@@ -10,8 +10,10 @@ export async function http<T>(
   url: string,
   config: ApiClientConfig = {}
 ): Promise<T> {
-  // 1. Get base URL and auth token
-  const token = localStorage.getItem("authToken")
+  // 1. Get base URL and auth token. Sessions started without "remember me"
+  // live in sessionStorage, so both stores are consulted.
+  const token =
+    localStorage.getItem("authToken") || sessionStorage.getItem("authToken")
 
   // 2. Create headers
   const headers = new Headers({

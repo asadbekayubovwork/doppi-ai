@@ -3,38 +3,29 @@ import { computed, ref } from "vue"
 import { useHead } from "@vueuse/head"
 import { useRoute, useRouter } from "vue-router"
 import { authApi, CAuthVerifyStep } from "@/features/auth"
-import { CDoppiMark, CIcon } from "@/shared/ui"
 import { HttpError } from "@/shared/api/types"
+import { CDoppiMark, CIcon } from "@/shared/ui"
 
 const route = useRoute()
 const router = useRouter()
 
+const name = ref("")
 const email = ref("")
 const password = ref("")
+const businessName = ref("")
+const acceptedTerms = ref(false)
 const showPassword = ref(false)
-const rememberMe = ref(true)
 const loading = ref(false)
 const errorMessage = ref("")
+const otp = ref("")
 const isOtpStep = ref(false)
 const codeChannel = ref<"email" | "telegram">("email")
 const codeSentVia = computed(() =>
   codeChannel.value === "telegram" ? "Telegram orqali" : "emailingizga"
 )
-const otp = ref("")
 const usesAuthApi = import.meta.env.VITE_AUTH_API_ENABLED === "true"
 
-const isForgotPassword = computed(() => route.path === "/forgot-password")
-const title = computed(() =>
-  isForgotPassword.value ? "Parolni tiklash" : "Xush kelibsiz"
-)
-const subtitle = computed(() =>
-  isForgotPassword.value
-    ? "Email manzilingizni kiriting — tasdiqlash kodini yuboramiz."
-    : "Agentlar, balans va bizneslarni boshqarish uchun Do'ppi AI ish maydoningizga kiring."
-)
-
-// The dark brand column: the same three modules the landing sells, kept here so
-// the login screen repeats the pitch instead of showing an empty panel.
+// The dark brand column, shared with the login screen.
 const highlights = [
   {
     icon: "library",
@@ -53,18 +44,32 @@ const highlights = [
   },
 ]
 
+// Strength is an indicator only — `minlength` is what actually gates the form.
+const strengthLevels = [
+  { label: "Juda kuchsiz", bar: "bg-[#E5484D]", text: "text-[#C42121]" },
+  { label: "Kuchsiz", bar: "bg-[#E5484D]", text: "text-[#C42121]" },
+  { label: "O'rtacha", bar: "bg-[#E8A33D]", text: "text-[#B0730B]" },
+  { label: "Kuchli", bar: "bg-[#15803D]", text: "text-[#15803D]" },
+  { label: "Juda kuchli", bar: "bg-[#15803D]", text: "text-[#15803D]" },
+]
+
+const passwordScore = computed(() => {
+  const value = password.value
+  if (!value) return 0
+
+  let score = 0
+  if (value.length >= 8) score += 1
+  if (value.length >= 12) score += 1
+  if (/[a-z]/.test(value) && /[A-Z]/.test(value)) score += 1
+  if (/\d/.test(value) || /[^A-Za-z0-9]/.test(value)) score += 1
+
+  return Math.min(4, Math.max(1, score))
+})
+const passwordStrength = computed(() => strengthLevels[passwordScore.value])
+
 useHead({
-  title: computed(() => `${title.value} — Do'ppi.ai`),
-  meta: [
-    {
-      name: "description",
-      content: computed(() =>
-        isForgotPassword.value
-          ? "Do'ppi.ai parolini tiklash"
-          : "Do'ppi.ai hisobiga kirish"
-      ),
-    },
-  ],
+  title: "Ro'yxatdan o'tish — Do'ppi.ai",
+  meta: [{ name: "description", content: "Do'ppi.ai hisobini yarating" }],
 })
 
 const getErrorMessage = async (error: unknown) => {
@@ -74,52 +79,35 @@ const getErrorMessage = async (error: unknown) => {
         message?: string
         detail?: string
       }
-      return body.message || body.detail || "Email yoki parol noto'g'ri."
+      return body.message || body.detail || "Ro'yxatdan o'tish amalga oshmadi."
     } catch {
-      return "Kirish amalga oshmadi. Ma'lumotlaringizni tekshirib, qayta urinib ko'ring."
+      return "Ro'yxatdan o'tish amalga oshmadi. Ma'lumotlaringizni tekshirib, qayta urinib ko'ring."
     }
   }
   return "Tarmoq xatosi yuz berdi. Iltimos, qayta urinib ko'ring."
 }
 
-const signIn = async () => {
+const register = async () => {
   errorMessage.value = ""
-  loading.value = true
 
-  try {
-    const response = await authApi.signIn({
-      email: email.value.trim(),
-      password: password.value,
-    })
-    const token = response.token || response.accessToken
-
-    // "Meni eslab qol" is the difference between a persistent session and one
-    // that dies with the tab — `shared/api/http.ts` reads either store.
-    if (token) {
-      const store = rememberMe.value ? localStorage : sessionStorage
-      const other = rememberMe.value ? sessionStorage : localStorage
-      other.removeItem("authToken")
-      store.setItem("authToken", token)
-    }
-
-    const redirect = route.query.redirect
-    await router.push(
-      typeof redirect === "string" && redirect.startsWith("/") ? redirect : "/"
-    )
-  } catch (error) {
-    errorMessage.value = await getErrorMessage(error)
-  } finally {
-    loading.value = false
+  if (!acceptedTerms.value) {
+    errorMessage.value =
+      "Davom etish uchun foydalanish shartlarini qabul qiling."
+    return
   }
-}
 
-const requestPasswordReset = async () => {
-  errorMessage.value = ""
   loading.value = true
-
   try {
-    // Without a connected API, keep the temporary OTP flow testable locally.
-    if (usesAuthApi) await authApi.requestPasswordReset(email.value.trim())
+    // Enable this once the API sends the actual email code. The demo flow is
+    // deliberately available without a backend while the temporary OTP is used.
+    if (usesAuthApi) {
+      await authApi.register({
+        name: name.value.trim(),
+        email: email.value.trim(),
+        password: password.value,
+        businessName: businessName.value.trim(),
+      })
+    }
     isOtpStep.value = true
   } catch (error) {
     errorMessage.value = await getErrorMessage(error)
@@ -128,19 +116,12 @@ const requestPasswordReset = async () => {
   }
 }
 
-const resendCode = async (channel: "email" | "telegram") => {
+// No dedicated resend endpoint exists yet; once the API sends the real code,
+// call it here for both channels. The countdown restarts either way.
+const resendCode = (channel: "email" | "telegram") => {
   errorMessage.value = ""
   otp.value = ""
   codeChannel.value = channel
-
-  // Telegram delivery has no endpoint yet, so only the email code is re-sent.
-  if (usesAuthApi && channel === "email") {
-    try {
-      await authApi.requestPasswordReset(email.value.trim())
-    } catch (error) {
-      errorMessage.value = await getErrorMessage(error)
-    }
-  }
 }
 
 const verifyOtp = async () => {
@@ -149,17 +130,24 @@ const verifyOtp = async () => {
     errorMessage.value = "Tasdiqlash kodi noto'g'ri."
     return
   }
-  await router.push("/")
+
+  const redirect = route.query.redirect
+  await router.push(
+    typeof redirect === "string" && redirect.startsWith("/") ? redirect : "/"
+  )
 }
 
-const signInWith = (provider: "google" | "telegram") => {
-  const fallback = `/api/auth/${provider}`
+const registerWith = (provider: "google" | "telegram") => {
+  const fallback = `/api/auth/${provider}?intent=register`
   const configuredUrl =
     provider === "google"
       ? import.meta.env.VITE_GOOGLE_OAUTH_URL
       : import.meta.env.VITE_TELEGRAM_OAUTH_URL
 
-  window.location.assign(configuredUrl || fallback)
+  const separator = configuredUrl?.includes("?") ? "&" : "?"
+  window.location.assign(
+    configuredUrl ? `${configuredUrl}${separator}intent=register` : fallback
+  )
 }
 </script>
 
@@ -289,38 +277,24 @@ const signInWith = (provider: "google" | "telegram") => {
         </RouterLink>
 
         <div class="flex items-center gap-4">
-          <template v-if="isOtpStep">
-            <span class="hidden text-sm text-[#6B6B78] sm:inline">
-              Siz emasmisiz?
-            </span>
-            <button
-              type="button"
-              class="rounded-[10px] border border-[#E3E3EB] bg-white px-4 py-2 text-sm font-semibold text-[#12121A] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-              @click="isOtpStep = false"
-            >
-              Bekor qilish
-            </button>
-          </template>
-          <template v-else-if="isForgotPassword">
-            <RouterLink
-              to="/login"
-              class="inline-flex items-center gap-2 rounded-[10px] border border-[#E3E3EB] bg-white px-4 py-2 text-sm font-semibold text-[#12121A] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-            >
-              <CIcon name="arrow-left" class="h-4 w-4" />
-              Kirishga qaytish
-            </RouterLink>
-          </template>
-          <template v-else>
-            <span class="hidden text-sm text-[#6B6B78] sm:inline">
-              Hisobingiz yo'qmi?
-            </span>
-            <RouterLink
-              to="/register"
-              class="rounded-[10px] border border-[#E3E3EB] bg-white px-4 py-2 text-sm font-semibold text-[#12121A] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-            >
-              Ro'yxatdan o'tish
-            </RouterLink>
-          </template>
+          <span class="hidden text-sm text-[#6B6B78] sm:inline">
+            {{ isOtpStep ? "Siz emasmisiz?" : "Hisobingiz bormi?" }}
+          </span>
+          <button
+            v-if="isOtpStep"
+            type="button"
+            class="rounded-[10px] border border-[#E3E3EB] bg-white px-4 py-2 text-sm font-semibold text-[#12121A] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
+            @click="isOtpStep = false"
+          >
+            Bekor qilish
+          </button>
+          <RouterLink
+            v-else
+            to="/login"
+            class="rounded-[10px] border border-[#E3E3EB] bg-white px-4 py-2 text-sm font-semibold text-[#12121A] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
+          >
+            Kirish
+          </RouterLink>
         </div>
       </header>
 
@@ -332,9 +306,9 @@ const signInWith = (provider: "google" | "telegram") => {
             <CAuthVerifyStep
               v-model="otp"
               :email="email"
-              title="Kodni kiriting"
+              title="Emailni tasdiqlang"
               :description="`6 xonali tasdiqlash kodini ${codeSentVia} yubordik. Kod 10 daqiqa amal qiladi.`"
-              submit-label="Tasdiqlash"
+              submit-label="Emailni tasdiqlash"
               step-name="Tasdiqlash"
               :error-message="errorMessage"
               :loading="loading"
@@ -348,17 +322,17 @@ const signInWith = (provider: "google" | "telegram") => {
             <h1
               class="text-[28px] font-bold tracking-[-0.02em] text-[#0F0F17] sm:text-[32px]"
             >
-              {{ title }}
+              Hisob yarating
             </h1>
             <p class="mt-2 text-[15px] leading-[1.6] text-[#6B6B78]">
-              {{ subtitle }}
+              500 ta bepul kredit bilan boshlang. Karta talab qilinmaydi.
             </p>
 
-            <div v-if="!isForgotPassword" class="mt-6 grid grid-cols-2 gap-3">
+            <div class="mt-6 grid grid-cols-2 gap-3">
               <button
                 type="button"
                 class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-                @click="signInWith('google')"
+                @click="registerWith('google')"
               >
                 <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
                   <path
@@ -383,35 +357,52 @@ const signInWith = (provider: "google" | "telegram") => {
               <button
                 type="button"
                 class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-                @click="signInWith('telegram')"
+                @click="registerWith('telegram')"
               >
                 <CIcon name="telegram" class="h-5 w-5 text-[#29A9EA]" />
                 Telegram
               </button>
             </div>
 
-            <div
-              v-if="!isForgotPassword"
-              class="my-5 flex items-center gap-3"
-              aria-hidden="true"
-            >
+            <div class="my-5 flex items-center gap-3" aria-hidden="true">
               <span class="h-px flex-1 bg-[#E9E9EF]" />
-              <span class="text-xs text-[#9A9AA5]">yoki email orqali</span>
+              <span class="whitespace-nowrap text-xs text-[#9A9AA5]">
+                yoki email orqali ro'yxatdan o'ting
+              </span>
               <span class="h-px flex-1 bg-[#E9E9EF]" />
             </div>
 
-            <form
-              :class="isForgotPassword ? 'mt-7' : ''"
-              @submit.prevent="
-                isForgotPassword ? requestPasswordReset() : signIn()
-              "
-            >
+            <form @submit.prevent="register">
               <div>
                 <label
-                  for="login-email"
+                  for="register-name"
                   class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
                 >
-                  Email
+                  To'liq ism
+                </label>
+                <div class="relative">
+                  <CIcon
+                    name="user-round"
+                    class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
+                  />
+                  <input
+                    id="register-name"
+                    v-model="name"
+                    type="text"
+                    autocomplete="name"
+                    required
+                    placeholder="Akmal Karimov"
+                    class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+                  />
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <label
+                  for="register-email"
+                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
+                >
+                  Ish emaili
                 </label>
                 <div class="relative">
                   <CIcon
@@ -419,7 +410,7 @@ const signInWith = (provider: "google" | "telegram") => {
                     class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
                   />
                   <input
-                    id="login-email"
+                    id="register-email"
                     v-model="email"
                     type="email"
                     autocomplete="email"
@@ -430,34 +421,26 @@ const signInWith = (provider: "google" | "telegram") => {
                 </div>
               </div>
 
-              <div v-if="!isForgotPassword" class="mt-4">
-                <div class="mb-2 flex items-center justify-between gap-4">
-                  <label
-                    for="login-password"
-                    class="text-[13.5px] font-medium text-[#3D3D4A]"
-                  >
-                    Parol
-                  </label>
-                  <RouterLink
-                    to="/forgot-password"
-                    class="text-[13px] font-medium text-[#6633EE] transition-colors hover:text-[#4B21C4]"
-                  >
-                    Parolni unutdingizmi?
-                  </RouterLink>
-                </div>
+              <div class="mt-4">
+                <label
+                  for="register-password"
+                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
+                >
+                  Parol
+                </label>
                 <div class="relative">
                   <CIcon
                     name="lock-keyhole"
                     class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
                   />
                   <input
-                    id="login-password"
+                    id="register-password"
                     v-model="password"
                     :type="showPassword ? 'text' : 'password'"
-                    autocomplete="current-password"
+                    autocomplete="new-password"
                     required
                     minlength="8"
-                    placeholder="Parolingizni kiriting"
+                    placeholder="Kamida 8 ta belgi"
                     class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-12 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
                   />
                   <button
@@ -474,14 +457,69 @@ const signInWith = (provider: "google" | "telegram") => {
                     />
                   </button>
                 </div>
+
+                <div v-if="password" class="mt-2 flex items-center gap-3">
+                  <span
+                    class="grid flex-1 grid-cols-4 gap-1.5"
+                    role="img"
+                    :aria-label="`Parol kuchi: ${passwordStrength.label}`"
+                  >
+                    <span
+                      v-for="segment in 4"
+                      :key="segment"
+                      class="h-1 rounded-full transition-colors"
+                      :class="
+                        segment <= passwordScore
+                          ? passwordStrength.bar
+                          : 'bg-[#E9E9EF]'
+                      "
+                    />
+                  </span>
+                  <span
+                    class="shrink-0 text-[13px] font-medium"
+                    :class="passwordStrength.text"
+                  >
+                    {{ passwordStrength.label }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <label
+                  for="register-business"
+                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
+                >
+                  Biznes nomi
+                </label>
+                <div class="relative">
+                  <CIcon
+                    name="building-2"
+                    class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
+                  />
+                  <input
+                    id="register-business"
+                    v-model="businessName"
+                    type="text"
+                    autocomplete="organization"
+                    required
+                    placeholder="Karimov Group"
+                    aria-describedby="register-business-hint"
+                    class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+                  />
+                </div>
+                <p
+                  id="register-business-hint"
+                  class="mt-1.5 text-[12.5px] leading-5 text-[#8E8E9C]"
+                >
+                  Keyinchalik boshqaruv panelidan yana biznes qo'sha olasiz.
+                </p>
               </div>
 
               <label
-                v-if="!isForgotPassword"
                 class="mt-4 flex w-fit cursor-pointer select-none items-center gap-3"
               >
                 <input
-                  v-model="rememberMe"
+                  v-model="acceptedTerms"
                   type="checkbox"
                   class="peer sr-only"
                 />
@@ -492,7 +530,7 @@ const signInWith = (provider: "google" | "telegram") => {
                   <CIcon name="check" class="h-3.5 w-3.5" stroke-width="3" />
                 </span>
                 <span class="text-sm text-[#4A4A57]">
-                  Meni 30 kun davomida eslab qol
+                  Foydalanish shartlari va maxfiylik siyosatiga roziman
                 </span>
               </label>
 
@@ -514,31 +552,20 @@ const signInWith = (provider: "google" | "telegram") => {
                   class="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white"
                   aria-hidden="true"
                 />
-                {{
-                  loading
-                    ? "Kutilmoqda..."
-                    : isForgotPassword
-                      ? "Tasdiqlash kodini yuborish"
-                      : "Kirish"
-                }}
-                <CIcon
-                  v-if="!loading && !isForgotPassword"
-                  name="arrow-right"
-                  class="h-4 w-4"
-                />
+                {{ loading ? "Kutilmoqda..." : "Hisob yaratish" }}
+                <CIcon v-if="!loading" name="arrow-right" class="h-4 w-4" />
               </button>
             </form>
 
             <p
-              v-if="!isForgotPassword"
               class="mt-4 text-center text-sm text-[#6B6B78] [@media(max-height:880px)]:hidden"
             >
-              Do'ppi AI'da yangimisiz?
+              Allaqachon ro'yxatdan o'tganmisiz?
               <RouterLink
-                to="/register"
+                to="/login"
                 class="ml-1 font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
               >
-                Hisob yarating
+                Kirish
               </RouterLink>
             </p>
           </template>
@@ -550,21 +577,20 @@ const signInWith = (provider: "google" | "telegram") => {
         so'ramaydi.
       </p>
       <p v-else class="text-center text-xs leading-5 text-[#9A9AA5]">
-        Davom etish orqali siz
         <RouterLink
           to="/terms"
           class="transition-colors hover:text-[#4A4A57] hover:underline"
         >
-          foydalanish shartlari
+          Foydalanish shartlari
         </RouterLink>
         va
         <RouterLink
           to="/privacy"
           class="transition-colors hover:text-[#4A4A57] hover:underline"
         >
-          maxfiylik siyosatiga
+          maxfiylik siyosati
         </RouterLink>
-        rozilik bildirasiz.
+        · Ma'lumotlar Yevropa Ittifoqi va O'zbekistonda saqlanadi.
       </p>
     </section>
   </main>

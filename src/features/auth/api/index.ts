@@ -1,2 +1,6 @@
-export { authApi, type AuthResponse, type SignInPayload } from "./authApi"
-
+export {
+  authApi,
+  type AuthResponse,
+  type RegisterPayload,
+  type SignInPayload,
+} from "./authApi"

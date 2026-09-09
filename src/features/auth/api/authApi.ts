@@ -10,6 +10,12 @@ export interface AuthResponse {
   accessToken?: string
 }
 
+export interface RegisterPayload extends SignInPayload {
+  name: string
+  // Every account starts with one business; more are added from the dashboard.
+  businessName: string
+}
+
 /**
  * Authentication endpoints are kept in one place so the landing can point to
  * the production API without coupling page components to a transport layer.
@@ -17,7 +23,8 @@ export interface AuthResponse {
 export const authApi = {
   signIn: (payload: SignInPayload) =>
     apiClient.post<AuthResponse>("/auth/login", payload),
+  register: (payload: RegisterPayload) =>
+    apiClient.post<AuthResponse>("/auth/register", payload),
   requestPasswordReset: (email: string) =>
     apiClient.post<void>("/auth/forgot-password", { email }),
 }
-

@@ -111,7 +111,7 @@ onUnmounted(() => {
             {{ $t("nav.signIn") }}
           </RouterLink>
           <RouterLink
-            to="/contact-us"
+            to="/login"
             class="flex h-10 items-center justify-center rounded-xl bg-[#6633EE] px-5 text-sm font-medium text-white transition-300 hover:bg-[#6633EE]/80"
           >
             {{ $t("nav.cta") }}
@@ -190,7 +190,7 @@ onUnmounted(() => {
             {{ $t("nav.signIn") }}
           </RouterLink>
           <RouterLink
-            to="/contact-us"
+            to="/login"
             class="flex h-12 items-center justify-center rounded-xl bg-[#6633EE] font-medium text-white transition-300 hover:bg-[#6633EE]/80"
             @click="closeMobileMenu"
           >

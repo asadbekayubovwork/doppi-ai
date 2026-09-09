@@ -66,6 +66,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("./PLogin.vue"),
   },
   {
+    path: "/register",
+    name: "Register",
+    meta: {
+      layout: "EmptyLayout",
+    },
+    component: () => import("./PRegister.vue"),
+  },
+  {
     path: "/forgot-password",
     name: "ForgotPassword",
     meta: {
