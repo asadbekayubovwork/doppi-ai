@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .transition-200 {
+    @apply transition-all duration-200;
+  }
+
+  .transition-300 {
+    @apply transition-all duration-300;
+  }
+}

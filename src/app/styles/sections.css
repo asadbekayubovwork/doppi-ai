@@ -1,0 +1,244 @@
+/* ---------------------------------------------------------------------------
+   Landing section primitives — shared by every widget on the Do'ppi.ai landing.
+   Keeps the dark violet Toolbar look in one place: page ground (--bg-ground), the
+   faint noise pattern, card surfaces, and the motion keyframes the animated
+   demos (live call, marquee, orbit) rely on.
+--------------------------------------------------------------------------- */
+
+.section-dark {
+  position: relative;
+  background: var(--bg-ground);
+  overflow: hidden;
+}
+
+/* Faint tiled noise over the flat ground — same treatment as the hero. */
+.section-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("@/shared/assets/png/blur-bg.png");
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.05;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Slightly lifted band, used to separate neighbouring dark sections. */
+.section-raised {
+  background: var(--bg-raised);
+}
+
+/* Card surfaces ---------------------------------------------------------- */
+
+.surface-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.surface-card:hover {
+  border-color: rgba(102, 51, 238, 0.45);
+  background: rgba(102, 51, 238, 0.06);
+  box-shadow: 0 18px 40px -18px rgba(102, 51, 238, 0.55);
+}
+
+.surface-card-lift:hover {
+  transform: translateY(-4px);
+}
+
+.surface-card-accent {
+  background: linear-gradient(
+    140deg,
+    rgba(102, 51, 238, 0.16) 0%,
+    rgba(255, 255, 255, 0.03) 55%
+  );
+  border-color: rgba(102, 51, 238, 0.5);
+  box-shadow: 0 20px 50px -22px rgba(102, 51, 238, 0.75);
+}
+
+/*
+   Photo that zooms on card hover. It sits a touch larger than its box so its
+   edges never land on the clip boundary: at scale 1 a fractional container
+   height leaves a hairline of card background along the bottom edge. Note the
+   deliberate absence of `will-change` — promoting the image to its own layer
+   inside a rounded, clipped ancestor makes the seam worse, not better.
+*/
+.photo-zoom {
+  transform: scale(1.02);
+}
+
+.group:hover .photo-zoom {
+  transform: scale(1.08);
+}
+
+/*
+   Secondary card content (social links) that folds away until the card is
+   hovered. Visible by default: a phone has no hover to bring it back, and a
+   narrow screen has no room to spare for the gesture. Only a real pointer on a
+   wide screen tucks it away — `hover: hover` alone is not enough, since some
+   Android browsers and DevTools device emulation still claim to have hover.
+*/
+.hover-reveal {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  .hover-reveal {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  .group:hover .hover-reveal,
+  .group:focus-within .hover-reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-reveal,
+  .photo-zoom {
+    transition: none !important;
+  }
+}
+
+/* Text + glow ------------------------------------------------------------ */
+
+.text-gradient-violet {
+  background: linear-gradient(92deg, #ffffff 0%, #b9a2ff 45%, #6633ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.violet-glow {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(102, 51, 238, 0.22);
+  filter: blur(110px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Thin dotted grid, used behind the hero and the how-it-works flow. */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.mask-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 90%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 90%);
+}
+
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+/* Motion ----------------------------------------------------------------- */
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, 3%, 0) scale(1.08);
+  }
+}
+
+.animate-drift {
+  animation: drift 24s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 90s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-pulse-ring,
+  .animate-drift,
+  .animate-spin-slow,
+  .wave-bar {
+    animation: none !important;
+  }
+}

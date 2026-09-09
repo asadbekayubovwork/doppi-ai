@@ -1,0 +1,712 @@
+{
+  "brand": {
+    "name": "Do'ppi.ai"
+  },
+  "a11y": {
+    "mute": "Mikrofonni o'chirish",
+    "endCall": "Qo'ng'iroqni tugatish",
+    "openMenu": "Menyuni ochish",
+    "closeMenu": "Menyuni yopish",
+    "switchLang": "Tilni almashtirish",
+    "toTop": "Bosh sahifaga"
+  },
+  "nav": {
+    "home": "Bosh sahifa",
+    "features": "Imkoniyatlar",
+    "how": "Qanday ishlaydi",
+    "voice": "Ovozli agent",
+    "results": "Natijalar",
+    "pricing": "Narxlar",
+    "about": "Biz haqimizda",
+    "team": "Jamoa",
+    "faq": "Savol-javob",
+    "contact": "Aloqa",
+    "signIn": "Kirish",
+    "cta": "Bepul boshlash",
+    "product": "Mahsulot"
+  },
+  "hero": {
+    "badge": "O'zbekiston uchun AI Marketing tizimi",
+    "titleTop": "Reklamadan sotuvgacha —",
+    "titleHighlight": "barchasi bir tizimda",
+    "titleBottom": "sun'iy intellekt bilan",
+    "subtitle": "Do'ppi.ai — biznesingiz uchun AI marketing operatsion tizimi. Ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, video va kontent, CRM va chatbotlar — hammasi bitta joyda ishlaydi.",
+    "ctaPrimary": "Bepul sinovni boshlash",
+    "ctaSecondary": "Demoni ko'rish",
+    "stats": [
+      {
+        "value": "2–5×",
+        "label": "ko'proq lead"
+      },
+      {
+        "value": "70%",
+        "label": "vaqt tejaladi"
+      },
+      {
+        "value": "24/7",
+        "label": "AI agentlar ishlaydi"
+      }
+    ],
+    "agentName": "AI Ovozli Agent",
+    "agentStatus": "Qo'ng'iroq davom etmoqda",
+    "agentCaption": "Inson kabi gaplashadi, mijozni malakalab, uchrashuv belgilaydi."
+  },
+  "trust": {
+    "label": "Barcha kanallar bitta tizimda birlashadi",
+    "channels": [
+      "Instagram",
+      "Telegram",
+      "WhatsApp",
+      "Facebook",
+      "SIP Telefoniya",
+      "Google Ads",
+      "TikTok",
+      "YouTube"
+    ]
+  },
+  "problem": {
+    "eyebrow": "Muammo",
+    "title": "O'zbekistondagi marketing muammolari",
+    "subtitle": "Reklamaga pul ketadi, lekin natija tizimli emas. Ko'p bizneslar bir xil to'siqlarga duch keladi.",
+    "items": [
+      {
+        "icon": "megaphone-off",
+        "title": "Reklama ketadi, mijoz yo'qoladi",
+        "desc": "Reklama ishlaydi, lekin leadlar to'planmaydi va yo'qolib ketadi."
+      },
+      {
+        "icon": "clock-alert",
+        "title": "Qo'lda ishlash — vaqt va xato",
+        "desc": "Leadlarni qo'lda boshqarish sekin, charchatadi va xatolarga olib keladi."
+      },
+      {
+        "icon": "unplug",
+        "title": "Mijoz bilan aloqa uziladi",
+        "desc": "Follow-up qilinmaydi, mijoz sovib qoladi va raqobatchiga ketadi."
+      },
+      {
+        "icon": "phone-missed",
+        "title": "Qo'ng'iroqlar javobsiz",
+        "desc": "Kelgan qo'ng'iroqlarning bir qismi umuman javobsiz qoladi."
+      },
+      {
+        "icon": "split",
+        "title": "Kanallar alohida ishlaydi",
+        "desc": "Instagram, Telegram, telefon — hammasi bir-biridan uzilgan."
+      },
+      {
+        "icon": "chart-column-decreasing",
+        "title": "Natijani tahlil qilish qiyin",
+        "desc": "Qaysi kanal ishlayapti — aniq emas, qarorlar taxminga asoslanadi."
+      }
+    ]
+  },
+  "solution": {
+    "eyebrow": "Yechim",
+    "title": "Do'ppi.ai — hammasi bitta AI tizimida",
+    "subtitle": "Reklama, aloqa, sotuv va tahlil — bitta operatsion tizimda birlashtirilgan All-in-One AI marketing platformasi.",
+    "centerLabel": "Do'ppi.ai",
+    "modules": [
+      {
+        "icon": "phone",
+        "label": "AI Ovozli Agent"
+      },
+      {
+        "icon": "share-2",
+        "label": "Ijtimoiy tarmoq"
+      },
+      {
+        "icon": "clapperboard",
+        "label": "AI Video & Kontent"
+      },
+      {
+        "icon": "database",
+        "label": "CRM & Lead"
+      },
+      {
+        "icon": "bot",
+        "label": "Chatbotlar"
+      },
+      {
+        "icon": "headset",
+        "label": "SIP Call-markaz"
+      }
+    ],
+    "note": "Bitta panel, bitta baza, bitta jamoa — barcha jarayonlar nazorat ostida."
+  },
+  "features": {
+    "eyebrow": "Imkoniyatlar",
+    "title": "Bitta platforma, oltita kuchli modul",
+    "subtitle": "Har bir modul sizning o'rningizga ishlaydi va natijani CRM'ga yozadi.",
+    "items": [
+      {
+        "icon": "phone",
+        "title": "AI Ovozli Agent",
+        "desc": "Inson kabi gaplashadi, savollarga javob beradi, mijozni malakalaydi va uchrashuv belgilaydi."
+      },
+      {
+        "icon": "share-2",
+        "title": "Ijtimoiy tarmoq avtomatizatsiyasi",
+        "desc": "Instagram, Telegram va WhatsApp'da DM, komment va follow-up avtomatik boshqariladi."
+      },
+      {
+        "icon": "headset",
+        "title": "SIP Call-markaz",
+        "desc": "Inbound va outbound qo'ng'iroqlar — barchasi yozib olinadi va CRM'ga saqlanadi."
+      },
+      {
+        "icon": "clapperboard",
+        "title": "AI Video & Kontent",
+        "desc": "Reels, reklama, rasm, matn va ovozli dublyaj — kontentni AI yaratadi."
+      },
+      {
+        "icon": "database",
+        "title": "CRM & Lead boshqaruvi",
+        "desc": "Har bir lead bazada saqlanadi, malakalanadi va sotuvgacha kuzatiladi."
+      },
+      {
+        "icon": "bot",
+        "title": "Chatbotlar",
+        "desc": "Har bir kanalda 24/7 avtomatik javoblar va aqlli suhbatlar."
+      }
+    ]
+  },
+  "audience": {
+    "eyebrow": "Kim uchun",
+    "title": "Do'ppi.ai kimlar uchun",
+    "subtitle": "Reklama beradigan, mijoz bilan yozishadigan yoki qo'ng'iroq qiladigan har qanday biznes uchun — jamoangiz hajmidan qat'i nazar.",
+    "items": [
+      {
+        "icon": "user-plus",
+        "title": "Kichik biznes va yangi loyihalar",
+        "desc": "Mijoz Instagram va Telegram orqali keladi, lekin har biriga javob berishga vaqt yetmaydi.",
+        "points": [
+          "Chatbot va ovozli agent 24/7 javob beradi",
+          "Har bir lead bazaga tushadi va yo'qolmaydi",
+          "Bitta xodim bilan ham tizimli ishlash mumkin"
+        ]
+      },
+      {
+        "icon": "bar-chart-3",
+        "title": "O'sayotgan bizneslar va sotuv jamoalari",
+        "desc": "Kanallar ko'payadi, leadlar oqimi kattalashadi — qo'lda nazorat qilish qiyinlashadi.",
+        "points": [
+          "Barcha kanallar bitta CRM'da birlashadi",
+          "Follow-up va eslatmalar avtomatik yuboriladi",
+          "Qaysi kanal sotuv keltirayotgani aniq ko'rinadi"
+        ]
+      },
+      {
+        "icon": "headset",
+        "title": "Qo'ng'iroq bilan ishlaydigan kompaniyalar",
+        "desc": "Kirish va chiqish qo'ng'iroqlari kundalik ishning asosini tashkil qiladi.",
+        "points": [
+          "SIP telefoniya bilan to'g'ridan-to'g'ri integratsiya",
+          "Har bir qo'ng'iroq yozib olinadi va CRM'ga saqlanadi",
+          "AI agent mijozni malakalab, menejerga tayyor lead uzatadi"
+        ]
+      },
+      {
+        "icon": "shield-check",
+        "title": "Yirik korxonalar va agentliklar",
+        "desc": "Bir nechta jamoa, ko'p mijoz va qat'iy talablar bilan ishlaydiganlar uchun.",
+        "points": [
+          "Maxsus integratsiyalar va AI assistant sozlamalari",
+          "Kirish darajalari va xavfsizlik nazorati",
+          "SLA kafolati hamda shaxsiy menejer"
+        ]
+      }
+    ]
+  },
+  "how": {
+    "eyebrow": "Qanday ishlaydi",
+    "title": "Reklamadan sotuvgacha — avtomatik oqim",
+    "subtitle": "Har bir qadam avtomatlashtirilgan, hech bir lead yo'qolmaydi.",
+    "steps": [
+      {
+        "icon": "megaphone",
+        "title": "Reklama",
+        "desc": "Targetlangan reklama kampaniyasi ishga tushadi."
+      },
+      {
+        "icon": "user-plus",
+        "title": "Lead yig'ish",
+        "desc": "Barcha kanallardan leadlar yig'iladi."
+      },
+      {
+        "icon": "message-square",
+        "title": "AI Chatbot & forma",
+        "desc": "Chatbot javob beradi, ma'lumot to'playdi."
+      },
+      {
+        "icon": "phone",
+        "title": "AI Ovozli qo'ng'iroq",
+        "desc": "Voice agent qo'ng'iroq qilib, mijozni malakalaydi."
+      },
+      {
+        "icon": "database",
+        "title": "CRM'ga saqlash",
+        "desc": "Ma'lumot CRM'ga yoziladi va menejerga yetkaziladi."
+      },
+      {
+        "icon": "handshake",
+        "title": "Uchrashuv / sotuv",
+        "desc": "Malakalangan lead sotuvga aylanadi."
+      },
+      {
+        "icon": "life-buoy",
+        "title": "Sotuvdan keyingi xizmat",
+        "desc": "Avtomatik follow-up va qo'llab-quvvatlash."
+      },
+      {
+        "icon": "bar-chart-3",
+        "title": "Tahlil & hisobot",
+        "desc": "Har bir bosqich bo'yicha aniq analitika."
+      }
+    ]
+  },
+  "voice": {
+    "eyebrow": "Asosiy modul",
+    "title": "AI Ovozli Agent — inson kabi gaplashadi",
+    "subtitle": "Tabiiy ovoz bilan qo'ng'iroq qiladi, mijozni tinglaydi, ma'lumot yig'adi va sotuvni boshlaydi — kechayu kunduz.",
+    "points": [
+      "Tabiiy va ravon suhbat",
+      "Savol va ehtiyojni aniqlaydi",
+      "Kerakli ma'lumotni yig'adi",
+      "Uchrashuvni avtomatik belgilaydi",
+      "Hammasini CRM'ga yozadi",
+      "Natijani tahlil qilib, hisobot beradi"
+    ],
+    "transcript": [
+      {
+        "role": "agent",
+        "text": "Assalomu alaykum! Do'ppi.ai'dan aloqaga chiqdim. Xizmatimiz haqida gaplashsak bo'ladimi?"
+      },
+      {
+        "role": "user",
+        "text": "Ha, albatta. Narxlari qanday?"
+      },
+      {
+        "role": "agent",
+        "text": "Ajoyib! Bir necha savol berib, sizga mos rejani tavsiya qilaman va uchrashuvga yozib qo'yaman."
+      }
+    ],
+    "callLabel": "Jonli qo'ng'iroq"
+  },
+  "results": {
+    "eyebrow": "Natijalar",
+    "title": "Biznesingizni keyingi bosqichga olib chiqing",
+    "subtitle": "Do'ppi.ai bilan ishlagan bizneslar birinchi oylardanoq o'sishni ko'radi.",
+    "stats": [
+      {
+        "value": "2–5×",
+        "label": "ko'proq malakali lead"
+      },
+      {
+        "value": "70%",
+        "label": "qo'lda ishga sarflangan vaqt kamayadi"
+      },
+      {
+        "value": "50%",
+        "label": "marketing xarajati qisqaradi"
+      },
+      {
+        "value": "24/7",
+        "label": "uzluksiz avtomatlashtirish"
+      },
+      {
+        "value": "90%+",
+        "label": "mijozlar mamnunligi"
+      },
+      {
+        "value": "100%",
+        "label": "sotuv jarayoni nazorati"
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Narxlar",
+    "title": "Biznesingizga mos rejani tanlang",
+    "subtitle": "Kichik jamoadan yirik korxonagacha — har bir bosqich uchun aniq reja.",
+    "trialNote": "Barcha rejalar uchun 14 kunlik bepul sinov. Karta talab qilinmaydi.",
+    "popularLabel": "Eng ommabop",
+    "pageTitle": "Ochiq va tushunarli narxlar",
+    "pageSubtitle": "Biznesingiz bosqichiga mos rejani tanlang — istalgan vaqtda o'zgartirishingiz mumkin.",
+    "tiers": [
+      {
+        "id": "starter",
+        "name": "Starter",
+        "price": "$19",
+        "period": "/oy",
+        "tagline": "Yangi bizneslar va kichik jamoalar uchun",
+        "popular": false,
+        "cta": "Boshlash",
+        "features": [
+          "1 000 tagacha lead boshqaruvi",
+          "Kontaktlar bazasi",
+          "Oyiga 5 000 ta email",
+          "Asosiy hisobotlar",
+          "Mobil ilova",
+          "1 foydalanuvchi"
+        ]
+      },
+      {
+        "id": "growth",
+        "name": "Growth",
+        "price": "$49",
+        "period": "/oy",
+        "tagline": "O'sayotgan bizneslar uchun",
+        "popular": false,
+        "cta": "Boshlash",
+        "features": [
+          "10 000 tagacha lead boshqaruvi",
+          "Avtomatik email & SMS",
+          "Kengaytirilgan hisobotlar",
+          "5 tagacha foydalanuvchi",
+          "24/7 qo'llab-quvvatlash"
+        ]
+      },
+      {
+        "id": "pro",
+        "name": "Pro",
+        "price": "$99",
+        "period": "/oy",
+        "tagline": "Professional jamoalar uchun",
+        "popular": true,
+        "cta": "Boshlash",
+        "features": [
+          "Cheksiz lead boshqaruvi",
+          "Marketing avtomatlashuvi",
+          "AI tahlil va bashoratlar",
+          "Maxsus hisobot paneli",
+          "Cheksiz foydalanuvchi",
+          "24/7 ustuvor qo'llab-quvvatlash"
+        ]
+      },
+      {
+        "id": "enterprise",
+        "name": "Enterprise",
+        "price": "Maxsus",
+        "period": "",
+        "tagline": "Yirik korxonalar va maxsus yechimlar uchun",
+        "popular": false,
+        "cta": "Aloqaga chiqish",
+        "features": [
+          "Barcha Pro imkoniyatlari",
+          "Maxsus integratsiyalar",
+          "AI assistant sozlamalari",
+          "Xavfsizlik va kirish darajalari",
+          "SLA kafolati",
+          "Shaxsiy menejer va trening"
+        ]
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "Biz haqimizda",
+    "title": "O'zbekiston bizneslari uchun kelajak — AI bilan bugundan",
+    "lead": "Do'ppi.ai — har bir biznes uchun sun'iy intellekt orqali marketingni avtomatlashtirishni maksimal darajada osonlashtiruvchi platforma.",
+    "vision": "Bizning vazifamiz — O'zbekistondagi har bir biznesni global darajaga olib chiqish. Mahalliy til, kanallar va telefoniya uchun maxsus qurilgan AI tizimi bilan.",
+    "pageTitle": "Do'ppi.ai ortidagi maqsad",
+    "pageSubtitle": "Biz O'zbekiston bizneslari uchun sun'iy intellektni kundalik ish quroliga aylantiramiz.",
+    "points": [
+      {
+        "icon": "target",
+        "title": "Mahalliy bozorga moslangan",
+        "desc": "O'zbek va rus tili, mahalliy kanallar va SIP telefoniya bilan ishlaydi."
+      },
+      {
+        "icon": "sparkles",
+        "title": "AI-native texnologiya",
+        "desc": "Zamonaviy sun'iy intellekt modellari asosida qurilgan."
+      },
+      {
+        "icon": "shield-check",
+        "title": "Xavfsiz bulut",
+        "desc": "Ma'lumotlar himoyalangan, zaxiralanadi va 24/7 mavjud."
+      }
+    ],
+    "facts": [
+      {
+        "label": "Tashkil topgan",
+        "value": "2025"
+      },
+      {
+        "label": "Joylashuv",
+        "value": "Toshkent, O'zbekiston"
+      },
+      {
+        "label": "Yo'nalish",
+        "value": "AI Marketing SaaS"
+      }
+    ]
+  },
+  "team": {
+    "eyebrow": "Jamoa",
+    "title": "Do'ppi.ai ortidagi jamoa",
+    "subtitle": "Sun'iy intellekt, marketing va mahsulot mutaxassislari — O'zbekiston bizneslari uchun yagona tizim quramiz.",
+    "roles": {
+      "rifat": "O'sish bo'yicha rahbar",
+      "jaxongir": "Bosh texnolog (CTO)",
+      "nodirbek": "Backend dasturchi",
+      "asadbek": "Dasturiy ta'minot muhandisi",
+      "aziz": "AI muhandis"
+    },
+    "bios": {
+      "rifat": "Do'ppi.ai marketingi va mijozlar bilan ishlashni boshqaradi. Bizneslarga platformani joriy qilish va undan natija olishda yordam beradi.",
+      "jaxongir": "Do'ppi.ai texnik arxitekturasi va AI modellarini boshqaradi. Platformaning muhandislik yo'nalishini belgilaydi, 5+ yillik tajriba.",
+      "nodirbek": "Do'ppi.ai backend dasturchisi. Server logikasi, API va ma'lumotlar bazasini quradi — tizim tez, xavfsiz va barqaror ishlaydi.",
+      "asadbek": "Do'ppi.ai front qismi bo'yicha dasturchi. Interfeysni quradi va UI/UX ni shakllantiradi — platforma har qanday qurilmada tez va qulay.",
+      "aziz": "Platformaning AI modellari ustida ishlaydi — ularni o'zbek va rus tillarini yaxshi tushunadigan qilib o'rgatadi va sozlaydi."
+    }
+  },
+  "faq": {
+    "eyebrow": "Savol-javob",
+    "title": "Ko'p so'raladigan savollar",
+    "subtitle": "Do'ppi.ai haqida eng ko'p beriladigan savollarga javoblar.",
+    "items": [
+      {
+        "q": "Do'ppi.ai o'zbek tilida ishlaydimi?",
+        "a": "Ha. Ovozli agent, chatbot va kontent o'zbek va rus tillarida ishlaydi — mahalliy bozor uchun maxsus sozlangan."
+      },
+      {
+        "q": "Tizimni ishga tushirish qancha vaqt oladi?",
+        "a": "Odatda bir necha kun. Jamoamiz kanallaringizni ulab, ovozli agent va CRM'ni biznesingizga moslab beradi."
+      },
+      {
+        "q": "Mavjud CRM yoki kanallarim bilan integratsiya bo'ladimi?",
+        "a": "Ha. Instagram, Telegram, WhatsApp, SIP telefoniya va boshqa xizmatlar bilan integratsiya qilinadi. Enterprise rejada maxsus integratsiyalar mavjud."
+      },
+      {
+        "q": "Ma'lumotlarim xavfsizmi?",
+        "a": "Ma'lumotlaringiz himoyalangan bulutda saqlanadi, muntazam zaxiralanadi va faqat sizga tegishli bo'ladi."
+      },
+      {
+        "q": "Bepul sinov qanday ishlaydi?",
+        "a": "Barcha rejalar uchun 14 kunlik bepul sinov mavjud, karta talab qilinmaydi. Istalgan vaqtda bekor qilishingiz mumkin."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Aloqa",
+    "title": "Keling, marketingni birga avtomatlashtiramiz",
+    "subtitle": "Demoga yoziling — jamoamiz biznesingiz uchun tizimni ko'rsatadi.",
+    "pageTitle": "Biz bilan bog'laning",
+    "pageSubtitle": "Savollaringizga javob beramiz va biznesingiz uchun demo tayyorlaymiz.",
+    "form": {
+      "name": "Ismingiz",
+      "phone": "Telefon raqamingiz",
+      "email": "Email",
+      "business": "Biznesingiz nomi",
+      "message": "Xabaringiz",
+      "placeholders": {
+        "name": "Masalan, Aziz Karimov",
+        "phone": "+998 90 123 45 67",
+        "email": "siz@kompaniya.uz",
+        "business": "Masalan, Do'ppi Group",
+        "message": "Biznesingiz va maqsadlaringiz haqida qisqacha yozing"
+      },
+      "submit": "Demo olish",
+      "sending": "Yuborilmoqda...",
+      "privacy": "Yuborish orqali siz bilan bog'lanishimizga rozilik bildirasiz."
+    },
+    "success": {
+      "title": "Rahmat! So'rovingiz qabul qilindi.",
+      "subtitle": "Jamoamiz bir ish kuni ichida siz bilan bog'lanib, demo uchun vaqt belgilaydi."
+    },
+    "email": "admin{'@'}doppi.ai",
+    "phone": "+998 93 903 33 01",
+    "website": "doppiai.uz",
+    "location": "Toshkent, O'zbekiston",
+    "reachTitle": "To'g'ridan-to'g'ri bog'laning",
+    "reachSubtitle": "Savollaringiz bo'lsa, biz doim aloqadamiz.",
+    "socialsTitle": "Ijtimoiy tarmoqlar"
+  },
+  "footer": {
+    "tagline": "O'zbekiston bizneslari uchun kelajak — AI bilan bugundan.",
+    "product": "Mahsulot",
+    "company": "Kompaniya",
+    "contactTitle": "Aloqa",
+    "rights": "© {year} Do'ppi.ai. Barcha huquqlar himoyalangan.",
+    "madeIn": "Toshkentda mehr bilan yaratilgan",
+    "privacy": "Maxfiylik siyosati",
+    "terms": "Foydalanish shartlari"
+  },
+  "error": {
+    "404": "404",
+    "pageNotFound": "Sahifa topilmadi",
+    "message": "Kechirasiz, siz izlagan sahifa mavjud emas yoki ko'chirilgan.",
+    "goBackHome": "Bosh sahifaga qaytish"
+  },
+  "legal": {
+    "back": "Bosh sahifaga qaytish",
+    "eyebrow": "Huquqiy",
+    "privacy": {
+      "title": "Maxfiylik siyosati",
+      "updated": "Oxirgi yangilanish: 2026-yil 7-iyul",
+      "sections": [
+        {
+          "h": "Kirish",
+          "p": "Do'ppi.ai (\"biz\") O'zbekistondagi bizneslar uchun sun'iy intellektga asoslangan marketing platformasini taqdim etadi. Ushbu Maxfiylik siyosati biz qanday ma'lumotlarni yig'ishimizni, ulardan qanday foydalanishimizni va veb-saytimizga tashrif buyurganingizda yoki demo so'raganingizda qanday tanlovlaringiz borligini tushuntiradi."
+        },
+        {
+          "h": "Biz yig'adigan ma'lumotlar",
+          "p": "Demo so'rovi formasini to'ldirganingizda siz kiritgan ma'lumotlarni yig'amiz: ismingiz, telefon raqamingiz, elektron pochta manzilingiz va biznesingiz haqidagi ma'lumot. Shuningdek, veb-saytimiz qanday ishlatilayotganini tushunish va uni xavfsiz saqlash uchun cheklangan foydalanish va analitika ma'lumotlarini — masalan, ko'rilgan sahifalar, qurilma va brauzer turi hamda taxminiy joylashuv — avtomatik ravishda to'playmiz."
+        },
+        {
+          "h": "Ma'lumotlardan qanday foydalanamiz",
+          "p": "Ma'lumotlaringizdan demo so'rovlaringiz va murojaatlaringizga javob berish, Do'ppi.ai xizmatini taqdim etish va ishlatish hamda mahsulotimiz, kontentimiz va mijozlar tajribasini yaxshilash uchun foydalanamiz. So'rovingiz va tegishli mahsulot yangiliklari yuzasidan siz bilan bog'lanishimiz mumkin."
+        },
+        {
+          "h": "Ma'lumotlarni ulashish",
+          "p": "Biz shaxsiy ma'lumotlaringizni sotmaymiz. Ularni faqat platformamizni ishlatishga yordam beradigan ishonchli xizmat ko'rsatuvchilar bilan — masalan, hosting, aloqa va analitika provayderlari bilan — va faqat xizmatni taqdim etish uchun zarur bo'lgan darajada ulashamiz. Shuningdek, amaldagi qonun talab qilgan hollarda ma'lumotlarni oshkor qilishimiz mumkin."
+        },
+        {
+          "h": "Ma'lumotlar xavfsizligi",
+          "p": "Ma'lumotlaringiz kirish nazorati va muntazam zaxira nusxalari bilan himoyalangan bulut infratuzilmasida saqlanadi. Biz ularni ruxsatsiz kirish, yo'qotish yoki noto'g'ri foydalanishdan himoya qilish uchun asosli texnik va tashkiliy choralarni ko'ramiz."
+        },
+        {
+          "h": "Sizning huquqlaringiz",
+          "p": "Siz o'zingiz haqingizda saqlanayotgan shaxsiy ma'lumotlarga kirishni so'rashingiz, ularni tuzatishni yoki o'chirishni talab qilishingiz mumkin. Ushbu huquqlardan foydalanish uchun quyidagi ma'lumotlar orqali biz bilan bog'laning — biz asosli muddat ichida javob beramiz."
+        }
+      ],
+      "contact": {
+        "h": "Aloqa",
+        "p": "Ushbu Maxfiylik siyosati yoki ma'lumotlaringizni qanday boshqarishimiz yuzasidan savollaringiz bo'lsa, biz bilan bog'laning:"
+      },
+      "disclaimer": {
+        "h": "Umumiy shablon — yuridik maslahat emas",
+        "p": "Ushbu Maxfiylik siyosati Do'ppi.ai'ning mahsulot va muvofiqlik ishlarini qo'llab-quvvatlash uchun umumiy shablon sifatida taqdim etilgan. U yuridik maslahat hisoblanmaydi va unga tayanishdan oldin malakali yuristlar tomonidan ko'rib chiqilishi va biznesingizga moslashtirilishi lozim."
+      }
+    },
+    "terms": {
+      "title": "Foydalanish shartlari",
+      "updated": "Oxirgi yangilanish: 2026-yil 7-iyul",
+      "intro": "Ushbu Foydalanish shartlari (\"Shartlar\") Do'ppi.ai platformasi va u bilan bog'liq veb-sayt hamda xizmatlardan (\"Xizmat\") foydalanishingizni tartibga soladi. Xizmatdan foydalanishdan oldin ushbu shartlarni diqqat bilan o'qib chiqing.",
+      "disclaimerNote": "Ushbu hujjat umumiy namuna sifatida taqdim etilgan va yuridik maslahat hisoblanmaydi. Yakuniy foydalanishdan oldin uni malakali yuridik maslahatchi ko'rib chiqishi tavsiya etiladi.",
+      "sections": [
+        {
+          "heading": "Kirish va shartlarni qabul qilish",
+          "paragraphs": [
+            "Do'ppi.ai xizmatidan ro'yxatdan o'tib yoki undan foydalanib, siz ushbu Shartlarga va Maxfiylik siyosatiga rozilik bildirasiz. Agar siz ushbu shartlarga rozi bo'lmasangiz, Xizmatdan foydalanmang.",
+            "Agar siz Xizmatdan tashkilot nomidan foydalanayotgan bo'lsangiz, siz ushbu tashkilotni ushbu Shartlar bilan bog'lash vakolatiga ega ekanligingizni tasdiqlaysiz."
+          ],
+          "bullets": []
+        },
+        {
+          "heading": "Xizmat tavsifi",
+          "paragraphs": [
+            "Do'ppi.ai — bu marketing jarayonlarini avtomatlashtirishga mo'ljallangan All-in-One AI marketing platformasi. Xizmat quyidagi asosiy modullarni o'z ichiga oladi:"
+          ],
+          "bullets": [
+            "AI ovozli agent — mijozlar bilan tabiiy suhbat, malakalash va uchrashuv belgilash.",
+            "Ijtimoiy tarmoq avtomatizatsiyasi — DM, komment va follow-up boshqaruvi.",
+            "AI kontent va video generatsiyasi.",
+            "CRM va lead boshqaruvi.",
+            "Ko'p kanalli chatbotlar."
+          ]
+        },
+        {
+          "heading": "Hisoblar va muvofiqlik",
+          "paragraphs": [
+            "Xizmatdan foydalanish uchun kamida 18 yoshda bo'lishingiz va amaldagi qonunlarga muvofiq shartnoma tuzish qobiliyatiga ega bo'lishingiz kerak.",
+            "Siz hisob ma'lumotlaringiz (login va parol) maxfiyligini saqlash va hisobingiz orqali amalga oshirilgan barcha faoliyat uchun javobgar bo'lasiz. Ruxsatsiz foydalanish aniqlansa, bizni zudlik bilan xabardor qiling."
+          ],
+          "bullets": []
+        },
+        {
+          "heading": "Obuna, sinov va to'lovlar",
+          "paragraphs": [
+            "Do'ppi.ai obuna asosidagi rejalarni taklif qiladi: Starter ($19/oy), Growth ($49/oy), Pro ($99/oy) va yirik korxonalar uchun maxsus narxdagi Enterprise reja.",
+            "Barcha rejalar uchun 14 kunlik bepul sinov mavjud. To'lovlar tanlangan reja asosida davriy (oylik) tarzda undiriladi. Obunani istalgan vaqtda bekor qilishingiz mumkin — bekor qilish joriy to'lov davri oxirida kuchga kiradi.",
+            "Narxlar va tarkib oldindan xabar berilgan holda o'zgarishi mumkin. Qonun bilan talab qilinmagan hollarda, to'langan summalar qaytarilmaydi."
+          ],
+          "bullets": []
+        },
+        {
+          "heading": "Foydalanish qoidalari",
+          "paragraphs": [
+            "Siz Xizmatdan faqat qonuniy maqsadlarda va ushbu Shartlarga muvofiq foydalanishga rozilik bildirasiz. Xususan, siz quyidagilarga yo'l qo'ymaslikka rozisiz:"
+          ],
+          "bullets": [
+            "Qonunga xilof, aldov yoki spam xarakteridagi xabarlar yuborish.",
+            "Boshqa shaxslarning huquqlarini yoki maxfiyligini buzish.",
+            "Xizmatni buzish, unga ruxsatsiz kirish yoki uni teskari muhandislik qilish.",
+            "Zararli dastur yoki avtomatlashtirilgan so'rovlar orqali tizimga ortiqcha yuk berish.",
+            "Xizmat orqali qonun taqiqlagan tovar yoki xizmatlarni targ'ib qilish."
+          ]
+        },
+        {
+          "heading": "Intellektual mulk",
+          "paragraphs": [
+            "Xizmat, uning dizayni, dasturiy ta'minoti, brendi va barcha tegishli intellektual mulk huquqlari Do'ppi.ai yoki uning litsenziarlariga tegishli. Ushbu Shartlar sizga cheklangan, eksklyuziv bo'lmagan va o'tkazib bo'lmaydigan foydalanish huquqini beradi.",
+            "Siz Xizmatga yuklagan yoki u orqali yaratgan kontentga (\"Foydalanuvchi kontenti\") egaligingiz saqlanib qoladi. Xizmatni taqdim etish uchun zarur bo'lgan darajada uni qayta ishlashimizga ruxsat berasiz."
+          ],
+          "bullets": []
+        },
+        {
+          "heading": "Kafolatlardan voz kechish va javobgarlik cheklovi",
+          "paragraphs": [
+            "Xizmat \"boribori holida\" va \"mavjud bo'lgani bo'yicha\" taqdim etiladi. Qonun ruxsat bergan darajada biz uning uzluksiz, xatosiz yoki har qanday muayyan maqsadga mos kelishini kafolatlamaymiz.",
+            "Qonun ruxsat bergan maksimal darajada Do'ppi.ai bilvosita, tasodifiy yoki oqibatli zararlar, shu jumladan foyda yoki ma'lumot yo'qotilishi uchun javobgar bo'lmaydi. Bizning umumiy javobgarligimiz da'vodan oldingi 12 oy ichida Xizmat uchun to'langan summadan oshmaydi."
+          ],
+          "bullets": []
+        },
+        {
+          "heading": "Bekor qilish",
+          "paragraphs": [
+            "Siz istalgan vaqtda hisobingizni bekor qilishingiz mumkin. Ushbu Shartlar buzilgan taqdirda biz Xizmatga kirishni to'xtatib qo'yish yoki hisobni bekor qilish huquqini o'zimizda saqlab qolamiz.",
+            "Bekor qilingandan so'ng Xizmatdan foydalanish huquqingiz darhol tugaydi. Ayrim qoidalar (masalan, intellektual mulk va javobgarlik cheklovi) bekor qilingandan keyin ham amal qiladi."
+          ],
+          "bullets": []
+        },
+        {
+          "heading": "Shartlarga o'zgartirishlar",
+          "paragraphs": [
+            "Biz ushbu Shartlarni vaqti-vaqti bilan yangilashimiz mumkin. Muhim o'zgarishlar to'g'risida veb-sayt orqali yoki boshqa oqilona usulda xabar beramiz. O'zgarishlardan keyin Xizmatdan foydalanishni davom ettirish yangilangan Shartlarni qabul qilishni anglatadi."
+          ],
+          "bullets": []
+        },
+        {
+          "heading": "Amaldagi qonun",
+          "paragraphs": [
+            "Ushbu Shartlar O'zbekiston Respublikasi qonunlariga muvofiq tartibga solinadi va talqin qilinadi. Har qanday nizolar O'zbekiston Respublikasining vakolatli sudlari tomonidan ko'rib chiqiladi."
+          ],
+          "bullets": []
+        }
+      ],
+      "contactHeading": "Aloqa",
+      "contactLead": "Ushbu Shartlar bo'yicha savollaringiz bo'lsa, biz bilan bog'laning:",
+      "ctaTitle": "Yana savollaringiz bormi?",
+      "ctaBody": "Jamoamiz Xizmat va shartlar bo'yicha savollaringizga yordam berishga tayyor.",
+      "ctaButton": "Bosh sahifaga qaytish"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Do'ppi.ai — O'zbekiston uchun AI marketing tizimi",
+      "description": "Do'ppi.ai — reklamadan sotuvgacha bo'lgan jarayonni avtomatlashtiruvchi AI marketing operatsion tizimi: ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, CRM, chatbotlar va SIP call-markaz.",
+      "keywords": "AI marketing, sun'iy intellekt, ovozli agent, CRM, chatbot, SIP telefoniya, O'zbekiston, lead generatsiya, marketing avtomatizatsiya"
+    },
+    "pricing": {
+      "title": "Narxlar — Do'ppi.ai",
+      "description": "Do'ppi.ai rejalari: Starter, Growth, Pro va Enterprise. Barcha rejalar uchun 14 kunlik bepul sinov."
+    },
+    "about": {
+      "title": "Biz haqimizda — Do'ppi.ai",
+      "description": "Do'ppi.ai jamoasi va vazifasi: O'zbekiston bizneslari uchun AI marketing tizimini qurish."
+    },
+    "contact": {
+      "title": "Aloqa — Do'ppi.ai",
+      "description": "Do'ppi.ai jamoasi bilan bog'laning va biznesingiz uchun demo oling."
+    },
+    "product": {
+      "title": "Mahsulot — Do'ppi.ai",
+      "description": "Do'ppi.ai modullari: AI ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, SIP call-markaz, AI video va kontent, CRM hamda chatbotlar."
+    }
+  },
+  "product": {
+    "pageTitle": "Reklamadan sotuvgacha — bitta AI platformada",
+    "pageSubtitle": "Do'ppi.ai qanday ishlashini bosqichma-bosqich ko'ring: modullar, imkoniyatlar, kimlar uchun mo'ljallangani va kutilayotgan natijalar."
+  }
+}

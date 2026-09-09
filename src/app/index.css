@@ -1,0 +1,21 @@
+/* Fonts */
+@import "./fonts/fonts.css";
+
+/* Base Styles */
+@import "./styles/base.css";
+
+/* Common Styles */
+@import "./styles/common.css";
+
+/* Landing section primitives */
+@import "./styles/sections.css";
+
+/* Tailwind CSS */
+@import "./styles/tailwind.css";
+
+/* Transitions */
+@import "./styles/transitions.css";
+
+/* Icons */
+/* Enable if you have icons */
+/* @import "@/shared/assets/icons/style.css"; */

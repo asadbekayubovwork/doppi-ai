@@ -1,0 +1,21 @@
+export { default as CTable } from "./Table/ui/CTable.vue"
+
+// Chrome
+export { CHeader } from "./header"
+export { CFooter } from "./footer"
+
+// Landing sections (in page order)
+export { CHero } from "./hero"
+export { CTrustBar } from "./trustbar"
+export { CProblem } from "./problem"
+export { CSolution } from "./solution"
+export { CFeatures } from "./features"
+export { CAudience } from "./audience"
+export { CHowItWorks } from "./howitworks"
+export { CVoiceAgent } from "./voiceagent"
+export { CResults } from "./results"
+export { CPricingList } from "./pricing"
+export { CFaq } from "./faq"
+export { CAbout } from "./about"
+export { CTeamCards } from "./team"
+export { CContact } from "./contact"
