@@ -6,3 +6,14 @@ declare module "@vue/runtime-core" {
     $router: Router
   }
 }
+
+declare module "vue-router" {
+  interface RouteMeta {
+    layout?: string
+    /** Heading shown by the dashboard header. */
+    title?: string
+    subtitle?: string
+  }
+}
+
+export {}

@@ -4,6 +4,7 @@ import { useHead } from "@vueuse/head"
 import { useRoute, useRouter } from "vue-router"
 import { authApi, CAuthVerifyStep } from "@/features/auth"
 import { HttpError } from "@/shared/api/types"
+import { usePasswordStrength } from "@/shared/lib"
 import { CDoppiMark, CIcon } from "@/shared/ui"
 
 const route = useRoute()
@@ -45,27 +46,9 @@ const highlights = [
 ]
 
 // Strength is an indicator only — `minlength` is what actually gates the form.
-const strengthLevels = [
-  { label: "Juda kuchsiz", bar: "bg-[#E5484D]", text: "text-[#C42121]" },
-  { label: "Kuchsiz", bar: "bg-[#E5484D]", text: "text-[#C42121]" },
-  { label: "O'rtacha", bar: "bg-[#E8A33D]", text: "text-[#B0730B]" },
-  { label: "Kuchli", bar: "bg-[#15803D]", text: "text-[#15803D]" },
-  { label: "Juda kuchli", bar: "bg-[#15803D]", text: "text-[#15803D]" },
-]
-
-const passwordScore = computed(() => {
-  const value = password.value
-  if (!value) return 0
-
-  let score = 0
-  if (value.length >= 8) score += 1
-  if (value.length >= 12) score += 1
-  if (/[a-z]/.test(value) && /[A-Z]/.test(value)) score += 1
-  if (/\d/.test(value) || /[^A-Za-z0-9]/.test(value)) score += 1
-
-  return Math.min(4, Math.max(1, score))
-})
-const passwordStrength = computed(() => strengthLevels[passwordScore.value])
+// Shared with the password-reset form so both score a password the same way.
+const { score: passwordScore, level: passwordStrength } =
+  usePasswordStrength(password)
 
 useHead({
   title: "Ro'yxatdan o'tish — Do'ppi.ai",
@@ -302,273 +285,283 @@ const registerWith = (provider: "google" | "telegram") => {
         class="flex flex-1 items-center justify-center py-3 [@media(min-height:860px)]:py-6 [@media(min-height:960px)]:py-12"
       >
         <div class="w-full max-w-[400px]">
-          <template v-if="isOtpStep">
-            <CAuthVerifyStep
-              v-model="otp"
-              :email="email"
-              title="Emailni tasdiqlang"
-              :description="`6 xonali tasdiqlash kodini ${codeSentVia} yubordik. Kod 10 daqiqa amal qiladi.`"
-              submit-label="Emailni tasdiqlash"
-              step-name="Tasdiqlash"
-              :error-message="errorMessage"
-              :loading="loading"
-              @submit="verifyOtp"
-              @resend="resendCode"
-              @change-email="isOtpStep = false"
-            />
-          </template>
+          <Transition name="step" mode="out-in">
+            <div :key="isOtpStep ? 'otp' : 'form'">
+              <template v-if="isOtpStep">
+                <CAuthVerifyStep
+                  v-model="otp"
+                  :email="email"
+                  title="Emailni tasdiqlang"
+                  :description="`6 xonali tasdiqlash kodini ${codeSentVia} yubordik. Kod 10 daqiqa amal qiladi.`"
+                  submit-label="Emailni tasdiqlash"
+                  step-name="Tasdiqlash"
+                  :error-message="errorMessage"
+                  :loading="loading"
+                  @submit="verifyOtp"
+                  @resend="resendCode"
+                  @change-email="isOtpStep = false"
+                />
+              </template>
 
-          <template v-else>
-            <h1
-              class="text-[28px] font-bold tracking-[-0.02em] text-[#0F0F17] sm:text-[32px]"
-            >
-              Hisob yarating
-            </h1>
-            <p class="mt-2 text-[15px] leading-[1.6] text-[#6B6B78]">
-              500 ta bepul kredit bilan boshlang. Karta talab qilinmaydi.
-            </p>
-
-            <div class="mt-6 grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-                @click="registerWith('google')"
-              >
-                <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="#4285F4"
-                    d="M21.8 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.5a4.7 4.7 0 0 1-2 3.1v2.5h3.2c1.9-1.7 3.1-4.3 3.1-7.4Z"
-                  />
-                  <path
-                    fill="#34A853"
-                    d="M12 22c2.7 0 5-.9 6.7-2.4l-3.2-2.5c-.9.6-2 .9-3.5.9-2.7 0-5-1.8-5.8-4.3H2.9v2.6A10 10 0 0 0 12 22Z"
-                  />
-                  <path
-                    fill="#FBBC05"
-                    d="M6.2 13.7a6 6 0 0 1 0-3.4V7.7H2.9a10 10 0 0 0 0 8.6l3.3-2.6Z"
-                  />
-                  <path
-                    fill="#EA4335"
-                    d="M12 6c1.6 0 3 .6 4.1 1.6l3.1-3A10 10 0 0 0 2.9 7.7l3.3 2.6C7 7.8 9.3 6 12 6Z"
-                  />
-                </svg>
-                Google
-              </button>
-              <button
-                type="button"
-                class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-                @click="registerWith('telegram')"
-              >
-                <CIcon name="telegram" class="h-5 w-5 text-[#29A9EA]" />
-                Telegram
-              </button>
-            </div>
-
-            <div class="my-5 flex items-center gap-3" aria-hidden="true">
-              <span class="h-px flex-1 bg-[#E9E9EF]" />
-              <span class="whitespace-nowrap text-xs text-[#9A9AA5]">
-                yoki email orqali ro'yxatdan o'ting
-              </span>
-              <span class="h-px flex-1 bg-[#E9E9EF]" />
-            </div>
-
-            <form @submit.prevent="register">
-              <div>
-                <label
-                  for="register-name"
-                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
+              <template v-else>
+                <h1
+                  class="text-[28px] font-bold tracking-[-0.02em] text-[#0F0F17] sm:text-[32px]"
                 >
-                  To'liq ism
-                </label>
-                <div class="relative">
-                  <CIcon
-                    name="user-round"
-                    class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
-                  />
-                  <input
-                    id="register-name"
-                    v-model="name"
-                    type="text"
-                    autocomplete="name"
-                    required
-                    placeholder="Akmal Karimov"
-                    class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
-                  />
-                </div>
-              </div>
+                  Hisob yarating
+                </h1>
+                <p class="mt-2 text-[15px] leading-[1.6] text-[#6B6B78]">
+                  500 ta bepul kredit bilan boshlang. Karta talab qilinmaydi.
+                </p>
 
-              <div class="mt-4">
-                <label
-                  for="register-email"
-                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
-                >
-                  Ish emaili
-                </label>
-                <div class="relative">
-                  <CIcon
-                    name="mail"
-                    class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
-                  />
-                  <input
-                    id="register-email"
-                    v-model="email"
-                    type="email"
-                    autocomplete="email"
-                    required
-                    placeholder="siz@kompaniya.uz"
-                    class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
-                  />
-                </div>
-              </div>
-
-              <div class="mt-4">
-                <label
-                  for="register-password"
-                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
-                >
-                  Parol
-                </label>
-                <div class="relative">
-                  <CIcon
-                    name="lock-keyhole"
-                    class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
-                  />
-                  <input
-                    id="register-password"
-                    v-model="password"
-                    :type="showPassword ? 'text' : 'password'"
-                    autocomplete="new-password"
-                    required
-                    minlength="8"
-                    placeholder="Kamida 8 ta belgi"
-                    class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-12 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
-                  />
+                <div class="mt-6 grid grid-cols-2 gap-3">
                   <button
                     type="button"
-                    class="absolute right-3 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-[#8E8E9C] transition hover:bg-[#F2F2F6] hover:text-[#12121C]"
-                    :aria-label="
-                      showPassword ? 'Parolni yashirish' : 'Parolni korsatish'
-                    "
-                    @click="showPassword = !showPassword"
+                    class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
+                    @click="registerWith('google')"
                   >
-                    <CIcon
-                      :name="showPassword ? 'eye-off' : 'eye'"
-                      class="h-5 w-5"
-                    />
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        fill="#4285F4"
+                        d="M21.8 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.5a4.7 4.7 0 0 1-2 3.1v2.5h3.2c1.9-1.7 3.1-4.3 3.1-7.4Z"
+                      />
+                      <path
+                        fill="#34A853"
+                        d="M12 22c2.7 0 5-.9 6.7-2.4l-3.2-2.5c-.9.6-2 .9-3.5.9-2.7 0-5-1.8-5.8-4.3H2.9v2.6A10 10 0 0 0 12 22Z"
+                      />
+                      <path
+                        fill="#FBBC05"
+                        d="M6.2 13.7a6 6 0 0 1 0-3.4V7.7H2.9a10 10 0 0 0 0 8.6l3.3-2.6Z"
+                      />
+                      <path
+                        fill="#EA4335"
+                        d="M12 6c1.6 0 3 .6 4.1 1.6l3.1-3A10 10 0 0 0 2.9 7.7l3.3 2.6C7 7.8 9.3 6 12 6Z"
+                      />
+                    </svg>
+                    Google
+                  </button>
+                  <button
+                    type="button"
+                    class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
+                    @click="registerWith('telegram')"
+                  >
+                    <CIcon name="telegram" class="h-5 w-5 text-[#29A9EA]" />
+                    Telegram
                   </button>
                 </div>
 
-                <div v-if="password" class="mt-2 flex items-center gap-3">
-                  <span
-                    class="grid flex-1 grid-cols-4 gap-1.5"
-                    role="img"
-                    :aria-label="`Parol kuchi: ${passwordStrength.label}`"
+                <div class="my-5 flex items-center gap-3" aria-hidden="true">
+                  <span class="h-px flex-1 bg-[#E9E9EF]" />
+                  <span class="whitespace-nowrap text-xs text-[#9A9AA5]">
+                    yoki email orqali ro'yxatdan o'ting
+                  </span>
+                  <span class="h-px flex-1 bg-[#E9E9EF]" />
+                </div>
+
+                <form @submit.prevent="register">
+                  <div>
+                    <label
+                      for="register-name"
+                      class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
+                    >
+                      To'liq ism
+                    </label>
+                    <div class="relative">
+                      <CIcon
+                        name="user-round"
+                        class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
+                      />
+                      <input
+                        id="register-name"
+                        v-model="name"
+                        type="text"
+                        autocomplete="name"
+                        required
+                        placeholder="Akmal Karimov"
+                        class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="mt-4">
+                    <label
+                      for="register-email"
+                      class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
+                    >
+                      Ish emaili
+                    </label>
+                    <div class="relative">
+                      <CIcon
+                        name="mail"
+                        class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
+                      />
+                      <input
+                        id="register-email"
+                        v-model="email"
+                        type="email"
+                        autocomplete="email"
+                        required
+                        placeholder="siz@kompaniya.uz"
+                        class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="mt-4">
+                    <label
+                      for="register-password"
+                      class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
+                    >
+                      Parol
+                    </label>
+                    <div class="relative">
+                      <CIcon
+                        name="lock-keyhole"
+                        class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
+                      />
+                      <input
+                        id="register-password"
+                        v-model="password"
+                        :type="showPassword ? 'text' : 'password'"
+                        autocomplete="new-password"
+                        required
+                        minlength="8"
+                        placeholder="Kamida 8 ta belgi"
+                        class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-12 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+                      />
+                      <button
+                        type="button"
+                        class="absolute right-3 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-[#8E8E9C] transition hover:bg-[#F2F2F6] hover:text-[#12121C]"
+                        :aria-label="
+                          showPassword
+                            ? 'Parolni yashirish'
+                            : 'Parolni korsatish'
+                        "
+                        @click="showPassword = !showPassword"
+                      >
+                        <CIcon
+                          :name="showPassword ? 'eye-off' : 'eye'"
+                          class="h-5 w-5"
+                        />
+                      </button>
+                    </div>
+
+                    <div v-if="password" class="mt-2 flex items-center gap-3">
+                      <span
+                        class="grid flex-1 grid-cols-4 gap-1.5"
+                        role="img"
+                        :aria-label="`Parol kuchi: ${passwordStrength.label}`"
+                      >
+                        <span
+                          v-for="segment in 4"
+                          :key="segment"
+                          class="h-1 rounded-full transition-colors"
+                          :class="
+                            segment <= passwordScore
+                              ? passwordStrength.bar
+                              : 'bg-[#E9E9EF]'
+                          "
+                        />
+                      </span>
+                      <span
+                        class="shrink-0 text-[13px] font-medium"
+                        :class="passwordStrength.text"
+                      >
+                        {{ passwordStrength.label }}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="mt-4">
+                    <label
+                      for="register-business"
+                      class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
+                    >
+                      Biznes nomi
+                    </label>
+                    <div class="relative">
+                      <CIcon
+                        name="building-2"
+                        class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
+                      />
+                      <input
+                        id="register-business"
+                        v-model="businessName"
+                        type="text"
+                        autocomplete="organization"
+                        required
+                        placeholder="Karimov Group"
+                        aria-describedby="register-business-hint"
+                        class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+                      />
+                    </div>
+                    <p
+                      id="register-business-hint"
+                      class="mt-1.5 text-[12.5px] leading-5 text-[#8E8E9C]"
+                    >
+                      Keyinchalik boshqaruv panelidan yana biznes qo'sha olasiz.
+                    </p>
+                  </div>
+
+                  <label
+                    class="mt-4 flex w-fit cursor-pointer select-none items-center gap-3"
+                  >
+                    <input
+                      v-model="acceptedTerms"
+                      type="checkbox"
+                      class="peer sr-only"
+                    />
+                    <span
+                      class="grid h-5 w-5 shrink-0 place-items-center rounded-md border border-[#D5D5DE] bg-white text-transparent transition peer-checked:border-[#6633EE] peer-checked:bg-[#6633EE] peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-[#6633EE]/20"
+                      aria-hidden="true"
+                    >
+                      <CIcon
+                        name="check"
+                        class="h-3.5 w-3.5"
+                        stroke-width="3"
+                      />
+                    </span>
+                    <span class="text-sm text-[#4A4A57]">
+                      Foydalanish shartlari va maxfiylik siyosatiga roziman
+                    </span>
+                  </label>
+
+                  <p
+                    v-if="errorMessage"
+                    class="mt-4 rounded-xl border border-[#FFD5D5] bg-[#FFF3F3] px-3.5 py-2.5 text-sm text-[#C42121]"
+                    role="alert"
+                  >
+                    {{ errorMessage }}
+                  </p>
+
+                  <button
+                    type="submit"
+                    :disabled="loading"
+                    class="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6633EE] text-[15px] font-semibold text-white transition-colors hover:bg-[#5A2CE0] disabled:cursor-wait disabled:opacity-70"
                   >
                     <span
-                      v-for="segment in 4"
-                      :key="segment"
-                      class="h-1 rounded-full transition-colors"
-                      :class="
-                        segment <= passwordScore
-                          ? passwordStrength.bar
-                          : 'bg-[#E9E9EF]'
-                      "
+                      v-if="loading"
+                      class="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white"
+                      aria-hidden="true"
                     />
-                  </span>
-                  <span
-                    class="shrink-0 text-[13px] font-medium"
-                    :class="passwordStrength.text"
-                  >
-                    {{ passwordStrength.label }}
-                  </span>
-                </div>
-              </div>
+                    {{ loading ? "Kutilmoqda..." : "Hisob yaratish" }}
+                    <CIcon v-if="!loading" name="arrow-right" class="h-4 w-4" />
+                  </button>
+                </form>
 
-              <div class="mt-4">
-                <label
-                  for="register-business"
-                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
-                >
-                  Biznes nomi
-                </label>
-                <div class="relative">
-                  <CIcon
-                    name="building-2"
-                    class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
-                  />
-                  <input
-                    id="register-business"
-                    v-model="businessName"
-                    type="text"
-                    autocomplete="organization"
-                    required
-                    placeholder="Karimov Group"
-                    aria-describedby="register-business-hint"
-                    class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
-                  />
-                </div>
                 <p
-                  id="register-business-hint"
-                  class="mt-1.5 text-[12.5px] leading-5 text-[#8E8E9C]"
+                  class="mt-4 text-center text-sm text-[#6B6B78] [@media(max-height:880px)]:hidden"
                 >
-                  Keyinchalik boshqaruv panelidan yana biznes qo'sha olasiz.
+                  Allaqachon ro'yxatdan o'tganmisiz?
+                  <RouterLink
+                    to="/login"
+                    class="ml-1 font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
+                  >
+                    Kirish
+                  </RouterLink>
                 </p>
-              </div>
-
-              <label
-                class="mt-4 flex w-fit cursor-pointer select-none items-center gap-3"
-              >
-                <input
-                  v-model="acceptedTerms"
-                  type="checkbox"
-                  class="peer sr-only"
-                />
-                <span
-                  class="grid h-5 w-5 shrink-0 place-items-center rounded-md border border-[#D5D5DE] bg-white text-transparent transition peer-checked:border-[#6633EE] peer-checked:bg-[#6633EE] peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-[#6633EE]/20"
-                  aria-hidden="true"
-                >
-                  <CIcon name="check" class="h-3.5 w-3.5" stroke-width="3" />
-                </span>
-                <span class="text-sm text-[#4A4A57]">
-                  Foydalanish shartlari va maxfiylik siyosatiga roziman
-                </span>
-              </label>
-
-              <p
-                v-if="errorMessage"
-                class="mt-4 rounded-xl border border-[#FFD5D5] bg-[#FFF3F3] px-3.5 py-2.5 text-sm text-[#C42121]"
-                role="alert"
-              >
-                {{ errorMessage }}
-              </p>
-
-              <button
-                type="submit"
-                :disabled="loading"
-                class="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6633EE] text-[15px] font-semibold text-white transition-colors hover:bg-[#5A2CE0] disabled:cursor-wait disabled:opacity-70"
-              >
-                <span
-                  v-if="loading"
-                  class="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white"
-                  aria-hidden="true"
-                />
-                {{ loading ? "Kutilmoqda..." : "Hisob yaratish" }}
-                <CIcon v-if="!loading" name="arrow-right" class="h-4 w-4" />
-              </button>
-            </form>
-
-            <p
-              class="mt-4 text-center text-sm text-[#6B6B78] [@media(max-height:880px)]:hidden"
-            >
-              Allaqachon ro'yxatdan o'tganmisiz?
-              <RouterLink
-                to="/login"
-                class="ml-1 font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
-              >
-                Kirish
-              </RouterLink>
-            </p>
-          </template>
+              </template>
+            </div>
+          </Transition>
         </div>
       </div>
 

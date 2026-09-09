@@ -16,6 +16,18 @@ export interface RegisterPayload extends SignInPayload {
   businessName: string
 }
 
+export interface ResetPasswordPayload {
+  email: string
+  code: string
+  password: string
+}
+
+export interface ResetPasswordResponse {
+  /** Sessions the backend invalidated because the password changed. */
+  signedOutSessions?: number
+  devices?: string[]
+}
+
 /**
  * Authentication endpoints are kept in one place so the landing can point to
  * the production API without coupling page components to a transport layer.
@@ -27,4 +39,6 @@ export const authApi = {
     apiClient.post<AuthResponse>("/auth/register", payload),
   requestPasswordReset: (email: string) =>
     apiClient.post<void>("/auth/forgot-password", { email }),
+  resetPassword: (payload: ResetPasswordPayload) =>
+    apiClient.post<ResetPasswordResponse>("/auth/reset-password", payload),
 }

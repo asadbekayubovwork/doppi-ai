@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from "vue"
+import { ref } from "vue"
 import { useHead } from "@vueuse/head"
 import { useRoute, useRouter } from "vue-router"
-import { authApi, CAuthVerifyStep } from "@/features/auth"
+import { authApi } from "@/features/auth"
 import { CDoppiMark, CIcon } from "@/shared/ui"
 import { HttpError } from "@/shared/api/types"
 
@@ -15,23 +15,6 @@ const showPassword = ref(false)
 const rememberMe = ref(true)
 const loading = ref(false)
 const errorMessage = ref("")
-const isOtpStep = ref(false)
-const codeChannel = ref<"email" | "telegram">("email")
-const codeSentVia = computed(() =>
-  codeChannel.value === "telegram" ? "Telegram orqali" : "emailingizga"
-)
-const otp = ref("")
-const usesAuthApi = import.meta.env.VITE_AUTH_API_ENABLED === "true"
-
-const isForgotPassword = computed(() => route.path === "/forgot-password")
-const title = computed(() =>
-  isForgotPassword.value ? "Parolni tiklash" : "Xush kelibsiz"
-)
-const subtitle = computed(() =>
-  isForgotPassword.value
-    ? "Email manzilingizni kiriting — tasdiqlash kodini yuboramiz."
-    : "Agentlar, balans va bizneslarni boshqarish uchun Do'ppi AI ish maydoningizga kiring."
-)
 
 // The dark brand column: the same three modules the landing sells, kept here so
 // the login screen repeats the pitch instead of showing an empty panel.
@@ -54,17 +37,8 @@ const highlights = [
 ]
 
 useHead({
-  title: computed(() => `${title.value} — Do'ppi.ai`),
-  meta: [
-    {
-      name: "description",
-      content: computed(() =>
-        isForgotPassword.value
-          ? "Do'ppi.ai parolini tiklash"
-          : "Do'ppi.ai hisobiga kirish"
-      ),
-    },
-  ],
+  title: "Xush kelibsiz — Do'ppi.ai",
+  meta: [{ name: "description", content: "Do'ppi.ai hisobiga kirish" }],
 })
 
 const getErrorMessage = async (error: unknown) => {
@@ -111,45 +85,6 @@ const signIn = async () => {
   } finally {
     loading.value = false
   }
-}
-
-const requestPasswordReset = async () => {
-  errorMessage.value = ""
-  loading.value = true
-
-  try {
-    // Without a connected API, keep the temporary OTP flow testable locally.
-    if (usesAuthApi) await authApi.requestPasswordReset(email.value.trim())
-    isOtpStep.value = true
-  } catch (error) {
-    errorMessage.value = await getErrorMessage(error)
-  } finally {
-    loading.value = false
-  }
-}
-
-const resendCode = async (channel: "email" | "telegram") => {
-  errorMessage.value = ""
-  otp.value = ""
-  codeChannel.value = channel
-
-  // Telegram delivery has no endpoint yet, so only the email code is re-sent.
-  if (usesAuthApi && channel === "email") {
-    try {
-      await authApi.requestPasswordReset(email.value.trim())
-    } catch (error) {
-      errorMessage.value = await getErrorMessage(error)
-    }
-  }
-}
-
-const verifyOtp = async () => {
-  errorMessage.value = ""
-  if (otp.value !== "111111") {
-    errorMessage.value = "Tasdiqlash kodi noto'g'ri."
-    return
-  }
-  await router.push("/")
 }
 
 const signInWith = (provider: "google" | "telegram") => {
@@ -289,38 +224,15 @@ const signInWith = (provider: "google" | "telegram") => {
         </RouterLink>
 
         <div class="flex items-center gap-4">
-          <template v-if="isOtpStep">
-            <span class="hidden text-sm text-[#6B6B78] sm:inline">
-              Siz emasmisiz?
-            </span>
-            <button
-              type="button"
-              class="rounded-[10px] border border-[#E3E3EB] bg-white px-4 py-2 text-sm font-semibold text-[#12121A] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-              @click="isOtpStep = false"
-            >
-              Bekor qilish
-            </button>
-          </template>
-          <template v-else-if="isForgotPassword">
-            <RouterLink
-              to="/login"
-              class="inline-flex items-center gap-2 rounded-[10px] border border-[#E3E3EB] bg-white px-4 py-2 text-sm font-semibold text-[#12121A] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-            >
-              <CIcon name="arrow-left" class="h-4 w-4" />
-              Kirishga qaytish
-            </RouterLink>
-          </template>
-          <template v-else>
-            <span class="hidden text-sm text-[#6B6B78] sm:inline">
-              Hisobingiz yo'qmi?
-            </span>
-            <RouterLink
-              to="/register"
-              class="rounded-[10px] border border-[#E3E3EB] bg-white px-4 py-2 text-sm font-semibold text-[#12121A] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-            >
-              Ro'yxatdan o'tish
-            </RouterLink>
-          </template>
+          <span class="hidden text-sm text-[#6B6B78] sm:inline">
+            Hisobingiz yo'qmi?
+          </span>
+          <RouterLink
+            to="/register"
+            class="rounded-[10px] border border-[#E3E3EB] bg-white px-4 py-2 text-sm font-semibold text-[#12121A] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
+          >
+            Ro'yxatdan o'tish
+          </RouterLink>
         </div>
       </header>
 
@@ -328,228 +240,186 @@ const signInWith = (provider: "google" | "telegram") => {
         class="flex flex-1 items-center justify-center py-3 [@media(min-height:860px)]:py-6 [@media(min-height:960px)]:py-12"
       >
         <div class="w-full max-w-[400px]">
-          <template v-if="isOtpStep">
-            <CAuthVerifyStep
-              v-model="otp"
-              :email="email"
-              title="Kodni kiriting"
-              :description="`6 xonali tasdiqlash kodini ${codeSentVia} yubordik. Kod 10 daqiqa amal qiladi.`"
-              submit-label="Tasdiqlash"
-              step-name="Tasdiqlash"
-              :error-message="errorMessage"
-              :loading="loading"
-              @submit="verifyOtp"
-              @resend="resendCode"
-              @change-email="isOtpStep = false"
-            />
-          </template>
+          <h1
+            class="text-[28px] font-bold tracking-[-0.02em] text-[#0F0F17] sm:text-[32px]"
+          >
+            Xush kelibsiz
+          </h1>
+          <p class="mt-2 text-[15px] leading-[1.6] text-[#6B6B78]">
+            Agentlar, balans va bizneslarni boshqarish uchun Do'ppi AI ish
+            maydoningizga kiring.
+          </p>
 
-          <template v-else>
-            <h1
-              class="text-[28px] font-bold tracking-[-0.02em] text-[#0F0F17] sm:text-[32px]"
+          <div class="mt-6 grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
+              @click="signInWith('google')"
             >
-              {{ title }}
-            </h1>
-            <p class="mt-2 text-[15px] leading-[1.6] text-[#6B6B78]">
-              {{ subtitle }}
-            </p>
-
-            <div v-if="!isForgotPassword" class="mt-6 grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-                @click="signInWith('google')"
-              >
-                <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="#4285F4"
-                    d="M21.8 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.5a4.7 4.7 0 0 1-2 3.1v2.5h3.2c1.9-1.7 3.1-4.3 3.1-7.4Z"
-                  />
-                  <path
-                    fill="#34A853"
-                    d="M12 22c2.7 0 5-.9 6.7-2.4l-3.2-2.5c-.9.6-2 .9-3.5.9-2.7 0-5-1.8-5.8-4.3H2.9v2.6A10 10 0 0 0 12 22Z"
-                  />
-                  <path
-                    fill="#FBBC05"
-                    d="M6.2 13.7a6 6 0 0 1 0-3.4V7.7H2.9a10 10 0 0 0 0 8.6l3.3-2.6Z"
-                  />
-                  <path
-                    fill="#EA4335"
-                    d="M12 6c1.6 0 3 .6 4.1 1.6l3.1-3A10 10 0 0 0 2.9 7.7l3.3 2.6C7 7.8 9.3 6 12 6Z"
-                  />
-                </svg>
-                Google
-              </button>
-              <button
-                type="button"
-                class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-                @click="signInWith('telegram')"
-              >
-                <CIcon name="telegram" class="h-5 w-5 text-[#29A9EA]" />
-                Telegram
-              </button>
-            </div>
-
-            <div
-              v-if="!isForgotPassword"
-              class="my-5 flex items-center gap-3"
-              aria-hidden="true"
+              <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#4285F4"
+                  d="M21.8 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.5a4.7 4.7 0 0 1-2 3.1v2.5h3.2c1.9-1.7 3.1-4.3 3.1-7.4Z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 22c2.7 0 5-.9 6.7-2.4l-3.2-2.5c-.9.6-2 .9-3.5.9-2.7 0-5-1.8-5.8-4.3H2.9v2.6A10 10 0 0 0 12 22Z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M6.2 13.7a6 6 0 0 1 0-3.4V7.7H2.9a10 10 0 0 0 0 8.6l3.3-2.6Z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 6c1.6 0 3 .6 4.1 1.6l3.1-3A10 10 0 0 0 2.9 7.7l3.3 2.6C7 7.8 9.3 6 12 6Z"
+                />
+              </svg>
+              Google
+            </button>
+            <button
+              type="button"
+              class="flex h-11 items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
+              @click="signInWith('telegram')"
             >
-              <span class="h-px flex-1 bg-[#E9E9EF]" />
-              <span class="text-xs text-[#9A9AA5]">yoki email orqali</span>
-              <span class="h-px flex-1 bg-[#E9E9EF]" />
-            </div>
+              <CIcon name="telegram" class="h-5 w-5 text-[#29A9EA]" />
+              Telegram
+            </button>
+          </div>
 
-            <form
-              :class="isForgotPassword ? 'mt-7' : ''"
-              @submit.prevent="
-                isForgotPassword ? requestPasswordReset() : signIn()
-              "
-            >
-              <div>
-                <label
-                  for="login-email"
-                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
-                >
-                  Email
-                </label>
-                <div class="relative">
-                  <CIcon
-                    name="mail"
-                    class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
-                  />
-                  <input
-                    id="login-email"
-                    v-model="email"
-                    type="email"
-                    autocomplete="email"
-                    required
-                    placeholder="siz@kompaniya.uz"
-                    class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
-                  />
-                </div>
-              </div>
+          <div class="my-5 flex items-center gap-3" aria-hidden="true">
+            <span class="h-px flex-1 bg-[#E9E9EF]" />
+            <span class="text-xs text-[#9A9AA5]">yoki email orqali</span>
+            <span class="h-px flex-1 bg-[#E9E9EF]" />
+          </div>
 
-              <div v-if="!isForgotPassword" class="mt-4">
-                <div class="mb-2 flex items-center justify-between gap-4">
-                  <label
-                    for="login-password"
-                    class="text-[13.5px] font-medium text-[#3D3D4A]"
-                  >
-                    Parol
-                  </label>
-                  <RouterLink
-                    to="/forgot-password"
-                    class="text-[13px] font-medium text-[#6633EE] transition-colors hover:text-[#4B21C4]"
-                  >
-                    Parolni unutdingizmi?
-                  </RouterLink>
-                </div>
-                <div class="relative">
-                  <CIcon
-                    name="lock-keyhole"
-                    class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
-                  />
-                  <input
-                    id="login-password"
-                    v-model="password"
-                    :type="showPassword ? 'text' : 'password'"
-                    autocomplete="current-password"
-                    required
-                    minlength="8"
-                    placeholder="Parolingizni kiriting"
-                    class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-12 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
-                  />
-                  <button
-                    type="button"
-                    class="absolute right-3 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-[#8E8E9C] transition hover:bg-[#F2F2F6] hover:text-[#12121C]"
-                    :aria-label="
-                      showPassword ? 'Parolni yashirish' : 'Parolni korsatish'
-                    "
-                    @click="showPassword = !showPassword"
-                  >
-                    <CIcon
-                      :name="showPassword ? 'eye-off' : 'eye'"
-                      class="h-5 w-5"
-                    />
-                  </button>
-                </div>
-              </div>
-
+          <form @submit.prevent="signIn">
+            <div>
               <label
-                v-if="!isForgotPassword"
-                class="mt-4 flex w-fit cursor-pointer select-none items-center gap-3"
+                for="login-email"
+                class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
               >
-                <input
-                  v-model="rememberMe"
-                  type="checkbox"
-                  class="peer sr-only"
-                />
-                <span
-                  class="grid h-5 w-5 shrink-0 place-items-center rounded-md border border-[#D5D5DE] bg-white text-transparent transition peer-checked:border-[#6633EE] peer-checked:bg-[#6633EE] peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-[#6633EE]/20"
-                  aria-hidden="true"
-                >
-                  <CIcon name="check" class="h-3.5 w-3.5" stroke-width="3" />
-                </span>
-                <span class="text-sm text-[#4A4A57]">
-                  Meni 30 kun davomida eslab qol
-                </span>
+                Email
               </label>
-
-              <p
-                v-if="errorMessage"
-                class="mt-4 rounded-xl border border-[#FFD5D5] bg-[#FFF3F3] px-3.5 py-2.5 text-sm text-[#C42121]"
-                role="alert"
-              >
-                {{ errorMessage }}
-              </p>
-
-              <button
-                type="submit"
-                :disabled="loading"
-                class="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6633EE] text-[15px] font-semibold text-white transition-colors hover:bg-[#5A2CE0] disabled:cursor-wait disabled:opacity-70"
-              >
-                <span
-                  v-if="loading"
-                  class="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white"
-                  aria-hidden="true"
-                />
-                {{
-                  loading
-                    ? "Kutilmoqda..."
-                    : isForgotPassword
-                      ? "Tasdiqlash kodini yuborish"
-                      : "Kirish"
-                }}
+              <div class="relative">
                 <CIcon
-                  v-if="!loading && !isForgotPassword"
-                  name="arrow-right"
-                  class="h-4 w-4"
+                  name="mail"
+                  class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
                 />
-              </button>
-            </form>
+                <input
+                  id="login-email"
+                  v-model="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  placeholder="siz@kompaniya.uz"
+                  class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-4 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+                />
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <div class="mb-2 flex items-center justify-between gap-4">
+                <label
+                  for="login-password"
+                  class="text-[13.5px] font-medium text-[#3D3D4A]"
+                >
+                  Parol
+                </label>
+                <RouterLink
+                  to="/forgot-password"
+                  class="text-[13px] font-medium text-[#6633EE] transition-colors hover:text-[#4B21C4]"
+                >
+                  Parolni unutdingizmi?
+                </RouterLink>
+              </div>
+              <div class="relative">
+                <CIcon
+                  name="lock-keyhole"
+                  class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#A2A2AE]"
+                />
+                <input
+                  id="login-password"
+                  v-model="password"
+                  :type="showPassword ? 'text' : 'password'"
+                  autocomplete="current-password"
+                  required
+                  minlength="8"
+                  placeholder="Parolingizni kiriting"
+                  class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white pl-11 pr-12 text-[15px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+                />
+                <button
+                  type="button"
+                  class="absolute right-3 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-[#8E8E9C] transition hover:bg-[#F2F2F6] hover:text-[#12121C]"
+                  :aria-label="
+                    showPassword ? 'Parolni yashirish' : 'Parolni korsatish'
+                  "
+                  @click="showPassword = !showPassword"
+                >
+                  <CIcon
+                    :name="showPassword ? 'eye-off' : 'eye'"
+                    class="h-5 w-5"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <label
+              class="mt-4 flex w-fit cursor-pointer select-none items-center gap-3"
+            >
+              <input
+                v-model="rememberMe"
+                type="checkbox"
+                class="peer sr-only"
+              />
+              <span
+                class="grid h-5 w-5 shrink-0 place-items-center rounded-md border border-[#D5D5DE] bg-white text-transparent transition peer-checked:border-[#6633EE] peer-checked:bg-[#6633EE] peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-[#6633EE]/20"
+                aria-hidden="true"
+              >
+                <CIcon name="check" class="h-3.5 w-3.5" stroke-width="3" />
+              </span>
+              <span class="text-sm text-[#4A4A57]">
+                Meni 30 kun davomida eslab qol
+              </span>
+            </label>
 
             <p
-              v-if="!isForgotPassword"
-              class="mt-4 text-center text-sm text-[#6B6B78] [@media(max-height:880px)]:hidden"
+              v-if="errorMessage"
+              class="mt-4 rounded-xl border border-[#FFD5D5] bg-[#FFF3F3] px-3.5 py-2.5 text-sm text-[#C42121]"
+              role="alert"
             >
-              Do'ppi AI'da yangimisiz?
-              <RouterLink
-                to="/register"
-                class="ml-1 font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
-              >
-                Hisob yarating
-              </RouterLink>
+              {{ errorMessage }}
             </p>
-          </template>
+
+            <button
+              type="submit"
+              :disabled="loading"
+              class="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6633EE] text-[15px] font-semibold text-white transition-colors hover:bg-[#5A2CE0] disabled:cursor-wait disabled:opacity-70"
+            >
+              <span
+                v-if="loading"
+                class="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white"
+                aria-hidden="true"
+              />
+              {{ loading ? "Kutilmoqda..." : "Kirish" }}
+              <CIcon v-if="!loading" name="arrow-right" class="h-4 w-4" />
+            </button>
+          </form>
+
+          <p
+            class="mt-4 text-center text-sm text-[#6B6B78] [@media(max-height:880px)]:hidden"
+          >
+            Do'ppi AI'da yangimisiz?
+            <RouterLink
+              to="/register"
+              class="ml-1 font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
+            >
+              Hisob yarating
+            </RouterLink>
+          </p>
         </div>
       </div>
 
-      <p v-if="isOtpStep" class="text-center text-xs leading-5 text-[#9A9AA5]">
-        Bu kodni hech kimga bermang. Do'ppi AI xodimlari uni hech qachon
-        so'ramaydi.
-      </p>
-      <p v-else class="text-center text-xs leading-5 text-[#9A9AA5]">
+      <p class="text-center text-xs leading-5 text-[#9A9AA5]">
         Davom etish orqali siz
         <RouterLink
           to="/terms"

@@ -16,6 +16,13 @@ const props = withDefaults(
     stepName?: string
     // Seconds before the code can be requested again.
     resendDelay?: number
+    // `danger` turns the badge and the code boxes red after a rejected code.
+    variant?: "default" | "danger"
+    icon?: string
+    // The register flow shows the address as an editable chip; the reset flow
+    // names it inside the description instead.
+    emailChip?: boolean
+    telegramVariant?: "button" | "link"
   }>(),
   {
     errorMessage: "",
@@ -24,6 +31,10 @@ const props = withDefaults(
     steps: 2,
     stepName: "Tasdiqlash",
     resendDelay: 60,
+    variant: "default",
+    icon: "mail-check",
+    emailChip: true,
+    telegramVariant: "button",
   }
 )
 
@@ -54,6 +65,7 @@ const startCountdown = () => {
 onMounted(startCountdown)
 onBeforeUnmount(stopCountdown)
 
+const isDanger = computed(() => props.variant === "danger")
 const canResend = computed(() => secondsLeft.value <= 0)
 const countdown = computed(() => {
   const minutes = Math.floor(secondsLeft.value / 60)
@@ -87,9 +99,12 @@ const requestCode = (channel: "email" | "telegram") => {
     </p>
 
     <span
-      class="mt-6 flex h-12 w-12 items-center justify-center rounded-[14px] bg-[#EFEAFE] text-[#6633EE]"
+      class="mt-6 flex h-12 w-12 items-center justify-center rounded-[14px]"
+      :class="
+        isDanger ? 'bg-[#FFF1F1] text-[#E5484D]' : 'bg-[#EFEAFE] text-[#6633EE]'
+      "
     >
-      <CIcon name="mail-check" class="h-6 w-6" />
+      <CIcon :name="props.icon" class="h-6 w-6" />
     </span>
 
     <h1
@@ -101,7 +116,10 @@ const requestCode = (channel: "email" | "telegram") => {
       {{ props.description }}
     </p>
 
-    <div class="mt-6 flex flex-wrap items-center justify-between gap-3">
+    <div
+      v-if="props.emailChip"
+      class="mt-6 flex flex-wrap items-center justify-between gap-3"
+    >
       <span
         class="inline-flex min-w-0 items-center gap-2 rounded-lg border border-[#E4E4EB] bg-white px-3 py-2 text-sm text-[#12121C]"
       >
@@ -117,23 +135,37 @@ const requestCode = (channel: "email" | "telegram") => {
       </button>
     </div>
 
-    <form class="mt-4" @submit.prevent="emit('submit')">
+    <form
+      :class="props.emailChip ? 'mt-4' : 'mt-6'"
+      @submit.prevent="emit('submit')"
+    >
       <COtpInput
         :model-value="props.modelValue"
         tone="light"
+        :invalid="isDanger"
         @update:model-value="emit('update:modelValue', $event)"
         @complete="emit('submit')"
       />
+
+      <p
+        v-if="props.errorMessage"
+        class="mt-4 flex items-start gap-2 rounded-xl bg-[#FFF1F1] px-3.5 py-2.5 text-sm text-[#C42121]"
+        role="alert"
+      >
+        <CIcon name="triangle-alert" class="mt-0.5 h-4 w-4 shrink-0" />
+        <span>{{ props.errorMessage }}</span>
+      </p>
 
       <div class="mt-4 flex flex-wrap items-center justify-between gap-2">
         <span class="text-sm text-[#6B6B78]">Kod kelmadimi?</span>
         <button
           v-if="canResend"
           type="button"
-          class="text-sm font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
           @click="requestCode('email')"
         >
-          Qayta yuborish
+          <CIcon name="refresh-cw" class="h-4 w-4" />
+          Kodni qayta yuborish
         </button>
         <span
           v-else
@@ -143,14 +175,6 @@ const requestCode = (channel: "email" | "telegram") => {
           Qayta yuborish: {{ countdown }}
         </span>
       </div>
-
-      <p
-        v-if="props.errorMessage"
-        class="mt-4 rounded-xl border border-[#FFD5D5] bg-[#FFF3F3] px-3.5 py-2.5 text-sm text-[#C42121]"
-        role="alert"
-      >
-        {{ props.errorMessage }}
-      </p>
 
       <button
         type="submit"
@@ -168,6 +192,7 @@ const requestCode = (channel: "email" | "telegram") => {
     </form>
 
     <button
+      v-if="props.telegramVariant === 'button'"
       type="button"
       class="mt-3 flex h-12 w-full items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
       @click="requestCode('telegram')"
@@ -176,7 +201,18 @@ const requestCode = (channel: "email" | "telegram") => {
       Kodni Telegram orqali yuborish
     </button>
 
-    <p class="mt-4 text-center text-sm text-[#6B6B78]">
+    <p v-else class="mt-5 text-center text-sm text-[#6B6B78]">
+      Boshqa yo'l kerakmi?
+      <button
+        type="button"
+        class="ml-1 font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
+        @click="requestCode('telegram')"
+      >
+        Kodni Telegramga yuboring
+      </button>
+    </p>
+
+    <p v-if="props.emailChip" class="mt-4 text-center text-sm text-[#6B6B78]">
       Manzil noto'g'rimi?
       <button
         type="button"

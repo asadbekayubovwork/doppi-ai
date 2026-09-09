@@ -9,8 +9,10 @@ const props = withDefaults(
     // `light` is used on the split-screen auth pages, whose form column sits
     // on a white panel instead of the dark landing ground.
     tone?: "dark" | "light"
+    // Paints the boxes red after a rejected code.
+    invalid?: boolean
   }>(),
-  { length: 6, disabled: false, tone: "dark" }
+  { length: 6, disabled: false, tone: "dark", invalid: false }
 )
 
 const emit = defineEmits<{
@@ -41,6 +43,10 @@ const groupClass = computed(() =>
 const boxClass = (index: number) => {
   if (!isLight.value) {
     return "h-12 w-10 text-lg border-white/10 bg-black/20 text-white focus:border-[#8F6BFF] focus:ring-[#6633EE]/15 sm:h-14 sm:w-12"
+  }
+
+  if (props.invalid) {
+    return "h-[52px] w-[52px] text-xl border-[#E5484D] bg-[#FFF1F1] text-[#C42121] focus:border-[#E5484D] focus:ring-[#E5484D]/15 sm:h-14 sm:w-14"
   }
 
   return [

@@ -62,3 +62,126 @@
 .transition-200 {
   transition: all 0.2s ease-in-out;
 }
+
+/* Dropdown menus anchored under a trigger. The panel needs
+   `origin-top-right` (or similar) so the scale grows out of the button. */
+.dropdown-enter-active {
+  transition:
+    opacity 0.14s ease-out,
+    transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-leave-active {
+  transition:
+    opacity 0.1s ease-in,
+    transform 0.1s ease-in;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-6px) scale(0.96);
+}
+
+/* Dialogs. One transition drives both layers: the backdrop fades while
+   `.modal-panel` inside it lifts and scales. */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.modal-enter-active .modal-panel {
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-leave-active .modal-panel {
+  transition: transform 0.15s ease-in;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .modal-panel,
+.modal-leave-to .modal-panel {
+  transform: translateY(14px) scale(0.96);
+}
+
+/* Dashboard route changes: quick enough to feel like an app, not a page load. */
+.app-page-enter-active {
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-page-leave-active {
+  transition:
+    opacity 0.12s ease-in,
+    transform 0.12s ease-in;
+}
+
+.app-page-enter-from,
+.app-page-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* Multi-step forms swapping one step for the next. */
+.step-enter-active {
+  transition:
+    opacity 0.22s ease-out,
+    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.step-leave-active {
+  transition:
+    opacity 0.12s ease-in,
+    transform 0.12s ease-in;
+}
+
+.step-enter-from {
+  opacity: 0;
+  transform: translateX(14px);
+}
+
+.step-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropdown-enter-active,
+  .dropdown-leave-active,
+  .modal-enter-active,
+  .modal-leave-active,
+  .modal-enter-active .modal-panel,
+  .modal-leave-active .modal-panel,
+  .page-enter-active,
+  .page-leave-active,
+  .app-page-enter-active,
+  .app-page-leave-active,
+  .step-enter-active,
+  .step-leave-active {
+    transition-duration: 0.01ms;
+  }
+
+  .dropdown-enter-from,
+  .dropdown-leave-to,
+  .modal-enter-from .modal-panel,
+  .modal-leave-to .modal-panel {
+    transform: none;
+  }
+
+  .page-enter-from,
+  .page-leave-to {
+    filter: none;
+  }
+
+  .app-page-enter-from,
+  .app-page-leave-to,
+  .step-enter-from,
+  .step-leave-to {
+    transform: none;
+  }
+}

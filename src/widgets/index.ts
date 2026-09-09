@@ -2,6 +2,8 @@ export { default as CTable } from "./Table/ui/CTable.vue"
 
 // Chrome
 export { CHeader } from "./header"
+export { CDashboardHeader } from "./dashboard-header"
+export { CDashboardSidebar } from "./dashboard-sidebar"
 export { CFooter } from "./footer"
 
 // Landing sections (in page order)
