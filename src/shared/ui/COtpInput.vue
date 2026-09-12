@@ -35,9 +35,7 @@ const isLight = computed(() => props.tone === "light")
 // The light tone sits in the auth pages' form column, where the boxes are
 // square, left-aligned with the rest of the column, and tint once filled.
 const groupClass = computed(() =>
-  isLight.value
-    ? "justify-start gap-2 sm:gap-2.5"
-    : "justify-center gap-2 sm:gap-3"
+  isLight.value ? "justify-start gap-3" : "justify-center gap-2 sm:gap-3"
 )
 
 const boxClass = (index: number) => {
@@ -46,12 +44,12 @@ const boxClass = (index: number) => {
   }
 
   if (props.invalid) {
-    return "h-[52px] w-[52px] text-xl border-[#E5484D] bg-[#FFF1F1] text-[#C42121] focus:border-[#E5484D] focus:ring-[#E5484D]/15 sm:h-14 sm:w-14"
+    return "h-[62px] w-[62px] text-xl border-[#C42B2B] bg-[#FFF0F0] text-[#C42B2B] focus:border-[#C42B2B] focus:ring-[#C42B2B]/15"
   }
 
   return [
-    "h-[52px] w-[52px] text-xl border-[#E1E1E9] text-[#12121C] focus:border-[#6633EE] focus:ring-[#6633EE]/15 sm:h-14 sm:w-14",
-    digits.value[index] ? "bg-[#F7F7F9]" : "bg-white",
+    "h-[62px] w-[62px] rounded-[12px] text-xl border-[#D6D6D1] text-[#15151B] focus:border-[#5B4BE8] focus:ring-[#5B4BE8]/15",
+    digits.value[index] ? "bg-[#FAFAF9]" : "bg-white",
   ]
 }
 

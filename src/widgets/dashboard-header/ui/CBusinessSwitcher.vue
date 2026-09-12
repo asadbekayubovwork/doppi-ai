@@ -23,7 +23,16 @@ useDismiss(root, close)
 const active = computed(
   () =>
     props.businesses.find((item) => item.id === props.activeId) ??
-    props.businesses[0]
+    props.businesses[0] ?? {
+      id: "",
+      name: "Biznes tanlang",
+      slug: "",
+      status: "",
+      default_language: "uz",
+      billing_region: "UZ",
+      initials: "??",
+      plan: "",
+    }
 )
 
 const select = (id: string) => {
@@ -105,7 +114,7 @@ const requestCreate = () => {
                   {{ item.name }}
                 </span>
                 <span class="block truncate text-[12.5px] text-[#8E8E9C]">
-                  {{ item.plan }} · {{ item.members }} a'zo
+                  {{ item.members === undefined ? item.plan : `${item.plan} · ${item.members} a'zo` }}
                 </span>
               </span>
               <CIcon

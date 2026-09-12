@@ -10,7 +10,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   "update:open": [value: boolean]
-  create: [payload: { name: string; industry: string; teamSize: string }]
+  create: [payload: { name: string; default_language: string; billing_region: string }]
 }>()
 
 const industries = [
@@ -42,6 +42,12 @@ const teamSize = ref(teamSizes[1])
 const region = ref(regions[0])
 const language = ref(languages[0])
 const copyDetails = ref(true)
+const regionCodes: Record<string, string> = {
+  "O'zbekiston (UZS)": "UZ",
+  "Qozog'iston (KZT)": "KZ",
+  "Yevropa (EUR)": "EU",
+  "AQSh (USD)": "US",
+}
 
 const close = () => emit("update:open", false)
 
@@ -62,8 +68,8 @@ watch(
 const submit = () => {
   emit("create", {
     name: name.value.trim(),
-    industry: industry.value,
-    teamSize: teamSize.value,
+    default_language: language.value === "Русский" ? "ru" : language.value === "English" ? "en" : "uz",
+    billing_region: regionCodes[region.value] ?? "UZ",
   })
   close()
 }

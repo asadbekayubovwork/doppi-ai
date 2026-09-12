@@ -1,0 +1,30 @@
+:root {
+  --doppi-bg-app: #f5f5f3;
+  --doppi-surface: #ffffff;
+  --doppi-surface-2: #fafaf9;
+  --doppi-border: #e5e5e1;
+  --doppi-border-strong: #d6d6d1;
+  --doppi-text-primary: #15151b;
+  --doppi-text-secondary: #6a6a74;
+  --doppi-text-tertiary: #84848e;
+  --doppi-sidebar: #121216;
+  --doppi-sidebar-surface: #1c1c22;
+  --doppi-accent: #5b4be8;
+  --doppi-accent-light: #b6abff;
+  --doppi-accent-soft: #efecff;
+  --doppi-lime: #d3f26a;
+  --doppi-success: #177a46;
+  --doppi-warning: #b45309;
+  --doppi-danger: #c42b2b;
+  --doppi-danger-soft: #fff0f0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
