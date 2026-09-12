@@ -3,6 +3,7 @@ import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useDismiss } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
+import { messageForProblem, useAuthStore } from "@/features/auth"
 
 const props = defineProps<{
   name: string
@@ -13,6 +14,7 @@ const props = defineProps<{
 }>()
 
 const router = useRouter()
+const auth = useAuthStore()
 
 const root = ref<HTMLElement | null>(null)
 const isOpen = ref(false)
@@ -23,12 +25,24 @@ useDismiss(root, close)
 // Light is the only theme the dashboard ships with so far; the row is here so
 // the switch has a home once a dark palette exists.
 const appearance = ref("Yorug'")
+const errorMessage = ref("")
 
-const signOut = () => {
+const signOut = async () => {
   close()
-  localStorage.removeItem("authToken")
-  sessionStorage.removeItem("authToken")
-  router.push("/login")
+  errorMessage.value = ""
+  try {
+    await auth.logout()
+  } catch (error) {
+    errorMessage.value = messageForProblem(
+      error,
+      "Sessiya serverda yopilmadi, lekin bu qurilmadagi holat tozalandi."
+    )
+  } finally {
+    await router.push({
+      name: "Login",
+      query: errorMessage.value ? { logout: "failed" } : undefined,
+    })
+  }
 }
 </script>
 
@@ -168,5 +182,6 @@ const signOut = () => {
         </div>
       </div>
     </Transition>
+    <p v-if="errorMessage" class="absolute right-0 top-full z-40 mt-2 w-64 rounded-lg border border-[#F3C5C5] bg-[#FFF0F0] px-3 py-2 text-xs text-[#C42B2B]" role="alert">{{ errorMessage }}</p>
   </div>
 </template>

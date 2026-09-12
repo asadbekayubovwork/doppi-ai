@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from "vue"
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { CIcon, COtpInput } from "@/shared/ui"
 
 const props = withDefaults(
@@ -22,7 +22,9 @@ const props = withDefaults(
     // The register flow shows the address as an editable chip; the reset flow
     // names it inside the description instead.
     emailChip?: boolean
-    telegramVariant?: "button" | "link"
+    // MFA has no resend operation; hide the email cooldown controls there.
+    resendEnabled?: boolean
+    telegramVariant?: "button" | "link" | "none"
   }>(),
   {
     errorMessage: "",
@@ -34,6 +36,7 @@ const props = withDefaults(
     variant: "default",
     icon: "mail-check",
     emailChip: true,
+    resendEnabled: true,
     telegramVariant: "button",
   }
 )
@@ -55,6 +58,10 @@ const stopCountdown = () => {
 
 const startCountdown = () => {
   stopCountdown()
+  if (!props.resendEnabled) {
+    secondsLeft.value = 0
+    return
+  }
   secondsLeft.value = props.resendDelay
   timerId = setInterval(() => {
     secondsLeft.value -= 1
@@ -64,6 +71,7 @@ const startCountdown = () => {
 
 onMounted(startCountdown)
 onBeforeUnmount(stopCountdown)
+watch(() => props.resendDelay, startCountdown)
 
 const isDanger = computed(() => props.variant === "danger")
 const canResend = computed(() => secondsLeft.value <= 0)
@@ -76,6 +84,7 @@ const countdown = computed(() => {
 // Telegram is an alternative channel, so it stays available while the email
 // countdown is still running.
 const requestCode = (channel: "email" | "telegram") => {
+  if (!props.resendEnabled || props.loading) return
   if (channel === "email" && !canResend.value) return
   emit("resend", channel)
   startCountdown()
@@ -88,12 +97,12 @@ const requestCode = (channel: "email" | "telegram") => {
       <span
         v-for="segment in props.steps"
         :key="segment"
-        class="h-1 flex-1 rounded-full"
-        :class="segment <= props.step ? 'bg-[#6633EE]' : 'bg-[#E9E9EF]'"
+        class="h-[3px] flex-1 rounded-full"
+        :class="segment <= props.step ? 'bg-[#5B4BE8]' : 'bg-[#E5E5E1]'"
       />
     </div>
     <p
-      class="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8E8E9C]"
+      class="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#84848E]"
     >
       {{ props.step }}-qadam / {{ props.steps }} · {{ props.stepName }}
     </p>
@@ -101,18 +110,18 @@ const requestCode = (channel: "email" | "telegram") => {
     <span
       class="mt-6 flex h-12 w-12 items-center justify-center rounded-[14px]"
       :class="
-        isDanger ? 'bg-[#FFF1F1] text-[#E5484D]' : 'bg-[#EFEAFE] text-[#6633EE]'
+        isDanger ? 'bg-[#FFF0F0] text-[#C42B2B]' : 'bg-[#EFECFF] text-[#5B4BE8]'
       "
     >
       <CIcon :name="props.icon" class="h-6 w-6" />
     </span>
 
     <h1
-      class="mt-6 text-[28px] font-bold tracking-[-0.02em] text-[#0F0F17] sm:text-[32px]"
+      class="mt-6 text-[28px] font-semibold tracking-[-0.02em] text-[#15151B]"
     >
       {{ props.title }}
     </h1>
-    <p class="mt-2 text-[15px] leading-[1.6] text-[#6B6B78]">
+    <p class="mt-2 text-[13.5px] leading-[1.6] text-[#6A6A74]">
       {{ props.description }}
     </p>
 
@@ -121,14 +130,14 @@ const requestCode = (channel: "email" | "telegram") => {
       class="mt-6 flex flex-wrap items-center justify-between gap-3"
     >
       <span
-        class="inline-flex min-w-0 items-center gap-2 rounded-lg border border-[#E4E4EB] bg-white px-3 py-2 text-sm text-[#12121C]"
+        class="inline-flex min-w-0 items-center gap-2 rounded-lg border border-[#E5E5E1] bg-white px-3 py-2 text-sm text-[#15151B]"
       >
-        <CIcon name="mail" class="h-4 w-4 shrink-0 text-[#8E8E9C]" />
+        <CIcon name="mail" class="h-4 w-4 shrink-0 text-[#84848E]" />
         <span class="truncate">{{ props.email }}</span>
       </span>
       <button
         type="button"
-        class="text-sm font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
+        class="text-sm font-semibold text-[#5B4BE8] transition-colors hover:text-[#4F40D4]"
         @click="emit('changeEmail')"
       >
         O'zgartirish
@@ -149,19 +158,23 @@ const requestCode = (channel: "email" | "telegram") => {
 
       <p
         v-if="props.errorMessage"
-        class="mt-4 flex items-start gap-2 rounded-xl bg-[#FFF1F1] px-3.5 py-2.5 text-sm text-[#C42121]"
+        class="mt-4 flex items-start gap-2 rounded-xl bg-[#FFF0F0] px-3.5 py-2.5 text-sm text-[#C42B2B]"
         role="alert"
       >
         <CIcon name="triangle-alert" class="mt-0.5 h-4 w-4 shrink-0" />
         <span>{{ props.errorMessage }}</span>
       </p>
 
-      <div class="mt-4 flex flex-wrap items-center justify-between gap-2">
-        <span class="text-sm text-[#6B6B78]">Kod kelmadimi?</span>
+      <div
+        v-if="props.resendEnabled"
+        class="mt-4 flex flex-wrap items-center justify-between gap-2"
+      >
+        <span class="text-sm text-[#6A6A74]">Kod kelmadimi?</span>
         <button
           v-if="canResend"
           type="button"
-          class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
+          :disabled="props.loading"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#5B4BE8] transition-colors hover:text-[#4F40D4]"
           @click="requestCode('email')"
         >
           <CIcon name="refresh-cw" class="h-4 w-4" />
@@ -169,7 +182,7 @@ const requestCode = (channel: "email" | "telegram") => {
         </button>
         <span
           v-else
-          class="inline-flex items-center gap-1.5 text-sm text-[#8E8E9C]"
+          class="inline-flex items-center gap-1.5 text-sm text-[#84848E]"
         >
           <CIcon name="timer" class="h-4 w-4" />
           Qayta yuborish: {{ countdown }}
@@ -179,7 +192,7 @@ const requestCode = (channel: "email" | "telegram") => {
       <button
         type="submit"
         :disabled="props.loading"
-        class="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6633EE] text-[15px] font-semibold text-white transition-colors hover:bg-[#5A2CE0] disabled:cursor-wait disabled:opacity-70"
+        class="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-[10px] bg-[#5B4BE8] text-[13.5px] font-semibold text-white transition-colors hover:bg-[#4F40D4] disabled:cursor-wait disabled:opacity-70"
       >
         <span
           v-if="props.loading"
@@ -194,29 +207,33 @@ const requestCode = (channel: "email" | "telegram") => {
     <button
       v-if="props.telegramVariant === 'button'"
       type="button"
-      class="mt-3 flex h-12 w-full items-center justify-center gap-2.5 rounded-xl border border-[#E4E4EB] bg-white text-[14.5px] font-medium text-[#1A1A24] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
+      :disabled="props.loading"
+      class="mt-3 flex h-11 w-full items-center justify-center gap-2.5 rounded-[10px] border border-[#E5E5E1] bg-white text-[13.5px] font-medium text-[#15151B] shadow-[0_1px_2px_rgba(16,17,26,0.05)] transition hover:border-[#D6D6D1] hover:bg-[#FAFAF9]"
       @click="requestCode('telegram')"
     >
       <CIcon name="telegram" class="h-5 w-5 text-[#29A9EA]" />
       Kodni Telegram orqali yuborish
     </button>
 
-    <p v-else class="mt-5 text-center text-sm text-[#6B6B78]">
+    <p
+      v-else-if="props.telegramVariant === 'link'"
+      class="mt-5 text-center text-sm text-[#6A6A74]"
+    >
       Boshqa yo'l kerakmi?
       <button
         type="button"
-        class="ml-1 font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
+        class="ml-1 font-semibold text-[#5B4BE8] transition-colors hover:text-[#4F40D4]"
         @click="requestCode('telegram')"
       >
         Kodni Telegramga yuboring
       </button>
     </p>
 
-    <p v-if="props.emailChip" class="mt-4 text-center text-sm text-[#6B6B78]">
+    <p v-if="props.emailChip" class="mt-4 text-center text-sm text-[#6A6A74]">
       Manzil noto'g'rimi?
       <button
         type="button"
-        class="ml-1 font-semibold text-[#6633EE] transition-colors hover:text-[#4B21C4]"
+        class="ml-1 font-semibold text-[#5B4BE8] transition-colors hover:text-[#4F40D4]"
         @click="emit('changeEmail')"
       >
         Boshqa email kiriting

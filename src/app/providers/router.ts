@@ -1,6 +1,9 @@
 // src/app/providers/router.ts
 import { createRouter, createWebHistory } from "vue-router"
 import { routes } from "@/pages"
+import { useAuthStore } from "@/features/auth"
+import { pinia } from "./pinia"
+import { safeLocalPath } from "@/features/auth/model/redirect"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,8 +17,24 @@ const router = createRouter({
   },
 })
 
-// Implement authentication logic
-// router.beforeEach((to, from, next) => {
-// })
+router.beforeEach(async (to) => {
+  const auth = useAuthStore(pinia)
+  const needsSession = to.meta.requiresAuth === true || to.meta.guestOnly === true
 
-export { router }
+  if (needsSession && auth.status === "unknown") await auth.bootstrap()
+
+  if (to.meta.requiresAuth === true && !auth.isAuthenticated) {
+    return {
+      name: "Login",
+      query: { redirect: safeLocalPath(to.fullPath) },
+    }
+  }
+
+  if (to.meta.guestOnly === true && auth.isAuthenticated) {
+    return safeLocalPath(to.query.redirect)
+  }
+
+  return true
+})
+
+export { router, safeLocalPath }

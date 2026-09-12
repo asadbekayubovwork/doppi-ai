@@ -1,6 +1,40 @@
-import { HttpError, type ApiClientConfig } from "./types"
+import { HttpError, type ApiClientConfig, type ApiProblem } from "./types"
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api"
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api/v1"
+const UNSAFE_METHODS = new Set(["POST", "PUT", "PATCH", "DELETE"])
+
+const csrfToken = () => {
+  if (typeof document === "undefined") return null
+  const value = document.cookie
+    .split(";")
+    .map((part) => part.trim())
+    .find((part) => part.startsWith("__Host-doppi_csrf="))
+    ?.split("=")
+    .slice(1)
+    .join("=")
+  if (!value) return null
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
+}
+
+const parseRetryAfter = (value: string | null) => {
+  if (!value) return undefined
+  const seconds = Number.parseInt(value, 10)
+  return Number.isFinite(seconds) && seconds >= 0 ? seconds : undefined
+}
+
+const parseJson = async <T>(response: Response): Promise<T | undefined> => {
+  const contentType = response.headers.get("Content-Type") || ""
+  if (!contentType.includes("json")) return undefined
+  try {
+    return (await response.clone().json()) as T
+  } catch {
+    return undefined
+  }
+}
 
 /**
  * The core, private fetcher function.
@@ -10,52 +44,41 @@ export async function http<T>(
   url: string,
   config: ApiClientConfig = {}
 ): Promise<T> {
-  // 1. Get base URL and auth token. Sessions started without "remember me"
-  // live in sessionStorage, so both stores are consulted.
-  const token =
-    localStorage.getItem("authToken") || sessionStorage.getItem("authToken")
-
-  // 2. Create headers
+  const { data, params, headers: configuredHeaders, ...requestInit } = config
+  const method = (requestInit.method || "GET").toUpperCase()
   const headers = new Headers({
-    "Content-Type": "application/json",
     Accept: "application/json",
-    // Spread any headers from the config
-    ...config.headers,
+    ...(data === undefined ? {} : { "Content-Type": "application/json" }),
+    ...configuredHeaders,
   })
 
-  if (token) {
-    headers.set("Authorization", `Bearer ${token}`)
+  if (UNSAFE_METHODS.has(method) && !headers.has("X-CSRF-Token")) {
+    const token = csrfToken()
+    if (token) headers.set("X-CSRF-Token", token)
   }
 
-  // 3. Handle query parameters
-  let fullUrl = `${API_BASE_URL}${url}`
-  if (config.params) {
+  let fullUrl = `${API_BASE_URL.replace(/\/$/, "")}/${url.replace(/^\//, "")}`
+  if (params) {
     const queryParams = new URLSearchParams(
-      Object.entries(config.params).map(([key, value]) => [key, String(value)])
+      Object.entries(params).map(([key, value]) => [key, String(value)])
     )
     fullUrl += `?${queryParams.toString()}`
   }
 
-  // 4. Make the request using native fetch
   const response = await fetch(fullUrl, {
-    ...config,
+    ...requestInit,
+    method,
     headers,
-    // Use `data` property for the body, like Axios
-    body: config.data ? JSON.stringify(config.data) : null,
+    credentials: requestInit.credentials || "same-origin",
+    body: data === undefined ? undefined : JSON.stringify(data),
   })
 
-  // 5. Handle the response
   if (!response.ok) {
-    // If the response is not OK, throw our custom error
-    // TanStack Query will catch this and put it in the `error` state
-    throw new HttpError(response)
+    const problem = await parseJson<ApiProblem>(response)
+    throw new HttpError(response, problem, parseRetryAfter(response.headers.get("Retry-After")))
   }
 
-  // If the response is OK but has no content (e.g., DELETE request)
-  if (response.status === 204 || response.status === 205) {
-    return null as T
-  }
-
-  // Otherwise, parse the JSON and return it
-  return response.json()
+  if (response.status === 204 || response.status === 205) return null as T
+  const result = await parseJson<T>(response)
+  return (result === undefined ? null : result) as T
 }

@@ -291,7 +291,7 @@ pnpm preview
 Create a `.env` file in the root directory with the necessary environment variables:
 
 ```env
-VITE_API_BASE_URL=your_api_url_here
+VITE_API_BASE_URL=/api/v1
 VITE_APP_TITLE="Vue 3 FSD Boilerplate"
 ```
 

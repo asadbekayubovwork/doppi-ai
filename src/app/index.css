@@ -4,6 +4,9 @@
 /* Base Styles */
 @import "./styles/base.css";
 
+/* Source-of-truth .pen visual tokens */
+@import "./styles/tokens.css";
+
 /* Common Styles */
 @import "./styles/common.css";
 

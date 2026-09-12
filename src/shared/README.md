@@ -46,45 +46,16 @@ shared/
 
 ### 1. API Client
 
-Centralized HTTP client with interceptors:
+The centralized client uses the same-origin session cookie and reads the
+CSRF cookie for unsafe mutations:
 
 ```typescript
-// shared/api/http.ts
-import axios from 'axios'
-import { useAuthStore } from '@/features/auth/model/auth.store'
+import { http } from '@/shared/api/http'
 
-const http = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+const session = await http('/auth/session', {
+  method: 'GET',
+  credentials: 'same-origin',
 })
-
-// Request interceptor
-http.interceptors.request.use(
-  (config) => {
-    const authStore = useAuthStore()
-    if (authStore.token) {
-      config.headers.Authorization = `Bearer ${authStore.token}`
-    }
-    return config
-  },
-  (error) => Promise.reject(error)
-)
-
-// Response interceptor
-http.interceptors.response.use(
-  (response) => response.data,
-  (error) => {
-    if (error.response?.status === 401) {
-      // Handle unauthorized
-    }
-    return Promise.reject(error)
-  }
-)
-
-export { http }
 ```
 
 ### 2. UI Components

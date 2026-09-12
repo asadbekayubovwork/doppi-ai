@@ -62,6 +62,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "Login",
     meta: {
       layout: "EmptyLayout",
+      guestOnly: true,
     },
     component: () => import("./PLogin.vue"),
   },
@@ -70,6 +71,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "Register",
     meta: {
       layout: "EmptyLayout",
+      guestOnly: true,
     },
     component: () => import("./PRegister.vue"),
   },
@@ -78,18 +80,38 @@ const routes: Array<RouteRecordRaw> = [
     name: "ForgotPassword",
     meta: {
       layout: "EmptyLayout",
+      guestOnly: true,
     },
     component: () => import("./PForgotPassword.vue"),
   },
   {
+    path: "/auth/callback",
+    name: "AuthCallback",
+    meta: {
+      layout: "EmptyLayout",
+    },
+    component: () => import("./PAuthCallback.vue"),
+  },
+  {
+    path: "/auth/telegram",
+    name: "TelegramAuth",
+    meta: {
+      layout: "EmptyLayout",
+      guestOnly: true,
+    },
+    component: () => import("./PTelegramAuth.vue"),
+  },
+  {
     path: "/app",
     redirect: "/app/rag",
+    meta: { requiresAuth: true },
   },
   {
     path: "/app/rag",
     name: "RagAgent",
     meta: {
       layout: "DashboardLayout",
+      requiresAuth: true,
       title: "Universal RAG agent",
       subtitle: "Bilim bazalari va qidiruv sifati",
     },
@@ -100,6 +122,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "VoiceAgentApp",
     meta: {
       layout: "DashboardLayout",
+      requiresAuth: true,
       title: "Ovozli agent",
       subtitle: "Qo'ng'iroqlar, ssenariylar va raqamlar",
     },
@@ -110,6 +133,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "VideoGenerator",
     meta: {
       layout: "DashboardLayout",
+      requiresAuth: true,
       title: "Video generator",
       subtitle: "Promptdan tayyor videogacha",
     },
@@ -120,6 +144,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "UsageBilling",
     meta: {
       layout: "DashboardLayout",
+      requiresAuth: true,
       title: "Sarf va to'lovlar",
       subtitle: "Balans, limitlar va hisob-fakturalar",
     },
@@ -130,6 +155,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "ApiKeys",
     meta: {
       layout: "DashboardLayout",
+      requiresAuth: true,
       title: "API kalitlar",
       subtitle: "Integratsiyalar uchun kalitlar",
     },
@@ -140,6 +166,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "TeamApp",
     meta: {
       layout: "DashboardLayout",
+      requiresAuth: true,
       title: "Jamoa",
       subtitle: "A'zolar va ruxsatlar",
     },
@@ -150,6 +177,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "Settings",
     meta: {
       layout: "DashboardLayout",
+      requiresAuth: true,
       title: "Sozlamalar",
       subtitle: "Ish maydoni va biznes sozlamalari",
     },

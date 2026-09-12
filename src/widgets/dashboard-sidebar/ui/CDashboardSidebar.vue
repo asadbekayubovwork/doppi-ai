@@ -2,11 +2,13 @@
 import { computed, ref, watch } from "vue"
 import { useRoute } from "vue-router"
 import { CDoppiMark, CIcon } from "@/shared/ui"
+import { useAuthStore } from "@/features/auth"
 
 defineProps<{ open?: boolean }>()
 defineEmits<{ close: [] }>()
 
 const route = useRoute()
+const auth = useAuthStore()
 const isVideoMenuOpen = ref(route.path.startsWith("/app/video"))
 
 watch(
@@ -53,6 +55,19 @@ const toggleVideoMenu = (event: MouseEvent) => {
 const balance = { amount: "$248.60", currency: "USD", limit: 400, used: 62 }
 const balanceHint = computed(
   () => `$${balance.limit} oylik limitning ${balance.used}% ishlatilgan`
+)
+const userName = computed(() => {
+  const name = `${auth.user?.first_name || ""} ${auth.user?.last_name || ""}`.trim()
+  return name || auth.user?.email || "Foydalanuvchi"
+})
+const userEmail = computed(() => auth.user?.email || "")
+const userInitials = computed(() =>
+  userName.value
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0]?.toUpperCase() || "")
+    .join("") || "??"
 )
 </script>
 
@@ -225,14 +240,14 @@ const balanceHint = computed(
         class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#4A416C] text-sm font-bold text-[#B8AAFF]"
         aria-hidden="true"
       >
-        AK
+          {{ userInitials }}
       </span>
       <span class="block min-w-0 flex-1">
         <span class="block truncate text-[13.5px] font-semibold text-white">
-          Akmal Karimov
+          {{ userName }}
         </span>
         <span class="block truncate text-xs text-white/40">
-          akmal@doppi.ai
+          {{ userEmail }}
         </span>
       </span>
       <CIcon name="chevrons-up-down" class="h-4 w-4 shrink-0 text-white/40" />

@@ -8,18 +8,38 @@ export interface ApiClientConfig extends Omit<RequestInit, "body"> {
   data?: unknown
 }
 
-/**
- * A custom error class that holds the response object and status.
- * TanStack Query will receive this error on promise rejection.
- */
+export interface ApiProblemError {
+  loc?: Array<string | number>
+  msg?: string
+}
+
+export interface ApiProblem {
+  type?: string
+  title?: string
+  status?: number
+  code?: string
+  detail?: string
+  instance?: string
+  trace_id?: string
+  errors?: ApiProblemError[]
+}
+
 export class HttpError extends Error {
   response: Response
   status: number
+  problem?: ApiProblem
+  retryAfter?: number
 
-  constructor(response: Response) {
+  constructor(
+    response: Response,
+    problem?: ApiProblem,
+    retryAfter?: number
+  ) {
     super(`HTTP Error: ${response.status} ${response.statusText}`)
     this.name = "HttpError"
     this.response = response
     this.status = response.status
+    this.problem = problem
+    this.retryAfter = retryAfter
   }
 }
