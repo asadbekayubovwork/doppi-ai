@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { useHead } from "@vueuse/head"
+import { useHead } from "@unhead/vue"
 import { useRoute, useRouter } from "vue-router"
 import {
   AuthShell,
@@ -27,6 +27,7 @@ const telegramLoading = ref(false)
 const errorMessage = ref("")
 const telegramMessage = ref("")
 const resendDelay = ref(60)
+const emailAuthEnabled = import.meta.env.VITE_EMAIL_AUTH_ENABLED !== "false"
 
 useHead({ title: "Ro'yxatdan o'tish — Do'ppi.ai" })
 
@@ -151,16 +152,28 @@ const handleTelegram = async (data: Record<string, string | number>) => {
           >G</span
         >Google orqali ro'yxatdan o'tish
       </button>
-      <div class="my-5 flex items-center gap-3" aria-hidden="true">
+      <div
+        v-if="emailAuthEnabled"
+        class="my-5 flex items-center gap-3"
+        aria-hidden="true"
+      >
         <span class="h-px flex-1 bg-[#E5E5E1]" />
         <span class="text-xs text-[#84848E]">yoki email orqali</span>
         <span class="h-px flex-1 bg-[#E5E5E1]" />
       </div>
       <CRegisterForm
+        v-if="emailAuthEnabled"
         :loading="loading"
         :error-message="errorMessage"
         @submit="register"
       />
+      <p
+        v-else
+        class="mt-5 rounded-[10px] border border-[#E5E5E1] bg-[#FAFAF9] px-4 py-3 text-center text-sm text-[#6A6A74]"
+        role="status"
+      >
+        Email orqali ro'yxatdan o'tish tez orada
+      </p>
       <div class="mt-4">
         <CTelegramLogin
           label="Telegram orqali ro'yxatdan o'tish"

@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { ref } from "vue"
-import { useHead } from "@vueuse/head"
+import { onBeforeUnmount, ref } from "vue"
+import { useHead } from "@unhead/vue"
 import { useRoute, useRouter } from "vue-router"
 import {
   AuthShell,
   CTelegramLogin,
-  CAuthVerifyStep,
+  CMfaChallenge,
   useAuthStore,
   authApi,
   messageForProblem,
+  retryAfterSeconds,
   safeLocalPath,
 } from "@/features/auth"
 import { CIcon } from "@/shared/ui"
 
 type Step = "password" | "mfa"
-
 const route = useRoute()
 const router = useRouter()
 const auth = useAuthStore()
@@ -26,25 +26,50 @@ const rememberMe = ref(true)
 const step = ref<Step>("password")
 const loading = ref(false)
 const telegramLoading = ref(false)
+const cooldown = ref(0)
 const errorMessage = ref(
   route.query.logout === "failed"
     ? "Server bilan bog'lanib chiqish amalga oshmadi, ammo bu qurilmadagi sessiya tozalandi."
     : ""
 )
 const telegramMessage = ref("")
+let cooldownTimer: ReturnType<typeof setInterval> | undefined
 
 useHead({ title: "Xush kelibsiz — Do'ppi.ai" })
-
 const destination = () => safeLocalPath(route.query.redirect)
-
-const showError = (error: unknown, fallback: string) => {
+const startCooldown = (seconds: number) => {
+  if (cooldownTimer) clearInterval(cooldownTimer)
+  cooldown.value = Math.max(0, seconds)
+  if (!cooldown.value) return
+  cooldownTimer = setInterval(() => {
+    cooldown.value = Math.max(0, cooldown.value - 1)
+    if (!cooldown.value && cooldownTimer) clearInterval(cooldownTimer)
+  }, 1000)
+}
+onBeforeUnmount(() => {
+  if (cooldownTimer) clearInterval(cooldownTimer)
+})
+const showLoginError = (error: unknown, fallback: string) => {
+  startCooldown(retryAfterSeconds(error))
   errorMessage.value = messageForProblem(error, fallback, {
     AUTHENTICATION_REQUIRED: "Email yoki parol noto'g'ri.",
     EMAIL_NOT_VERIFIED: "Avval email manzilingizni tasdiqlang.",
-    MFA_CODE_INVALID: "MFA kodi noto'g'ri yoki muddati tugagan.",
     RATE_LIMITED:
       "Juda ko'p urinish. Server ko'rsatgan vaqtdan so'ng qayta urinib ko'ring.",
   })
+}
+
+const showMfaError = (error: unknown) => {
+  errorMessage.value = messageForProblem(
+    error,
+    "MFA tekshiruvi amalga oshmadi.",
+    {
+      AUTHENTICATION_REQUIRED:
+        "MFA yoki tiklash kodi noto'g'ri yoxud muddati tugagan.",
+      RATE_LIMITED:
+        "MFA urinishlari vaqtincha cheklangan. Keyinroq urinib ko'ring.",
+    }
+  )
 }
 
 const signIn = async () => {
@@ -63,7 +88,7 @@ const signIn = async () => {
     }
     await router.replace(destination())
   } catch (error) {
-    showError(
+    showLoginError(
       error,
       "Kirish amalga oshmadi. Ma'lumotlaringizni tekshirib, qayta urinib ko'ring."
     )
@@ -79,7 +104,7 @@ const verifyMfa = async () => {
     await auth.verifyMfa(code.value)
     await router.replace(destination())
   } catch (error) {
-    showError(error, "MFA tekshiruvi amalga oshmadi.")
+    showMfaError(error)
   } finally {
     loading.value = false
   }
@@ -87,6 +112,7 @@ const verifyMfa = async () => {
 
 const backToPassword = () => {
   step.value = "password"
+  code.value = ""
   errorMessage.value = ""
 }
 
@@ -99,7 +125,7 @@ const handleTelegram = async (data: Record<string, string | number>) => {
   telegramMessage.value = ""
   telegramLoading.value = true
   try {
-    const response = await authApi.telegramLogin(data)
+    const response = await auth.telegramLogin(data)
     if (response.status === "challenge_required") {
       await router.replace({
         name: "TelegramAuth",
@@ -107,8 +133,6 @@ const handleTelegram = async (data: Record<string, string | number>) => {
       })
       return
     }
-    auth.setSession(response)
-    await auth.loadBusinesses()
     await router.replace(destination())
   } catch (error) {
     telegramMessage.value = messageForProblem(
@@ -195,7 +219,7 @@ const handleTelegram = async (data: Record<string, string | number>) => {
               class="h-11 w-full rounded-[10px] border border-[#D6D6D1] px-3.5 pr-12 text-base text-[#15151B] outline-none focus:border-[#5B4BE8] focus:ring-4 focus:ring-[#5B4BE8]/10"
             /><button
               type="button"
-              class="absolute right-2 top-1/2 grid h-9 w-9 -translate-y-1/2 rounded-lg text-[#6A6A74]"
+              class="absolute right-0 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-[10px] text-[#6A6A74] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#5B4BE8]/20"
               :aria-label="
                 showPassword ? 'Parolni yashirish' : 'Parolni ko\'rsatish'
               "
@@ -222,11 +246,21 @@ const handleTelegram = async (data: Record<string, string | number>) => {
         </p>
         <button
           type="submit"
-          :disabled="loading"
+          :disabled="loading || cooldown > 0"
           class="flex h-11 items-center justify-center gap-2 rounded-[10px] bg-[#5B4BE8] text-[13.5px] font-semibold text-white hover:bg-[#4F40D4] disabled:cursor-wait disabled:opacity-70"
         >
-          {{ loading ? "Kutilmoqda..." : "Kirish"
-          }}<CIcon v-if="!loading" name="arrow-right" class="h-4 w-4" />
+          {{
+            loading
+              ? "Kutilmoqda..."
+              : cooldown > 0
+                ? `${cooldown} soniyadan so'ng qayta urining`
+                : "Kirish"
+          }}
+          <CIcon
+            v-if="!loading && cooldown === 0"
+            name="arrow-right"
+            class="h-4 w-4"
+          />
         </button>
       </form>
       <div class="mt-4"><CTelegramLogin @auth="handleTelegram" /></div>
@@ -250,29 +284,15 @@ const handleTelegram = async (data: Record<string, string | number>) => {
           >Hisob yarating</RouterLink
         >
       </p></template
-    ><template v-else
-      ><CAuthVerifyStep
-        v-model="code"
-        :email="email"
-        :email-chip="false"
-        :resend-enabled="false"
-        :step="2"
-        :steps="2"
-        step-name="MFA"
-        title="MFA kodini kiriting"
-        description="Authenticator ilovangizdagi 6 xonali kodni kiriting."
-        submit-label="Tasdiqlash"
-        :error-message="errorMessage"
-        :loading="loading"
-        telegram-variant="none"
-        @submit="verifyMfa"
-      /><button
-        type="button"
-        class="mt-4 w-full text-center text-sm font-medium text-[#5B4BE8]"
-        @click="backToPassword"
-      >
-        Boshqa hisob bilan kirish
-      </button></template
+    ><CMfaChallenge
+      v-else
+      v-model="code"
+      :email="email"
+      :loading="loading"
+      :error-message="errorMessage"
+      @submit="verifyMfa"
+      @back="backToPassword"
+    />
     ></AuthShell
   >
 </template>

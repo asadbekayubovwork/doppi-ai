@@ -6,6 +6,7 @@ export {
   type LoginResponse,
   type MessageResponse,
   type MfaRequiredResponse,
+  type MfaVerificationPayload,
   type OtpResponse,
   type OtpVerificationPayload,
   type PasswordResetConfirmPayload,

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { useI18n } from "vue-i18n"
-import { useHead } from "@vueuse/head"
+import { useHead } from "@unhead/vue"
 import { CAbout, CProblem, CSolution, CResults, CTeamCards } from "@/widgets"
 
 const { t } = useI18n()

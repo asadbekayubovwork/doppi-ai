@@ -102,6 +102,15 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("./PTelegramAuth.vue"),
   },
   {
+    path: "/invitations/:token",
+    name: "InvitationAccept",
+    meta: {
+      layout: "EmptyLayout",
+      requiresAuth: true,
+    },
+    component: () => import("./PInvitationAccept.vue"),
+  },
+  {
     path: "/app",
     redirect: "/app/rag",
     meta: { requiresAuth: true },

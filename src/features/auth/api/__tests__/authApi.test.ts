@@ -69,11 +69,15 @@ describe("backend auth API contracts", () => {
     }
   })
 
-  it("posts exact reset, Telegram, logout, and business payloads", async () => {
+  it("posts exact MFA, reset, Telegram, logout, and business payloads", async () => {
     const post = vi.spyOn(apiClient, "post").mockResolvedValue({} as never)
     const get = vi.spyOn(apiClient, "get").mockResolvedValue([] as never)
 
-    await authApi.verifyMfa({ challenge_id: "mfa-1", code: "123456" })
+    await authApi.verifyMfa({
+      challenge_id: "mfa-1",
+      code: "RECOVERY-CODE-123456",
+      remember_me: true,
+    })
     await authApi.requestPasswordReset("user@example.com")
     await authApi.verifyPasswordReset({ challenge_id: "reset-1", code: "654321" })
     await authApi.confirmPasswordReset({ reset_token: "reset-token", new_password: "new-secret" })
@@ -89,7 +93,8 @@ describe("backend auth API contracts", () => {
 
     expect(post).toHaveBeenNthCalledWith(1, "/auth/mfa/login/verify", {
       challenge_id: "mfa-1",
-      code: "123456",
+      code: "RECOVERY-CODE-123456",
+      remember_me: true,
     })
     expect(post).toHaveBeenNthCalledWith(2, "/auth/password-resets", {
       email: "user@example.com",

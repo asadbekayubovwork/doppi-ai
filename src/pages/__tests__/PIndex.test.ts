@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach, vi } from "vitest"
 import { mount } from "@vue/test-utils"
 import { createI18n } from "vue-i18n"
-import { createHead } from "@vueuse/head"
+import { createHead } from "@unhead/vue/client"
 import { createRouter, createWebHistory } from "vue-router"
 import { messages } from "@/shared/config/i18n"
 

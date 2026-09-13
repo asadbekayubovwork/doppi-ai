@@ -502,7 +502,7 @@
       "placeholders": {
         "name": "Masalan, Aziz Karimov",
         "phone": "+998 90 123 45 67",
-        "email": "siz@kompaniya.uz",
+        "email": "siz{'@'}kompaniya.uz",
         "business": "Masalan, Do'ppi Group",
         "message": "Biznesingiz va maqsadlaringiz haqida qisqacha yozing"
       },

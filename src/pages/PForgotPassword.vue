@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
-import { useHead } from "@vueuse/head"
+import { useHead } from "@unhead/vue"
 import {
   AuthShell,
+  CAuthFeatureSoon,
   CAuthVerifyStep,
   authApi,
   messageForProblem,
@@ -23,14 +24,13 @@ const showPassword = ref(false)
 const loading = ref(false)
 const errorMessage = ref("")
 const resendDelay = ref(60)
+const emailAuthEnabled = import.meta.env.VITE_EMAIL_AUTH_ENABLED !== "false"
 const { requirements, score, level } = usePasswordStrength(newPassword)
 const passwordsMatch = computed(
   () =>
     confirmation.value.length > 0 && confirmation.value === newPassword.value
 )
-
 useHead({ title: "Parolni tiklash — Do'ppi.ai" })
-
 const showError = (error: unknown, fallback: string) => {
   const retry = retryAfterSeconds(error)
   if (retry > 0) resendDelay.value = retry
@@ -43,7 +43,6 @@ const showError = (error: unknown, fallback: string) => {
     RATE_LIMITED: "Server ko'rsatgan vaqt tugagach qayta urinib ko'ring.",
   })
 }
-
 const requestCode = async () => {
   errorMessage.value = ""
   loading.value = true
@@ -58,7 +57,6 @@ const requestCode = async () => {
     loading.value = false
   }
 }
-
 const resendCode = async (channel: "email" | "telegram") => {
   if (channel !== "email") return
   errorMessage.value = ""
@@ -74,7 +72,6 @@ const resendCode = async (channel: "email" | "telegram") => {
     loading.value = false
   }
 }
-
 const verifyCode = async () => {
   errorMessage.value = ""
   loading.value = true
@@ -120,7 +117,12 @@ const updatePassword = async () => {
     switch-to="/register"
     switch-label="Ro'yxatdan o'tish"
     switch-text="Hisobingiz yo'qmi?"
-    ><template v-if="step === 'email'"
+    ><CAuthFeatureSoon
+      v-if="!emailAuthEnabled"
+      title="Parolni tiklash"
+      message="Email orqali parolni tiklash tez orada"
+    />
+    <template v-else-if="step === 'email'"
       ><div class="flex gap-2" aria-label="1-qadam / 3">
         <span class="h-[3px] flex-1 rounded-full bg-[#5B4BE8]" /><span
           class="h-[3px] flex-1 rounded-full bg-[#E5E5E1]"

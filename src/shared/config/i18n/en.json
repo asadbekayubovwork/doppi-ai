@@ -502,7 +502,7 @@
       "placeholders": {
         "name": "e.g. Aziz Karimov",
         "phone": "+998 90 123 45 67",
-        "email": "you@company.com",
+        "email": "you{'@'}company.com",
         "business": "e.g. Doppi Group",
         "message": "Tell us briefly about your business and goals"
       },

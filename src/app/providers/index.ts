@@ -4,11 +4,15 @@ import { router } from "./router"
 import { i18n } from "./i18n"
 import AOS from "aos"
 import "aos/dist/aos.css"
+import { createHead } from "@unhead/vue/client"
+
+const head = createHead()
 
 export function setupProviders(app: App) {
   app.use(pinia)
   app.use(router)
   app.use(i18n)
+  app.use(head)
   app.use(AOS)
   // `once: true` — an element that has already animated in is never hidden
   // again. With the default (`once: false`) AOS strips `aos-animate` whenever it
