@@ -10,7 +10,7 @@ permissions:
 
 concurrency:
   group: doppi-frontend-production
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   verify-build-deploy:
@@ -20,10 +20,6 @@ jobs:
       PATH: /opt/node-v20/bin:/opt/pnpm/bin:/usr/local/bin:/usr/bin:/bin
       PNPM_HOME: /opt/pnpm
       PNPM_STORE_DIR: /opt/actions-cache/pnpm
-      VITE_API_BASE_URL: /api/v1
-      VITE_GOOGLE_OAUTH_URL: /api/v1/auth/oauth/google/authorize
-      VITE_EMAIL_AUTH_ENABLED: "false"
-      VITE_TELEGRAM_AUTH_ENABLED: "false"
     steps:
       - name: Checkout exact commit
         uses: actions/checkout@v7
@@ -47,6 +43,11 @@ jobs:
             | awk '$1 >= 400 {print; found=1} END {exit found}'
 
       - name: Build production bundle
+        env:
+          VITE_API_BASE_URL: /api/v1
+          VITE_GOOGLE_OAUTH_URL: /api/v1/auth/oauth/google/authorize
+          VITE_EMAIL_AUTH_ENABLED: "false"
+          VITE_TELEGRAM_AUTH_ENABLED: "false"
         run: pnpm build
 
       - name: Deploy atomically
