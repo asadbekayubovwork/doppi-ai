@@ -26,8 +26,9 @@ jobs:
       VITE_TELEGRAM_AUTH_ENABLED: "false"
     steps:
       - name: Checkout exact commit
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Install locked dependencies
@@ -57,6 +58,7 @@ jobs:
           release="$releases/${GITHUB_SHA:0:12}"
 
           git -C "$deploy_repo" fetch "$GITHUB_WORKSPACE" "$GITHUB_SHA"
+          test "$(git -C "$deploy_repo" rev-parse FETCH_HEAD)" = "$GITHUB_SHA"
           git -C "$deploy_repo" merge --ff-only FETCH_HEAD
           install -d -m 2775 "$release"
           rsync -a --delete dist/ "$release/"
