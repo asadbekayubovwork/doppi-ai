@@ -7,11 +7,15 @@ import {
   type SessionResponse,
   type SignInPayload,
   type SignupPayload,
+  type TelegramAuthResponse,
   type User,
 } from "../api/authApi"
 import { safeLocalPath } from "./redirect"
 
 export type AuthStatus = "unknown" | "loading" | "authenticated" | "anonymous"
+
+let bootstrapRequest: Promise<boolean> | null = null
+let bootstrapGeneration = 0
 
 const isMfaResponse = (
   response: LoginResponse
@@ -33,7 +37,9 @@ export const useAuthStore = defineStore("auth", {
     businesses: [] as Business[],
     activeBusinessId: null as string | null,
     mfaChallengeId: null as string | null,
+    mfaRememberMe: false,
     bootstrapError: null as unknown,
+    businessError: null as unknown,
   }),
 
   getters: {
@@ -51,6 +57,7 @@ export const useAuthStore = defineStore("auth", {
       this.user = response.user
       this.status = "authenticated"
       this.mfaChallengeId = null
+      this.mfaRememberMe = false
       this.bootstrapError = null
     },
 
@@ -60,55 +67,74 @@ export const useAuthStore = defineStore("auth", {
       this.businesses = []
       this.activeBusinessId = null
       this.mfaChallengeId = null
+      this.mfaRememberMe = false
+      this.businessError = null
       this.status = "anonymous"
     },
 
     async loadBusinesses() {
-      this.businesses = await authApi.listBusinesses()
-      if (
-        this.activeBusinessId === null ||
-        !this.businesses.some((business) => business.id === this.activeBusinessId)
-      ) {
-        this.activeBusinessId = this.businesses[0]?.id ?? null
-      }
-    },
-
-    async bootstrap(force = false) {
-      if (!force && (this.status === "loading" || this.status === "authenticated")) {
-        return this.isAuthenticated
-      }
-
-      this.status = "loading"
-      this.bootstrapError = null
       try {
-        const response = await authApi.getSession()
-        this.setSession(response)
-        await this.loadBusinesses()
+        this.businesses = await authApi.listBusinesses()
+        if (
+          this.activeBusinessId === null ||
+          !this.businesses.some((business) => business.id === this.activeBusinessId)
+        ) {
+          this.activeBusinessId = this.businesses[0]?.id ?? null
+        }
+        this.businessError = null
         return true
       } catch (error) {
-        this.bootstrapError = error
-        this.clearSession()
+        this.businessError = error
         return false
       }
     },
 
+    async bootstrap(force = false) {
+      if (!force && this.status === "authenticated") return true
+      if (!force && bootstrapRequest) return bootstrapRequest
+
+      const generation = ++bootstrapGeneration
+      this.status = "loading"
+      this.bootstrapError = null
+      const request = (async () => {
+        try {
+          const response = await authApi.getSession()
+          if (generation !== bootstrapGeneration) return this.isAuthenticated
+          this.setSession(response)
+          await this.loadBusinesses()
+          return true
+        } catch (error) {
+          if (generation !== bootstrapGeneration) return this.isAuthenticated
+          this.clearSession()
+          this.bootstrapError = error
+          return false
+        } finally {
+          if (bootstrapRequest === request) bootstrapRequest = null
+        }
+      })()
+      bootstrapRequest = request
+      return request
+    },
+
     async login(payload: SignInPayload): Promise<LoginResponse> {
       this.status = "loading"
+      let response: LoginResponse
       try {
-        const response = await authApi.signIn(payload)
-        if (isMfaResponse(response)) {
-          this.mfaChallengeId = response.challenge_id
-          this.bootstrapError = null
-          this.status = "anonymous"
-          return response
-        }
-        this.setSession(response)
-        await this.loadBusinesses()
-        return response
+        response = await authApi.signIn(payload)
       } catch (error) {
         this.clearSession()
         throw error
       }
+      if (isMfaResponse(response)) {
+        this.mfaChallengeId = response.challenge_id
+        this.mfaRememberMe = payload.remember_me ?? false
+        this.bootstrapError = null
+        this.status = "anonymous"
+        return response
+      }
+      this.setSession(response)
+      await this.loadBusinesses()
+      return response
     },
 
     async verifyMfa(code: string) {
@@ -116,9 +142,21 @@ export const useAuthStore = defineStore("auth", {
       const response = await authApi.verifyMfa({
         challenge_id: this.mfaChallengeId,
         code,
+        remember_me: this.mfaRememberMe,
       })
       this.setSession(response)
       await this.loadBusinesses()
+      return response
+    },
+
+    async telegramLogin(
+      data: Record<string, string | number>
+    ): Promise<TelegramAuthResponse> {
+      const response = await authApi.telegramLogin(data)
+      if (response.status !== "challenge_required") {
+        this.setSession(response)
+        await this.loadBusinesses()
+      }
       return response
     },
 
@@ -142,6 +180,8 @@ export const useAuthStore = defineStore("auth", {
     },
 
     async logout() {
+      bootstrapGeneration += 1
+      bootstrapRequest = null
       let failure: unknown
       try {
         await authApi.logout()

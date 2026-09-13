@@ -54,6 +54,10 @@ export interface OtpVerificationPayload {
   code: string
 }
 
+export interface MfaVerificationPayload extends OtpVerificationPayload {
+  remember_me?: boolean
+}
+
 export interface OtpResponse {
   status: string
   challenge_id?: string | null
@@ -130,7 +134,7 @@ export const authApi = {
   requestEmailVerification: (payload: { email: string }) =>
     apiClient.post<OtpResponse>("/auth/email-verifications", payload),
 
-  verifyMfa: (payload: OtpVerificationPayload) =>
+  verifyMfa: (payload: MfaVerificationPayload) =>
     apiClient.post<SessionResponse>("/auth/mfa/login/verify", payload),
 
   requestPasswordReset: (email: string | { email: string }) =>

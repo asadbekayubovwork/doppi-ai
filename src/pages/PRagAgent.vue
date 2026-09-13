@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useHead } from "@vueuse/head"
+import { useHead } from "@unhead/vue"
 
 useHead({ title: "Universal RAG agent — Do'ppi AI" })
 </script>

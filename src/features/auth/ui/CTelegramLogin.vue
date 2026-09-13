@@ -14,8 +14,10 @@ const emit = defineEmits<{
 
 const container = ref<HTMLElement | null>(null)
 const callbackName = `doppiTelegramAuth${Math.random().toString(36).slice(2)}`
-const configuredUsername =
-  props.botUsername || import.meta.env.VITE_TELEGRAM_BOT_USERNAME
+const telegramEnabled = import.meta.env.VITE_TELEGRAM_AUTH_ENABLED === "true"
+const configuredUsername = telegramEnabled
+  ? props.botUsername || import.meta.env.VITE_TELEGRAM_BOT_USERNAME
+  : ""
 
 const callback = (data: TelegramLoginData) => emit("auth", data)
 
@@ -51,6 +53,6 @@ onBeforeUnmount(() => {
     class="rounded-[10px] border border-[#E5E5E1] bg-[#FAFAF9] px-3 py-2.5 text-center text-xs text-[#6A6A74]"
     role="status"
   >
-    Telegram orqali kirish hozircha mavjud emas.
+    Telegram orqali kirish tez orada
   </p>
 </template>

@@ -1,9 +1,10 @@
-import { createHead } from "@vueuse/head"
+import { createHead } from "@unhead/vue/client"
 import { createPinia, setActivePinia } from "pinia"
 import { flushPromises, mount } from "@vue/test-utils"
 import { createRouter, createWebHistory } from "vue-router"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { authApi, CAuthVerifyStep } from "@/features/auth"
+import { HttpError } from "@/shared/api"
 import PLogin from "../PLogin.vue"
 import PRegister from "../PRegister.vue"
 import PForgotPassword from "../PForgotPassword.vue"
@@ -32,7 +33,10 @@ beforeEach(() => {
   vi.spyOn(authApi, "listBusinesses").mockResolvedValue([])
 })
 
-afterEach(() => vi.restoreAllMocks())
+afterEach(() => {
+  vi.useRealTimers()
+  vi.restoreAllMocks()
+})
 
 describe("auth page flows", () => {
   it("sends remember_me and transitions to a real MFA challenge", async () => {
@@ -55,6 +59,73 @@ describe("auth page flows", () => {
     expect(wrapper.text()).toContain("MFA kodini kiriting")
     expect(wrapper.text()).not.toContain("Kod kelmadimi?")
     wrapper.unmount()
+  })
+
+  it("submits a full MFA recovery code with the remember preference", async () => {
+    vi.spyOn(authApi, "signIn").mockResolvedValue({
+      status: "mfa_required",
+      challenge_id: "mfa-1",
+    })
+    vi.spyOn(authApi, "verifyMfa").mockResolvedValue({
+      user: {
+        id: "user-1",
+        email: "user@example.com",
+        email_verified_at: "2026-09-13T00:00:00Z",
+        status: "active",
+        first_name: "Ada",
+        last_name: "Lovelace",
+        locale: "uz",
+        timezone: "Asia/Tashkent",
+      },
+      session_id: "session-1",
+      expires_at: "2026-10-13T00:00:00Z",
+    })
+    const wrapper = mountPage(PLogin)
+    await wrapper.find("#login-email").setValue("user@example.com")
+    await wrapper.find("#login-password").setValue("secret-password")
+    await wrapper.find("form").trigger("submit")
+    await vi.waitFor(() => expect(wrapper.text()).toContain("MFA kodini kiriting"))
+
+    const recoveryButton = wrapper
+      .findAll("button")
+      .find((button) => button.text().includes("Tiklash kodidan"))
+    expect(recoveryButton).toBeDefined()
+    await recoveryButton!.trigger("click")
+    await wrapper.get("#mfa-recovery").setValue("AbC-recovery-code-123456")
+    await wrapper.find("form").trigger("submit")
+
+    await vi.waitFor(() =>
+      expect(authApi.verifyMfa).toHaveBeenCalledWith({
+        challenge_id: "mfa-1",
+        code: "AbC-recovery-code-123456",
+        remember_me: true,
+      })
+    )
+    wrapper.unmount()
+  })
+
+  it("disables password login for the server Retry-After window", async () => {
+    vi.useFakeTimers()
+    vi.spyOn(authApi, "signIn").mockRejectedValue(
+      new HttpError(
+        new Response(null, { status: 429, statusText: "Too Many Requests" }),
+        { code: "RATE_LIMITED", detail: "Wait before retrying." },
+        2
+      )
+    )
+    const wrapper = mountPage(PLogin)
+    await wrapper.find("#login-email").setValue("user@example.com")
+    await wrapper.find("#login-password").setValue("secret-password")
+    await wrapper.find("form").trigger("submit")
+    await flushPromises()
+
+    const submit = wrapper.find('button[type="submit"]')
+    expect(submit.attributes("disabled")).toBeDefined()
+    expect(submit.text()).toContain("2 soniyadan")
+    await vi.advanceTimersByTimeAsync(2000)
+    expect(submit.attributes("disabled")).toBeUndefined()
+    wrapper.unmount()
+    vi.useRealTimers()
   })
 
   it("retains the signup challenge and verifies it through the backend", async () => {

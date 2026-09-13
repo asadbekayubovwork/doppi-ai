@@ -4,78 +4,40 @@ import { CIcon } from "@/shared/ui"
 
 const props = defineProps<{
   open: boolean
-  /** Business the new one can inherit keys and billing from. */
-  copyFrom: string
+  loading?: boolean
+  errorMessage?: string
 }>()
-
 const emit = defineEmits<{
   "update:open": [value: boolean]
-  create: [payload: { name: string; default_language: string; billing_region: string }]
+  create: [
+    payload: { name: string; default_language: string; billing_region: string },
+  ]
 }>()
 
-const industries = [
-  "Logistika va yetkazish",
-  "Savdo va e-commerce",
-  "Moliya va bank",
-  "Ta'lim",
-  "Sog'liqni saqlash",
-  "Boshqa",
-]
-const teamSizes = [
-  "1 kishi",
-  "2–10 kishi",
-  "11–50 kishi",
-  "51–200 kishi",
-  "200+",
-]
-const regions = [
-  "O'zbekiston (UZS)",
-  "Qozog'iston (KZT)",
-  "Yevropa (EUR)",
-  "AQSh (USD)",
-]
-const languages = ["O'zbekcha", "Русский", "English"]
-
 const name = ref("")
-const industry = ref(industries[0])
-const teamSize = ref(teamSizes[1])
-const region = ref(regions[0])
-const language = ref(languages[0])
-const copyDetails = ref(true)
-const regionCodes: Record<string, string> = {
-  "O'zbekiston (UZS)": "UZ",
-  "Qozog'iston (KZT)": "KZ",
-  "Yevropa (EUR)": "EU",
-  "AQSh (USD)": "US",
+const language = ref("uz")
+const region = ref("UZ")
+const close = () => {
+  if (!props.loading) emit("update:open", false)
 }
 
-const close = () => emit("update:open", false)
-
-// A fresh dialog each time it opens, so a cancelled draft never leaks back.
 watch(
   () => props.open,
   (open) => {
     if (!open) return
     name.value = ""
-    industry.value = industries[0]
-    teamSize.value = teamSizes[1]
-    region.value = regions[0]
-    language.value = languages[0]
-    copyDetails.value = true
+    language.value = "uz"
+    region.value = "UZ"
   }
 )
 
 const submit = () => {
   emit("create", {
     name: name.value.trim(),
-    default_language: language.value === "Русский" ? "ru" : language.value === "English" ? "en" : "uz",
-    billing_region: regionCodes[region.value] ?? "UZ",
+    default_language: language.value,
+    billing_region: region.value,
   })
-  close()
 }
-
-const selectClass =
-  "h-12 w-full appearance-none rounded-xl border border-[#E1E1E9] bg-white pl-4 pr-10 text-[14.5px] text-[#12121C] outline-none transition focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
 </script>
 
 <template>
@@ -96,9 +58,8 @@ const selectClass =
           <div class="flex items-start gap-4 border-b border-[#E9E9EF] p-5">
             <span
               class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-[#EFEAFE] text-[#6633EE]"
-            >
-              <CIcon name="building-2" class="h-5 w-5" />
-            </span>
+              ><CIcon name="building-2" class="h-5 w-5"
+            /></span>
             <div class="min-w-0 flex-1">
               <h2
                 id="create-business-title"
@@ -107,12 +68,14 @@ const selectClass =
                 Yangi biznes yaratish
               </h2>
               <p class="mt-1 text-[13.5px] leading-5 text-[#6B6B78]">
-                Har bir biznesning o'z balansi, agentlari va jamoasi bo'ladi.
+                Har bir biznesning o'z agentlari, jamoasi va API kalitlari
+                bo'ladi.
               </p>
             </div>
             <button
               type="button"
-              class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#E4E4EB] text-[#8E8E9C] transition hover:bg-[#F7F7F9] hover:text-[#12121C]"
+              :disabled="loading"
+              class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#E4E4EB] text-[#8E8E9C] hover:bg-[#F7F7F9]"
               aria-label="Yopish"
               @click="close"
             >
@@ -120,175 +83,82 @@ const selectClass =
             </button>
           </div>
 
-          <form id="create-business-form" class="p-5" @submit.prevent="submit">
-            <label
-              for="business-name"
-              class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
-            >
-              Biznes nomi
-            </label>
-            <input
-              id="business-name"
-              v-model="name"
-              type="text"
-              required
-              autofocus
-              placeholder="Karimov Group"
-              class="h-12 w-full rounded-xl border border-[#E1E1E9] bg-white px-4 text-[14.5px] text-[#12121C] outline-none transition placeholder:text-[#A8A8B4] focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
-            />
-
-            <div class="mt-4 grid gap-4 sm:grid-cols-2">
-              <div>
-                <label
-                  for="business-industry"
-                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
+          <form
+            id="create-business-form"
+            class="grid gap-4 p-5"
+            @submit.prevent="submit"
+          >
+            <label class="grid gap-1.5 text-[13.5px] font-medium text-[#3D3D4A]"
+              >Biznes nomi<input
+                v-model="name"
+                required
+                minlength="2"
+                maxlength="160"
+                autofocus
+                placeholder="Karimov Group"
+                class="h-12 rounded-xl border border-[#E1E1E9] px-4 text-[14.5px] outline-none focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+            /></label>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <label
+                class="grid gap-1.5 text-[13.5px] font-medium text-[#3D3D4A]"
+                >Asosiy til<select
+                  v-model="language"
+                  class="h-12 rounded-xl border border-[#E1E1E9] bg-white px-4 text-[14.5px]"
                 >
-                  Soha
-                </label>
-                <div class="relative">
-                  <select
-                    id="business-industry"
-                    v-model="industry"
-                    :class="selectClass"
-                  >
-                    <option v-for="item in industries" :key="item">
-                      {{ item }}
-                    </option>
-                  </select>
-                  <CIcon
-                    name="chevron-down"
-                    class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8E8E9C]"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label
-                  for="business-team"
-                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
-                >
-                  Jamoa hajmi
-                </label>
-                <div class="relative">
-                  <select
-                    id="business-team"
-                    v-model="teamSize"
-                    :class="selectClass"
-                  >
-                    <option v-for="item in teamSizes" :key="item">
-                      {{ item }}
-                    </option>
-                  </select>
-                  <CIcon
-                    name="chevron-down"
-                    class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8E8E9C]"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label
-                  for="business-region"
-                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
-                >
-                  To'lov hududi
-                </label>
-                <div class="relative">
-                  <select
-                    id="business-region"
-                    v-model="region"
-                    :class="selectClass"
-                  >
-                    <option v-for="item in regions" :key="item">
-                      {{ item }}
-                    </option>
-                  </select>
-                  <CIcon
-                    name="chevron-down"
-                    class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8E8E9C]"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label
-                  for="business-language"
-                  class="mb-1.5 block text-[13.5px] font-medium text-[#3D3D4A]"
-                >
-                  Asosiy til
-                </label>
-                <div class="relative">
-                  <select
-                    id="business-language"
-                    v-model="language"
-                    :class="selectClass"
-                  >
-                    <option v-for="item in languages" :key="item">
-                      {{ item }}
-                    </option>
-                  </select>
-                  <CIcon
-                    name="chevron-down"
-                    class="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8E8E9C]"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <label
-              class="mt-5 flex w-fit cursor-pointer select-none items-center gap-3"
-            >
-              <input
-                v-model="copyDetails"
-                type="checkbox"
-                class="peer sr-only"
-              />
-              <span
-                class="grid h-5 w-5 shrink-0 place-items-center rounded-md border border-[#D5D5DE] bg-white text-transparent transition peer-checked:border-[#6633EE] peer-checked:bg-[#6633EE] peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-[#6633EE]/20"
-                aria-hidden="true"
+                  <option value="uz">O'zbekcha</option>
+                  <option value="ru">Русский</option>
+                  <option value="en">English</option>
+                </select></label
               >
-                <CIcon name="check" class="h-3.5 w-3.5" stroke-width="3" />
-              </span>
-              <span class="text-[13.5px] text-[#4A4A57]">
-                API kalitlar va to'lov ma'lumotlarini {{ copyFrom }}dan
-                nusxalash
-              </span>
-            </label>
-
+              <label
+                class="grid gap-1.5 text-[13.5px] font-medium text-[#3D3D4A]"
+                >To'lov hududi<select
+                  v-model="region"
+                  class="h-12 rounded-xl border border-[#E1E1E9] bg-white px-4 text-[14.5px]"
+                >
+                  <option value="UZ">O'zbekiston</option>
+                  <option value="KZ">Qozog'iston</option>
+                  <option value="US">AQSh</option>
+                  <option value="EU">Yevropa</option>
+                </select></label
+              >
+            </div>
             <p
-              class="mt-4 flex items-start gap-2.5 rounded-xl bg-[#F3F0FE] px-3.5 py-3 text-[13.5px] leading-5 text-[#4B21C4]"
+              v-if="errorMessage"
+              class="rounded-xl bg-[#FFF0F0] px-3.5 py-3 text-sm text-[#C42B2B]"
+              role="alert"
             >
-              <CIcon name="gift" class="mt-0.5 h-4 w-4 shrink-0" />
-              <span>
-                Yangi bizneslar 500 ta bepul kredit va umumiy Pro tarif o'rni
-                bilan boshlanadi.
-              </span>
+              {{ errorMessage }}
+            </p>
+            <p
+              class="rounded-xl bg-[#F3F0FE] px-3.5 py-3 text-[13.5px] leading-5 text-[#4B21C4]"
+            >
+              Biznes yaratilgach, jamoa va integratsiyalarni alohida
+              sozlashingiz mumkin.
             </p>
           </form>
 
           <div
-            class="flex flex-wrap items-center justify-between gap-3 border-t border-[#E9E9EF] bg-[#FBFBFC] px-5 py-4"
+            class="flex justify-end gap-3 border-t border-[#E9E9EF] bg-[#FBFBFC] px-5 py-4"
           >
-            <p class="text-[13px] text-[#8E8E9C]">
-              Jamoani keyinroq taklif qilasiz
-            </p>
-            <div class="flex items-center gap-3">
-              <button
-                type="button"
-                class="h-11 rounded-xl border border-[#E3E3EB] bg-white px-4 text-[14px] font-semibold text-[#12121A] transition hover:border-[#C9C9D6] hover:bg-[#FAFAFC]"
-                @click="close"
-              >
-                Bekor qilish
-              </button>
-              <button
-                type="submit"
-                form="create-business-form"
-                class="inline-flex h-11 items-center gap-2 rounded-xl bg-[#6633EE] px-4 text-[14px] font-semibold text-white transition hover:bg-[#5A2CE0]"
-              >
-                <CIcon name="plus" class="h-4 w-4" />
-                Biznes yaratish
-              </button>
-            </div>
+            <button
+              type="button"
+              :disabled="loading"
+              class="h-11 rounded-xl border border-[#E3E3EB] bg-white px-4 text-sm font-semibold"
+              @click="close"
+            >
+              Bekor qilish
+            </button>
+            <button
+              type="submit"
+              form="create-business-form"
+              :disabled="loading"
+              class="inline-flex h-11 items-center gap-2 rounded-xl bg-[#6633EE] px-4 text-sm font-semibold text-white disabled:opacity-60"
+            >
+              <CIcon name="plus" class="h-4 w-4" />{{
+                loading ? "Yaratilmoqda..." : "Biznes yaratish"
+              }}
+            </button>
           </div>
         </div>
       </div>
