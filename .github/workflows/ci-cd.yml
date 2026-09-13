@@ -65,8 +65,8 @@ jobs:
           rsync -a --delete dist/ "$release/"
           find "$release" -type d -exec chmod 755 {} +
           find "$release" -type f -exec chmod 644 {} +
-          find "$release" -mindepth 1 -maxdepth 1 ! -name index.html \
-            -exec cp -a {} "$live/" \;
+          rsync -r --omit-dir-times --no-times --exclude index.html \
+            "$release/" "$live/"
           install -m 644 "$release/index.html" "$live/index.html.next"
           mv "$live/index.html.next" "$live/index.html"
 
