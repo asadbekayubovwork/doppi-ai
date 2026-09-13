@@ -283,8 +283,9 @@ const handleTelegram = async (data: Record<string, string | number>) => {
         <RouterLink to="/register" class="font-semibold text-[#5B4BE8]"
           >Hisob yarating</RouterLink
         >
-      </p></template
-    ><CMfaChallenge
+      </p>
+    </template>
+    <CMfaChallenge
       v-else
       v-model="code"
       :email="email"
@@ -293,6 +294,5 @@ const handleTelegram = async (data: Record<string, string | number>) => {
       @submit="verifyMfa"
       @back="backToPassword"
     />
-    ></AuthShell
-  >
+  </AuthShell>
 </template>

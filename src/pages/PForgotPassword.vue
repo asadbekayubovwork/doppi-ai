@@ -293,7 +293,7 @@ const updatePassword = async () => {
           class="mt-6 flex h-11 items-center justify-center rounded-[10px] bg-[#5B4BE8] text-sm font-semibold text-white"
           >Kirishga o'tish</RouterLink
         >
-      </div></template
-    ></AuthShell
-  >
+      </div>
+    </template>
+  </AuthShell>
 </template>
