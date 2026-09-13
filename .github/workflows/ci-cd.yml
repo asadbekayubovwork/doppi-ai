@@ -1,0 +1,76 @@
+name: Production CI/CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: doppi-frontend-production
+  cancel-in-progress: false
+
+jobs:
+  verify-build-deploy:
+    runs-on: [self-hosted, linux, x64, doppiai-frontend]
+    timeout-minutes: 5
+    env:
+      PATH: /opt/node-v20/bin:/opt/pnpm/bin:/usr/local/bin:/usr/bin:/bin
+      PNPM_HOME: /opt/pnpm
+      PNPM_STORE_DIR: /opt/actions-cache/pnpm
+      VITE_API_BASE_URL: /api/v1
+      VITE_GOOGLE_OAUTH_URL: /api/v1/auth/oauth/google/authorize
+      VITE_EMAIL_AUTH_ENABLED: "false"
+      VITE_TELEGRAM_AUTH_ENABLED: "false"
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Verify source
+        run: |
+          set -euo pipefail
+          pnpm test
+          pnpm lint
+          pnpm exec vue-tsc --noEmit
+          pnpm audit --prod --audit-level high
+          git diff --check
+          find src -type f \( -name '*.ts' -o -name '*.vue' -o -name '*.css' \) -print0 \
+            | xargs -0 -n1 wc -l \
+            | awk '$1 >= 400 {print; found=1} END {exit found}'
+
+      - name: Build production bundle
+        run: pnpm build
+
+      - name: Deploy atomically
+        run: |
+          set -euo pipefail
+          deploy_repo=/opt/doppi-ai
+          live=/var/www/doppiai.uz
+          releases=/var/www/doppiai.uz.releases
+          release="$releases/${GITHUB_SHA:0:12}"
+
+          git -C "$deploy_repo" fetch "$GITHUB_WORKSPACE" "$GITHUB_SHA"
+          git -C "$deploy_repo" merge --ff-only FETCH_HEAD
+          install -d -m 2775 "$release"
+          rsync -a --delete dist/ "$release/"
+          find "$release" -type d -exec chmod 755 {} +
+          find "$release" -type f -exec chmod 644 {} +
+          find "$release" -mindepth 1 -maxdepth 1 ! -name index.html \
+            -exec cp -a {} "$live/" \;
+          install -m 644 "$release/index.html" "$live/index.html.next"
+          mv "$live/index.html.next" "$live/index.html"
+
+      - name: Verify public deployment
+        run: |
+          set -euo pipefail
+          test "$(git -C /opt/doppi-ai rev-parse HEAD)" = "$GITHUB_SHA"
+          curl --fail --silent --show-error --retry 5 --retry-delay 1 https://doppiai.uz/ >/dev/null
+          curl --fail --silent --show-error --retry 5 --retry-delay 1 https://doppiai.uz/login >/dev/null
+          curl --fail --silent --show-error --retry 5 --retry-delay 1 https://doppiai.uz/api/docs >/dev/null
