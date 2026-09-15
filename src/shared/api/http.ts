@@ -1,6 +1,6 @@
+import { apiUrl, isCrossOriginApi } from "@/shared/config/api"
 import { HttpError, type ApiClientConfig, type ApiProblem } from "./types"
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api/v1"
 const UNSAFE_METHODS = new Set(["POST", "PUT", "PATCH", "DELETE"])
 
 const csrfToken = () => {
@@ -57,7 +57,7 @@ export async function http<T>(
     if (token) headers.set("X-CSRF-Token", token)
   }
 
-  let fullUrl = `${API_BASE_URL.replace(/\/$/, "")}/${url.replace(/^\//, "")}`
+  let fullUrl = apiUrl(url)
   if (params) {
     const queryParams = new URLSearchParams(
       Object.entries(params).map(([key, value]) => [key, String(value)])
@@ -69,13 +69,19 @@ export async function http<T>(
     ...requestInit,
     method,
     headers,
-    credentials: requestInit.credentials || "same-origin",
+    // A cross-origin base URL still has to carry the HttpOnly session cookie.
+    credentials:
+      requestInit.credentials || (isCrossOriginApi ? "include" : "same-origin"),
     body: data === undefined ? undefined : JSON.stringify(data),
   })
 
   if (!response.ok) {
     const problem = await parseJson<ApiProblem>(response)
-    throw new HttpError(response, problem, parseRetryAfter(response.headers.get("Retry-After")))
+    throw new HttpError(
+      response,
+      problem,
+      parseRetryAfter(response.headers.get("Retry-After"))
+    )
   }
 
   if (response.status === 204 || response.status === 205) return null as T

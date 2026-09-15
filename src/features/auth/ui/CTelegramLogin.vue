@@ -48,11 +48,11 @@ onBeforeUnmount(() => {
     class="flex min-h-11 items-center justify-center"
     :aria-label="label"
   />
-  <p
+  <!-- <p
     v-else
     class="rounded-[10px] border border-[#E5E5E1] bg-[#FAFAF9] px-3 py-2.5 text-center text-xs text-[#6A6A74]"
     role="status"
   >
     Telegram orqali kirish tez orada
-  </p>
+  </p> -->
 </template>

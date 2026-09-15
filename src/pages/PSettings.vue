@@ -3,10 +3,12 @@ import { onMounted, ref } from "vue"
 import { useHead } from "@unhead/vue"
 import { useRouter } from "vue-router"
 import { messageForProblem, useAuthStore } from "@/features/auth"
+import { useToast } from "@/shared/lib"
 import { workspaceApi, type SessionItem } from "@/features/workspace"
 
 const auth = useAuthStore()
 const router = useRouter()
+const toast = useToast()
 const firstName = ref(auth.user?.first_name || "")
 const lastName = ref(auth.user?.last_name || "")
 const locale = ref(auth.user?.locale || "uz")
@@ -16,19 +18,15 @@ const newPassword = ref("")
 const sessions = ref<SessionItem[]>([])
 const loading = ref(false)
 const sessionsLoading = ref(false)
-const message = ref("")
-const error = ref("")
 
 useHead({ title: "Sozlamalar — Do'ppi AI" })
 
-const fail = (value: unknown, fallback: string) => {
-  error.value = messageForProblem(value, fallback)
-  message.value = ""
+const fail = (value: unknown, title: string, fallback: string) => {
+  toast.error(title, messageForProblem(value, fallback))
 }
 
 const saveProfile = async () => {
   loading.value = true
-  error.value = ""
   try {
     const user = await workspaceApi.updateProfile({
       first_name: firstName.value.trim(),
@@ -37,9 +35,9 @@ const saveProfile = async () => {
       timezone: timezone.value.trim(),
     })
     auth.user = user
-    message.value = "Profil saqlandi."
+    toast.success("Profil saqlandi")
   } catch (value) {
-    fail(value, "Profilni saqlab bo'lmadi.")
+    fail(value, "Profilni saqlab bo'lmadi", "Qayta urinib ko'ring.")
   } finally {
     loading.value = false
   }
@@ -47,7 +45,6 @@ const saveProfile = async () => {
 
 const changePassword = async () => {
   loading.value = true
-  error.value = ""
   try {
     await workspaceApi.changePassword({
       current_password: currentPassword.value,
@@ -55,9 +52,9 @@ const changePassword = async () => {
     })
     currentPassword.value = ""
     newPassword.value = ""
-    message.value = "Parol yangilandi."
+    toast.success("Parol yangilandi")
   } catch (value) {
-    fail(value, "Parolni yangilab bo'lmadi.")
+    fail(value, "Parolni yangilab bo'lmadi", "Joriy parolni tekshirib ko'ring.")
   } finally {
     loading.value = false
   }
@@ -68,7 +65,7 @@ const loadSessions = async () => {
   try {
     sessions.value = await workspaceApi.listSessions()
   } catch (value) {
-    fail(value, "Sessiyalarni yuklab bo'lmadi.")
+    fail(value, "Sessiyalarni yuklab bo'lmadi", "Sahifani yangilang.")
   } finally {
     sessionsLoading.value = false
   }
@@ -78,9 +75,9 @@ const revokeSession = async (id: string) => {
   try {
     await workspaceApi.revokeSession(id)
     sessions.value = sessions.value.filter((item) => item.id !== id)
-    message.value = "Sessiya yakunlandi."
+    toast.success("Sessiya yakunlandi")
   } catch (value) {
-    fail(value, "Sessiyani yakunlab bo'lmadi.")
+    fail(value, "Sessiyani yakunlab bo'lmadi", "Qayta urinib ko'ring.")
   }
 }
 
@@ -91,7 +88,11 @@ const logoutEverywhere = async () => {
     auth.clearSession()
     await router.replace("/login")
   } catch (value) {
-    fail(value, "Barcha sessiyalarni yakunlab bo'lmadi.")
+    fail(
+      value,
+      "Barcha sessiyalarni yakunlab bo'lmadi",
+      "Qayta urinib ko'ring."
+    )
   } finally {
     loading.value = false
   }
@@ -190,21 +191,6 @@ onMounted(loadSessions)
         </button>
       </form>
     </section>
-
-    <p
-      v-if="message"
-      class="rounded-xl bg-[#EAF8F0] px-4 py-3 text-sm text-[#177A46] xl:col-span-2"
-      role="status"
-    >
-      {{ message }}
-    </p>
-    <p
-      v-if="error"
-      class="rounded-xl bg-[#FFF0F0] px-4 py-3 text-sm text-[#C42B2B] xl:col-span-2"
-      role="alert"
-    >
-      {{ error }}
-    </p>
 
     <section
       class="rounded-2xl border border-[#E5E5E1] bg-white p-5 xl:col-span-2"

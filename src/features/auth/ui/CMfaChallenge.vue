@@ -6,7 +6,6 @@ defineProps<{
   email: string
   modelValue: string
   loading?: boolean
-  errorMessage?: string
 }>()
 
 const emit = defineEmits<{
@@ -36,7 +35,6 @@ const changeMode = (recovery: boolean) => {
       title="MFA kodini kiriting"
       description="Authenticator ilovangizdagi 6 xonali kodni kiriting."
       submit-label="Tasdiqlash"
-      :error-message="errorMessage"
       :loading="loading"
       telegram-variant="none"
       @update:model-value="emit('update:modelValue', $event)"
@@ -44,7 +42,7 @@ const changeMode = (recovery: boolean) => {
     />
     <button
       type="button"
-      class="mt-3 min-h-11 w-full rounded-[10px] text-sm font-medium text-[#5B4BE8] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#5B4BE8]/20"
+      class="mt-3 min-h-11 w-full rounded-[10px] text-sm font-medium text-[#5B4BE8]"
       @click="changeMode(true)"
     >
       Tiklash kodidan foydalanish
@@ -78,7 +76,7 @@ const changeMode = (recovery: boolean) => {
           maxlength="32"
           autocomplete="one-time-code"
           spellcheck="false"
-          class="h-11 w-full rounded-[10px] border border-[#D6D6D1] px-3.5 font-mono text-base text-[#15151B] outline-none focus:border-[#5B4BE8] focus:ring-4 focus:ring-[#5B4BE8]/10"
+          class="h-11 w-full rounded-[10px] border border-[#D6D6D1] px-3.5 font-mono text-base text-[#15151B] outline-none focus:border-[#5B4BE8]"
           @input="
             emit(
               'update:modelValue',
@@ -87,24 +85,17 @@ const changeMode = (recovery: boolean) => {
           "
         />
       </div>
-      <p
-        v-if="errorMessage"
-        class="rounded-[10px] border border-[#F3C5C5] bg-[#FFF0F0] px-3.5 py-2.5 text-sm text-[#C42B2B]"
-        role="alert"
-      >
-        {{ errorMessage }}
-      </p>
       <button
         type="submit"
         :disabled="loading"
-        class="h-11 rounded-[10px] bg-[#5B4BE8] text-sm font-semibold text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#5B4BE8]/30 disabled:opacity-70"
+        class="h-11 rounded-[10px] bg-[#5B4BE8] text-sm font-semibold text-white disabled:opacity-70"
       >
         {{ loading ? "Kutilmoqda..." : "Tiklash kodi bilan kirish" }}
       </button>
     </form>
     <button
       type="button"
-      class="mt-3 min-h-11 w-full rounded-[10px] text-sm font-medium text-[#5B4BE8] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#5B4BE8]/20"
+      class="mt-3 min-h-11 w-full rounded-[10px] text-sm font-medium text-[#5B4BE8]"
       @click="changeMode(false)"
     >
       Authenticator kodiga qaytish
@@ -112,7 +103,7 @@ const changeMode = (recovery: boolean) => {
   </template>
   <button
     type="button"
-    class="mt-1 min-h-11 w-full rounded-[10px] text-sm font-medium text-[#5B4BE8] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#5B4BE8]/20"
+    class="mt-1 min-h-11 w-full rounded-[10px] text-sm font-medium text-[#5B4BE8]"
     @click="emit('back')"
   >
     Boshqa hisob bilan kirish

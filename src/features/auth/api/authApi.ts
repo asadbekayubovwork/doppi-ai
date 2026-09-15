@@ -1,4 +1,5 @@
 import { apiClient } from "@/shared/api"
+import { apiUrl } from "@/shared/config/api"
 
 export interface User {
   id: string
@@ -105,7 +106,6 @@ export interface TelegramLoginResponse {
 
 export type TelegramAuthResponse = SessionResponse | TelegramLoginResponse
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api/v1"
 const GOOGLE_AUTHORIZE_PATH = "/auth/oauth/google/authorize"
 
 const asEmailPayload = (email: string | { email: string }) =>
@@ -147,10 +147,7 @@ export const authApi = {
     ),
 
   confirmPasswordReset: (payload: PasswordResetConfirmPayload) =>
-    apiClient.post<MessageResponse>(
-      "/auth/password-resets/confirm",
-      payload
-    ),
+    apiClient.post<MessageResponse>("/auth/password-resets/confirm", payload),
 
   resetPassword: (payload: ResetPasswordPayload) =>
     authApi.confirmPasswordReset(payload),
@@ -160,7 +157,9 @@ export const authApi = {
   getMe: () => apiClient.get<User>("/me"),
 
   patchMe: (
-    payload: Partial<Pick<User, "first_name" | "last_name" | "locale" | "timezone">>
+    payload: Partial<
+      Pick<User, "first_name" | "last_name" | "locale" | "timezone">
+    >
   ) => apiClient.patch<User>("/me", payload),
 
   logout: () => apiClient.post<MessageResponse>("/auth/logout"),
@@ -168,8 +167,7 @@ export const authApi = {
   logoutAll: () => apiClient.post<MessageResponse>("/auth/logout-all"),
 
   googleAuthorizeUrl: () =>
-    import.meta.env.VITE_GOOGLE_OAUTH_URL ||
-    `${API_BASE_URL}${GOOGLE_AUTHORIZE_PATH}`,
+    import.meta.env.VITE_GOOGLE_OAUTH_URL || apiUrl(GOOGLE_AUTHORIZE_PATH),
 
   telegramLogin: (data: Record<string, string | number>) =>
     apiClient.post<TelegramAuthResponse>("/auth/telegram/login", {

@@ -14,18 +14,18 @@ import {
   useAuthStore,
   type SignupPayload,
 } from "@/features/auth"
+import { useToast } from "@/shared/lib"
+import { CGoogleMark } from "@/shared/ui"
 
 const route = useRoute()
 const router = useRouter()
 const auth = useAuthStore()
+const toast = useToast()
 const email = ref("")
 const challengeId = ref("")
 const code = ref("")
 const isVerifyStep = ref(false)
 const loading = ref(false)
-const telegramLoading = ref(false)
-const errorMessage = ref("")
-const telegramMessage = ref("")
 const resendDelay = ref(60)
 const emailAuthEnabled = import.meta.env.VITE_EMAIL_AUTH_ENABLED !== "false"
 
@@ -33,15 +33,18 @@ useHead({ title: "Ro'yxatdan o'tish — Do'ppi.ai" })
 
 const destination = () => safeLocalPath(route.query.redirect)
 
-const showError = (error: unknown, fallback: string) => {
+const showError = (error: unknown, title: string, fallback: string) => {
   const retry = retryAfterSeconds(error)
   if (retry > 0) resendDelay.value = retry
-  errorMessage.value = messageForProblem(error, fallback, {
-    EMAIL_ALREADY_REGISTERED: "Bu email bilan hisob allaqachon mavjud.",
-    PASSWORD_POLICY: "Parol backend talablariga mos emas.",
-    OTP_INVALID: "Tasdiqlash kodi noto'g'ri yoki muddati tugagan.",
-    RATE_LIMITED: "Yangi kod so'rash uchun server ko'rsatgan vaqtni kuting.",
-  })
+  toast.error(
+    title,
+    messageForProblem(error, fallback, {
+      EMAIL_ALREADY_REGISTERED: "Bu email bilan hisob allaqachon mavjud.",
+      PASSWORD_POLICY: "Parol backend talablariga mos emas.",
+      OTP_INVALID: "Tasdiqlash kodi noto'g'ri yoki muddati tugagan.",
+      RATE_LIMITED: "Yangi kod so'rash uchun server ko'rsatgan vaqtni kuting.",
+    })
+  )
 }
 
 const startGoogle = () => {
@@ -50,7 +53,6 @@ const startGoogle = () => {
 }
 
 const register = async (payload: SignupPayload) => {
-  errorMessage.value = ""
   email.value = payload.email
   loading.value = true
   try {
@@ -59,14 +61,17 @@ const register = async (payload: SignupPayload) => {
     isVerifyStep.value = true
     resendDelay.value = 60
   } catch (error) {
-    showError(error, "Ro'yxatdan o'tish amalga oshmadi.")
+    showError(
+      error,
+      "Ro'yxatdan o'tish amalga oshmadi",
+      "Ma'lumotlarni tekshirib, qayta urinib ko'ring."
+    )
   } finally {
     loading.value = false
   }
 }
 
 const verifyEmail = async () => {
-  errorMessage.value = ""
   loading.value = true
   try {
     await authApi.verifyEmail({
@@ -75,7 +80,7 @@ const verifyEmail = async () => {
     })
     await router.replace({ path: "/login", query: { redirect: destination() } })
   } catch (error) {
-    showError(error, "Email tasdiqlanmadi.")
+    showError(error, "Email tasdiqlanmadi", "Kodni qayta kiritib ko'ring.")
   } finally {
     loading.value = false
   }
@@ -83,7 +88,6 @@ const verifyEmail = async () => {
 
 const resendCode = async (channel: "email" | "telegram") => {
   if (channel !== "email") return
-  errorMessage.value = ""
   loading.value = true
   try {
     const response = await authApi.requestEmailVerification({
@@ -92,16 +96,20 @@ const resendCode = async (channel: "email" | "telegram") => {
     if (response.challenge_id) challengeId.value = response.challenge_id
     resendDelay.value = 60
     code.value = ""
+    toast.success("Yangi kod yuborildi", email.value)
   } catch (error) {
-    showError(error, "Yangi tasdiqlash kodi yuborilmadi.")
+    showError(
+      error,
+      "Yangi tasdiqlash kodi yuborilmadi",
+      "Biroz kutib, qayta urinib ko'ring."
+    )
   } finally {
     loading.value = false
   }
 }
 
 const handleTelegram = async (data: Record<string, string | number>) => {
-  telegramMessage.value = ""
-  telegramLoading.value = true
+  const pending = toast.loading("Telegram tasdiqlanmoqda...")
   try {
     const response = await authApi.telegramLogin(data)
     if (response.status === "challenge_required") {
@@ -115,42 +123,30 @@ const handleTelegram = async (data: Record<string, string | number>) => {
     await auth.loadBusinesses()
     await router.replace(destination())
   } catch (error) {
-    telegramMessage.value = messageForProblem(
-      error,
-      "Telegram orqali ro'yxatdan o'tish amalga oshmadi.",
-      {
+    toast.error(
+      "Telegram orqali ro'yxatdan o'tish amalga oshmadi",
+      messageForProblem(error, "Qayta urinib ko'ring.", {
         TELEGRAM_NOT_CONFIGURED: "Telegram orqali kirish hozircha mavjud emas.",
-      }
+      })
     )
   } finally {
-    telegramLoading.value = false
+    toast.dismiss(pending)
   }
 }
 </script>
 
 <template>
-  <AuthShell
-    switch-to="/login"
-    switch-label="Kirish"
-    switch-text="Hisobingiz bormi?"
-  >
+  <AuthShell>
     <template v-if="!isVerifyStep">
       <h1 class="text-[28px] font-semibold tracking-[-0.8px] text-[#15151B]">
         Hisob yarating
       </h1>
-      <p class="mt-2 text-[13.5px] leading-6 text-[#6A6A74]">
-        500 ta bepul kredit bilan boshlang. Karta talab qilinmaydi.
-      </p>
       <button
         type="button"
-        class="mt-6 flex h-11 w-full items-center justify-center gap-2 rounded-[10px] border border-[#D6D6D1] bg-white text-[13.5px] font-medium text-[#15151B] hover:bg-[#FAFAF9]"
+        class="mt-6 flex h-11 w-full items-center justify-center gap-2.5 rounded-[10px] border border-[#D6D6D1] bg-white text-[13.5px] font-medium text-[#15151B] hover:bg-[#FAFAF9]"
         @click="startGoogle"
       >
-        <span
-          class="grid h-5 w-5 place-items-center text-[#5B4BE8]"
-          aria-hidden="true"
-          >G</span
-        >Google orqali ro'yxatdan o'tish
+        <CGoogleMark class="h-[18px] w-[18px]" />Google orqali ro'yxatdan o'tish
       </button>
       <div
         v-if="emailAuthEnabled"
@@ -164,7 +160,6 @@ const handleTelegram = async (data: Record<string, string | number>) => {
       <CRegisterForm
         v-if="emailAuthEnabled"
         :loading="loading"
-        :error-message="errorMessage"
         @submit="register"
       />
       <p
@@ -180,20 +175,6 @@ const handleTelegram = async (data: Record<string, string | number>) => {
           @auth="handleTelegram"
         />
       </div>
-      <p
-        v-if="telegramLoading"
-        class="mt-2 text-center text-xs text-[#6A6A74]"
-        aria-live="polite"
-      >
-        Telegram tasdiqlanmoqda...
-      </p>
-      <p
-        v-if="telegramMessage"
-        class="mt-2 text-center text-xs text-[#C42B2B]"
-        role="alert"
-      >
-        {{ telegramMessage }}
-      </p>
     </template>
     <template v-else>
       <CAuthVerifyStep
@@ -203,7 +184,6 @@ const handleTelegram = async (data: Record<string, string | number>) => {
         :description="`6 xonali tasdiqlash kodini emailingizga yubordik: ${email}. Kod 10 daqiqa amal qiladi.`"
         submit-label="Emailni tasdiqlash"
         step-name="Email"
-        :error-message="errorMessage"
         :loading="loading"
         :resend-delay="resendDelay"
         telegram-variant="none"

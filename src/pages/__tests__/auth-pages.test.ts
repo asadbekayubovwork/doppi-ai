@@ -142,7 +142,6 @@ describe("auth page flows", () => {
     await wrapper.find("#register-email").setValue("user@example.com")
     await wrapper.find("#register-business").setValue("Analytical Engines")
     await wrapper.find("#register-password").setValue("secret-password")
-    await wrapper.find("input[type=checkbox]").setValue(true)
     await wrapper.find("form").trigger("submit")
     await vi.waitFor(() => expect(authApi.signup).toHaveBeenCalled())
     await flushPromises()

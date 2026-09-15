@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
 
+import { API_BASE_URL } from "@/shared/config/api"
+
 const page = (name: string) =>
   readFileSync(join(process.cwd(), "src/pages", name), "utf8")
 
@@ -28,7 +30,9 @@ describe("auth pages use real backend flows", () => {
       .join("\n")
       .concat(authApiSource)
 
-    expect(source).toContain('"/api/v1"')
+    // The prefix now resolves in one place, so assert the value the client
+    // actually sends against rather than grepping the feature source.
+    expect(API_BASE_URL).toBe("/api/v1")
     expect(source).toContain('"/auth/oauth/google/authorize"')
     expect(source).toContain("verifyPasswordReset")
     expect(source).toContain("confirmPasswordReset")

@@ -1,4 +1,5 @@
 import { apiClient } from "@/shared/api"
+import { apiUrl } from "@/shared/config/api"
 import type { User } from "@/features/auth"
 
 export interface SessionItem {
@@ -43,10 +44,8 @@ export interface ProfilePayload {
   timezone?: string
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api/v1"
-
 export const workspaceApi = {
-  googleLinkUrl: () => `${API_BASE_URL}/auth/oauth/google/link/authorize`,
+  googleLinkUrl: () => apiUrl("/auth/oauth/google/link/authorize"),
   updateProfile: (payload: ProfilePayload) =>
     apiClient.patch<User>("/me", payload),
 

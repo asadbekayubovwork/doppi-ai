@@ -9,7 +9,7 @@ import {
   messageForProblem,
   retryAfterSeconds,
 } from "@/features/auth"
-import { usePasswordStrength } from "@/shared/lib"
+import { usePasswordStrength, useToast } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 
 type Step = "email" | "code" | "password" | "done"
@@ -22,58 +22,68 @@ const newPassword = ref("")
 const confirmation = ref("")
 const showPassword = ref(false)
 const loading = ref(false)
-const errorMessage = ref("")
 const resendDelay = ref(60)
 const emailAuthEnabled = import.meta.env.VITE_EMAIL_AUTH_ENABLED !== "false"
+const toast = useToast()
 const { requirements, score, level } = usePasswordStrength(newPassword)
 const passwordsMatch = computed(
   () =>
     confirmation.value.length > 0 && confirmation.value === newPassword.value
 )
 useHead({ title: "Parolni tiklash — Do'ppi.ai" })
-const showError = (error: unknown, fallback: string) => {
+const showError = (error: unknown, title: string, fallback: string) => {
   const retry = retryAfterSeconds(error)
   if (retry > 0) resendDelay.value = retry
-  errorMessage.value = messageForProblem(error, fallback, {
-    OTP_INVALID: "Kod noto'g'ri yoki muddati tugagan.",
-    RESET_TOKEN_INVALID:
-      "Tiklash sessiyasi muddati tugagan. Qaytadan boshlang.",
-    PASSWORD_POLICY: "Yangi parol backend talablariga mos emas.",
-    PASSWORD_REUSED: "Avval ishlatilmagan parol tanlang.",
-    RATE_LIMITED: "Server ko'rsatgan vaqt tugagach qayta urinib ko'ring.",
-  })
+  toast.error(
+    title,
+    messageForProblem(error, fallback, {
+      OTP_INVALID: "Kod noto'g'ri yoki muddati tugagan.",
+      RESET_TOKEN_INVALID:
+        "Tiklash sessiyasi muddati tugagan. Qaytadan boshlang.",
+      PASSWORD_POLICY: "Yangi parol backend talablariga mos emas.",
+      PASSWORD_REUSED: "Avval ishlatilmagan parol tanlang.",
+      RATE_LIMITED: "Server ko'rsatgan vaqt tugagach qayta urinib ko'ring.",
+    })
+  )
 }
 const requestCode = async () => {
-  errorMessage.value = ""
   loading.value = true
   try {
     const response = await authApi.requestPasswordReset(email.value.trim())
     challengeId.value = response.challenge_id || ""
     step.value = "code"
     resendDelay.value = 60
+    toast.success("Tasdiqlash kodi yuborildi", email.value.trim())
   } catch (error) {
-    showError(error, "Tasdiqlash kodi yuborilmadi.")
+    showError(
+      error,
+      "Tasdiqlash kodi yuborilmadi",
+      "Email manzilni tekshirib, qayta urinib ko'ring."
+    )
   } finally {
     loading.value = false
   }
 }
 const resendCode = async (channel: "email" | "telegram") => {
   if (channel !== "email") return
-  errorMessage.value = ""
   loading.value = true
   try {
     const response = await authApi.requestPasswordReset(email.value.trim())
     if (response.challenge_id) challengeId.value = response.challenge_id
     code.value = ""
     resendDelay.value = 60
+    toast.success("Yangi kod yuborildi", email.value.trim())
   } catch (error) {
-    showError(error, "Yangi tasdiqlash kodi yuborilmadi.")
+    showError(
+      error,
+      "Yangi tasdiqlash kodi yuborilmadi",
+      "Biroz kutib, qayta urinib ko'ring."
+    )
   } finally {
     loading.value = false
   }
 }
 const verifyCode = async () => {
-  errorMessage.value = ""
   loading.value = true
   try {
     const response = await authApi.verifyPasswordReset({
@@ -84,16 +94,18 @@ const verifyCode = async () => {
     code.value = ""
     step.value = "password"
   } catch (error) {
-    showError(error, "Tiklash kodi tasdiqlanmadi.")
+    showError(error, "Tiklash kodi tasdiqlanmadi", "Kodni qayta kiriting.")
   } finally {
     loading.value = false
   }
 }
 
 const updatePassword = async () => {
-  errorMessage.value = ""
   if (!passwordsMatch.value) {
-    errorMessage.value = "Parollar bir xil emas."
+    toast.warning(
+      "Parollar mos emas",
+      "Ikkala maydonga bir xil parol kiriting."
+    )
     return
   }
   loading.value = true
@@ -104,8 +116,16 @@ const updatePassword = async () => {
     })
     resetToken.value = ""
     step.value = "done"
+    toast.success(
+      "Parol yangilandi",
+      "Endi yangi parol bilan kirishingiz mumkin."
+    )
   } catch (error) {
-    showError(error, "Parolni yangilab bo'lmadi.")
+    showError(
+      error,
+      "Parolni yangilab bo'lmadi",
+      "Yangi parolni tekshirib, qayta urinib ko'ring."
+    )
   } finally {
     loading.value = false
   }
@@ -114,9 +134,6 @@ const updatePassword = async () => {
 
 <template>
   <AuthShell
-    switch-to="/register"
-    switch-label="Ro'yxatdan o'tish"
-    switch-text="Hisobingiz yo'qmi?"
     ><CAuthFeatureSoon
       v-if="!emailAuthEnabled"
       title="Parolni tiklash"
@@ -148,13 +165,6 @@ const updatePassword = async () => {
             class="h-11 w-full rounded-[10px] border border-[#D6D6D1] px-3.5 text-base outline-none focus:border-[#5B4BE8]"
           />
         </div>
-        <p
-          v-if="errorMessage"
-          class="rounded-[10px] border border-[#F3C5C5] bg-[#FFF0F0] px-3.5 py-2.5 text-sm text-[#C42B2B]"
-          role="alert"
-        >
-          {{ errorMessage }}
-        </p>
         <button
           type="submit"
           :disabled="loading"
@@ -180,7 +190,6 @@ const updatePassword = async () => {
       title="Tiklash kodini kiriting"
       :description="`6 xonali kodni emailingizga yubordik: ${email}.`"
       submit-label="Kodni tasdiqlash"
-      :error-message="errorMessage"
       :loading="loading"
       :resend-delay="resendDelay"
       telegram-variant="none"
@@ -263,13 +272,6 @@ const updatePassword = async () => {
             Parollar mos keladi
           </p>
         </div>
-        <p
-          v-if="errorMessage"
-          class="rounded-[10px] border border-[#F3C5C5] bg-[#FFF0F0] px-3.5 py-2.5 text-sm text-[#C42B2B]"
-          role="alert"
-        >
-          {{ errorMessage }}
-        </p>
         <button
           type="submit"
           :disabled="loading"

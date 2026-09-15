@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue"
+import { ref } from "vue"
 import { usePasswordStrength } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 import type { SignupPayload } from "../api/authApi"
@@ -7,9 +7,8 @@ import type { SignupPayload } from "../api/authApi"
 const props = withDefaults(
   defineProps<{
     loading?: boolean
-    errorMessage?: string
   }>(),
-  { loading: false, errorMessage: "" }
+  { loading: false }
 )
 
 const emit = defineEmits<{
@@ -21,18 +20,10 @@ const lastName = ref("")
 const email = ref("")
 const password = ref("")
 const businessName = ref("")
-const acceptedTerms = ref(false)
 const showPassword = ref(false)
-const termsError = ref("")
 const { requirements, score, level } = usePasswordStrength(password)
-const displayError = computed(() => props.errorMessage || termsError.value)
 
 const submit = () => {
-  termsError.value = ""
-  if (!acceptedTerms.value) {
-    termsError.value = "Davom etish uchun foydalanish shartlarini qabul qiling."
-    return
-  }
   emit("submit", {
     email: email.value.trim(),
     password: password.value,
@@ -84,7 +75,6 @@ const submit = () => {
         type="email"
         required
         autocomplete="email"
-        placeholder="siz@kompaniya.uz"
         class="h-11 w-full rounded-[10px] border border-[#D6D6D1] px-3.5 text-base outline-none focus:border-[#5B4BE8]"
       />
     </div>
@@ -99,7 +89,6 @@ const submit = () => {
         required
         minlength="2"
         autocomplete="organization"
-        placeholder="Kompaniyangiz"
         class="h-11 w-full rounded-[10px] border border-[#D6D6D1] px-3.5 text-base outline-none focus:border-[#5B4BE8]"
       />
     </div>
@@ -121,7 +110,7 @@ const submit = () => {
         />
         <button
           type="button"
-          class="absolute right-2 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-lg text-[#6A6A74] focus:outline-none focus:ring-4 focus:ring-[#5B4BE8]/15"
+          class="absolute right-2 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-lg text-[#6A6A74] outline-none"
           :aria-label="
             showPassword ? 'Parolni yashirish' : 'Parolni ko\'rsatish'
           "
@@ -145,26 +134,6 @@ const submit = () => {
         <li v-for="item in requirements" :key="item.label">{{ item.label }}</li>
       </ul>
     </div>
-
-    <label
-      class="flex min-h-11 items-center gap-3 text-[13.5px] text-[#6A6A74]"
-    >
-      <input
-        v-model="acceptedTerms"
-        type="checkbox"
-        required
-        class="h-4 w-4 accent-[#5B4BE8]"
-      />
-      Shartlarni qabul qilaman
-    </label>
-
-    <p
-      v-if="displayError"
-      class="rounded-[10px] border border-[#F3C5C5] bg-[#FFF0F0] px-3.5 py-2.5 text-sm text-[#C42B2B]"
-      role="alert"
-    >
-      {{ displayError }}
-    </p>
 
     <button
       type="submit"
