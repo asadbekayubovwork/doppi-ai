@@ -108,5 +108,28 @@ onUnmounted(stop)
         </footer>
       </blockquote>
     </Transition>
+
+    <!-- Parked top-right, inside the padding the quote reserves with `pr-16`. -->
+    <div
+      class="absolute right-[18px] top-[18px] flex items-center gap-1.5"
+      role="tablist"
+      aria-label="Mijoz fikrlari"
+    >
+      <button
+        v-for="(item, dot) in testimonials"
+        :key="item.name"
+        type="button"
+        role="tab"
+        :aria-selected="dot === index"
+        :aria-label="item.name"
+        class="h-1.5 rounded-full transition-all duration-300"
+        :class="
+          dot === index
+            ? 'w-4 bg-[#D3F26A]'
+            : 'w-1.5 bg-white/25 hover:bg-white/45'
+        "
+        @click="show(dot)"
+      />
+    </div>
   </figure>
 </template>
