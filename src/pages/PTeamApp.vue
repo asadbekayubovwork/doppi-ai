@@ -3,14 +3,15 @@ import { computed, onMounted, ref, watch } from "vue"
 import { useHead } from "@unhead/vue"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { workspaceApi, type Membership } from "@/features/workspace"
+import { useToast } from "@/shared/lib"
 
 const auth = useAuthStore()
+const toast = useToast()
 const members = ref<Membership[]>([])
 const email = ref("")
 const role = ref<Membership["role"]>("member")
 const invitationLink = ref("")
 const loading = ref(false)
-const error = ref("")
 const businessId = computed(() => auth.activeBusinessId)
 const canManage = computed(() =>
   ["owner", "admin"].includes(auth.activeBusiness?.role || "")
@@ -18,18 +19,17 @@ const canManage = computed(() =>
 
 useHead({ title: "Jamoa — Do'ppi AI" })
 
-const fail = (value: unknown, fallback: string) => {
-  error.value = messageForProblem(value, fallback)
+const fail = (value: unknown, title: string, fallback: string) => {
+  toast.error(title, messageForProblem(value, fallback))
 }
 
 const loadMembers = async () => {
   if (!businessId.value) return
   loading.value = true
-  error.value = ""
   try {
     members.value = await workspaceApi.listMembers(businessId.value)
   } catch (value) {
-    fail(value, "Jamoani yuklab bo'lmadi.")
+    fail(value, "Jamoani yuklab bo'lmadi", "Sahifani yangilang.")
   } finally {
     loading.value = false
   }
@@ -38,7 +38,6 @@ const loadMembers = async () => {
 const invite = async () => {
   if (!businessId.value) return
   loading.value = true
-  error.value = ""
   invitationLink.value = ""
   try {
     const invitation = await workspaceApi.inviteMember(businessId.value, {
@@ -46,9 +45,10 @@ const invite = async () => {
       role: role.value,
     })
     invitationLink.value = `${window.location.origin}/invitations/${invitation.token}`
+    toast.success("Taklif yaratildi", email.value.trim())
     email.value = ""
   } catch (value) {
-    fail(value, "Taklif yaratib bo'lmadi.")
+    fail(value, "Taklif yaratib bo'lmadi", "Email va rolni tekshirib ko'ring.")
   } finally {
     loading.value = false
   }
@@ -65,8 +65,9 @@ const updateRole = async (member: Membership, nextRole: Membership["role"]) => {
     members.value = members.value.map((item) =>
       item.user_id === updated.user_id ? updated : item
     )
+    toast.success("Rol yangilandi")
   } catch (value) {
-    fail(value, "Rolni yangilab bo'lmadi.")
+    fail(value, "Rolni yangilab bo'lmadi", "Qayta urinib ko'ring.")
     await loadMembers()
   }
 }
@@ -82,13 +83,20 @@ const remove = async (member: Membership) => {
     members.value = members.value.filter(
       (item) => item.user_id !== member.user_id
     )
+    toast.success("A'zo jamoadan olib tashlandi")
   } catch (value) {
-    fail(value, "A'zoni olib tashlab bo'lmadi.")
+    fail(value, "A'zoni olib tashlab bo'lmadi", "Qayta urinib ko'ring.")
   }
 }
 
-const copyInvitation = async () =>
-  navigator.clipboard.writeText(invitationLink.value)
+const copyInvitation = async () => {
+  try {
+    await navigator.clipboard.writeText(invitationLink.value)
+    toast.success("Taklif havolasi nusxalandi")
+  } catch {
+    toast.error("Nusxalab bo'lmadi", "Havolani qo'lda belgilab nusxalang.")
+  }
+}
 
 watch(businessId, loadMembers)
 onMounted(loadMembers)
@@ -155,13 +163,6 @@ onMounted(loadMembers)
       </div>
     </section>
 
-    <p
-      v-if="error"
-      class="rounded-xl bg-[#FFF0F0] px-4 py-3 text-sm text-[#C42B2B]"
-      role="alert"
-    >
-      {{ error }}
-    </p>
     <section
       class="overflow-hidden rounded-2xl border border-[#E5E5E1] bg-white"
     >

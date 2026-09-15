@@ -288,11 +288,28 @@ pnpm preview
 
 ### Environment Variables
 
-Create a `.env` file in the root directory with the necessary environment variables:
+The frontend talks to the Do'ppi control plane, whose contract is published as
+Swagger at <https://doppiai.uz/api/docs> (raw spec: `/api/openapi.json`). Every
+documented path is versioned under `/api/v1`, and `src/shared/config/api.ts` is
+the single place that resolves it — features call bare paths such as
+`apiClient.post("/auth/login")`.
+
+Nothing has to be configured to run locally. `pnpm dev` proxies `/api` to the
+API origin, which matters because the backend allowlists one browser origin and
+issues HttpOnly `__Host-` session cookies: a direct call from `localhost` fails
+preflight with `400 Disallowed CORS origin` and could not keep the cookie.
+Proxying keeps the browser same-origin in development, exactly as in production.
+
+Override any of these in a `.env` file:
 
 ```env
+# Prefix every request is resolved against. A relative value keeps the API
+# same-origin; an absolute one switches fetch to credentials: "include" and
+# needs that origin allowlisted by the backend.
 VITE_API_BASE_URL=/api/v1
-VITE_APP_TITLE="Vue 3 FSD Boilerplate"
+
+# Backend the dev server proxies /api to (development only).
+VITE_API_PROXY_TARGET=https://doppiai.uz
 ```
 
 ## 🤝 Contributing

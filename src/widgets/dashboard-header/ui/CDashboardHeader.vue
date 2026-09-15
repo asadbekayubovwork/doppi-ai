@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue"
+import { computed, onMounted, ref, watch } from "vue"
 import { useRoute } from "vue-router"
 import { useAuthStore, messageForProblem } from "@/features/auth"
+import { useToast } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 import type { Business } from "../model/types"
 import CBusinessSwitcher from "./CBusinessSwitcher.vue"
@@ -12,8 +13,8 @@ defineEmits<{ openNav: [] }>()
 
 const route = useRoute()
 const auth = useAuthStore()
+const toast = useToast()
 const isCreateOpen = ref(false)
-const businessError = ref("")
 const creatingBusiness = ref(false)
 
 const initialsFor = (name: string) =>
@@ -58,11 +59,13 @@ onMounted(() => {
 
 const selectBusiness = async (id: string) => {
   if (!id || id === auth.activeBusinessId) return
-  businessError.value = ""
   try {
     await auth.selectBusiness(id)
   } catch (error) {
-    businessError.value = messageForProblem(error, "Biznesni tanlab bo'lmadi.")
+    toast.error(
+      "Biznesni tanlab bo'lmadi",
+      messageForProblem(error, "Qayta urinib ko'ring.")
+    )
   }
 }
 
@@ -71,17 +74,34 @@ const createBusiness = async (payload: {
   default_language: string
   billing_region: string
 }) => {
-  businessError.value = ""
   creatingBusiness.value = true
   try {
     await auth.createBusiness(payload)
     isCreateOpen.value = false
+    toast.success("Biznes yaratildi", payload.name)
   } catch (error) {
-    businessError.value = messageForProblem(error, "Biznes yaratib bo'lmadi.")
+    toast.error(
+      "Biznes yaratib bo'lmadi",
+      messageForProblem(error, "Ma'lumotlarni tekshirib ko'ring.")
+    )
   } finally {
     creatingBusiness.value = false
   }
 }
+
+// The store loads the business list on its own (bootstrap, session changes), so
+// a failure there is reported from here rather than from each caller.
+watch(
+  () => auth.businessError,
+  (failure) => {
+    if (!failure) return
+    toast.error(
+      "Bizneslar ro'yxatini yuklab bo'lmadi",
+      messageForProblem(failure, "Qayta urinib ko'ring."),
+      6000
+    )
+  }
+)
 </script>
 
 <template>
@@ -142,24 +162,9 @@ const createBusiness = async (payload: {
         :notifications="user.notifications"
       />
     </div>
-    <p
-      v-if="businessError || auth.businessError"
-      class="basis-full text-right text-xs text-[#C42B2B]"
-      role="alert"
-    >
-      {{ businessError || "Bizneslar ro'yxatini yuklab bo'lmadi." }}
-      <button
-        v-if="auth.businessError"
-        class="ml-2 underline"
-        @click="auth.loadBusinesses()"
-      >
-        Qayta urinish
-      </button>
-    </p>
     <CCreateBusinessModal
       v-model:open="isCreateOpen"
       :loading="creatingBusiness"
-      :error-message="businessError"
       @create="createBusiness"
     />
   </header>

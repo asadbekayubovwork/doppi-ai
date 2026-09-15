@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import { useHead } from "@unhead/vue"
 import { CDoppiMark, CIcon } from "@/shared/ui"
+import CAuthTestimonials from "./CAuthTestimonials.vue"
 
 withDefaults(
   defineProps<{
-    switchTo?: string
-    switchLabel?: string
-    switchText?: string
     title?: string
     description?: string
   }>(),
   {
-    switchTo: "/login",
-    switchLabel: "Kirish",
-    switchText: "Hisobingiz bormi?",
     title: "Do'ppi.ai",
     description: "Do'ppi.ai autentifikatsiyasi",
   }
@@ -52,7 +47,7 @@ const highlights = [
         class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(91,75,232,.18),transparent_45%)]"
         aria-hidden="true"
       />
-      <div class="relative flex items-center justify-between gap-4">
+      <div class="relative flex items-center gap-4">
         <RouterLink
           to="/"
           class="inline-flex items-center gap-3"
@@ -66,11 +61,6 @@ const highlights = [
             >Do'ppi AI</span
           >
         </RouterLink>
-        <RouterLink
-          to="/"
-          class="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1.5 text-xs font-medium text-white/60 hover:text-white"
-          >doppi.ai <CIcon name="arrow-up-right" class="h-3.5 w-3.5"
-        /></RouterLink>
       </div>
 
       <div class="relative flex flex-1 flex-col justify-center py-12">
@@ -106,41 +96,14 @@ const highlights = [
         </ul>
       </div>
 
-      <figure
-        class="relative rounded-[14px] border border-white/[0.08] bg-white/[0.03] px-[18px] py-3.5"
-      >
-        <blockquote class="text-[13.5px] leading-[1.6] text-white/85">
-          &ldquo;Uchta vendorni Do'ppi bilan almashtirdik. Qo'llab-quvvatlash
-          liniyamiz endi 4 soniyada, o'zbek tilida javob beradi.&rdquo;
-        </blockquote>
-        <figcaption class="mt-4 flex items-center justify-between gap-4">
-          <span class="flex items-center gap-3"
-            ><span
-              class="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-[#5B4BE8]/25 text-xs font-semibold text-[#B6ABFF]"
-              aria-hidden="true"
-              >DS</span
-            ><span
-              ><span class="block text-[13.5px] font-semibold text-white"
-                >Dilnoza Saidova</span
-              ><span class="block text-xs text-white/40"
-                >COO, Silk Road Logistics</span
-              ></span
-            ></span
-          ><span
-            class="flex gap-0.5 text-[#D3F26A]"
-            role="img"
-            aria-label="5 balldan 5"
-            ><CIcon v-for="star in 5" :key="star" name="star" class="h-3 w-3"
-          /></span>
-        </figcaption>
-      </figure>
+      <CAuthTestimonials />
     </aside>
 
     <section class="flex min-w-0 flex-1 flex-col px-8 py-[26px] sm:px-8">
-      <header class="flex items-center justify-between gap-4">
+      <header class="flex items-center gap-4 lg:hidden">
         <RouterLink
           to="/"
-          class="inline-flex items-center gap-3 lg:invisible"
+          class="inline-flex items-center gap-3"
           aria-label="Do'ppi AI bosh sahifasi"
           ><span
             class="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#5B4BE8]"
@@ -149,16 +112,6 @@ const highlights = [
             >Do'ppi AI</span
           ></RouterLink
         >
-        <div class="flex items-center gap-4">
-          <span class="hidden text-[13.5px] text-[#6A6A74] sm:inline">{{
-            switchText
-          }}</span
-          ><RouterLink
-            :to="switchTo"
-            class="inline-flex min-h-11 items-center rounded-[10px] border border-[#D6D6D1] bg-white px-4 text-[13.5px] font-semibold text-[#15151B] hover:bg-[#FAFAF9]"
-            >{{ switchLabel }}</RouterLink
-          >
-        </div>
       </header>
       <div class="flex flex-1 items-center justify-center py-6 sm:py-10">
         <div class="w-full max-w-[400px]"><slot /></div>

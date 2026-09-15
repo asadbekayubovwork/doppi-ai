@@ -10,6 +10,7 @@
       </div>
     </Transition>
   </RouterView>
+  <CToaster />
 </template>
 
 <script setup lang="ts">
@@ -17,6 +18,7 @@ import { RouterView } from "vue-router"
 import { computed } from "vue"
 import { useRoute } from "vue-router"
 import { useLenis } from "@/shared/lib"
+import { CToaster } from "@/shared/ui"
 
 import { DashboardLayout, DefaultLayout, EmptyLayout } from "./layouts"
 

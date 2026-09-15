@@ -40,15 +40,15 @@ const groupClass = computed(() =>
 
 const boxClass = (index: number) => {
   if (!isLight.value) {
-    return "h-12 w-10 text-lg border-white/10 bg-black/20 text-white focus:border-[#8F6BFF] focus:ring-[#6633EE]/15 sm:h-14 sm:w-12"
+    return "h-12 w-10 text-lg border-white/10 bg-black/20 text-white focus:border-[#8F6BFF] sm:h-14 sm:w-12"
   }
 
   if (props.invalid) {
-    return "h-[62px] w-[62px] text-xl border-[#C42B2B] bg-[#FFF0F0] text-[#C42B2B] focus:border-[#C42B2B] focus:ring-[#C42B2B]/15"
+    return "h-[62px] w-[62px] text-xl border-[#C42B2B] bg-[#FFF0F0] text-[#C42B2B] focus:border-[#C42B2B]"
   }
 
   return [
-    "h-[62px] w-[62px] rounded-[12px] text-xl border-[#D6D6D1] text-[#15151B] focus:border-[#5B4BE8] focus:ring-[#5B4BE8]/15",
+    "h-[62px] w-[62px] rounded-[12px] text-xl border-[#D6D6D1] text-[#15151B] focus:border-[#5B4BE8]",
     digits.value[index] ? "bg-[#FAFAF9]" : "bg-white",
   ]
 }
@@ -127,7 +127,7 @@ onMounted(() =>
       :disabled="disabled"
       :aria-label="`${index + 1}-raqam`"
       :class="[
-        'rounded-xl border text-center font-semibold outline-none transition focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60',
+        'rounded-xl border text-center font-semibold outline-none transition disabled:cursor-not-allowed disabled:opacity-60',
         boxClass(index),
       ]"
       @input="handleInput(index, $event)"

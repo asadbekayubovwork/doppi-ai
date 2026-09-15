@@ -9,7 +9,6 @@ const props = withDefaults(
     title: string
     description: string
     submitLabel: string
-    errorMessage?: string
     loading?: boolean
     step?: number
     steps?: number
@@ -27,7 +26,6 @@ const props = withDefaults(
     telegramVariant?: "button" | "link" | "none"
   }>(),
   {
-    errorMessage: "",
     loading: false,
     step: 2,
     steps: 2,
@@ -155,15 +153,6 @@ const requestCode = (channel: "email" | "telegram") => {
         @update:model-value="emit('update:modelValue', $event)"
         @complete="emit('submit')"
       />
-
-      <p
-        v-if="props.errorMessage"
-        class="mt-4 flex items-start gap-2 rounded-xl bg-[#FFF0F0] px-3.5 py-2.5 text-sm text-[#C42B2B]"
-        role="alert"
-      >
-        <CIcon name="triangle-alert" class="mt-0.5 h-4 w-4 shrink-0" />
-        <span>{{ props.errorMessage }}</span>
-      </p>
 
       <div
         v-if="props.resendEnabled"

@@ -5,7 +5,6 @@ import { CIcon } from "@/shared/ui"
 const props = defineProps<{
   open: boolean
   loading?: boolean
-  errorMessage?: string
 }>()
 const emit = defineEmits<{
   "update:open": [value: boolean]
@@ -96,7 +95,7 @@ const submit = () => {
                 maxlength="160"
                 autofocus
                 placeholder="Karimov Group"
-                class="h-12 rounded-xl border border-[#E1E1E9] px-4 text-[14.5px] outline-none focus:border-[#6633EE] focus:ring-4 focus:ring-[#6633EE]/12"
+                class="h-12 rounded-xl border border-[#E1E1E9] px-4 text-[14.5px] outline-none focus:border-[#6633EE]"
             /></label>
             <div class="grid gap-4 sm:grid-cols-2">
               <label
@@ -123,13 +122,6 @@ const submit = () => {
                 </select></label
               >
             </div>
-            <p
-              v-if="errorMessage"
-              class="rounded-xl bg-[#FFF0F0] px-3.5 py-3 text-sm text-[#C42B2B]"
-              role="alert"
-            >
-              {{ errorMessage }}
-            </p>
             <p
               class="rounded-xl bg-[#F3F0FE] px-3.5 py-3 text-[13.5px] leading-5 text-[#4B21C4]"
             >

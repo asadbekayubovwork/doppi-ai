@@ -3,15 +3,16 @@ import { computed, onMounted, ref, watch } from "vue"
 import { useHead } from "@unhead/vue"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { workspaceApi, type ApiKeyItem } from "@/features/workspace"
+import { useToast } from "@/shared/lib"
 
 const auth = useAuthStore()
+const toast = useToast()
 const keys = ref<ApiKeyItem[]>([])
 const name = ref("")
 const readScope = ref(true)
 const writeScope = ref(false)
 const oneTimeSecret = ref("")
 const loading = ref(false)
-const error = ref("")
 const businessId = computed(() => auth.activeBusinessId)
 const canManage = computed(() =>
   ["owner", "admin"].includes(auth.activeBusiness?.role || "")
@@ -19,21 +20,23 @@ const canManage = computed(() =>
 
 useHead({ title: "API kalitlar — Do'ppi AI" })
 
-const fail = (value: unknown, fallback: string) => {
-  error.value = messageForProblem(value, fallback, {
-    STEP_UP_REQUIRED:
-      "Xavfsizlik uchun Google orqali qayta kirib, amalni takrorlang.",
-  })
+const fail = (value: unknown, title: string, fallback: string) => {
+  toast.error(
+    title,
+    messageForProblem(value, fallback, {
+      STEP_UP_REQUIRED:
+        "Xavfsizlik uchun Google orqali qayta kirib, amalni takrorlang.",
+    })
+  )
 }
 
 const loadKeys = async () => {
   if (!businessId.value || !canManage.value) return
   loading.value = true
-  error.value = ""
   try {
     keys.value = await workspaceApi.listApiKeys(businessId.value)
   } catch (value) {
-    fail(value, "API kalitlarni yuklab bo'lmadi.")
+    fail(value, "API kalitlarni yuklab bo'lmadi", "Sahifani yangilang.")
   } finally {
     loading.value = false
   }
@@ -47,7 +50,6 @@ const scopes = () =>
 const createKey = async () => {
   if (!businessId.value || !scopes().length) return
   loading.value = true
-  error.value = ""
   oneTimeSecret.value = ""
   try {
     const created = await workspaceApi.createApiKey(businessId.value, {
@@ -57,8 +59,13 @@ const createKey = async () => {
     oneTimeSecret.value = created.secret || ""
     keys.value = [created, ...keys.value]
     name.value = ""
+    toast.success("API kalit yaratildi", "Secretni hoziroq nusxalab oling.")
   } catch (value) {
-    fail(value, "API kalit yaratib bo'lmadi.")
+    fail(
+      value,
+      "API kalit yaratib bo'lmadi",
+      "Ma'lumotlarni tekshirib ko'ring."
+    )
   } finally {
     loading.value = false
   }
@@ -74,8 +81,9 @@ const rotate = async (item: ApiKeyItem) => {
     const created = await workspaceApi.rotateApiKey(businessId.value, item.id)
     oneTimeSecret.value = created.secret || ""
     await loadKeys()
+    toast.success("API kalit almashtirildi", "Eski kalit bekor qilindi.")
   } catch (value) {
-    fail(value, "API kalitni almashtirib bo'lmadi.")
+    fail(value, "API kalitni almashtirib bo'lmadi", "Qayta urinib ko'ring.")
   }
 }
 
@@ -85,13 +93,20 @@ const revoke = async (item: ApiKeyItem) => {
   try {
     await workspaceApi.revokeApiKey(businessId.value, item.id)
     await loadKeys()
+    toast.success("API kalit bekor qilindi", item.name)
   } catch (value) {
-    fail(value, "API kalitni bekor qilib bo'lmadi.")
+    fail(value, "API kalitni bekor qilib bo'lmadi", "Qayta urinib ko'ring.")
   }
 }
 
-const copySecret = async () =>
-  navigator.clipboard.writeText(oneTimeSecret.value)
+const copySecret = async () => {
+  try {
+    await navigator.clipboard.writeText(oneTimeSecret.value)
+    toast.success("Secret nusxalandi")
+  } catch {
+    toast.error("Nusxalab bo'lmadi", "Matnni qo'lda belgilab nusxalang.")
+  }
+}
 
 watch([businessId, canManage], loadKeys)
 onMounted(loadKeys)
@@ -156,13 +171,6 @@ onMounted(loadKeys)
       </div>
     </section>
 
-    <p
-      v-if="error"
-      class="rounded-xl bg-[#FFF0F0] px-4 py-3 text-sm text-[#C42B2B]"
-      role="alert"
-    >
-      {{ error }}
-    </p>
     <section
       v-if="canManage"
       class="overflow-hidden rounded-2xl border border-[#E5E5E1] bg-white"
