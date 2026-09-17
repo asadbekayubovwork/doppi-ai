@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from "vue"
 import { useRoute } from "vue-router"
 import { useAuthStore, messageForProblem } from "@/features/auth"
-import { useToast } from "@/shared/lib"
+import { useClaimedPageHeading, useToast } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 import type { Business } from "../model/types"
 import CBusinessSwitcher from "./CBusinessSwitcher.vue"
@@ -33,8 +33,14 @@ const toViewBusiness = (
   plan: business.role || "Workspace",
 })
 
-const title = computed(() => route.meta.title || "Ish maydoni")
-const subtitle = computed(() => route.meta.subtitle)
+// A page can replace the route's static heading with one built from its data.
+const claimedHeading = useClaimedPageHeading()
+const title = computed(
+  () => claimedHeading.value?.title || route.meta.title || "Ish maydoni"
+)
+const subtitle = computed(
+  () => claimedHeading.value?.subtitle || route.meta.subtitle
+)
 const businesses = computed(() => auth.businesses.map(toViewBusiness))
 const activeBusinessId = computed({
   get: () => auth.activeBusinessId || businesses.value[0]?.id || "",
@@ -106,7 +112,7 @@ watch(
 
 <template>
   <header
-    class="sticky top-0 z-20 flex min-h-16 flex-wrap items-center gap-x-4 gap-y-3 border-b border-[#E5E5E1] bg-white px-6 py-3"
+    class="relative z-20 flex min-h-16 flex-wrap items-center gap-x-4 gap-y-3 border-b border-[#E5E5E1] bg-white px-6 py-3"
   >
     <button
       type="button"
