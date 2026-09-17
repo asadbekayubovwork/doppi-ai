@@ -1,17 +1,21 @@
 <script setup lang="ts">
+import logoUrl from "../assets/brand/logo.svg"
 import CDoppiMark from "./CDoppiMark.vue"
 
 withDefaults(defineProps<{ withWordmark?: boolean }>(), { withWordmark: true })
+
+// logo.svg draws its wordmark in white, so the full logo belongs on dark
+// surfaces. On a light one, pair CDoppiMark with dark text instead.
 </script>
 
 <template>
-  <span class="inline-flex items-center gap-2.5">
-    <CDoppiMark class="h-7 w-9 text-[#8F6BFF] shrink-0" />
-    <span
-      v-if="withWordmark"
-      class="text-lg font-bold tracking-tight text-white whitespace-nowrap"
-    >
-      Do'ppi<span class="text-[#8F6BFF]">.ai</span>
-    </span>
-  </span>
+  <img
+    v-if="withWordmark"
+    :src="logoUrl"
+    alt="Do'ppi AI"
+    width="568"
+    height="134"
+    class="h-8 w-auto shrink-0"
+  />
+  <CDoppiMark v-else class="h-8 w-8 shrink-0 text-white" />
 </template>

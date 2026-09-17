@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useHead } from "@unhead/vue"
-import { CDoppiMark, CIcon } from "@/shared/ui"
+import { CDoppiMark, CIcon, CLogo } from "@/shared/ui"
 import CAuthTestimonials from "./CAuthTestimonials.vue"
 
 withDefaults(
@@ -50,16 +50,10 @@ const highlights = [
       <div class="relative flex items-center gap-4">
         <RouterLink
           to="/"
-          class="inline-flex items-center gap-3"
+          class="inline-flex items-center"
           aria-label="Do'ppi AI bosh sahifasi"
         >
-          <span
-            class="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#5B4BE8]"
-            ><CDoppiMark class="h-5 w-6 text-white"
-          /></span>
-          <span class="text-base font-semibold tracking-tight text-white"
-            >Do'ppi AI</span
-          >
+          <CLogo />
         </RouterLink>
       </div>
 
@@ -105,11 +99,13 @@ const highlights = [
           to="/"
           class="inline-flex items-center gap-3"
           aria-label="Do'ppi AI bosh sahifasi"
-          ><span
-            class="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#5B4BE8]"
-            ><CDoppiMark class="h-5 w-6 text-white" /></span
+          ><!-- logo.svg's wordmark is white, so on this light header the mark
+               sits on a dark tile beside a dark wordmark in the logo's colours. -->
+          <span
+            class="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#121216]"
+            ><CDoppiMark class="h-5 w-5 text-white" /></span
           ><span class="text-base font-semibold tracking-tight"
-            >Do'ppi AI</span
+            >Do'ppi <span class="text-[#7A48FF]">AI</span></span
           ></RouterLink
         >
       </header>

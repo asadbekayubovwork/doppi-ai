@@ -17,7 +17,13 @@ const router = createRouter({
   },
 })
 
+// Dev-only escape hatch for UI work while the backend is unavailable.
+const authBypass =
+  import.meta.env.DEV && import.meta.env.VITE_AUTH_BYPASS === "true"
+
 router.beforeEach(async (to) => {
+  if (authBypass && to.meta.requiresAuth === true) return true
+
   const auth = useAuthStore(pinia)
   const needsSession = to.meta.requiresAuth === true || to.meta.guestOnly === true
 

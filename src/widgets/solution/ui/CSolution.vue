@@ -119,7 +119,7 @@ const spokeClass = (i: number) => {
             aria-hidden="true"
           />
           <div class="relative z-10 flex flex-col items-center gap-1.5">
-            <CDoppiMark class="h-9 w-12 text-[#8F6BFF]" />
+            <CDoppiMark class="h-10 w-10 text-[#8F6BFF]" />
             <span class="text-sm font-bold tracking-tight text-white">
               {{ $t("solution.centerLabel") }}
             </span>
@@ -134,7 +134,7 @@ const spokeClass = (i: number) => {
           data-aos="fade-up"
           data-aos-duration="800"
         >
-          <CDoppiMark class="h-6 w-8 shrink-0 text-[#8F6BFF]" />
+          <CDoppiMark class="h-7 w-7 shrink-0 text-[#8F6BFF]" />
           <span class="text-sm font-bold tracking-tight text-white">
             {{ $t("solution.centerLabel") }}
           </span>

@@ -121,10 +121,33 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Universal RAG agent",
+      title: "Universal RAG Agent",
       subtitle: "Bilim bazalari va qidiruv sifati",
     },
     component: () => import("./PRagAgent.vue"),
+  },
+  {
+    path: "/app/rag/create",
+    name: "RagAgentCreate",
+    meta: {
+      layout: "DashboardLayout",
+      requiresAuth: true,
+      title: "Universal RAG Agent",
+      subtitle: "Agent sozlamalari",
+    },
+    component: () => import("./PRagAgentCreate.vue"),
+  },
+  {
+    path: "/app/rag/conversations/:chatId",
+    name: "RagConversation",
+    props: true,
+    meta: {
+      layout: "DashboardLayout",
+      requiresAuth: true,
+      title: "Universal RAG Agent",
+      subtitle: "Suhbatlar",
+    },
+    component: () => import("./PRagConversation.vue"),
   },
   {
     path: "/app/voice",

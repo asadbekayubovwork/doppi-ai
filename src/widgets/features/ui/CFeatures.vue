@@ -39,7 +39,7 @@ const spanFor = (index: number) => (index === 0 ? "lg:col-span-2 lg:row-span-2" 
           >
             <CDoppiMark
               v-if="i === 0"
-              class="pointer-events-none absolute -bottom-8 -right-4 hidden h-44 w-56 text-[#6633EE]/10 lg:block"
+              class="pointer-events-none absolute -bottom-8 -right-4 hidden h-48 w-48 text-[#6633EE]/10 lg:block"
             />
 
             <div class="relative z-10">
