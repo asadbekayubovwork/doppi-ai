@@ -1,7 +1,10 @@
+import { readFileSync } from "node:fs"
+import { dirname, join } from "node:path"
+import { fileURLToPath } from "node:url"
 import { describe, it, expect } from "vitest"
 import { messages } from "../src/shared/config/i18n"
-import { SEO_PAGES, SERVICE_PATHS } from "../src/shared/config/seoPages"
-import { SITE_URL } from "../src/shared/config/site"
+import { SEO_PAGES, SERVICE_PATHS, ogImageFor } from "../src/shared/config/seoPages"
+import { OG_IMAGE, SITE_URL } from "../src/shared/config/site"
 import {
   message,
   outputFile,
@@ -42,6 +45,27 @@ describe("build/seo", () => {
       // doppi.ai is an unrelated company; nothing may point search engines there.
       expect(html).not.toMatch(/https:\/\/doppi\.ai/)
     }
+  })
+
+  it("gives every page a link-preview image that exists at the advertised size", () => {
+    for (const page of SEO_PAGES) {
+      const html = renderPage(template, uz, page)
+      const src = ogImageFor(page)
+
+      expect(html).toContain(`<meta property="og:image" content="${SITE_URL}${src}"`)
+      expect(html).toContain('<meta name="twitter:card" content="summary_large_image"')
+
+      // A missing file or a size that disagrees with og:image:width/height is
+      // what makes Telegram fall back to a preview with no picture.
+      // Vite rewrites `new URL(…, import.meta.url)` as an asset import, so build
+      // the path by hand.
+      const png = readFileSync(join(dirname(fileURLToPath(import.meta.url)), "../public", src))
+      expect([png.readUInt32BE(16), png.readUInt32BE(20)], src).toEqual([
+        OG_IMAGE.width,
+        OG_IMAGE.height,
+      ])
+    }
+    expect(ogImageFor(pageAt(SERVICE_PATHS.voice))).toBe("/og/voice.png")
   })
 
   it("publishes the brand, the services and their FAQs as structured data", () => {

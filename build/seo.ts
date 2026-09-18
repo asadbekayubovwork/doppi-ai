@@ -2,8 +2,9 @@ import { readFile, writeFile } from "node:fs/promises"
 import { join, resolve } from "node:path"
 import type { Plugin } from "vite"
 import { defaultLocale, messages } from "../src/shared/config/i18n"
-import { SEO_PAGES, type SeoPage } from "../src/shared/config/seoPages"
+import { SEO_PAGES, ogImageFor, type SeoPage } from "../src/shared/config/seoPages"
 import {
+  OG_IMAGE,
   SITE_ALTERNATE_NAMES,
   SITE_LOGO_PATH,
   SITE_NAME,
@@ -86,6 +87,7 @@ const breadcrumb = (tree: Messages, page: SeoPage, name: string) => ({
 export const structuredData = (tree: Messages, page: SeoPage) => {
   const url = absoluteUrl(page.path)
   const description = message(tree, `seo.${page.seoKey}.description`)
+  const image = absoluteUrl(ogImageFor(page))
   const graph: object[] = [organization(tree)]
 
   if (page.path === "/") {
@@ -104,6 +106,7 @@ export const structuredData = (tree: Messages, page: SeoPage) => {
         name: SITE_NAME,
         url,
         description,
+        image,
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         // Starter plan, the lowest listed price on /pricing.
@@ -120,6 +123,7 @@ export const structuredData = (tree: Messages, page: SeoPage) => {
         name: message(tree, `${base}.eyebrow`),
         description,
         url,
+        image,
         provider: { "@id": organizationId },
       },
       breadcrumb(tree, page, message(tree, `${base}.name`)),
@@ -145,6 +149,7 @@ export const renderHead = (tree: Messages, page: SeoPage): string => {
   const title = message(tree, `seo.${page.seoKey}.title`)
   const description = message(tree, `seo.${page.seoKey}.description`)
   const url = absoluteUrl(page.path)
+  const image = absoluteUrl(ogImageFor(page))
   // Only the home page carries keywords.
   const keywordsKey = `seo.${page.seoKey}.keywords`
   const keywords = lookup(tree, keywordsKey) === undefined ? "" : message(tree, keywordsKey)
@@ -166,9 +171,17 @@ export const renderHead = (tree: Messages, page: SeoPage): string => {
     meta("property", "og:url", url),
     meta("property", "og:title", title),
     meta("property", "og:description", description),
-    meta("name", "twitter:card", "summary"),
+    // Telegram and Facebook use width/height to lay the preview out before the
+    // image arrives; without them a first share can show no picture.
+    meta("property", "og:image", image),
+    meta("property", "og:image:width", String(OG_IMAGE.width)),
+    meta("property", "og:image:height", String(OG_IMAGE.height)),
+    meta("property", "og:image:type", OG_IMAGE.type),
+    meta("property", "og:image:alt", title),
+    meta("name", "twitter:card", "summary_large_image"),
     meta("name", "twitter:title", title),
     meta("name", "twitter:description", description),
+    meta("name", "twitter:image", image),
     `<script type="application/ld+json">${json}</script>`,
   ]
     .filter(Boolean)

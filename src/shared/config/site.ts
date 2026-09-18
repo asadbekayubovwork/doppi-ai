@@ -16,4 +16,10 @@ export const SITE_ALTERNATE_NAMES = ["Doppi AI", "Do'ppi AI", "DoppiAI", "Doppi.
 /** Square PNG at a stable URL, as Google requires for an organization logo. */
 export const SITE_LOGO_PATH = "/apple-touch-icon.png"
 
+/**
+ * Link-preview images for Telegram, Facebook, WhatsApp and X, rendered from
+ * build/og/template.html by `pnpm og:images`.
+ */
+export const OG_IMAGE = { default: "/og/home.png", width: 1200, height: 630, type: "image/png" }
+
 export const absoluteUrl = (path: string): string => new URL(path, SITE_URL).href
