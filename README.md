@@ -286,6 +286,62 @@ pnpm build
 pnpm preview
 ```
 
+### Production deploys
+
+Every push to `main` runs [`.github/workflows/ci-cd.yml`](.github/workflows/ci-cd.yml)
+on a GitHub-hosted runner: tests, lint, type-check and `pnpm audit`, then a
+production build. The build is streamed over SSH to the production host
+(`doppiai@34.27.103.62`, SSH port 8800), where
+[`deploy/doppiai-release.sh`](deploy/doppiai-release.sh) — installed as
+`/usr/local/bin/doppiai-release` — makes it live. The workflow finishes by
+checking that <https://doppiai.uz> serves the new bundle.
+
+On the host each deploy unpacks into `/var/www/doppiai.uz/releases/<name>` and
+the `current` symlink that nginx serves is swapped in one step, so visitors
+never see a half-copied site. The five newest releases are kept, and `previous`
+always points at the one to roll back to.
+
+The CI key is pinned to that script with a forced command, so it can only
+`activate` or `rollback` — no shell, file transfer or tunnels. The server also
+hosts another project, which is why the key stored in GitHub must not be the
+admin key.
+
+#### One-time setup
+
+1. Install the release script (repeat whenever `deploy/doppiai-release.sh`
+   changes — CI cannot update it):
+
+   ```bash
+   scp -P 8800 deploy/doppiai-release.sh doppiai@34.27.103.62:/tmp/
+   ssh -p 8800 doppiai@34.27.103.62 'sudo install -m 755 /tmp/doppiai-release.sh /usr/local/bin/doppiai-release && rm /tmp/doppiai-release.sh'
+   ```
+
+2. Authorize a dedicated CI key by appending its public key to
+   `~doppiai/.ssh/authorized_keys` on the host, prefixed with the restriction:
+
+   ```text
+   restrict,command="/usr/local/bin/doppiai-release" ssh-ed25519 AAAA... github-actions@doppi-ai
+   ```
+
+3. Add the private half as the repository secret `DEPLOY_SSH_KEY`
+   (GitHub → Settings → Secrets and variables → Actions).
+
+The workflow pins the host's SSH keys instead of trusting them on first use. If
+the server is ever rebuilt, replace them in the workflow with the output of
+`ssh-keyscan -p 8800 34.27.103.62`.
+
+#### Manual deploy and rollback
+
+From Windows, with the admin key at `~/.ssh/doppiai_gcp`:
+
+```powershell
+.\deploy.ps1              # build, upload, switch, verify
+.\deploy.ps1 -SkipBuild   # ship the existing dist/
+.\deploy.ps1 -Rollback    # back to the previous release (run again to undo)
+```
+
+The CI key can roll back too: `ssh -p 8800 -i <ci-key> doppiai@34.27.103.62 rollback`.
+
 ### Environment Variables
 
 The frontend talks to the Do'ppi control plane, whose contract is published as
