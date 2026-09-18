@@ -17,8 +17,10 @@
 import { RouterView } from "vue-router"
 import { computed } from "vue"
 import { useRoute } from "vue-router"
+import { useHead } from "@unhead/vue"
 import { useLenis } from "@/shared/lib"
 import { CToaster } from "@/shared/ui"
+import { findSeoPage } from "@/shared/config/seoPages"
 
 import { DashboardLayout, DefaultLayout, EmptyLayout } from "./layouts"
 
@@ -40,6 +42,17 @@ const detectLayout = computed(() => {
 const pageTransition = computed(() =>
   route.meta.layout === "DashboardLayout" ? "app-page" : "page"
 )
+
+// Only pages listed in SEO_PAGES belong in search results; sign-in, the
+// dashboard and the 404 page stay out.
+useHead({
+  meta: [
+    {
+      name: "robots",
+      content: computed(() => (findSeoPage(route.path) ? "index, follow" : "noindex, follow")),
+    },
+  ],
+})
 
 // Initialize Lenis smooth scroll
 useLenis()

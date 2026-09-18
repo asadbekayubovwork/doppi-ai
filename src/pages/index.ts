@@ -1,4 +1,16 @@
 import type { RouteRecordRaw } from "vue-router"
+import { SERVICE_KEYS, SERVICE_PATHS } from "@/shared/config/seoPages"
+
+// One public landing page per service, all rendered by PService.
+const serviceRoutes: RouteRecordRaw[] = SERVICE_KEYS.map((service) => ({
+  path: SERVICE_PATHS[service],
+  name: `Service-${service}`,
+  props: { service },
+  meta: {
+    layout: "DefaultLayout",
+  },
+  component: () => import("./PService.vue"),
+}))
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,6 +29,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     component: () => import("./PProduct.vue"),
   },
+  ...serviceRoutes,
   {
     path: "/about",
     name: "About",

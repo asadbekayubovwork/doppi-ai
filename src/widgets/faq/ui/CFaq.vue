@@ -8,7 +8,15 @@ interface FaqItem {
   a: string
 }
 
-const items = useI18nList<FaqItem>("faq.items")
+const props = withDefaults(
+  defineProps<{
+    /** Branch holding eyebrow, title, subtitle and items; service pages pass their own. */
+    i18nKey?: string
+  }>(),
+  { i18nKey: "faq" }
+)
+
+const items = useI18nList<FaqItem>(`${props.i18nKey}.items`)
 
 // Single-open accordion: clicking the open row closes it again.
 const openIndex = ref<number | null>(0)
@@ -53,9 +61,9 @@ const onTransitionDone = (element: Element) => {
   <section id="faq" class="section-dark py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
       <CSectionHeading
-        :eyebrow="$t('faq.eyebrow')"
-        :title="$t('faq.title')"
-        :subtitle="$t('faq.subtitle')"
+        :eyebrow="$t(`${i18nKey}.eyebrow`)"
+        :title="$t(`${i18nKey}.title`)"
+        :subtitle="$t(`${i18nKey}.subtitle`)"
       />
 
       <div class="mx-auto mt-12 max-w-[760px] space-y-3">

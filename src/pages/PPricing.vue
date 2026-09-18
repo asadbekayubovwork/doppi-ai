@@ -1,20 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue"
-import { useI18n } from "vue-i18n"
-import { useHead } from "@unhead/vue"
+import { useSeo } from "@/shared/lib"
 import { CPricingList, CFaq } from "@/widgets"
 
-const { t } = useI18n()
-
-useHead({
-  title: computed(() => t("seo.pricing.title")),
-  meta: [
-    { name: "description", content: computed(() => t("seo.pricing.description")) },
-    { property: "og:title", content: computed(() => t("seo.pricing.title")) },
-    { property: "og:description", content: computed(() => t("seo.pricing.description")) },
-  ],
-  link: [{ rel: "canonical", href: "https://doppi.ai/pricing" }],
-})
+useSeo("/pricing")
 </script>
 
 <template>

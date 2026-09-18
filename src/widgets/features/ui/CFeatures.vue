@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18nList } from "@/shared/lib"
 import { CIcon, CSectionHeading, CDoppiMark } from "@/shared/ui"
+import { SERVICE_PATHS } from "@/shared/config/seoPages"
 
 interface FeatureItem {
   icon: string
@@ -13,6 +14,14 @@ const items = useI18nList<FeatureItem>("features.items")
 // Only the flagship tile (index 0 — the voice agent) grows to a 2x2 hero on
 // desktop, which keeps the 3-column grid hole-free: 4 + 5x1 = 9 cells.
 const spanFor = (index: number) => (index === 0 ? "lg:col-span-2 lg:row-span-2" : "")
+
+// Modules with their own landing page link through to it, keyed by icon since
+// the locale files carry no routes.
+const pageFor: Record<string, string> = {
+  phone: SERVICE_PATHS.voice,
+  clapperboard: SERVICE_PATHS.video,
+  bot: SERVICE_PATHS.rag,
+}
 </script>
 
 <template>
@@ -54,7 +63,15 @@ const spanFor = (index: number) => (index === 0 ? "lg:col-span-2 lg:row-span-2" 
                 class="mt-5 font-semibold text-white"
                 :class="i === 0 ? 'text-xl lg:text-2xl' : 'text-lg'"
               >
-                {{ item.title }}
+                <!-- The stretched ::after makes the whole card the link target. -->
+                <RouterLink
+                  v-if="pageFor[item.icon]"
+                  :to="pageFor[item.icon]"
+                  class="transition-colors after:absolute after:inset-0 hover:text-[#B9A2FF]"
+                >
+                  {{ item.title }}
+                </RouterLink>
+                <template v-else>{{ item.title }}</template>
               </h3>
               <p
                 class="mt-2 leading-relaxed text-[#A3A3A3]"

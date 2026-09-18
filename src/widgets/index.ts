@@ -21,3 +21,6 @@ export { CFaq } from "./faq"
 export { CAbout } from "./about"
 export { CTeamCards } from "./team"
 export { CContact } from "./contact"
+
+// Service pages (/rag-agent, /voice-agent, /video-generator)
+export { CServiceHero, CServiceFeatures, CServiceSteps, CServiceLinks, CServiceCta } from "./service"
