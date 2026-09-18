@@ -3,8 +3,10 @@ import { ref, onMounted, onUnmounted, watch } from "vue"
 import { useRoute, type RouteLocationRaw } from "vue-router"
 import CLanguageSwitcher from "./CLanguageSwitcher.vue"
 import CBgColorPicker from "./CBgColorPicker.vue"
+import CServicesMenu from "./CServicesMenu.vue"
 import { CIcon, CLogo } from "@/shared/ui"
 import { isGroundPickerEnabled } from "@/shared/lib"
+import { SERVICE_NAV } from "@/shared/config/services"
 
 interface NavItem {
   key: string
@@ -90,6 +92,7 @@ onUnmounted(() => {
         </RouterLink>
 
         <nav class="hidden items-center gap-7 lg:flex">
+          <CServicesMenu />
           <RouterLink
             v-for="item in navigation"
             :key="item.key"
@@ -169,6 +172,23 @@ onUnmounted(() => {
         </div>
 
         <nav class="flex flex-1 flex-col gap-1 overflow-y-auto px-5 py-4">
+          <p
+            class="px-3 pb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#8F6BFF]"
+          >
+            {{ $t("services.navLabel") }}
+          </p>
+          <RouterLink
+            v-for="item in SERVICE_NAV"
+            :key="item.key"
+            :to="item.to"
+            class="flex items-center gap-3 rounded-lg px-3 py-3 text-base text-white/80 transition-colors hover:bg-white/5 hover:text-white"
+            :class="{ 'text-[#8F6BFF]': route.path === item.to }"
+            @click="closeMobileMenu"
+          >
+            <CIcon :name="item.icon" class="h-5 w-5 text-[#B9A2FF]" />
+            {{ $t(`services.${item.key}.name`) }}
+          </RouterLink>
+          <span class="my-2 h-px bg-white/10" aria-hidden="true" />
           <RouterLink
             v-for="item in navigation"
             :key="item.key"

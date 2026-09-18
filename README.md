@@ -342,6 +342,34 @@ From Windows, with the admin key at `~/.ssh/doppiai_gcp`:
 
 The CI key can roll back too: `ssh -p 8800 -i <ci-key> doppiai@34.27.103.62 rollback`.
 
+#### nginx
+
+[`deploy/nginx/doppiai.uz.conf`](deploy/nginx/doppiai.uz.conf) is the server's
+site config (with the ACME snippet next to it). It maps `/voice-agent` to the
+prebuilt `voice-agent.html` described below and sends every other route to the
+`noindex` app shell. After editing it:
+
+```bash
+scp -P 8800 deploy/nginx/doppiai.uz.conf doppiai@34.27.103.62:/tmp/
+ssh -p 8800 doppiai@34.27.103.62 'sudo install -m 644 /tmp/doppiai.uz.conf /etc/nginx/sites-available/doppiai.uz && sudo nginx -t && sudo systemctl reload nginx'
+```
+
+### Search engines
+
+The pages meant for search are listed once, in
+[`src/shared/config/seoPages.ts`](src/shared/config/seoPages.ts). For each one
+the build ([`build/seo.ts`](build/seo.ts)) writes `<path>.html` carrying that
+page's title, description, canonical link, Open Graph tags and schema.org data
+(organization, services, breadcrumbs, FAQ), and lists it in `sitemap.xml`.
+Crawlers that don't run JavaScript — link previews in Telegram and Facebook,
+Google's first pass — therefore see each page as it is. Every other route gets
+`app.html`, marked `noindex`, so sign-in and the dashboard stay out of results.
+
+To publish a new page: add its route, add `seo.<key>.title` and
+`seo.<key>.description` in all three locale files, then add it to `SEO_PAGES`.
+The static HTML uses the default locale (`uz`); `useSeo` keeps the tags right
+after a language switch.
+
 ### Environment Variables
 
 The frontend talks to the Do'ppi control plane, whose contract is published as

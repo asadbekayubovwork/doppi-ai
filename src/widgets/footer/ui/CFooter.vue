@@ -4,6 +4,7 @@ import { useI18n } from "vue-i18n"
 import type { RouteLocationRaw } from "vue-router"
 import { CIcon, CLogo } from "@/shared/ui"
 import { SOCIALS } from "@/shared/config/socials"
+import { SERVICE_NAV } from "@/shared/config/services"
 
 const { t } = useI18n()
 const currentYear = new Date().getFullYear()
@@ -44,7 +45,7 @@ const socials = SOCIALS
 <template>
   <footer class="section-dark border-t border-white/10">
     <div class="container relative z-10 py-14">
-      <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+      <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr]">
         <div class="max-w-xs">
           <RouterLink to="/" aria-label="Do'ppi.ai">
             <CLogo />
@@ -64,6 +65,20 @@ const socials = SOCIALS
               <CIcon :name="social.icon" class="h-4 w-4" />
             </a>
           </div>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-white">{{ $t("services.navLabel") }}</h3>
+          <ul class="mt-4 space-y-3">
+            <li v-for="item in SERVICE_NAV" :key="item.key">
+              <RouterLink
+                :to="item.to"
+                class="text-sm text-[#A3A3A3] transition-colors hover:text-[#B9A2FF]"
+              >
+                {{ $t(`services.${item.key}.name`) }}
+              </RouterLink>
+            </li>
+          </ul>
         </div>
 
         <div>

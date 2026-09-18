@@ -1,20 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue"
-import { useI18n } from "vue-i18n"
-import { useHead } from "@unhead/vue"
+import { useSeo } from "@/shared/lib"
 import { CContact, CFaq } from "@/widgets"
 
-const { t } = useI18n()
-
-useHead({
-  title: computed(() => t("seo.contact.title")),
-  meta: [
-    { name: "description", content: computed(() => t("seo.contact.description")) },
-    { property: "og:title", content: computed(() => t("seo.contact.title")) },
-    { property: "og:description", content: computed(() => t("seo.contact.description")) },
-  ],
-  link: [{ rel: "canonical", href: "https://doppi.ai/contact-us" }],
-})
+useSeo("/contact-us")
 </script>
 
 <template>

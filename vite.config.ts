@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from "node:url"
 
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
+import { seoPages } from "./build/seo"
 
 /**
  * Origin that serves the documented API (https://doppiai.uz/api/docs).
@@ -12,7 +13,7 @@ const API_PROXY_TARGET =
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), seoPages()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),

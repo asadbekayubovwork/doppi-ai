@@ -1,0 +1,5 @@
+export { default as CServiceHero } from "./ui/CServiceHero.vue"
+export { default as CServiceFeatures } from "./ui/CServiceFeatures.vue"
+export { default as CServiceSteps } from "./ui/CServiceSteps.vue"
+export { default as CServiceLinks } from "./ui/CServiceLinks.vue"
+export { default as CServiceCta } from "./ui/CServiceCta.vue"

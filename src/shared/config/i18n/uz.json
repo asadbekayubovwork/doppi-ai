@@ -684,9 +684,21 @@
   },
   "seo": {
     "home": {
-      "title": "Do'ppi.ai — butun dunyo uchun AI marketing tizimi",
-      "description": "Do'ppi.ai — reklamadan sotuvgacha bo'lgan jarayonni avtomatlashtiruvchi AI marketing operatsion tizimi: ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, CRM, chatbotlar va SIP call-markaz.",
-      "keywords": "AI marketing, sun'iy intellekt, ovozli agent, CRM, chatbot, SIP telefoniya, O'zbekiston, lead generatsiya, marketing avtomatizatsiya"
+      "title": "Do'ppi.ai (Doppi AI) — butun dunyo uchun AI marketing tizimi",
+      "description": "Do'ppi.ai (Doppi AI) — reklamadan sotuvgacha jarayonni avtomatlashtiruvchi AI marketing tizimi: AI ovozli agent, RAG chatbot, video generator, CRM va SIP call-markaz.",
+      "keywords": "Do'ppi.ai, Doppi AI, doppi, AI marketing, sun'iy intellekt, ovozli agent, RAG chatbot, video generator, CRM, chatbot, SIP telefoniya, lead generatsiya, marketing avtomatizatsiya"
+    },
+    "ragAgent": {
+      "title": "RAG Agent: hujjatlaringiz asosidagi AI chatbot — Do'ppi.ai",
+      "description": "Do'ppi.ai RAG Agent PDF, DOCX va Excel hujjatlaringizni o'rganib, Instagram, Telegram, WhatsApp va saytda mijozlarga 24/7 aniq javob beradi."
+    },
+    "voiceAgent": {
+      "title": "AI Ovozli Agent: qo'ng'iroqlarga AI javob beradi — Do'ppi.ai",
+      "description": "Do'ppi.ai ovozli agenti qo'ng'iroqlarni inson kabi olib boradi: leadlarni saralaydi, uchrashuv belgilaydi va hammasini CRM'ga yozadi."
+    },
+    "videoGenerator": {
+      "title": "AI Video generator: matndan reklama va Reels — Do'ppi.ai",
+      "description": "Do'ppi.ai video generatori matndan reklama roliklari, Reels, rasmlar, reklama matnlari va ovozni sun'iy intellekt yordamida yaratadi."
     },
     "pricing": {
       "title": "Narxlar — Do'ppi.ai",
@@ -708,5 +720,297 @@
   "product": {
     "pageTitle": "Reklamadan sotuvgacha — bitta AI platformada",
     "pageSubtitle": "Do'ppi.ai qanday ishlashini bosqichma-bosqich ko'ring: modullar, imkoniyatlar, kimlar uchun mo'ljallangani va kutilayotgan natijalar."
+  },
+  "services": {
+    "navLabel": "Xizmatlar",
+    "breadcrumbHome": "Bosh sahifa",
+    "ctaPrimary": "Bepul sinovni boshlash",
+    "ctaSecondary": "Demo so'rash",
+    "breadcrumbLabel": "Sahifa yo'li",
+    "othersTitle": "Boshqa xizmatlarimiz",
+    "learnMore": "Batafsil",
+    "rag": {
+      "name": "RAG Agent",
+      "navDesc": "Hujjatlaringiz asosida javob beradigan AI chatbot",
+      "eyebrow": "Universal RAG Agent",
+      "title": "Mijozlarga hujjatlaringiz asosida javob beradigan AI chatbot",
+      "subtitle": "Narxlar, katalog, qo'llanma va qoidalaringizni yuklang — RAG Agent ularni o'rganib, Instagram, Telegram, WhatsApp va saytingizda mijozlarga kechayu kunduz aniq javob beradi.",
+      "features": {
+        "eyebrow": "Imkoniyatlar",
+        "title": "Bilim bazangiz ishlaydigan yordamchiga aylanadi",
+        "subtitle": "Agent faqat siz bergan ma'lumotlarga tayanadi, har bir suhbat esa nazoratingizda qoladi.",
+        "items": [
+          {
+            "icon": "file-text",
+            "title": "Hujjatlardan bilim bazasi",
+            "desc": "PDF, DOCX, XLSX va TXT fayllarni yuklang (har biri 50 MB gacha) — agent ularni indekslaydi va javoblarini shularga asoslaydi."
+          },
+          {
+            "icon": "messages-square",
+            "title": "Barcha kanallarda bitta agent",
+            "desc": "Instagram, Telegram, WhatsApp va sayt vidjetidagi yozishmalarga bir xil bilim bilan javob beradi."
+          },
+          {
+            "icon": "user-round-check",
+            "title": "Kerak bo'lsa — xodimga",
+            "desc": "Javob bera olmaydigan savolni suhbat tarixi bilan birga jamoangizdagi xodimga uzatadi."
+          },
+          {
+            "icon": "settings-2",
+            "title": "Sizning uslubingizda gaplashadi",
+            "desc": "Ko'rsatmalar va tayyor shablonlar orqali agentning ohangi, vazifasi va chegaralarini belgilaysiz."
+          },
+          {
+            "icon": "bar-chart-3",
+            "title": "Suhbatlar tahlili",
+            "desc": "Javob aniqligi, o'rtacha javob vaqti va xabarlar soni — hammasi bitta panelda."
+          },
+          {
+            "icon": "search",
+            "title": "Har bir suhbat qo'l ostida",
+            "desc": "Yozishmalarni kanal bo'yicha saralang, qidiring va CSV formatida yuklab oling."
+          }
+        ]
+      },
+      "steps": {
+        "eyebrow": "Qanday ishlaydi",
+        "title": "To'rt qadamda ishga tushadi",
+        "items": [
+          {
+            "title": "Hujjatlarni yuklang",
+            "desc": "Narxlar, mahsulotlar, ko'p beriladigan savollar va qoidalar yozilgan fayllarni qo'shing."
+          },
+          {
+            "title": "Agentni sozlang",
+            "desc": "Ko'rsatma yozing yoki shablon tanlang: agent kim, nima haqida gapiradi va nimaga javob bermaydi."
+          },
+          {
+            "title": "Kanallarni ulang",
+            "desc": "Instagram, Telegram, WhatsApp yoki sayt vidjetini ulang — agent darhol javob bera boshlaydi."
+          },
+          {
+            "title": "Natijani kuzating",
+            "desc": "Suhbatlar, xodimga uzatilganlar va javob sifatini panelda kuzatib, bilim bazasini to'ldirib boring."
+          }
+        ]
+      },
+      "faq": {
+        "eyebrow": "Savollar",
+        "title": "RAG Agent haqida savollar",
+        "subtitle": "Eng ko'p beriladigan savollarga qisqa javoblar.",
+        "items": [
+          {
+            "q": "RAG nima?",
+            "a": "RAG (Retrieval-Augmented Generation) — sun'iy intellekt javob berishdan oldin hujjatlaringizdan kerakli qismni topib, javobni aynan shunga asoslaydigan usul. Shu tufayli agent umumiy gaplar emas, biznesingizga oid aniq ma'lumot beradi."
+          },
+          {
+            "q": "Qanday fayllarni yuklash mumkin?",
+            "a": "PDF, DOCX, XLSX va TXT fayllarni — har birini 50 MB gacha."
+          },
+          {
+            "q": "Agent qaysi kanallarda ishlaydi?",
+            "a": "Instagram, Telegram, WhatsApp va saytingizdagi chat vidjetida."
+          },
+          {
+            "q": "Agent javobini bilmasa nima bo'ladi?",
+            "a": "Suhbatni jamoangizdagi xodimga uzatadi — xodim yozishma tarixini ko'rib, suhbatni davom ettiradi."
+          },
+          {
+            "q": "Qaysi tillarda javob beradi?",
+            "a": "O'zbek va rus tillarida."
+          }
+        ]
+      },
+      "cta": {
+        "title": "RAG Agentni biznesingizda sinab ko'ring",
+        "subtitle": "14 kunlik bepul sinov — hujjatlaringizni yuklang va agent qanday javob berishini o'zingiz ko'ring."
+      }
+    },
+    "voice": {
+      "name": "Ovozli agent",
+      "navDesc": "Qo'ng'iroqlarga inson kabi javob beradigan AI",
+      "eyebrow": "AI Ovozli Agent",
+      "title": "Qo'ng'iroqlarni inson kabi olib boradigan AI ovozli agent",
+      "subtitle": "Kiruvchi va chiquvchi qo'ng'iroqlarni tabiiy ovozda olib boradi: mijozni tinglaydi, ehtiyojini aniqlaydi, uchrashuv belgilaydi va hammasini CRM'ga yozadi — kechayu kunduz.",
+      "features": {
+        "eyebrow": "Imkoniyatlar",
+        "title": "Sotuv bo'limingiz uchun charchamaydigan xodim",
+        "subtitle": "Har bir qo'ng'iroq yozib olinadi, tahlil qilinadi va natijasi CRM'da qoladi.",
+        "items": [
+          {
+            "icon": "audio-lines",
+            "title": "Tabiiy va ravon suhbat",
+            "desc": "Robotdek emas, inson kabi gaplashadi — mijozni tinglaydi va savollariga javob beradi."
+          },
+          {
+            "icon": "target",
+            "title": "Leadlarni saralaydi",
+            "desc": "Savollar orqali ehtiyoj va byudjetni aniqlaydi, eng issiq mijozlarni ajratib beradi."
+          },
+          {
+            "icon": "calendar-days",
+            "title": "Uchrashuv belgilaydi",
+            "desc": "Mijoz rozi bo'lsa, uchrashuv yoki qayta qo'ng'iroq vaqtini o'zi yozib qo'yadi."
+          },
+          {
+            "icon": "headset",
+            "title": "SIP telefoniya",
+            "desc": "Kiruvchi va chiquvchi qo'ng'iroqlar sizning raqamlaringiz orqali ishlaydi, har biri yozib olinadi."
+          },
+          {
+            "icon": "database",
+            "title": "CRM bilan birga",
+            "desc": "Suhbat mazmuni, yig'ilgan ma'lumot va keyingi qadam avtomatik ravishda CRM'ga tushadi."
+          },
+          {
+            "icon": "bar-chart-3",
+            "title": "Hisobot va tahlil",
+            "desc": "Qo'ng'iroqlar natijasini tahlil qilib, qaysi ssenariy yaxshiroq ishlayotganini ko'rsatadi."
+          }
+        ]
+      },
+      "steps": {
+        "eyebrow": "Qanday ishlaydi",
+        "title": "To'rt qadamda ishga tushadi",
+        "items": [
+          {
+            "title": "Ssenariyni belgilang",
+            "desc": "Agent nima haqida gapirishini, qaysi savollarni berishini va maqsadini yozasiz."
+          },
+          {
+            "title": "Raqamni ulang",
+            "desc": "Kompaniyangiz telefon raqamini SIP orqali ulaysiz."
+          },
+          {
+            "title": "Agent qo'ng'iroq qiladi va qabul qiladi",
+            "desc": "Kiruvchi qo'ng'iroqlarga javob beradi va ro'yxatdagi mijozlarga o'zi qo'ng'iroq qiladi."
+          },
+          {
+            "title": "Natija CRM'da",
+            "desc": "Har bir qo'ng'iroqning yozuvi, xulosasi va keyingi qadami CRM'da saqlanadi."
+          }
+        ]
+      },
+      "faq": {
+        "eyebrow": "Savollar",
+        "title": "Ovozli agent haqida savollar",
+        "subtitle": "Eng ko'p beriladigan savollarga qisqa javoblar.",
+        "items": [
+          {
+            "q": "Agent qaysi tillarda gaplashadi?",
+            "a": "O'zbek va rus tillarida."
+          },
+          {
+            "q": "Qo'ng'iroqlar qaysi raqamdan amalga oshiriladi?",
+            "a": "Kompaniyangiz raqamidan — raqam SIP telefoniya orqali ulanadi."
+          },
+          {
+            "q": "Suhbatlar yozib olinadimi?",
+            "a": "Ha. Har bir qo'ng'iroq yozib olinadi va CRM'da saqlanadi."
+          },
+          {
+            "q": "Agent kechasi ham ishlaydimi?",
+            "a": "Ha, agent 24/7 ishlaydi — tunda va dam olish kunlarida ham."
+          }
+        ]
+      },
+      "cta": {
+        "title": "Ovozli agentni sinab ko'ring",
+        "subtitle": "14 kunlik bepul sinov — agent biznesingiz uchun qanday gaplashishini eshiting."
+      }
+    },
+    "video": {
+      "name": "Video generator",
+      "navDesc": "Matndan reklama va Reels videolar",
+      "eyebrow": "AI Video generator",
+      "title": "Matndan tayyor videogacha — AI video generator",
+      "subtitle": "G'oyangizni yozing — Do'ppi.ai reklama, Reels va ijtimoiy tarmoqlar uchun video, rasm, matn va ovozni sun'iy intellekt yordamida yaratadi.",
+      "features": {
+        "eyebrow": "Imkoniyatlar",
+        "title": "Kontentni tezroq tayyorlang",
+        "subtitle": "Dizayner va montajchini kutmasdan tayyor kontent.",
+        "items": [
+          {
+            "icon": "wand-sparkles",
+            "title": "Promptdan video",
+            "desc": "Nima kerakligini oddiy so'zlar bilan yozasiz — AI videoni yaratib beradi."
+          },
+          {
+            "icon": "clapperboard",
+            "title": "Reels va reklama roliklari",
+            "desc": "Instagram, Telegram va boshqa ijtimoiy tarmoqlar uchun qisqa videolar."
+          },
+          {
+            "icon": "mic",
+            "title": "AI ovoz",
+            "desc": "Videoga o'zbek yoki rus tilida ovoz qo'shadi."
+          },
+          {
+            "icon": "sparkles",
+            "title": "Rasm va bannerlar",
+            "desc": "Postlar, bannerlar va reklama uchun rasmlar yaratadi."
+          },
+          {
+            "icon": "file-text",
+            "title": "Reklama matnlari",
+            "desc": "Video va postlar uchun sarlavha, tavsif va reklama matnlarini yozadi."
+          },
+          {
+            "icon": "share-2",
+            "title": "Marketingingizning bir qismi",
+            "desc": "Kontent Do'ppi.ai'dagi ijtimoiy tarmoq avtomatizatsiyasi va reklama jarayonlari bilan bitta tizimda turadi."
+          }
+        ]
+      },
+      "steps": {
+        "eyebrow": "Qanday ishlaydi",
+        "title": "To'rt qadamda tayyor kontent",
+        "items": [
+          {
+            "title": "G'oyani yozing",
+            "desc": "Mahsulot, auditoriya va video nima haqida bo'lishini yozing."
+          },
+          {
+            "title": "Formatni tanlang",
+            "desc": "Reels, reklama roligi yoki post — qayerda ishlatilishini belgilang."
+          },
+          {
+            "title": "AI yaratadi",
+            "desc": "Sun'iy intellekt video, matn va ovozni tayyorlaydi."
+          },
+          {
+            "title": "Yuklab oling va ishlating",
+            "desc": "Tayyor kontentni yuklab olib, reklama va sahifalaringizda ishlating."
+          }
+        ]
+      },
+      "faq": {
+        "eyebrow": "Savollar",
+        "title": "Video generator haqida savollar",
+        "subtitle": "Eng ko'p beriladigan savollarga qisqa javoblar.",
+        "items": [
+          {
+            "q": "Video yaratish uchun montaj tajribasi kerakmi?",
+            "a": "Yo'q. Nima kerakligini oddiy so'zlar bilan yozasiz, qolganini AI bajaradi."
+          },
+          {
+            "q": "Qanday kontent yaratish mumkin?",
+            "a": "Reels va qisqa videolar, reklama roliklari, rasmlar, reklama matnlari va ovoz."
+          },
+          {
+            "q": "Videoga o'zbek tilida ovoz qo'shsa bo'ladimi?",
+            "a": "Ha, kontent o'zbek va rus tillarida yaratiladi."
+          },
+          {
+            "q": "Qancha turadi?",
+            "a": "Narxlar sahifasida rejalarni va ularga nimalar kirishini solishtiring — har bir reja 14 kunlik bepul sinov bilan boshlanadi."
+          }
+        ]
+      },
+      "cta": {
+        "title": "Birinchi videongizni yarating",
+        "subtitle": "14 kunlik bepul sinov bilan boshlang."
+      }
+    }
   }
 }

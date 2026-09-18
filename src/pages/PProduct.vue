@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue"
-import { useI18n } from "vue-i18n"
-import { useHead } from "@unhead/vue"
+import { useSeo } from "@/shared/lib"
 import {
   CSolution,
   CFeatures,
@@ -11,17 +9,7 @@ import {
   CResults,
 } from "@/widgets"
 
-const { t } = useI18n()
-
-useHead({
-  title: computed(() => t("seo.product.title")),
-  meta: [
-    { name: "description", content: computed(() => t("seo.product.description")) },
-    { property: "og:title", content: computed(() => t("seo.product.title")) },
-    { property: "og:description", content: computed(() => t("seo.product.description")) },
-  ],
-  link: [{ rel: "canonical", href: "https://doppi.ai/product" }],
-})
+useSeo("/product")
 </script>
 
 <template>

@@ -13,13 +13,15 @@ import PContact from "../PContact.vue"
 import PPrivacy from "../PPrivacy.vue"
 import PTerms from "../PTerms.vue"
 import PError from "../PError.vue"
+import PService from "../PService.vue"
+import { SERVICE_KEYS, SERVICE_PATHS } from "@/shared/config/seoPages"
 
 /**
  * Every page reachable from the router gets mounted at least once, so a missing
  * i18n branch or a broken widget import surfaces here rather than as a blank
  * screen in production.
  */
-const mountPage = (component: unknown, locale = "uz") => {
+const mountPage = (component: unknown, locale = "uz", props: Record<string, unknown> = {}) => {
   const i18n = createI18n({
     legacy: false,
     locale,
@@ -34,6 +36,7 @@ const mountPage = (component: unknown, locale = "uz") => {
   })
 
   return mount(component as never, {
+    props,
     global: { plugins: [i18n, router, createHead()] },
   })
 }
@@ -113,6 +116,24 @@ describe("routed pages", () => {
     expect(text).toContain("Amaldagi qonun")
     // A section whose `bullets` array failed to resolve would drop this line.
     expect(text).toContain("AI ovozli agent — mijozlar bilan tabiiy suhbat")
+    wrapper.unmount()
+  })
+
+  it.each(SERVICE_KEYS)("renders the %s service page with its own copy and links", (service) => {
+    const wrapper = mountPage(PService, "uz", { service })
+    const copy = messages.uz.services[service]
+
+    expect(wrapper.find("h1").text()).toBe(copy.title)
+    expect(wrapper.text()).toContain(copy.features.items[0].title)
+    expect(wrapper.text()).toContain(copy.faq.items[0].q)
+
+    // Links between the service pages are what tell crawlers these pages form
+    // one section of the site.
+    const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
+    for (const other of SERVICE_KEYS.filter((key) => key !== service)) {
+      expect(hrefs).toContain(SERVICE_PATHS[other])
+    }
+    expect(hrefs).toContain("/")
     wrapper.unmount()
   })
 

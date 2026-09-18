@@ -684,9 +684,21 @@
   },
   "seo": {
     "home": {
-      "title": "Do'ppi.ai — the AI marketing OS for businesses worldwide",
-      "description": "Do'ppi.ai is the AI marketing operating system that automates everything from ad to sale: voice agent, social media automation, CRM, chatbots and a SIP call center.",
-      "keywords": "AI marketing, artificial intelligence, voice agent, CRM, chatbot, SIP telephony, Uzbekistan, lead generation, marketing automation"
+      "title": "Do'ppi.ai (Doppi AI) — the AI marketing OS for businesses worldwide",
+      "description": "Do'ppi.ai (Doppi AI) is the AI marketing OS that automates everything from ad to sale: AI voice agent, RAG chatbot, video generator, CRM and a SIP call center.",
+      "keywords": "Do'ppi.ai, Doppi AI, doppi, AI marketing, artificial intelligence, voice agent, RAG chatbot, video generator, CRM, chatbot, SIP telephony, lead generation, marketing automation"
+    },
+    "ragAgent": {
+      "title": "RAG Agent: an AI chatbot trained on your documents — Do'ppi.ai",
+      "description": "The Do'ppi.ai RAG Agent learns your PDF, DOCX and Excel documents and answers customers accurately 24/7 on Instagram, Telegram, WhatsApp and your website."
+    },
+    "voiceAgent": {
+      "title": "AI Voice Agent: AI that handles your calls — Do'ppi.ai",
+      "description": "The Do'ppi.ai voice agent handles inbound and outbound calls like a person: it qualifies leads, books meetings and logs everything in your CRM."
+    },
+    "videoGenerator": {
+      "title": "AI Video Generator: ads and Reels from text — Do'ppi.ai",
+      "description": "The Do'ppi.ai video generator creates ad clips, Reels, images, ad copy and voiceover from a text prompt with AI."
     },
     "pricing": {
       "title": "Pricing — Do'ppi.ai",
@@ -708,5 +720,297 @@
   "product": {
     "pageTitle": "From ad to sale — on a single AI platform",
     "pageSubtitle": "See how Do'ppi.ai works step by step: the modules, the capabilities, who it is built for and the results to expect."
+  },
+  "services": {
+    "navLabel": "Services",
+    "breadcrumbHome": "Home",
+    "ctaPrimary": "Start free trial",
+    "ctaSecondary": "Request a demo",
+    "breadcrumbLabel": "Breadcrumb",
+    "othersTitle": "More from Do'ppi.ai",
+    "learnMore": "Learn more",
+    "rag": {
+      "name": "RAG Agent",
+      "navDesc": "AI chatbot that answers from your documents",
+      "eyebrow": "Universal RAG Agent",
+      "title": "An AI chatbot that answers customers from your own documents",
+      "subtitle": "Upload your price lists, catalogs, guides and policies — the RAG Agent learns them and answers customers accurately on Instagram, Telegram, WhatsApp and your website, around the clock.",
+      "features": {
+        "eyebrow": "Capabilities",
+        "title": "Your knowledge base becomes a working assistant",
+        "subtitle": "The agent relies only on the information you give it, and every conversation stays under your control.",
+        "items": [
+          {
+            "icon": "file-text",
+            "title": "A knowledge base from your files",
+            "desc": "Upload PDF, DOCX, XLSX and TXT files (up to 50 MB each) — the agent indexes them and grounds its answers in them."
+          },
+          {
+            "icon": "messages-square",
+            "title": "One agent on every channel",
+            "desc": "Answers messages on Instagram, Telegram, WhatsApp and your website widget with the same knowledge."
+          },
+          {
+            "icon": "user-round-check",
+            "title": "Hands over to a person when needed",
+            "desc": "Passes any question it can't answer to someone on your team, together with the conversation history."
+          },
+          {
+            "icon": "settings-2",
+            "title": "Speaks in your voice",
+            "desc": "Instructions and ready-made templates set the agent's tone, role and boundaries."
+          },
+          {
+            "icon": "bar-chart-3",
+            "title": "Conversation analytics",
+            "desc": "Answer accuracy, average response time and message volume — all on one dashboard."
+          },
+          {
+            "icon": "search",
+            "title": "Every conversation at hand",
+            "desc": "Filter conversations by channel, search them and export them as CSV."
+          }
+        ]
+      },
+      "steps": {
+        "eyebrow": "How it works",
+        "title": "Live in four steps",
+        "items": [
+          {
+            "title": "Upload your documents",
+            "desc": "Add the files that hold your prices, products, FAQs and policies."
+          },
+          {
+            "title": "Set up the agent",
+            "desc": "Write instructions or pick a template: who the agent is, what it talks about and what it won't answer."
+          },
+          {
+            "title": "Connect your channels",
+            "desc": "Connect Instagram, Telegram, WhatsApp or the website widget — the agent starts replying right away."
+          },
+          {
+            "title": "Track the results",
+            "desc": "Follow conversations, hand-overs and answer quality on the dashboard, and keep growing the knowledge base."
+          }
+        ]
+      },
+      "faq": {
+        "eyebrow": "FAQ",
+        "title": "RAG Agent questions",
+        "subtitle": "Short answers to the most common questions.",
+        "items": [
+          {
+            "q": "What is RAG?",
+            "a": "RAG (retrieval-augmented generation) is a technique where the AI first finds the relevant part of your documents and then bases its answer on it. That is why the agent gives specific information about your business rather than generic replies."
+          },
+          {
+            "q": "Which files can I upload?",
+            "a": "PDF, DOCX, XLSX and TXT files, up to 50 MB each."
+          },
+          {
+            "q": "Which channels does the agent work on?",
+            "a": "Instagram, Telegram, WhatsApp and the chat widget on your website."
+          },
+          {
+            "q": "What happens when the agent doesn't know the answer?",
+            "a": "It hands the conversation to someone on your team, who sees the full history and takes it from there."
+          },
+          {
+            "q": "Which languages does it answer in?",
+            "a": "Uzbek and Russian."
+          }
+        ]
+      },
+      "cta": {
+        "title": "Try the RAG Agent in your business",
+        "subtitle": "14-day free trial — upload your documents and see for yourself how the agent answers."
+      }
+    },
+    "voice": {
+      "name": "Voice Agent",
+      "navDesc": "AI that handles calls like a person",
+      "eyebrow": "AI Voice Agent",
+      "title": "An AI voice agent that handles calls like a person",
+      "subtitle": "It runs inbound and outbound calls in a natural voice: listens to the customer, finds out what they need, books a meeting and logs everything in your CRM — day and night.",
+      "features": {
+        "eyebrow": "Capabilities",
+        "title": "A sales rep that never gets tired",
+        "subtitle": "Every call is recorded and analyzed, and its outcome stays in your CRM.",
+        "items": [
+          {
+            "icon": "audio-lines",
+            "title": "Natural, fluent conversation",
+            "desc": "Talks like a person, not a robot — listens to the customer and answers their questions."
+          },
+          {
+            "icon": "target",
+            "title": "Qualifies leads",
+            "desc": "Finds out needs and budget through questions and surfaces your hottest prospects."
+          },
+          {
+            "icon": "calendar-days",
+            "title": "Books meetings",
+            "desc": "When the customer agrees, it schedules the meeting or a callback itself."
+          },
+          {
+            "icon": "headset",
+            "title": "SIP telephony",
+            "desc": "Inbound and outbound calls run through your own numbers, and every call is recorded."
+          },
+          {
+            "icon": "database",
+            "title": "Works with your CRM",
+            "desc": "The conversation summary, the details collected and the next step land in your CRM automatically."
+          },
+          {
+            "icon": "bar-chart-3",
+            "title": "Reports and analytics",
+            "desc": "Analyzes call outcomes and shows which scripts perform best."
+          }
+        ]
+      },
+      "steps": {
+        "eyebrow": "How it works",
+        "title": "Live in four steps",
+        "items": [
+          {
+            "title": "Define the script",
+            "desc": "Write what the agent talks about, which questions it asks and what it is trying to achieve."
+          },
+          {
+            "title": "Connect a number",
+            "desc": "Connect your company phone number over SIP."
+          },
+          {
+            "title": "The agent calls and answers",
+            "desc": "It picks up inbound calls and calls the customers on your list."
+          },
+          {
+            "title": "Results in your CRM",
+            "desc": "Every call's recording, summary and next step are saved in your CRM."
+          }
+        ]
+      },
+      "faq": {
+        "eyebrow": "FAQ",
+        "title": "Voice Agent questions",
+        "subtitle": "Short answers to the most common questions.",
+        "items": [
+          {
+            "q": "Which languages does the agent speak?",
+            "a": "Uzbek and Russian."
+          },
+          {
+            "q": "Which number are calls made from?",
+            "a": "Your company's own number, connected through SIP telephony."
+          },
+          {
+            "q": "Are calls recorded?",
+            "a": "Yes. Every call is recorded and saved to your CRM."
+          },
+          {
+            "q": "Does the agent work at night?",
+            "a": "Yes, it works 24/7 — nights and weekends included."
+          }
+        ]
+      },
+      "cta": {
+        "title": "Try the voice agent",
+        "subtitle": "14-day free trial — hear how the agent sounds for your business."
+      }
+    },
+    "video": {
+      "name": "Video Generator",
+      "navDesc": "Ads and Reels from a text prompt",
+      "eyebrow": "AI Video Generator",
+      "title": "From text to a finished video — the AI video generator",
+      "subtitle": "Describe your idea — Do'ppi.ai creates videos, images, copy and voiceover for ads, Reels and social media with AI.",
+      "features": {
+        "eyebrow": "Capabilities",
+        "title": "Produce content faster",
+        "subtitle": "Ready-made content without waiting on a designer or an editor.",
+        "items": [
+          {
+            "icon": "wand-sparkles",
+            "title": "Video from a prompt",
+            "desc": "Describe what you need in plain words — the AI creates the video."
+          },
+          {
+            "icon": "clapperboard",
+            "title": "Reels and ad clips",
+            "desc": "Short videos for Instagram, Telegram and other social networks."
+          },
+          {
+            "icon": "mic",
+            "title": "AI voiceover",
+            "desc": "Adds a voiceover in Uzbek or Russian."
+          },
+          {
+            "icon": "sparkles",
+            "title": "Images and banners",
+            "desc": "Creates images for posts, banners and ads."
+          },
+          {
+            "icon": "file-text",
+            "title": "Ad copy",
+            "desc": "Writes headlines, descriptions and ad copy for your videos and posts."
+          },
+          {
+            "icon": "share-2",
+            "title": "Part of your marketing",
+            "desc": "Content lives in the same system as Do'ppi.ai's social media automation and ad workflows."
+          }
+        ]
+      },
+      "steps": {
+        "eyebrow": "How it works",
+        "title": "Ready content in four steps",
+        "items": [
+          {
+            "title": "Describe the idea",
+            "desc": "Write about the product, the audience and what the video should say."
+          },
+          {
+            "title": "Pick a format",
+            "desc": "Reels, an ad clip or a post — choose where it will run."
+          },
+          {
+            "title": "The AI creates it",
+            "desc": "The AI produces the video, the copy and the voiceover."
+          },
+          {
+            "title": "Download and use",
+            "desc": "Download the finished content and use it in your ads and pages."
+          }
+        ]
+      },
+      "faq": {
+        "eyebrow": "FAQ",
+        "title": "Video Generator questions",
+        "subtitle": "Short answers to the most common questions.",
+        "items": [
+          {
+            "q": "Do I need video editing experience?",
+            "a": "No. You describe what you need in plain words and the AI does the rest."
+          },
+          {
+            "q": "What can I create?",
+            "a": "Reels and short videos, ad clips, images, ad copy and voiceover."
+          },
+          {
+            "q": "Can the voiceover be in Uzbek?",
+            "a": "Yes, content is created in Uzbek and Russian."
+          },
+          {
+            "q": "How much does it cost?",
+            "a": "Compare the plans and what each includes on the pricing page — every plan starts with a 14-day free trial."
+          }
+        ]
+      },
+      "cta": {
+        "title": "Create your first video",
+        "subtitle": "Start with a 14-day free trial."
+      }
+    }
   }
 }
