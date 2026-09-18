@@ -26,7 +26,7 @@
     "product": "Product"
   },
   "hero": {
-    "badge": "The AI Marketing OS for Uzbekistan",
+    "badge": "The AI Marketing OS for businesses worldwide",
     "titleTop": "From ad to sale —",
     "titleHighlight": "all in one system",
     "titleBottom": "powered by AI",
@@ -404,15 +404,15 @@
   },
   "about": {
     "eyebrow": "About us",
-    "title": "The future for Uzbekistan's businesses — with AI, starting today",
+    "title": "The future for businesses everywhere — with AI, starting today",
     "lead": "Do'ppi.ai makes AI-powered marketing automation effortless for every business — from the first ad to the closed sale.",
-    "vision": "Our mission is to take every business in Uzbekistan to the global stage, with an AI system purpose-built for local language, channels and telephony.",
+    "vision": "Our mission is to help every business, anywhere in the world, grow with AI — through a system that adapts to its customers' language, channels and telephony.",
     "pageTitle": "The purpose behind Do'ppi.ai",
-    "pageSubtitle": "We turn artificial intelligence into an everyday working tool for the businesses of Uzbekistan.",
+    "pageSubtitle": "We turn artificial intelligence into an everyday working tool for businesses around the world.",
     "points": [
       {
         "icon": "target",
-        "title": "Built for the local market",
+        "title": "Adapts to your market",
         "desc": "Works in Uzbek and Russian, with local channels and SIP telephony."
       },
       {
@@ -444,7 +444,7 @@
   "team": {
     "eyebrow": "Team",
     "title": "The team behind Do'ppi.ai",
-    "subtitle": "Specialists in AI, marketing and product — building one system for the businesses of Uzbekistan.",
+    "subtitle": "Specialists in AI, marketing and product — building one system for businesses around the world.",
     "roles": {
       "rifat": "Head of Growth",
       "jaxongir": "CTO",
@@ -523,7 +523,7 @@
     "socialsTitle": "Social profiles"
   },
   "footer": {
-    "tagline": "The future for Uzbekistan's businesses — with AI, starting today.",
+    "tagline": "The future for businesses everywhere — with AI, starting today.",
     "product": "Product",
     "company": "Company",
     "contactTitle": "Contact",
@@ -547,7 +547,7 @@
       "sections": [
         {
           "h": "Introduction",
-          "p": "Do'ppi.ai (\"we\", \"us\", or \"our\") operates an AI marketing platform for businesses in Uzbekistan. This Privacy Policy explains what information we collect, how we use it, and the choices you have when you visit our website or request a demo of our service."
+          "p": "Do'ppi.ai (\"we\", \"us\", or \"our\") operates an AI marketing platform for businesses around the world. This Privacy Policy explains what information we collect, how we use it, and the choices you have when you visit our website or request a demo of our service."
         },
         {
           "h": "Information We Collect",
@@ -684,7 +684,7 @@
   },
   "seo": {
     "home": {
-      "title": "Do'ppi.ai — the AI marketing OS for Uzbekistan",
+      "title": "Do'ppi.ai — the AI marketing OS for businesses worldwide",
       "description": "Do'ppi.ai is the AI marketing operating system that automates everything from ad to sale: voice agent, social media automation, CRM, chatbots and a SIP call center.",
       "keywords": "AI marketing, artificial intelligence, voice agent, CRM, chatbot, SIP telephony, Uzbekistan, lead generation, marketing automation"
     },
@@ -694,7 +694,7 @@
     },
     "about": {
       "title": "About — Do'ppi.ai",
-      "description": "The Do'ppi.ai team and mission: building an AI marketing system for the businesses of Uzbekistan."
+      "description": "The Do'ppi.ai team and mission: building an AI marketing system for businesses around the world."
     },
     "contact": {
       "title": "Contact — Do'ppi.ai",

@@ -26,7 +26,7 @@
     "product": "Mahsulot"
   },
   "hero": {
-    "badge": "O'zbekiston uchun AI Marketing tizimi",
+    "badge": "Butun dunyo uchun AI Marketing tizimi",
     "titleTop": "Reklamadan sotuvgacha —",
     "titleHighlight": "barchasi bir tizimda",
     "titleBottom": "sun'iy intellekt bilan",
@@ -66,7 +66,7 @@
   },
   "problem": {
     "eyebrow": "Muammo",
-    "title": "O'zbekistondagi marketing muammolari",
+    "title": "Ko'pchilik bizneslarda marketing tizimli ishlamaydi",
     "subtitle": "Reklamaga pul ketadi, lekin natija tizimli emas. Ko'p bizneslar bir xil to'siqlarga duch keladi.",
     "items": [
       {
@@ -404,15 +404,15 @@
   },
   "about": {
     "eyebrow": "Biz haqimizda",
-    "title": "O'zbekiston bizneslari uchun kelajak — AI bilan bugundan",
+    "title": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan",
     "lead": "Do'ppi.ai — har bir biznes uchun sun'iy intellekt orqali marketingni avtomatlashtirishni maksimal darajada osonlashtiruvchi platforma.",
-    "vision": "Bizning vazifamiz — O'zbekistondagi har bir biznesni global darajaga olib chiqish. Mahalliy til, kanallar va telefoniya uchun maxsus qurilgan AI tizimi bilan.",
+    "vision": "Bizning vazifamiz — dunyoning istalgan nuqtasidagi har bir biznesga AI yordamida o'sish imkonini berish. Mijozlarining tili, kanallari va telefoniyasiga moslashadigan AI tizimi bilan.",
     "pageTitle": "Do'ppi.ai ortidagi maqsad",
-    "pageSubtitle": "Biz O'zbekiston bizneslari uchun sun'iy intellektni kundalik ish quroliga aylantiramiz.",
+    "pageSubtitle": "Biz butun dunyo bizneslari uchun sun'iy intellektni kundalik ish quroliga aylantiramiz.",
     "points": [
       {
         "icon": "target",
-        "title": "Mahalliy bozorga moslangan",
+        "title": "Bozoringizga moslashadi",
         "desc": "O'zbek va rus tili, mahalliy kanallar va SIP telefoniya bilan ishlaydi."
       },
       {
@@ -444,7 +444,7 @@
   "team": {
     "eyebrow": "Jamoa",
     "title": "Do'ppi.ai ortidagi jamoa",
-    "subtitle": "Sun'iy intellekt, marketing va mahsulot mutaxassislari — O'zbekiston bizneslari uchun yagona tizim quramiz.",
+    "subtitle": "Sun'iy intellekt, marketing va mahsulot mutaxassislari — butun dunyo bizneslari uchun yagona tizim quramiz.",
     "roles": {
       "rifat": "O'sish bo'yicha rahbar",
       "jaxongir": "Bosh texnolog (CTO)",
@@ -523,7 +523,7 @@
     "socialsTitle": "Ijtimoiy tarmoqlar"
   },
   "footer": {
-    "tagline": "O'zbekiston bizneslari uchun kelajak — AI bilan bugundan.",
+    "tagline": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan.",
     "product": "Mahsulot",
     "company": "Kompaniya",
     "contactTitle": "Aloqa",
@@ -547,7 +547,7 @@
       "sections": [
         {
           "h": "Kirish",
-          "p": "Do'ppi.ai (\"biz\") O'zbekistondagi bizneslar uchun sun'iy intellektga asoslangan marketing platformasini taqdim etadi. Ushbu Maxfiylik siyosati biz qanday ma'lumotlarni yig'ishimizni, ulardan qanday foydalanishimizni va veb-saytimizga tashrif buyurganingizda yoki demo so'raganingizda qanday tanlovlaringiz borligini tushuntiradi."
+          "p": "Do'ppi.ai (\"biz\") butun dunyo bizneslari uchun sun'iy intellektga asoslangan marketing platformasini taqdim etadi. Ushbu Maxfiylik siyosati biz qanday ma'lumotlarni yig'ishimizni, ulardan qanday foydalanishimizni va veb-saytimizga tashrif buyurganingizda yoki demo so'raganingizda qanday tanlovlaringiz borligini tushuntiradi."
         },
         {
           "h": "Biz yig'adigan ma'lumotlar",
@@ -684,7 +684,7 @@
   },
   "seo": {
     "home": {
-      "title": "Do'ppi.ai — O'zbekiston uchun AI marketing tizimi",
+      "title": "Do'ppi.ai — butun dunyo uchun AI marketing tizimi",
       "description": "Do'ppi.ai — reklamadan sotuvgacha bo'lgan jarayonni avtomatlashtiruvchi AI marketing operatsion tizimi: ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, CRM, chatbotlar va SIP call-markaz.",
       "keywords": "AI marketing, sun'iy intellekt, ovozli agent, CRM, chatbot, SIP telefoniya, O'zbekiston, lead generatsiya, marketing avtomatizatsiya"
     },
@@ -694,7 +694,7 @@
     },
     "about": {
       "title": "Biz haqimizda — Do'ppi.ai",
-      "description": "Do'ppi.ai jamoasi va vazifasi: O'zbekiston bizneslari uchun AI marketing tizimini qurish."
+      "description": "Do'ppi.ai jamoasi va vazifasi: butun dunyo bizneslari uchun AI marketing tizimini qurish."
     },
     "contact": {
       "title": "Aloqa — Do'ppi.ai",
