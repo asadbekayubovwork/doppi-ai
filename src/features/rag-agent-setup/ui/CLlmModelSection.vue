@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { computed, useId } from "vue"
-import { LLM_MODELS, type LlmModelId } from "@/entities/rag-agent"
+import type { LlmModel, LlmModelId } from "@/entities/rag-agent"
 import { describeTemperature } from "../model/prompt"
 import CSetupSection from "./CSetupSection.vue"
 
 const model = defineModel<LlmModelId>("model", { required: true })
 const temperature = defineModel<number>("temperature", { required: true })
+defineProps<{ models: LlmModel[]; loading?: boolean }>()
 
 const temperatureId = useId()
 const radioName = useId()
@@ -14,6 +15,14 @@ const temperatureLabel = computed(
   () =>
     `${temperature.value.toFixed(1)} · ${describeTemperature(temperature.value)}`
 )
+
+const contextLabel = (tokens: number) =>
+  `${Intl.NumberFormat("en", { notation: "compact" }).format(tokens)} context`
+
+const pricingLabel = (option: LlmModel) => {
+  if (!option.pricingConfigured) return "Pricing not configured"
+  return `${option.currency} ${option.inputUsdPerMillion} input · ${option.outputUsdPerMillion} output / 1M`
+}
 </script>
 
 <template>
@@ -24,9 +33,12 @@ const temperatureLabel = computed(
   >
     <fieldset>
       <legend class="sr-only">Model</legend>
-      <div class="grid gap-3 sm:grid-cols-3">
+      <div
+        v-if="models.length"
+        class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3"
+      >
         <label
-          v-for="option in LLM_MODELS"
+          v-for="option in models"
           :key="option.id"
           class="flex cursor-pointer flex-col gap-0.5 rounded-xl border px-3.5 py-3 transition has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[#5B4BE8]/30"
           :class="
@@ -44,14 +56,27 @@ const temperatureLabel = computed(
               :value="option.id"
             />
             <span class="text-[13.5px] font-semibold text-[#15151B]">
-              {{ option.name }}
+              {{ option.displayName }}
             </span>
           </span>
           <span class="pl-6 text-xs text-[#84848E]">
-            {{ option.context }} · {{ option.strength }}
+            {{ option.provider }} · {{ contextLabel(option.contextTokens) }}
+          </span>
+          <span class="pl-6 text-[11px] text-[#84848E]">
+            {{ pricingLabel(option) }}
           </span>
         </label>
       </div>
+      <p
+        v-else
+        class="rounded-xl border border-[#E5E5E1] bg-[#FAFAF9] px-4 py-3 text-[13px] text-[#6A6A74]"
+      >
+        {{
+          loading
+            ? "Loading available models…"
+            : "No model is enabled for this workspace."
+        }}
+      </p>
     </fieldset>
 
     <div class="mt-4 flex items-center gap-4">

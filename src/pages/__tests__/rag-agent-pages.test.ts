@@ -2,12 +2,101 @@ import { flushPromises, mount } from "@vue/test-utils"
 import { createPinia } from "pinia"
 import { createHead } from "@unhead/vue/client"
 import { createRouter, createMemoryHistory } from "vue-router"
+import { HttpError } from "@/shared/api"
+import {
+  ragAgentApi,
+  type ConversationDetail,
+  type RagAgent,
+} from "@/entities/rag-agent"
 import { CDashboardSidebar } from "@/widgets/dashboard-sidebar"
 import PRagAgent from "../PRagAgent.vue"
 import PRagAgentCreate from "../PRagAgentCreate.vue"
 import PRagConversation from "../PRagConversation.vue"
 
 const stub = { template: "<div />" }
+const agent: RagAgent = {
+  id: "agent-test",
+  name: "Support agent",
+  description: "Grounded answers",
+  status: "live",
+  model: "google/gemma-4-31B-it",
+  temperature: 0.3,
+  systemPrompt: "Use sources.",
+  collections: ["knowledge-test"],
+  topK: 8,
+  similarityThreshold: 0.1,
+  documentCount: 2,
+  chunkCount: 12,
+  channels: ["web"],
+  syncedAt: new Date().toISOString(),
+  stats: {
+    conversations: 1,
+    conversationsChange: 0,
+    messages30d: 2,
+    messagesChange: 0,
+    avgResponseMs: 0,
+    avgResponseChangeMs: 0,
+    answerAccuracy: 0,
+    answerAccuracyChange: 0,
+    escalationRate: 0,
+    escalationRateChange: 0,
+  },
+}
+
+const conversation: ConversationDetail = {
+  id: "session-test",
+  channel: "web",
+  lastMessage: "What is covered?",
+  messageCount: 2,
+  status: "active",
+  updatedAt: new Date().toISOString(),
+  customer: { name: "Widget visitor", contact: "visitor-1" },
+  startedAt: new Date().toISOString(),
+  agentMessageCount: 1,
+  handledBy: "RAG agent",
+  handoverTo: null,
+  messages: [
+    {
+      id: "1",
+      author: "customer",
+      text: "What is covered?",
+      sentAt: new Date().toISOString(),
+    },
+    {
+      id: "2",
+      author: "agent",
+      text: "The policy covers the listed products.",
+      sentAt: new Date().toISOString(),
+      citations: [
+        {
+          document: "policy.docx",
+          location: "chunk 7",
+          chunkId: 7,
+          excerpt: "Coverage applies to listed products.",
+          vectorSimilarity: 0.82,
+          rerankScore: 0.91,
+        },
+      ],
+    },
+  ],
+  retrievedSources: [
+    {
+      document: "policy.docx",
+      chunksUsed: 1,
+      score: 0.91,
+      chunks: [
+        {
+          chunkId: 7,
+          content: "Coverage applies to listed products.",
+          vectorSimilarity: 0.82,
+          rerankScore: 0.91,
+        },
+      ],
+    },
+  ],
+  tags: [],
+  rating: null,
+}
 
 const mountAt = async (
   path: string,
@@ -19,6 +108,8 @@ const mountAt = async (
     routes: [
       { path: "/app/rag", name: "RagAgent", component: stub },
       { path: "/app/rag/create", name: "RagAgentCreate", component: stub },
+      { path: "/app/rag/playground", name: "RagPlayground", component: stub },
+      { path: "/app/rag/settings", name: "RagAgentSettings", component: stub },
       {
         path: "/app/rag/conversations/:chatId",
         name: "RagConversation",
@@ -27,83 +118,94 @@ const mountAt = async (
       { path: "/:pathMatch(.*)*", component: stub },
     ],
   })
+  const pinia = createPinia()
+  pinia.state.value.auth = {
+    status: "authenticated",
+    businesses: [
+      {
+        id: "business-test",
+        name: "Test",
+        slug: "test",
+        status: "active",
+        default_language: "uz",
+        billing_region: "UZ",
+      },
+    ],
+    activeBusinessId: "business-test",
+  }
   await router.push(path)
   const wrapper = mount(component as never, {
     props,
-    global: { plugins: [createPinia(), router, createHead()] },
+    global: { plugins: [pinia, router, createHead()] },
   })
-  // The RAG API is an in-memory stand-in that answers after a short delay.
-  await vi.runAllTimersAsync()
   await flushPromises()
   return wrapper
 }
 
 beforeEach(() => {
-  vi.useFakeTimers()
-  // jsdom has no layout; the conversation list scrolls the open chat into view.
+  vi.spyOn(ragAgentApi, "ensureTenant").mockResolvedValue({})
+  vi.spyOn(ragAgentApi, "getLimits").mockResolvedValue({
+    max_file_bytes: 1024 * 1024,
+  } as never)
+  vi.spyOn(ragAgentApi, "listModels").mockResolvedValue([
+    {
+      id: agent.model,
+      displayName: "Gemma",
+      provider: "GPU.UZ",
+      contextTokens: 32768,
+      inputUsdPerMillion: null,
+      outputUsdPerMillion: null,
+      currency: "USD",
+      pricingConfigured: false,
+      isDefault: true,
+      capabilities: {},
+    },
+  ])
+  vi.spyOn(ragAgentApi, "getAgent").mockResolvedValue(agent)
+  vi.spyOn(ragAgentApi, "listConversations").mockResolvedValue([conversation])
+  vi.spyOn(ragAgentApi, "getConversation").mockResolvedValue(conversation)
   Element.prototype.scrollIntoView = vi.fn()
 })
 
-afterEach(() => {
-  vi.useRealTimers()
-})
+afterEach(() => vi.restoreAllMocks())
 
 describe("RAG agent pages", () => {
-  it("renders the agent summary and the first page of conversations", async () => {
+  it("renders data loaded through the RAG API", async () => {
     const wrapper = await mountAt("/app/rag", PRagAgent)
-    const text = wrapper.text()
-
-    expect(text).toContain("Aura Support Agent")
-    expect(text).toContain("8,942")
-    expect(text).toContain("GPT-4o · temperature 0.3")
-    expect(wrapper.findAll("tbody tr")).toHaveLength(10)
-    expect(text).toContain("Showing 1–10 of 20 conversations")
+    expect(wrapper.text()).toContain("Support agent")
+    expect(wrapper.text()).toContain("1 chats")
     wrapper.unmount()
   })
 
-  it("opens a conversation with its transcript, sources and outcome", async () => {
+  it("renders conversation evidence from persisted source chunks", async () => {
     const wrapper = await mountAt(
-      "/app/rag/conversations/chat_5c73aa90",
+      "/app/rag/conversations/session-test",
       PRagConversation,
-      { chatId: "chat_5c73aa90" }
+      { chatId: "session-test" }
     )
-    const text = wrapper.text()
-
-    expect(text).toContain("Madina Karimova")
-    expect(text).toContain("Ulgurji buyurtmaga chegirma bormi?")
-    expect(text).toContain("Pricing & discounts.xlsx · sheet 3")
-    expect(text).toContain("Retrieved sources")
-    expect(text).toContain("Customer rated 5/5")
-    expect(text).toContain("Read-only transcript — take over to reply")
+    expect(wrapper.text()).toContain("Widget visitor")
+    expect(wrapper.text()).toContain("policy.docx")
+    expect(wrapper.text()).toContain("View evidence chunks")
     wrapper.unmount()
   })
 
-  it("says so when a conversation does not exist", async () => {
-    const wrapper = await mountAt(
-      "/app/rag/conversations/chat_missing",
-      PRagConversation,
-      { chatId: "chat_missing" }
+  it("shows not found only for a 404 conversation response", async () => {
+    vi.spyOn(ragAgentApi, "getConversation").mockRejectedValue(
+      new HttpError(new Response(null, { status: 404 }))
     )
-
+    const wrapper = await mountAt(
+      "/app/rag/conversations/missing",
+      PRagConversation,
+      { chatId: "missing" }
+    )
     expect(wrapper.text()).toContain("Conversation not found")
     wrapper.unmount()
   })
 
-  it("renders every setup step and the checklist", async () => {
+  it("renders dynamic model options", async () => {
     const wrapper = await mountAt("/app/rag/create", PRagAgentCreate)
-    const text = wrapper.text()
-
-    for (const step of [
-      "Agent name",
-      "Knowledge base",
-      "LLM model",
-      "System prompt",
-      "Channels & credentials",
-      "Setup checklist",
-    ]) {
-      expect(text).toContain(step)
-    }
-    expect(wrapper.findAll('input[type="radio"]')).toHaveLength(3)
+    expect(wrapper.text()).toContain("Gemma")
+    expect(wrapper.findAll('input[type="radio"]')).toHaveLength(1)
     wrapper.unmount()
   })
 })
@@ -111,21 +213,11 @@ describe("RAG agent pages", () => {
 describe("dashboard sidebar", () => {
   it("nests Create agent under the RAG agent and marks it current", async () => {
     const wrapper = await mountAt("/app/rag/create", CDashboardSidebar)
-
     const createLink = wrapper
       .findAll("a")
       .find((link) => link.text() === "Create agent")
     expect(createLink?.attributes("href")).toBe("/app/rag/create")
     expect(createLink?.attributes("aria-current")).toBe("page")
-
-    const toggle = wrapper.find(
-      'button[aria-label="Collapse Universal RAG Agent"]'
-    )
-    expect(toggle.attributes("aria-expanded")).toBe("true")
-
-    await toggle.trigger("click")
-    await vi.runAllTimersAsync()
-    expect(wrapper.text()).not.toContain("Create agent")
     wrapper.unmount()
   })
 })

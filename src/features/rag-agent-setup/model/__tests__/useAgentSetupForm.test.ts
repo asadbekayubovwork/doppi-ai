@@ -1,4 +1,5 @@
 import { effectScope } from "vue"
+import { ragAgentApi } from "@/entities/rag-agent"
 import { useAgentSetupForm, type AgentSetupForm } from "../useAgentSetupForm"
 
 const TELEGRAM_TOKEN = "7742150983:AAF91c7kQx2mZ8vN3pL5tR9wY1bH6dJ4sE0"
@@ -16,7 +17,21 @@ describe("agent setup form", () => {
   beforeEach(() => {
     vi.useFakeTimers()
     scope = effectScope()
-    form = scope.run(() => useAgentSetupForm())!
+    form = scope.run(() => useAgentSetupForm("business-test"))!
+    form.configureLimits(50 * 1024 * 1024)
+    vi.spyOn(ragAgentApi, "uploadDocument").mockResolvedValue("document-test")
+    vi.spyOn(ragAgentApi, "listDocuments").mockResolvedValue([
+      {
+        document_id: "document-test",
+        name: "policy.docx",
+        size_bytes: 2048,
+        chunk_count: 3,
+        status: "indexed",
+        progress: 1,
+        error: null,
+      },
+    ])
+    vi.spyOn(ragAgentApi, "deleteDocument").mockResolvedValue()
   })
 
   afterEach(() => {
@@ -29,8 +44,8 @@ describe("agent setup form", () => {
     expect(form.missing.map((item) => item.key)).toEqual([
       "name",
       "documents",
+      "model",
       "prompt",
-      "channel",
     ])
     const channelItems = form.checklist.filter((item) =>
       item.key.startsWith("channel-")
@@ -52,7 +67,7 @@ describe("agent setup form", () => {
     expect(rejected.map(({ file, reason }) => [file.name, reason])).toEqual([
       ["prices.xlsx", "already added"],
       ["photo.png", "unsupported file type"],
-      ["catalogue.pdf", "larger than 50 MB"],
+      ["catalogue.pdf", "larger than the configured limit"],
     ])
     expect(form.documents).toHaveLength(1)
   })
@@ -86,12 +101,12 @@ describe("agent setup form", () => {
 
     form.setCredential("telegram", "botToken", TELEGRAM_TOKEN)
 
-    expect(openItems(form)).not.toContain("At least one channel connected")
     expect(openItems(form)).not.toContain("Telegram credentials")
   })
 
   it("submits only indexed documents and enabled channels", async () => {
     form.name = "  Aura Support Agent "
+    form.model = "google/gemma-4-31B-it"
     form.systemPrompt = "Answer from the documents."
     form.addFiles([file("policy.docx")])
     form.setChannelEnabled("telegram", true)
@@ -101,7 +116,7 @@ describe("agent setup form", () => {
     expect(form.canSubmit).toBe(true)
     const payload = form.toPayload()
     expect(payload.name).toBe("Aura Support Agent")
-    expect(payload.documentIds).toHaveLength(1)
+    expect(payload.collections).toHaveLength(1)
     expect(payload.channels).toEqual([
       { kind: "telegram", credentials: { botToken: TELEGRAM_TOKEN } },
     ])

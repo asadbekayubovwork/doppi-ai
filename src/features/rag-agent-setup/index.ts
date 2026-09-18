@@ -1,6 +1,5 @@
 export {
   ACCEPTED_EXTENSIONS,
-  MAX_FILE_BYTES,
   isChannelReady,
   useAgentSetupForm,
   type AgentSetupForm,

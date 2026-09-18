@@ -10,7 +10,6 @@ import { CHANNEL_SETUP, DEFAULT_CHANNELS } from "./channel-setup"
 import { PROMPT_TOKEN_LIMIT, estimateTokens } from "./prompt"
 
 export const ACCEPTED_EXTENSIONS = [".pdf", ".docx", ".xlsx", ".txt"]
-export const MAX_FILE_BYTES = 50 * 1024 * 1024
 
 export interface DocumentDraft {
   /** Client-side key; the server id arrives once embedding finishes. */
@@ -22,6 +21,7 @@ export interface DocumentDraft {
   progress: number
   documentId: string | null
   chunkCount: number | null
+  error: string | null
 }
 
 export interface ChannelDraft {
@@ -64,13 +64,38 @@ export const isChannelReady = (channel: ChannelDraft): boolean =>
  * rather than for the submit button. Returned as one reactive object so the
  * page can bind `v-model="form.name"` directly.
  */
-export function useAgentSetupForm() {
+const newCollectionName = () => {
+  const id =
+    typeof crypto !== "undefined" && "randomUUID" in crypto
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2)}`
+  return `knowledge-${id}`
+}
+
+const pause = (milliseconds: number, signal: AbortSignal) =>
+  new Promise<void>((resolve, reject) => {
+    const timer = window.setTimeout(resolve, milliseconds)
+    signal.addEventListener(
+      "abort",
+      () => {
+        window.clearTimeout(timer)
+        reject(signal.reason)
+      },
+      { once: true }
+    )
+  })
+
+export function useAgentSetupForm(businessId: string | (() => string)) {
+  const currentBusinessId = () =>
+    typeof businessId === "function" ? businessId() : businessId
   const name = ref("")
   const description = ref("")
   const documents = ref<DocumentDraft[]>([])
-  const model = ref<LlmModelId>("gpt-4o")
+  const model = ref<LlmModelId>("")
   const temperature = ref(0.3)
   const systemPrompt = ref("")
+  const collection = ref(newCollectionName())
+  const maxFileBytes = ref<number | null>(null)
   const channels = ref<ChannelDraft[]>(
     DEFAULT_CHANNELS.map((kind) => channelDraft(kind))
   )
@@ -86,7 +111,9 @@ export function useAgentSetupForm() {
   const rejectionReason = (file: File): string | null => {
     const extension = file.name.slice(file.name.lastIndexOf(".")).toLowerCase()
     if (!ACCEPTED_EXTENSIONS.includes(extension)) return "unsupported file type"
-    if (file.size > MAX_FILE_BYTES) return "larger than 50 MB"
+    if (maxFileBytes.value === null) return "configuration is still loading"
+    if (file.size > maxFileBytes.value)
+      return "larger than the configured limit"
     const duplicate = documents.value.some(
       (item) => item.name === file.name && item.sizeBytes === file.size
     )
@@ -106,28 +133,54 @@ export function useAgentSetupForm() {
       progress: 0,
       documentId: null,
       chunkCount: null,
+      error: null,
     })
 
     try {
-      const uploaded = await ragAgentApi.uploadDocument(file, {
-        signal: controller.signal,
-        onProgress: (ratio) => {
-          const draft = findDocument(key)
-          if (draft) draft.progress = ratio
-        },
-      })
-      const draft = findDocument(key)
-      if (draft) {
-        draft.status = "indexed"
-        draft.progress = 1
-        draft.documentId = uploaded.id
-        draft.chunkCount = uploaded.chunkCount
+      const documentId = await ragAgentApi.uploadDocument(
+        currentBusinessId(),
+        collection.value,
+        file,
+        controller.signal
+      )
+      const uploaded = findDocument(key)
+      if (uploaded) {
+        uploaded.documentId = documentId
+        uploaded.progress = 0.05
       }
-    } catch {
+      while (!controller.signal.aborted) {
+        const rows = await ragAgentApi.listDocuments(
+          currentBusinessId(),
+          collection.value
+        )
+        const row = rows.find((item) => item.document_id === documentId)
+        if (!row) throw new Error("Uploaded document disappeared")
+        const draft = findDocument(key)
+        if (!draft) return
+        draft.progress =
+          row.status === "processing"
+            ? Math.max(0.1, row.progress)
+            : row.progress
+        draft.chunkCount = row.chunk_count
+        draft.error = row.error
+        if (row.status === "indexed") {
+          draft.status = "indexed"
+          draft.progress = 1
+          return
+        }
+        if (row.status === "failed")
+          throw new Error(row.error || "Indexing failed")
+        await pause(1000, controller.signal)
+      }
+    } catch (error) {
       // Removing a document aborts its upload; that is not a failure.
       if (!controller.signal.aborted) {
         const draft = findDocument(key)
-        if (draft) draft.status = "failed"
+        if (draft) {
+          draft.status = "failed"
+          draft.error =
+            error instanceof Error ? error.message : "Indexing failed"
+        }
       }
     } finally {
       uploads.delete(key)
@@ -146,8 +199,12 @@ export function useAgentSetupForm() {
   }
 
   const removeDocument = (key: string) => {
+    const document = findDocument(key)
     uploads.get(key)?.abort()
     documents.value = documents.value.filter((item) => item.key !== key)
+    if (document?.documentId) {
+      void ragAgentApi.deleteDocument(currentBusinessId(), document.documentId)
+    }
   }
 
   const setChannelEnabled = (kind: ChannelKind, enabled: boolean) => {
@@ -193,11 +250,6 @@ export function useAgentSetupForm() {
         systemPrompt.value.trim().length > 0 &&
           promptTokens.value <= PROMPT_TOKEN_LIMIT
       ),
-      required(
-        "channel",
-        "At least one channel connected",
-        channels.value.some((item) => item.enabled && isChannelReady(item))
-      ),
     ]
 
     // A channel switched on without valid credentials would fail at launch,
@@ -223,7 +275,7 @@ export function useAgentSetupForm() {
   const toPayload = (): CreateAgentPayload => ({
     name: name.value.trim(),
     description: description.value.trim(),
-    documentIds: documents.value.flatMap((item) => item.documentId ?? []),
+    collections: [collection.value],
     model: model.value,
     temperature: temperature.value,
     systemPrompt: systemPrompt.value.trim(),
@@ -243,6 +295,8 @@ export function useAgentSetupForm() {
     temperature,
     systemPrompt,
     channels,
+    collection,
+    maxFileBytes,
     availableChannels,
     promptTokens,
     checklist,
@@ -254,6 +308,7 @@ export function useAgentSetupForm() {
     setCredential,
     addChannel,
     toPayload,
+    configureLimits: (value: number) => (maxFileBytes.value = value),
   })
 }
 

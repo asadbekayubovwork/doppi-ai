@@ -1,4 +1,6 @@
 import { defineStore } from "pinia"
+import { clearRagTokens } from "@/entities/rag-agent"
+import { clearRagAdminToken } from "@/features/rag-admin"
 import {
   authApi,
   type Business,
@@ -62,6 +64,8 @@ export const useAuthStore = defineStore("auth", {
     },
 
     clearSession() {
+      clearRagTokens()
+      clearRagAdminToken()
       this.session = null
       this.user = null
       this.businesses = []
