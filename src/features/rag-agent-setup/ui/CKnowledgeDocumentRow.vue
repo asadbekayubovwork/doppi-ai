@@ -26,7 +26,8 @@ const details = computed(() => {
   const size = formatFileSize(sizeBytes)
   if (status === "indexed")
     return `${size} · ${formatCount(chunkCount ?? 0)} chunks`
-  if (status === "failed") return `${size} · remove it and upload again`
+  if (status === "failed")
+    return `${size} · ${props.document.error || "remove it and upload again"}`
   return size
 })
 </script>

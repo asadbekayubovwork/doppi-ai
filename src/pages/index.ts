@@ -151,6 +151,39 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("./PRagAgentCreate.vue"),
   },
   {
+    path: "/app/rag/playground",
+    name: "RagPlayground",
+    meta: {
+      layout: "DashboardLayout",
+      requiresAuth: true,
+      title: "RAG playground",
+      subtitle: "Retrieval va javoblarni real vaqtda tekshirish",
+    },
+    component: () => import("./PRagPlayground.vue"),
+  },
+  {
+    path: "/app/rag/settings",
+    name: "RagAgentSettings",
+    meta: {
+      layout: "DashboardLayout",
+      requiresAuth: true,
+      title: "RAG agent settings",
+      subtitle: "Model, retrieval va agent boshqaruvi",
+    },
+    component: () => import("./PRagAgentSettings.vue"),
+  },
+  {
+    path: "/app/admin/rag",
+    name: "RagAdmin",
+    meta: {
+      layout: "DashboardLayout",
+      requiresAuth: true,
+      title: "RAG administration",
+      subtitle: "Modellar, narxlar va tenant limitlari",
+    },
+    component: () => import("./PRagAdmin.vue"),
+  },
+  {
     path: "/app/rag/conversations/:chatId",
     name: "RagConversation",
     props: true,

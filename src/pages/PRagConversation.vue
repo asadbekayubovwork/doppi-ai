@@ -47,10 +47,16 @@ const isHandledByMe = computed(
 useHead({ title: computed(() => `${props.chatId} — Do'ppi AI`) })
 usePageHeading(() => ({ subtitle: `Conversations · ${props.chatId}` }))
 
-onMounted(() => {
-  void store.loadAgent()
-  void store.loadConversations()
-})
+const businessId = computed(() => auth.activeBusiness?.id ?? "")
+
+const loadContext = async () => {
+  if (!businessId.value) return
+  await store.loadAgent(businessId.value)
+  await store.loadConversations(businessId.value)
+}
+
+onMounted(() => void loadContext())
+watch(businessId, () => void loadContext())
 
 watch(
   () => props.chatId,
@@ -58,6 +64,7 @@ watch(
     draft.value = ""
     loadState.value = "loading"
     try {
+      await loadContext()
       const detail = await store.loadConversation(chatId)
       // Ignore a response for a chat the user has already navigated away from.
       if (chatId === props.chatId)

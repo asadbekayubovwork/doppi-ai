@@ -9,6 +9,7 @@ defineProps<{
   documents: DocumentDraft[]
   /** Value for the file input's `accept` attribute. */
   accept: string
+  maxFileBytes: number | null
 }>()
 
 const emit = defineEmits<{ add: [files: File[]]; remove: [key: string] }>()
@@ -48,7 +49,11 @@ const onPick = (event: Event) => {
   <CSetupSection
     :step="2"
     title="Knowledge base"
-    hint="PDF, DOCX, XLSX or TXT, up to 50 MB each"
+    :hint="
+      maxFileBytes
+        ? `PDF, DOCX, XLSX or TXT, up to ${Math.round(maxFileBytes / 1024 / 1024)} MB each`
+        : 'Loading upload limits…'
+    "
   >
     <div class="space-y-2.5">
       <label

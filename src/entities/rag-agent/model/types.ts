@@ -2,7 +2,7 @@ export type ChannelKind = "instagram" | "telegram" | "whatsapp" | "web"
 
 export type ConversationStatus = "active" | "resolved" | "escalated"
 
-export type LlmModelId = "gpt-4o" | "claude-opus-5" | "llama-3.1-70b"
+export type LlmModelId = string
 
 /** Changes are relative to the previous 30-day window. Ratios are 0–1. */
 export interface AgentStats {
@@ -25,6 +25,10 @@ export interface RagAgent {
   status: "live" | "paused"
   model: LlmModelId
   temperature: number
+  systemPrompt: string
+  collections: string[]
+  topK: number
+  similarityThreshold: number
   documentCount: number
   chunkCount: number
   channels: ChannelKind[]
@@ -45,6 +49,10 @@ export interface SourceCitation {
   document: string
   /** Where in the document the answer came from: "sheet 1", "p.14", "§4". */
   location: string
+  chunkId: number
+  excerpt: string
+  vectorSimilarity: number
+  rerankScore: number
 }
 
 export interface AnswerTrace {
@@ -69,6 +77,12 @@ export interface RetrievedSource {
   chunksUsed: number
   /** Retrieval similarity, 0–1. */
   score: number
+  chunks: Array<{
+    chunkId: number
+    content: string
+    vectorSimilarity: number
+    rerankScore: number
+  }>
 }
 
 export interface CustomerRating {
@@ -100,9 +114,23 @@ export interface UploadedDocument {
 export interface CreateAgentPayload {
   name: string
   description: string
-  documentIds: string[]
+  collections: string[]
   model: LlmModelId
   temperature: number
   systemPrompt: string
   channels: Array<{ kind: ChannelKind; credentials: Record<string, string> }>
+}
+
+export interface TenantLimits {
+  max_documents: number
+  max_storage_bytes: number
+  max_agents: number
+  monthly_queries: number
+  monthly_tokens: number
+  monthly_cost_microusd: number | null
+  max_file_bytes: number
+  max_files_per_request: number
+  max_pdf_pages: number
+  query_rate_per_minute: number
+  upload_rate_per_minute: number
 }

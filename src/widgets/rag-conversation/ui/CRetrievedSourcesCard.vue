@@ -38,6 +38,24 @@ const ranked = computed(() =>
           :value="source.score"
           :label="`Relevance of ${source.document}`"
         />
+        <details class="mt-2 text-xs text-[#6A6A74]">
+          <summary class="cursor-pointer font-medium text-[#5B4BE8]">
+            View evidence chunks
+          </summary>
+          <div
+            v-for="chunk in source.chunks"
+            :key="chunk.chunkId"
+            class="mt-2 rounded-lg border border-[#EEEEEA] bg-[#FAFAF9] p-2.5"
+          >
+            <p class="font-medium text-[#15151B]">
+              Chunk {{ chunk.chunkId }} · rerank
+              {{ chunk.rerankScore.toFixed(3) }}
+            </p>
+            <p class="mt-1 whitespace-pre-wrap text-[11px] leading-4">
+              {{ chunk.content }}
+            </p>
+          </div>
+        </details>
       </li>
     </ul>
     <p v-else class="px-4 py-6 text-center text-[13px] text-[#84848E]">

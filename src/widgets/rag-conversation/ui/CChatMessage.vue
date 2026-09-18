@@ -38,22 +38,39 @@ const traceLabel = computed(() => {
         Operator
       </p>
       <p class="whitespace-pre-line break-words">{{ message.text }}</p>
-      <ul
+      <div
         v-if="message.citations?.length"
-        class="mt-2.5 flex flex-wrap gap-1.5"
+        class="mt-2.5 space-y-1.5"
         aria-label="Sources"
       >
-        <li
+        <details
           v-for="citation in message.citations"
-          :key="`${citation.document}-${citation.location}`"
-          class="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-[#E0DCFA] bg-white px-2 py-1 text-xs text-[#3F3F46]"
+          :key="`${citation.document}-${citation.chunkId}`"
+          class="max-w-full rounded-lg border border-[#E0DCFA] bg-white px-2 py-1 text-xs text-[#3F3F46]"
         >
-          <CIcon name="file-text" class="h-3.5 w-3.5 shrink-0 text-[#5B4BE8]" />
-          <span class="truncate">
-            {{ citation.document }} · {{ citation.location }}
-          </span>
-        </li>
-      </ul>
+          <summary class="flex cursor-pointer items-center gap-1.5">
+            <CIcon
+              name="file-text"
+              class="h-3.5 w-3.5 shrink-0 text-[#5B4BE8]"
+            />
+            <span class="truncate"
+              >{{ citation.document }} · {{ citation.location }}</span
+            >
+            <span class="ml-auto tabular-nums text-[#84848E]">{{
+              citation.rerankScore.toFixed(3)
+            }}</span>
+          </summary>
+          <p
+            class="mt-2 whitespace-pre-wrap border-t border-[#EEEEEA] pt-2 text-[11px] leading-4 text-[#6A6A74]"
+          >
+            {{ citation.excerpt }}
+          </p>
+          <p class="mt-1 text-[10px] text-[#84848E]">
+            Vector {{ citation.vectorSimilarity.toFixed(3) }} · rerank
+            {{ citation.rerankScore.toFixed(3) }}
+          </p>
+        </details>
+      </div>
     </div>
 
     <p class="mt-1.5 flex items-center gap-1.5 text-[11px] text-[#84848E]">

@@ -16,28 +16,41 @@ export interface ChannelSetup {
   fields: CredentialField[]
 }
 
-const filled = (value: string) => value.trim().length > 0
-
 export const CHANNEL_SETUP: Record<ChannelKind, ChannelSetup> = {
   instagram: {
     title: "Instagram",
-    caption: "Direct messages",
+    caption: "Meta Messaging API",
     fields: [
       {
-        key: "login",
-        label: "Login",
-        placeholder: "@your.store",
-        isValid: (value) => /^@?[\w.]{1,30}$/.test(value.trim()),
-        invalidHint:
-          "Use the account handle: letters, digits, dots and underscores.",
+        key: "pageId",
+        label: "Page ID",
+        placeholder: "17841400000000000",
+        isValid: (value) => /^\d{8,30}$/.test(value.trim()),
+        invalidHint: "Copy the connected Page ID from Meta Business.",
       },
       {
-        key: "password",
-        label: "Password",
-        placeholder: "Account password",
+        key: "accessToken",
+        label: "Access token",
+        placeholder: "EAA…",
         secret: true,
-        isValid: filled,
-        invalidHint: "Enter the account password.",
+        isValid: (value) => value.trim().length >= 20,
+        invalidHint: "Paste a valid long-lived Meta access token.",
+      },
+      {
+        key: "verifyToken",
+        label: "Webhook verify token",
+        placeholder: "Your private verification token",
+        secret: true,
+        isValid: (value) => value.trim().length >= 16,
+        invalidHint: "Use at least 16 characters.",
+      },
+      {
+        key: "appSecret",
+        label: "Meta app secret",
+        placeholder: "App secret",
+        secret: true,
+        isValid: (value) => value.trim().length >= 20,
+        invalidHint: "Paste the App Secret from Meta Developers.",
       },
     ],
   },
@@ -74,6 +87,22 @@ export const CHANNEL_SETUP: Record<ChannelKind, ChannelSetup> = {
         secret: true,
         isValid: (value) => value.trim().length >= 20,
         invalidHint: "This looks too short for a Cloud API token.",
+      },
+      {
+        key: "verifyToken",
+        label: "Webhook verify token",
+        placeholder: "Your private verification token",
+        secret: true,
+        isValid: (value) => value.trim().length >= 16,
+        invalidHint: "Use at least 16 characters.",
+      },
+      {
+        key: "appSecret",
+        label: "Meta app secret",
+        placeholder: "App secret",
+        secret: true,
+        isValid: (value) => value.trim().length >= 20,
+        invalidHint: "Paste the App Secret from Meta Developers.",
       },
     ],
   },

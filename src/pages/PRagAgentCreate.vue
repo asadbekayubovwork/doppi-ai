@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue"
+import { computed, onMounted, ref, watch } from "vue"
 import { useHead } from "@unhead/vue"
 import { useRouter } from "vue-router"
 import { messageForProblem, useAuthStore } from "@/features/auth"
@@ -25,10 +25,32 @@ const router = useRouter()
 const toast = useToast()
 const auth = useAuthStore()
 const store = useRagAgentStore()
-const form = useAgentSetupForm()
+const businessId = computed(() => auth.activeBusiness?.id ?? "")
+const form = useAgentSetupForm(() => businessId.value)
 const isSubmitting = ref(false)
 
-onMounted(() => void store.loadAgent())
+const load = async () => {
+  if (!businessId.value) return
+  try {
+    await Promise.all([
+      store.loadAgent(businessId.value),
+      store.loadConfiguration(businessId.value),
+    ])
+    if (store.limits) form.configureLimits(store.limits.max_file_bytes)
+    if (!form.model && store.models.length) {
+      form.model =
+        store.models.find((model) => model.isDefault)?.id ?? store.models[0].id
+    }
+  } catch (error) {
+    toast.error(
+      "Couldn't load RAG configuration",
+      messageForProblem(error, "Try again in a moment.")
+    )
+  }
+}
+
+onMounted(() => void load())
+watch(businessId, () => void load())
 
 usePageHeading(() => ({
   subtitle: store.agent
@@ -71,7 +93,7 @@ const submit = async () => {
   }
   isSubmitting.value = true
   try {
-    const agent = await store.createAgent(form.toPayload())
+    const agent = await store.createAgent(businessId.value, form.toPayload())
     toast.success("Agent created", `${agent.name} is live.`)
     await router.push({ name: "RagAgent" })
   } catch (error) {
@@ -126,12 +148,15 @@ const submit = async () => {
         <CKnowledgeBaseSection
           :documents="form.documents"
           :accept="ACCEPTED_EXTENSIONS.join(',')"
+          :max-file-bytes="form.maxFileBytes"
           @add="addFiles"
           @remove="form.removeDocument"
         />
         <CLlmModelSection
           v-model:model="form.model"
           v-model:temperature="form.temperature"
+          :models="store.models"
+          :loading="store.configurationState === 'loading'"
         />
         <CSystemPromptSection
           v-model="form.systemPrompt"
