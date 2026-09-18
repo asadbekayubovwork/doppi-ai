@@ -1,20 +1,28 @@
 ﻿#Requires -Version 5.1
 <#
 .SYNOPSIS
-    Do'ppi.ai landing sahifasini doppiai.uz serveriga deploy qiladi.
+    Do'ppi.ai frontendini doppiai.uz serveriga deploy qiladi.
 
 .DESCRIPTION
-    Loyihani build qiladi, dist/ ni arxivlab serverga yuboradi va
-    saytni yangi versiyaga almashtiradi. Eski versiya serverda
-    saqlanib qoladi, shuning uchun xato bo'lsa darhol qaytarish mumkin.
+    Loyihani build qiladi, dist/ ni arxivlab serverga yuboradi va saytni yangi
+    versiyaga almashtiradi. Har bir deploy serverda alohida release papkasiga
+    ochiladi, `current` symlink esa bitta harakatda yangisiga ko'chadi, shuning
+    uchun sayt yarim yangilangan holatda qolmaydi.
 
-    Ulanish parolsiz — ~/.ssh/doppiai_deploy SSH kaliti orqali.
+    Oxirgi releaselar serverda saqlanib qoladi, xato bo'lsa -Rollback bilan
+    darhol qaytarish mumkin.
+
+    Almashtirishni serverdagi /usr/local/bin/doppiai-release bajaradi
+    (manbasi: deploy/doppiai-release.sh). GitHub Actions ham aynan shu
+    skriptni chaqiradi, shuning uchun qo'lda va CI deploy bir xil ishlaydi.
+
+    Ulanish parolsiz — ~/.ssh/doppiai_gcp SSH kaliti orqali.
 
 .PARAMETER SkipBuild
     Build bosqichini o'tkazib yuboradi va mavjud dist/ papkasini yuboradi.
 
 .PARAMETER Rollback
-    Deploy qilmaydi, oldingi versiyani qaytaradi.
+    Deploy qilmaydi, oldingi releasega qaytaradi.
 
 .EXAMPLE
     .\deploy.ps1
@@ -26,7 +34,7 @@
 
 .EXAMPLE
     .\deploy.ps1 -Rollback
-    Oldingi versiyaga qaytaradi.
+    Oldingi releasega qaytaradi.
 #>
 [CmdletBinding()]
 param(
@@ -36,17 +44,34 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+# Windows PowerShell 5.1 eski .NET da TLS 1.2 ni o'zi yoqmasligi mumkin,
+# server esa faqat TLS 1.2/1.3 qabul qiladi.
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+
 # ---------------------------------------------------------------- sozlamalar
-$Server     = "root@169.58.183.151"
-$SshKey     = Join-Path $env:USERPROFILE ".ssh\doppiai_deploy"
-$RemoteRoot = "/var/www/doppiai.uz"
-$RemoteTmp  = "/tmp/doppiai-dist.tar.gz"
-$SiteUrl    = "https://doppiai.uz"
-$ProjectDir = $PSScriptRoot
+$Server       = "doppiai@34.27.103.62"
+$SshPort      = 8800
+$SshKey       = Join-Path $env:USERPROFILE ".ssh\doppiai_gcp"
+$RemoteRoot   = "/var/www/doppiai.uz"
+$RemoteTmp    = "/tmp/doppiai-dist.tar.gz"
+$SiteUrl      = "https://doppiai.uz"
+$ReleaseCmd   = "/usr/local/bin/doppiai-release"
+$ProjectDir   = $PSScriptRoot
+
+# Build muhiti .github/workflows/ci-cd.yml bilan bir xil bo'lishi shart:
+# bular berilmasa, masalan, email orqali kirish jimgina yoqilib qoladi.
+$BuildEnv = @{
+    VITE_API_BASE_URL          = "/api/v1"
+    VITE_GOOGLE_OAUTH_URL      = "/api/v1/auth/oauth/google/authorize"
+    VITE_EMAIL_AUTH_ENABLED    = "false"
+    VITE_TELEGRAM_AUTH_ENABLED = "false"
+}
 # ---------------------------------------------------------------------------
 
 $SshOpts = @(
     "-i", $SshKey,
+    # -o Port ssh va scp uchun bir xil ishlaydi (-p / -P farqiga tushmaslik uchun).
+    "-o", "Port=$SshPort",
     "-o", "IdentitiesOnly=yes",
     "-o", "BatchMode=yes",
     "-o", "StrictHostKeyChecking=accept-new",
@@ -56,6 +81,7 @@ $SshOpts = @(
 function Write-Step { param([string]$Message) Write-Host "`n==> $Message" -ForegroundColor Cyan }
 function Write-Ok   { param([string]$Message) Write-Host "    $Message" -ForegroundColor Green }
 function Write-Info { param([string]$Message) Write-Host "    $Message" -ForegroundColor DarkGray }
+function Write-Warn { param([string]$Message) Write-Host "    $Message" -ForegroundColor Yellow }
 
 function Stop-WithError {
     param([string]$Message)
@@ -82,6 +108,15 @@ function Get-BundleName {
     return $null
 }
 
+function Get-Page {
+    param([string]$Url)
+    try {
+        return Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 30 -Headers @{ "Cache-Control" = "no-cache" }
+    } catch {
+        Stop-WithError "Sayt javob bermayapti ($Url): $($_.Exception.Message)`nQaytarish uchun: .\deploy.ps1 -Rollback"
+    }
+}
+
 Write-Host ""
 Write-Host "  Do'ppi.ai deploy -> doppiai.uz" -ForegroundColor White
 Write-Host "  ------------------------------" -ForegroundColor DarkGray
@@ -90,10 +125,9 @@ Write-Host "  ------------------------------" -ForegroundColor DarkGray
 if (-not (Test-Path $SshKey)) {
     $keyHelp = @(
         "SSH kaliti topilmadi: $SshKey",
-        'Kalitni qayta yaratish uchun:',
-        '  ssh-keygen -t ed25519 -f "$env:USERPROFILE\.ssh\doppiai_deploy" -N ''""'' -C "doppiai-deploy"',
-        'So''ng ochiq kalitni serverga qo''shing:',
-        '  type "$env:USERPROFILE\.ssh\doppiai_deploy.pub" | ssh root@169.58.183.151 "cat >> /root/.ssh/authorized_keys"'
+        "doppiai@34.27.103.62 (port $SshPort) uchun maxfiy kalitni shu manzilga saqlang va",
+        "faqat o'zingizga o'qish huquqini qoldiring:",
+        '  icacls "$env:USERPROFILE\.ssh\doppiai_gcp" /inheritance:r /grant:r "$($env:USERNAME):(R)"'
     ) -join [Environment]::NewLine
     Stop-WithError $keyHelp
 }
@@ -101,34 +135,42 @@ if (-not (Test-Path $SshKey)) {
 Write-Step "Serverga ulanish tekshirilmoqda"
 $null = Invoke-Remote "echo ok" "Serverga ulanib bo'lmadi. Internet aloqasini va SSH kalitni tekshiring."
 Write-Ok "Ulanish muvaffaqiyatli ($Server)"
+$null = Invoke-Remote "test -x $ReleaseCmd" "Serverda $ReleaseCmd o'rnatilmagan. O'rnatish tartibi: README.md -> Deployment."
 
 # ------------------------------------------------------------------- rollback
 if ($Rollback) {
-    Write-Step "Oldingi versiyaga qaytarilmoqda"
+    Write-Step "Oldingi releasega qaytarilmoqda"
 
-    $rollbackCmd = @(
-        "test -d '$RemoteRoot.prev'",
-        "rm -rf '$RemoteRoot.swap'",
-        "mv '$RemoteRoot' '$RemoteRoot.swap'",
-        "mv '$RemoteRoot.prev' '$RemoteRoot'",
-        "mv '$RemoteRoot.swap' '$RemoteRoot.prev'"
-    ) -join " && "
+    $restored = Invoke-Remote "$ReleaseCmd rollback" "Qaytarish muvaffaqiyatsiz. Serverda saqlangan oldingi release topilmadi."
+    Write-Ok "Release tiklandi ($restored)"
 
-    $null = Invoke-Remote $rollbackCmd "Qaytarish muvaffaqiyatsiz. Serverda saqlangan oldingi versiya ($RemoteRoot.prev) topilmadi."
-    Write-Ok "Oldingi versiya tiklandi"
-
-    try {
-        $check = Invoke-WebRequest -Uri $SiteUrl -UseBasicParsing -TimeoutSec 30 -Headers @{ "Cache-Control" = "no-cache" }
-        Write-Ok "Sayt javob bermoqda: HTTP $($check.StatusCode)"
-    } catch {
-        Stop-WithError "Sayt javob bermayapti: $($_.Exception.Message)"
-    }
+    $check = Get-Page $SiteUrl
+    Write-Ok "Sayt javob bermoqda: HTTP $($check.StatusCode)"
 
     Write-Host "`n  Qaytarish tugadi. $SiteUrl" -ForegroundColor Green
     Write-Info "Yana bir marta -Rollback ishlatsangiz, avvalgi holatga qaytadi."
     Write-Host ""
     exit 0
 }
+
+# --------------------------------------------------------------- release nomi
+# Commit va vaqt birga: bir commitni qayta deploy qilish hozir efirda turgan
+# papkani ustidan yozmaydi.
+Push-Location $ProjectDir
+try {
+    $commit = git rev-parse --short=12 HEAD
+    if ($LASTEXITCODE -ne 0 -or -not $commit) { Stop-WithError "git commit aniqlanmadi." }
+    $dirty = git status --porcelain
+} finally {
+    Pop-Location
+}
+
+$release = "$($commit.Trim())-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
+if ($dirty) {
+    $release = "$release-dirty"
+    Write-Warn "Diqqat: commit qilinmagan o'zgarishlar bor, ular ham deploy bo'ladi."
+}
+Write-Info "Release: $release"
 
 # ---------------------------------------------------------------------- build
 $distDir = Join-Path $ProjectDir "dist"
@@ -149,6 +191,7 @@ if ($SkipBuild) {
     Push-Location $ProjectDir
     try {
         if (Test-Path $distDir) { Remove-Item $distDir -Recurse -Force }
+        foreach ($name in $BuildEnv.Keys) { Set-Item -Path "env:$name" -Value $BuildEnv[$name] }
         pnpm build
         if ($LASTEXITCODE -ne 0) { Stop-WithError "Build muvaffaqiyatsiz tugadi. Yuqoridagi xatolarni tuzating." }
     } finally {
@@ -181,54 +224,36 @@ Write-Ok "Arxiv tayyor: $tarSize MB"
 Write-Step "Serverga yuklanmoqda"
 scp @SshOpts $tarPath "${Server}:$RemoteTmp"
 if ($LASTEXITCODE -ne 0) { Stop-WithError "Fayl serverga yuklanmadi." }
+Remove-Item $tarPath -Force -ErrorAction SilentlyContinue
 Write-Ok "Yuklandi"
 
 # ---------------------------------------------------------------- almashtirish
-# Yangi versiya avval alohida papkaga ochiladi, keyingina joriy papka bilan
-# almashtiriladi. Shu sabab sayt yarim yangilangan holatda qolmaydi.
-Write-Step "Sayt yangi versiyaga almashtirilmoqda"
-
-$deployCmd = @(
-    "rm -rf '$RemoteRoot.new'",
-    "mkdir -p '$RemoteRoot.new'",
-    "tar -xzf '$RemoteTmp' -C '$RemoteRoot.new'",
-    "test -f '$RemoteRoot.new/index.html'",
-    "chown -R www-data:www-data '$RemoteRoot.new'",
-    "find '$RemoteRoot.new' -type d -exec chmod 755 {} +",
-    "find '$RemoteRoot.new' -type f -exec chmod 644 {} +",
-    "rm -rf '$RemoteRoot.prev'",
-    "if [ -d '$RemoteRoot' ]; then mv '$RemoteRoot' '$RemoteRoot.prev'; fi",
-    "mv '$RemoteRoot.new' '$RemoteRoot'",
-    "rm -f '$RemoteTmp'"
-) -join " && "
-
-$null = Invoke-Remote $deployCmd "Serverda almashtirish muvaffaqiyatsiz. Sayt eski versiyada qoldi."
-Write-Ok "Fayllar o'rnatildi ($RemoteRoot)"
-
-Remove-Item $tarPath -Force -ErrorAction SilentlyContinue
+Write-Step "Sayt yangi releasega almashtirilmoqda"
+$null = Invoke-Remote "$ReleaseCmd activate '$release' < '$RemoteTmp'; status=`$?; rm -f '$RemoteTmp'; exit `$status" "Serverda almashtirish muvaffaqiyatsiz. Sayt eski releaseda qoldi."
+Write-Ok "Release o'rnatildi ($RemoteRoot/releases/$release)"
 
 # ------------------------------------------------------------------ tekshirish
 Write-Step "Natija tekshirilmoqda"
 
-try {
-    $response = Invoke-WebRequest -Uri $SiteUrl -UseBasicParsing -TimeoutSec 30 -Headers @{ "Cache-Control" = "no-cache" }
-} catch {
-    Stop-WithError "Sayt javob bermayapti: $($_.Exception.Message)`nQaytarish uchun: .\deploy.ps1 -Rollback"
-}
-
+$response = Get-Page $SiteUrl
 if ($response.StatusCode -ne 200) {
     Stop-WithError "Sayt HTTP $($response.StatusCode) qaytardi.`nQaytarish uchun: .\deploy.ps1 -Rollback"
 }
 Write-Ok "HTTP $($response.StatusCode) — sayt ochilmoqda"
+
+# Ichki sahifalar nginx dagi SPA fallback orqali ochiladi; u buzilsa faqat
+# bosh sahifa ishlab, qolganlari 404 beradi.
+$null = Get-Page "$SiteUrl/login"
+Write-Ok "Ichki sahifalar ochilmoqda (/login)"
 
 $liveBundle = Get-BundleName $response.Content
 if ($localBundle -and $liveBundle) {
     if ($localBundle -eq $liveBundle) {
         Write-Ok "Eng oxirgi versiya efirda ($liveBundle)"
     } else {
-        Write-Host "    [OGOHLANTIRISH] Serverdagi versiya mos kelmadi." -ForegroundColor Yellow
-        Write-Host "    Kutilgan: $localBundle / Serverda: $liveBundle" -ForegroundColor Yellow
-        Write-Host "    Brauzer keshi bo'lishi mumkin — Ctrl+F5 bilan tekshiring." -ForegroundColor Yellow
+        Write-Warn "[OGOHLANTIRISH] Serverdagi versiya mos kelmadi."
+        Write-Warn "Kutilgan: $localBundle / Serverda: $liveBundle"
+        Write-Warn "Brauzer keshi bo'lishi mumkin — Ctrl+F5 bilan tekshiring."
     }
 }
 

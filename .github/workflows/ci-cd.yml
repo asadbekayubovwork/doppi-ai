@@ -8,27 +8,40 @@ on:
 permissions:
   contents: read
 
+# A newer push waits for the running deploy rather than cutting it off; runs
+# queued behind it are superseded by the newest one.
 concurrency:
   group: doppi-frontend-production
-  cancel-in-progress: true
+  cancel-in-progress: false
+
+env:
+  DEPLOY_HOST: 34.27.103.62
+  DEPLOY_PORT: 8800
+  DEPLOY_USER: doppiai
+  SITE_URL: https://doppiai.uz
 
 jobs:
   verify-build-deploy:
-    runs-on: [self-hosted, linux, x64, doppiai-frontend]
-    timeout-minutes: 5
-    env:
-      PATH: /opt/node-v20/bin:/opt/pnpm/bin:/usr/local/bin:/usr/bin:/bin
-      PNPM_HOME: /opt/pnpm
-      PNPM_STORE_DIR: /opt/actions-cache/pnpm
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout exact commit
         uses: actions/checkout@v7
         with:
-          fetch-depth: 0
           persist-credentials: false
 
+      # Version comes from "packageManager" in package.json.
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: pnpm
+
       - name: Install locked dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
 
       - name: Verify source
         run: |
@@ -50,30 +63,53 @@ jobs:
           VITE_TELEGRAM_AUTH_ENABLED: "false"
         run: pnpm build
 
+      # The key is pinned server-side to /usr/local/bin/doppiai-release, so the
+      # words after the host are that script's arguments, not a shell command.
       - name: Deploy atomically
+        if: github.ref == 'refs/heads/main'
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
         run: |
           set -euo pipefail
-          deploy_repo=/opt/doppi-ai
-          live=/var/www/doppiai.uz
-          releases=/var/www/doppiai.uz.releases
-          release="$releases/${GITHUB_SHA:0:12}"
+          if [ -z "$DEPLOY_SSH_KEY" ]; then
+            echo "::error::Repository secret DEPLOY_SSH_KEY is not set (see Deployment in README.md)."
+            exit 1
+          fi
 
-          git -C "$deploy_repo" fetch "$GITHUB_WORKSPACE" "$GITHUB_SHA"
-          test "$(git -C "$deploy_repo" rev-parse FETCH_HEAD)" = "$GITHUB_SHA"
-          git -C "$deploy_repo" merge --ff-only FETCH_HEAD
-          install -d -m 2775 "$release"
-          rsync -a --delete dist/ "$release/"
-          find "$release" -type d -exec chmod 755 {} +
-          find "$release" -type f -exec chmod 644 {} +
-          rsync -r --omit-dir-times --no-times --exclude index.html \
-            "$release/" "$live/"
-          install -m 644 "$release/index.html" "$live/index.html.next"
-          mv "$live/index.html.next" "$live/index.html"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          # Pinned rather than learned on first use, so a spoofed host cannot
+          # receive the build. Update these if the server is ever rebuilt.
+          # A non-default port is part of the host name ssh looks up.
+          cat > ~/.ssh/known_hosts <<'EOF'
+          [34.27.103.62]:8800 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPOFUGcfSvJWjcgiIbazgfKMBGIcJi2OM3UQUtU9uw2u
+          [34.27.103.62]:8800 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBF+vQQqHWxbcMImXzqrfs8Fal5um1Vx3nc8fOdxXKcS0+9cimHJS2m/sldfkZE3+3T7Ja64tV4iAxwDoXTLNes=
+          [34.27.103.62]:8800 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDOu/le9JJVIIIfdhjO3xWBKJUbj6zYqSWyDFtsEqLs1HoTuA6YZITqfrdzWvJ59y9YNQhNgtc/WLolviNIr6gZjrOPPrW/Yx2Y5p96wvK6wl8XmjSoArIjRxcziiW8ERZsch7bc5wn3/ht6ZAMyBUx0vCiP9AoStTBjC8TSkDdmYimmg0d95k9vRkRIqbp4pzucV3+0UkYBiNvsNhloEpc60QN+ViTiMTVESgB5LYTkfgch1omej7RS7VmG9Y80QbaLLNeTR2PzT/YTB/DvgHTc/7HYwBbJIE4ZLqF0AvseST/KP887/YlBfKFSuJPBJr+lnQTVCK+1IpwQEfwy7nZl4SXgkAfFBNUAgdVPJO36NuQfSoHnywhpJYNthf2pllhiPl43BnGxCRa/foCxwVo2TCRWXb5vks0oDREfX0Pt4ySlipQGglbKqRGES9tj6y+r1peUgyFXVaoR0i8acBeeT+XzkGrfztVARb/9UPwUe3sbxEcR+O5Q+lx8F7y8Ds=
+          EOF
+
+          release="${GITHUB_SHA:0:12}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          tar -czf - -C dist . | ssh \
+            -p "$DEPLOY_PORT" \
+            -i ~/.ssh/deploy_key \
+            -o IdentitiesOnly=yes \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=20 \
+            "$DEPLOY_USER@$DEPLOY_HOST" activate "$release"
 
       - name: Verify public deployment
+        if: github.ref == 'refs/heads/main'
         run: |
           set -euo pipefail
-          test "$(git -C /opt/doppi-ai rev-parse HEAD)" = "$GITHUB_SHA"
-          curl --fail --silent --show-error --retry 5 --retry-delay 1 https://doppiai.uz/ >/dev/null
-          curl --fail --silent --show-error --retry 5 --retry-delay 1 https://doppiai.uz/login >/dev/null
-          curl --fail --silent --show-error --retry 5 --retry-delay 1 https://doppiai.uz/api/docs >/dev/null
+          expected=$(grep -oE 'assets/index-[A-Za-z0-9_-]+\.js' dist/index.html)
+          live=$(curl --fail --silent --show-error --retry 5 --retry-delay 2 "$SITE_URL/")
+          if ! grep -qF "$expected" <<<"$live"; then
+            echo "::error::$SITE_URL is not serving $expected from this build."
+            exit 1
+          fi
+          curl --fail --silent --show-error --retry 5 --retry-delay 2 -o /dev/null "$SITE_URL/$expected"
+          # Deep links only work through the nginx SPA fallback.
+          curl --fail --silent --show-error --retry 5 --retry-delay 2 -o /dev/null "$SITE_URL/login"
+          echo "Live: $SITE_URL ($expected)"
