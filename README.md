@@ -365,6 +365,13 @@ Crawlers that don't run JavaScript — link previews in Telegram and Facebook,
 Google's first pass — therefore see each page as it is. Every other route gets
 `app.html`, marked `noindex`, so sign-in and the dashboard stay out of results.
 
+Link previews (Telegram, Facebook, WhatsApp, X) use the 1200×630 images in
+`public/og/` — one for the home page and one per service. They are rendered
+from [`build/og/template.html`](build/og/template.html) with the `uz` copy;
+after changing that copy, run `pnpm og:images` (needs a local Chrome) and commit
+the PNGs. Telegram caches previews, so to refresh one that was already shared,
+send the link to [@WebpageBot](https://t.me/WebpageBot).
+
 To publish a new page: add its route, add `seo.<key>.title` and
 `seo.<key>.description` in all three locale files, then add it to `SEO_PAGES`.
 The static HTML uses the default locale (`uz`); `useSeo` keeps the tags right
