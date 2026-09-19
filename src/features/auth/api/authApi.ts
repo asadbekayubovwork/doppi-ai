@@ -1,5 +1,5 @@
 import { apiClient } from "@/shared/api"
-import { apiUrl } from "@/shared/config/api"
+import { oauthAuthorizeUrl } from "@/shared/config/api"
 
 export interface User {
   id: string
@@ -167,7 +167,8 @@ export const authApi = {
   logoutAll: () => apiClient.post<MessageResponse>("/auth/logout-all"),
 
   googleAuthorizeUrl: () =>
-    import.meta.env.VITE_GOOGLE_OAUTH_URL || apiUrl(GOOGLE_AUTHORIZE_PATH),
+    import.meta.env.VITE_GOOGLE_OAUTH_URL ||
+    oauthAuthorizeUrl(GOOGLE_AUTHORIZE_PATH),
 
   telegramLogin: (data: Record<string, string | number>) =>
     apiClient.post<TelegramAuthResponse>("/auth/telegram/login", {

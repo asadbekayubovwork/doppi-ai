@@ -50,3 +50,14 @@ export const isCrossOriginApi = (() => {
 /** Resolves a documented path against the base URL. */
 export const apiUrl = (path: string) =>
   `${API_BASE_URL}/${path.replace(/^\//, "")}`
+
+/**
+ * Adds the initiating browser origin to an OAuth navigation. The backend only
+ * accepts configured origins and stores the exact callback URI with the state.
+ */
+export const oauthAuthorizeUrl = (path: string) => {
+  const base = apiUrl(path)
+  if (typeof window === "undefined") return base
+  const separator = base.includes("?") ? "&" : "?"
+  return `${base}${separator}client_origin=${encodeURIComponent(window.location.origin)}`
+}
