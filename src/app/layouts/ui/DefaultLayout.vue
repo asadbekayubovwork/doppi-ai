@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CBorderGlowLayer } from "@/shared/ui"
 import { CHeader, CFooter } from "@/widgets"
 </script>
 
@@ -9,5 +10,6 @@ import { CHeader, CFooter } from "@/widgets"
       <slot />
     </main>
     <CFooter />
+    <CBorderGlowLayer />
   </div>
 </template>
