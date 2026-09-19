@@ -4,12 +4,7 @@ import { useToast } from "@/shared/lib"
 import { videoApi } from "../api/videoApi"
 import type { VideoJob, VideoJobCreatePayload } from "../api/types"
 
-const ACTIVE = new Set([
-  "submitting",
-  "submission_unknown",
-  "queued",
-  "processing",
-])
+const ACTIVE = new Set(["submitting", "queued", "processing"])
 
 const requestKey = () => {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
@@ -40,6 +35,12 @@ export const useVideoGenerator = () => {
   const isSyncing = ref(false)
   const pollInFlight = ref(false)
   const businessId = computed(() => auth.activeBusiness?.id ?? "")
+  let disposed = false
+  let generation = 0
+  let loadSequence = 0
+  const attempts = new Map<string, { signature: string; key: string }>()
+  const isCurrent = (workspace: string, epoch: number) =>
+    !disposed && workspace === businessId.value && epoch === generation
   const form = reactive({
     topic: "",
     sourceText: "",
@@ -60,26 +61,35 @@ export const useVideoGenerator = () => {
   )
 
   const replaceJob = (next: VideoJob) => {
+    if (next.business_id !== businessId.value) return
     const index = jobs.value.findIndex((job) => job.id === next.id)
     if (index < 0) jobs.value.unshift(next)
     else jobs.value[index] = next
   }
 
   const load = async () => {
+    const workspace = businessId.value
+    const epoch = generation
+    const sequence = ++loadSequence
     if (!businessId.value) {
       jobs.value = []
+      isLoading.value = false
       return
     }
     isLoading.value = true
     try {
-      jobs.value = await videoApi.list(businessId.value)
+      const result = await videoApi.list(workspace)
+      if (isCurrent(workspace, epoch) && sequence === loadSequence)
+        jobs.value = result
     } catch (error) {
+      if (!isCurrent(workspace, epoch)) return
       toast.error(
         "Couldn't load video jobs",
         messageForProblem(error, "Try again in a moment.")
       )
     } finally {
-      isLoading.value = false
+      if (isCurrent(workspace, epoch) && sequence === loadSequence)
+        isLoading.value = false
     }
   }
 
@@ -113,9 +123,34 @@ export const useVideoGenerator = () => {
       },
     }
     isCreating.value = true
+    const workspace = businessId.value
+    const epoch = generation
+    const signature = JSON.stringify(payload)
+    let attempt = attempts.get(workspace)
+    if (!attempt || attempt.signature !== signature) {
+      attempt = { signature, key: requestKey() }
+      attempts.set(workspace, attempt)
+    }
     try {
-      const job = await videoApi.create(businessId.value, payload, requestKey())
+      const job = await videoApi.create(workspace, payload, attempt.key)
+      if (!isCurrent(workspace, epoch)) return
       replaceJob(job)
+      if (job.status === "submission_unknown" || job.status === "submitting") {
+        toast.warning(
+          "Submission needs verification",
+          job.error_message ||
+            "Check this job before generating again. No automatic resubmission will be made."
+        )
+        return
+      }
+      if (job.status === "submission_failed" || job.status === "failed") {
+        toast.error(
+          "Generation was not completed",
+          job.error_message || "Check the job details."
+        )
+        return
+      }
+      attempts.delete(workspace)
       form.topic = ""
       form.sourceText = ""
       form.cta = ""
@@ -125,12 +160,14 @@ export const useVideoGenerator = () => {
         "Progress appears in the job list below."
       )
     } catch (error) {
+      if (!isCurrent(workspace, epoch)) return
       toast.error(
         "Couldn't start video generation",
         messageForProblem(error, "Check the job list before trying again.")
       )
+      await load()
     } finally {
-      isCreating.value = false
+      if (isCurrent(workspace, epoch)) isCreating.value = false
     }
   }
 
@@ -138,34 +175,44 @@ export const useVideoGenerator = () => {
     if (!businessId.value || !activeJobs.value.length || pollInFlight.value)
       return
     pollInFlight.value = true
+    const workspace = businessId.value
+    const epoch = generation
     try {
-      const updates = await Promise.all(
-        activeJobs.value
-          .filter((job) => job.external_job_id)
-          .map((job) => videoApi.refresh(businessId.value, job.id))
+      const updates = await Promise.allSettled(
+        activeJobs.value.map((job) =>
+          job.external_job_id
+            ? videoApi.refresh(workspace, job.id)
+            : videoApi.get(workspace, job.id)
+        )
       )
-      updates.forEach(replaceJob)
-    } catch {
-      // The next interval retries; avoid a repeating toast while the upstream recovers.
+      if (!isCurrent(workspace, epoch)) return
+      for (const update of updates) {
+        if (update.status === "fulfilled") replaceJob(update.value)
+      }
     } finally {
-      pollInFlight.value = false
+      if (isCurrent(workspace, epoch)) pollInFlight.value = false
     }
   }
 
   const sync = async () => {
     if (!businessId.value || isSyncing.value) return
     isSyncing.value = true
+    const workspace = businessId.value
+    const epoch = generation
     try {
-      const result = await videoApi.sync(businessId.value)
+      const result = await videoApi.sync(workspace)
+      if (!isCurrent(workspace, epoch)) return
       await load()
+      if (!isCurrent(workspace, epoch)) return
       toast.success("Video jobs synchronized", `${result.updated} job updated.`)
     } catch (error) {
+      if (!isCurrent(workspace, epoch)) return
       toast.error(
         "Couldn't synchronize jobs",
         messageForProblem(error, "Try again in a moment.")
       )
     } finally {
-      isSyncing.value = false
+      if (isCurrent(workspace, epoch)) isSyncing.value = false
     }
   }
 
@@ -179,8 +226,18 @@ export const useVideoGenerator = () => {
     void load()
     timer = window.setInterval(() => void poll(), 5_000)
   })
-  onBeforeUnmount(() => window.clearInterval(timer))
-  watch(businessId, () => void load())
+  onBeforeUnmount(() => {
+    disposed = true
+    window.clearInterval(timer)
+  })
+  watch(businessId, () => {
+    generation++
+    jobs.value = []
+    isCreating.value = false
+    isSyncing.value = false
+    pollInFlight.value = false
+    void load()
+  })
 
   return {
     jobs,

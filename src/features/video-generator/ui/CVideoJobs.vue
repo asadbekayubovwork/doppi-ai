@@ -26,7 +26,7 @@ const STATUS: Record<
     icon: "triangle-alert",
   },
   submission_unknown: {
-    label: "Checking submission",
+    label: "Needs verification",
     tone: "warning",
     icon: "clock-alert",
   },
