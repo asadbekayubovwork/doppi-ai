@@ -1,6 +1,7 @@
 export { default as CAuthVerifyStep } from "./CAuthVerifyStep.vue"
 export { default as AuthShell } from "./AuthShell.vue"
 export { default as CAuthAside } from "./CAuthAside.vue"
+export { default as CAuthSteps, type AuthStepState } from "./CAuthSteps.vue"
 export { default as CAuthTestimonials } from "./CAuthTestimonials.vue"
 export { default as CTelegramLogin } from "./CTelegramLogin.vue"
 export { default as CRegisterForm } from "./CRegisterForm.vue"
