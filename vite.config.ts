@@ -21,6 +21,8 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    // Google registers exact callback ports; never silently switch to 3001.
+    strictPort: true,
     // The control plane allowlists a single browser origin and hands out
     // HttpOnly `__Host-` session cookies, so calling it straight from
     // localhost fails preflight ("Disallowed CORS origin") and could not keep

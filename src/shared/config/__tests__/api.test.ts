@@ -35,6 +35,20 @@ describe("API configuration", () => {
     )
   })
 
+  it("binds an endpoint override without losing its query parameters", () => {
+    const result = oauthAuthorizeUrl(
+      "/auth/oauth/google/authorize",
+      "/api/v1/auth/oauth/google/authorize?source=login&client_origin=https%3A%2F%2Fold.example"
+    )
+    const url = new URL(result, window.location.origin)
+
+    expect(url.pathname).toBe("/api/v1/auth/oauth/google/authorize")
+    expect(url.searchParams.get("source")).toBe("login")
+    expect(url.searchParams.getAll("client_origin")).toEqual([
+      window.location.origin,
+    ])
+  })
+
   it("honours an override and strips its trailing slashes", async () => {
     const config = await loadWithBaseUrl("https://doppiai.uz/api/v1/")
 
