@@ -24,6 +24,8 @@ export {
 export {
   AuthShell,
   CAuthAside,
+  CAuthSteps,
+  type AuthStepState,
   CAuthVerifyStep,
   CMfaChallenge,
   CAuthFeatureSoon,
