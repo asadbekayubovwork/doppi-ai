@@ -64,7 +64,7 @@ const userInitials = computed(
       </span>
     </div>
 
-    <nav class="flex-1 overflow-y-auto px-3 pb-4">
+    <nav class="sidebar-scroll flex-1 overflow-y-auto px-3 pb-4">
       <ul class="pt-3">
         <CSidebarNavItem :item="HOME" />
       </ul>
@@ -129,25 +129,58 @@ const userInitials = computed(
       </div>
     </div>
 
-    <button
-      type="button"
-      class="flex h-[74px] items-center gap-3 border-t border-white/[0.08] px-5 text-left transition hover:bg-white/[0.04]"
-    >
-      <span
-        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#4A416C] text-sm font-bold text-[#B8AAFF]"
-        aria-hidden="true"
-      >
-        {{ userInitials }}
-      </span>
-      <span class="block min-w-0 flex-1">
-        <span class="block truncate text-[13.5px] font-semibold text-white">
-          {{ userName }}
-        </span>
-        <span class="block truncate text-xs text-white/40">
-          {{ userEmail }}
-        </span>
-      </span>
-      <CIcon name="chevrons-up-down" class="h-4 w-4 shrink-0 text-white/40" />
-    </button>
+  
   </aside>
 </template>
+
+<style scoped>
+/* The layout gives every scroll area a light scrollbar meant for the page
+   background; on the dark sidebar it needs a dim thumb that brightens on hover. */
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.1) transparent;
+  transition: scrollbar-color 0.2s;
+}
+
+.sidebar-scroll:hover {
+  scrollbar-color: rgb(255 255 255 / 0.22) transparent;
+}
+
+/* Chromium ignores ::-webkit-scrollbar once the standard properties are set,
+   and those draw arrow buttons on Windows, so reset them where the pseudo
+   elements are available and style the bar directly. */
+@supports selector(::-webkit-scrollbar) {
+  .sidebar-scroll,
+  .sidebar-scroll:hover {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-track,
+  .sidebar-scroll::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.1) padding-box;
+  }
+
+  .sidebar-scroll:hover::-webkit-scrollbar-thumb {
+    background-color: rgb(255 255 255 / 0.22);
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-thumb:active {
+    background-color: rgb(255 255 255 / 0.32);
+  }
+}
+</style>

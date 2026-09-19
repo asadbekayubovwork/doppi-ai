@@ -23,6 +23,7 @@ export {
 } from "./api"
 export {
   AuthShell,
+  CAuthAside,
   CAuthVerifyStep,
   CMfaChallenge,
   CAuthFeatureSoon,
