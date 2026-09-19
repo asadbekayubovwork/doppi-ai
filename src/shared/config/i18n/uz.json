@@ -48,7 +48,17 @@
       }
     ],
     "agentPrompt": "Do'ppi AI ovozli agentining imkoniyatlarini kashf eting — inson kabi gaplashadi va uchrashuv belgilaydi",
-    "agentCall": "Ovozli agentni tinglash"
+    "agentCall": "Ovozli agent bilan gaplashish",
+    "agentEndCall": "Qo'ng'iroqni tugatish",
+    "agentCallTime": "Qo'ng'iroq davomiyligi {time}",
+    "agentStates": {
+      "idle": "Agent bilan gaplashish uchun bosing",
+      "connecting": "Ulanmoqda…",
+      "listening": "Tinglamoqda…",
+      "speaking": "Agent gapiryapti…",
+      "live": "Ulandingiz — gapirishni boshlang",
+      "error": "Xatolik yuz berdi. Qayta urinish uchun bosing"
+    }
   },
   "trust": {
     "label": "Barcha kanallar bitta tizimda birlashadi",

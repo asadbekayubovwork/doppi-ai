@@ -48,7 +48,17 @@
       }
     ],
     "agentPrompt": "Discover what the Do'ppi AI voice agent can do — it talks like a human and books the meeting",
-    "agentCall": "Listen to the voice agent"
+    "agentCall": "Talk to the voice agent",
+    "agentEndCall": "End the call",
+    "agentCallTime": "Call duration {time}",
+    "agentStates": {
+      "idle": "Tap to talk to the agent",
+      "connecting": "Connecting…",
+      "listening": "Listening…",
+      "speaking": "Agent is speaking…",
+      "live": "You're connected — start speaking",
+      "error": "Something went wrong. Tap to try again"
+    }
   },
   "trust": {
     "label": "Every channel, unified in one system",
