@@ -7,6 +7,18 @@ import { createTestingPinia } from '@pinia/testing'
 import CounterDisplay from '../CounterDisplay.vue'
 import { useCounterStore } from '../../model/counter.store'
 
+// The store calls fetchCounter() from its own setup, which createTestingPinia
+// cannot stub. Against the real API that leaves a 100ms timer reading
+// localStorage after the test environment is torn down, failing the run.
+// Keeping the fetch pending also leaves each test's seeded state untouched.
+vi.mock('../../api', () => ({
+  counterApi: {
+    getCounter: () => new Promise(() => {}),
+    updateCounter: vi.fn(),
+    resetCounter: vi.fn()
+  }
+}))
+
 describe('CounterDisplay', () => {
   beforeEach(() => {
     // Reset the DOM
