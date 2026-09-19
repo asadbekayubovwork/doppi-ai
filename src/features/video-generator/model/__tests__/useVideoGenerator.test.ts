@@ -105,6 +105,19 @@ describe("video async isolation and submission safety", () => {
     expect(video.form.topic).toBe("Test")
   })
 
+  it("allows an explicitly confirmed new attempt after a definite failure", async () => {
+    const create = vi.spyOn(videoApi, "create")
+      .mockResolvedValueOnce(makeJob({ status: "submission_failed" }))
+      .mockResolvedValueOnce(makeJob())
+    await mountController()
+    video.form.topic = "Test"
+    await video.create()
+    await video.create()
+    expect(create).toHaveBeenCalledTimes(2)
+    expect(create.mock.calls[0][2]).not.toBe(create.mock.calls[1][2])
+    expect(window.confirm).toHaveBeenCalledTimes(2)
+  })
+
   it("discards an old workspace history response", async () => {
     const old = deferred<VideoJob[]>()
     vi.mocked(videoApi.list)

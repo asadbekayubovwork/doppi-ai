@@ -144,6 +144,7 @@ export const useVideoGenerator = () => {
         return
       }
       if (job.status === "submission_failed" || job.status === "failed") {
+        attempts.delete(workspace)
         toast.error(
           "Generation was not completed",
           job.error_message || "Check the job details."
