@@ -54,14 +54,38 @@
   "trust": {
     "label": "Every channel, unified in one system",
     "channels": [
-      "Instagram",
-      "Telegram",
-      "WhatsApp",
-      "Facebook",
-      "SIP Telephony",
-      "Google Ads",
-      "TikTok",
-      "YouTube"
+      {
+        "icon": "instagram",
+        "label": "Instagram"
+      },
+      {
+        "icon": "telegram",
+        "label": "Telegram"
+      },
+      {
+        "icon": "whatsapp",
+        "label": "WhatsApp"
+      },
+      {
+        "icon": "facebook",
+        "label": "Facebook"
+      },
+      {
+        "icon": "phone",
+        "label": "SIP Telephony"
+      },
+      {
+        "icon": "google-ads",
+        "label": "Google Ads"
+      },
+      {
+        "icon": "tiktok",
+        "label": "TikTok"
+      },
+      {
+        "icon": "youtube",
+        "label": "YouTube"
+      }
     ]
   },
   "problem": {

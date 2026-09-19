@@ -2,7 +2,7 @@
    Landing section primitives — shared by every widget on the Do'ppi.ai landing.
    Keeps the dark violet Toolbar look in one place: page ground (--bg-ground), the
    faint noise pattern, card surfaces, and the motion keyframes the animated
-   demos (live call, marquee, orbit) rely on.
+   demos (live call, orbit) rely on.
 --------------------------------------------------------------------------- */
 
 .section-dark {
@@ -173,23 +173,6 @@
   }
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 32s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-
 @keyframes pulse-ring {
   0% {
     transform: scale(1);
@@ -234,7 +217,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
   .animate-pulse-ring,
   .animate-drift,
   .animate-spin-slow,

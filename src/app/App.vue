@@ -11,6 +11,7 @@
     </Transition>
   </RouterView>
   <CToaster />
+  <CClickSparkLayer />
 </template>
 
 <script setup lang="ts">
@@ -19,7 +20,7 @@ import { computed } from "vue"
 import { useRoute } from "vue-router"
 import { useHead } from "@unhead/vue"
 import { useLenis } from "@/shared/lib"
-import { CToaster } from "@/shared/ui"
+import { CClickSparkLayer, CToaster } from "@/shared/ui"
 import { findSeoPage } from "@/shared/config/seoPages"
 
 import { DashboardLayout, DefaultLayout, EmptyLayout } from "./layouts"
