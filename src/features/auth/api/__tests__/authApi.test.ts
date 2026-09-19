@@ -3,6 +3,16 @@ import { authApi } from "../authApi"
 
 describe("backend auth API contracts", () => {
   beforeEach(() => vi.restoreAllMocks())
+  afterEach(() => vi.unstubAllEnvs())
+
+  it("keeps the local callback origin when an OAuth URL override is configured", () => {
+    vi.stubEnv("VITE_GOOGLE_OAUTH_URL", "/api/v1/auth/oauth/google/authorize")
+
+    const url = new URL(authApi.googleAuthorizeUrl(), window.location.origin)
+
+    expect(url.origin).toBe(window.location.origin)
+    expect(url.searchParams.get("client_origin")).toBe(window.location.origin)
+  })
 
   it("sends login payload including remember_me", async () => {
     const post = vi.spyOn(apiClient, "post").mockResolvedValue({} as never)
