@@ -55,9 +55,12 @@ export const apiUrl = (path: string) =>
  * Adds the initiating browser origin to an OAuth navigation. The backend only
  * accepts configured origins and stores the exact callback URI with the state.
  */
-export const oauthAuthorizeUrl = (path: string) => {
-  const base = apiUrl(path)
+export const oauthAuthorizeUrl = (path: string, endpoint?: string) => {
+  const base = endpoint?.trim() || apiUrl(path)
   if (typeof window === "undefined") return base
-  const separator = base.includes("?") ? "&" : "?"
-  return `${base}${separator}client_origin=${encodeURIComponent(window.location.origin)}`
+  const url = new URL(base, window.location.origin)
+  url.searchParams.set("client_origin", window.location.origin)
+  return url.origin === window.location.origin
+    ? `${url.pathname}${url.search}${url.hash}`
+    : url.href
 }
