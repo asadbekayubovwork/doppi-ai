@@ -1,16 +1,25 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import { CIcon } from "@/shared/ui"
-import type { DocumentDraft } from "../model/useAgentSetupForm"
+import type { DocumentDraft } from "../model/useKnowledgeDocuments"
 import CKnowledgeDocumentRow from "./CKnowledgeDocumentRow.vue"
 import CSetupSection from "./CSetupSection.vue"
 
-defineProps<{
+const props = defineProps<{
   documents: DocumentDraft[]
   /** Value for the file input's `accept` attribute. */
   accept: string
   maxFileBytes: number | null
+  icon?: string
+  /** Replaces the upload-limits hint, e.g. with document counts. */
+  hint?: string
 }>()
+
+const limitsHint = computed(() =>
+  props.maxFileBytes
+    ? `PDF, DOCX, XLSX or TXT, up to ${Math.round(props.maxFileBytes / 1024 / 1024)} MB each`
+    : "Loading upload limits…"
+)
 
 const emit = defineEmits<{ add: [files: File[]]; remove: [key: string] }>()
 
@@ -48,13 +57,11 @@ const onPick = (event: Event) => {
 <template>
   <CSetupSection
     :step="2"
+    :icon="icon"
     title="Knowledge base"
-    :hint="
-      maxFileBytes
-        ? `PDF, DOCX, XLSX or TXT, up to ${Math.round(maxFileBytes / 1024 / 1024)} MB each`
-        : 'Loading upload limits…'
-    "
+    :hint="hint ?? limitsHint"
   >
+    <template v-if="$slots.aside" #aside><slot name="aside" /></template>
     <div class="space-y-2.5">
       <label
         class="group flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border border-dashed px-4 py-5 text-center transition-colors focus-within:ring-2 focus-within:ring-[#5B4BE8]/30"

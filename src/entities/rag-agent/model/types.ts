@@ -121,6 +121,26 @@ export interface CreateAgentPayload {
   channels: Array<{ kind: ChannelKind; credentials: Record<string, string> }>
 }
 
+export interface UpdateAgentPayload {
+  name: string
+  description: string
+  status: RagAgent["status"]
+  model: LlmModelId
+  temperature: number
+  systemPrompt: string
+  topK: number
+  similarityThreshold: number
+}
+
+/** One "Save changes" on the configuration screen. */
+export interface AgentConfigurationUpdate {
+  /** `null` leaves the agent's own fields untouched. */
+  agent: UpdateAgentPayload | null
+  /** Channels to create or give new credentials. */
+  connect: CreateAgentPayload["channels"]
+  disconnect: ChannelKind[]
+}
+
 export interface TenantLimits {
   max_documents: number
   max_storage_bytes: number

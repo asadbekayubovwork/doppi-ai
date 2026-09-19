@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { useId } from "vue"
+import { CIcon } from "@/shared/ui"
 
 defineProps<{
   /** Position in the setup flow, drawn as a numbered badge. */
   step?: number
+  /** Drawn in the badge instead of the step, where the order doesn't matter. */
+  icon?: string
   title: string
   hint?: string
 }>()
@@ -20,7 +23,14 @@ const titleId = useId()
       class="flex items-center gap-3 border-b border-[#EEEEEA] px-5 py-3.5"
     >
       <span
-        v-if="step"
+        v-if="icon"
+        class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#EFECFF] text-[#5B4BE8]"
+        aria-hidden="true"
+      >
+        <CIcon :name="icon" class="h-4 w-4" />
+      </span>
+      <span
+        v-else-if="step"
         class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EFECFF] text-xs font-semibold text-[#5B4BE8]"
         aria-hidden="true"
       >

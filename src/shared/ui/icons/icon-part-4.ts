@@ -122,4 +122,59 @@ export const ICON_PART_4: Record<string, IconNode[]> = {
     ["path", { d: "M15 7h2a5 5 0 1 1 0 10h-2" }],
     ["path", { d: "M8 12h8" }],
   ],
+  // Workspace home.
+  "layout-grid": [
+    ["rect", { width: "7", height: "7", x: "3", y: "3", rx: "1" }],
+    ["rect", { width: "7", height: "7", x: "14", y: "3", rx: "1" }],
+    ["rect", { width: "7", height: "7", x: "14", y: "14", rx: "1" }],
+    ["rect", { width: "7", height: "7", x: "3", y: "14", rx: "1" }],
+  ],
+  // Agent configuration screen.
+  pause: [
+    ["rect", { x: "14", y: "4", width: "4", height: "16", rx: "1" }],
+    ["rect", { x: "6", y: "4", width: "4", height: "16", rx: "1" }],
+  ],
+  "trash-2": [
+    ["path", { d: "M3 6h18" }],
+    ["path", { d: "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" }],
+    ["path", { d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" }],
+    ["line", { x1: "10", x2: "10", y1: "11", y2: "17" }],
+    ["line", { x1: "14", x2: "14", y1: "11", y2: "17" }],
+  ],
+  activity: [
+    [
+      "path",
+      {
+        d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
+      },
+    ],
+  ],
+  history: [
+    ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" }],
+    ["path", { d: "M3 3v5h5" }],
+    ["path", { d: "M12 7v5l4 2" }],
+  ],
+  plug: [
+    ["path", { d: "M12 22v-5" }],
+    ["path", { d: "M9 8V2" }],
+    ["path", { d: "M15 8V2" }],
+    ["path", { d: "M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z" }],
+  ],
+  upload: [
+    ["path", { d: "M12 3v12" }],
+    ["path", { d: "m17 8-5-5-5 5" }],
+    ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }],
+  ],
+  "circle-dot": [
+    ["circle", { cx: "12", cy: "12", r: "10" }],
+    ["circle", { cx: "12", cy: "12", r: "1" }],
+  ],
+  "message-square-text": [
+    [
+      "path",
+      { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" },
+    ],
+    ["path", { d: "M13 8H7" }],
+    ["path", { d: "M17 12H7" }],
+  ],
 }

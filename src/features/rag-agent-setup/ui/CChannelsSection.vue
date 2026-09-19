@@ -4,7 +4,7 @@ import { CChannelIcon, type ChannelKind } from "@/entities/rag-agent"
 import { useDismiss } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 import { CHANNEL_SETUP } from "../model/channel-setup"
-import type { ChannelDraft } from "../model/useAgentSetupForm"
+import type { ChannelDraft } from "../model/channel-drafts"
 import CChannelCard from "./CChannelCard.vue"
 import CSetupSection from "./CSetupSection.vue"
 
@@ -12,6 +12,8 @@ defineProps<{
   channels: ChannelDraft[]
   /** Channels not on the list yet, offered by "Add another channel". */
   available: ChannelKind[]
+  icon?: string
+  hint?: string
 }>()
 
 const emit = defineEmits<{
@@ -33,9 +35,11 @@ const add = (kind: ChannelKind) => {
 <template>
   <CSetupSection
     :step="5"
+    :icon="icon"
     title="Channels & credentials"
-    hint="Where the agent will answer customers"
+    :hint="hint ?? 'Where the agent will answer customers'"
   >
+    <template v-if="$slots.aside" #aside><slot name="aside" /></template>
     <div class="space-y-3">
       <CChannelCard
         v-for="channel in channels"

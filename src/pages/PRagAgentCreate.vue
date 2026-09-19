@@ -108,7 +108,7 @@ const submit = async () => {
 </script>
 
 <template>
-  <div class="grid gap-5">
+  <div class="grid grid-cols-1 gap-5">
     <header
       class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between"
     >
@@ -138,9 +138,9 @@ const submit = async () => {
     </header>
 
     <div
-      class="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(320px,380px)]"
+      class="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(320px,380px)]"
     >
-      <div class="grid gap-5">
+      <div class="grid grid-cols-1 gap-5">
         <CAgentIdentitySection
           v-model:name="form.name"
           v-model:description="form.description"
@@ -166,7 +166,7 @@ const submit = async () => {
         />
       </div>
 
-      <div class="grid gap-5">
+      <div class="grid grid-cols-1 gap-5">
         <CChannelsSection
           :channels="form.channels"
           :available="form.availableChannels"

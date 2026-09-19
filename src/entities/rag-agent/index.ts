@@ -1,4 +1,4 @@
-export { ragAgentApi } from "./api/ragAgentApi"
+export { ragAgentApi, type DocumentResponse } from "./api/ragAgentApi"
 export { clearRagTokens } from "./api/ragHttp"
 export { useRagAgentStore, type LoadState } from "./model/rag-agent.store"
 export { CHANNELS, CHANNEL_KINDS, type ChannelMeta } from "./model/channels"
@@ -9,6 +9,7 @@ export {
   type LlmModel,
 } from "./model/llm-models"
 export type {
+  AgentConfigurationUpdate,
   AgentStats,
   AnswerTrace,
   ChannelKind,
@@ -23,6 +24,7 @@ export type {
   RetrievedSource,
   SourceCitation,
   UploadedDocument,
+  UpdateAgentPayload,
   TenantLimits,
 } from "./model/types"
 export { default as CChannelIcon } from "./ui/CChannelIcon.vue"

@@ -6,7 +6,12 @@ import CSetupSection from "./CSetupSection.vue"
 
 const model = defineModel<LlmModelId>("model", { required: true })
 const temperature = defineModel<number>("temperature", { required: true })
-defineProps<{ models: LlmModel[]; loading?: boolean }>()
+defineProps<{
+  models: LlmModel[]
+  loading?: boolean
+  icon?: string
+  hint?: string
+}>()
 
 const temperatureId = useId()
 const radioName = useId()
@@ -28,9 +33,11 @@ const pricingLabel = (option: LlmModel) => {
 <template>
   <CSetupSection
     :step="3"
+    :icon="icon"
     title="LLM model"
-    hint="Powers retrieval answers on every channel"
+    :hint="hint ?? 'Powers retrieval answers on every channel'"
   >
+    <template v-if="$slots.aside" #aside><slot name="aside" /></template>
     <fieldset>
       <legend class="sr-only">Model</legend>
       <div
@@ -100,6 +107,11 @@ const pricingLabel = (option: LlmModel) => {
       >
         {{ temperatureLabel }}
       </output>
+    </div>
+
+    <!-- Extra tuning such as retrieval depth, below a divider. -->
+    <div v-if="$slots.default" class="mt-4 border-t border-[#EEEEEA] pt-4">
+      <slot />
     </div>
   </CSetupSection>
 </template>
