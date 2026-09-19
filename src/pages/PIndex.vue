@@ -3,7 +3,6 @@ import { useSeo } from "@/shared/lib"
 import {
   CHero,
   CTrustBar,
-  CProblem,
   CSolution,
   CFeatures,
   CHowItWorks,
@@ -23,7 +22,6 @@ useSeo("/")
   <div>
     <CHero />
     <CTrustBar />
-    <!-- <CProblem /> -->
     <CSolution />
     <CFeatures />
     <CHowItWorks />
