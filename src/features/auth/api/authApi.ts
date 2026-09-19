@@ -167,8 +167,10 @@ export const authApi = {
   logoutAll: () => apiClient.post<MessageResponse>("/auth/logout-all"),
 
   googleAuthorizeUrl: () =>
-    import.meta.env.VITE_GOOGLE_OAUTH_URL ||
-    oauthAuthorizeUrl(GOOGLE_AUTHORIZE_PATH),
+    oauthAuthorizeUrl(
+      GOOGLE_AUTHORIZE_PATH,
+      import.meta.env.VITE_GOOGLE_OAUTH_URL
+    ),
 
   telegramLogin: (data: Record<string, string | number>) =>
     apiClient.post<TelegramAuthResponse>("/auth/telegram/login", {

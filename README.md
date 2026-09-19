@@ -391,6 +391,26 @@ issues HttpOnly `__Host-` session cookies: a direct call from `localhost` fails
 preflight with `400 Disallowed CORS origin` and could not keep the cookie.
 Proxying keeps the browser same-origin in development, exactly as in production.
 
+For Google login with a local frontend and the production API, open
+`http://localhost:3000` and keep `VITE_API_BASE_URL=/api/v1`. No local backend
+is required. Google returns to Vite's `/api` proxy, which forwards the callback
+to production and sets the session cookie on localhost. Use these exact values
+in Google Auth Platform for the OAuth client used by the production API:
+
+| Setting | Value |
+| --- | --- |
+| Authorized JavaScript origin | `http://localhost:3000` |
+| Authorized redirect URI | `http://localhost:3000/api/v1/auth/oauth/google/callback` |
+| Production redirect URI (keep registered) | `https://doppiai.uz/api/v1/auth/oauth/google/callback` |
+
+The backend's `DOPPI_OAUTH_CLIENT_ORIGINS` must include `http://localhost:3000`.
+`localhost:8000`, `127.0.0.1:3000`, and `localhost:3001` are different callback
+origins. Vite fails if port 3000 is busy instead of silently switching ports.
+If `VITE_GOOGLE_OAUTH_URL` is set, use `/api/v1/auth/oauth/google/authorize` so
+the initial OAuth binding cookie also goes through the local proxy. Start a new
+login after saving Google settings; reloading Google's existing error page does
+not restart the OAuth transaction.
+
 Override any of these in a `.env` file:
 
 ```env
