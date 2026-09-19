@@ -142,19 +142,6 @@ const signOut = async () => {
             </span>
           </button>
 
-          <RouterLink
-            to="/app/api-keys"
-            class="flex items-center gap-3 px-4 py-2.5 text-[13.5px] font-medium text-[#12121C] transition hover:bg-[#F7F7F9]"
-            role="menuitem"
-            @click="close"
-          >
-            <CIcon
-              name="key-round"
-              class="h-[18px] w-[18px] shrink-0 text-[#8E8E9C]"
-            />
-            <span class="flex-1">API kalitlar</span>
-          </RouterLink>
-
           <button
             type="button"
             class="flex w-full items-center gap-3 px-4 py-2.5 text-left text-[13.5px] font-medium text-[#12121C] transition hover:bg-[#F7F7F9]"

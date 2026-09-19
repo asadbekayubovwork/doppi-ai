@@ -77,6 +77,11 @@ export const ICON_PART_3: Record<string, IconNode[]> = {
     ["path", { d: "M2 10h20" }],
   ],
   moon: [["path", { d: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9" }]],
+  "rotate-ccw": [
+    ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" }],
+    ["path", { d: "M3 3v5h5" }],
+  ],
+  "loader-circle": [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56" }]],
   "log-out": [
     ["path", { d: "m16 17 5-5-5-5" }],
     ["path", { d: "M21 12H9" }],

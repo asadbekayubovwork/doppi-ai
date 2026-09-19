@@ -6,11 +6,20 @@ const COMMENT = 3
 const ELEMENT = 1
 const TEMPLATE_TAG = 3
 
-const pages = import.meta.glob("../*.vue", {
-  query: "?raw",
-  import: "default",
-  eager: true,
-}) as Record<string, string>
+const pages = {
+  ...import.meta.glob("../*.vue", {
+    query: "?raw",
+    import: "default",
+    eager: true,
+  }),
+  // Auth pages render AuthShell as their root, which passes the transition
+  // hooks on to it, so its root has to be a single element as well.
+  ...import.meta.glob("@/features/auth/ui/AuthShell.vue", {
+    query: "?raw",
+    import: "default",
+    eager: true,
+  }),
+} as Record<string, string>
 
 /**
  * App.vue renders every page inside `<Transition mode="out-in">`. A page whose

@@ -74,7 +74,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/login",
     name: "Login",
     meta: {
-      layout: "EmptyLayout",
+      layout: "AuthLayout",
       guestOnly: true,
     },
     component: () => import("./PLogin.vue"),
@@ -83,7 +83,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/register",
     name: "Register",
     meta: {
-      layout: "EmptyLayout",
+      layout: "AuthLayout",
       guestOnly: true,
     },
     component: () => import("./PRegister.vue"),
@@ -92,7 +92,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/forgot-password",
     name: "ForgotPassword",
     meta: {
-      layout: "EmptyLayout",
+      layout: "AuthLayout",
       guestOnly: true,
     },
     component: () => import("./PForgotPassword.vue"),
@@ -101,7 +101,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/auth/callback",
     name: "AuthCallback",
     meta: {
-      layout: "EmptyLayout",
+      layout: "AuthLayout",
     },
     component: () => import("./PAuthCallback.vue"),
   },
@@ -109,7 +109,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/auth/telegram",
     name: "TelegramAuth",
     meta: {
-      layout: "EmptyLayout",
+      layout: "AuthLayout",
       guestOnly: true,
     },
     component: () => import("./PTelegramAuth.vue"),
@@ -233,17 +233,6 @@ const routes: Array<RouteRecordRaw> = [
       subtitle: "Balans, limitlar va hisob-fakturalar",
     },
     component: () => import("./PUsageBilling.vue"),
-  },
-  {
-    path: "/app/api-keys",
-    name: "ApiKeys",
-    meta: {
-      layout: "DashboardLayout",
-      requiresAuth: true,
-      title: "API kalitlar",
-      subtitle: "Integratsiyalar uchun kalitlar",
-    },
-    component: () => import("./PApiKeys.vue"),
   },
   {
     path: "/app/team",

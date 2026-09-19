@@ -23,12 +23,18 @@ import { useLenis } from "@/shared/lib"
 import { CClickSparkLayer, CToaster } from "@/shared/ui"
 import { findSeoPage } from "@/shared/config/seoPages"
 
-import { DashboardLayout, DefaultLayout, EmptyLayout } from "./layouts"
+import {
+  AuthLayout,
+  DashboardLayout,
+  DefaultLayout,
+  EmptyLayout,
+} from "./layouts"
 
 const layouts = {
   DefaultLayout,
   EmptyLayout,
   DashboardLayout,
+  AuthLayout,
 }
 
 const route = useRoute()
@@ -38,10 +44,13 @@ const detectLayout = computed(() => {
   return layouts[metaLayout]
 })
 
-// The landing's blur reads as a page load; inside the dashboard a short slide
-// is what makes navigation feel instant.
+// The landing's blur reads as a page load; inside the dashboard and between
+// auth pages a short slide is what makes navigation feel instant. Auth pages
+// share AuthLayout, so only their right-hand column takes part in it.
 const pageTransition = computed(() =>
-  route.meta.layout === "DashboardLayout" ? "app-page" : "page"
+  route.meta.layout === "DashboardLayout" || route.meta.layout === "AuthLayout"
+    ? "app-page"
+    : "page"
 )
 
 // Only pages listed in SEO_PAGES belong in search results; sign-in, the

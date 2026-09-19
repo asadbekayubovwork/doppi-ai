@@ -25,6 +25,15 @@ const isOpen = ref(isInSection.value)
 watch(isInSection, (inside) => {
   if (inside) isOpen.value = true
 })
+
+// Clicking the row takes you to the section and unfolds it; once you are on
+// the section's own page, clicking it again folds the group back up.
+// `route` still holds the page the click came from: navigation resolves later.
+function onRowClick(event: MouseEvent) {
+  if (!hasChildren.value) return
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+  isOpen.value = route.path === props.item.to ? !isOpen.value : true
+}
 </script>
 
 <template>
@@ -37,6 +46,8 @@ watch(isInSection, (inside) => {
           isInSection ? 'bg-[#28272F] !text-[#F5F5F7]' : '',
           hasChildren ? 'pr-10' : '',
         ]"
+        :aria-expanded="hasChildren ? isOpen : undefined"
+        @click="onRowClick"
       >
         <CIcon
           :name="item.icon"
@@ -52,8 +63,8 @@ watch(isInSection, (inside) => {
         </span>
       </RouterLink>
 
-      <!-- A separate control, so the label always navigates and the chevron
-           only folds the group. -->
+      <!-- A separate control, so the group can be folded from any page
+           without navigating. -->
       <button
         v-if="hasChildren"
         type="button"

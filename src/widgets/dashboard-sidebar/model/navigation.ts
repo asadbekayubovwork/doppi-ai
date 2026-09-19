@@ -50,6 +50,5 @@ export const SERVICES: NavItem[] = [
 
 export const WORKSPACE: NavItem[] = [
   { label: "Usage & Billing", to: "/app/usage", icon: "bar-chart-3" },
-  { label: "Team", to: "/app/team", icon: "users" },
   { label: "Settings", to: "/app/settings", icon: "settings" },
 ]
