@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { useId } from "vue"
-import { useI18nList } from "@/shared/lib"
+import { computed, ref, useId } from "vue"
+import { useI18n } from "vue-i18n"
+import { useI18nList, useCallTimer } from "@/shared/lib"
 import { CIcon, CCountUp } from "@/shared/ui"
+import { useVoiceSession } from "@/features/voice-agent"
 
 interface Stat {
   value: string
@@ -11,10 +13,39 @@ interface Stat {
 const stats = useI18nList<Stat>("hero.stats")
 
 const grainId = `${useId()}-grain`
+
+// --- Live voice agent behind the orb --------------------------------------
+const { t } = useI18n()
+const agentAudio = ref<HTMLAudioElement | null>(null)
+const { phase, speaker, error, isActive, start, stop } = useVoiceSession({
+  audioEl: agentAudio,
+})
+
+/** Live "MM:SS" call clock, running only while a call is active. */
+const callTime = useCallTimer(isActive)
+
+/** The line under the orb reflects the finest-grained thing happening. */
+const statusText = computed(() => {
+  if (phase.value === "error")
+    return error.value || t("hero.agentStates.error")
+  if (phase.value === "connecting") return t("hero.agentStates.connecting")
+  if (phase.value === "live")
+    return t(`hero.agentStates.${speaker.value === "idle" ? "live" : speaker.value}`)
+  return t("hero.agentStates.idle")
+})
+
+/** The orb reacts while connected; connecting reads as "listening". */
+const orbState = computed(() => {
+  if (phase.value === "connecting") return "listening"
+  if (phase.value === "live") return speaker.value
+  return "idle"
+})
+
+const toggleCall = () => (isActive.value ? stop() : start())
 </script>
 
 <template>
-  <section id="top" class="hero section-ground pt-[120px] pb-[60px] sm:pt-[160px] sm:pb-[100px]">
+  <section id="top" class="hero section-ground pt-[120px] pb-[60px] sm:pt-[160px] sm:pb-[100px] h-screen">
     <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-70" aria-hidden="true" />
     <div class="ambient-glow animate-drift left-[6%] -top-40 h-72 w-[34rem]" aria-hidden="true" />
     <div
@@ -27,18 +58,6 @@ const grainId = `${useId()}-grain`
       <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
         <!-- Copy -->
         <div class="flex flex-col items-start">
-          <span
-            class="inline-flex items-center gap-2 rounded-full border border-sand-200 bg-white px-4 py-2 text-xs sm:text-sm font-medium text-sand-700"
-            data-aos="fade-up"
-            data-aos-duration="800"
-          >
-            <span class="relative flex h-1.5 w-1.5">
-              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-75" />
-              <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-signal" />
-            </span>
-            {{ $t("hero.badge") }}
-          </span>
-
           <h1
             class="mt-6 text-[32px] sm:text-5xl lg:text-[56px] font-bold leading-[110%] tracking-tight text-sand-950"
             data-aos="fade-up"
@@ -103,7 +122,7 @@ const grainId = `${useId()}-grain`
           <div
             class="relative flex flex-col items-center rounded-[32px] border border-sand-200 bg-white px-8 py-14 shadow-[0_24px_60px_-28px_rgba(12,10,9,0.25)] sm:py-16"
           >
-            <div class="relative h-[200px] w-[200px]">
+            <div class="voice-orb-shell relative h-[200px] w-[200px]" :data-state="orbState">
               <div class="voice-orb absolute inset-0 overflow-hidden rounded-full" aria-hidden="true">
                 <div class="voice-orb__mesh absolute -inset-[20%]" />
                 <svg class="voice-orb__grain absolute inset-0 h-full w-full">
@@ -115,18 +134,60 @@ const grainId = `${useId()}-grain`
                 </svg>
               </div>
 
-              <RouterLink
-                :to="{ hash: '#voice' }"
-                :aria-label="$t('hero.agentCall')"
-                class="absolute left-1/2 top-1/2 grid h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-sand-950 shadow-[0_8px_24px_-8px_rgba(12,10,9,0.35)] transition-transform duration-300 hover:scale-110"
+              <button
+                type="button"
+                :aria-label="isActive ? $t('hero.agentEndCall') : $t('hero.agentCall')"
+                :aria-pressed="isActive"
+                :disabled="phase === 'connecting'"
+                class="absolute left-1/2 top-1/2 grid h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full shadow-[0_8px_24px_-8px_rgba(12,10,9,0.35)] transition-300 hover:scale-110 disabled:cursor-not-allowed disabled:opacity-70"
+                :class="isActive ? 'bg-sand-950 text-white' : 'bg-white text-sand-950'"
+                @click="toggleCall"
               >
-                <CIcon name="phone" class="h-5 w-5" />
-              </RouterLink>
+                <CIcon
+                  :name="
+                    phase === 'connecting'
+                      ? 'loader-circle'
+                      : isActive
+                        ? 'phone-off'
+                        : 'phone'
+                  "
+                  class="h-5 w-5"
+                  :class="{ 'animate-spin': phase === 'connecting' }"
+                />
+              </button>
             </div>
 
-            <p class="mt-8 max-w-[300px] text-center text-sm leading-relaxed text-sand-500 sm:text-base">
+            <p
+              v-if="isActive"
+              class="mt-8 flex items-center gap-2 text-xl font-semibold tabular-nums text-sand-950"
+              role="timer"
+              :aria-label="$t('hero.agentCallTime', { time: callTime })"
+            >
+              <span class="h-2 w-2 rounded-full bg-signal" aria-hidden="true" />
+              {{ callTime }}
+            </p>
+
+            <p
+              class="max-w-[300px] text-center text-sm font-medium leading-relaxed sm:text-base"
+              :class="[
+                phase === 'error' ? 'text-signal' : 'text-sand-700',
+                isActive ? 'mt-2' : 'mt-8 min-h-[1.5rem]',
+              ]"
+              role="status"
+              aria-live="polite"
+            >
+              {{ statusText }}
+            </p>
+
+            <p
+              v-if="!isActive && phase !== 'error'"
+              class="mt-2 max-w-[300px] text-center text-xs leading-relaxed text-sand-500 sm:text-sm"
+            >
               {{ $t("hero.agentPrompt") }}
             </p>
+
+            <!-- The agent's returned voice. -->
+            <audio ref="agentAudio" autoplay class="hidden" />
           </div>
         </div>
       </div>
@@ -156,6 +217,26 @@ const grainId = `${useId()}-grain`
   mix-blend-mode: soft-light;
 }
 
+/* The orb comes alive with the call. Listening breathes gently; the agent
+   speaking spins the mesh quicker and brighter, so the state is legible at a
+   glance without reading the status line. */
+.voice-orb-shell {
+  transition: transform 300ms ease;
+}
+.voice-orb-shell[data-state="listening"] {
+  transform: scale(1.03);
+}
+.voice-orb-shell[data-state="speaking"] {
+  transform: scale(1.06);
+}
+.voice-orb-shell[data-state="listening"] .voice-orb__mesh {
+  animation-duration: 9s;
+}
+.voice-orb-shell[data-state="speaking"] .voice-orb__mesh {
+  animation-duration: 4s;
+  filter: blur(12px) saturate(1.35);
+}
+
 @keyframes orb-drift {
   from {
     transform: rotate(0deg) scale(1.05);
@@ -171,6 +252,9 @@ const grainId = `${useId()}-grain`
 @media (prefers-reduced-motion: reduce) {
   .voice-orb__mesh {
     animation: none;
+  }
+  .voice-orb-shell {
+    transform: none !important;
   }
 }
 </style>
