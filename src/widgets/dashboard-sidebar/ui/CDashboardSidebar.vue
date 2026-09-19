@@ -1,34 +1,17 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { CIcon, CLogo } from "@/shared/ui"
-import { useAuthStore } from "@/features/auth"
 import { HOME, SERVICES, WORKSPACE } from "../model/navigation"
 import CSidebarNavItem from "./CSidebarNavItem.vue"
 
 defineProps<{ open?: boolean }>()
 defineEmits<{ close: [] }>()
 
-const auth = useAuthStore()
 
 // Placeholder figures until the billing endpoint is wired up.
 const balance = { amount: "$248.60", currency: "USD", limit: 400, used: 62 }
 const balanceHint = computed(
   () => `$${balance.limit} oylik limitning ${balance.used}% ishlatilgan`
-)
-const userName = computed(() => {
-  const name =
-    `${auth.user?.first_name || ""} ${auth.user?.last_name || ""}`.trim()
-  return name || auth.user?.email || "Foydalanuvchi"
-})
-const userEmail = computed(() => auth.user?.email || "")
-const userInitials = computed(
-  () =>
-    userName.value
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((word) => word[0]?.toUpperCase() || "")
-      .join("") || "??"
 )
 </script>
 
