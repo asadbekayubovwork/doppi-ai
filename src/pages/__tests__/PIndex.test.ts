@@ -55,7 +55,7 @@ describe("PIndex (landing page)", () => {
     const wrapper = buildApp()
     const text = wrapper.text()
 
-    expect(text).toContain("Butun dunyo uchun AI Marketing tizimi")
+    expect(text).toContain("biznesingiz uchun AI marketing operatsion tizimi")
     expect(text).toContain("barchasi bir tizimda")
     expect(text).toContain("SIP Telefoniya")
     expect(text).toContain("Jonli qo'ng'iroq")
