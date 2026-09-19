@@ -1,9 +1,11 @@
 import type {
+  ChannelKind,
   ConversationDetail,
   ConversationSummary,
   CreateAgentPayload,
   RagAgent,
   TenantLimits,
+  UpdateAgentPayload,
   UploadedDocument,
 } from "../model/types"
 import type { LlmModel } from "../model/llm-models"
@@ -19,7 +21,7 @@ import {
 } from "./ragMappers"
 import { jsonBody, ragHttp } from "./ragHttp"
 
-interface DocumentResponse {
+export interface DocumentResponse {
   document_id: string
   name: string
   size_bytes: number
@@ -102,16 +104,7 @@ export const ragAgentApi = {
   async updateAgent(
     businessId: string,
     agentId: string,
-    payload: {
-      name: string
-      description: string
-      status: "live" | "paused"
-      model: string
-      temperature: number
-      systemPrompt: string
-      topK: number
-      similarityThreshold: number
-    }
+    payload: UpdateAgentPayload
   ): Promise<RagAgent> {
     const row = await ragHttp<AgentResponse>(
       businessId,
@@ -174,6 +167,13 @@ export const ragAgentApi = {
         method: "PUT",
         ...jsonBody({ credentials: channel.credentials, config: {} }),
       }
+    ),
+
+  deleteChannel: (businessId: string, agentId: string, kind: ChannelKind) =>
+    ragHttp<void>(
+      businessId,
+      `${agentPath(businessId, agentId)}/channels/${kind}`,
+      { method: "DELETE" }
     ),
 
   async listConversations(

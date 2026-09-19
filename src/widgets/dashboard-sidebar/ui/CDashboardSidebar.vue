@@ -2,7 +2,7 @@
 import { computed } from "vue"
 import { CIcon, CLogo } from "@/shared/ui"
 import { useAuthStore } from "@/features/auth"
-import { SERVICES, WORKSPACE } from "../model/navigation"
+import { HOME, SERVICES, WORKSPACE } from "../model/navigation"
 import CSidebarNavItem from "./CSidebarNavItem.vue"
 
 defineProps<{ open?: boolean }>()
@@ -51,7 +51,7 @@ const userInitials = computed(
       class="flex items-center justify-between gap-3 border-b border-white/[0.08] px-5 py-5"
     >
       <RouterLink
-        to="/app/rag"
+        to="/app"
         class="inline-flex items-center"
         aria-label="Do'ppi AI ish maydoni"
       >
@@ -65,8 +65,12 @@ const userInitials = computed(
     </div>
 
     <nav class="flex-1 overflow-y-auto px-3 pb-4">
+      <ul class="pt-3">
+        <CSidebarNavItem :item="HOME" />
+      </ul>
+
       <p
-        class="px-2 pb-2 pt-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D6B77]"
+        class="px-2 pb-2 pt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D6B77]"
       >
         Services
       </p>

@@ -2,6 +2,8 @@
 import { CTextField } from "@/shared/ui"
 import CSetupSection from "./CSetupSection.vue"
 
+defineProps<{ icon?: string }>()
+
 const name = defineModel<string>("name", { required: true })
 const description = defineModel<string>("description", { required: true })
 </script>
@@ -9,9 +11,11 @@ const description = defineModel<string>("description", { required: true })
 <template>
   <CSetupSection
     :step="1"
+    :icon="icon"
     title="Agent name"
     hint="Shown to your team, not to customers"
   >
+    <template v-if="$slots.aside" #aside><slot name="aside" /></template>
     <div class="grid gap-4 md:grid-cols-2">
       <CTextField
         v-model="name"

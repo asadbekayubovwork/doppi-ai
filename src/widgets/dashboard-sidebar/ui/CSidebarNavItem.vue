@@ -11,7 +11,8 @@ const groupId = useId()
 
 const isInSection = computed(
   () =>
-    route.path === props.item.to || route.path.startsWith(`${props.item.to}/`)
+    route.path === props.item.to ||
+    (!props.item.exact && route.path.startsWith(`${props.item.to}/`))
 )
 
 // Children may point at an anchor on the parent page ("/app/video#plans").

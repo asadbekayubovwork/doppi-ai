@@ -22,6 +22,8 @@ const VARIANTS: Record<ButtonVariant, string> = {
   primary: "bg-[#5B4BE8] text-white hover:bg-[#4F3FDC]",
   secondary:
     "border border-[#E5E5E1] bg-white text-[#15151B] hover:border-[#D6D6D1] hover:bg-[#FAFAF9]",
+  danger:
+    "border border-[#F3CACA] bg-[#FFF5F5] text-[#C42B2B] hover:border-[#EBB3B3] hover:bg-[#FFECEC]",
 }
 
 const SIZES = {

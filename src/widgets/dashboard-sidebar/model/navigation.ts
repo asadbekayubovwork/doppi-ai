@@ -8,6 +8,16 @@ export interface NavLink {
 export interface NavItem extends NavLink {
   /** Sub-pages shown in a collapsible group under the item. */
   children?: NavLink[]
+  /** Active on its own path only, not on every page below it. */
+  exact?: boolean
+}
+
+// Every /app page sits below the home path, so it only matches exactly.
+export const HOME: NavItem = {
+  label: "Home",
+  to: "/app",
+  icon: "layout-grid",
+  exact: true,
 }
 
 // Two groups, matching the product split: what the workspace runs, and how the

@@ -6,4 +6,4 @@ export type BadgeTone =
   | "danger"
   | "outline"
 
-export type ButtonVariant = "primary" | "secondary"
+export type ButtonVariant = "primary" | "secondary" | "danger"

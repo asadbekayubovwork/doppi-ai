@@ -125,8 +125,14 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/app",
-    redirect: "/app/rag",
-    meta: { requiresAuth: true },
+    name: "DashboardHome",
+    meta: {
+      layout: "DashboardLayout",
+      requiresAuth: true,
+      title: "Home",
+      subtitle: "Workspace overview",
+    },
+    component: () => import("./PDashboardHome.vue"),
   },
   {
     path: "/app/rag",
@@ -167,8 +173,8 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "RAG agent settings",
-      subtitle: "Model, retrieval va agent boshqaruvi",
+      title: "Universal RAG Agent",
+      subtitle: "Agent konfiguratsiyasi",
     },
     component: () => import("./PRagAgentSettings.vue"),
   },

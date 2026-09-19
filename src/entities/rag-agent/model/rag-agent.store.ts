@@ -3,14 +3,27 @@ import { HttpError } from "@/shared/api"
 import { ragAgentApi } from "../api/ragAgentApi"
 import type { LlmModel } from "./llm-models"
 import type {
+  AgentConfigurationUpdate,
   ConversationDetail,
   ConversationSummary,
   CreateAgentPayload,
   RagAgent,
   TenantLimits,
+  UpdateAgentPayload,
 } from "./types"
 
 export type LoadState = "idle" | "loading" | "ready" | "error"
+
+const editableFields = (agent: RagAgent): UpdateAgentPayload => ({
+  name: agent.name,
+  description: agent.description,
+  status: agent.status,
+  model: agent.model,
+  temperature: agent.temperature,
+  systemPrompt: agent.systemPrompt,
+  topK: agent.topK,
+  similarityThreshold: agent.similarityThreshold,
+})
 
 const toSummary = (detail: ConversationDetail): ConversationSummary => ({
   id: detail.id,
@@ -180,6 +193,57 @@ export const useRagAgentStore = defineStore("rag-agent", {
         details: {},
       })
       return configured
+    },
+
+    async saveConfiguration(
+      businessId: string,
+      update: AgentConfigurationUpdate
+    ) {
+      this.useBusiness(businessId)
+      const agentId = this.agent?.id
+      if (!agentId) throw new Error("There is no agent to update")
+      try {
+        if (update.agent) {
+          await ragAgentApi.updateAgent(businessId, agentId, update.agent)
+        }
+        for (const channel of update.connect) {
+          await ragAgentApi.upsertChannel(businessId, agentId, channel)
+        }
+        for (const kind of update.disconnect) {
+          await ragAgentApi.deleteChannel(businessId, agentId, kind)
+        }
+      } finally {
+        // Whatever went through is live now, even when a later step failed.
+        this.agent = await ragAgentApi
+          .getAgentById(businessId, agentId)
+          .catch(() => this.agent)
+      }
+    },
+
+    /** Pauses or resumes the agent without touching any unsaved edits. */
+    async setAgentStatus(businessId: string, status: RagAgent["status"]) {
+      this.useBusiness(businessId)
+      const agent = this.agent
+      if (!agent) return
+      await ragAgentApi.updateAgent(businessId, agent.id, {
+        ...editableFields(agent),
+        status,
+      })
+      this.agent = await ragAgentApi.getAgentById(businessId, agent.id)
+    },
+
+    async deleteAgent(businessId: string) {
+      this.useBusiness(businessId)
+      const agent = this.agent
+      if (!agent) return
+      await ragAgentApi.deleteAgent(businessId, agent.id)
+      this.$patch({
+        agent: null,
+        agentState: "ready",
+        conversations: [],
+        conversationsState: "ready",
+        details: {},
+      })
     },
 
     applyDetail(detail: ConversationDetail) {

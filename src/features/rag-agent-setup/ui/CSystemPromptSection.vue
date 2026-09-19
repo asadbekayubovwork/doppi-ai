@@ -4,7 +4,7 @@ import { formatCount } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 import CSetupSection from "./CSetupSection.vue"
 
-const props = defineProps<{ tokens: number; limit: number }>()
+const props = defineProps<{ tokens: number; limit: number; icon?: string }>()
 
 defineEmits<{ useTemplate: [] }>()
 
@@ -17,9 +17,11 @@ const isOverLimit = computed(() => props.tokens > props.limit)
 <template>
   <CSetupSection
     :step="4"
+    :icon="icon"
     title="System prompt"
     hint="Applies to every conversation on every channel"
   >
+    <template v-if="$slots.aside" #aside><slot name="aside" /></template>
     <label :for="fieldId" class="sr-only">System prompt</label>
     <textarea
       :id="fieldId"
@@ -35,7 +37,7 @@ const isOverLimit = computed(() => props.tokens > props.limit)
       :aria-invalid="isOverLimit || undefined"
       :aria-describedby="`${fieldId}-tokens`"
     />
-    <div class="mt-2 flex items-center justify-between gap-3">
+    <div class="mt-2 flex min-h-[20px] items-center justify-between gap-3">
       <p
         :id="`${fieldId}-tokens`"
         class="text-xs tabular-nums"
@@ -43,7 +45,11 @@ const isOverLimit = computed(() => props.tokens > props.limit)
       >
         {{ formatCount(tokens) }} / {{ formatCount(limit) }} tokens
       </p>
+      <!-- A page that passes #action owns this corner, even when its content
+           is empty for the moment. -->
+      <slot v-if="$slots.action" name="action" />
       <button
+        v-else
         type="button"
         class="inline-flex items-center gap-1.5 rounded-md text-[13px] font-semibold text-[#5B4BE8] transition hover:text-[#4F3FDC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B4BE8]/40"
         @click="$emit('useTemplate')"

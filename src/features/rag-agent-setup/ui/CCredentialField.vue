@@ -3,7 +3,11 @@ import { computed, ref } from "vue"
 import { CIcon, CTextField } from "@/shared/ui"
 import type { CredentialField } from "../model/channel-setup"
 
-const props = defineProps<{ field: CredentialField }>()
+const props = defineProps<{
+  field: CredentialField
+  /** Overrides the field's example value. */
+  placeholder?: string
+}>()
 
 const value = defineModel<string>({ default: "" })
 
@@ -18,7 +22,7 @@ const isInvalid = computed(() => value.value.trim() !== "" && !isValid.value)
     v-model="value"
     :label="field.label"
     :type="field.secret && !isRevealed ? 'password' : 'text'"
-    :placeholder="field.placeholder"
+    :placeholder="placeholder ?? field.placeholder"
     :autocomplete="field.secret ? 'new-password' : 'off'"
     :invalid="isInvalid"
     :hint="isInvalid ? field.invalidHint : undefined"

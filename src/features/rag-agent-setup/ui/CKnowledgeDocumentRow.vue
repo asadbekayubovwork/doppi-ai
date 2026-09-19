@@ -8,7 +8,7 @@ import {
   CProgress,
   type BadgeTone,
 } from "@/shared/ui"
-import type { DocumentDraft } from "../model/useAgentSetupForm"
+import type { DocumentDraft } from "../model/useKnowledgeDocuments"
 
 const props = defineProps<{ document: DocumentDraft }>()
 

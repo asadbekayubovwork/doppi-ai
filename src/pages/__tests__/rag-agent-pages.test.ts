@@ -11,6 +11,7 @@ import {
 import { CDashboardSidebar } from "@/widgets/dashboard-sidebar"
 import PRagAgent from "../PRagAgent.vue"
 import PRagAgentCreate from "../PRagAgentCreate.vue"
+import PRagAgentSettings from "../PRagAgentSettings.vue"
 import PRagConversation from "../PRagConversation.vue"
 
 const stub = { template: "<div />" }
@@ -206,6 +207,75 @@ describe("RAG agent pages", () => {
     const wrapper = await mountAt("/app/rag/create", PRagAgentCreate)
     expect(wrapper.text()).toContain("Gemma")
     expect(wrapper.findAll('input[type="radio"]')).toHaveLength(1)
+    wrapper.unmount()
+  })
+})
+
+describe("RAG agent configuration page", () => {
+  beforeEach(() => {
+    vi.spyOn(ragAgentApi, "listDocuments").mockResolvedValue([
+      {
+        document_id: "document-test",
+        name: "policy.docx",
+        size_bytes: 2048,
+        chunk_count: 12,
+        status: "indexed",
+        progress: 1,
+        error: null,
+      },
+    ])
+  })
+
+  it("opens with the saved configuration and no pending changes", async () => {
+    const wrapper = await mountAt("/app/rag/settings", PRagAgentSettings)
+    expect(wrapper.text()).toContain("Edit configuration")
+    expect(wrapper.text()).toContain("Support agent · Live")
+    expect(wrapper.text()).toContain("policy.docx")
+    expect(wrapper.text()).toContain("1 document · 12 chunks")
+    expect(
+      (
+        wrapper.find('input[placeholder="Aura Support Agent"]')
+          .element as HTMLInputElement
+      ).value
+    ).toBe("Support agent")
+    expect(wrapper.text()).not.toContain("unsaved change")
+    wrapper.unmount()
+  })
+
+  it("saves edited fields and channel changes together", async () => {
+    const updateAgent = vi
+      .spyOn(ragAgentApi, "updateAgent")
+      .mockResolvedValue(agent)
+    const deleteChannel = vi
+      .spyOn(ragAgentApi, "deleteChannel")
+      .mockResolvedValue()
+    vi.spyOn(ragAgentApi, "getAgentById").mockResolvedValue({
+      ...agent,
+      name: "Renamed agent",
+      channels: [],
+    })
+    const wrapper = await mountAt("/app/rag/settings", PRagAgentSettings)
+
+    await wrapper
+      .find('input[placeholder="Aura Support Agent"]')
+      .setValue("Renamed agent")
+    await wrapper.find('[aria-label="Connect Web widget"]').trigger("click")
+    expect(wrapper.text()).toContain("2 unsaved changes")
+
+    const save = wrapper
+      .findAll("button")
+      .find((button) => button.text() === "Save changes")
+    await save?.trigger("click")
+    await flushPromises()
+
+    expect(updateAgent).toHaveBeenCalledWith(
+      "business-test",
+      agent.id,
+      expect.objectContaining({ name: "Renamed agent", status: "live" })
+    )
+    expect(deleteChannel).toHaveBeenCalledWith("business-test", agent.id, "web")
+    expect(wrapper.text()).toContain("Renamed agent · Live")
+    expect(wrapper.text()).not.toContain("unsaved change")
     wrapper.unmount()
   })
 })
