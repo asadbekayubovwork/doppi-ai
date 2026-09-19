@@ -9,6 +9,7 @@ import CFeatures from "../features/ui/CFeatures.vue"
 import CPricingList from "../pricing/ui/CPricingList.vue"
 import CFaq from "../faq/ui/CFaq.vue"
 import CTeamCards from "../team/ui/CTeamCards.vue"
+import CTrustBar from "../trustbar/ui/CTrustBar.vue"
 
 /**
  * The landing sections read their lists straight out of the i18n tree via
@@ -83,6 +84,24 @@ describe("landing sections render i18n list content", () => {
     // A missing `team.roles.<id>` entry would leave the raw key on screen.
     expect(text).not.toContain("team.roles")
     expect(text).not.toContain("team.bios")
+  })
+
+  it("renders every trust-bar channel with a logo, announced once", () => {
+    const wrapper = mountWithI18n(CTrustBar)
+    const [first, ...copies] = wrapper.findAll("ul")
+
+    expect(first.findAll("li")).toHaveLength(8)
+    // Seven brand marks plus the stroke phone icon for SIP telephony.
+    expect(first.findAll("svg")).toHaveLength(8)
+    expect(first.text()).toContain("SIP Telefoniya")
+    expect(first.attributes("aria-hidden")).toBeUndefined()
+
+    // The loop's extra copies are decoration only.
+    expect(copies.length).toBeGreaterThan(0)
+    for (const copy of copies) {
+      expect(copy.attributes("aria-hidden")).toBe("true")
+      expect(copy.attributes("inert")).toBeDefined()
+    }
   })
 
   it("switches every list to the selected locale", () => {
