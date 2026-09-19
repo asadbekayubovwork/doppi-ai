@@ -55,7 +55,6 @@ const user = computed(() => {
     email: auth.user?.email || "",
     initials: initialsFor(name),
     balance: "",
-    notifications: 0,
   }
 })
 
@@ -130,28 +129,13 @@ watch(
         {{ subtitle }}
       </p>
     </div>
-    <label class="relative hidden min-w-0 max-w-[240px] flex-1 xl:block"
-      ><span class="sr-only">Qidiruv</span
-      ><CIcon
-        name="search"
-        class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#84848E]" /><input
-        type="search"
-        placeholder="Qidirish"
-        class="h-9 w-full rounded-[9px] border border-[#E5E5E1] bg-[#FAFAF9] pl-10 pr-3 text-sm outline-none focus:border-[#5B4BE8] focus:bg-white"
-    /></label>
     <div class="flex items-center gap-2 sm:gap-3">
       <CBusinessSwitcher
         :businesses="businesses"
         :active-id="activeBusinessId"
         @update:active-id="selectBusiness"
         @create="isCreateOpen = true"
-      /><button
-        type="button"
-        class="hidden h-9 items-center gap-2 rounded-[9px] border border-[#E5E5E1] bg-white px-3 text-sm font-semibold text-[#15151B] hover:bg-[#FAFAF9] md:inline-flex"
-        @click="isCreateOpen = true"
-      >
-        <CIcon name="plus" class="h-4 w-4" />Yangi biznes</button
-      ><span
+      /><span
         class="hidden h-6 w-px bg-[#E5E5E1] sm:block"
         aria-hidden="true"
       /><button
@@ -165,7 +149,6 @@ watch(
         :email="user.email"
         :initials="user.initials"
         :balance="user.balance"
-        :notifications="user.notifications"
       />
     </div>
     <CCreateBusinessModal

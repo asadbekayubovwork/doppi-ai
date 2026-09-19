@@ -23,7 +23,7 @@ useSeo("/")
   <div>
     <CHero />
     <CTrustBar />
-    <CProblem />
+    <!-- <CProblem /> -->
     <CSolution />
     <CFeatures />
     <CHowItWorks />

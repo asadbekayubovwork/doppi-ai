@@ -68,7 +68,7 @@ describe("PIndex (landing page)", () => {
     const wrapper = buildApp("en")
 
     expect(wrapper.text()).not.toContain("Toolbar")
-    expect(wrapper.text()).toContain("Do'ppi.ai")
+    expect(wrapper.text()).toContain("Do'ppi AI")
 
     wrapper.unmount()
   })

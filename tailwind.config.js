@@ -8,6 +8,29 @@ export default {
         // Channel triplets (not hex) so `bg-ground/80` keeps working.
         ground: "rgb(var(--bg-ground-rgb) / <alpha-value>)",
         raised: "rgb(var(--bg-raised-rgb) / <alpha-value>)",
+        // Landing palette, taken from ElevenLabs' warm neutrals: `sand-25` is
+        // the page ground, 950 the ink, and the steps between carry borders
+        // (200), muted copy (500) and hover states.
+        sand: {
+          25: "#FDFCFC",
+          50: "#FAF8F8",
+          100: "#F5F3F1",
+          200: "#EBE8E4",
+          300: "#D7D2CC",
+          400: "#A59F97",
+          500: "#777169",
+          600: "#59544F",
+          700: "#44403B",
+          800: "#292524",
+          900: "#1C1917",
+          950: "#0C0A09",
+        },
+        // The live accent on the landing, kept for things that are live or
+        // moving: status dots, waveforms, the orbit's travelling light.
+        signal: "#FF4704",
+        // Hover accent for cards and blocks: the border glow, lit orbit
+        // chips, step markers. Deep blue, hsl(221 46% 38%).
+        cobalt: "#34508C",
         primary: {
           10: "#EAEFFF",
           20: "#BDCCFF",

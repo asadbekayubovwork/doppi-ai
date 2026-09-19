@@ -15,9 +15,9 @@ const showConnector = (index: number) => (index + 1) % 4 !== 0 && index !== step
 </script>
 
 <template>
-  <section id="how" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="how" class="section-ground py-[60px] sm:py-[100px]">
     <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-40" aria-hidden="true" />
-    <div class="violet-glow left-1/2 top-8 h-64 w-[40rem] -translate-x-1/2 opacity-70" aria-hidden="true" />
+    <div class="ambient-glow left-1/2 top-8 h-64 w-[40rem] -translate-x-1/2 opacity-70" aria-hidden="true" />
 
     <div class="container relative z-10">
       <CSectionHeading
@@ -37,28 +37,28 @@ const showConnector = (index: number) => (index + 1) % 4 !== 0 && index !== step
         >
           <div class="surface-card surface-card-lift group relative h-full rounded-2xl p-6">
             <span
-              class="absolute left-0 top-6 h-8 w-0.5 rounded bg-[#6633EE]/50 transition-all duration-300 group-hover:h-12 group-hover:bg-[#8F6BFF]"
+              class="absolute left-0 top-6 h-8 w-0.5 rounded bg-sand-300 transition-all duration-300 group-hover:h-12 group-hover:bg-cobalt"
               aria-hidden="true"
             />
 
             <div class="flex items-center">
-              <span class="text-sm font-semibold tabular-nums text-[#8F6BFF]/80">
+              <span class="text-sm font-semibold tabular-nums text-sand-400">
                 {{ String(i + 1).padStart(2, "0") }}
               </span>
               <span
-                class="ml-auto grid h-10 w-10 place-items-center rounded-xl bg-[#6633EE]/15 text-[#B9A2FF] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+                class="ml-auto grid h-10 w-10 place-items-center rounded-xl bg-sand-100 text-sand-950 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
               >
                 <CIcon :name="step.icon" class="h-5 w-5" />
               </span>
             </div>
 
-            <h3 class="mt-4 font-semibold text-white">{{ step.title }}</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-[#A3A3A3]">{{ step.desc }}</p>
+            <h3 class="mt-4 font-semibold text-sand-950">{{ step.title }}</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-sand-500">{{ step.desc }}</p>
           </div>
 
           <span
             v-if="showConnector(i)"
-            class="pointer-events-none absolute -right-3 top-1/2 z-10 hidden -translate-y-1/2 text-[#6633EE]/60 lg:block"
+            class="pointer-events-none absolute -right-3 top-1/2 z-10 hidden -translate-y-1/2 text-sand-300 lg:block"
             aria-hidden="true"
           >
             <CIcon name="chevron-right" class="h-5 w-5" />

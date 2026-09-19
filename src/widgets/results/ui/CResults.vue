@@ -11,13 +11,13 @@ const stats = useI18nList<Stat>("results.stats")
 </script>
 
 <template>
-  <section id="results" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="results" class="section-ground py-[60px] sm:py-[100px]">
     <div
-      class="violet-glow -right-24 top-1/3 h-72 w-[32rem]"
+      class="ambient-glow -right-24 top-1/3 h-72 w-[32rem]"
       aria-hidden="true"
     />
     <div
-      class="violet-glow -left-24 bottom-0 h-64 w-[26rem] opacity-60"
+      class="ambient-glow -left-24 bottom-0 h-64 w-[26rem] opacity-60"
       aria-hidden="true"
     />
 
@@ -41,11 +41,11 @@ const stats = useI18nList<Stat>("results.stats")
             class="surface-card surface-card-lift h-full rounded-2xl p-6 text-center sm:p-8 sm:text-left"
           >
             <p
-              class="text-4xl sm:text-5xl font-bold leading-none tracking-tight text-gradient-violet"
+              class="text-4xl sm:text-5xl font-bold leading-none tracking-tight text-gradient-ink"
             >
               <CCountUp :value="stat.value" />
             </p>
-            <p class="mt-2 text-sm leading-snug text-[#A3A3A3]">
+            <p class="mt-2 text-sm leading-snug text-sand-500">
               {{ stat.label }}
             </p>
           </div>

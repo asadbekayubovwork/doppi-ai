@@ -1,32 +1,26 @@
 <script setup lang="ts">
 import { useId } from "vue"
 import { CIcon } from "@/shared/ui"
+import {
+  COMET_SWEEP_DEG,
+  ORBIT_POSITIONS,
+  ORBIT_RADIUS,
+  type OrbitFlow,
+} from "../model/orbit"
 import type { SolutionModule } from "../model/types"
 import CSolutionHub from "./CSolutionHub.vue"
 
 const props = defineProps<{
   modules: SolutionModule[]
   entered: boolean
-  /** Lit module: the hovered one, otherwise the auto-highlight. */
+  /** Lit module: the hovered one, otherwise the one the comet last reached. */
   current: number | null
   hovered: number | null
-  /** Module whose light is travelling in; null when motion is off. */
-  flowIndex: number | null
+  /** Light travelling in from a module; null when motion is off. */
+  flow: OrbitFlow | null
 }>()
 
 defineEmits<{ hover: [index: number | null] }>()
-
-// Fixed anchor points (percent of the square diagram box); each chip is centred
-// on its point. Listed clockwise from the top, which is also the order the
-// chips enter in and the order the auto-highlight walks through them.
-const ORBIT_POSITIONS = [
-  { top: 2, left: 50 },
-  { top: 27, left: 93 },
-  { top: 73, left: 93 },
-  { top: 98, left: 50 },
-  { top: 73, left: 7 },
-  { top: 27, left: 7 },
-]
 
 // How far (px) a chip starts from its anchor, pulled in towards the hub, so the
 // entrance reads as the modules bursting out of Do'ppi.
@@ -46,20 +40,21 @@ const orbit = ORBIT_POSITIONS.map((pos) => {
 const orbitAt = (i: number) => orbit[i % orbit.length]
 
 const spokeClass = (i: number) => {
-  if (props.current === i) return "stroke-[#8F6BFF]"
-  return props.hovered === null ? "stroke-[#6633EE]/30" : "stroke-[#6633EE]/10"
+  if (props.current === i) return "stroke-cobalt"
+  return props.hovered === null ? "stroke-sand-300" : "stroke-sand-200"
 }
 
 const uid = useId()
 const glowId = `${uid}-glow`
 const cometId = `${uid}-comet`
 
-// The comet is a short arc on the orbit (r = 47) starting at 12 o'clock and
-// sweeping clockwise; the whole group then spins round the hub.
-const COMET_SWEEP = (24 * Math.PI) / 180
+// The comet is a short arc on the orbit starting at 12 o'clock and sweeping
+// clockwise; CSolution turns the whole group round the hub.
+const COMET_SWEEP = (COMET_SWEEP_DEG * Math.PI) / 180
+const orbitTop = 50 - ORBIT_RADIUS
 const cometHead = {
-  x: 50 + 47 * Math.sin(COMET_SWEEP),
-  y: 50 - 47 * Math.cos(COMET_SWEEP),
+  x: 50 + ORBIT_RADIUS * Math.sin(COMET_SWEEP),
+  y: 50 - ORBIT_RADIUS * Math.cos(COMET_SWEEP),
 }
 </script>
 
@@ -67,6 +62,7 @@ const cometHead = {
   <div
     class="constellation relative mx-auto mt-16 hidden h-[30rem] w-[30rem] lg:block"
     :class="{ 'is-entered': entered }"
+    data-orbit
   >
     <svg
       class="absolute inset-0 h-full w-full"
@@ -95,12 +91,12 @@ const cometHead = {
           :id="cometId"
           gradientUnits="userSpaceOnUse"
           x1="50"
-          y1="3"
+          :y1="orbitTop"
           :x2="cometHead.x"
           :y2="cometHead.y"
         >
-          <stop offset="0" stop-color="#8F6BFF" stop-opacity="0" />
-          <stop offset="1" stop-color="#B9A2FF" stop-opacity="0.9" />
+          <stop offset="0" stop-color="#34508C" stop-opacity="0" />
+          <stop offset="1" stop-color="#34508C" stop-opacity="0.9" />
         </linearGradient>
       </defs>
 
@@ -108,18 +104,18 @@ const cometHead = {
         <circle
           cx="50"
           cy="50"
-          r="47"
+          :r="ORBIT_RADIUS"
           fill="none"
           stroke-width="0.25"
           stroke-dasharray="0.5 2"
-          class="stroke-[#6633EE]/30"
+          class="stroke-sand-300"
         />
       </g>
 
       <g class="comet-in">
         <g class="comet">
           <path
-            :d="`M 50 3 A 47 47 0 0 1 ${cometHead.x} ${cometHead.y}`"
+            :d="`M 50 ${orbitTop} A ${ORBIT_RADIUS} ${ORBIT_RADIUS} 0 0 1 ${cometHead.x} ${cometHead.y}`"
             fill="none"
             :stroke="`url(#${cometId})`"
             stroke-width="0.5"
@@ -129,7 +125,7 @@ const cometHead = {
             :cx="cometHead.x"
             :cy="cometHead.y"
             r="0.75"
-            fill="#D9CCFF"
+            fill="#34508C"
             :filter="`url(#${glowId})`"
           />
         </g>
@@ -149,17 +145,17 @@ const cometHead = {
         :style="{ '--delay': `${300 + i * 80}ms` }"
       />
 
-      <!-- A light running from the lit module into the hub. Keyed so it
-           restarts from the chip whenever the highlight moves on. -->
+      <!-- A light running from a module into the hub. Keyed so every send
+           starts afresh from its chip. -->
       <line
-        v-if="flowIndex !== null"
-        :key="`packet-${flowIndex}`"
-        :x1="orbitAt(flowIndex).left"
-        :y1="orbitAt(flowIndex).top"
+        v-if="flow"
+        :key="`packet-${flow.id}`"
+        :x1="orbitAt(flow.index).left"
+        :y1="orbitAt(flow.index).top"
         x2="50"
         y2="50"
         pathLength="100"
-        stroke="#CDBBFF"
+        stroke="#34508C"
         stroke-width="0.9"
         stroke-linecap="round"
         class="packet"
@@ -172,6 +168,7 @@ const cometHead = {
         v-for="(module, i) in modules"
         :key="i"
         class="absolute -translate-x-1/2 -translate-y-1/2"
+        data-orbit-chip
         :style="{
           top: `${orbitAt(i).top}%`,
           left: `${orbitAt(i).left}%`,
@@ -193,21 +190,21 @@ const cometHead = {
             class="flex items-center gap-3 rounded-2xl border px-4 py-3 backdrop-blur-sm transition-[border-color,background-color,box-shadow] duration-300"
             :class="
               current === i
-                ? 'border-[#6633EE]/70 bg-[#1C0F38] shadow-[0_16px_40px_-16px_rgba(102,51,238,0.8)]'
-                : 'border-white/10 bg-[#160A2E]/80'
+                ? 'border-cobalt/60 bg-white shadow-[0_16px_40px_-18px_rgba(52,80,140,0.45)]'
+                : 'border-sand-200 bg-white/90'
             "
           >
             <span
               class="grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-colors duration-300"
-              :class="current === i ? 'bg-[#6633EE]/35' : 'bg-[#6633EE]/15'"
+              :class="current === i ? 'bg-sand-950' : 'bg-sand-100'"
             >
               <CIcon
                 :name="module.icon"
                 class="h-5 w-5 transition-colors duration-300"
-                :class="current === i ? 'text-white' : 'text-[#B9A2FF]'"
+                :class="current === i ? 'text-white' : 'text-sand-950'"
               />
             </span>
-            <span class="whitespace-nowrap text-sm font-medium text-white">{{
+            <span class="whitespace-nowrap text-sm font-medium text-sand-950">{{
               module.label
             }}</span>
           </div>
@@ -215,7 +212,7 @@ const cometHead = {
       </li>
     </ul>
 
-    <CSolutionHub :entered="entered" :flow-index="flowIndex" />
+    <CSolutionHub :entered="entered" :flow-id="flow?.id ?? null" />
   </div>
 </template>
 
@@ -317,25 +314,20 @@ const cometHead = {
   }
 }
 
+/* Turned frame by frame from CSolution, which lights each chip it reaches. */
 .comet {
-  animation: comet-spin 9s linear infinite;
+  transform: rotate(var(--comet-angle, 0deg));
 }
 
-@keyframes comet-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* The highlight lap (2.4s, see CYCLE_MS in CSolution): the light leaves the
-   chip and reaches the hub edge around 30%, where CSolutionHub answers it. */
+/* One send (2.4s, see SEND_MS in CSolution): the light leaves the chip and
+   reaches the hub edge around 30%, where CSolutionHub answers it. */
 
 .packet {
   stroke-dasharray: 10 200;
   stroke-dashoffset: 16;
   animation:
-    packet-travel 2.4s linear infinite,
-    packet-fade 2.4s linear infinite;
+    packet-travel 2.4s linear both,
+    packet-fade 2.4s linear both;
 }
 
 @keyframes packet-travel {
@@ -366,7 +358,6 @@ const cometHead = {
 @media (prefers-reduced-motion: reduce) {
   .spoke,
   .chip,
-  .comet,
   .is-entered .spoke,
   .is-entered .chip {
     animation: none !important;

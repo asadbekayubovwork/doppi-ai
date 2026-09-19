@@ -14,20 +14,20 @@ useSeo("/product")
 
 <template>
   <div>
-    <section class="section-dark pt-[130px] pb-[40px] sm:pt-[180px] sm:pb-[60px]">
+    <section class="section-ground pt-[130px] pb-[40px] sm:pt-[180px] sm:pb-[60px]">
       <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-60" aria-hidden="true" />
-      <div class="violet-glow left-1/2 -top-24 h-64 w-[38rem] -translate-x-1/2" aria-hidden="true" />
+      <div class="ambient-glow left-1/2 -top-24 h-64 w-[38rem] -translate-x-1/2" aria-hidden="true" />
 
       <div class="container relative z-10 text-center">
         <h1
-          class="mx-auto max-w-[820px] text-[32px] sm:text-5xl font-bold leading-[120%] tracking-tight text-white"
+          class="mx-auto max-w-[820px] text-[32px] sm:text-5xl font-bold leading-[120%] tracking-tight text-sand-950"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
           {{ $t("product.pageTitle") }}
         </h1>
         <p
-          class="mx-auto mt-5 max-w-[640px] text-base sm:text-lg leading-[150%] text-[#A3A3A3]"
+          class="mx-auto mt-5 max-w-[640px] text-base sm:text-lg leading-[150%] text-sand-500"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-delay="150"
@@ -43,13 +43,13 @@ useSeo("/product")
         >
           <RouterLink
             to="/contact-us"
-            class="flex h-12 w-full items-center justify-center rounded-xl bg-[#6633EE] px-8 font-medium text-white transition-300 hover:bg-[#6633EE]/80 sm:w-auto"
+            class="flex h-12 w-full items-center justify-center rounded-xl bg-sand-950 px-8 font-medium text-white transition-300 hover:bg-sand-800 sm:w-auto"
           >
             {{ $t("hero.ctaPrimary") }}
           </RouterLink>
           <RouterLink
             to="/pricing"
-            class="flex h-12 w-full items-center justify-center rounded-xl border border-white/10 bg-[#3D3D3D]/40 px-8 font-medium text-white transition-300 hover:bg-[#3D3D3D]/60 sm:w-auto"
+            class="flex h-12 w-full items-center justify-center rounded-xl border border-sand-200 bg-white px-8 font-medium text-sand-950 transition-300 hover:bg-sand-100 sm:w-auto"
           >
             {{ $t("nav.pricing") }}
           </RouterLink>

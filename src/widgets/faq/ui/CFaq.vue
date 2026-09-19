@@ -58,7 +58,7 @@ const onTransitionDone = (element: Element) => {
 </script>
 
 <template>
-  <section id="faq" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="faq" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
       <CSectionHeading
         :eyebrow="$t(`${i18nKey}.eyebrow`)"
@@ -80,7 +80,7 @@ const onTransitionDone = (element: Element) => {
         >
           <div
             class="surface-card overflow-hidden rounded-2xl"
-            :class="openIndex === i ? 'border-[#6633EE]/45 bg-[#6633EE]/[0.07]' : ''"
+            :class="openIndex === i ? 'border-sand-300 bg-sand-50' : ''"
           >
             <button
               type="button"
@@ -89,10 +89,10 @@ const onTransitionDone = (element: Element) => {
               :aria-controls="`faq-panel-${i}`"
               @click="toggle(i)"
             >
-              <span class="text-base font-medium text-white sm:text-lg">{{ item.q }}</span>
+              <span class="text-base font-medium text-sand-950 sm:text-lg">{{ item.q }}</span>
               <CIcon
                 name="chevron-down"
-                class="h-5 w-5 shrink-0 text-[#8F6BFF] transition-transform duration-300"
+                class="h-5 w-5 shrink-0 text-sand-500 transition-transform duration-300"
                 :class="openIndex === i ? 'rotate-180' : ''"
               />
             </button>
@@ -105,7 +105,7 @@ const onTransitionDone = (element: Element) => {
               @after-leave="onTransitionDone"
             >
               <div v-show="openIndex === i" :id="`faq-panel-${i}`" class="faq-panel">
-                <p class="px-5 pb-5 text-sm leading-relaxed text-[#A3A3A3] sm:text-base">
+                <p class="px-5 pb-5 text-sm leading-relaxed text-sand-600 sm:text-base">
                   {{ item.a }}
                 </p>
               </div>

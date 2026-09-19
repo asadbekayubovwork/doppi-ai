@@ -26,13 +26,13 @@ onUnmounted(() => window.clearTimeout(handoff))
   <p
     :class="
       role === 'agent'
-        ? 'max-w-[80%] rounded-2xl rounded-tl-sm border border-[#6633EE]/25 bg-[#6633EE]/10 px-4 py-2.5 text-sm leading-relaxed text-white/90'
-        : 'ml-auto max-w-[80%] rounded-2xl rounded-tr-sm border border-white/10 bg-white/5 px-4 py-2.5 text-sm leading-relaxed text-white/80'
+        ? 'max-w-[80%] rounded-2xl rounded-tl-sm border border-sand-200 bg-sand-100 px-4 py-2.5 text-sm leading-relaxed text-sand-900'
+        : 'ml-auto max-w-[80%] rounded-2xl rounded-tr-sm border border-sand-200 bg-white px-4 py-2.5 text-sm leading-relaxed text-sand-700'
     "
   >
     {{ typed }}
     <span
-      class="ml-0.5 inline-block h-3.5 w-px translate-y-0.5 animate-pulse bg-[#8F6BFF] align-middle"
+      class="ml-0.5 inline-block h-3.5 w-px translate-y-0.5 animate-pulse bg-signal align-middle"
       aria-hidden="true"
     />
   </p>

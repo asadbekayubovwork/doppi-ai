@@ -13,9 +13,9 @@ const items = useI18nList<AudienceItem>("audience.items")
 </script>
 
 <template>
-  <section id="audience" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="audience" class="section-ground py-[60px] sm:py-[100px]">
     <div
-      class="violet-glow left-1/4 top-10 h-64 w-[30rem] opacity-70"
+      class="ambient-glow left-1/4 top-10 h-64 w-[30rem] opacity-70"
       aria-hidden="true"
     />
 
@@ -39,27 +39,27 @@ const items = useI18nList<AudienceItem>("audience.items")
             class="surface-card surface-card-lift group flex h-full flex-col rounded-2xl p-6 sm:p-7"
           >
             <span
-              class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#6633EE]/15 text-[#B9A2FF] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+              class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-sand-100 text-sand-950 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
             >
               <CIcon :name="item.icon" class="h-6 w-6" />
             </span>
 
-            <h3 class="mt-5 text-lg font-semibold text-white sm:text-xl">
+            <h3 class="mt-5 text-lg font-semibold text-sand-950 sm:text-xl">
               {{ item.title }}
             </h3>
-            <p class="mt-2 text-sm leading-relaxed text-[#A3A3A3]">
+            <p class="mt-2 text-sm leading-relaxed text-sand-500">
               {{ item.desc }}
             </p>
 
-            <ul class="mt-5 space-y-2.5 border-t border-white/10 pt-5">
+            <ul class="mt-5 space-y-2.5 border-t border-sand-200 pt-5">
               <li
                 v-for="(point, pi) in item.points"
                 :key="pi"
-                class="flex items-start gap-2.5 text-sm text-white/85"
+                class="flex items-start gap-2.5 text-sm text-sand-700"
               >
                 <CIcon
                   name="check"
-                  class="mt-0.5 h-4 w-4 shrink-0 text-[#8F6BFF]"
+                  class="mt-0.5 h-4 w-4 shrink-0 text-sand-950"
                   stroke-width="2.25"
                 />
                 <span>{{ point }}</span>

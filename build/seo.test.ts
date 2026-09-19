@@ -18,7 +18,7 @@ import {
 type Tree = Record<string, unknown>
 
 const template =
-  "<!doctype html><html><head><title>Do'ppi.ai</title><!--seo--></head><body></body></html>"
+  "<!doctype html><html><head><title>Do'ppi AI</title><!--seo--></head><body></body></html>"
 const uz = messages.uz as Tree
 
 const pageAt = (path: string) => {

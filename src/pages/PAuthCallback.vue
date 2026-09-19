@@ -70,8 +70,8 @@ const queryText = (value: unknown) => (typeof value === "string" ? value : "")
 useHead({
   title: computed(() =>
     failure.value
-      ? "Kirish amalga oshmadi — Do'ppi.ai"
-      : "Kirish tasdiqlanmoqda — Do'ppi.ai"
+      ? "Kirish amalga oshmadi — Do'ppi AI"
+      : "Kirish tasdiqlanmoqda — Do'ppi AI"
   ),
 })
 

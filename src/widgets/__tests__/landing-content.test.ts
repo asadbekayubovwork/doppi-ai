@@ -69,7 +69,7 @@ describe("landing sections render i18n list content", () => {
     const wrapper = mountWithI18n(CFaq)
 
     expect(wrapper.findAll("button")).toHaveLength(5)
-    expect(wrapper.text()).toContain("Do'ppi.ai o'zbek tilida ishlaydimi?")
+    expect(wrapper.text()).toContain("Do'ppi AI o'zbek tilida ishlaydimi?")
   })
 
   it("resolves each team member's role and bio from their id", () => {

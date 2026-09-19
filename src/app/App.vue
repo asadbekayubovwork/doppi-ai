@@ -11,7 +11,7 @@
     </Transition>
   </RouterView>
   <CToaster />
-  <CClickSparkLayer />
+  <CClickSparkLayer :color="sparkColor" />
 </template>
 
 <script setup lang="ts">
@@ -51,6 +51,12 @@ const pageTransition = computed(() =>
   route.meta.layout === "DashboardLayout" || route.meta.layout === "AuthLayout"
     ? "app-page"
     : "page"
+)
+
+// On the landing the sparks take its one accent colour; elsewhere they keep
+// the layer's default.
+const sparkColor = computed(() =>
+  route.meta.layout === "DefaultLayout" ? "#FF4704" : undefined
 )
 
 // Only pages listed in SEO_PAGES belong in search results; sign-in, the

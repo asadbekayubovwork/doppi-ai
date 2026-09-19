@@ -11,11 +11,11 @@ defineProps<{
 <template>
   <div class="mt-12 lg:hidden">
     <div
-      class="mx-auto flex w-fit items-center gap-3 rounded-2xl border border-[#6633EE]/50 bg-[#160A2E] px-5 py-3"
+      class="mx-auto flex w-fit items-center gap-3 rounded-2xl border border-sand-950 bg-sand-950 px-5 py-3"
       data-aos="fade-up"
       data-aos-duration="800"
     >
-      <CDoppiMark class="h-7 w-7 shrink-0 text-[#8F6BFF]" />
+      <CDoppiMark class="h-7 w-7 shrink-0 text-white" />
       <span class="text-sm font-bold tracking-tight text-white">
         {{ $t("solution.centerLabel") }}
       </span>
@@ -36,11 +36,11 @@ defineProps<{
         >
           <span
             class="grid h-9 w-9 shrink-0 place-items-center rounded-xl transition-colors duration-300"
-            :class="current === i ? 'bg-[#6633EE]/35' : 'bg-[#6633EE]/15'"
+            :class="current === i ? 'bg-sand-950 text-white' : 'bg-sand-100 text-sand-950'"
           >
-            <CIcon :name="module.icon" class="h-5 w-5 text-[#B9A2FF]" />
+            <CIcon :name="module.icon" class="h-5 w-5" />
           </span>
-          <span class="text-sm font-medium text-white">{{
+          <span class="text-sm font-medium text-sand-950">{{
             module.label
           }}</span>
         </div>
@@ -52,8 +52,7 @@ defineProps<{
 <style scoped>
 /* The highlight walks the cards too. */
 .surface-card.is-lit {
-  border-color: rgba(102, 51, 238, 0.55);
-  background: rgba(102, 51, 238, 0.08);
-  box-shadow: 0 18px 40px -18px rgba(102, 51, 238, 0.55);
+  border-color: rgba(52, 80, 140, 0.6);
+  box-shadow: 0 18px 40px -20px rgba(52, 80, 140, 0.45);
 }
 </style>

@@ -10,7 +10,6 @@ const props = defineProps<{
   email: string
   initials: string
   balance: string
-  notifications: number
 }>()
 
 const router = useRouter()
@@ -22,10 +21,6 @@ const isOpen = ref(false)
 const close = () => (isOpen.value = false)
 
 useDismiss(root, close)
-
-// Light is the only theme the dashboard ships with so far; the row is here so
-// the switch has a home once a dark palette exists.
-const appearance = ref("Yorug'")
 
 const signOut = async () => {
   close()
@@ -126,38 +121,6 @@ const signOut = async () => {
             <span class="flex-1">To'lov va balans</span>
             <span class="text-[13px] text-[#8E8E9C]">{{ props.balance }}</span>
           </RouterLink>
-
-          <button
-            type="button"
-            class="flex w-full items-center gap-3 px-4 py-2.5 text-left text-[13.5px] font-medium text-[#12121C] transition hover:bg-[#F7F7F9]"
-            role="menuitem"
-          >
-            <CIcon
-              name="bell"
-              class="h-[18px] w-[18px] shrink-0 text-[#8E8E9C]"
-            />
-            <span class="flex-1">Bildirishnomalar</span>
-            <span v-if="props.notifications" class="text-[13px] text-[#8E8E9C]">
-              {{ props.notifications }}
-            </span>
-          </button>
-
-          <button
-            type="button"
-            class="flex w-full items-center gap-3 px-4 py-2.5 text-left text-[13.5px] font-medium text-[#12121C] transition hover:bg-[#F7F7F9]"
-            role="menuitem"
-          >
-            <CIcon
-              name="moon"
-              class="h-[18px] w-[18px] shrink-0 text-[#8E8E9C]"
-            />
-            <span class="flex-1">Ko'rinish</span>
-            <span class="text-[13px] text-[#8E8E9C]">{{ appearance }}</span>
-            <CIcon
-              name="chevron-right"
-              class="h-4 w-4 shrink-0 text-[#C4C4CE]"
-            />
-          </button>
         </div>
 
         <div class="border-t border-[#E9E9EF] py-1">

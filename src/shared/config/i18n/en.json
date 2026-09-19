@@ -1,6 +1,6 @@
 {
   "brand": {
-    "name": "Do'ppi.ai"
+    "name": "Do'ppi AI"
   },
   "a11y": {
     "mute": "Mute microphone",
@@ -30,7 +30,7 @@
     "titleTop": "From ad to sale —",
     "titleHighlight": "all in one system",
     "titleBottom": "powered by AI",
-    "subtitle": "Do'ppi.ai is the AI marketing operating system for your business. Voice agent, social media automation, video & content, CRM and chatbots — all working together in one place.",
+    "subtitle": "Do'ppi AI is the AI marketing operating system for your business. Voice agent, social media automation, video & content, CRM and chatbots — all working together in one place.",
     "ctaPrimary": "Start free trial",
     "ctaSecondary": "Watch demo",
     "stats": [
@@ -47,9 +47,8 @@
         "label": "AI agents working"
       }
     ],
-    "agentName": "AI Voice Agent",
-    "agentStatus": "Call in progress",
-    "agentCaption": "Talks like a human, qualifies the lead, and books the meeting."
+    "agentPrompt": "Discover what the Do'ppi AI voice agent can do — it talks like a human and books the meeting",
+    "agentCall": "Listen to the voice agent"
   },
   "trust": {
     "label": "Every channel, unified in one system",
@@ -127,9 +126,9 @@
   },
   "solution": {
     "eyebrow": "The solution",
-    "title": "Do'ppi.ai — everything in one AI system",
+    "title": "Do'ppi AI — everything in one AI system",
     "subtitle": "An all-in-one AI marketing platform that unifies advertising, conversations, sales and analytics into a single operating system.",
-    "centerLabel": "Do'ppi.ai",
+    "centerLabel": "Do'ppi AI",
     "modules": [
       {
         "icon": "phone",
@@ -197,7 +196,7 @@
   },
   "audience": {
     "eyebrow": "Who it's for",
-    "title": "Who Do'ppi.ai is built for",
+    "title": "Who Do'ppi AI is built for",
     "subtitle": "For any business that runs ads, messages customers or makes calls — whatever the size of your team.",
     "items": [
       {
@@ -304,7 +303,7 @@
     "transcript": [
       {
         "role": "agent",
-        "text": "Hi! This is Do'ppi.ai reaching out. Do you have a moment to talk about our service?"
+        "text": "Hi! This is Do'ppi AI reaching out. Do you have a moment to talk about our service?"
       },
       {
         "role": "user",
@@ -320,7 +319,7 @@
   "results": {
     "eyebrow": "Results",
     "title": "Take your business to the next level",
-    "subtitle": "Businesses running on Do'ppi.ai see growth from the very first months.",
+    "subtitle": "Businesses running on Do'ppi AI see growth from the very first months.",
     "stats": [
       {
         "value": "2–5×",
@@ -429,9 +428,9 @@
   "about": {
     "eyebrow": "About us",
     "title": "The future for businesses everywhere — with AI, starting today",
-    "lead": "Do'ppi.ai makes AI-powered marketing automation effortless for every business — from the first ad to the closed sale.",
+    "lead": "Do'ppi AI makes AI-powered marketing automation effortless for every business — from the first ad to the closed sale.",
     "vision": "Our mission is to help every business, anywhere in the world, grow with AI — through a system that adapts to its customers' language, channels and telephony.",
-    "pageTitle": "The purpose behind Do'ppi.ai",
+    "pageTitle": "The purpose behind Do'ppi AI",
     "pageSubtitle": "We turn artificial intelligence into an everyday working tool for businesses around the world.",
     "points": [
       {
@@ -467,7 +466,7 @@
   },
   "team": {
     "eyebrow": "Team",
-    "title": "The team behind Do'ppi.ai",
+    "title": "The team behind Do'ppi AI",
     "subtitle": "Specialists in AI, marketing and product — building one system for businesses around the world.",
     "roles": {
       "rifat": "Head of Growth",
@@ -477,20 +476,20 @@
       "aziz": "AI Engineer"
     },
     "bios": {
-      "rifat": "Leads marketing and customer success at Do'ppi.ai. Helps businesses adopt the platform and grow the results it brings them.",
-      "jaxongir": "Owns Do'ppi.ai's technical architecture and AI models. Sets the engineering direction of the platform, with 5+ years of experience.",
-      "nodirbek": "Backend developer at Do'ppi.ai. Builds the server logic, APIs and databases that keep the system fast, secure and reliable.",
-      "asadbek": "Software engineer on the Do'ppi.ai front-end. Builds the interface and shapes its UI/UX so the platform stays fast and clear on any device.",
+      "rifat": "Leads marketing and customer success at Do'ppi AI. Helps businesses adopt the platform and grow the results it brings them.",
+      "jaxongir": "Owns Do'ppi AI's technical architecture and AI models. Sets the engineering direction of the platform, with 5+ years of experience.",
+      "nodirbek": "Backend developer at Do'ppi AI. Builds the server logic, APIs and databases that keep the system fast, secure and reliable.",
+      "asadbek": "Software engineer on the Do'ppi AI front-end. Builds the interface and shapes its UI/UX so the platform stays fast and clear on any device.",
       "aziz": "Works on the platform's AI models — training, evaluating and tuning them so the agents understand Uzbek and Russian well."
     }
   },
   "faq": {
     "eyebrow": "FAQ",
     "title": "Frequently asked questions",
-    "subtitle": "Answers to the most common questions about Do'ppi.ai.",
+    "subtitle": "Answers to the most common questions about Do'ppi AI.",
     "items": [
       {
-        "q": "Does Do'ppi.ai work in Uzbek?",
+        "q": "Does Do'ppi AI work in Uzbek?",
         "a": "Yes. The voice agent, chatbot and content work in Uzbek and Russian — tuned specifically for the local market."
       },
       {
@@ -538,7 +537,7 @@
       "title": "Thank you! Your request has been received.",
       "subtitle": "Our team will reach out within one business day to schedule your demo."
     },
-    "email": "admin{'@'}doppi.ai",
+    "email": "transformation{'@'}doppiai.uz",
     "phone": "+998 93 903 33 01",
     "website": "doppiai.uz",
     "location": "Tashkent, Uzbekistan",
@@ -551,7 +550,7 @@
     "product": "Product",
     "company": "Company",
     "contactTitle": "Contact",
-    "rights": "© {year} Do'ppi.ai. All rights reserved.",
+    "rights": "© {year} Do'ppi AI. All rights reserved.",
     "madeIn": "Made with care in Tashkent",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
@@ -571,7 +570,7 @@
       "sections": [
         {
           "h": "Introduction",
-          "p": "Do'ppi.ai (\"we\", \"us\", or \"our\") operates an AI marketing platform for businesses around the world. This Privacy Policy explains what information we collect, how we use it, and the choices you have when you visit our website or request a demo of our service."
+          "p": "Do'ppi AI (\"we\", \"us\", or \"our\") operates an AI marketing platform for businesses around the world. This Privacy Policy explains what information we collect, how we use it, and the choices you have when you visit our website or request a demo of our service."
         },
         {
           "h": "Information We Collect",
@@ -579,7 +578,7 @@
         },
         {
           "h": "How We Use It",
-          "p": "We use your information to respond to your demo requests and enquiries, to provide and operate the Do'ppi.ai service, and to improve our product, content, and customer experience. We may contact you about your request and about relevant product updates."
+          "p": "We use your information to respond to your demo requests and enquiries, to provide and operate the Do'ppi AI service, and to improve our product, content, and customer experience. We may contact you about your request and about relevant product updates."
         },
         {
           "h": "Data Sharing",
@@ -600,19 +599,19 @@
       },
       "disclaimer": {
         "h": "General template — not legal advice",
-        "p": "This Privacy Policy is provided as a general template to support Do'ppi.ai's ongoing product and compliance work. It does not constitute legal advice and should be reviewed and tailored by qualified legal counsel before it is relied upon."
+        "p": "This Privacy Policy is provided as a general template to support Do'ppi AI's ongoing product and compliance work. It does not constitute legal advice and should be reviewed and tailored by qualified legal counsel before it is relied upon."
       }
     },
     "terms": {
       "title": "Terms of Service",
       "updated": "Last updated: 7 July 2026",
-      "intro": "These Terms of Service (\"Terms\") govern your access to and use of the Do'ppi.ai platform and its related website and services (the \"Service\"). Please read these Terms carefully before using the Service.",
+      "intro": "These Terms of Service (\"Terms\") govern your access to and use of the Do'ppi AI platform and its related website and services (the \"Service\"). Please read these Terms carefully before using the Service.",
       "disclaimerNote": "This document is provided as a general template and does not constitute legal advice. We recommend it be reviewed by qualified legal counsel before final use.",
       "sections": [
         {
           "heading": "Introduction & acceptance of terms",
           "paragraphs": [
-            "By registering for or using Do'ppi.ai, you agree to be bound by these Terms and our Privacy Policy. If you do not agree with these Terms, do not use the Service.",
+            "By registering for or using Do'ppi AI, you agree to be bound by these Terms and our Privacy Policy. If you do not agree with these Terms, do not use the Service.",
             "If you use the Service on behalf of an organization, you represent that you have the authority to bind that organization to these Terms."
           ],
           "bullets": []
@@ -620,7 +619,7 @@
         {
           "heading": "Description of service",
           "paragraphs": [
-            "Do'ppi.ai is an all-in-one AI marketing platform designed to automate your marketing operations. The Service includes the following core modules:"
+            "Do'ppi AI is an all-in-one AI marketing platform designed to automate your marketing operations. The Service includes the following core modules:"
           ],
           "bullets": [
             "AI voice agent — natural conversations, lead qualification and meeting booking.",
@@ -641,7 +640,7 @@
         {
           "heading": "Subscriptions, trial & billing",
           "paragraphs": [
-            "Do'ppi.ai offers subscription-based plans: Starter ($19/mo), Growth ($49/mo), Pro ($99/mo) and an Enterprise plan with custom pricing for larger organizations.",
+            "Do'ppi AI offers subscription-based plans: Starter ($19/mo), Growth ($49/mo), Pro ($99/mo) and an Enterprise plan with custom pricing for larger organizations.",
             "Every plan includes a 14-day free trial. Fees are billed on a recurring (monthly) basis according to the plan you select. You may cancel anytime — cancellation takes effect at the end of the current billing period.",
             "Prices and features may change with prior notice. Except where required by law, amounts already paid are non-refundable."
           ],
@@ -663,7 +662,7 @@
         {
           "heading": "Intellectual property",
           "paragraphs": [
-            "The Service, including its design, software, branding and all related intellectual property rights, belongs to Do'ppi.ai or its licensors. These Terms grant you a limited, non-exclusive and non-transferable right to use the Service.",
+            "The Service, including its design, software, branding and all related intellectual property rights, belongs to Do'ppi AI or its licensors. These Terms grant you a limited, non-exclusive and non-transferable right to use the Service.",
             "You retain ownership of the content you upload to or create through the Service (\"User Content\"). You grant us permission to process it to the extent necessary to provide the Service."
           ],
           "bullets": []
@@ -672,7 +671,7 @@
           "heading": "Disclaimers & limitation of liability",
           "paragraphs": [
             "The Service is provided \"as is\" and \"as available.\" To the extent permitted by law, we do not warrant that it will be uninterrupted, error-free, or fit for any particular purpose.",
-            "To the maximum extent permitted by law, Do'ppi.ai shall not be liable for any indirect, incidental or consequential damages, including loss of profits or data. Our total liability shall not exceed the amount paid for the Service in the 12 months preceding the claim."
+            "To the maximum extent permitted by law, Do'ppi AI shall not be liable for any indirect, incidental or consequential damages, including loss of profits or data. Our total liability shall not exceed the amount paid for the Service in the 12 months preceding the claim."
           ],
           "bullets": []
         },
@@ -708,42 +707,42 @@
   },
   "seo": {
     "home": {
-      "title": "Do'ppi.ai (Doppi AI) — the AI marketing OS for businesses worldwide",
-      "description": "Do'ppi.ai (Doppi AI) is the AI marketing OS that automates everything from ad to sale: AI voice agent, RAG chatbot, video generator, CRM and a SIP call center.",
-      "keywords": "Do'ppi.ai, Doppi AI, doppi, AI marketing, artificial intelligence, voice agent, RAG chatbot, video generator, CRM, chatbot, SIP telephony, lead generation, marketing automation"
+      "title": "Do'ppi AI (Doppi AI) — the AI marketing OS for businesses worldwide",
+      "description": "Do'ppi AI (Doppi AI) is the AI marketing OS that automates everything from ad to sale: AI voice agent, RAG chatbot, video generator, CRM and a SIP call center.",
+      "keywords": "Do'ppi AI, Doppi AI, doppi, AI marketing, artificial intelligence, voice agent, RAG chatbot, video generator, CRM, chatbot, SIP telephony, lead generation, marketing automation"
     },
     "ragAgent": {
-      "title": "RAG Agent: an AI chatbot trained on your documents — Do'ppi.ai",
-      "description": "The Do'ppi.ai RAG Agent learns your PDF, DOCX and Excel documents and answers customers accurately 24/7 on Instagram, Telegram, WhatsApp and your website."
+      "title": "RAG Agent: an AI chatbot trained on your documents — Do'ppi AI",
+      "description": "The Do'ppi AI RAG Agent learns your PDF, DOCX and Excel documents and answers customers accurately 24/7 on Instagram, Telegram, WhatsApp and your website."
     },
     "voiceAgent": {
-      "title": "AI Voice Agent: AI that handles your calls — Do'ppi.ai",
-      "description": "The Do'ppi.ai voice agent handles inbound and outbound calls like a person: it qualifies leads, books meetings and logs everything in your CRM."
+      "title": "AI Voice Agent: AI that handles your calls — Do'ppi AI",
+      "description": "The Do'ppi AI voice agent handles inbound and outbound calls like a person: it qualifies leads, books meetings and logs everything in your CRM."
     },
     "videoGenerator": {
-      "title": "AI Video Generator: ads and Reels from text — Do'ppi.ai",
-      "description": "The Do'ppi.ai video generator creates ad clips, Reels, images, ad copy and voiceover from a text prompt with AI."
+      "title": "AI Video Generator: ads and Reels from text — Do'ppi AI",
+      "description": "The Do'ppi AI video generator creates ad clips, Reels, images, ad copy and voiceover from a text prompt with AI."
     },
     "pricing": {
-      "title": "Pricing — Do'ppi.ai",
-      "description": "Do'ppi.ai plans: Starter, Growth, Pro and Enterprise. Every plan includes a 14-day free trial."
+      "title": "Pricing — Do'ppi AI",
+      "description": "Do'ppi AI plans: Starter, Growth, Pro and Enterprise. Every plan includes a 14-day free trial."
     },
     "about": {
-      "title": "About — Do'ppi.ai",
-      "description": "The Do'ppi.ai team and mission: building an AI marketing system for businesses around the world."
+      "title": "About — Do'ppi AI",
+      "description": "The Do'ppi AI team and mission: building an AI marketing system for businesses around the world."
     },
     "contact": {
-      "title": "Contact — Do'ppi.ai",
-      "description": "Get in touch with the Do'ppi.ai team and book a demo for your business."
+      "title": "Contact — Do'ppi AI",
+      "description": "Get in touch with the Do'ppi AI team and book a demo for your business."
     },
     "product": {
-      "title": "Product — Do'ppi.ai",
-      "description": "The Do'ppi.ai modules: AI voice agent, social media automation, SIP call center, AI video & content, CRM and chatbots."
+      "title": "Product — Do'ppi AI",
+      "description": "The Do'ppi AI modules: AI voice agent, social media automation, SIP call center, AI video & content, CRM and chatbots."
     }
   },
   "product": {
     "pageTitle": "From ad to sale — on a single AI platform",
-    "pageSubtitle": "See how Do'ppi.ai works step by step: the modules, the capabilities, who it is built for and the results to expect."
+    "pageSubtitle": "See how Do'ppi AI works step by step: the modules, the capabilities, who it is built for and the results to expect."
   },
   "services": {
     "navLabel": "Services",
@@ -751,7 +750,7 @@
     "ctaPrimary": "Start free trial",
     "ctaSecondary": "Request a demo",
     "breadcrumbLabel": "Breadcrumb",
-    "othersTitle": "More from Do'ppi.ai",
+    "othersTitle": "More from Do'ppi AI",
     "learnMore": "Learn more",
     "rag": {
       "name": "RAG Agent",
@@ -948,7 +947,7 @@
       "navDesc": "Ads and Reels from a text prompt",
       "eyebrow": "AI Video Generator",
       "title": "From text to a finished video — the AI video generator",
-      "subtitle": "Describe your idea — Do'ppi.ai creates videos, images, copy and voiceover for ads, Reels and social media with AI.",
+      "subtitle": "Describe your idea — Do'ppi AI creates videos, images, copy and voiceover for ads, Reels and social media with AI.",
       "features": {
         "eyebrow": "Capabilities",
         "title": "Produce content faster",
@@ -982,7 +981,7 @@
           {
             "icon": "share-2",
             "title": "Part of your marketing",
-            "desc": "Content lives in the same system as Do'ppi.ai's social media automation and ad workflows."
+            "desc": "Content lives in the same system as Do'ppi AI's social media automation and ad workflows."
           }
         ]
       },

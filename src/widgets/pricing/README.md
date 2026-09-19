@@ -27,7 +27,7 @@ import { CPricingList } from "@/widgets/pricing"
 
 The component follows the same styling patterns as other landing sections:
 
-- Background color: `var(--bg-ground)` (`#0e041f` by default — Tailwind class `bg-ground`)
-- Purple theme with gradient accents
-- Glassmorphism effects
+- Background color: `var(--bg-ground)` (`#FDFCFC` by default — Tailwind class `bg-ground`)
+- Light theme: white cards on the `sand` neutrals, ink (`sand-950`) for the popular plan
+- Hairline borders and soft shadows
 - Consistent padding: `sm:py-[100px] py-[60px] sm:px-[100px] px-[20px]`

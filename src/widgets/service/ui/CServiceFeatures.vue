@@ -17,7 +17,7 @@ const items = useI18nList<Feature>(`${base}.items`)
 </script>
 
 <template>
-  <section id="features" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="features" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
       <CSectionHeading
         :eyebrow="$t(`${base}.eyebrow`)"
@@ -35,12 +35,12 @@ const items = useI18nList<Feature>(`${base}.items`)
         >
           <div class="surface-card surface-card-lift group h-full rounded-2xl p-6">
             <span
-              class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#6633EE]/15 text-[#B9A2FF] transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-110"
+              class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-sand-100 text-sand-950 transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-110"
             >
               <CIcon :name="item.icon" class="h-6 w-6" />
             </span>
-            <h3 class="mt-5 text-lg font-semibold text-white">{{ item.title }}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-[#A3A3A3]">{{ item.desc }}</p>
+            <h3 class="mt-5 text-lg font-semibold text-sand-950">{{ item.title }}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-sand-500">{{ item.desc }}</p>
           </div>
         </li>
       </ul>

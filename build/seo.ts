@@ -137,7 +137,7 @@ export const structuredData = (tree: Messages, page: SeoPage) => {
       }
     )
   } else {
-    // "Narxlar — Do'ppi.ai" names the crumb "Narxlar".
+    // "Narxlar — Do'ppi AI" names the crumb "Narxlar".
     const name = message(tree, `seo.${page.seoKey}.title`).split(" — ")[0]
     graph.push(breadcrumb(tree, page, name))
   }

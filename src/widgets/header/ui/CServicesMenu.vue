@@ -29,8 +29,8 @@ const handleFocusOut = (event: FocusEvent) => {
   >
     <button
       type="button"
-      class="inline-flex items-center gap-1 text-sm text-white/75 transition-200 hover:text-white"
-      :class="{ 'text-[#8F6BFF]': isActive }"
+      class="inline-flex items-center gap-1 text-sm transition-200"
+      :class="isActive ? 'text-sand-950' : 'text-sand-500 hover:text-sand-950'"
       :aria-expanded="isOpen"
       aria-controls="services-menu"
       @click="isOpen = !isOpen"
@@ -49,22 +49,22 @@ const handleFocusOut = (event: FocusEvent) => {
       id="services-menu"
       class="absolute left-1/2 top-full z-50 w-[340px] -translate-x-1/2 pt-3"
     >
-      <ul class="rounded-2xl border border-white/10 bg-ground/95 p-2 shadow-2xl backdrop-blur-2xl">
+      <ul class="rounded-2xl border border-sand-200 bg-white/95 p-2 shadow-[0_24px_60px_-28px_rgba(12,10,9,0.3)] backdrop-blur-2xl">
         <li v-for="item in SERVICE_NAV" :key="item.key">
           <RouterLink
             :to="item.to"
-            class="flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-white/5"
+            class="flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-sand-100"
           >
             <span
-              class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[#6633EE]/15 text-[#B9A2FF]"
+              class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-sand-100 text-sand-950"
             >
               <CIcon :name="item.icon" class="h-5 w-5" />
             </span>
             <span class="flex flex-col">
-              <span class="text-sm font-medium text-white">
+              <span class="text-sm font-medium text-sand-950">
                 {{ $t(`services.${item.key}.name`) }}
               </span>
-              <span class="mt-0.5 text-xs leading-relaxed text-[#A3A3A3]">
+              <span class="mt-0.5 text-xs leading-relaxed text-sand-500">
                 {{ $t(`services.${item.key}.navDesc`) }}
               </span>
             </span>
