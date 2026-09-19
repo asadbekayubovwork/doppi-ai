@@ -66,15 +66,15 @@ onUnmounted(clearTimer)
 
 const bubbleClass = (role: Turn["role"]) =>
   role === "agent"
-    ? "max-w-[80%] rounded-2xl rounded-tl-sm border border-[#6633EE]/25 bg-[#6633EE]/10 px-4 py-2.5 text-sm leading-relaxed text-white/90"
-    : "ml-auto max-w-[80%] rounded-2xl rounded-tr-sm border border-white/10 bg-white/5 px-4 py-2.5 text-sm leading-relaxed text-white/80"
+    ? "max-w-[80%] rounded-2xl rounded-tl-sm border border-sand-200 bg-sand-100 px-4 py-2.5 text-sm leading-relaxed text-sand-900"
+    : "ml-auto max-w-[80%] rounded-2xl rounded-tr-sm border border-sand-200 bg-white px-4 py-2.5 text-sm leading-relaxed text-sand-700"
 
 const miniBars = [0.5, 0.9, 0.6, 1, 0.7]
 </script>
 
 <template>
-  <section id="voice" class="section-dark py-[60px] sm:py-[100px]">
-    <div class="violet-glow -right-16 top-1/3 h-72 w-[30rem]" aria-hidden="true" />
+  <section id="voice" class="section-ground py-[60px] sm:py-[100px]">
+    <div class="ambient-glow -right-16 top-1/3 h-72 w-[30rem]" aria-hidden="true" />
 
     <div class="container relative z-10">
       <div class="grid items-center gap-12 lg:grid-cols-2">
@@ -97,11 +97,11 @@ const miniBars = [0.5, 0.9, 0.6, 1, 0.7]
               :data-aos-delay="100 + i * 70"
             >
               <span
-                class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#6633EE]/20 text-[#B9A2FF]"
+                class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sand-950 text-white"
               >
                 <CIcon name="check" class="h-3.5 w-3.5" stroke-width="2.5" />
               </span>
-              <span class="text-sm text-white/90 sm:text-base">{{ point }}</span>
+              <span class="text-sm text-sand-700 sm:text-base">{{ point }}</span>
             </li>
           </ul>
         </div>
@@ -113,14 +113,14 @@ const miniBars = [0.5, 0.9, 0.6, 1, 0.7]
           data-aos-duration="1000"
           data-aos-delay="200"
         >
-          <div class="absolute -inset-6 rounded-[2rem] bg-[#6633EE]/20 blur-3xl" aria-hidden="true" />
+          <div class="ambient-glow -inset-6" aria-hidden="true" />
 
-          <div ref="card" class="relative rounded-[28px] border border-white/10 bg-[#160A2E]/80 p-6 backdrop-blur">
-            <div class="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
-              <span class="flex items-center gap-2 text-sm font-medium text-white">
+          <div ref="card" class="relative rounded-[28px] border border-sand-200 bg-white/90 p-6 shadow-[0_24px_60px_-28px_rgba(12,10,9,0.25)] backdrop-blur">
+            <div class="flex items-center justify-between gap-4 border-b border-sand-200 pb-4">
+              <span class="flex items-center gap-2 text-sm font-medium text-sand-950">
                 <span class="relative flex h-2 w-2">
-                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                  <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
                 {{ $t("voice.callLabel") }}
               </span>
@@ -129,7 +129,7 @@ const miniBars = [0.5, 0.9, 0.6, 1, 0.7]
                 <span
                   v-for="(bar, i) in miniBars"
                   :key="i"
-                  class="wave-bar w-[3px] origin-center rounded-full bg-[#8F6BFF]"
+                  class="wave-bar w-[3px] origin-center rounded-full bg-signal"
                   :style="{ height: `${bar * 100}%`, animation: `wave 1.1s ease-in-out ${i * 0.12}s infinite` }"
                 />
               </div>
@@ -164,15 +164,15 @@ const miniBars = [0.5, 0.9, 0.6, 1, 0.7]
                   class="inline-flex w-fit items-center gap-1 rounded-2xl border px-4 py-3"
                   :class="
                     transcript[revealed].role === 'agent'
-                      ? 'rounded-tl-sm border-[#6633EE]/25 bg-[#6633EE]/10'
-                      : 'ml-auto rounded-tr-sm border-white/10 bg-white/5'
+                      ? 'rounded-tl-sm border-sand-200 bg-sand-100'
+                      : 'ml-auto rounded-tr-sm border-sand-200 bg-white'
                   "
                   aria-hidden="true"
                 >
                   <span
                     v-for="i in 3"
                     :key="i"
-                    class="wave-bar h-1.5 w-1.5 rounded-full bg-[#8F6BFF]/80"
+                    class="wave-bar h-1.5 w-1.5 rounded-full bg-sand-400"
                     :style="{ animation: `wave 1s ease-in-out ${(i - 1) * 0.15}s infinite` }"
                   />
                 </div>

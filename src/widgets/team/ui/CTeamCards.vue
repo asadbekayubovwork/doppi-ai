@@ -13,8 +13,8 @@ import { TEAM_MEMBERS, realSocials } from "../model/members"
 </script>
 
 <template>
-  <section id="team" class="section-dark py-[60px] sm:py-[100px]">
-    <div class="violet-glow left-1/4 top-0 h-64 w-[30rem]" aria-hidden="true" />
+  <section id="team" class="section-ground py-[60px] sm:py-[100px]">
+    <div class="ambient-glow left-1/4 top-0 h-64 w-[30rem]" aria-hidden="true" />
 
     <div class="container relative z-10">
       <CSectionHeading
@@ -42,7 +42,7 @@ import { TEAM_MEMBERS, realSocials } from "../model/members"
               <!-- The panel below overlaps by a pixel: with a fractional card
                    width the photo box can otherwise end half a pixel short and
                    let a hairline of the card's hover tint through. -->
-              <div class="relative -mb-px aspect-square overflow-hidden bg-ground">
+              <div class="relative -mb-px aspect-square overflow-hidden bg-sand-100">
                 <img
                   v-if="member.image"
                   :src="member.image"
@@ -55,26 +55,26 @@ import { TEAM_MEMBERS, realSocials } from "../model/members"
                 <span
                   v-else
                   aria-hidden="true"
-                  class="grid h-full w-full place-items-center bg-gradient-to-br from-[#6633EE]/40 to-[#6633EE]/10 text-5xl font-bold text-[#C9B8FF]"
+                  class="grid h-full w-full place-items-center bg-gradient-to-br from-sand-200 to-sand-100 text-5xl font-bold text-sand-500"
                 >
                   {{ member.initials }}
                 </span>
 
-                <!-- Grounds the photo in the section colour so the name stays legible. -->
+                <!-- Fades the photo into the card's white panel so the name stays legible. -->
                 <div
-                  class="absolute inset-0 bg-gradient-to-t from-ground via-ground/40 to-transparent"
+                  class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent"
                   aria-hidden="true"
                 />
                 <!-- Fades back to transparent before the bottom edge; a wash at
                      full strength there cuts off against the panel as a line. -->
                 <div
-                  class="absolute inset-0 bg-[linear-gradient(to_top,transparent_0%,rgba(102,51,238,0.45)_22%,transparent_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  class="absolute inset-0 bg-[linear-gradient(to_top,transparent_0%,rgba(52,80,140,0.18)_22%,transparent_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   aria-hidden="true"
                 />
 
                 <div class="absolute inset-x-0 bottom-0 p-5">
-                  <h3 class="text-lg font-semibold leading-snug text-white">{{ member.name }}</h3>
-                  <p class="mt-0.5 text-sm font-medium text-[#B9A2FF]">
+                  <h3 class="text-lg font-semibold leading-snug text-sand-950">{{ member.name }}</h3>
+                  <p class="mt-0.5 text-sm font-medium text-sand-600">
                     {{ $t(`team.roles.${member.id}`) }}
                   </p>
                 </div>
@@ -83,7 +83,7 @@ import { TEAM_MEMBERS, realSocials } from "../model/members"
               <div class="flex flex-1 flex-col p-5">
                 <!-- Three lines are reserved either way, so every card's social
                      row lands on the same baseline whatever the bio's length. -->
-                <p class="line-clamp-3 min-h-[4.25rem] text-sm leading-relaxed text-[#A3A3A3]">
+                <p class="line-clamp-3 min-h-[4.25rem] text-sm leading-relaxed text-sand-500">
                   {{ $t(`team.bios.${member.id}`) }}
                 </p>
 
@@ -98,7 +98,7 @@ import { TEAM_MEMBERS, realSocials } from "../model/members"
                     target="_blank"
                     rel="noreferrer"
                     :aria-label="`${member.name} — ${social.label}`"
-                    class="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-[#A3A3A3] transition-colors duration-200 hover:border-[#6633EE]/50 hover:bg-[#6633EE]/15 hover:text-white"
+                    class="grid h-9 w-9 place-items-center rounded-full border border-sand-200 text-sand-500 transition-colors duration-200 hover:border-sand-950 hover:bg-sand-950 hover:text-white"
                   >
                     <CIcon :name="social.icon" class="h-4 w-4" />
                   </a>

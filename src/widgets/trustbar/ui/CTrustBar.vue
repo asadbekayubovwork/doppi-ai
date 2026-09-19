@@ -10,36 +10,36 @@ interface Channel {
 const channels = useI18nList<Channel>("trust.channels")
 
 // Channels without a brand logo (SIP telephony) take a stroke icon and the
-// site's violet as their hover tint.
-const tint = (icon: string) => BRAND_MARKS[icon]?.color ?? "#8F6BFF"
+// site's accent as their hover tint.
+const tint = (icon: string) => BRAND_MARKS[icon]?.color ?? "#FF4704"
 </script>
 
 <template>
-  <div class="section-dark border-y border-white/10 py-10">
+  <div class="section-ground border-y border-sand-200 py-10">
     <div class="container relative z-10">
       <p
-        class="text-center text-xs font-medium uppercase tracking-[0.18em] text-[#A3A3A3]"
+        class="text-center text-xs font-medium uppercase tracking-[0.18em] text-sand-500"
       >
         {{ $t("trust.label") }}
       </p>
 
       <!-- Logos stay monochrome and pick up their brand colour on hover; the
            strip glides to a stop under the mouse. -->
-      <CLogoLoop :items="channels" class="mask-fade-x mt-6">
+      <CLogoLoop :items="channels" :gap="16" class="mask-fade-x mt-6">
         <template #item="{ item }">
           <span
-            class="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-[#A3A3A3] transition-colors duration-200 hover:border-[#6633EE]/50 hover:text-white"
+            class="group inline-flex cursor-pointer items-center gap-2.5 rounded-full border border-sand-200 bg-white px-5 py-2.5 text-base text-sand-500 transition-colors duration-200 hover:border-sand-400 hover:text-sand-950"
             :style="{ '--brand': tint(item.icon) }"
           >
             <CBrandMark
               v-if="BRAND_MARKS[item.icon]"
               :name="item.icon"
-              class="h-4 w-4 shrink-0 transition-colors duration-200 group-hover:text-[color:var(--brand)]"
+              class="h-5 w-5 shrink-0 transition-colors duration-200 group-hover:text-[color:var(--brand)]"
             />
             <CIcon
               v-else
               :name="item.icon"
-              class="h-4 w-4 shrink-0 transition-colors duration-200 group-hover:text-[color:var(--brand)]"
+              class="h-5 w-5 shrink-0 transition-colors duration-200 group-hover:text-[color:var(--brand)]"
             />
             {{ item.label }}
           </span>

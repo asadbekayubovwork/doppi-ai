@@ -37,8 +37,8 @@ const props = withDefaults(
     intensity?: number
   }>(),
   {
-    colors: () => ["#B9A2FF", "#6633EE", "#F472B6"],
-    glowColor: "258 100 80",
+    colors: () => ["#8FA6D6", "#34508C", "#5B7BC0"],
+    glowColor: "221 46 38",
     glowRadius: 28,
     intensity: 0.35,
   }
@@ -197,9 +197,9 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* One fixed layer per lit card, placed over it by script. Additive blending
-   lets the colours light up the dark cards beneath instead of covering them;
-   `screen` is the fallback where `plus-lighter` is unsupported. */
+/* One fixed layer per lit card, placed over it by script. Multiply blending
+   tints the light cards beneath instead of covering them: white takes the
+   colour, while dark ink and text stay as they are. */
 .border-glow {
   --glow-angle: 45deg;
   --glow-edge: 0;
@@ -220,8 +220,7 @@ onUnmounted(() => {
   width: 0;
   height: 0;
   pointer-events: none;
-  mix-blend-mode: screen;
-  mix-blend-mode: plus-lighter;
+  mix-blend-mode: multiply;
 }
 
 .border-glow[data-state="idle"] {

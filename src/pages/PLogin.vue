@@ -29,7 +29,7 @@ const loading = ref(false)
 const cooldown = ref(0)
 let cooldownTimer: ReturnType<typeof setInterval> | undefined
 
-useHead({ title: "Xush kelibsiz — Do'ppi.ai" })
+useHead({ title: "Xush kelibsiz — Do'ppi AI" })
 
 onMounted(() => {
   if (route.query.logout === "failed") {

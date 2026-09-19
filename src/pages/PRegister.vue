@@ -29,7 +29,7 @@ const loading = ref(false)
 const resendDelay = ref(60)
 const emailAuthEnabled = import.meta.env.VITE_EMAIL_AUTH_ENABLED !== "false"
 
-useHead({ title: "Ro'yxatdan o'tish — Do'ppi.ai" })
+useHead({ title: "Ro'yxatdan o'tish — Do'ppi AI" })
 
 const destination = () => safeLocalPath(route.query.redirect)
 

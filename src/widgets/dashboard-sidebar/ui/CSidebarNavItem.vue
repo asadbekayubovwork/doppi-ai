@@ -55,12 +55,12 @@ function onRowClick(event: MouseEvent) {
           :class="isInSection ? 'text-[#B9A7FF]' : ''"
         />
         <span class="flex-1 truncate">{{ item.label }}</span>
-        <span
+        <!-- <span
           v-if="item.badge"
           class="flex h-6 min-w-6 items-center justify-center rounded-lg bg-[#6046E8] px-1.5 text-xs font-bold text-white"
         >
           {{ item.badge }}
-        </span>
+        </span> -->
       </RouterLink>
 
       <!-- A separate control, so the group can be folded from any page

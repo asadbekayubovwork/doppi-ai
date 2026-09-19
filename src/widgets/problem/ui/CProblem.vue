@@ -12,9 +12,9 @@ const items = useI18nList<ProblemItem>("problem.items")
 </script>
 
 <template>
-  <section id="problem" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="problem" class="section-ground py-[60px] sm:py-[100px]">
     <div
-      class="violet-glow right-0 top-12 h-64 w-[26rem] translate-x-1/3 opacity-60"
+      class="ambient-glow right-0 top-12 h-64 w-[26rem] translate-x-1/3 opacity-60"
       aria-hidden="true"
     />
 
@@ -39,14 +39,14 @@ const items = useI18nList<ProblemItem>("problem.items")
             class="surface-card surface-card-lift group flex h-full items-start gap-4 rounded-2xl p-5"
           >
             <span
-              class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-300 transition-transform duration-300 group-hover:scale-110 group-hover:bg-red-500/15"
+              class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-600 transition-transform duration-300 group-hover:scale-110 group-hover:bg-red-500/15"
             >
               <CIcon :name="item.icon" class="h-5 w-5" />
             </span>
 
             <div class="min-w-0">
-              <h3 class="text-lg font-semibold text-white">{{ item.title }}</h3>
-              <p class="mt-1.5 text-sm leading-relaxed text-[#A3A3A3]">
+              <h3 class="text-lg font-semibold text-sand-950">{{ item.title }}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-sand-500">
                 {{ item.desc }}
               </p>
             </div>

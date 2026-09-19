@@ -30,7 +30,7 @@ const passwordsMatch = computed(
   () =>
     confirmation.value.length > 0 && confirmation.value === newPassword.value
 )
-useHead({ title: "Parolni tiklash — Do'ppi.ai" })
+useHead({ title: "Parolni tiklash — Do'ppi AI" })
 const showError = (error: unknown, title: string, fallback: string) => {
   const retry = retryAfterSeconds(error)
   if (retry > 0) resendDelay.value = retry

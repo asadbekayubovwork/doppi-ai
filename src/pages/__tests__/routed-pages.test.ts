@@ -90,7 +90,7 @@ describe("routed pages", () => {
     // Company contact details: domain email, location and real social profiles
     // (a placeholder href would have been filtered out of SOCIALS entirely).
     const text = wrapper.text()
-    expect(text).toContain("admin@doppi.ai")
+    expect(text).toContain("transformation@doppiai.uz")
     expect(text).toContain("Toshkent, O'zbekiston")
     const socialHrefs = wrapper.findAll('a[target="_blank"]').map((a) => a.attributes("href"))
     expect(socialHrefs).toContain("https://t.me/doppi_ai")
@@ -104,7 +104,7 @@ describe("routed pages", () => {
 
     expect(text).toContain("Maxfiylik siyosati")
     expect(text).toContain("Ma'lumotlar xavfsizligi")
-    expect(text).toContain("admin@doppi.ai")
+    expect(text).toContain("transformation@doppiai.uz")
     wrapper.unmount()
   })
 

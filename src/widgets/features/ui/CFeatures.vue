@@ -25,7 +25,7 @@ const pageFor: Record<string, string> = {
 </script>
 
 <template>
-  <section id="features" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="features" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
       <CSectionHeading
         :eyebrow="$t('features.eyebrow')"
@@ -48,33 +48,33 @@ const pageFor: Record<string, string> = {
           >
             <CDoppiMark
               v-if="i === 0"
-              class="pointer-events-none absolute -bottom-8 -right-4 hidden h-48 w-48 text-[#6633EE]/10 lg:block"
+              class="pointer-events-none absolute -bottom-8 -right-4 hidden h-48 w-48 text-sand-100 lg:block"
             />
 
             <div class="relative z-10">
               <span
-                class="inline-flex items-center justify-center rounded-xl bg-[#6633EE]/15 text-[#B9A2FF] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+                class="inline-flex items-center justify-center rounded-xl bg-sand-100 text-sand-950 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
                 :class="i === 0 ? 'h-14 w-14' : 'h-12 w-12'"
               >
                 <CIcon :name="item.icon" :class="i === 0 ? 'h-7 w-7' : 'h-6 w-6'" />
               </span>
 
               <h3
-                class="mt-5 font-semibold text-white"
+                class="mt-5 font-semibold text-sand-950"
                 :class="i === 0 ? 'text-xl lg:text-2xl' : 'text-lg'"
               >
                 <!-- The stretched ::after makes the whole card the link target. -->
                 <RouterLink
                   v-if="pageFor[item.icon]"
                   :to="pageFor[item.icon]"
-                  class="transition-colors after:absolute after:inset-0 hover:text-[#B9A2FF]"
+                  class="transition-colors after:absolute after:inset-0 hover:text-sand-600"
                 >
                   {{ item.title }}
                 </RouterLink>
                 <template v-else>{{ item.title }}</template>
               </h3>
               <p
-                class="mt-2 leading-relaxed text-[#A3A3A3]"
+                class="mt-2 leading-relaxed text-sand-500"
                 :class="i === 0 ? 'text-sm sm:text-base lg:max-w-md' : 'text-sm'"
               >
                 {{ item.desc }}

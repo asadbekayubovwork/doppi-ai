@@ -1,16 +1,15 @@
 /*
-   Page ground. Every dark surface on the landing derives from these two
-   variables, so the whole site can be re-tinted from one place (the header
-   colour picker writes to them at runtime). The `-rgb` twins are channel
-   triplets so Tailwind can layer opacity on top: `bg-ground/80`.
-   `--bg-raised` is the ground lifted ~2.6 lightness points — the band used to
-   separate neighbouring dark sections.
+   Page ground. Every section on the landing derives from these two variables,
+   so the whole site can be re-tinted from one place. The `-rgb` twins are
+   channel triplets so Tailwind can layer opacity on top: `bg-ground/80`.
+   `--bg-raised` is the ground sunk ~3.7 lightness points (`sand-100`) — the
+   band used to separate neighbouring sections.
 */
 :root {
-  --bg-ground: #0e041f;
-  --bg-ground-rgb: 14 4 31;
-  --bg-raised: #12062a;
-  --bg-raised-rgb: 18 6 42;
+  --bg-ground: #fdfcfc;
+  --bg-ground-rgb: 253 252 252;
+  --bg-raised: #f5f3f1;
+  --bg-raised-rgb: 245 243 241;
 }
 
 *,

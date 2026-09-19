@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
   <div class="relative" @mouseenter="openDropdown" @mouseleave="closeDropdown">
     <button
-      class="flex items-center gap-1 px-3 py-2 text-white transition-colors"
+      class="flex items-center gap-1 px-3 py-2 text-sand-950 transition-colors"
     >
       <span class="font-medium capitalize">{{ currentLanguageDisplay }}</span>
       <svg
@@ -74,21 +74,23 @@ onMounted(() => {
     <Transition name="dropdown">
       <div v-if="isOpen" class="absolute top-full right-0 z-50 dropdown">
         <div
-          class="w-[140px] bg-[#1C132C] mt-2 rounded-xl shadow-xl overflow-hidden"
+          class="w-[140px] bg-white border border-sand-200 mt-2 rounded-xl shadow-xl overflow-hidden"
         >
           <button
             v-for="language in languages"
             :key="language.code"
             @click="selectLanguage(language)"
-            class="w-full text-left px-4 py-3 text-xs text-[#FCFCFC] hover:bg-[#6633EE]/20 transition-colors flex items-center justify-between"
-            :class="{
-              'text-[#6633EE]': selectedLanguage.code === language.code,
-            }"
+            class="w-full text-left px-4 py-3 text-xs hover:bg-sand-100 transition-colors flex items-center justify-between"
+            :class="
+              selectedLanguage.code === language.code
+                ? 'font-medium text-sand-950'
+                : 'text-sand-600'
+            "
           >
             <span>{{ language.name }}</span>
             <svg
               v-if="selectedLanguage.code === language.code"
-              class="w-4 h-4 text-[#6633EE]"
+              class="w-4 h-4 text-sand-950"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -118,6 +120,6 @@ onMounted(() => {
 }
 
 .dropdown {
-  box-shadow: 0px 2px 4px -2px #ffffff0f;
+  box-shadow: 0px 2px 4px -2px rgba(12, 10, 9, 0.06);
 }
 </style>

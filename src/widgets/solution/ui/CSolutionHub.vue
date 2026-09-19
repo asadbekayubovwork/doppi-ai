@@ -3,8 +3,8 @@ import { CDoppiMark } from "@/shared/ui"
 
 defineProps<{
   entered: boolean
-  /** Module whose light is heading in; null keeps the idle pulse. */
-  flowIndex: number | null
+  /** The send heading in; null keeps the idle pulse. */
+  flowId: number | null
 }>()
 </script>
 
@@ -14,29 +14,29 @@ defineProps<{
   >
     <div class="hub relative h-full w-full" :class="{ 'is-entered': entered }">
       <span
-        v-if="flowIndex === null"
-        class="absolute inset-0 animate-pulse-ring rounded-full border border-[#6633EE]/50"
+        v-if="flowId === null"
+        class="absolute inset-0 animate-pulse-ring rounded-full border border-cobalt/50"
         aria-hidden="true"
       />
       <template v-else>
         <!-- Fires as the travelling light lands, in step with it. -->
         <span
-          :key="`flash-${flowIndex}`"
+          :key="`flash-${flowId}`"
           class="hub-flash absolute -inset-10 rounded-full"
           aria-hidden="true"
         />
         <span
-          :key="`ping-${flowIndex}`"
-          class="hub-ping absolute inset-0 rounded-full border-2 border-[#8F6BFF]"
+          :key="`ping-${flowId}`"
+          class="hub-ping absolute inset-0 rounded-full border-2 border-cobalt"
           aria-hidden="true"
         />
       </template>
 
       <div
-        class="relative grid h-full w-full place-items-center rounded-full border border-[#6633EE]/50 bg-[#160A2E] text-center shadow-[0_0_60px_-10px_rgba(102,51,238,0.8)]"
+        class="relative grid h-full w-full place-items-center rounded-full border border-sand-950 bg-sand-950 text-center shadow-[0_20px_50px_-18px_rgba(12,10,9,0.45)]"
       >
         <div class="flex flex-col items-center gap-1.5">
-          <CDoppiMark class="h-10 w-10 text-[#8F6BFF]" />
+          <CDoppiMark class="h-10 w-10 text-white" />
           <span class="text-sm font-bold tracking-tight text-white">
             {{ $t("solution.centerLabel") }}
           </span>
@@ -63,17 +63,17 @@ defineProps<{
   }
 }
 
-/* The highlight lap (2.4s, see CYCLE_MS in CSolution): the light reaches the
-   hub edge around 30%, and the hub answers with a flash and a ring. */
+/* One send (2.4s, see SEND_MS in CSolution): the light reaches the hub edge
+   around 30%, and the hub answers with a flash and a ring. */
 
 .hub-flash {
   background: radial-gradient(
     closest-side,
-    rgba(143, 107, 255, 0.5),
-    rgba(102, 51, 238, 0.15) 60%,
+    rgba(52, 80, 140, 0.35),
+    rgba(52, 80, 140, 0.1) 60%,
     transparent
   );
-  animation: hub-flash 2.4s ease-out infinite;
+  animation: hub-flash 2.4s ease-out both;
 }
 
 @keyframes hub-flash {
@@ -91,7 +91,7 @@ defineProps<{
 }
 
 .hub-ping {
-  animation: hub-ping 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  animation: hub-ping 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) both;
 }
 
 @keyframes hub-ping {

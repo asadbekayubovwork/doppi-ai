@@ -95,7 +95,7 @@ const handleSubmit = async () => {
     })
     if (!response.ok) throw new Error("request failed")
   } catch {
-    const subject = `Do'ppi.ai demo — ${payload.business || payload.name}`
+    const subject = `Do'ppi AI demo — ${payload.business || payload.name}`
     const body = [
       `${t("contact.form.name")}: ${payload.name}`,
       `${t("contact.form.phone")}: ${payload.phone}`,
@@ -115,13 +115,13 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <section id="contact" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="contact" class="section-ground py-[60px] sm:py-[100px]">
     <div
       class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-50"
       aria-hidden="true"
     />
     <div
-      class="violet-glow -right-24 top-4 h-72 w-[30rem]"
+      class="ambient-glow -right-24 top-4 h-72 w-[30rem]"
       aria-hidden="true"
     />
 
@@ -136,10 +136,10 @@ const handleSubmit = async () => {
             :subtitle="$t('contact.subtitle')"
           />
 
-          <h3 class="mt-10 text-lg font-semibold text-white">
+          <h3 class="mt-10 text-lg font-semibold text-sand-950">
             {{ $t("contact.reachTitle") }}
           </h3>
-          <p class="mt-2 leading-relaxed text-[#A3A3A3]">
+          <p class="mt-2 leading-relaxed text-sand-500">
             {{ $t("contact.reachSubtitle") }}
           </p>
 
@@ -153,7 +153,7 @@ const handleSubmit = async () => {
                 class="group -mx-2 flex items-center gap-4 rounded-xl px-2 py-1.5 transition-colors"
               >
                 <span
-                  class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#6633EE]/15 text-[#B9A2FF]"
+                  class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sand-100 text-sand-950"
                 >
                   <CIcon :name="row.icon" class="h-5 w-5" />
                 </span>
@@ -161,8 +161,8 @@ const handleSubmit = async () => {
                   class="text-sm transition-colors"
                   :class="
                     row.href
-                      ? 'text-white group-hover:text-[#B9A2FF]'
-                      : 'text-[#A3A3A3]'
+                      ? 'text-sand-950 group-hover:text-sand-600'
+                      : 'text-sand-500'
                   "
                 >
                   {{ row.label }}
@@ -173,7 +173,7 @@ const handleSubmit = async () => {
 
           <template v-if="SOCIALS.length">
             <h4
-              class="mt-8 text-sm font-semibold uppercase tracking-[0.14em] text-[#A3A3A3]"
+              class="mt-8 text-sm font-semibold uppercase tracking-[0.14em] text-sand-500"
             >
               {{ $t("contact.socialsTitle") }}
             </h4>
@@ -183,11 +183,11 @@ const handleSubmit = async () => {
                   :href="social.href"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white transition-colors hover:border-[#6633EE]/50 hover:text-[#B9A2FF]"
+                  class="inline-flex items-center gap-2.5 rounded-xl border border-sand-200 bg-white px-4 py-2.5 text-sm text-sand-950 transition-colors hover:border-sand-400"
                 >
-                  <CIcon :name="social.icon" class="h-4 w-4 text-[#8F6BFF]" />
+                  <CIcon :name="social.icon" class="h-4 w-4 text-sand-600" />
                   {{ social.label }}
-                  <span class="text-[#A3A3A3]">{{ social.handle }}</span>
+                  <span class="text-sand-500">{{ social.handle }}</span>
                 </a>
               </li>
             </ul>
@@ -203,14 +203,14 @@ const handleSubmit = async () => {
               class="flex flex-col items-center py-10 text-center"
             >
               <span
-                class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-[#7C3AED] to-[#A855F7] text-white"
+                class="grid h-14 w-14 place-items-center rounded-full bg-sand-950 text-white"
               >
                 <CIcon name="check" class="h-7 w-7" stroke-width="2.5" />
               </span>
-              <h3 class="mt-6 text-xl font-semibold text-white">
+              <h3 class="mt-6 text-xl font-semibold text-sand-950">
                 {{ $t("contact.success.title") }}
               </h3>
-              <p class="mt-2 max-w-sm leading-relaxed text-[#A3A3A3]">
+              <p class="mt-2 max-w-sm leading-relaxed text-sand-500">
                 {{ $t("contact.success.subtitle") }}
               </p>
             </div>
@@ -225,11 +225,11 @@ const handleSubmit = async () => {
                 :key="field.id"
                 class="flex flex-col gap-2"
               >
-                <label :for="field.id" class="text-sm font-medium text-white">
+                <label :for="field.id" class="text-sm font-medium text-sand-950">
                   {{ field.label }}
                   <span
                     v-if="field.required"
-                    class="text-[#8F6BFF]"
+                    class="text-signal"
                     aria-hidden="true"
                   >
                     *</span
@@ -242,14 +242,14 @@ const handleSubmit = async () => {
                   :placeholder="field.placeholder"
                   :required="field.required"
                   :autocomplete="field.autocomplete"
-                  class="w-full rounded-xl border border-white/10 bg-ground/70 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-[#6B6B6B] focus:border-[#6633EE]/70"
+                  class="w-full rounded-xl border border-sand-200 bg-white px-4 py-3 text-sm text-sand-950 outline-none transition-colors placeholder:text-sand-400 focus:border-sand-950"
                 />
               </div>
 
               <div class="flex flex-col gap-2 sm:col-span-2">
                 <label
                   for="contact-message"
-                  class="text-sm font-medium text-white"
+                  class="text-sm font-medium text-sand-950"
                 >
                   {{ $t("contact.form.message") }}
                 </label>
@@ -258,7 +258,7 @@ const handleSubmit = async () => {
                   v-model="form.message"
                   :placeholder="$t('contact.form.placeholders.message')"
                   rows="4"
-                  class="w-full resize-y rounded-xl border border-white/10 bg-ground/70 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-[#6B6B6B] focus:border-[#6633EE]/70"
+                  class="w-full resize-y rounded-xl border border-sand-200 bg-white px-4 py-3 text-sm text-sand-950 outline-none transition-colors placeholder:text-sand-400 focus:border-sand-950"
                 />
               </div>
 
@@ -266,7 +266,7 @@ const handleSubmit = async () => {
                 <button
                   type="submit"
                   :disabled="sending"
-                  class="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#6633EE] font-medium text-white transition-300 hover:bg-[#6633EE]/80 disabled:opacity-60"
+                  class="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-sand-950 font-medium text-white transition-300 hover:bg-sand-800 disabled:opacity-60"
                 >
                   {{
                     sending
@@ -275,7 +275,7 @@ const handleSubmit = async () => {
                   }}
                   <CIcon v-if="!sending" name="send" class="h-4 w-4" />
                 </button>
-                <p class="mt-3 text-xs leading-relaxed text-[#A3A3A3]">
+                <p class="mt-3 text-xs leading-relaxed text-sand-500">
                   {{ $t("contact.form.privacy") }}
                 </p>
               </div>

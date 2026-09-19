@@ -1,6 +1,6 @@
 {
   "brand": {
-    "name": "Do'ppi.ai"
+    "name": "Do'ppi AI"
   },
   "a11y": {
     "mute": "Mikrofonni o'chirish",
@@ -30,7 +30,7 @@
     "titleTop": "Reklamadan sotuvgacha —",
     "titleHighlight": "barchasi bir tizimda",
     "titleBottom": "sun'iy intellekt bilan",
-    "subtitle": "Do'ppi.ai — biznesingiz uchun AI marketing operatsion tizimi. Ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, video va kontent, CRM va chatbotlar — hammasi bitta joyda ishlaydi.",
+    "subtitle": "Do'ppi AI — biznesingiz uchun AI marketing operatsion tizimi. Ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, video va kontent, CRM va chatbotlar — hammasi bitta joyda ishlaydi.",
     "ctaPrimary": "Bepul sinovni boshlash",
     "ctaSecondary": "Demoni ko'rish",
     "stats": [
@@ -47,9 +47,8 @@
         "label": "AI agentlar ishlaydi"
       }
     ],
-    "agentName": "AI Ovozli Agent",
-    "agentStatus": "Qo'ng'iroq davom etmoqda",
-    "agentCaption": "Inson kabi gaplashadi, mijozni malakalab, uchrashuv belgilaydi."
+    "agentPrompt": "Do'ppi AI ovozli agentining imkoniyatlarini kashf eting — inson kabi gaplashadi va uchrashuv belgilaydi",
+    "agentCall": "Ovozli agentni tinglash"
   },
   "trust": {
     "label": "Barcha kanallar bitta tizimda birlashadi",
@@ -127,9 +126,9 @@
   },
   "solution": {
     "eyebrow": "Yechim",
-    "title": "Do'ppi.ai — hammasi bitta AI tizimida",
+    "title": "Do'ppi AI — hammasi bitta AI tizimida",
     "subtitle": "Reklama, aloqa, sotuv va tahlil — bitta operatsion tizimda birlashtirilgan All-in-One AI marketing platformasi.",
-    "centerLabel": "Do'ppi.ai",
+    "centerLabel": "Do'ppi AI",
     "modules": [
       {
         "icon": "phone",
@@ -197,7 +196,7 @@
   },
   "audience": {
     "eyebrow": "Kim uchun",
-    "title": "Do'ppi.ai kimlar uchun",
+    "title": "Do'ppi AI kimlar uchun",
     "subtitle": "Reklama beradigan, mijoz bilan yozishadigan yoki qo'ng'iroq qiladigan har qanday biznes uchun — jamoangiz hajmidan qat'i nazar.",
     "items": [
       {
@@ -304,7 +303,7 @@
     "transcript": [
       {
         "role": "agent",
-        "text": "Assalomu alaykum! Do'ppi.ai'dan aloqaga chiqdim. Xizmatimiz haqida gaplashsak bo'ladimi?"
+        "text": "Assalomu alaykum! Do'ppi AI'dan aloqaga chiqdim. Xizmatimiz haqida gaplashsak bo'ladimi?"
       },
       {
         "role": "user",
@@ -320,7 +319,7 @@
   "results": {
     "eyebrow": "Natijalar",
     "title": "Biznesingizni keyingi bosqichga olib chiqing",
-    "subtitle": "Do'ppi.ai bilan ishlagan bizneslar birinchi oylardanoq o'sishni ko'radi.",
+    "subtitle": "Do'ppi AI bilan ishlagan bizneslar birinchi oylardanoq o'sishni ko'radi.",
     "stats": [
       {
         "value": "2–5×",
@@ -429,9 +428,9 @@
   "about": {
     "eyebrow": "Biz haqimizda",
     "title": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan",
-    "lead": "Do'ppi.ai — har bir biznes uchun sun'iy intellekt orqali marketingni avtomatlashtirishni maksimal darajada osonlashtiruvchi platforma.",
+    "lead": "Do'ppi AI — har bir biznes uchun sun'iy intellekt orqali marketingni avtomatlashtirishni maksimal darajada osonlashtiruvchi platforma.",
     "vision": "Bizning vazifamiz — dunyoning istalgan nuqtasidagi har bir biznesga AI yordamida o'sish imkonini berish. Mijozlarining tili, kanallari va telefoniyasiga moslashadigan AI tizimi bilan.",
-    "pageTitle": "Do'ppi.ai ortidagi maqsad",
+    "pageTitle": "Do'ppi AI ortidagi maqsad",
     "pageSubtitle": "Biz butun dunyo bizneslari uchun sun'iy intellektni kundalik ish quroliga aylantiramiz.",
     "points": [
       {
@@ -467,7 +466,7 @@
   },
   "team": {
     "eyebrow": "Jamoa",
-    "title": "Do'ppi.ai ortidagi jamoa",
+    "title": "Do'ppi AI ortidagi jamoa",
     "subtitle": "Sun'iy intellekt, marketing va mahsulot mutaxassislari — butun dunyo bizneslari uchun yagona tizim quramiz.",
     "roles": {
       "rifat": "O'sish bo'yicha rahbar",
@@ -477,20 +476,20 @@
       "aziz": "AI muhandis"
     },
     "bios": {
-      "rifat": "Do'ppi.ai marketingi va mijozlar bilan ishlashni boshqaradi. Bizneslarga platformani joriy qilish va undan natija olishda yordam beradi.",
-      "jaxongir": "Do'ppi.ai texnik arxitekturasi va AI modellarini boshqaradi. Platformaning muhandislik yo'nalishini belgilaydi, 5+ yillik tajriba.",
-      "nodirbek": "Do'ppi.ai backend dasturchisi. Server logikasi, API va ma'lumotlar bazasini quradi — tizim tez, xavfsiz va barqaror ishlaydi.",
-      "asadbek": "Do'ppi.ai front qismi bo'yicha dasturchi. Interfeysni quradi va UI/UX ni shakllantiradi — platforma har qanday qurilmada tez va qulay.",
+      "rifat": "Do'ppi AI marketingi va mijozlar bilan ishlashni boshqaradi. Bizneslarga platformani joriy qilish va undan natija olishda yordam beradi.",
+      "jaxongir": "Do'ppi AI texnik arxitekturasi va AI modellarini boshqaradi. Platformaning muhandislik yo'nalishini belgilaydi, 5+ yillik tajriba.",
+      "nodirbek": "Do'ppi AI backend dasturchisi. Server logikasi, API va ma'lumotlar bazasini quradi — tizim tez, xavfsiz va barqaror ishlaydi.",
+      "asadbek": "Do'ppi AI front qismi bo'yicha dasturchi. Interfeysni quradi va UI/UX ni shakllantiradi — platforma har qanday qurilmada tez va qulay.",
       "aziz": "Platformaning AI modellari ustida ishlaydi — ularni o'zbek va rus tillarini yaxshi tushunadigan qilib o'rgatadi va sozlaydi."
     }
   },
   "faq": {
     "eyebrow": "Savol-javob",
     "title": "Ko'p so'raladigan savollar",
-    "subtitle": "Do'ppi.ai haqida eng ko'p beriladigan savollarga javoblar.",
+    "subtitle": "Do'ppi AI haqida eng ko'p beriladigan savollarga javoblar.",
     "items": [
       {
-        "q": "Do'ppi.ai o'zbek tilida ishlaydimi?",
+        "q": "Do'ppi AI o'zbek tilida ishlaydimi?",
         "a": "Ha. Ovozli agent, chatbot va kontent o'zbek va rus tillarida ishlaydi — mahalliy bozor uchun maxsus sozlangan."
       },
       {
@@ -538,7 +537,7 @@
       "title": "Rahmat! So'rovingiz qabul qilindi.",
       "subtitle": "Jamoamiz bir ish kuni ichida siz bilan bog'lanib, demo uchun vaqt belgilaydi."
     },
-    "email": "admin{'@'}doppi.ai",
+    "email": "transformation{'@'}doppiai.uz",
     "phone": "+998 93 903 33 01",
     "website": "doppiai.uz",
     "location": "Toshkent, O'zbekiston",
@@ -551,7 +550,7 @@
     "product": "Mahsulot",
     "company": "Kompaniya",
     "contactTitle": "Aloqa",
-    "rights": "© {year} Do'ppi.ai. Barcha huquqlar himoyalangan.",
+    "rights": "© {year} Do'ppi AI. Barcha huquqlar himoyalangan.",
     "madeIn": "Toshkentda mehr bilan yaratilgan",
     "privacy": "Maxfiylik siyosati",
     "terms": "Foydalanish shartlari"
@@ -571,7 +570,7 @@
       "sections": [
         {
           "h": "Kirish",
-          "p": "Do'ppi.ai (\"biz\") butun dunyo bizneslari uchun sun'iy intellektga asoslangan marketing platformasini taqdim etadi. Ushbu Maxfiylik siyosati biz qanday ma'lumotlarni yig'ishimizni, ulardan qanday foydalanishimizni va veb-saytimizga tashrif buyurganingizda yoki demo so'raganingizda qanday tanlovlaringiz borligini tushuntiradi."
+          "p": "Do'ppi AI (\"biz\") butun dunyo bizneslari uchun sun'iy intellektga asoslangan marketing platformasini taqdim etadi. Ushbu Maxfiylik siyosati biz qanday ma'lumotlarni yig'ishimizni, ulardan qanday foydalanishimizni va veb-saytimizga tashrif buyurganingizda yoki demo so'raganingizda qanday tanlovlaringiz borligini tushuntiradi."
         },
         {
           "h": "Biz yig'adigan ma'lumotlar",
@@ -579,7 +578,7 @@
         },
         {
           "h": "Ma'lumotlardan qanday foydalanamiz",
-          "p": "Ma'lumotlaringizdan demo so'rovlaringiz va murojaatlaringizga javob berish, Do'ppi.ai xizmatini taqdim etish va ishlatish hamda mahsulotimiz, kontentimiz va mijozlar tajribasini yaxshilash uchun foydalanamiz. So'rovingiz va tegishli mahsulot yangiliklari yuzasidan siz bilan bog'lanishimiz mumkin."
+          "p": "Ma'lumotlaringizdan demo so'rovlaringiz va murojaatlaringizga javob berish, Do'ppi AI xizmatini taqdim etish va ishlatish hamda mahsulotimiz, kontentimiz va mijozlar tajribasini yaxshilash uchun foydalanamiz. So'rovingiz va tegishli mahsulot yangiliklari yuzasidan siz bilan bog'lanishimiz mumkin."
         },
         {
           "h": "Ma'lumotlarni ulashish",
@@ -600,19 +599,19 @@
       },
       "disclaimer": {
         "h": "Umumiy shablon — yuridik maslahat emas",
-        "p": "Ushbu Maxfiylik siyosati Do'ppi.ai'ning mahsulot va muvofiqlik ishlarini qo'llab-quvvatlash uchun umumiy shablon sifatida taqdim etilgan. U yuridik maslahat hisoblanmaydi va unga tayanishdan oldin malakali yuristlar tomonidan ko'rib chiqilishi va biznesingizga moslashtirilishi lozim."
+        "p": "Ushbu Maxfiylik siyosati Do'ppi AI'ning mahsulot va muvofiqlik ishlarini qo'llab-quvvatlash uchun umumiy shablon sifatida taqdim etilgan. U yuridik maslahat hisoblanmaydi va unga tayanishdan oldin malakali yuristlar tomonidan ko'rib chiqilishi va biznesingizga moslashtirilishi lozim."
       }
     },
     "terms": {
       "title": "Foydalanish shartlari",
       "updated": "Oxirgi yangilanish: 2026-yil 7-iyul",
-      "intro": "Ushbu Foydalanish shartlari (\"Shartlar\") Do'ppi.ai platformasi va u bilan bog'liq veb-sayt hamda xizmatlardan (\"Xizmat\") foydalanishingizni tartibga soladi. Xizmatdan foydalanishdan oldin ushbu shartlarni diqqat bilan o'qib chiqing.",
+      "intro": "Ushbu Foydalanish shartlari (\"Shartlar\") Do'ppi AI platformasi va u bilan bog'liq veb-sayt hamda xizmatlardan (\"Xizmat\") foydalanishingizni tartibga soladi. Xizmatdan foydalanishdan oldin ushbu shartlarni diqqat bilan o'qib chiqing.",
       "disclaimerNote": "Ushbu hujjat umumiy namuna sifatida taqdim etilgan va yuridik maslahat hisoblanmaydi. Yakuniy foydalanishdan oldin uni malakali yuridik maslahatchi ko'rib chiqishi tavsiya etiladi.",
       "sections": [
         {
           "heading": "Kirish va shartlarni qabul qilish",
           "paragraphs": [
-            "Do'ppi.ai xizmatidan ro'yxatdan o'tib yoki undan foydalanib, siz ushbu Shartlarga va Maxfiylik siyosatiga rozilik bildirasiz. Agar siz ushbu shartlarga rozi bo'lmasangiz, Xizmatdan foydalanmang.",
+            "Do'ppi AI xizmatidan ro'yxatdan o'tib yoki undan foydalanib, siz ushbu Shartlarga va Maxfiylik siyosatiga rozilik bildirasiz. Agar siz ushbu shartlarga rozi bo'lmasangiz, Xizmatdan foydalanmang.",
             "Agar siz Xizmatdan tashkilot nomidan foydalanayotgan bo'lsangiz, siz ushbu tashkilotni ushbu Shartlar bilan bog'lash vakolatiga ega ekanligingizni tasdiqlaysiz."
           ],
           "bullets": []
@@ -620,7 +619,7 @@
         {
           "heading": "Xizmat tavsifi",
           "paragraphs": [
-            "Do'ppi.ai — bu marketing jarayonlarini avtomatlashtirishga mo'ljallangan All-in-One AI marketing platformasi. Xizmat quyidagi asosiy modullarni o'z ichiga oladi:"
+            "Do'ppi AI — bu marketing jarayonlarini avtomatlashtirishga mo'ljallangan All-in-One AI marketing platformasi. Xizmat quyidagi asosiy modullarni o'z ichiga oladi:"
           ],
           "bullets": [
             "AI ovozli agent — mijozlar bilan tabiiy suhbat, malakalash va uchrashuv belgilash.",
@@ -641,7 +640,7 @@
         {
           "heading": "Obuna, sinov va to'lovlar",
           "paragraphs": [
-            "Do'ppi.ai obuna asosidagi rejalarni taklif qiladi: Starter ($19/oy), Growth ($49/oy), Pro ($99/oy) va yirik korxonalar uchun maxsus narxdagi Enterprise reja.",
+            "Do'ppi AI obuna asosidagi rejalarni taklif qiladi: Starter ($19/oy), Growth ($49/oy), Pro ($99/oy) va yirik korxonalar uchun maxsus narxdagi Enterprise reja.",
             "Barcha rejalar uchun 14 kunlik bepul sinov mavjud. To'lovlar tanlangan reja asosida davriy (oylik) tarzda undiriladi. Obunani istalgan vaqtda bekor qilishingiz mumkin — bekor qilish joriy to'lov davri oxirida kuchga kiradi.",
             "Narxlar va tarkib oldindan xabar berilgan holda o'zgarishi mumkin. Qonun bilan talab qilinmagan hollarda, to'langan summalar qaytarilmaydi."
           ],
@@ -663,7 +662,7 @@
         {
           "heading": "Intellektual mulk",
           "paragraphs": [
-            "Xizmat, uning dizayni, dasturiy ta'minoti, brendi va barcha tegishli intellektual mulk huquqlari Do'ppi.ai yoki uning litsenziarlariga tegishli. Ushbu Shartlar sizga cheklangan, eksklyuziv bo'lmagan va o'tkazib bo'lmaydigan foydalanish huquqini beradi.",
+            "Xizmat, uning dizayni, dasturiy ta'minoti, brendi va barcha tegishli intellektual mulk huquqlari Do'ppi AI yoki uning litsenziarlariga tegishli. Ushbu Shartlar sizga cheklangan, eksklyuziv bo'lmagan va o'tkazib bo'lmaydigan foydalanish huquqini beradi.",
             "Siz Xizmatga yuklagan yoki u orqali yaratgan kontentga (\"Foydalanuvchi kontenti\") egaligingiz saqlanib qoladi. Xizmatni taqdim etish uchun zarur bo'lgan darajada uni qayta ishlashimizga ruxsat berasiz."
           ],
           "bullets": []
@@ -672,7 +671,7 @@
           "heading": "Kafolatlardan voz kechish va javobgarlik cheklovi",
           "paragraphs": [
             "Xizmat \"boribori holida\" va \"mavjud bo'lgani bo'yicha\" taqdim etiladi. Qonun ruxsat bergan darajada biz uning uzluksiz, xatosiz yoki har qanday muayyan maqsadga mos kelishini kafolatlamaymiz.",
-            "Qonun ruxsat bergan maksimal darajada Do'ppi.ai bilvosita, tasodifiy yoki oqibatli zararlar, shu jumladan foyda yoki ma'lumot yo'qotilishi uchun javobgar bo'lmaydi. Bizning umumiy javobgarligimiz da'vodan oldingi 12 oy ichida Xizmat uchun to'langan summadan oshmaydi."
+            "Qonun ruxsat bergan maksimal darajada Do'ppi AI bilvosita, tasodifiy yoki oqibatli zararlar, shu jumladan foyda yoki ma'lumot yo'qotilishi uchun javobgar bo'lmaydi. Bizning umumiy javobgarligimiz da'vodan oldingi 12 oy ichida Xizmat uchun to'langan summadan oshmaydi."
           ],
           "bullets": []
         },
@@ -708,42 +707,42 @@
   },
   "seo": {
     "home": {
-      "title": "Do'ppi.ai (Doppi AI) — butun dunyo uchun AI marketing tizimi",
-      "description": "Do'ppi.ai (Doppi AI) — reklamadan sotuvgacha jarayonni avtomatlashtiruvchi AI marketing tizimi: AI ovozli agent, RAG chatbot, video generator, CRM va SIP call-markaz.",
-      "keywords": "Do'ppi.ai, Doppi AI, doppi, AI marketing, sun'iy intellekt, ovozli agent, RAG chatbot, video generator, CRM, chatbot, SIP telefoniya, lead generatsiya, marketing avtomatizatsiya"
+      "title": "Do'ppi AI (Doppi AI) — butun dunyo uchun AI marketing tizimi",
+      "description": "Do'ppi AI (Doppi AI) — reklamadan sotuvgacha jarayonni avtomatlashtiruvchi AI marketing tizimi: AI ovozli agent, RAG chatbot, video generator, CRM va SIP call-markaz.",
+      "keywords": "Do'ppi AI, Doppi AI, doppi, AI marketing, sun'iy intellekt, ovozli agent, RAG chatbot, video generator, CRM, chatbot, SIP telefoniya, lead generatsiya, marketing avtomatizatsiya"
     },
     "ragAgent": {
-      "title": "RAG Agent: hujjatlaringiz asosidagi AI chatbot — Do'ppi.ai",
-      "description": "Do'ppi.ai RAG Agent PDF, DOCX va Excel hujjatlaringizni o'rganib, Instagram, Telegram, WhatsApp va saytda mijozlarga 24/7 aniq javob beradi."
+      "title": "RAG Agent: hujjatlaringiz asosidagi AI chatbot — Do'ppi AI",
+      "description": "Do'ppi AI RAG Agent PDF, DOCX va Excel hujjatlaringizni o'rganib, Instagram, Telegram, WhatsApp va saytda mijozlarga 24/7 aniq javob beradi."
     },
     "voiceAgent": {
-      "title": "AI Ovozli Agent: qo'ng'iroqlarga AI javob beradi — Do'ppi.ai",
-      "description": "Do'ppi.ai ovozli agenti qo'ng'iroqlarni inson kabi olib boradi: leadlarni saralaydi, uchrashuv belgilaydi va hammasini CRM'ga yozadi."
+      "title": "AI Ovozli Agent: qo'ng'iroqlarga AI javob beradi — Do'ppi AI",
+      "description": "Do'ppi AI ovozli agenti qo'ng'iroqlarni inson kabi olib boradi: leadlarni saralaydi, uchrashuv belgilaydi va hammasini CRM'ga yozadi."
     },
     "videoGenerator": {
-      "title": "AI Video generator: matndan reklama va Reels — Do'ppi.ai",
-      "description": "Do'ppi.ai video generatori matndan reklama roliklari, Reels, rasmlar, reklama matnlari va ovozni sun'iy intellekt yordamida yaratadi."
+      "title": "AI Video generator: matndan reklama va Reels — Do'ppi AI",
+      "description": "Do'ppi AI video generatori matndan reklama roliklari, Reels, rasmlar, reklama matnlari va ovozni sun'iy intellekt yordamida yaratadi."
     },
     "pricing": {
-      "title": "Narxlar — Do'ppi.ai",
-      "description": "Do'ppi.ai rejalari: Starter, Growth, Pro va Enterprise. Barcha rejalar uchun 14 kunlik bepul sinov."
+      "title": "Narxlar — Do'ppi AI",
+      "description": "Do'ppi AI rejalari: Starter, Growth, Pro va Enterprise. Barcha rejalar uchun 14 kunlik bepul sinov."
     },
     "about": {
-      "title": "Biz haqimizda — Do'ppi.ai",
-      "description": "Do'ppi.ai jamoasi va vazifasi: butun dunyo bizneslari uchun AI marketing tizimini qurish."
+      "title": "Biz haqimizda — Do'ppi AI",
+      "description": "Do'ppi AI jamoasi va vazifasi: butun dunyo bizneslari uchun AI marketing tizimini qurish."
     },
     "contact": {
-      "title": "Aloqa — Do'ppi.ai",
-      "description": "Do'ppi.ai jamoasi bilan bog'laning va biznesingiz uchun demo oling."
+      "title": "Aloqa — Do'ppi AI",
+      "description": "Do'ppi AI jamoasi bilan bog'laning va biznesingiz uchun demo oling."
     },
     "product": {
-      "title": "Mahsulot — Do'ppi.ai",
-      "description": "Do'ppi.ai modullari: AI ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, SIP call-markaz, AI video va kontent, CRM hamda chatbotlar."
+      "title": "Mahsulot — Do'ppi AI",
+      "description": "Do'ppi AI modullari: AI ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, SIP call-markaz, AI video va kontent, CRM hamda chatbotlar."
     }
   },
   "product": {
     "pageTitle": "Reklamadan sotuvgacha — bitta AI platformada",
-    "pageSubtitle": "Do'ppi.ai qanday ishlashini bosqichma-bosqich ko'ring: modullar, imkoniyatlar, kimlar uchun mo'ljallangani va kutilayotgan natijalar."
+    "pageSubtitle": "Do'ppi AI qanday ishlashini bosqichma-bosqich ko'ring: modullar, imkoniyatlar, kimlar uchun mo'ljallangani va kutilayotgan natijalar."
   },
   "services": {
     "navLabel": "Xizmatlar",
@@ -948,7 +947,7 @@
       "navDesc": "Matndan reklama va Reels videolar",
       "eyebrow": "AI Video generator",
       "title": "Matndan tayyor videogacha — AI video generator",
-      "subtitle": "G'oyangizni yozing — Do'ppi.ai reklama, Reels va ijtimoiy tarmoqlar uchun video, rasm, matn va ovozni sun'iy intellekt yordamida yaratadi.",
+      "subtitle": "G'oyangizni yozing — Do'ppi AI reklama, Reels va ijtimoiy tarmoqlar uchun video, rasm, matn va ovozni sun'iy intellekt yordamida yaratadi.",
       "features": {
         "eyebrow": "Imkoniyatlar",
         "title": "Kontentni tezroq tayyorlang",
@@ -982,7 +981,7 @@
           {
             "icon": "share-2",
             "title": "Marketingingizning bir qismi",
-            "desc": "Kontent Do'ppi.ai'dagi ijtimoiy tarmoq avtomatizatsiyasi va reklama jarayonlari bilan bitta tizimda turadi."
+            "desc": "Kontent Do'ppi AI'dagi ijtimoiy tarmoq avtomatizatsiyasi va reklama jarayonlari bilan bitta tizimda turadi."
           }
         ]
       },

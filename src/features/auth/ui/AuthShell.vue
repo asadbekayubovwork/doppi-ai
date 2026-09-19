@@ -8,14 +8,14 @@ withDefaults(
     description?: string
   }>(),
   {
-    title: "Do'ppi.ai",
-    description: "Do'ppi.ai autentifikatsiyasi",
+    title: "Do'ppi AI",
+    description: "Do'ppi AI autentifikatsiyasi",
   }
 )
 
 useHead({
-  title: "Do'ppi.ai",
-  meta: [{ name: "description", content: "Do'ppi.ai autentifikatsiyasi" }],
+  title: "Do'ppi AI",
+  meta: [{ name: "description", content: "Do'ppi AI autentifikatsiyasi" }],
 })
 </script>
 

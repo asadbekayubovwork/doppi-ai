@@ -18,9 +18,9 @@ const facts = useI18nList<Fact>("about.facts")
 </script>
 
 <template>
-  <section id="about" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="about" class="section-ground py-[60px] sm:py-[100px]">
     <div
-      class="violet-glow right-1/4 top-0 h-64 w-[30rem]"
+      class="ambient-glow right-1/4 top-0 h-64 w-[30rem]"
       aria-hidden="true"
     />
 
@@ -35,14 +35,14 @@ const facts = useI18nList<Fact>("about.facts")
           />
 
           <p
-            class="mt-6 text-base leading-relaxed text-white/90 sm:text-lg"
+            class="mt-6 text-base leading-relaxed text-sand-800 sm:text-lg"
             data-aos="fade-up"
             data-aos-duration="800"
           >
             {{ $t("about.lead") }}
           </p>
           <p
-            class="mt-4 leading-relaxed text-[#A3A3A3]"
+            class="mt-4 leading-relaxed text-sand-500"
             data-aos="fade-up"
             data-aos-duration="800"
             data-aos-delay="100"
@@ -51,7 +51,7 @@ const facts = useI18nList<Fact>("about.facts")
           </p>
 
           <dl
-            class="mt-8 grid grid-cols-1 gap-4 border-t border-white/10 pt-8 sm:grid-cols-3"
+            class="mt-8 grid grid-cols-1 gap-4 border-t border-sand-200 pt-8 sm:grid-cols-3"
           >
             <div
               v-for="(fact, i) in facts"
@@ -60,10 +60,10 @@ const facts = useI18nList<Fact>("about.facts")
               data-aos-duration="700"
               :data-aos-delay="150 + i * 80"
             >
-              <dt class="text-xs uppercase tracking-wide text-[#A3A3A3]">
+              <dt class="text-xs uppercase tracking-wide text-sand-500">
                 {{ fact.label }}
               </dt>
-              <dd class="mt-1 font-semibold text-white">
+              <dd class="mt-1 font-semibold text-sand-950">
                 <CCountUp :value="fact.value" />
               </dd>
             </div>
@@ -84,13 +84,13 @@ const facts = useI18nList<Fact>("about.facts")
               class="surface-card surface-card-lift group flex items-start gap-4 rounded-2xl p-5"
             >
               <span
-                class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#6633EE]/15 text-[#B9A2FF] transition-transform duration-300 group-hover:scale-110"
+                class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sand-100 text-sand-950 transition-transform duration-300 group-hover:scale-110"
               >
                 <CIcon :name="point.icon" class="h-5 w-5" />
               </span>
               <div>
-                <h3 class="font-semibold text-white">{{ point.title }}</h3>
-                <p class="mt-1 text-sm leading-relaxed text-[#A3A3A3]">
+                <h3 class="font-semibold text-sand-950">{{ point.title }}</h3>
+                <p class="mt-1 text-sm leading-relaxed text-sand-500">
                   {{ point.desc }}
                 </p>
               </div>

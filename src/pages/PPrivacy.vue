@@ -17,73 +17,73 @@ const email = computed(() => t("contact.email"))
 const phone = computed(() => t("contact.phone"))
 
 useHead({
-  title: computed(() => `${t("legal.privacy.title")} — Do'ppi.ai`),
+  title: computed(() => `${t("legal.privacy.title")} — Do'ppi AI`),
   meta: [{ name: "robots", content: "noindex, follow" }],
 })
 </script>
 
 <template>
-  <section class="section-dark pt-[130px] pb-[80px] sm:pt-[170px]">
-    <div class="violet-glow left-1/2 -top-24 h-72 w-72 -translate-x-1/2 opacity-60" aria-hidden="true" />
+  <section class="section-ground pt-[130px] pb-[80px] sm:pt-[170px]">
+    <div class="ambient-glow left-1/2 -top-24 h-72 w-72 -translate-x-1/2 opacity-60" aria-hidden="true" />
 
     <div class="container relative z-10">
       <div class="mx-auto max-w-[760px]">
         <RouterLink
           to="/"
-          class="inline-flex items-center gap-2 text-sm text-[#A3A3A3] transition-colors hover:text-[#B9A2FF]"
+          class="inline-flex items-center gap-2 text-sm text-sand-500 transition-colors hover:text-sand-950"
         >
           <CIcon name="arrow-right" class="h-4 w-4 rotate-180" />
           {{ $t("legal.back") }}
         </RouterLink>
 
-        <h1 class="mt-4 text-4xl font-bold tracking-tight text-white">
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-sand-950">
           {{ $t("legal.privacy.title") }}
         </h1>
-        <p class="mt-3 text-sm text-[#A3A3A3]">{{ $t("legal.privacy.updated") }}</p>
+        <p class="mt-3 text-sm text-sand-500">{{ $t("legal.privacy.updated") }}</p>
 
         <section v-for="section in sections" :key="section.h">
-          <h2 class="mt-10 text-xl font-semibold text-white">{{ section.h }}</h2>
-          <p class="mt-3 leading-relaxed text-[#A3A3A3]">{{ section.p }}</p>
+          <h2 class="mt-10 text-xl font-semibold text-sand-950">{{ section.h }}</h2>
+          <p class="mt-3 leading-relaxed text-sand-600">{{ section.p }}</p>
         </section>
 
         <section>
-          <h2 class="mt-10 text-xl font-semibold text-white">
+          <h2 class="mt-10 text-xl font-semibold text-sand-950">
             {{ $t("legal.privacy.contact.h") }}
           </h2>
-          <p class="mt-3 leading-relaxed text-[#A3A3A3]">{{ $t("legal.privacy.contact.p") }}</p>
+          <p class="mt-3 leading-relaxed text-sand-600">{{ $t("legal.privacy.contact.p") }}</p>
 
-          <ul class="mt-4 space-y-2 text-[#A3A3A3]">
+          <ul class="mt-4 space-y-2 text-sand-600">
             <li>
               <a
                 :href="`mailto:${email}`"
-                class="inline-flex items-center gap-2.5 transition-colors hover:text-[#B9A2FF]"
+                class="inline-flex items-center gap-2.5 transition-colors hover:text-sand-950"
               >
-                <CIcon name="mail" class="h-4 w-4 text-[#8F6BFF]" />
+                <CIcon name="mail" class="h-4 w-4 text-sand-950" />
                 {{ email }}
               </a>
             </li>
             <li>
               <a
                 :href="`tel:${phone.replace(/\s/g, '')}`"
-                class="inline-flex items-center gap-2.5 transition-colors hover:text-[#B9A2FF]"
+                class="inline-flex items-center gap-2.5 transition-colors hover:text-sand-950"
               >
-                <CIcon name="phone" class="h-4 w-4 text-[#8F6BFF]" />
+                <CIcon name="phone" class="h-4 w-4 text-sand-950" />
                 {{ phone }}
               </a>
             </li>
             <li class="inline-flex items-center gap-2.5">
-              <CIcon name="map-pin" class="h-4 w-4 text-[#8F6BFF]" />
+              <CIcon name="map-pin" class="h-4 w-4 text-sand-950" />
               {{ $t("contact.location") }}
             </li>
           </ul>
         </section>
 
-        <div class="mt-12 rounded-2xl border border-[#6633EE]/40 bg-[#6633EE]/10 p-5">
-          <h2 class="flex items-center gap-2 text-base font-semibold text-[#C9B8FF]">
+        <div class="mt-12 rounded-2xl border border-sand-200 bg-sand-100 p-5">
+          <h2 class="flex items-center gap-2 text-base font-semibold text-sand-950">
             <CIcon name="shield-check" class="h-5 w-5 shrink-0" />
             {{ $t("legal.privacy.disclaimer.h") }}
           </h2>
-          <p class="mt-2 text-sm leading-relaxed text-[#A3A3A3]">
+          <p class="mt-2 text-sm leading-relaxed text-sand-600">
             {{ $t("legal.privacy.disclaimer.p") }}
           </p>
         </div>

@@ -1,7 +1,7 @@
 ﻿#Requires -Version 5.1
 <#
 .SYNOPSIS
-    Do'ppi.ai frontendini doppiai.uz serveriga deploy qiladi.
+    Do'ppi AI frontendini doppiai.uz serveriga deploy qiladi.
 
 .DESCRIPTION
     Loyihani build qiladi, dist/ ni arxivlab serverga yuboradi va saytni yangi
@@ -118,7 +118,7 @@ function Get-Page {
 }
 
 Write-Host ""
-Write-Host "  Do'ppi.ai deploy -> doppiai.uz" -ForegroundColor White
+Write-Host "  Do'ppi AI deploy -> doppiai.uz" -ForegroundColor White
 Write-Host "  ------------------------------" -ForegroundColor DarkGray
 
 # --------------------------------------------------------------- tekshiruvlar

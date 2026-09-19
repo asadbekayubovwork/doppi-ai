@@ -1,5 +1,5 @@
 #!/bin/bash
-# Makes a Do'ppi.ai frontend build live on the production host.
+# Makes a Do'ppi AI frontend build live on the production host.
 #
 #   doppiai-release activate <name>   < dist.tar.gz
 #   doppiai-release rollback

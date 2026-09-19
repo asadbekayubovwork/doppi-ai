@@ -16,7 +16,7 @@ const items = useI18nList<Step>(`${base}.items`)
 </script>
 
 <template>
-  <section id="how" class="section-dark py-[60px] sm:py-[100px]">
+  <section id="how" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
       <CSectionHeading :eyebrow="$t(`${base}.eyebrow`)" :title="$t(`${base}.title`)" />
 
@@ -29,11 +29,11 @@ const items = useI18nList<Step>(`${base}.items`)
           data-aos-duration="800"
           :data-aos-delay="100 + i * 100"
         >
-          <span class="text-sm font-semibold tabular-nums text-[#8F6BFF]">
+          <span class="text-sm font-semibold tabular-nums text-sand-400">
             {{ String(i + 1).padStart(2, "0") }}
           </span>
-          <h3 class="mt-3 text-lg font-semibold text-white">{{ item.title }}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-[#A3A3A3]">{{ item.desc }}</p>
+          <h3 class="mt-3 text-lg font-semibold text-sand-950">{{ item.title }}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-sand-500">{{ item.desc }}</p>
         </li>
       </ol>
     </div>
