@@ -138,7 +138,6 @@ const socials = SOCIALS
           <RouterLink to="/terms" class="text-xs text-[#8F8E8A] transition-colors hover:text-white">
             {{ $t("footer.terms") }}
           </RouterLink>
-          <span class="text-xs text-[#8F8E8A]">{{ $t("footer.madeIn") }}</span>
         </div>
       </div>
     </div>
