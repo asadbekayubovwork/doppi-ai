@@ -1,4 +1,10 @@
-import { API_BASE_URL, API_DOCS_URL, API_ORIGIN, apiUrl } from "../api"
+import {
+  API_BASE_URL,
+  API_DOCS_URL,
+  API_ORIGIN,
+  apiUrl,
+  oauthAuthorizeUrl,
+} from "../api"
 
 const loadWithBaseUrl = async (value: string) => {
   vi.resetModules()
@@ -21,6 +27,12 @@ describe("API configuration", () => {
   it("joins documented paths onto the base URL exactly once", () => {
     expect(apiUrl("/auth/login")).toBe("/api/v1/auth/login")
     expect(apiUrl("auth/login")).toBe("/api/v1/auth/login")
+  })
+
+  it("binds OAuth navigation to the initiating browser origin", () => {
+    expect(oauthAuthorizeUrl("/auth/oauth/google/authorize")).toBe(
+      `/api/v1/auth/oauth/google/authorize?client_origin=${encodeURIComponent(window.location.origin)}`
+    )
   })
 
   it("honours an override and strips its trailing slashes", async () => {

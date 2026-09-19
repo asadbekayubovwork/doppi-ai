@@ -40,10 +40,14 @@ describe("backend auth API contracts", () => {
       last_name: "Lovelace",
       business_name: "Analytical Engines",
     })
-    expect(post).toHaveBeenNthCalledWith(2, "/auth/email-verifications/verify", {
-      challenge_id: "challenge-1",
-      code: "123456",
-    })
+    expect(post).toHaveBeenNthCalledWith(
+      2,
+      "/auth/email-verifications/verify",
+      {
+        challenge_id: "challenge-1",
+        code: "123456",
+      }
+    )
     expect(post).toHaveBeenNthCalledWith(3, "/auth/email-verifications", {
       email: "user@example.com",
     })
@@ -65,7 +69,9 @@ describe("backend auth API contracts", () => {
     ]
 
     for (const methodName of methodNames) {
-      expect(typeof (authApi as Record<string, unknown>)[methodName]).toBe("function")
+      expect(typeof (authApi as Record<string, unknown>)[methodName]).toBe(
+        "function"
+      )
     }
   })
 
@@ -79,8 +85,14 @@ describe("backend auth API contracts", () => {
       remember_me: true,
     })
     await authApi.requestPasswordReset("user@example.com")
-    await authApi.verifyPasswordReset({ challenge_id: "reset-1", code: "654321" })
-    await authApi.confirmPasswordReset({ reset_token: "reset-token", new_password: "new-secret" })
+    await authApi.verifyPasswordReset({
+      challenge_id: "reset-1",
+      code: "654321",
+    })
+    await authApi.confirmPasswordReset({
+      reset_token: "reset-token",
+      new_password: "new-secret",
+    })
     await authApi.logout()
     await authApi.telegramLogin({ id: 123, hash: "signed" })
     await authApi.createBusiness(
@@ -120,6 +132,8 @@ describe("backend auth API contracts", () => {
     expect(post).toHaveBeenNthCalledWith(8, "/businesses/business-1/context")
     expect(get).toHaveBeenNthCalledWith(1, "/auth/session")
     expect(get).toHaveBeenNthCalledWith(2, "/businesses")
-    expect(authApi.googleAuthorizeUrl()).toBe("/api/v1/auth/oauth/google/authorize")
+    expect(authApi.googleAuthorizeUrl()).toBe(
+      `/api/v1/auth/oauth/google/authorize?client_origin=${encodeURIComponent(window.location.origin)}`
+    )
   })
 })

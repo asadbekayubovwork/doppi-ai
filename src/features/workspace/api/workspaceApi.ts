@@ -1,5 +1,5 @@
 import { apiClient } from "@/shared/api"
-import { apiUrl } from "@/shared/config/api"
+import { oauthAuthorizeUrl } from "@/shared/config/api"
 import type { User } from "@/features/auth"
 
 export interface SessionItem {
@@ -45,7 +45,7 @@ export interface ProfilePayload {
 }
 
 export const workspaceApi = {
-  googleLinkUrl: () => apiUrl("/auth/oauth/google/link/authorize"),
+  googleLinkUrl: () => oauthAuthorizeUrl("/auth/oauth/google/link/authorize"),
   updateProfile: (payload: ProfilePayload) =>
     apiClient.patch<User>("/me", payload),
 
