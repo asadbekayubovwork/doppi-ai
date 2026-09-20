@@ -1,13 +1,65 @@
 <script setup lang="ts">
-import { CVideoThumb } from "@/entities/video"
+import { computed } from "vue"
+import { CVideoPlayer, CVideoThumb, type VideoJob } from "@/entities/video"
 import { CAppButton, CBadge, CIcon } from "@/shared/ui"
+import { formatClockTime } from "@/shared/lib"
 
-defineProps<{
-  isCreating: boolean
-  hasResult: boolean
+const props = defineProps<{
+  /** Newest job, or null before anything has been generated. */
+  job: VideoJob | null
+  /** Same-origin playback URL for a completed job. */
+  playbackUrl: string | null
+  /** 0–100 pipeline progress for an active job. */
+  progress: number | null
+  /** True while the create request itself is in flight. */
+  isSubmitting: boolean
 }>()
 
 defineEmits<{ publish: []; download: []; regenerate: [] }>()
+
+const ACTIVE = new Set(["submitting", "queued", "processing"])
+
+const phase = computed<"idle" | "active" | "completed" | "failed">(() => {
+  if (props.isSubmitting) return "active"
+  const status = props.job?.status
+  if (!status) return "idle"
+  if (status === "completed") return "completed"
+  if (ACTIVE.has(status)) return "active"
+  return "failed"
+})
+
+// Uzbek status line shown under the spinner while the pipeline runs.
+const STATUS_LABEL: Record<string, string> = {
+  submitting: "Yuborilmoqda…",
+  queued: "Navbatda…",
+  processing: "Video montaj qilinmoqda…",
+  submission_unknown: "Tekshirilmoqda…",
+}
+const statusLabel = computed(() =>
+  props.isSubmitting
+    ? "So'rov yuborilmoqda…"
+    : STATUS_LABEL[props.job?.status ?? ""] || "Tayyorlanmoqda…"
+)
+
+// The pipeline emits a step name with each event; the newest is the live one.
+const currentStep = computed(() => {
+  const events = props.job?.detail?.events
+  if (!Array.isArray(events) || !events.length) return null
+  const last = events[events.length - 1] as { label?: string; step?: string }
+  return last.label || last.step || null
+})
+
+const meta = computed(() => {
+  const brief = props.job?.brief
+  const created = props.job?.created_at
+  const parts: string[] = []
+  if (created) parts.push(formatClockTime(created))
+  if (brief?.duration_sec) parts.push(`${brief.duration_sec}s`)
+  if (brief?.aspect_ratio) parts.push(brief.aspect_ratio)
+  return parts.join(" · ")
+})
+
+const title = computed(() => props.job?.brief?.topic || "Yangi video")
 
 const PIPELINE = [
   { key: "script", label: "Script" },
@@ -26,42 +78,90 @@ const PIPELINE = [
     >
       <div class="flex items-center gap-2">
         <h2 class="text-[15px] font-semibold text-[#15151B]">Natija</h2>
-        <CBadge v-if="hasResult" tone="success" icon="circle-check">
+        <CBadge v-if="phase === 'completed'" tone="success" icon="circle-check">
           Tayyor
         </CBadge>
-        <CBadge v-else-if="isCreating" tone="accent" icon="loader-circle">
+        <CBadge v-else-if="phase === 'active'" tone="accent" icon="loader-circle">
           Yaratilmoqda
         </CBadge>
+        <CBadge v-else-if="phase === 'failed'" tone="danger" icon="triangle-alert">
+          Xatolik
+        </CBadge>
       </div>
-      <span class="text-[12px] text-[#9A9AA2]">Veo 3 · 15s · 9:16</span>
+      <span v-if="meta" class="text-[12px] text-[#9A9AA2]">{{ meta }}</span>
     </header>
 
     <div class="flex flex-1 flex-col items-center px-5 py-6">
-      <!-- Phone-frame vertical preview -->
       <div class="w-full max-w-[300px]">
-        <CVideoThumb
-          color="#8C8378"
-          :play="hasResult"
-          duration="0:15"
-          rounded="rounded-[24px]"
+        <!-- Completed: real player -->
+        <CVideoPlayer
+          v-if="phase === 'completed' && playbackUrl"
+          :src="playbackUrl"
           class="aspect-[9/16] w-full border-4 border-[#15151B]/5 shadow-[0_20px_50px_-20px_rgba(21,21,27,0.5)]"
+        />
+
+        <!-- Active: animated progress placeholder -->
+        <CVideoThumb
+          v-else-if="phase === 'active'"
+          color="#5B4BE8"
+          rounded="rounded-[24px]"
+          class="aspect-[9/16] w-full border-4 border-[#15151B]/5"
         >
-          <div
-            v-if="isCreating"
-            class="flex flex-col items-center gap-2 text-white"
-          >
-            <CIcon name="loader-circle" class="h-8 w-8 animate-spin" />
-            <span class="text-[12px] font-medium">Generatsiya…</span>
+          <div class="flex w-full flex-col items-center gap-3 px-6 text-white">
+            <CIcon name="loader-circle" class="h-9 w-9 animate-spin" />
+            <span class="text-[13px] font-medium">{{ statusLabel }}</span>
+            <span
+              v-if="currentStep"
+              class="rounded-full bg-white/15 px-2.5 py-1 text-[11px]"
+            >
+              {{ currentStep }}
+            </span>
+            <!-- Progress bar (falls back to indeterminate shimmer) -->
+            <div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-white/20">
+              <div
+                v-if="progress !== null"
+                class="h-full rounded-full bg-white transition-all duration-500"
+                :style="{ width: `${progress}%` }"
+              />
+              <div v-else class="h-full w-1/3 animate-pulse rounded-full bg-white/70" />
+            </div>
+            <span v-if="progress !== null" class="text-[11px] text-white/80">
+              {{ progress }}%
+            </span>
           </div>
         </CVideoThumb>
 
-        <div class="mt-4 text-center">
-          <h3 class="text-[15px] font-semibold text-[#15151B]">
-            Kuzgi menyu e'loni
-          </h3>
-          <p class="mt-0.5 text-[12px] text-[#8A8A94]">
-            Bugun 14:20 · 120 kredit · 1080×1920
+        <!-- Failed -->
+        <CVideoThumb
+          v-else-if="phase === 'failed'"
+          color="#C42B2B"
+          rounded="rounded-[24px]"
+          class="aspect-[9/16] w-full border-4 border-[#15151B]/5"
+        >
+          <div class="flex flex-col items-center gap-2 px-6 text-center text-white">
+            <CIcon name="triangle-alert" class="h-8 w-8" />
+            <span class="text-[12.5px]">
+              {{ job?.error_message || "Video yaratilmadi" }}
+            </span>
+          </div>
+        </CVideoThumb>
+
+        <!-- Idle -->
+        <div
+          v-else
+          class="flex aspect-[9/16] w-full flex-col items-center justify-center gap-3 rounded-[24px] border border-dashed border-[#DEDEE4] bg-[#FAFAF9] px-6 text-center"
+        >
+          <span class="grid h-12 w-12 place-items-center rounded-2xl bg-[#EFECFF] text-[#5B4BE8]">
+            <CIcon name="wand-sparkles" class="h-6 w-6" />
+          </span>
+          <p class="text-[13px] text-[#73737D]">
+            Prompt yozing va "Video yaratish" tugmasini bosing
           </p>
+        </div>
+
+        <div v-if="phase !== 'idle'" class="mt-4 text-center">
+          <h3 class="text-[15px] font-semibold text-[#15151B]">{{ title }}</h3>
+          <p v-if="meta" class="mt-0.5 text-[12px] text-[#8A8A94]">{{ meta }}</p>
         </div>
       </div>
 
@@ -71,7 +171,7 @@ const PIPELINE = [
           variant="primary"
           icon="send"
           class="w-full"
-          :disabled="!hasResult"
+          :disabled="phase !== 'completed'"
           @click="$emit('publish')"
         >
           Ijtimoiy tarmoqqa joylash
@@ -79,13 +179,17 @@ const PIPELINE = [
         <div class="grid grid-cols-2 gap-2.5">
           <CAppButton
             icon="download"
-            :disabled="!hasResult"
+            :disabled="phase !== 'completed'"
             @click="$emit('download')"
           >
             Yuklab olish
           </CAppButton>
-          <CAppButton icon="refresh-cw" @click="$emit('regenerate')">
-            Qayta yaratish
+          <CAppButton
+            icon="refresh-cw"
+            :disabled="phase === 'active'"
+            @click="$emit('regenerate')"
+          >
+            {{ phase === "failed" ? "Qayta urinish" : "Qayta yaratish" }}
           </CAppButton>
         </div>
       </div>
@@ -99,11 +203,12 @@ const PIPELINE = [
         v-for="step in PIPELINE"
         :key="step.key"
         class="inline-flex items-center gap-1.5 text-[12.5px] font-medium"
-        :class="hasResult ? 'text-[#177A46]' : 'text-[#9A9AA2]'"
+        :class="phase === 'completed' ? 'text-[#177A46]' : 'text-[#9A9AA2]'"
       >
         <CIcon
-          :name="hasResult ? 'circle-check' : 'circle-dot'"
+          :name="phase === 'completed' ? 'circle-check' : 'circle-dot'"
           class="h-4 w-4"
+          :class="phase === 'active' ? 'animate-pulse text-[#5B4BE8]' : ''"
         />
         {{ step.label }}
       </span>

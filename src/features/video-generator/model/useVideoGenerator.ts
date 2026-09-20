@@ -70,15 +70,48 @@ export const useVideoGenerator = () => {
   const activeJobs = computed(() =>
     jobs.value.filter((job) => ACTIVE.has(job.status))
   )
+  // The newest job drives the studio result panel. `load()` returns newest
+  // first and `replaceJob` unshifts, so index 0 is always the latest.
+  const latestJob = computed<VideoJob | null>(() => jobs.value[0] ?? null)
+  // 0–100 progress for the active job, from the pipeline's `progress_pct`.
+  const progressPct = computed(() => {
+    const value = latestJob.value?.detail?.progress_pct
+    return typeof value === "number" && value >= 0 && value <= 100
+      ? Math.round(value)
+      : null
+  })
   const canCreate = computed(() =>
     Boolean(businessId.value && form.topic.trim())
   )
 
+  // Same-origin URL the browser can stream in a <video> tag. Prefer the
+  // provider's result_url; fall back to the secure download endpoint.
+  const playbackUrl = (job: VideoJob) =>
+    job.status === "completed"
+      ? job.result_url || videoApi.downloadUrl(businessId.value, job.id)
+      : null
+
   const replaceJob = (next: VideoJob) => {
     if (next.business_id !== businessId.value) return
     const index = jobs.value.findIndex((job) => job.id === next.id)
-    if (index < 0) jobs.value.unshift(next)
-    else jobs.value[index] = next
+    if (index < 0) {
+      jobs.value.unshift(next)
+      return
+    }
+    // A job that was active and has now settled tells the user its outcome,
+    // even if they navigated away from the composer.
+    const previous = jobs.value[index]
+    jobs.value[index] = next
+    if (previous.status !== next.status && ACTIVE.has(previous.status)) {
+      if (next.status === "completed") {
+        toast.success("Video tayyor", "Uni ko'rish va joylash mumkin.")
+      } else if (next.status === "failed") {
+        toast.error(
+          "Video yaratilmadi",
+          next.error_message || "Qayta urinib ko'ring."
+        )
+      }
+    }
   }
 
   const load = async (params: VideoListParams = {}) => {
@@ -268,6 +301,8 @@ export const useVideoGenerator = () => {
     jobs,
     form,
     activeJobs,
+    latestJob,
+    progressPct,
     canCreate,
     isLoading,
     isCreating,
@@ -276,5 +311,6 @@ export const useVideoGenerator = () => {
     create,
     sync,
     download,
+    playbackUrl,
   }
 }
