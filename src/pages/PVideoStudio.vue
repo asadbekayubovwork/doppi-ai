@@ -32,6 +32,13 @@ const latestCompleted = computed(() =>
 const onDownload = () => {
   if (latestCompleted.value) download(latestCompleted.value)
 }
+
+// The publish modal returns the platforms the user kept enabled; they ride
+// along in the create payload's publish_to array.
+const onPublish = (targets: string[]) => {
+  publishOpen.value = false
+  void create(targets)
+}
 </script>
 
 <template>
@@ -62,20 +69,29 @@ const onDownload = () => {
         v-model:prompt="form.topic"
         v-model:aspect-ratio="form.aspectRatio"
         v-model:duration-sec="form.durationSec"
+        v-model:research-mode="form.researchMode"
+        v-model:skip-research="form.skipResearch"
+        v-model:subtitles="form.subtitles"
+        v-model:preview-only="form.previewOnly"
+        v-model:tone="form.tone"
+        v-model:cta="form.cta"
+        v-model:source-text="form.sourceText"
+        v-model:reference-links="form.referenceLinks"
+        v-model:reference-images="form.referenceImages"
         :is-creating="isCreating"
         :can-create="canCreate"
-        @submit="create"
+        @submit="create()"
       />
       <CStudioResult
         :is-creating="isCreating"
         :has-result="hasResult"
         @publish="publishOpen = true"
         @download="onDownload"
-        @regenerate="create"
+        @regenerate="create()"
       />
       <CStudioLibrary :videos="STUDIO_VIDEOS" />
     </div>
 
-    <CPublishModal v-model:open="publishOpen" @publish="publishOpen = false" />
+    <CPublishModal v-model:open="publishOpen" @publish="onPublish" />
   </div>
 </template>

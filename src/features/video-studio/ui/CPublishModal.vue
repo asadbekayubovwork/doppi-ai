@@ -12,7 +12,10 @@ import {
 import { CBadge, CIcon, CSwitch } from "@/shared/ui"
 
 const props = defineProps<{ open: boolean }>()
-const emit = defineEmits<{ "update:open": [value: boolean]; publish: [] }>()
+const emit = defineEmits<{
+  "update:open": [value: boolean]
+  publish: [targets: string[]]
+}>()
 
 const targets = ref<PublishTarget[]>([])
 const schedule = ref<"now" | "later">("now")
@@ -28,11 +31,13 @@ watch(
   { immediate: true }
 )
 
-const selectedCount = computed(
-  () => targets.value.filter((target) => target.enabled).length
+const selectedTargets = computed(() =>
+  targets.value.filter((target) => target.enabled).map((target) => target.platform)
 )
+const selectedCount = computed(() => selectedTargets.value.length)
 
 const close = () => emit("update:open", false)
+const publish = () => emit("publish", selectedTargets.value)
 </script>
 
 <template>
@@ -241,7 +246,7 @@ const close = () => emit("update:open", false)
                 type="button"
                 class="inline-flex h-10 items-center gap-2 rounded-[10px] bg-[#5B4BE8] px-4 text-[13px] font-semibold text-white transition hover:bg-[#4F3FDC] disabled:opacity-50"
                 :disabled="!selectedCount"
-                @click="emit('publish')"
+                @click="publish"
               >
                 <CIcon name="send" class="h-4 w-4" />
                 Joylash

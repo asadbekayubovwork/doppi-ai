@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CVideoThumb } from "@/entities/video"
-import { CAppButton, CBadge, CIcon } from "@/shared/ui"
+import { CAppButton, CBadge, CIcon, CSwitch } from "@/shared/ui"
 
 defineProps<{
   isCreating: boolean
@@ -14,6 +14,19 @@ const aspectRatio = defineModel<"9:16" | "16:9" | "1:1">("aspectRatio", {
   required: true,
 })
 const durationSec = defineModel<number>("durationSec", { required: true })
+const researchMode = defineModel<"fast" | "deep">("researchMode", {
+  required: true,
+})
+const skipResearch = defineModel<boolean>("skipResearch", { required: true })
+const subtitles = defineModel<boolean>("subtitles", { required: true })
+const previewOnly = defineModel<boolean>("previewOnly", { required: true })
+const tone = defineModel<string>("tone", { required: true })
+const cta = defineModel<string>("cta", { required: true })
+const sourceText = defineModel<string>("sourceText", { required: true })
+const referenceLinks = defineModel<string>("referenceLinks", { required: true })
+const referenceImages = defineModel<string>("referenceImages", {
+  required: true,
+})
 
 // Static context chips + references while the catalog endpoints are stubbed.
 const CONTEXT = [
@@ -163,6 +176,134 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
           </div>
         </div>
       </div>
+
+      <div class="grid gap-2">
+        <span
+          class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
+        >
+          Research
+        </span>
+        <div
+          class="grid grid-cols-3 gap-0.5 rounded-xl border border-[#DEDEE4] bg-[#F5F4FB] p-0.5"
+          role="tablist"
+        >
+          <button
+            v-for="mode in [
+              { value: 'fast', label: 'Tez' },
+              { value: 'deep', label: 'Chuqur' },
+              { value: 'skip', label: 'Researchsiz' },
+            ]"
+            :key="mode.value"
+            type="button"
+            role="tab"
+            :aria-selected="
+              mode.value === 'skip' ? skipResearch : !skipResearch && researchMode === mode.value
+            "
+            class="h-8 rounded-[9px] text-[12px] font-semibold transition"
+            :class="
+              (mode.value === 'skip' ? skipResearch : !skipResearch && researchMode === mode.value)
+                ? 'bg-white text-[#15151B] shadow-[0_1px_2px_rgba(22,22,27,0.08)]'
+                : 'text-[#73737D] hover:text-[#15151B]'
+            "
+            @click="
+              mode.value === 'skip'
+                ? (skipResearch = true)
+                : ((skipResearch = false), (researchMode = mode.value as 'fast' | 'deep'))
+            "
+          >
+            {{ mode.label }}
+          </button>
+        </div>
+      </div>
+
+      <div class="grid gap-2.5">
+        <label
+          class="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-[#DEDEE4] bg-white px-3 py-2.5"
+        >
+          <span class="flex items-center gap-2 text-[13px] text-[#42424B]">
+            <CIcon name="message-square-text" class="h-4 w-4 text-[#84848E]" />
+            Subtitrlarni yoqish
+          </span>
+          <CSwitch v-model="subtitles" label="Subtitrlarni yoqish" />
+        </label>
+        <label
+          class="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-[#DEDEE4] bg-white px-3 py-2.5"
+        >
+          <span class="flex items-center gap-2 text-[13px] text-[#42424B]">
+            <CIcon name="eye" class="h-4 w-4 text-[#84848E]" />
+            Faqat prompt-preview
+          </span>
+          <CSwitch v-model="previewOnly" label="Faqat prompt-preview" />
+        </label>
+      </div>
+
+      <details class="group rounded-xl border border-[#E7E7E3] bg-[#FAFAF8]">
+        <summary
+          class="flex cursor-pointer list-none items-center justify-between px-3.5 py-3 text-[13px] font-semibold text-[#3D3D45]"
+        >
+          Qo'shimcha yo'nalish va referenslar
+          <CIcon
+            name="chevron-down"
+            class="h-4 w-4 transition group-open:rotate-180"
+          />
+        </summary>
+        <div class="grid gap-3.5 border-t border-[#E7E7E3] p-3.5">
+          <label class="grid gap-1.5">
+            <span class="text-[11px] font-medium text-[#55555F]">Ohang (tone)</span>
+            <input
+              v-model="tone"
+              maxlength="500"
+              placeholder="Masalan: samimiy, energiyali, ishonchli"
+              class="h-9 rounded-lg border border-[#DEDEE4] bg-white px-3 text-[13px] outline-none focus:border-[#8175EA]"
+            />
+          </label>
+          <label class="grid gap-1.5">
+            <span class="text-[11px] font-medium text-[#55555F]"
+              >Call to action</span
+            >
+            <input
+              v-model="cta"
+              maxlength="2000"
+              placeholder="Masalan: Profildagi havola orqali buyurtma bering"
+              class="h-9 rounded-lg border border-[#DEDEE4] bg-white px-3 text-[13px] outline-none focus:border-[#8175EA]"
+            />
+          </label>
+          <label class="grid gap-1.5">
+            <span class="text-[11px] font-medium text-[#55555F]"
+              >Tayyor script yoki manba matn</span
+            >
+            <textarea
+              v-model="sourceText"
+              rows="3"
+              maxlength="40000"
+              placeholder="Tasdiqlangan matn bo'lsa, shu yerga qo'ying"
+              class="resize-y rounded-lg border border-[#DEDEE4] bg-white px-3 py-2 text-[13px] outline-none focus:border-[#8175EA]"
+            />
+          </label>
+          <label class="grid gap-1.5">
+            <span class="text-[11px] font-medium text-[#55555F]"
+              >Referens havolalar · har qatorda bitta HTTPS URL</span
+            >
+            <textarea
+              v-model="referenceLinks"
+              rows="2"
+              placeholder="https://..."
+              class="resize-y rounded-lg border border-[#DEDEE4] bg-white px-3 py-2 text-[13px] outline-none focus:border-[#8175EA]"
+            />
+          </label>
+          <label class="grid gap-1.5">
+            <span class="text-[11px] font-medium text-[#55555F]"
+              >Referens rasm URL'lari · har qatorda bitta HTTPS URL</span
+            >
+            <textarea
+              v-model="referenceImages"
+              rows="2"
+              placeholder="https://.../image.jpg"
+              class="resize-y rounded-lg border border-[#DEDEE4] bg-white px-3 py-2 text-[13px] outline-none focus:border-[#8175EA]"
+            />
+          </label>
+        </div>
+      </details>
 
       <div class="mt-auto border-t border-[#ECECE8] pt-4">
         <div class="mb-3 flex items-center justify-between text-[12.5px]">
