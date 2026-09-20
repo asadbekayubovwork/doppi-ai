@@ -1,0 +1,6 @@
+export { default as CVideoMetricCard } from "./ui/CVideoMetricCard.vue"
+export { default as CTopVideosTable } from "./ui/CTopVideosTable.vue"
+export { default as CChannelBreakdown } from "./ui/CChannelBreakdown.vue"
+export { default as CWeeklyPlanCard } from "./ui/CWeeklyPlanCard.vue"
+export { default as CRecommendations } from "./ui/CRecommendations.vue"
+export { default as CSegmentedControl } from "./ui/CSegmentedControl.vue"
