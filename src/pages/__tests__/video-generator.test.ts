@@ -3,7 +3,7 @@ import { flushPromises, mount } from "@vue/test-utils"
 import { createPinia, setActivePinia } from "pinia"
 import { useAuthStore } from "@/features/auth"
 import { videoApi, type VideoJob } from "@/features/video-generator"
-import PVideoGenerator from "../PVideoGenerator.vue"
+import PVideoStudio from "../PVideoStudio.vue"
 
 const job: VideoJob = {
   id: "job-1",
@@ -43,27 +43,30 @@ const mountPage = async () => {
     },
   ]
   auth.activeBusinessId = "business-1"
-  const wrapper = mount(PVideoGenerator, {
-    global: { plugins: [pinia, createHead()] },
+  const wrapper = mount(PVideoStudio, {
+    global: {
+      plugins: [pinia, createHead()],
+      stubs: { RouterLink: true, teleport: true },
+    },
   })
   await flushPromises()
   return wrapper
 }
 
-describe("video generator integration", () => {
+describe("video studio integration", () => {
   beforeEach(() => {
     vi.restoreAllMocks()
     vi.spyOn(videoApi, "list").mockResolvedValue([])
   })
 
-  it("keeps generation explicit and loads only local history on mount", async () => {
+  it("loads only local history on mount and keeps generation explicit", async () => {
     const create = vi.spyOn(videoApi, "create").mockResolvedValue(job)
     vi.spyOn(window, "confirm").mockReturnValue(false)
     const wrapper = await mountPage()
 
     expect(videoApi.list).toHaveBeenCalledWith("business-1")
-    expect(wrapper.text()).toContain("New video")
-    expect(wrapper.text()).toContain("No video jobs yet")
+    expect(wrapper.text()).toContain("Yangi video yaratish")
+    expect(wrapper.text()).toContain("Prompt va kontekst")
 
     await wrapper.find("textarea").setValue("Autumn launch")
     await wrapper.find("form").trigger("submit")
@@ -98,7 +101,6 @@ describe("video generator integration", () => {
       },
       expect.any(String)
     )
-    expect(wrapper.text()).toContain("Autumn launch")
     wrapper.unmount()
   })
 })

@@ -39,11 +39,11 @@ export const SERVICES: NavItem[] = [
     children: [
       {
         label: "Plans",
-        to: "/app/video#plans",
+        to: "/app/video/plans",
         icon: "calendar-days",
         badge: 3,
       },
-      { label: "New video", to: "/app/video#new-video", icon: "sparkles" },
+      { label: "New video", to: "/app/video/new", icon: "sparkles" },
     ],
   },
 ]

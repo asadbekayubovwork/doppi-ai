@@ -218,10 +218,32 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Video generator",
+      title: "Video Generator",
       subtitle: "Promptdan tayyor videogacha",
     },
     component: () => import("./PVideoGenerator.vue"),
+  },
+  {
+    path: "/app/video/plans",
+    name: "VideoPlans",
+    meta: {
+      layout: "DashboardLayout",
+      requiresAuth: true,
+      title: "Plans",
+      subtitle: "Haftalik kontent rejalari",
+    },
+    component: () => import("./PVideoPlans.vue"),
+  },
+  {
+    path: "/app/video/new",
+    name: "VideoStudio",
+    meta: {
+      layout: "DashboardLayout",
+      requiresAuth: true,
+      title: "New video",
+      subtitle: "Navbatdan tashqari video",
+    },
+    component: () => import("./PVideoStudio.vue"),
   },
   {
     path: "/app/usage",
