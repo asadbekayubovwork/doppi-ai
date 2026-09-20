@@ -70,12 +70,17 @@ export const useVideoGenerator = () => {
   const activeJobs = computed(() =>
     jobs.value.filter((job) => ACTIVE.has(job.status))
   )
-  // The newest job drives the studio result panel. `load()` returns newest
-  // first and `replaceJob` unshifts, so index 0 is always the latest.
+  // Only a job created in this session drives the studio result panel, so a
+  // reload starts on a clean composer instead of surfacing an old failed job.
+  const sessionJobId = ref<string | null>(null)
+  const sessionJob = computed<VideoJob | null>(
+    () => jobs.value.find((job) => job.id === sessionJobId.value) ?? null
+  )
+  // The newest job overall; used for polling bookkeeping, not the studio panel.
   const latestJob = computed<VideoJob | null>(() => jobs.value[0] ?? null)
-  // 0–100 progress for the active job, from the pipeline's `progress_pct`.
+  // 0–100 progress for the session job, from the pipeline's `progress_pct`.
   const progressPct = computed(() => {
-    const value = latestJob.value?.detail?.progress_pct
+    const value = sessionJob.value?.detail?.progress_pct
     return typeof value === "number" && value >= 0 && value <= 100
       ? Math.round(value)
       : null
@@ -190,6 +195,8 @@ export const useVideoGenerator = () => {
       const job = await videoApi.create(workspace, payload, attempt.key)
       if (!isCurrent(workspace, epoch)) return
       replaceJob(job)
+      // This is the job the studio result panel should now track.
+      sessionJobId.value = job.id
       if (job.status === "submission_unknown" || job.status === "submitting") {
         toast.warning(
           "Submission needs verification",
@@ -291,18 +298,26 @@ export const useVideoGenerator = () => {
   watch(businessId, () => {
     generation++
     jobs.value = []
+    sessionJobId.value = null
     isCreating.value = false
     isSyncing.value = false
     pollInFlight.value = false
     void load()
   })
 
+  // Clears the studio result panel back to its idle state (e.g. on retry).
+  const dismissSessionJob = () => {
+    sessionJobId.value = null
+  }
+
   return {
     jobs,
     form,
     activeJobs,
     latestJob,
+    sessionJob,
     progressPct,
+    dismissSessionJob,
     canCreate,
     isLoading,
     isCreating,

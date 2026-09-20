@@ -165,9 +165,10 @@ const PIPELINE = [
         </div>
       </div>
 
-      <!-- Actions -->
-      <div class="mt-5 w-full max-w-[340px] space-y-2.5">
+      <!-- Actions (only once something has been generated this session) -->
+      <div v-if="phase !== 'idle'" class="mt-5 w-full max-w-[340px] space-y-2.5">
         <CAppButton
+          v-if="phase !== 'failed'"
           variant="primary"
           icon="send"
           class="w-full"
@@ -178,6 +179,7 @@ const PIPELINE = [
         </CAppButton>
         <div class="grid grid-cols-2 gap-2.5">
           <CAppButton
+            v-if="phase !== 'failed'"
             icon="download"
             :disabled="phase !== 'completed'"
             @click="$emit('download')"
@@ -186,6 +188,7 @@ const PIPELINE = [
           </CAppButton>
           <CAppButton
             icon="refresh-cw"
+            :class="phase === 'failed' ? 'col-span-2' : 'col-span-1'"
             :disabled="phase === 'active'"
             @click="$emit('regenerate')"
           >
