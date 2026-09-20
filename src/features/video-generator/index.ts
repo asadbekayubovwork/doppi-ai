@@ -1,4 +1,8 @@
-export { videoApi } from "./api/videoApi"
+export {
+  videoApi,
+  type VideoListParams,
+  type VideoSyncStatus,
+} from "./api/videoApi"
 export type {
   VideoBrief,
   VideoJob,

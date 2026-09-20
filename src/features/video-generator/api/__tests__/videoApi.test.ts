@@ -21,7 +21,11 @@ describe("video backend contracts", () => {
     await videoApi.refresh("business-1", "job-1")
     await videoApi.sync("business-1")
 
-    expect(get).toHaveBeenNthCalledWith(1, "/businesses/business-1/video-jobs")
+    expect(get).toHaveBeenNthCalledWith(
+      1,
+      "/businesses/business-1/video-jobs",
+      undefined
+    )
     expect(get).toHaveBeenNthCalledWith(
       2,
       "/businesses/business-1/video-jobs/job-1"
@@ -38,7 +42,26 @@ describe("video backend contracts", () => {
     )
     expect(post).toHaveBeenNthCalledWith(
       3,
-      "/businesses/business-1/video-jobs/sync/upstream"
+      "/businesses/business-1/video-jobs/sync/upstream",
+      undefined,
+      undefined
+    )
+  })
+
+  it("passes list filters and sync status as query params", async () => {
+    const get = vi.spyOn(apiClient, "get").mockResolvedValue([] as never)
+    const post = vi.spyOn(apiClient, "post").mockResolvedValue({} as never)
+
+    await videoApi.list("business-1", { status: "completed", limit: 50 })
+    await videoApi.sync("business-1", "processing")
+
+    expect(get).toHaveBeenCalledWith("/businesses/business-1/video-jobs", {
+      params: { status: "completed", limit: 50 },
+    })
+    expect(post).toHaveBeenCalledWith(
+      "/businesses/business-1/video-jobs/sync/upstream",
+      undefined,
+      { params: { status: "processing" } }
     )
   })
 

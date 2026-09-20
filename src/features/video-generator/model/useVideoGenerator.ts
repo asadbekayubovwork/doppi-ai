@@ -1,7 +1,11 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { useToast } from "@/shared/lib"
-import { videoApi } from "../api/videoApi"
+import {
+  videoApi,
+  type VideoListParams,
+  type VideoSyncStatus,
+} from "../api/videoApi"
 import type { VideoJob, VideoJobCreatePayload } from "../api/types"
 
 const ACTIVE = new Set(["submitting", "queued", "processing"])
@@ -26,6 +30,13 @@ const secureUrls = (raw: string) => {
   return values
 }
 
+// Optional string field → trimmed value or undefined, so empty inputs are
+// omitted from the brief rather than sent as blanks.
+const optional = (value: string) => {
+  const trimmed = value.trim()
+  return trimmed ? trimmed : undefined
+}
+
 export const useVideoGenerator = () => {
   const auth = useAuthStore()
   const toast = useToast()
@@ -43,13 +54,16 @@ export const useVideoGenerator = () => {
     !disposed && workspace === businessId.value && epoch === generation
   const form = reactive({
     topic: "",
+    tone: "",
     sourceText: "",
     cta: "",
     referenceLinks: "",
+    referenceImages: "",
     durationSec: 15,
     aspectRatio: "9:16" as "9:16" | "16:9" | "1:1",
     subtitles: true,
     previewOnly: false,
+    skipResearch: false,
     researchMode: "fast" as "fast" | "deep",
   })
 
@@ -67,7 +81,7 @@ export const useVideoGenerator = () => {
     else jobs.value[index] = next
   }
 
-  const load = async () => {
+  const load = async (params: VideoListParams = {}) => {
     const workspace = businessId.value
     const epoch = generation
     const sequence = ++loadSequence
@@ -78,7 +92,7 @@ export const useVideoGenerator = () => {
     }
     isLoading.value = true
     try {
-      const result = await videoApi.list(workspace)
+      const result = await videoApi.list(workspace, params)
       if (isCurrent(workspace, epoch) && sequence === loadSequence)
         jobs.value = result
     } catch (error) {
@@ -93,7 +107,7 @@ export const useVideoGenerator = () => {
     }
   }
 
-  const create = async () => {
+  const create = async (publishTo: string[] = []) => {
     if (!canCreate.value || isCreating.value) return
     const confirmation = form.previewOnly
       ? "Start prompt preview? This sends one request to the video service without rendering clips."
@@ -102,12 +116,15 @@ export const useVideoGenerator = () => {
       return
     }
     let links: string[]
+    let images: string[]
     try {
       links = secureUrls(form.referenceLinks)
+      images = secureUrls(form.referenceImages)
     } catch (error) {
       toast.warning("Check reference links", (error as Error).message)
       return
     }
+    const targets = publishTo.filter(Boolean)
     const payload: VideoJobCreatePayload = {
       brief: {
         topic: form.topic.trim(),
@@ -116,11 +133,16 @@ export const useVideoGenerator = () => {
         aspect_ratio: form.aspectRatio,
         subtitles: form.subtitles,
         preview_only: form.previewOnly,
-        research_mode: form.researchMode,
-        source_text: form.sourceText.trim() || undefined,
-        cta: form.cta.trim() || undefined,
+        // Research mode is only meaningful when research runs at all.
+        skip_research: form.skipResearch || undefined,
+        research_mode: form.skipResearch ? undefined : form.researchMode,
+        tone: optional(form.tone),
+        source_text: optional(form.sourceText),
+        cta: optional(form.cta),
         reference_links: links.length ? links : undefined,
+        reference_image_urls: images.length ? images : undefined,
       },
+      ...(targets.length ? { publish_to: targets } : {}),
     }
     isCreating.value = true
     const workspace = businessId.value
@@ -153,9 +175,11 @@ export const useVideoGenerator = () => {
       }
       attempts.delete(workspace)
       form.topic = ""
+      form.tone = ""
       form.sourceText = ""
       form.cta = ""
       form.referenceLinks = ""
+      form.referenceImages = ""
       toast.success(
         form.previewOnly ? "Preview job queued" : "Video generation queued",
         "Progress appears in the job list below."
@@ -195,13 +219,13 @@ export const useVideoGenerator = () => {
     }
   }
 
-  const sync = async () => {
+  const sync = async (status?: VideoSyncStatus) => {
     if (!businessId.value || isSyncing.value) return
     isSyncing.value = true
     const workspace = businessId.value
     const epoch = generation
     try {
-      const result = await videoApi.sync(workspace)
+      const result = await videoApi.sync(workspace, status)
       if (!isCurrent(workspace, epoch)) return
       await load()
       if (!isCurrent(workspace, epoch)) return

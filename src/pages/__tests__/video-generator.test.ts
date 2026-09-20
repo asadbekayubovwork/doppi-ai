@@ -64,7 +64,7 @@ describe("video studio integration", () => {
     vi.spyOn(window, "confirm").mockReturnValue(false)
     const wrapper = await mountPage()
 
-    expect(videoApi.list).toHaveBeenCalledWith("business-1")
+    expect(videoApi.list).toHaveBeenCalledWith("business-1", {})
     expect(wrapper.text()).toContain("Yangi video yaratish")
     expect(wrapper.text()).toContain("Prompt va kontekst")
 
