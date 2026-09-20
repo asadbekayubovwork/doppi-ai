@@ -23,21 +23,22 @@ const {
   isCreating,
   create,
   download,
-  latestJob,
+  sessionJob,
   progressPct,
   playbackUrl,
+  dismissSessionJob,
 } = useVideoGenerator()
 
-// Playback URL for the newest job once it completes; drives the <video> player
-// and enables the publish/download actions. Survives a page refresh because the
-// composable reloads the job list on mount and keeps polling active jobs.
+// The result panel only tracks a job created in this session, so opening the
+// page (or reloading it) starts on a clean composer rather than surfacing an
+// old failed job.
 const currentPlaybackUrl = computed(() =>
-  latestJob.value ? playbackUrl(latestJob.value) : null
+  sessionJob.value ? playbackUrl(sessionJob.value) : null
 )
 
 const publishOpen = ref(false)
 const onDownload = () => {
-  if (latestJob.value?.status === "completed") download(latestJob.value)
+  if (sessionJob.value?.status === "completed") download(sessionJob.value)
 }
 
 // The publish modal returns the platforms the user kept enabled; they ride
@@ -45,6 +46,26 @@ const onDownload = () => {
 const onPublish = (targets: string[]) => {
   publishOpen.value = false
   void create(targets)
+}
+
+// "Retry"/"Regenerate": put the failed job's brief back into the form, clear
+// the result panel, and let the user adjust and resubmit deliberately.
+const onRegenerate = () => {
+  const brief = sessionJob.value?.brief
+  if (brief) {
+    form.topic = brief.topic ?? form.topic
+    form.tone = brief.tone ?? ""
+    form.cta = brief.cta ?? ""
+    form.sourceText = brief.source_text ?? ""
+    form.durationSec = brief.duration_sec ?? form.durationSec
+    if (brief.aspect_ratio) form.aspectRatio = brief.aspect_ratio
+    form.subtitles = brief.subtitles ?? form.subtitles
+    form.researchMode = brief.research_mode ?? form.researchMode
+    form.skipResearch = brief.skip_research ?? form.skipResearch
+    form.referenceLinks = (brief.reference_links ?? []).join("\n")
+    form.referenceImages = (brief.reference_image_urls ?? []).join("\n")
+  }
+  dismissSessionJob()
 }
 </script>
 
@@ -90,13 +111,13 @@ const onPublish = (targets: string[]) => {
         @submit="create()"
       />
       <CStudioResult
-        :job="latestJob"
+        :job="sessionJob"
         :playback-url="currentPlaybackUrl"
         :progress="progressPct"
         :is-submitting="isCreating"
         @publish="publishOpen = true"
         @download="onDownload"
-        @regenerate="create()"
+        @regenerate="onRegenerate"
       />
       <CStudioLibrary :videos="STUDIO_VIDEOS" />
     </div>
