@@ -5,6 +5,7 @@ export {
 } from "./model/platforms"
 export { default as CPlatformPill } from "./ui/CPlatformPill.vue"
 export { default as CVideoThumb } from "./ui/CVideoThumb.vue"
+export { default as CVideoPlayer } from "./ui/CVideoPlayer.vue"
 export type {
   CalendarDay,
   ChannelShare,

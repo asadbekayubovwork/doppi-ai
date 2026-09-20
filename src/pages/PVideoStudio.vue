@@ -17,20 +17,27 @@ usePageHeading(() => ({
   subtitle: "Navbatdan tashqari video · o'z prompt va kontekstingiz bilan",
 }))
 
-const { form, canCreate, isCreating, create, jobs, download } =
-  useVideoGenerator()
+const {
+  form,
+  canCreate,
+  isCreating,
+  create,
+  download,
+  latestJob,
+  progressPct,
+  playbackUrl,
+} = useVideoGenerator()
 
-// A completed job (or the seeded library) means there is a result to preview.
-const hasResult = computed(() =>
-  jobs.value.some((job) => job.status === "completed")
+// Playback URL for the newest job once it completes; drives the <video> player
+// and enables the publish/download actions. Survives a page refresh because the
+// composable reloads the job list on mount and keeps polling active jobs.
+const currentPlaybackUrl = computed(() =>
+  latestJob.value ? playbackUrl(latestJob.value) : null
 )
 
 const publishOpen = ref(false)
-const latestCompleted = computed(() =>
-  jobs.value.find((job) => job.status === "completed")
-)
 const onDownload = () => {
-  if (latestCompleted.value) download(latestCompleted.value)
+  if (latestJob.value?.status === "completed") download(latestJob.value)
 }
 
 // The publish modal returns the platforms the user kept enabled; they ride
@@ -83,8 +90,10 @@ const onPublish = (targets: string[]) => {
         @submit="create()"
       />
       <CStudioResult
-        :is-creating="isCreating"
-        :has-result="hasResult"
+        :job="latestJob"
+        :playback-url="currentPlaybackUrl"
+        :progress="progressPct"
+        :is-submitting="isCreating"
         @publish="publishOpen = true"
         @download="onDownload"
         @regenerate="create()"
