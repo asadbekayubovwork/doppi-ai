@@ -47,6 +47,17 @@ const items = useI18nList<Capability>(`${props.base}.items`)
           </p>
         </li>
       </ul>
+
+      <!-- Anything the service wants to add under the grid, e.g. the channels
+           it publishes to. -->
+      <div
+        v-if="$slots.footer"
+        class="mt-10 flex flex-wrap items-center justify-center gap-2.5"
+        data-aos="fade-up"
+        data-aos-duration="800"
+      >
+        <slot name="footer" />
+      </div>
     </div>
   </section>
 </template>

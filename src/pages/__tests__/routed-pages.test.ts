@@ -16,6 +16,7 @@ import PError from "../PError.vue"
 import PService from "../PService.vue"
 import PVoiceAgentLanding from "../PVoiceAgentLanding.vue"
 import PRagAgentLanding from "../PRagAgentLanding.vue"
+import PVideoGeneratorLanding from "../PVideoGeneratorLanding.vue"
 import { SERVICE_KEYS, SERVICE_PATHS } from "@/shared/config/seoPages"
 
 /**
@@ -196,6 +197,36 @@ describe("routed pages", () => {
     const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
     expect(hrefs).toContain(SERVICE_PATHS.voice)
     expect(hrefs).toContain(SERVICE_PATHS.video)
+    wrapper.unmount()
+  })
+
+  it("renders the video generator landing with its four steps and mockups", () => {
+    const wrapper = mountPage(PVideoGeneratorLanding)
+    const copy = messages.uz.services.video.landing
+    const text = wrapper.text()
+
+    expect(wrapper.find("h1").text()).toBe(copy.title)
+    expect(wrapper.find("#video-flow").exists()).toBe(true)
+
+    // Every step and every capability is on the page, copy and mockup alike.
+    for (const step of copy.steps.items) expect(text).toContain(step.title)
+    for (const item of copy.capabilities.items)
+      expect(text).toContain(item.title)
+    // The whole week is in the plan, not just the first day.
+    for (const row of copy.demo.plan.rows) expect(text).toContain(row.topic)
+    expect(text).toContain(copy.demo.queue.job.title)
+    expect(text).toContain(copy.demo.post.tiles[0].value)
+
+    // The channels the agent publishes to are named, not just implied.
+    for (const platform of copy.capabilities.platforms)
+      expect(text).toContain(platform.label)
+
+    // The FAQ and the cross-links are what the build's structured data claims
+    // this page carries, so they have to stay visible.
+    expect(text).toContain(messages.uz.services.video.faq.items[0].q)
+    const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
+    expect(hrefs).toContain(SERVICE_PATHS.rag)
+    expect(hrefs).toContain(SERVICE_PATHS.voice)
     wrapper.unmount()
   })
 

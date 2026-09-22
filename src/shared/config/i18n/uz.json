@@ -1544,6 +1544,425 @@
       "cta": {
         "title": "Birinchi videongizni yarating",
         "subtitle": "14 kunlik bepul sinov bilan boshlang."
+      },
+      "landing": {
+        "badge": "Video generator · Avto-post · Analitika",
+        "title": "Haftalik rejani tasdiqlang — videolar o'zi chiqib, o'zi joylanadi",
+        "subtitle": "Siz bir marta kontent rejasini kiritasiz. AI agent ssenariy yozadi, videoni yig'adi, belgilangan vaqtda Instagramga joylaydi va natijani statistika bilan qaytaradi.",
+        "ctaPrimary": "Haftalik reja tuzish",
+        "ctaSecondary": "Namunaviy videolarni ko'rish",
+        "flow": [
+          {
+            "icon": "calendar-days",
+            "label": "Haftalik reja"
+          },
+          {
+            "icon": "wand-sparkles",
+            "label": "Avto-generatsiya"
+          },
+          {
+            "icon": "instagram",
+            "label": "Instagramga post"
+          },
+          {
+            "icon": "chart-line",
+            "label": "Statistika"
+          }
+        ],
+        "steps": {
+          "eyebrow": "Qanday ishlaydi",
+          "title": "Rejadan tortib hisobotgacha — to'rt qadam, bitta agent",
+          "subtitle": "Haftalik reja → avtomatik generatsiya → Instagramga post → statistika. Siz faqat natijani ko'rasiz.",
+          "items": [
+            {
+              "tag": "Haftalik reja",
+              "title": "Kontent rejangizni dashboardda ko'rib turasiz",
+              "desc": "Qaysi kuni qanday video chiqishi — mavzu, ssenariy, format va joylanish vaqti bilan bitta jadvalda. Agent rejani o'zi to'ldiradi, siz faqat tasdiqlaysiz.",
+              "bullets": [
+                "Mavzu va ssenariyni AI taklif qiladi",
+                "Kun, vaqt va format qo'lda sozlanadi",
+                "Tasdiqlangan reja avtomatik ishga tushadi"
+              ]
+            },
+            {
+              "tag": "Avto-generatsiya",
+              "title": "Bir haftalik videolar o'zi tayyorlanib, o'zi joylanadi",
+              "desc": "Agent har bir reja bandini navbatga oladi: ssenariy yozadi, ovoz beradi, montaj qiladi, titr qo'yadi va belgilangan kuni Instagramga post qiladi. Har safar tasdiq so'ramaydi.",
+              "bullets": [
+                "Ssenariy → ovoz → montaj → titr → post",
+                "Belgilangan kun va soatda avtomatik chiqadi",
+                "Xatolik bo'lsa qayta urinadi va xabar beradi"
+              ]
+            },
+            {
+              "tag": "Natija va statistika",
+              "title": "Chiqqan videoning natijasi bir joyda ko'rinadi",
+              "desc": "Har bir post bo'yicha ko'rishlar, layklar, izohlar va ulashishlar avtomatik yig'iladi. Qaysi mavzu ishlagani ko'rinadi va agent keyingi haftalik rejani shunga moslab tuzadi.",
+              "bullets": [
+                "Ko'rishlar, layklar, izoh va ulashishlar",
+                "Video Instagramda qanday turgani ko'rinadi",
+                "Eng yaxshi mavzular keyingi rejaga tushadi"
+              ]
+            },
+            {
+              "tag": "Siz faqat ko'rasiz",
+              "title": "Telefoningizni ochasiz — natija allaqachon joyida",
+              "desc": "Video chiqdi, odamlar ko'rdi, layk bosdi va izoh yozdi. Siz Instagramni ochib shunchaki o'sishni kuzatasiz, haftalik hisobot esa o'zi kelib turadi.",
+              "bullets": [
+                "Har hafta tayyor hisobot",
+                "Post vaqti va natijasi bir joyda",
+                "Kontent hech qachon uzilib qolmaydi"
+              ]
+            }
+          ]
+        },
+        "capabilities": {
+          "eyebrow": "Imkoniyatlar",
+          "title": "Video agent yana nimalarni uddalaydi",
+          "items": [
+            {
+              "icon": "wand-sparkles",
+              "title": "Ssenariy AI tomonidan",
+              "desc": "Biznesingiz va auditoriyangizga mos mavzu, matn va ilgak (hook) avtomatik yoziladi."
+            },
+            {
+              "icon": "mic-vocal",
+              "title": "O'zbekcha ovoz",
+              "desc": "Tabiiy ovozli diktor: erkak yoki ayol, tezlik va ohang sozlanadi."
+            },
+            {
+              "icon": "captions",
+              "title": "Avto-titrlar",
+              "desc": "Har bir videoga o'qish oson titr qo'yiladi — ovozsiz ko'rilsa ham tushunarli."
+            },
+            {
+              "icon": "calendar-clock",
+              "title": "Rejalashtirilgan post",
+              "desc": "Kun va soatni belgilaysiz — agent o'zi joylaydi, siz kutib o'tirmaysiz."
+            },
+            {
+              "icon": "images",
+              "title": "Brend uslubi saqlanadi",
+              "desc": "Logotip, ranglar va shrift barcha videolarda bir xil bo'ladi."
+            },
+            {
+              "icon": "chart-line",
+              "title": "Natijadan o'rganadi",
+              "desc": "Yaxshi ishlagan mavzular keyingi haftalik rejada ko'proq takrorlanadi."
+            }
+          ],
+          "platformsLabel": "Joylanadi:",
+          "platforms": [
+            {
+              "icon": "instagram",
+              "label": "Instagram Reels"
+            },
+            {
+              "icon": "music-2",
+              "label": "TikTok"
+            },
+            {
+              "icon": "youtube",
+              "label": "YouTube Shorts"
+            },
+            {
+              "icon": "send",
+              "label": "Telegram"
+            }
+          ]
+        },
+        "cta": {
+          "title": "Har hafta 7 ta video — sizning ishtirokingizsiz",
+          "subtitle": "Bir marta reja tuzing — montajchi, diktor va SMM menejerning ishini agent o'z zimmasiga oladi.",
+          "primary": "Haftalik reja tuzish",
+          "secondary": "Namunaviy videolarni ko'rish"
+        },
+        "demo": {
+          "days": ["Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya"],
+          "plan": {
+            "window": "Doppi AI · Kontent rejasi",
+            "title": "Haftalik reja",
+            "week": "22–28 sentabr",
+            "approve": "Rejani tasdiqlash",
+            "summary": [
+              {
+                "icon": "clapperboard",
+                "value": "7 ta video",
+                "label": "haftasiga"
+              },
+              {
+                "icon": "timer",
+                "value": "30–45 soniya",
+                "label": "Reels format"
+              },
+              {
+                "icon": "clock",
+                "value": "19:00",
+                "label": "har kuni post"
+              }
+            ],
+            "cols": {
+              "day": "KUN",
+              "topic": "MAVZU / SSENARIY",
+              "format": "FORMAT",
+              "time": "VAQT",
+              "status": "HOLAT"
+            },
+            "rows": [
+              {
+                "day": "Dushanba",
+                "date": "22 sen",
+                "topic": "Implantatsiya: 3 ta asosiy savol",
+                "format": "Reels · 35s",
+                "time": "19:00",
+                "status": "Tasdiqlandi",
+                "tone": "success"
+              },
+              {
+                "day": "Seshanba",
+                "date": "23 sen",
+                "topic": "Bemor sharhi: implantdan keyin 1 yil",
+                "format": "Reels · 42s",
+                "time": "19:00",
+                "status": "Tasdiqlandi",
+                "tone": "success"
+              },
+              {
+                "day": "Chorshanba",
+                "date": "24 sen",
+                "topic": "Tish oqartirish — narx va muddat",
+                "format": "Reels · 30s",
+                "time": "19:00",
+                "status": "Tasdiqlandi",
+                "tone": "success"
+              },
+              {
+                "day": "Payshanba",
+                "date": "25 sen",
+                "topic": "Klinika ichida: bir ish kuni",
+                "format": "Reels · 38s",
+                "time": "19:00",
+                "status": "Ssenariy tayyor",
+                "tone": "accent"
+              },
+              {
+                "day": "Juma",
+                "date": "26 sen",
+                "topic": "Bolalar stomatologiyasi: 5 maslahat",
+                "format": "Reels · 33s",
+                "time": "19:00",
+                "status": "Ssenariy tayyor",
+                "tone": "accent"
+              },
+              {
+                "day": "Shanba",
+                "date": "27 sen",
+                "topic": "Aksiya: bepul konsultatsiya",
+                "format": "Reels · 25s",
+                "time": "12:00",
+                "status": "Rejada",
+                "tone": "warning"
+              },
+              {
+                "day": "Yakshanba",
+                "date": "28 sen",
+                "topic": "Savol-javob: kafolat qanday ishlaydi",
+                "format": "Reels · 40s",
+                "time": "12:00",
+                "status": "Rejada",
+                "tone": "warning"
+              }
+            ],
+            "footer": "Reja tasdiqlangach agent ssenariy, ovoz va montajni o'zi bajaradi",
+            "auto": "Avtopilot yoqilgan",
+            "alt": "Haftalik kontent rejasi jadvali va uning holati"
+          },
+          "queue": {
+            "window": "Doppi AI · Generatsiya navbati",
+            "title": "Generatsiya navbati",
+            "live": "ishlamoqda",
+            "week": "22–28 sentabr",
+            "progressLabel": "Haftalik reja bajarilmoqda",
+            "progressValue": "7 tadan 4 tasi tayyor",
+            "videos": [
+              {
+                "day": "Du",
+                "duration": "0:35",
+                "status": "Tayyor",
+                "tone": "success"
+              },
+              {
+                "day": "Se",
+                "duration": "0:42",
+                "status": "Tayyor",
+                "tone": "success"
+              },
+              {
+                "day": "Ch",
+                "duration": "0:30",
+                "status": "Tayyor",
+                "tone": "success"
+              },
+              {
+                "day": "Pa",
+                "duration": "0:38",
+                "status": "Montaj · 62%",
+                "tone": "accent"
+              },
+              {
+                "day": "Ju",
+                "duration": "0:33",
+                "status": "Navbatda",
+                "tone": "muted"
+              },
+              {
+                "day": "Sh",
+                "duration": "0:25",
+                "status": "Navbatda",
+                "tone": "muted"
+              },
+              {
+                "day": "Ya",
+                "duration": "0:40",
+                "status": "Navbatda",
+                "tone": "muted"
+              }
+            ],
+            "job": {
+              "title": "Payshanba · «Klinika ichida: bir ish kuni»",
+              "eta": "~2 daqiqa qoldi",
+              "stages": [
+                {
+                  "label": "Ssenariy",
+                  "state": "done"
+                },
+                {
+                  "label": "Ovoz (TTS)",
+                  "state": "done"
+                },
+                {
+                  "label": "Montaj",
+                  "state": "active"
+                },
+                {
+                  "label": "Titrlar",
+                  "state": "todo"
+                },
+                {
+                  "label": "Instagramga post",
+                  "state": "todo"
+                }
+              ]
+            },
+            "footer": "Keyingi post: bugun 19:00 · avtomatik",
+            "account": "{'@'}doppi.clinic ulangan",
+            "alt": "Videolar generatsiya navbati va joriy bosqichlar"
+          },
+          "post": {
+            "stories": [
+              "Sizning",
+              "doppi.clinic",
+              "kurvonali",
+              "marhamat",
+              "oyxon"
+            ],
+            "author": "doppi.clinic",
+            "meta": "Toshkent · bugun 19:00",
+            "duration": "0:35",
+            "aiBadge": "Doppi AI tomonidan avtomatik",
+            "likes": "3 412",
+            "comments": "218",
+            "shares": "764",
+            "views": "48 210 marta ko'rildi",
+            "caption": "Implantatsiya haqida 3 ta asosiy savol 🦷",
+            "statsTitle": "Post statistikasi",
+            "statsSub": "Dushanba · 22 sentabr, 19:00 da joylandi",
+            "tiles": [
+              {
+                "icon": "eye",
+                "value": "48 210",
+                "label": "Ko'rishlar",
+                "delta": "+32%"
+              },
+              {
+                "icon": "heart",
+                "value": "3 412",
+                "label": "Layklar",
+                "delta": "+18%"
+              },
+              {
+                "icon": "message-circle",
+                "value": "218",
+                "label": "Izohlar",
+                "delta": "+24%"
+              },
+              {
+                "icon": "send",
+                "value": "764",
+                "label": "Ulashishlar",
+                "delta": "+41%"
+              }
+            ],
+            "chartTitle": "Oxirgi 7 kun · ko'rishlar",
+            "chartTotal": "186K",
+            "chart": [
+              {
+                "day": "Du",
+                "height": 38,
+                "lit": false
+              },
+              {
+                "day": "Se",
+                "height": 52,
+                "lit": true
+              },
+              {
+                "day": "Ch",
+                "height": 30,
+                "lit": false
+              },
+              {
+                "day": "Pa",
+                "height": 64,
+                "lit": true
+              },
+              {
+                "day": "Ju",
+                "height": 46,
+                "lit": false
+              },
+              {
+                "day": "Sh",
+                "height": 24,
+                "lit": false
+              },
+              {
+                "day": "Ya",
+                "height": 40,
+                "lit": false
+              }
+            ],
+            "alt": "Instagramdagi post va uning statistikasi"
+          },
+          "week": {
+            "title": "Bu hafta 7 ta video joylandi",
+            "reactions": [
+              {
+                "icon": "heart",
+                "count": "3 412"
+              },
+              {
+                "icon": "message-circle",
+                "count": "218"
+              },
+              {
+                "icon": "send",
+                "count": "764"
+              }
+            ],
+            "alt": "Telefonida Instagram ochib turgan odam va haftalik natija"
+          }
+        }
       }
     }
   }

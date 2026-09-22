@@ -1544,6 +1544,425 @@
       "cta": {
         "title": "Create your first video",
         "subtitle": "Start with a 14-day free trial."
+      },
+      "landing": {
+        "badge": "Video generator · Auto-posting · Analytics",
+        "title": "Approve the week's plan — the videos make and post themselves",
+        "subtitle": "You fill in the content plan once. The AI agent writes the script, assembles the video, posts it to Instagram at the time you set and brings the numbers back.",
+        "ctaPrimary": "Build a weekly plan",
+        "ctaSecondary": "Watch sample videos",
+        "flow": [
+          {
+            "icon": "calendar-days",
+            "label": "Weekly plan"
+          },
+          {
+            "icon": "wand-sparkles",
+            "label": "Auto-generation"
+          },
+          {
+            "icon": "instagram",
+            "label": "Instagram post"
+          },
+          {
+            "icon": "chart-line",
+            "label": "Analytics"
+          }
+        ],
+        "steps": {
+          "eyebrow": "How it works",
+          "title": "From plan to report — four steps, one agent",
+          "subtitle": "Weekly plan → automatic generation → Instagram post → analytics. All you do is read the result.",
+          "items": [
+            {
+              "tag": "Weekly plan",
+              "title": "Your content plan sits in one dashboard",
+              "desc": "Which video goes out on which day — topic, script, format and posting time in a single table. The agent fills the plan in; you only approve it.",
+              "bullets": [
+                "The AI proposes the topic and the script",
+                "Day, time and format stay yours to set",
+                "An approved plan starts running by itself"
+              ]
+            },
+            {
+              "tag": "Auto-generation",
+              "title": "A week of videos is produced and posted on its own",
+              "desc": "The agent queues every item in the plan: it writes the script, voices it, edits it, adds captions and posts to Instagram on the day. It does not ask for approval each time.",
+              "bullets": [
+                "Script → voice → edit → captions → post",
+                "Goes out automatically on the day and hour you set",
+                "On failure it retries and tells you"
+              ]
+            },
+            {
+              "tag": "Result and analytics",
+              "title": "What the published video did, in one place",
+              "desc": "Views, likes, comments and shares are collected for every post. You can see which topic worked, and the agent shapes next week's plan around it.",
+              "bullets": [
+                "Views, likes, comments and shares",
+                "How the video actually looks on Instagram",
+                "The best topics come back in the next plan"
+              ]
+            },
+            {
+              "tag": "You just watch",
+              "title": "You open your phone — the result is already there",
+              "desc": "The video went out, people watched it, liked it and commented. You open Instagram and watch the growth; the weekly report arrives on its own.",
+              "bullets": [
+                "A finished report every week",
+                "Posting time and result side by side",
+                "The content never stops"
+              ]
+            }
+          ]
+        },
+        "capabilities": {
+          "eyebrow": "Capabilities",
+          "title": "What else the video agent handles",
+          "items": [
+            {
+              "icon": "wand-sparkles",
+              "title": "Scripts by AI",
+              "desc": "Topic, copy and hook are written to fit your business and your audience."
+            },
+            {
+              "icon": "mic-vocal",
+              "title": "Uzbek voice-over",
+              "desc": "A natural voice: male or female, with speed and tone to match."
+            },
+            {
+              "icon": "captions",
+              "title": "Automatic captions",
+              "desc": "Every video gets readable captions — it works with the sound off too."
+            },
+            {
+              "icon": "calendar-clock",
+              "title": "Scheduled posting",
+              "desc": "You pick the day and the hour; the agent posts, you do not wait around."
+            },
+            {
+              "icon": "images",
+              "title": "Your brand style",
+              "desc": "Logo, colours and type stay the same across every video."
+            },
+            {
+              "icon": "chart-line",
+              "title": "It learns from results",
+              "desc": "Topics that performed well come back more often in the next plan."
+            }
+          ],
+          "platformsLabel": "Posts to:",
+          "platforms": [
+            {
+              "icon": "instagram",
+              "label": "Instagram Reels"
+            },
+            {
+              "icon": "music-2",
+              "label": "TikTok"
+            },
+            {
+              "icon": "youtube",
+              "label": "YouTube Shorts"
+            },
+            {
+              "icon": "send",
+              "label": "Telegram"
+            }
+          ]
+        },
+        "cta": {
+          "title": "Seven videos a week — without you lifting a finger",
+          "subtitle": "Build the plan once; the agent takes over the editor's, the voice actor's and the social manager's work.",
+          "primary": "Build a weekly plan",
+          "secondary": "Watch sample videos"
+        },
+        "demo": {
+          "days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "plan": {
+            "window": "Doppi AI · Content plan",
+            "title": "Weekly plan",
+            "week": "22–28 September",
+            "approve": "Approve the plan",
+            "summary": [
+              {
+                "icon": "clapperboard",
+                "value": "7 videos",
+                "label": "per week"
+              },
+              {
+                "icon": "timer",
+                "value": "30–45 seconds",
+                "label": "Reels format"
+              },
+              {
+                "icon": "clock",
+                "value": "19:00",
+                "label": "post every day"
+              }
+            ],
+            "cols": {
+              "day": "DAY",
+              "topic": "TOPIC / SCRIPT",
+              "format": "FORMAT",
+              "time": "TIME",
+              "status": "STATUS"
+            },
+            "rows": [
+              {
+                "day": "Monday",
+                "date": "22 Sep",
+                "topic": "Implants: the three main questions",
+                "format": "Reels · 35s",
+                "time": "19:00",
+                "status": "Approved",
+                "tone": "success"
+              },
+              {
+                "day": "Tuesday",
+                "date": "23 Sep",
+                "topic": "Patient story: one year after the implant",
+                "format": "Reels · 42s",
+                "time": "19:00",
+                "status": "Approved",
+                "tone": "success"
+              },
+              {
+                "day": "Wednesday",
+                "date": "24 Sep",
+                "topic": "Whitening — price and timing",
+                "format": "Reels · 30s",
+                "time": "19:00",
+                "status": "Approved",
+                "tone": "success"
+              },
+              {
+                "day": "Thursday",
+                "date": "25 Sep",
+                "topic": "Inside the clinic: one working day",
+                "format": "Reels · 38s",
+                "time": "19:00",
+                "status": "Script ready",
+                "tone": "accent"
+              },
+              {
+                "day": "Friday",
+                "date": "26 Sep",
+                "topic": "Children's dentistry: five tips",
+                "format": "Reels · 33s",
+                "time": "19:00",
+                "status": "Script ready",
+                "tone": "accent"
+              },
+              {
+                "day": "Saturday",
+                "date": "27 Sep",
+                "topic": "Offer: free consultation",
+                "format": "Reels · 25s",
+                "time": "12:00",
+                "status": "Planned",
+                "tone": "warning"
+              },
+              {
+                "day": "Sunday",
+                "date": "28 Sep",
+                "topic": "Q&A: how the warranty works",
+                "format": "Reels · 40s",
+                "time": "12:00",
+                "status": "Planned",
+                "tone": "warning"
+              }
+            ],
+            "footer": "Once the plan is approved the agent handles script, voice and editing",
+            "auto": "Autopilot on",
+            "alt": "The weekly content plan table and the status of each item"
+          },
+          "queue": {
+            "window": "Doppi AI · Generation queue",
+            "title": "Generation queue",
+            "live": "running",
+            "week": "22–28 September",
+            "progressLabel": "Weekly plan in progress",
+            "progressValue": "4 of 7 ready",
+            "videos": [
+              {
+                "day": "Mon",
+                "duration": "0:35",
+                "status": "Ready",
+                "tone": "success"
+              },
+              {
+                "day": "Tue",
+                "duration": "0:42",
+                "status": "Ready",
+                "tone": "success"
+              },
+              {
+                "day": "Wed",
+                "duration": "0:30",
+                "status": "Ready",
+                "tone": "success"
+              },
+              {
+                "day": "Thu",
+                "duration": "0:38",
+                "status": "Editing · 62%",
+                "tone": "accent"
+              },
+              {
+                "day": "Fri",
+                "duration": "0:33",
+                "status": "Queued",
+                "tone": "muted"
+              },
+              {
+                "day": "Sat",
+                "duration": "0:25",
+                "status": "Queued",
+                "tone": "muted"
+              },
+              {
+                "day": "Sun",
+                "duration": "0:40",
+                "status": "Queued",
+                "tone": "muted"
+              }
+            ],
+            "job": {
+              "title": "Thursday · “Inside the clinic: one working day”",
+              "eta": "~2 minutes left",
+              "stages": [
+                {
+                  "label": "Script",
+                  "state": "done"
+                },
+                {
+                  "label": "Voice (TTS)",
+                  "state": "done"
+                },
+                {
+                  "label": "Editing",
+                  "state": "active"
+                },
+                {
+                  "label": "Captions",
+                  "state": "todo"
+                },
+                {
+                  "label": "Instagram post",
+                  "state": "todo"
+                }
+              ]
+            },
+            "footer": "Next post: today 19:00 · automatic",
+            "account": "{'@'}doppi.clinic connected",
+            "alt": "The video generation queue and the stages of the current job"
+          },
+          "post": {
+            "stories": [
+              "Your story",
+              "doppi.clinic",
+              "kurvonali",
+              "marhamat",
+              "oyxon"
+            ],
+            "author": "doppi.clinic",
+            "meta": "Tashkent · today 19:00",
+            "duration": "0:35",
+            "aiBadge": "Made automatically by Doppi AI",
+            "likes": "3,412",
+            "comments": "218",
+            "shares": "764",
+            "views": "48,210 views",
+            "caption": "Three key questions about implants 🦷",
+            "statsTitle": "Post analytics",
+            "statsSub": "Monday · posted 22 September, 19:00",
+            "tiles": [
+              {
+                "icon": "eye",
+                "value": "48 210",
+                "label": "Views",
+                "delta": "+32%"
+              },
+              {
+                "icon": "heart",
+                "value": "3 412",
+                "label": "Likes",
+                "delta": "+18%"
+              },
+              {
+                "icon": "message-circle",
+                "value": "218",
+                "label": "Comments",
+                "delta": "+24%"
+              },
+              {
+                "icon": "send",
+                "value": "764",
+                "label": "Shares",
+                "delta": "+41%"
+              }
+            ],
+            "chartTitle": "Last 7 days · views",
+            "chartTotal": "186K",
+            "chart": [
+              {
+                "day": "Mon",
+                "height": 38,
+                "lit": false
+              },
+              {
+                "day": "Tue",
+                "height": 52,
+                "lit": true
+              },
+              {
+                "day": "Wed",
+                "height": 30,
+                "lit": false
+              },
+              {
+                "day": "Thu",
+                "height": 64,
+                "lit": true
+              },
+              {
+                "day": "Fri",
+                "height": 46,
+                "lit": false
+              },
+              {
+                "day": "Sat",
+                "height": 24,
+                "lit": false
+              },
+              {
+                "day": "Sun",
+                "height": 40,
+                "lit": false
+              }
+            ],
+            "alt": "The post on Instagram and its analytics"
+          },
+          "week": {
+            "title": "7 videos posted this week",
+            "reactions": [
+              {
+                "icon": "heart",
+                "count": "3 412"
+              },
+              {
+                "icon": "message-circle",
+                "count": "218"
+              },
+              {
+                "icon": "send",
+                "count": "764"
+              }
+            ],
+            "alt": "Someone opening Instagram on their phone, next to the week's result"
+          }
+        }
       }
     }
   }

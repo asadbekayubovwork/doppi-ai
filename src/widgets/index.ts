@@ -53,3 +53,9 @@ export {
   CDemoTelegram,
   CDemoConversations,
 } from "./rag-landing"
+export {
+  CDemoContentPlan,
+  CDemoQueue,
+  CDemoPostStats,
+  CDemoWeekResult,
+} from "./video-landing"

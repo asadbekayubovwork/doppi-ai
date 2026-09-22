@@ -5,12 +5,13 @@ import {
   type ServiceKey,
 } from "@/shared/config/seoPages"
 
-// One public landing page per service. Voice and RAG have their own pages,
-// each built around the chain that service runs; the rest share PService.
+// Every service has its own landing, each built around the chain that service
+// runs; PService stays as the fallback for a service added without one.
 const SERVICE_PAGES: Partial<Record<ServiceKey, RouteRecordRaw["component"]>> =
   {
     voice: () => import("./PVoiceAgentLanding.vue"),
     rag: () => import("./PRagAgentLanding.vue"),
+    video: () => import("./PVideoGeneratorLanding.vue"),
   }
 
 const serviceRoutes: RouteRecordRaw[] = SERVICE_KEYS.map((service) => ({
