@@ -1,5 +1,5 @@
 import { apiClient } from "@/shared/api"
-import { apiUrl } from "@/shared/config/api"
+import { API_BASE_URL, apiUrl } from "@/shared/config/api"
 import type {
   VideoJob,
   VideoJobCreatePayload,
@@ -35,6 +35,22 @@ const query = (input: Record<string, string | number | undefined>) => {
 const listQuery = (params: VideoListParams) =>
   query({ status: params.status, limit: params.limit })
 
+/**
+ * Resolves a backend-issued relative URL against the configured API origin.
+ * Provider URLs are deliberately rejected so playback never bypasses the
+ * control-plane tenant and session checks.
+ */
+export const resolveMediaUrl = (
+  value: string | null | undefined,
+  fallback: string
+) => {
+  if (!value || !value.startsWith("/")) return fallback
+  if (/^https?:\/\//i.test(API_BASE_URL)) {
+    return new URL(value, apiUrl("/")).toString()
+  }
+  return value
+}
+
 export const videoApi = {
   list: (businessId: string, params: VideoListParams = {}) =>
     apiClient.get<VideoJob[]>(root(businessId), listQuery(params)),
@@ -58,4 +74,6 @@ export const videoApi = {
     ),
   downloadUrl: (businessId: string, jobId: string) =>
     apiUrl(`${root(businessId)}/${jobId}/download`),
+  streamUrl: (businessId: string, jobId: string) =>
+    apiUrl(`${root(businessId)}/${jobId}/stream`),
 }

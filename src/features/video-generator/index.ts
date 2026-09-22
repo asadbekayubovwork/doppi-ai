@@ -1,4 +1,5 @@
 export {
+  resolveMediaUrl,
   videoApi,
   type VideoListParams,
   type VideoSyncStatus,

@@ -67,6 +67,7 @@ describe("video studio integration", () => {
     expect(videoApi.list).toHaveBeenCalledWith("business-1", {})
     expect(wrapper.text()).toContain("Yangi video yaratish")
     expect(wrapper.text()).toContain("Prompt va kontekst")
+    expect(wrapper.text()).toContain("Generation jobs")
 
     await wrapper.find("textarea").setValue("Autumn launch")
     await wrapper.find("form").trigger("submit")

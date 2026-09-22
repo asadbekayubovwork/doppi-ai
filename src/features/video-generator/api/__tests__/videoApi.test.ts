@@ -1,5 +1,5 @@
 import { apiClient } from "@/shared/api"
-import { videoApi } from "../videoApi"
+import { resolveMediaUrl, videoApi } from "../videoApi"
 
 describe("video backend contracts", () => {
   beforeEach(() => vi.restoreAllMocks())
@@ -69,5 +69,16 @@ describe("video backend contracts", () => {
     expect(videoApi.downloadUrl("business-1", "job-1")).toBe(
       "/api/v1/businesses/business-1/video-jobs/job-1/download"
     )
+    expect(videoApi.streamUrl("business-1", "job-1")).toBe(
+      "/api/v1/businesses/business-1/video-jobs/job-1/stream"
+    )
+  })
+
+  it("does not let provider URLs bypass the control plane", () => {
+    const fallback = videoApi.streamUrl("business-1", "job-1")
+    expect(
+      resolveMediaUrl("https://provider.example/video.mp4", fallback)
+    ).toBe(fallback)
+    expect(resolveMediaUrl(fallback, "/fallback")).toBe(fallback)
   })
 })

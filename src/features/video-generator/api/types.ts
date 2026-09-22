@@ -48,6 +48,10 @@ export interface VideoJob {
   brief: VideoBrief
   publish_to: string[] | null
   result_url: string | null
+  /** Same-origin, tenant-authorized playback endpoint from the control plane. */
+  stream_url?: string | null
+  /** Same-origin, tenant-authorized download endpoint from the control plane. */
+  download_url?: string | null
   error_message: string | null
   detail: Record<string, unknown> | null
   created_at: string
