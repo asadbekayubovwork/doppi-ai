@@ -86,9 +86,9 @@ jobs:
           # receive the build. Update these if the server is ever rebuilt.
           # A non-default port is part of the host name ssh looks up.
           cat > ~/.ssh/known_hosts <<'EOF'
-          [34.27.103.62]:8800 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPOFUGcfSvJWjcgiIbazgfKMBGIcJi2OM3UQUtU9uw2u
-          [34.27.103.62]:8800 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBF+vQQqHWxbcMImXzqrfs8Fal5um1Vx3nc8fOdxXKcS0+9cimHJS2m/sldfkZE3+3T7Ja64tV4iAxwDoXTLNes=
-          [34.27.103.62]:8800 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDOu/le9JJVIIIfdhjO3xWBKJUbj6zYqSWyDFtsEqLs1HoTuA6YZITqfrdzWvJ59y9YNQhNgtc/WLolviNIr6gZjrOPPrW/Yx2Y5p96wvK6wl8XmjSoArIjRxcziiW8ERZsch7bc5wn3/ht6ZAMyBUx0vCiP9AoStTBjC8TSkDdmYimmg0d95k9vRkRIqbp4pzucV3+0UkYBiNvsNhloEpc60QN+ViTiMTVESgB5LYTkfgch1omej7RS7VmG9Y80QbaLLNeTR2PzT/YTB/DvgHTc/7HYwBbJIE4ZLqF0AvseST/KP887/YlBfKFSuJPBJr+lnQTVCK+1IpwQEfwy7nZl4SXgkAfFBNUAgdVPJO36NuQfSoHnywhpJYNthf2pllhiPl43BnGxCRa/foCxwVo2TCRWXb5vks0oDREfX0Pt4ySlipQGglbKqRGES9tj6y+r1peUgyFXVaoR0i8acBeeT+XzkGrfztVARb/9UPwUe3sbxEcR+O5Q+lx8F7y8Ds=
+          [34.27.103.62]:8800 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINq47X8DaBgpE9HsgWT/6PkklLOkHWwyAMSxtmFecTVJ
+          [34.27.103.62]:8800 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMwzlzghrR/NGrUhkUKpqxy16yxleNHkM4z6fZBN/G12uk5fnNvjhTwF5Dk6PgGAfF7ONaOzK9N1UQqel6gCrkI=
+          [34.27.103.62]:8800 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCmYTf6nLribNe8SJO6u1BYnqkrPwAlnEF2o6HBDV9zXLCKoOqEyHi9f7ivoUX6tTJ2urMRfD6Eo5yTFxSnlpSRA8MjPcqZz76EXkf/+Q5cRsWFIFTdBPT2UPP85tosPR5dbWa7ZUEPLEMBhxVvOL7eXbm4e6YBwv6IjSn1Zq12oJ5I4t9FVffoWNWs+H3VkOGMBgrH0VGhFJYAMbUNgeMWY7Q4H/6OZvJVDWPjFPTHQeMEO9fCnqwCxpPp6F7M5IcF1fG6zLOBFZQUL4a2Da9ooeoQQkaJd0X/Y1Bfw+4TMqtPm+YoeftFpGX0pD7l62vJw853AYbzTnFbDhnE0HkQVJ1w2rK7mGxKE+zmzGV1aQO0ZIzKykzWVcybLZjrcxI1VGMarOm8ZIQviziH2RrEpImuD3Dms/CjV4qayzVMbbIeFy0WU6o/TpeK7xzF7Trdx9geP2kgnF3Gk53zEdy+b1wp65JOfAUqzEFlpofde1k9c87OH6TSkpnDbUCmbYE=
           EOF
 
           release="${GITHUB_SHA:0:12}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
