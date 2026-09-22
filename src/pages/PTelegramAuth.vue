@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue"
-import { useRoute } from "vue-router"
 import { AuthShell } from "@/features/auth"
-
-const route = useRoute()
-const challengeId = computed(() =>
-  typeof route.query.challenge_id === "string" ? route.query.challenge_id : ""
-)
 </script>
 
 <template>

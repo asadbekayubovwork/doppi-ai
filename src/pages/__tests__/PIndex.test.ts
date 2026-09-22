@@ -42,7 +42,7 @@ describe("PIndex (landing page)", () => {
     const wrapper = buildApp()
 
     // The section anchors the navigation and footer link to must all exist.
-    for (const id of ["top", "solution", "features", "how", "voice", "results", "pricing", "faq", "about", "team", "contact"]) {
+    for (const id of ["top", "solution", "features", "how", "results", "pricing", "faq", "about", "team", "contact"]) {
       expect(wrapper.find(`#${id}`).exists(), `#${id} is missing`).toBe(true)
     }
 
@@ -51,14 +51,14 @@ describe("PIndex (landing page)", () => {
     wrapper.unmount()
   })
 
-  it("renders hero, trust bar and voice transcript copy", () => {
+  it("renders the home value proposition, core modules, and contact details", () => {
     const wrapper = buildApp()
     const text = wrapper.text()
 
     expect(text).toContain("biznesingiz uchun AI marketing operatsion tizimi")
     expect(text).toContain("barchasi bir tizimda")
     expect(text).toContain("SIP Telefoniya")
-    expect(text).toContain("Jonli qo'ng'iroq")
+    expect(text).toContain("AI Ovozli Agent")
     expect(text).toContain("Toshkent, O'zbekiston")
 
     wrapper.unmount()

@@ -51,7 +51,9 @@ jobs:
           pnpm exec vue-tsc --noEmit
           pnpm audit --prod --audit-level high
           git diff --check
-          find src -type f \( -name '*.ts' -o -name '*.vue' -o -name '*.css' \) -print0 \
+          # Generated Lucide geometry is data, not hand-maintained source.
+          find src -type f \( -name '*.ts' -o -name '*.vue' -o -name '*.css' \) \
+            ! -path 'src/shared/ui/icons/icon-part-*.ts' -print0 \
             | xargs -0 -n1 wc -l \
             | awk '$1 >= 400 {print; found=1} END {exit found}'
 

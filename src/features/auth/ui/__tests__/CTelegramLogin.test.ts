@@ -5,11 +5,16 @@ import CTelegramLogin from "../CTelegramLogin.vue"
 describe("official Telegram login widget", () => {
   afterEach(() => vi.unstubAllEnvs())
 
-  it("shows an honest unavailable state when no public bot is configured", () => {
+  it("renders no placeholder and emits no Vue warning while Telegram auth is disabled", () => {
+    const warning = vi.spyOn(console, "warn").mockImplementation(() => {})
     const wrapper = mount(CTelegramLogin)
 
-    expect(wrapper.get('[role="status"]').text()).toContain("tez orada")
+    expect(wrapper.find('[role="status"]').exists()).toBe(false)
     expect(wrapper.find("script").exists()).toBe(false)
+    expect(warning).not.toHaveBeenCalled()
+
+    warning.mockRestore()
+    wrapper.unmount()
   })
 
   it("loads Telegram's signed callback widget when configured", () => {
