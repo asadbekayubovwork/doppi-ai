@@ -14,7 +14,6 @@ const base = `services.${props.service}`
       class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-60"
       aria-hidden="true"
     />
-    <div class="ambient-glow left-1/2 -top-24 h-64 w-[38rem] -translate-x-1/2" aria-hidden="true" />
 
     <div class="container relative z-10 text-center">
       <nav :aria-label="$t('services.breadcrumbLabel')" class="flex justify-center">

@@ -14,10 +14,6 @@ const items = useI18nList<AudienceItem>("audience.items")
 
 <template>
   <section id="audience" class="section-ground py-[60px] sm:py-[100px]">
-    <div
-      class="ambient-glow left-1/4 top-10 h-64 w-[30rem] opacity-70"
-      aria-hidden="true"
-    />
 
     <div class="container relative z-10">
       <CSectionHeading

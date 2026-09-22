@@ -24,7 +24,6 @@ useHead({
 
 <template>
   <section class="section-ground pt-[130px] pb-[80px] sm:pt-[170px]">
-    <div class="ambient-glow left-1/2 -top-24 h-72 w-72 -translate-x-1/2 opacity-60" aria-hidden="true" />
 
     <div class="container relative z-10">
       <div class="mx-auto max-w-[760px]">

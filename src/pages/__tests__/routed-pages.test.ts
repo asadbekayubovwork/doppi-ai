@@ -14,6 +14,7 @@ import PPrivacy from "../PPrivacy.vue"
 import PTerms from "../PTerms.vue"
 import PError from "../PError.vue"
 import PService from "../PService.vue"
+import PVoiceAgentLanding from "../PVoiceAgentLanding.vue"
 import { SERVICE_KEYS, SERVICE_PATHS } from "@/shared/config/seoPages"
 
 /**
@@ -21,7 +22,11 @@ import { SERVICE_KEYS, SERVICE_PATHS } from "@/shared/config/seoPages"
  * i18n branch or a broken widget import surfaces here rather than as a blank
  * screen in production.
  */
-const mountPage = (component: unknown, locale = "uz", props: Record<string, unknown> = {}) => {
+const mountPage = (
+  component: unknown,
+  locale = "uz",
+  props: Record<string, unknown> = {}
+) => {
   const i18n = createI18n({
     legacy: false,
     locale,
@@ -92,7 +97,9 @@ describe("routed pages", () => {
     const text = wrapper.text()
     expect(text).toContain("transformation@doppiai.uz")
     expect(text).toContain("Toshkent, O'zbekiston")
-    const socialHrefs = wrapper.findAll('a[target="_blank"]').map((a) => a.attributes("href"))
+    const socialHrefs = wrapper
+      .findAll('a[target="_blank"]')
+      .map((a) => a.attributes("href"))
     expect(socialHrefs).toContain("https://t.me/doppi_ai")
     expect(socialHrefs).toContain("https://instagram.com/doppi_ai")
     wrapper.unmount()
@@ -119,21 +126,49 @@ describe("routed pages", () => {
     wrapper.unmount()
   })
 
-  it.each(SERVICE_KEYS)("renders the %s service page with its own copy and links", (service) => {
-    const wrapper = mountPage(PService, "uz", { service })
-    const copy = messages.uz.services[service]
+  it.each(SERVICE_KEYS)(
+    "renders the %s service page with its own copy and links",
+    (service) => {
+      const wrapper = mountPage(PService, "uz", { service })
+      const copy = messages.uz.services[service]
+
+      expect(wrapper.find("h1").text()).toBe(copy.title)
+      expect(wrapper.text()).toContain(copy.features.items[0].title)
+      expect(wrapper.text()).toContain(copy.faq.items[0].q)
+
+      // Links between the service pages are what tell crawlers these pages form
+      // one section of the site.
+      const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
+      for (const other of SERVICE_KEYS.filter((key) => key !== service)) {
+        expect(hrefs).toContain(SERVICE_PATHS[other])
+      }
+      expect(hrefs).toContain("/")
+      wrapper.unmount()
+    }
+  )
+
+  it("renders the voice agent landing with its four steps and mockups", () => {
+    const wrapper = mountPage(PVoiceAgentLanding)
+    const copy = messages.uz.services.voice.landing
+    const text = wrapper.text()
 
     expect(wrapper.find("h1").text()).toBe(copy.title)
-    expect(wrapper.text()).toContain(copy.features.items[0].title)
-    expect(wrapper.text()).toContain(copy.faq.items[0].q)
+    expect(wrapper.find("#voice-flow").exists()).toBe(true)
 
-    // Links between the service pages are what tell crawlers these pages form
-    // one section of the site.
+    // Every step and every capability is on the page, copy and mockup alike.
+    for (const step of copy.steps.items) expect(text).toContain(step.title)
+    for (const item of copy.capabilities.items)
+      expect(text).toContain(item.title)
+    expect(text).toContain(copy.demo.leads.rows[0].name)
+    expect(text).toContain(copy.demo.call.turns[0].text)
+    expect(text).toContain(copy.demo.result.aiText)
+
+    // The FAQ and the cross-links are what the build's structured data claims
+    // this page carries, so they have to stay visible.
+    expect(text).toContain(messages.uz.services.voice.faq.items[0].q)
     const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
-    for (const other of SERVICE_KEYS.filter((key) => key !== service)) {
-      expect(hrefs).toContain(SERVICE_PATHS[other])
-    }
-    expect(hrefs).toContain("/")
+    expect(hrefs).toContain(SERVICE_PATHS.rag)
+    expect(hrefs).toContain(SERVICE_PATHS.video)
     wrapper.unmount()
   })
 

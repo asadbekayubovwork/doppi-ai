@@ -15,10 +15,6 @@ const base = `services.${props.service}.cta`
         data-aos="fade-up"
         data-aos-duration="900"
       >
-        <div
-          class="ambient-glow left-1/2 -top-28 h-56 w-[30rem] -translate-x-1/2"
-          aria-hidden="true"
-        />
         <h2 class="relative text-2xl font-bold text-sand-950 sm:text-4xl">{{ $t(`${base}.title`) }}</h2>
         <p class="relative mx-auto mt-4 max-w-[560px] text-base text-sand-500">
           {{ $t(`${base}.subtitle`) }}

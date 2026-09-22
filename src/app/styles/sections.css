@@ -110,28 +110,20 @@
   color: transparent;
 }
 
-/* Soft warm-to-cool haze behind a section, like the colour orbs on
-   ElevenLabs' light pages. */
-.ambient-glow {
+/* Cool haze behind a section, for the blocks lit in the cobalt hover accent.
+   The warm variant that used to sit behind every section is gone: the orange
+   cast it threw over the off-white ground read as a stain, not as light. */
+.ambient-glow-cool {
   position: absolute;
   border-radius: 9999px;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 71, 4, 0.14),
-    rgba(43, 127, 255, 0.1)
-  );
-  filter: blur(110px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Cool-only haze, for sections lit in the cobalt hover accent. */
-.ambient-glow-cool {
   background: linear-gradient(
     120deg,
     rgba(52, 80, 140, 0.14),
     rgba(43, 127, 255, 0.1)
   );
+  filter: blur(110px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Thin dotted grid, used behind the hero and the how-it-works flow. */
@@ -197,20 +189,6 @@
   animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(4%, 3%, 0) scale(1.08);
-  }
-}
-
-.animate-drift {
-  animation: drift 24s ease-in-out infinite;
-}
-
 @keyframes spin-slow {
   to {
     transform: rotate(360deg);
@@ -223,7 +201,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .animate-pulse-ring,
-  .animate-drift,
   .animate-spin-slow,
   .wave-bar {
     animation: none !important;
