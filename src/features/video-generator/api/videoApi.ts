@@ -4,6 +4,7 @@ import type {
   VideoJob,
   VideoJobCreatePayload,
   VideoJobStatus,
+  VideoModelCatalog,
   VideoSyncResult,
 } from "./types"
 
@@ -52,6 +53,8 @@ export const resolveMediaUrl = (
 }
 
 export const videoApi = {
+  models: (businessId: string) =>
+    apiClient.get<VideoModelCatalog>(`${root(businessId)}/models`),
   list: (businessId: string, params: VideoListParams = {}) =>
     apiClient.get<VideoJob[]>(root(businessId), listQuery(params)),
   get: (businessId: string, jobId: string) =>

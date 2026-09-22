@@ -9,6 +9,8 @@ export type {
   VideoJob,
   VideoJobCreatePayload,
   VideoJobStatus,
+  VideoModel,
+  VideoModelCatalog,
   VideoSyncResult,
 } from "./api/types"
 export { useVideoGenerator } from "./model/useVideoGenerator"

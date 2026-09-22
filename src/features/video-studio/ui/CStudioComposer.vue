@@ -1,19 +1,28 @@
 <script setup lang="ts">
 import { CVideoThumb } from "@/entities/video"
 import { CAppButton, CBadge, CIcon, CSwitch } from "@/shared/ui"
+import CStudioModelSettings from "./CStudioModelSettings.vue"
+import type { VideoModel } from "@/features/video-generator"
 
 defineProps<{
   isCreating: boolean
   canCreate: boolean
+  models: VideoModel[]
+  modelsLoading: boolean
+  modelError: string | null
 }>()
 
-defineEmits<{ submit: [] }>()
+defineEmits<{ submit: []; retryModels: [] }>()
 
 const prompt = defineModel<string>("prompt", { required: true })
 const aspectRatio = defineModel<"9:16" | "16:9" | "1:1">("aspectRatio", {
   required: true,
 })
 const durationSec = defineModel<number>("durationSec", { required: true })
+const videoModel = defineModel<string>("videoModel", { required: true })
+const videoResolution = defineModel<string>("videoResolution", {
+  required: true,
+})
 const researchMode = defineModel<"fast" | "deep">("researchMode", {
   required: true,
 })
@@ -44,11 +53,16 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
     <header
       class="flex items-center justify-between border-b border-[#ECECE8] px-5 py-4"
     >
-      <h2 class="text-[15px] font-semibold text-[#15151B]">Prompt va kontekst</h2>
+      <h2 class="text-[15px] font-semibold text-[#15151B]">
+        Prompt va kontekst
+      </h2>
       <CBadge tone="accent" icon="wand-sparkles">AI yordam</CBadge>
     </header>
 
-    <form class="flex flex-1 flex-col gap-5 p-5" @submit.prevent="$emit('submit')">
+    <form
+      class="flex flex-1 flex-col gap-5 p-5"
+      @submit.prevent="$emit('submit')"
+    >
       <label class="grid gap-2">
         <span
           class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
@@ -133,37 +147,16 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
             </select>
           </label>
 
-          <label class="relative">
-            <span
-              class="pointer-events-none absolute left-9 top-1.5 text-[10px] text-[#9A9AA2]"
-            >
-              Davomiylik
-            </span>
-            <CIcon
-              name="clock"
-              class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#84848E]"
-            />
-            <select
-              v-model.number="durationSec"
-              class="h-12 w-full rounded-xl border border-[#DEDEE4] bg-white pl-9 pr-3 pt-3.5 text-[13px] font-medium text-[#202027] outline-none focus:border-[#8175EA]"
-            >
-              <option :value="10">10s</option>
-              <option :value="15">15s</option>
-              <option :value="30">30s</option>
-            </select>
-          </label>
-
-          <div
-            class="flex h-12 items-center gap-2.5 rounded-xl border border-[#DEDEE4] bg-white px-3"
-          >
-            <CIcon name="cpu" class="h-4 w-4 text-[#84848E]" />
-            <span class="flex flex-col leading-tight">
-              <span class="text-[10px] text-[#9A9AA2]">Model</span>
-              <span class="text-[13px] font-medium text-[#202027]">
-                Veo 3 · fal.ai
-              </span>
-            </span>
-          </div>
+          <CStudioModelSettings
+            v-model:model="videoModel"
+            v-model:resolution="videoResolution"
+            v-model:duration-sec="durationSec"
+            class="col-span-2"
+            :models="models"
+            :loading="modelsLoading"
+            :error="modelError"
+            @retry="$emit('retryModels')"
+          />
 
           <div
             class="flex h-12 items-center gap-2.5 rounded-xl border border-[#DEDEE4] bg-white px-3"
@@ -171,7 +164,9 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
             <CIcon name="mic" class="h-4 w-4 text-[#84848E]" />
             <span class="flex flex-col leading-tight">
               <span class="text-[10px] text-[#9A9AA2]">Ovoz</span>
-              <span class="text-[13px] font-medium text-[#202027]">UZ ayol</span>
+              <span class="text-[13px] font-medium text-[#202027]"
+                >UZ ayol</span
+              >
             </span>
           </div>
         </div>
@@ -197,18 +192,25 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
             type="button"
             role="tab"
             :aria-selected="
-              mode.value === 'skip' ? skipResearch : !skipResearch && researchMode === mode.value
+              mode.value === 'skip'
+                ? skipResearch
+                : !skipResearch && researchMode === mode.value
             "
             class="h-8 rounded-[9px] text-[12px] font-semibold transition"
             :class="
-              (mode.value === 'skip' ? skipResearch : !skipResearch && researchMode === mode.value)
+              (
+                mode.value === 'skip'
+                  ? skipResearch
+                  : !skipResearch && researchMode === mode.value
+              )
                 ? 'bg-white text-[#15151B] shadow-[0_1px_2px_rgba(22,22,27,0.08)]'
                 : 'text-[#73737D] hover:text-[#15151B]'
             "
             @click="
               mode.value === 'skip'
                 ? (skipResearch = true)
-                : ((skipResearch = false), (researchMode = mode.value as 'fast' | 'deep'))
+                : ((skipResearch = false),
+                  (researchMode = mode.value as 'fast' | 'deep'))
             "
           >
             {{ mode.label }}
@@ -249,7 +251,9 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         </summary>
         <div class="grid gap-3.5 border-t border-[#E7E7E3] p-3.5">
           <label class="grid gap-1.5">
-            <span class="text-[11px] font-medium text-[#55555F]">Ohang (tone)</span>
+            <span class="text-[11px] font-medium text-[#55555F]"
+              >Ohang (tone)</span
+            >
             <input
               v-model="tone"
               maxlength="500"
@@ -306,10 +310,6 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
       </details>
 
       <div class="mt-auto border-t border-[#ECECE8] pt-4">
-        <div class="mb-3 flex items-center justify-between text-[12.5px]">
-          <span class="text-[#73737D]">Taxminiy narx</span>
-          <span class="font-semibold text-[#15151B]">120 kredit · ~90 s</span>
-        </div>
         <CAppButton
           type="submit"
           variant="primary"

@@ -18,6 +18,8 @@ export interface VideoBrief {
   format?: string
   length?: "short" | "medium" | "long"
   video_provider?: string
+  video_model?: string
+  video_resolution?: string
   cta?: string
   preview_only?: boolean
   subtitles?: boolean
@@ -63,6 +65,23 @@ export interface VideoJob {
 export interface VideoJobCreatePayload {
   brief: VideoBrief
   publish_to?: string[]
+}
+
+export interface VideoModel {
+  model: string
+  name: string
+  resolutions: string[]
+  durations_seconds: number[]
+  supports_audio: boolean
+  cost_per_second_usd: number | null
+  is_default: boolean
+  auto_selected_for_genres?: string[]
+}
+
+export interface VideoModelCatalog {
+  provider: string
+  default_model: string
+  models: VideoModel[]
 }
 
 export interface VideoSyncResult {
