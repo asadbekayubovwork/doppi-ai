@@ -8,6 +8,7 @@ import {
   type VideoSyncStatus,
 } from "../api/videoApi"
 import type { VideoJob, VideoJobCreatePayload } from "../api/types"
+import { useVideoModelCatalog } from "./useVideoModelCatalog"
 
 const ACTIVE = new Set(["submitting", "queued", "processing"])
 
@@ -61,12 +62,23 @@ export const useVideoGenerator = () => {
     referenceLinks: "",
     referenceImages: "",
     durationSec: 15,
+    videoModel: "",
+    videoResolution: "",
     aspectRatio: "9:16" as "9:16" | "16:9" | "1:1",
     subtitles: true,
     previewOnly: false,
     skipResearch: false,
     researchMode: "fast" as "fast" | "deep",
   })
+  const {
+    modelCatalog,
+    modelError,
+    isLoadingModels,
+    selectedModel,
+    load: loadModels,
+    reset: resetModels,
+    invalidate: invalidateModels,
+  } = useVideoModelCatalog(businessId, form, () => generation, isCurrent)
 
   const activeJobs = computed(() =>
     jobs.value.filter((job) => ACTIVE.has(job.status))
@@ -87,7 +99,11 @@ export const useVideoGenerator = () => {
       : null
   })
   const canCreate = computed(() =>
-    Boolean(businessId.value && form.topic.trim())
+    Boolean(
+      businessId.value &&
+        form.topic.trim() &&
+        selectedModel.value?.resolutions.includes(form.videoResolution)
+    )
   )
 
   // Only the control-plane URL is used by the browser. The provider result_url
@@ -174,6 +190,9 @@ export const useVideoGenerator = () => {
         duration_sec: form.durationSec,
         language: auth.activeBusiness?.default_language || "uz",
         aspect_ratio: form.aspectRatio,
+        video_provider: modelCatalog.value?.provider,
+        video_model: form.videoModel,
+        video_resolution: form.videoResolution,
         subtitles: form.subtitles,
         preview_only: form.previewOnly,
         // Research mode is only meaningful when research runs at all.
@@ -299,20 +318,24 @@ export const useVideoGenerator = () => {
   let timer: number | undefined
   onMounted(() => {
     void load()
+    void loadModels()
     timer = window.setInterval(() => void poll(), 5_000)
   })
   onBeforeUnmount(() => {
     disposed = true
+    invalidateModels()
     window.clearInterval(timer)
   })
   watch(businessId, () => {
     generation++
+    resetModels()
     jobs.value = []
     sessionJobId.value = null
     isCreating.value = false
     isSyncing.value = false
     pollInFlight.value = false
     void load()
+    void loadModels()
   })
 
   // Clears the studio result panel back to its idle state (e.g. on retry).
@@ -323,6 +346,10 @@ export const useVideoGenerator = () => {
   return {
     jobs,
     form,
+    modelCatalog,
+    selectedModel,
+    modelError,
+    isLoadingModels,
     activeJobs,
     latestJob,
     sessionJob,
@@ -333,6 +360,7 @@ export const useVideoGenerator = () => {
     isCreating,
     isSyncing,
     load,
+    loadModels,
     create,
     sync,
     download,

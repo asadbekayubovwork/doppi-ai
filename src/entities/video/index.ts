@@ -17,6 +17,7 @@ export type {
   Recommendation,
   ScriptMessage,
   StudioVideo,
+  StudioVideoStatus,
   TopVideo,
   VideoMetric,
   WeekPlan,

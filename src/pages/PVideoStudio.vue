@@ -2,14 +2,19 @@
 import { computed, ref } from "vue"
 import { useHead } from "@unhead/vue"
 import { usePageHeading } from "@/shared/lib"
-import { CVideoJobs, useVideoGenerator } from "@/features/video-generator"
+import {
+  CVideoJobs,
+  resolveMediaUrl,
+  useVideoGenerator,
+  videoApi,
+} from "@/features/video-generator"
 import {
   CPublishModal,
   CStudioComposer,
   CStudioLibrary,
   CStudioResult,
 } from "@/features/video-studio"
-import { STUDIO_VIDEOS } from "@/entities/video"
+import type { StudioVideo } from "@/entities/video"
 import { CAppButton } from "@/shared/ui"
 
 useHead({ title: "Yangi video — Do'ppi AI" })
@@ -19,6 +24,9 @@ usePageHeading(() => ({
 
 const {
   form,
+  modelCatalog,
+  isLoadingModels,
+  modelError,
   canCreate,
   isCreating,
   jobs,
@@ -31,7 +39,47 @@ const {
   progressPct,
   playbackUrl,
   dismissSessionJob,
+  loadModels,
 } = useVideoGenerator()
+
+const libraryVideos = computed<StudioVideo[]>(() =>
+  jobs.value.slice(0, 8).map((job) => {
+    const status: StudioVideo["status"] =
+      job.status === "completed"
+        ? "ready"
+        : job.status === "failed" || job.status === "submission_failed"
+          ? "failed"
+          : job.status === "submission_unknown"
+            ? "review"
+            : "processing"
+    const ready = status === "ready"
+    return {
+      id: job.id,
+      title: job.brief.topic || "Video",
+      meta: `${job.brief.duration_sec ?? "—"}s · ${new Intl.DateTimeFormat(
+        "uz-UZ",
+        {
+          day: "numeric",
+          month: "short",
+        }
+      ).format(new Date(job.created_at))}`,
+      status,
+      thumbnail: "#E8E6E2",
+      previewUrl: ready
+        ? resolveMediaUrl(
+            job.stream_url,
+            videoApi.streamUrl(job.business_id, job.id)
+          )
+        : undefined,
+      downloadUrl: ready
+        ? resolveMediaUrl(
+            job.download_url,
+            videoApi.downloadUrl(job.business_id, job.id)
+          )
+        : undefined,
+    }
+  })
+)
 
 // The result panel only tracks a job created in this session, so opening the
 // page (or reloading it) starts on a clean composer rather than surfacing an
@@ -108,6 +156,8 @@ const onRegenerate = () => {
         v-model:prompt="form.topic"
         v-model:aspect-ratio="form.aspectRatio"
         v-model:duration-sec="form.durationSec"
+        v-model:video-model="form.videoModel"
+        v-model:video-resolution="form.videoResolution"
         v-model:research-mode="form.researchMode"
         v-model:skip-research="form.skipResearch"
         v-model:subtitles="form.subtitles"
@@ -119,7 +169,11 @@ const onRegenerate = () => {
         v-model:reference-images="form.referenceImages"
         :is-creating="isCreating"
         :can-create="canCreate"
+        :models="modelCatalog?.models ?? []"
+        :models-loading="isLoadingModels"
+        :model-error="modelError"
         @submit="create()"
+        @retry-models="loadModels"
       />
       <CStudioResult
         :job="sessionJob"
@@ -130,7 +184,7 @@ const onRegenerate = () => {
         @download="onDownload"
         @regenerate="onRegenerate"
       />
-      <CStudioLibrary :videos="STUDIO_VIDEOS" />
+      <CStudioLibrary :videos="libraryVideos" :loading="isLoading" />
     </div>
 
     <CVideoJobs

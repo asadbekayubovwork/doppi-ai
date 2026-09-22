@@ -3,8 +3,33 @@ import { createPinia, setActivePinia } from "pinia"
 import { flushPromises, mount, type VueWrapper } from "@vue/test-utils"
 import { useAuthStore } from "@/features/auth"
 import { videoApi } from "../../api/videoApi"
-import type { VideoJob } from "../../api/types"
+import type { VideoJob, VideoModelCatalog } from "../../api/types"
 import { useVideoGenerator } from "../useVideoGenerator"
+
+const modelCatalog: VideoModelCatalog = {
+  provider: "magic_hour",
+  default_model: "model-a",
+  models: [
+    {
+      model: "model-a",
+      name: "Model A",
+      resolutions: ["720p", "1080p"],
+      durations_seconds: [5, 10, 15],
+      supports_audio: true,
+      cost_per_second_usd: 0.04,
+      is_default: true,
+    },
+    {
+      model: "model-b",
+      name: "Model B",
+      resolutions: ["480p"],
+      durations_seconds: [8, 12],
+      supports_audio: false,
+      cost_per_second_usd: null,
+      is_default: false,
+    },
+  ],
+}
 
 const makeJob = (overrides: Partial<VideoJob> = {}): VideoJob => ({
   id: "job-1",
@@ -66,6 +91,7 @@ describe("video async isolation and submission safety", () => {
     vi.useFakeTimers({ toFake: ["setInterval", "clearInterval"] })
     vi.spyOn(window, "confirm").mockReturnValue(true)
     vi.spyOn(videoApi, "list").mockResolvedValue([])
+    vi.spyOn(videoApi, "models").mockResolvedValue(modelCatalog)
   })
   afterEach(() => {
     wrapper?.unmount()
@@ -84,7 +110,21 @@ describe("video async isolation and submission safety", () => {
     await video.create()
     expect(create).toHaveBeenCalledTimes(2)
     expect(create.mock.calls[0][2]).toBe(create.mock.calls[1][2])
+    expect(create.mock.calls[0][1].brief).toMatchObject({
+      video_provider: "magic_hour",
+      video_model: "model-a",
+      video_resolution: "720p",
+    })
     expect(video.jobs.value).toHaveLength(1)
+  })
+
+  it("loads model and resolution defaults from the live catalog", async () => {
+    await mountController()
+
+    expect(videoApi.models).toHaveBeenCalledWith("business-1")
+    expect(video.form.videoModel).toBe("model-a")
+    expect(video.form.videoResolution).toBe("720p")
+    expect(video.modelCatalog.value?.models).toHaveLength(2)
   })
 
   it("does not poll or resubmit uncertain upstream submissions", async () => {

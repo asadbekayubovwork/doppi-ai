@@ -65,6 +65,14 @@ describe("video backend contracts", () => {
     )
   })
 
+  it("loads the tenant's live video model catalog", async () => {
+    const get = vi.spyOn(apiClient, "get").mockResolvedValue({} as never)
+
+    await videoApi.models("business-1")
+
+    expect(get).toHaveBeenCalledWith("/businesses/business-1/video-jobs/models")
+  })
+
   it("builds a same-origin secure download URL", () => {
     expect(videoApi.downloadUrl("business-1", "job-1")).toBe(
       "/api/v1/businesses/business-1/video-jobs/job-1/download"

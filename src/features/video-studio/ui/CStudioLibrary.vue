@@ -1,22 +1,49 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
 import { CVideoThumb, type StudioVideo } from "@/entities/video"
-import { CBadge, CIcon, CIconButton } from "@/shared/ui"
+import { CBadge, CEmptyState, CIcon, CSkeleton } from "@/shared/ui"
+import type { StudioVideoStatus } from "@/entities/video"
 
-const props = defineProps<{ videos: StudioVideo[] }>()
+const props = defineProps<{ videos: StudioVideo[]; loading?: boolean }>()
 
-type Filter = "all" | "published" | "draft"
+type Filter = "all" | "ready" | "processing" | "issues"
 const filter = ref<Filter>("all")
 const FILTERS: ReadonlyArray<{ value: Filter; label: string }> = [
   { value: "all", label: "Barchasi" },
-  { value: "published", label: "Joylangan" },
-  { value: "draft", label: "Draft" },
+  { value: "ready", label: "Tayyor" },
+  { value: "processing", label: "Jarayonda" },
+  { value: "issues", label: "Muammo" },
 ]
+
+const STATUS: Record<
+  StudioVideoStatus,
+  {
+    label: string
+    tone: "success" | "accent" | "danger" | "warning" | "neutral"
+  }
+> = {
+  ready: { label: "Tayyor", tone: "success" },
+  processing: { label: "Jarayonda", tone: "accent" },
+  failed: { label: "Xato", tone: "danger" },
+  review: { label: "Tekshirish kerak", tone: "warning" },
+  published: { label: "Joylangan", tone: "success" },
+  draft: { label: "Draft", tone: "neutral" },
+}
 
 const visible = computed(() =>
   filter.value === "all"
     ? props.videos
-    : props.videos.filter((video) => video.status === filter.value)
+    : filter.value === "issues"
+      ? props.videos.filter((video) =>
+          ["failed", "review"].includes(video.status)
+        )
+      : filter.value === "ready"
+        ? props.videos.filter((video) =>
+            ["ready", "published"].includes(video.status)
+          )
+        : props.videos.filter((video) =>
+            ["processing", "draft"].includes(video.status)
+          )
 )
 </script>
 
@@ -26,7 +53,9 @@ const visible = computed(() =>
   >
     <header class="border-b border-[#ECECE8] px-5 py-4">
       <div class="flex items-center justify-between">
-        <h2 class="text-[15px] font-semibold text-[#15151B]">Mening videolarim</h2>
+        <h2 class="text-[15px] font-semibold text-[#15151B]">
+          Mening videolarim
+        </h2>
         <span class="text-[12px] text-[#9A9AA2]">{{ videos.length }} ta</span>
       </div>
       <div
@@ -39,7 +68,7 @@ const visible = computed(() =>
           type="button"
           role="tab"
           :aria-selected="filter === tab.value"
-          class="h-7 flex-1 rounded-[8px] text-[12px] font-semibold transition"
+          class="min-h-11 flex-1 rounded-[8px] text-[12px] font-semibold transition"
           :class="
             filter === tab.value
               ? 'bg-white text-[#15151B] shadow-[0_1px_2px_rgba(22,22,27,0.08)]'
@@ -52,7 +81,10 @@ const visible = computed(() =>
       </div>
     </header>
 
-    <ul class="flex-1 divide-y divide-[#F1F1EE] overflow-y-auto">
+    <ul
+      v-if="!loading && visible.length"
+      class="flex-1 divide-y divide-[#F1F1EE] overflow-y-auto"
+    >
       <li
         v-for="video in visible"
         :key="video.id"
@@ -71,31 +103,46 @@ const visible = computed(() =>
             <span class="truncate text-[11.5px] text-[#9A9AA2]">
               {{ video.meta }}
             </span>
-            <CBadge
-              :tone="video.status === 'published' ? 'success' : 'neutral'"
-              size="sm"
-            >
-              {{ video.status === "published" ? "Joylangan" : "Draft" }}
+            <CBadge :tone="STATUS[video.status].tone" size="sm">
+              {{ STATUS[video.status].label }}
             </CBadge>
           </div>
         </div>
         <div class="flex shrink-0 items-center gap-0.5">
-          <CIconButton
-            v-if="video.hasLink"
-            icon="external-link"
-            label="Havolani ochish"
-            variant="ghost"
-            size="sm"
-          />
-          <CIconButton
-            icon="download"
-            label="Yuklab olish"
-            variant="ghost"
-            size="sm"
-          />
+          <a
+            v-if="video.previewUrl"
+            :href="video.previewUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Videoni ko'rish"
+            class="grid h-11 w-11 place-items-center rounded-lg text-[#73737D] transition hover:bg-[#F5F4FB] hover:text-[#5B4BE8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8175EA]"
+          >
+            <CIcon name="external-link" class="h-4 w-4" />
+          </a>
+          <a
+            v-if="video.downloadUrl"
+            :href="video.downloadUrl"
+            aria-label="Videoni yuklab olish"
+            class="grid h-11 w-11 place-items-center rounded-lg text-[#73737D] transition hover:bg-[#F5F4FB] hover:text-[#5B4BE8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8175EA]"
+          >
+            <CIcon name="download" class="h-4 w-4" />
+          </a>
         </div>
       </li>
     </ul>
+
+    <div v-else-if="loading" class="grid gap-3 p-4" role="status">
+      <CSkeleton v-for="index in 3" :key="index" class="h-14 rounded-lg" />
+    </div>
+    <CEmptyState
+      v-else-if="!visible.length"
+      class="m-4"
+      icon="clapperboard"
+      :title="
+        filter === 'all' ? 'Hali video yo‘q' : 'Bu holatda video topilmadi'
+      "
+      description="Yaratilgan videolar shu yerda statusi va xavfsiz ko'rish/yuklab olish havolalari bilan chiqadi."
+    />
 
     <footer
       class="flex items-start gap-2 border-t border-[#ECECE8] px-4 py-3 text-[11.5px] leading-4 text-[#9A9AA2]"

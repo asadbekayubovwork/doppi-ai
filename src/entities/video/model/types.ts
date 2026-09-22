@@ -120,12 +120,23 @@ export interface ScriptMessage {
 }
 
 /** A video the user has generated (studio "Mening videolarim" list). */
+export type StudioVideoStatus =
+  | "ready"
+  | "processing"
+  | "failed"
+  | "review"
+  | "published"
+  | "draft"
+
 export interface StudioVideo {
   id: string
   title: string
   meta: string
-  status: "published" | "draft"
+  status: StudioVideoStatus
   thumbnail: string
+  previewUrl?: string
+  downloadUrl?: string
+  /** @deprecated Only retained for the unused legacy fixture shape. */
   hasLink?: boolean
 }
 
