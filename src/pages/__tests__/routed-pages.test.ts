@@ -15,6 +15,7 @@ import PTerms from "../PTerms.vue"
 import PError from "../PError.vue"
 import PService from "../PService.vue"
 import PVoiceAgentLanding from "../PVoiceAgentLanding.vue"
+import PRagAgentLanding from "../PRagAgentLanding.vue"
 import { SERVICE_KEYS, SERVICE_PATHS } from "@/shared/config/seoPages"
 
 /**
@@ -160,7 +161,7 @@ describe("routed pages", () => {
     for (const item of copy.capabilities.items)
       expect(text).toContain(item.title)
     expect(text).toContain(copy.demo.leads.rows[0].name)
-    expect(text).toContain(copy.demo.call.turns[0].text)
+    expect(text).toContain(copy.demo.call.line)
     expect(text).toContain(copy.demo.result.aiText)
 
     // The FAQ and the cross-links are what the build's structured data claims
@@ -168,6 +169,32 @@ describe("routed pages", () => {
     expect(text).toContain(messages.uz.services.voice.faq.items[0].q)
     const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
     expect(hrefs).toContain(SERVICE_PATHS.rag)
+    expect(hrefs).toContain(SERVICE_PATHS.video)
+    wrapper.unmount()
+  })
+
+  it("renders the RAG agent landing with its three steps and mockups", () => {
+    const wrapper = mountPage(PRagAgentLanding)
+    const copy = messages.uz.services.rag.landing
+    const text = wrapper.text()
+
+    expect(wrapper.find("h1").text()).toBe(copy.title)
+    expect(wrapper.find("#rag-flow").exists()).toBe(true)
+
+    // Every step and every capability is on the page, copy and mockup alike.
+    for (const step of copy.steps.items) expect(text).toContain(step.title)
+    for (const item of copy.capabilities.items)
+      expect(text).toContain(item.title)
+    expect(text).toContain(copy.demo.kb.files[0].name)
+    // An answer is only worth anything with the source it came from.
+    expect(text).toContain(copy.demo.chat.turns[1].source)
+    expect(text).toContain(copy.demo.crm.chats[0].name)
+
+    // The FAQ and the cross-links are what the build's structured data claims
+    // this page carries, so they have to stay visible.
+    expect(text).toContain(messages.uz.services.rag.faq.items[0].q)
+    const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
+    expect(hrefs).toContain(SERVICE_PATHS.voice)
     expect(hrefs).toContain(SERVICE_PATHS.video)
     wrapper.unmount()
   })

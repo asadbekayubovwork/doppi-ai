@@ -9,10 +9,9 @@ import {
   CLandingSteps,
   CLandingCapabilities,
   CLandingCta,
-  CDemoInstagram,
-  CDemoLeads,
-  CDemoCall,
-  CDemoResult,
+  CDemoKnowledgeBase,
+  CDemoTelegram,
+  CDemoConversations,
   CFaq,
   CServiceLinks,
   HERO_PRIMARY,
@@ -22,22 +21,20 @@ import {
 } from "@/widgets"
 
 /**
- * `/voice-agent` has its own landing rather than the shared PService layout:
- * the page walks one lead through the whole chain — Instagram form, CRM, SIP
- * call, booking back in the CRM — with a mockup per step.
+ * `/rag-agent` has its own landing rather than the shared PService layout: the
+ * page follows one question from the uploaded document through the Telegram
+ * answer to the conversation waiting in the CRM, with a mockup per step.
  *
  * The FAQ and the cross-links stay: the build publishes FAQPage structured data
  * for every service page (build/seo.ts), and those answers have to be visible
  * on the page they are claimed for.
  */
-useSeo(() => SERVICE_PATHS.voice)
+useSeo(() => SERVICE_PATHS.rag)
 
-const base = "services.voice.landing"
-const visuals = [CDemoInstagram, CDemoLeads, CDemoCall, CDemoResult]
+const base = "services.rag.landing"
+const visuals = [CDemoKnowledgeBase, CDemoTelegram, CDemoConversations]
 
-// The hero's second button drops the visitor at the step that plays the call
-// back; "talk to a manager" goes to Telegram, a different door from the form.
-const flowAnchor = { path: SERVICE_PATHS.voice, hash: "#voice-flow" }
+// "Try it on Telegram" is a real door: the company bot, not a form.
 const telegram = computed(() =>
   SOCIALS.find((social) => social.icon === "telegram")
 )
@@ -51,25 +48,35 @@ const telegram = computed(() =>
           {{ $t(`${base}.ctaPrimary`) }}
           <CIcon name="arrow-right" class="h-4 w-4" />
         </RouterLink>
-        <RouterLink :to="flowAnchor" :class="HERO_SECONDARY">
-          <CIcon name="circle-play" class="h-4 w-4" />
+        <a
+          v-if="telegram"
+          :href="telegram.href"
+          target="_blank"
+          rel="noopener noreferrer"
+          :class="HERO_SECONDARY"
+        >
+          <CIcon name="message-circle" class="h-4 w-4" />
+          {{ $t(`${base}.ctaSecondary`) }}
+        </a>
+        <RouterLink v-else to="/contact-us" :class="HERO_SECONDARY">
+          <CIcon name="message-circle" class="h-4 w-4" />
           {{ $t(`${base}.ctaSecondary`) }}
         </RouterLink>
       </template>
     </CLandingHero>
 
-    <CLandingSteps id="voice-flow" :base="`${base}.steps`" :visuals="visuals" />
+    <CLandingSteps id="rag-flow" :base="`${base}.steps`" :visuals="visuals" />
 
     <CLandingCapabilities :base="`${base}.capabilities`" />
 
-    <CFaq i18n-key="services.voice.faq" />
-    <CServiceLinks exclude="voice" />
+    <CFaq i18n-key="services.rag.faq" />
+    <CServiceLinks exclude="rag" />
 
     <CLandingCta :base="`${base}.cta`">
       <template #actions>
-        <RouterLink to="/contact-us" :class="BAND_PRIMARY">
+        <RouterLink to="/login" :class="BAND_PRIMARY">
           {{ $t(`${base}.cta.primary`) }}
-          <CIcon name="phone-call" class="h-4 w-4" />
+          <CIcon name="cloud-upload" class="h-4 w-4" />
         </RouterLink>
         <a
           v-if="telegram"

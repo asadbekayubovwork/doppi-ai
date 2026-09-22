@@ -1,10 +1,7 @@
 <script setup lang="ts">
+import type { Component } from "vue"
 import { useI18nList } from "@/shared/lib"
 import { CIcon, CSectionHeading } from "@/shared/ui"
-import CDemoInstagram from "./demo/CDemoInstagram.vue"
-import CDemoLeads from "./demo/CDemoLeads.vue"
-import CDemoCall from "./demo/CDemoCall.vue"
-import CDemoResult from "./demo/CDemoResult.vue"
 
 interface Step {
   tag: string
@@ -13,20 +10,29 @@ interface Step {
   bullets: string[]
 }
 
-const base = "services.voice.landing.steps"
-const steps = useI18nList<Step>(`${base}.items`)
+/**
+ * The numbered chain every service landing is built around: one row per step,
+ * copy on one side and a mockup of the product on the other. The page supplies
+ * the mockups; everything else comes from the i18n branch.
+ */
+const props = defineProps<{
+  /** i18n branch holding eyebrow, title, subtitle and items. */
+  base: string
+  /** One component per step, in the order the chain runs. */
+  visuals: Component[]
+  /** Anchor id, so a hero button can jump to the chain. */
+  id?: string
+}>()
 
-// One mockup per step, in the order the chain runs.
-const VISUALS = [CDemoInstagram, CDemoLeads, CDemoCall, CDemoResult]
+const steps = useI18nList<Step>(`${props.base}.items`)
 
-// Steps alternate sides: the two phone screens open on the left, the two CRM
-// windows on the right. The copy column is fixed so both stages get the same
-// width whichever side they land on.
-const isPhoneStep = (index: number) => index % 2 === 0
+// Steps alternate sides. The copy column is a fixed width, so every mockup
+// stage gets the same room whichever side it lands on.
+const visualFirst = (index: number) => index % 2 === 0
 </script>
 
 <template>
-  <section id="voice-flow" class="section-ground py-[60px] sm:py-[100px]">
+  <section :id="id" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
       <CSectionHeading
         :eyebrow="$t(`${base}.eyebrow`)"
@@ -40,7 +46,7 @@ const isPhoneStep = (index: number) => index % 2 === 0
           :key="step.title"
           class="grid items-center gap-10 lg:gap-16"
           :class="
-            isPhoneStep(i)
+            visualFirst(i)
               ? 'lg:grid-cols-[minmax(0,1fr)_460px]'
               : 'lg:grid-cols-[460px_minmax(0,1fr)]'
           "
@@ -48,17 +54,17 @@ const isPhoneStep = (index: number) => index % 2 === 0
           <!-- Mockup -->
           <div
             class="order-2 flex w-full min-w-0 justify-center rounded-[28px] border border-sand-200 bg-[radial-gradient(ellipse_70%_70%_at_50%_40%,#FFFFFF_0%,#F1EFEC_100%)] p-4 sm:p-8"
-            :class="isPhoneStep(i) ? 'lg:order-1' : 'lg:order-2'"
+            :class="visualFirst(i) ? 'lg:order-1' : 'lg:order-2'"
             data-aos="fade-up"
             data-aos-duration="900"
           >
-            <component :is="VISUALS[i]" />
+            <component :is="visuals[i]" />
           </div>
 
           <!-- Copy -->
           <div
             class="order-1 flex max-w-[460px] flex-col gap-4"
-            :class="isPhoneStep(i) ? 'lg:order-2' : 'lg:order-1'"
+            :class="visualFirst(i) ? 'lg:order-2' : 'lg:order-1'"
             data-aos="fade-up"
             data-aos-duration="900"
             data-aos-delay="120"

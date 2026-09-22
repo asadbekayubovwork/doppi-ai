@@ -857,6 +857,257 @@
       "cta": {
         "title": "RAG Agentni biznesingizda sinab ko'ring",
         "subtitle": "14 kunlik bepul sinov — hujjatlaringizni yuklang va agent qanday javob berishini o'zingiz ko'ring."
+      },
+      "landing": {
+        "badge": "RAG agent · Bilim bazasi · Telegram · CRM",
+        "title": "Ma'lumotlaringizni yuklang — agent mijozga o'zi javob bersin",
+        "subtitle": "Hujjat, narx ro'yxati va saytingizni yuklaysiz. RAG agent faqat shu ma'lumotlar asosida Telegramda javob beradi — har bir suhbat esa CRM'da saqlanib boradi.",
+        "ctaPrimary": "Bilim bazasini yuklash",
+        "ctaSecondary": "Telegramda sinab ko'rish",
+        "flow": [
+          {
+            "icon": "cloud-upload",
+            "label": "Ma'lumot yuklash"
+          },
+          {
+            "icon": "scan-text",
+            "label": "Indeksatsiya"
+          },
+          {
+            "icon": "send",
+            "label": "Telegramda javob"
+          },
+          {
+            "icon": "inbox",
+            "label": "CRM'da chat"
+          }
+        ],
+        "steps": {
+          "eyebrow": "Qanday ishlaydi",
+          "title": "Uch qadam: yuklang, javob bersin, CRM'da ko'ring",
+          "subtitle": "Bilim bazasi → Telegramdagi javob → CRM'dagi suhbat tarixi. Hammasi bitta zanjirda.",
+          "items": [
+            {
+              "tag": "Bilim bazasi",
+              "title": "Biznes ma'lumotlaringizni bir marta yuklaysiz",
+              "desc": "Narx ro'yxati, xizmatlar katalogi, ichki qo'llanma yoki saytingiz — faylni tashlaysiz, tizim uni bo'laklarga ajratib vektor bazaga yozadi.",
+              "bullets": [
+                "PDF, DOCX, XLSX, TXT va sayt havolasi",
+                "Ma'lumot o'zgarsa — avtomatik qayta indekslanadi",
+                "Agent faqat shu bazadan javob beradi"
+              ]
+            },
+            {
+              "tag": "Telegramda javob",
+              "title": "Mijoz Telegramda so'raydi — agent bazadan javob beradi",
+              "desc": "Agent o'zidan to'qib chiqarmaydi: javobni faqat siz yuklagan hujjatlardan oladi va qaysi fayldan olganini ko'rsatadi. Narx yangilansa, javob ham o'zi yangilanadi.",
+              "bullets": [
+                "Har bir javobda manba ko'rsatiladi",
+                "24/7 ishlaydi, mijoz kutib turmaydi",
+                "Bazada javob bo'lmasa — operatorga uzatadi"
+              ]
+            },
+            {
+              "tag": "CRM'da saqlanadi",
+              "title": "Agent olib borgan barcha suhbatlar CRM'ga tushadi",
+              "desc": "Kim bilan nima haqida gaplashilgani — to'liq yozishma, mavzu va holat bilan CRM'da turadi. Menejer istalgan paytda ochib ko'radi va kerak bo'lsa suhbatni o'zi davom ettiradi.",
+              "bullets": [
+                "To'liq yozishma tarixi vaqti bilan",
+                "Mavzu, holat va lead sifatida belgilash",
+                "Operator istalgan payt suhbatga qo'shiladi"
+              ]
+            }
+          ]
+        },
+        "capabilities": {
+          "eyebrow": "Imkoniyatlar",
+          "title": "RAG agent yana nimalarni uddalaydi",
+          "items": [
+            {
+              "icon": "shield-check",
+              "title": "Faqat sizning ma'lumotingiz",
+              "desc": "Agent bazadan tashqariga chiqmaydi va o'zidan to'qib javob bermaydi. Bilmasa — bilmaganini aytadi."
+            },
+            {
+              "icon": "file-search",
+              "title": "Har bir javobda manba",
+              "desc": "Javob ostida qaysi hujjat va qaysi bo'limdan olingani ko'rsatiladi — tekshirish oson."
+            },
+            {
+              "icon": "languages",
+              "title": "O'zbek va rus tili",
+              "desc": "Mijoz qaysi tilda yozsa, agent o'sha tilda javob qaytaradi."
+            },
+            {
+              "icon": "message-square",
+              "title": "Telegram, Instagram, sayt",
+              "desc": "Bitta bilim bazasi — barcha kanalda bir xil va bir xil aniq javob."
+            },
+            {
+              "icon": "user-round-cog",
+              "title": "Operatorga uzatish",
+              "desc": "Javob topilmasa yoki mijoz so'rasa, suhbatni jonli operatorga o'tkazadi."
+            },
+            {
+              "icon": "chart-no-axes-column",
+              "title": "Savollar analitikasi",
+              "desc": "Eng ko'p so'ralgan savollar va javobsiz qolgan so'rovlar hisoboti — bazani nima bilan to'ldirishni ko'rsatadi."
+            }
+          ]
+        },
+        "cta": {
+          "title": "Mijozlar savolining ko'pchiligiga javob allaqachon hujjatlaringizda bor",
+          "subtitle": "Ularni bir marta yuklang — qolganini RAG agent qiladi. Ulanish uchun dasturchi kerak emas, 1 kun kifoya.",
+          "primary": "Bilim bazasini yuklash",
+          "secondary": "Telegramda sinab ko'rish"
+        },
+        "demo": {
+          "kb": {
+            "window": "Doppi AI · Bilim bazasi",
+            "title": "Bilim bazasi",
+            "badge": "4 ta manba",
+            "add": "Manba qo'shish",
+            "dropTitle": "Fayllarni shu yerga tashlang",
+            "dropSub": "PDF · DOCX · XLSX · TXT · sayt havolasi — 50 MB gacha",
+            "files": [
+              {
+                "icon": "file-spreadsheet",
+                "name": "Narx-navo 2026.xlsx",
+                "meta": "240 KB · 312 qator"
+              },
+              {
+                "icon": "file-text",
+                "name": "Xizmatlar katalogi.pdf",
+                "meta": "3.2 MB · 48 sahifa"
+              },
+              {
+                "icon": "file-type",
+                "name": "Ko'p so'raladigan savollar.docx",
+                "meta": "180 KB · 64 savol"
+              },
+              {
+                "icon": "globe",
+                "name": "doppi.uz — sayt",
+                "meta": "128 sahifa skanerlandi"
+              }
+            ],
+            "indexed": "Indekslandi",
+            "indexing": "Indekslanmoqda · 64%",
+            "footer": "1 248 ta bo'lak vektor bazaga yozildi · so'nggi yangilanish 2 daqiqa oldin",
+            "sync": "Avtomatik",
+            "alt": "Bilim bazasiga yuklangan fayllar va ularning indeksatsiya holati"
+          },
+          "chat": {
+            "bot": "Doppi Klinika · yordamchi",
+            "status": "bot · doim onlayn",
+            "placeholder": "Xabar yozing...",
+            "sourceLabel": "Manba",
+            "turns": [
+              {
+                "role": "client",
+                "text": "Implant qo'yish qancha turadi?",
+                "time": "14:02"
+              },
+              {
+                "role": "bot",
+                "text": "Osstem (Koreya) — 4 500 000 so'm\nStraumann (Shveytsariya) — 8 200 000 so'm\nNarxga konsultatsiya va 3D rentgen kiradi.",
+                "time": "14:02",
+                "source": "Narx-navo 2026.xlsx",
+                "sourceIcon": "file-spreadsheet"
+              },
+              {
+                "role": "client",
+                "text": "Kafolat beriladimi?",
+                "time": "14:03"
+              },
+              {
+                "role": "bot",
+                "text": "Ha. Implantga 10 yillik, koronkaga 3 yillik kafolat beriladi.",
+                "time": "14:03",
+                "source": "Xizmatlar katalogi.pdf",
+                "sourceIcon": "file-text"
+              }
+            ],
+            "alt": "Telegramda RAG agent bilan suhbat, javoblar ostida manbalar ko'rsatilgan"
+          },
+          "crm": {
+            "window": "CRM · Suhbatlar",
+            "title": "Suhbatlar",
+            "badge": "bugun 46 ta",
+            "telegram": "Telegram",
+            "export": "Eksport",
+            "search": "Suhbat qidirish",
+            "agentBadge": "RAG agent javob berdi",
+            "contactSub": "Telegram · {'@'}dilshod_r · bugun 14:02",
+            "messages": [
+              {
+                "role": "client",
+                "text": "Implant qo'yish qancha turadi?",
+                "time": "14:02"
+              },
+              {
+                "role": "agent",
+                "text": "Osstem (Koreya) — 4 500 000 so'm, Straumann — 8 200 000 so'm. Narxga konsultatsiya kiradi.",
+                "time": "14:02"
+              },
+              {
+                "role": "client",
+                "text": "Kafolat beriladimi?",
+                "time": "14:03"
+              },
+              {
+                "role": "agent",
+                "text": "Ha, implantga 10 yillik kafolat beriladi.",
+                "time": "14:03"
+              }
+            ],
+            "chips": [
+              {
+                "icon": "tag",
+                "label": "Mavzu: Implantatsiya narxi",
+                "tone": "neutral"
+              },
+              {
+                "icon": "check-check",
+                "label": "Javob berildi",
+                "tone": "success"
+              },
+              {
+                "icon": "user-plus",
+                "label": "Lead yaratildi",
+                "tone": "accent"
+              }
+            ],
+            "alt": "CRM'dagi suhbatlar ro'yxati va agent olib borgan yozishma",
+            "chats": [
+              {
+                "name": "Dilshod Rahimov",
+                "time": "14:03",
+                "snippet": "Implant qo'yish qancha turadi?",
+                "unread": 2
+              },
+              {
+                "name": "Nilufar Qodirova",
+                "time": "13:41",
+                "snippet": "Rahmat, ertaga boraman",
+                "unread": 0
+              },
+              {
+                "name": "Jasur To'rayev",
+                "time": "12:58",
+                "snippet": "Filial manzilini yuborasizmi?",
+                "unread": 1
+              },
+              {
+                "name": "Kamola Sattorova",
+                "time": "11:20",
+                "snippet": "Tozalash narxi qancha?",
+                "unread": 0
+              }
+            ],
+            "contact": "Dilshod Rahimov"
+          }
+        }
       }
     },
     "voice": {
@@ -1132,28 +1383,44 @@
             ]
           },
           "call": {
-            "sip": "SIP trunk · ulandi",
-            "agent": "Doppi AI · Ovozli agent",
-            "meta": "+998 90 123 45 67 · 00:42",
-            "roles": {
-              "agent": "AGENT",
-              "client": "MIJOZ"
-            },
-            "turns": [
+            "number": "+998 90 123 45 67",
+            "duration": "00:42",
+            "rec": "REC",
+            "caller": "Doppi klinikasi · ovozli agent",
+            "line": "«Ertaga soat 10:00 ga yozib qo'yaman»",
+            "controls": [
               {
-                "role": "agent",
-                "text": "Assalomu alaykum, Dilshod! Doppi klinikasidan qo'ng'iroq qilyapman."
+                "icon": "voicemail",
+                "key": "stopRecording",
+                "label": "Yozuvni to'xtatish"
               },
               {
-                "role": "client",
-                "text": "Ha, eshitaman. Ertaga ertalab bo'lsa qulay edi."
+                "icon": "video",
+                "key": "videoCall",
+                "label": "Video qo'ng'iroq"
               },
               {
-                "role": "agent",
-                "text": "Unda shifokor qabuliga ertaga soat 10:00 ga yozib qo'yaman."
+                "icon": "bluetooth",
+                "key": "bluetooth",
+                "label": "Bluetooth"
+              },
+              {
+                "icon": "volume-2",
+                "key": "speaker",
+                "label": "Karnay"
+              },
+              {
+                "icon": "mic-off",
+                "key": "mute",
+                "label": "Ovozsiz"
+              },
+              {
+                "icon": "grid-3x3",
+                "key": "keypad",
+                "label": "Klaviatura"
               }
             ],
-            "alt": "Ovozli agent qo'ng'iroq qilayotgan telefon ekrani"
+            "alt": "Ovozli agent qo'ng'iroq qilayotgan telefon ekrani, suhbat yozib olinmoqda"
           },
           "result": {
             "window": "CRM · Lead kartasi",

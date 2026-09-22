@@ -1,5 +1,7 @@
 export { default as CButton } from "./CButton.vue"
 export { default as CIcon } from "./CIcon.vue"
+export { default as CPhoneFrame } from "./CPhoneFrame.vue"
+export { default as CAppWindow } from "./CAppWindow.vue"
 export { default as CDoppiMark } from "./CDoppiMark.vue"
 export { default as CGoogleMark } from "./CGoogleMark.vue"
 export { default as CToaster } from "./CToaster.vue"

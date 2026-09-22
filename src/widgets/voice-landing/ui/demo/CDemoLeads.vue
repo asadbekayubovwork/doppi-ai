@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useI18nList } from "@/shared/lib"
-import { CIcon } from "@/shared/ui"
-import CAppWindow from "./CAppWindow.vue"
+import { CIcon, CAppWindow } from "@/shared/ui"
 
 interface Lead {
   name: string

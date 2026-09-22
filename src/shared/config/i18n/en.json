@@ -857,6 +857,257 @@
       "cta": {
         "title": "Try the RAG Agent in your business",
         "subtitle": "14-day free trial — upload your documents and see for yourself how the agent answers."
+      },
+      "landing": {
+        "badge": "RAG agent · Knowledge base · Telegram · CRM",
+        "title": "Upload what you know — let the agent answer for you",
+        "subtitle": "You upload your documents, your price list and your website. The RAG agent answers on Telegram from that material and nothing else — and every conversation is kept in your CRM.",
+        "ctaPrimary": "Upload a knowledge base",
+        "ctaSecondary": "Try it on Telegram",
+        "flow": [
+          {
+            "icon": "cloud-upload",
+            "label": "Upload"
+          },
+          {
+            "icon": "scan-text",
+            "label": "Indexing"
+          },
+          {
+            "icon": "send",
+            "label": "Answer on Telegram"
+          },
+          {
+            "icon": "inbox",
+            "label": "Chat in CRM"
+          }
+        ],
+        "steps": {
+          "eyebrow": "How it works",
+          "title": "Three steps: upload, let it answer, read it in CRM",
+          "subtitle": "Knowledge base → the answer on Telegram → the conversation history in CRM. One unbroken chain.",
+          "items": [
+            {
+              "tag": "Knowledge base",
+              "title": "You upload your business material once",
+              "desc": "A price list, a service catalogue, an internal handbook or your website — you drop the file in and the system splits it into chunks and writes them to a vector store.",
+              "bullets": [
+                "PDF, DOCX, XLSX, TXT and website links",
+                "Change the material and it re-indexes itself",
+                "The agent answers from that base alone"
+              ]
+            },
+            {
+              "tag": "Answer on Telegram",
+              "title": "The customer asks on Telegram — the agent answers from the base",
+              "desc": "The agent invents nothing: it takes the answer from the documents you uploaded and names the file it came from. Update the price and the answer updates with it.",
+              "bullets": [
+                "Every answer names its source",
+                "Works 24/7, nobody is left waiting",
+                "No answer in the base — it hands over to an operator"
+              ]
+            },
+            {
+              "tag": "Kept in CRM",
+              "title": "Every conversation the agent handled lands in your CRM",
+              "desc": "Who asked what is there in full — the whole thread, its topic and its status. A manager can open it at any point and carry the conversation on.",
+              "bullets": [
+                "The full thread with timestamps",
+                "Topic, status and a lead flag",
+                "An operator can join the chat at any moment"
+              ]
+            }
+          ]
+        },
+        "capabilities": {
+          "eyebrow": "Capabilities",
+          "title": "What else the RAG agent handles",
+          "items": [
+            {
+              "icon": "shield-check",
+              "title": "Your material only",
+              "desc": "The agent never steps outside the base or makes an answer up. If it does not know, it says so."
+            },
+            {
+              "icon": "file-search",
+              "title": "A source on every answer",
+              "desc": "Each answer names the document and the section it came from — easy to check."
+            },
+            {
+              "icon": "languages",
+              "title": "Uzbek and Russian",
+              "desc": "Whichever language the customer writes in, the agent answers in the same one."
+            },
+            {
+              "icon": "message-square",
+              "title": "Telegram, Instagram, website",
+              "desc": "One knowledge base — the same precise answer on every channel."
+            },
+            {
+              "icon": "user-round-cog",
+              "title": "Hand over to an operator",
+              "desc": "If there is no answer, or the customer asks for a person, it passes the chat to a live operator."
+            },
+            {
+              "icon": "chart-no-axes-column",
+              "title": "Question analytics",
+              "desc": "A report of the most asked questions and the ones left unanswered — it shows what the base still needs."
+            }
+          ]
+        },
+        "cta": {
+          "title": "Most of what your customers ask is already in your documents",
+          "subtitle": "Upload them once and the RAG agent does the rest. No developer needed — a day is enough.",
+          "primary": "Upload a knowledge base",
+          "secondary": "Try it on Telegram"
+        },
+        "demo": {
+          "kb": {
+            "window": "Doppi AI · Knowledge base",
+            "title": "Knowledge base",
+            "badge": "4 sources",
+            "add": "Add source",
+            "dropTitle": "Drop your files here",
+            "dropSub": "PDF · DOCX · XLSX · TXT · website link — up to 50 MB",
+            "files": [
+              {
+                "icon": "file-spreadsheet",
+                "name": "Price list 2026.xlsx",
+                "meta": "240 KB · 312 rows"
+              },
+              {
+                "icon": "file-text",
+                "name": "Service catalogue.pdf",
+                "meta": "3.2 MB · 48 pages"
+              },
+              {
+                "icon": "file-type",
+                "name": "Frequent questions.docx",
+                "meta": "180 KB · 64 questions"
+              },
+              {
+                "icon": "globe",
+                "name": "doppi.uz — website",
+                "meta": "128 pages crawled"
+              }
+            ],
+            "indexed": "Indexed",
+            "indexing": "Indexing · 64%",
+            "footer": "1,248 chunks written to the vector store · last update 2 minutes ago",
+            "sync": "Automatic",
+            "alt": "Files uploaded to the knowledge base and their indexing status"
+          },
+          "chat": {
+            "bot": "Doppi Clinic · assistant",
+            "status": "bot · always online",
+            "placeholder": "Message...",
+            "sourceLabel": "Source",
+            "turns": [
+              {
+                "role": "client",
+                "text": "How much does an implant cost?",
+                "time": "14:02"
+              },
+              {
+                "role": "bot",
+                "text": "Osstem (Korea) — 4,500,000 UZS\nStraumann (Switzerland) — 8,200,000 UZS\nThe price includes the consultation and a 3D scan.",
+                "time": "14:02",
+                "source": "Price list 2026.xlsx",
+                "sourceIcon": "file-spreadsheet"
+              },
+              {
+                "role": "client",
+                "text": "Is there a warranty?",
+                "time": "14:03"
+              },
+              {
+                "role": "bot",
+                "text": "Yes. Ten years on the implant, three years on the crown.",
+                "time": "14:03",
+                "source": "Service catalogue.pdf",
+                "sourceIcon": "file-text"
+              }
+            ],
+            "alt": "A Telegram chat with the RAG agent, each answer naming its source"
+          },
+          "crm": {
+            "window": "CRM · Conversations",
+            "title": "Conversations",
+            "badge": "46 today",
+            "telegram": "Telegram",
+            "export": "Export",
+            "search": "Search conversations",
+            "agentBadge": "Answered by the RAG agent",
+            "contactSub": "Telegram · {'@'}dilshod_r · today 14:02",
+            "messages": [
+              {
+                "role": "client",
+                "text": "How much does an implant cost?",
+                "time": "14:02"
+              },
+              {
+                "role": "agent",
+                "text": "Osstem (Korea) — 4,500,000 UZS, Straumann — 8,200,000 UZS. The consultation is included.",
+                "time": "14:02"
+              },
+              {
+                "role": "client",
+                "text": "Is there a warranty?",
+                "time": "14:03"
+              },
+              {
+                "role": "agent",
+                "text": "Yes, the implant carries a ten-year warranty.",
+                "time": "14:03"
+              }
+            ],
+            "chips": [
+              {
+                "icon": "tag",
+                "label": "Topic: implant pricing",
+                "tone": "neutral"
+              },
+              {
+                "icon": "check-check",
+                "label": "Answered",
+                "tone": "success"
+              },
+              {
+                "icon": "user-plus",
+                "label": "Lead created",
+                "tone": "accent"
+              }
+            ],
+            "alt": "The conversation list in the CRM and the thread the agent handled",
+            "chats": [
+              {
+                "name": "Dilshod Rahimov",
+                "time": "14:03",
+                "snippet": "How much does an implant cost?",
+                "unread": 2
+              },
+              {
+                "name": "Nilufar Qodirova",
+                "time": "13:41",
+                "snippet": "Thank you, I will come tomorrow",
+                "unread": 0
+              },
+              {
+                "name": "Jasur To'rayev",
+                "time": "12:58",
+                "snippet": "Could you send the branch address?",
+                "unread": 1
+              },
+              {
+                "name": "Kamola Sattorova",
+                "time": "11:20",
+                "snippet": "How much is a cleaning?",
+                "unread": 0
+              }
+            ],
+            "contact": "Dilshod Rahimov"
+          }
+        }
       }
     },
     "voice": {
@@ -1132,28 +1383,44 @@
             ]
           },
           "call": {
-            "sip": "SIP trunk · connected",
-            "agent": "Doppi AI · Voice agent",
-            "meta": "+998 90 123 45 67 · 00:42",
-            "roles": {
-              "agent": "AGENT",
-              "client": "CUSTOMER"
-            },
-            "turns": [
+            "number": "+998 90 123 45 67",
+            "duration": "00:42",
+            "rec": "REC",
+            "caller": "Doppi clinic · voice agent",
+            "line": "“I will book you for 10:00 tomorrow”",
+            "controls": [
               {
-                "role": "agent",
-                "text": "Hello Dilshod! I am calling from the Doppi clinic."
+                "icon": "voicemail",
+                "key": "stopRecording",
+                "label": "Stop recording"
               },
               {
-                "role": "client",
-                "text": "Yes, I am listening. Tomorrow morning would suit me."
+                "icon": "video",
+                "key": "videoCall",
+                "label": "Video call"
               },
               {
-                "role": "agent",
-                "text": "Then I will book you with the doctor for 10:00 tomorrow."
+                "icon": "bluetooth",
+                "key": "bluetooth",
+                "label": "Bluetooth"
+              },
+              {
+                "icon": "volume-2",
+                "key": "speaker",
+                "label": "Speaker"
+              },
+              {
+                "icon": "mic-off",
+                "key": "mute",
+                "label": "Mute"
+              },
+              {
+                "icon": "grid-3x3",
+                "key": "keypad",
+                "label": "Keypad"
               }
             ],
-            "alt": "Phone screen with the voice agent on a call"
+            "alt": "A phone screen with the voice agent on a call, the conversation being recorded"
           },
           "result": {
             "window": "CRM · Lead card",
