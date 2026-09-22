@@ -950,6 +950,240 @@
       "cta": {
         "title": "Ovozli agentni sinab ko'ring",
         "subtitle": "14 kunlik bepul sinov — agent biznesingiz uchun qanday gaplashishini eshiting."
+      },
+      "landing": {
+        "badge": "Ovozli AI agent · SIP telefoniya · CRM",
+        "title": "Instagramda lead qoldirdi — 60 soniyada AI qo'ng'iroq qildi",
+        "subtitle": "Ovozli agent formadan kelgan mijozga o'zi telefon qiladi, savollarga javob beradi, qabulga yozadi va suhbat natijasini to'g'ridan-to'g'ri CRM'ga yozib qo'yadi.",
+        "ctaPrimary": "Agentni ishga tushirish",
+        "ctaSecondary": "Qo'ng'iroq yozuvini eshitish",
+        "flow": [
+          {
+            "icon": "instagram",
+            "label": "Instagram forma"
+          },
+          {
+            "icon": "database",
+            "label": "CRM'ga lead"
+          },
+          {
+            "icon": "phone-call",
+            "label": "SIP qo'ng'iroq"
+          },
+          {
+            "icon": "calendar-check",
+            "label": "CRM'da natija"
+          }
+        ],
+        "steps": {
+          "eyebrow": "Qanday ishlaydi",
+          "title": "Lead'dan yozuvgacha — to'rt qadam, odam aralashuvisiz",
+          "subtitle": "Instagram formasi → CRM → ovozli qo'ng'iroq → CRM'da natija. Hammasi bir zanjirda.",
+          "items": [
+            {
+              "tag": "Lead yig'ish",
+              "title": "Instagram postidagi tugmadan ro'yxatdan o'tadi",
+              "desc": "Mijoz reklama posti ostidagi «Ro'yxatdan o'tish» tugmasini bosadi va faqat ism-familiya bilan telefon raqamini qoldiradi — boshqa hech narsa so'ralmaydi.",
+              "bullets": [
+                "Instagram va Facebook lead formalari",
+                "Telegram bot va sayt formalari",
+                "Ma'lumot bir zumda tizimga tushadi"
+              ]
+            },
+            {
+              "tag": "CRM'ga tushadi",
+              "title": "Forma to'ldirilishi bilan lead CRM'da paydo bo'ladi",
+              "desc": "Ma'lumotlar qo'lda ko'chirilmaydi. Ism, telefon, manba va vaqt avtomatik yoziladi va lead darhol navbatga tushadi — operator kutib o'tirmaydi.",
+              "bullets": [
+                "Real vaqtda sinxronizatsiya",
+                "Manba va UTM belgilari saqlanadi",
+                "Dublikat raqamlar birlashtiriladi"
+              ]
+            },
+            {
+              "tag": "Ovozli qo'ng'iroq",
+              "title": "SIP orqali agent mijozga o'zi telefon qiladi",
+              "desc": "Lead tushgan zahoti ovozli agent haqiqiy raqamdan qo'ng'iroq qiladi. O'zbek tilida tabiiy gaplashadi, savollarga javob beradi va qabul vaqtini kelishib oladi.",
+              "bullets": [
+                "SIP trunk orqali haqiqiy shahar raqamidan",
+                "O'zbek va rus tillarida tabiiy nutq",
+                "Javob bermasa — belgilangan vaqtda qayta uriniladi"
+              ]
+            },
+            {
+              "tag": "Natija CRM'da",
+              "title": "Suhbat natijasi CRM'ga qaytib yoziladi",
+              "desc": "Agent nima kelishilganini o'zi yozib qo'yadi: qabul sanasi va vaqti, shifokor, xizmat hamda qisqa xulosa. Menejer CRM'ni ochadi va ko'radi — «Shifokor qabuliga soat 10:00 ga yozildi».",
+              "bullets": [
+                "Qabul sanasi va vaqti avtomatik saqlanadi",
+                "Qo'ng'iroq yozuvi va to'liq transkript",
+                "Lead holati o'z-o'zidan yangilanadi"
+              ]
+            }
+          ]
+        },
+        "capabilities": {
+          "eyebrow": "Imkoniyatlar",
+          "title": "Ovozli agent yana nimalarni uddalaydi",
+          "items": [
+            {
+              "icon": "phone-call",
+              "title": "SIP telefoniya",
+              "desc": "Haqiqiy shahar raqamidan chiquvchi va kiruvchi qo'ng'iroqlar. Mavjud ATS'ingizga ulanadi."
+            },
+            {
+              "icon": "languages",
+              "title": "O'zbek va rus tili",
+              "desc": "Tabiiy nutq, jonli intonatsiya va mijozning gapini bo'lmasdan tinglash."
+            },
+            {
+              "icon": "database-zap",
+              "title": "CRM'ga to'g'ridan-to'g'ri",
+              "desc": "Lead, qabul vaqti, xulosa va holat — hammasi API orqali real vaqtda yoziladi."
+            },
+            {
+              "icon": "calendar-clock",
+              "title": "Qabulga yozish",
+              "desc": "Bo'sh vaqtlarni tekshiradi, mijoz bilan kelishadi va bandlovni tasdiqlaydi."
+            },
+            {
+              "icon": "audio-lines",
+              "title": "Yozuv va transkript",
+              "desc": "Har bir qo'ng'iroq saqlanadi: audio, matn va kayfiyat tahlili bilan."
+            },
+            {
+              "icon": "gauge",
+              "title": "100+ parallel qo'ng'iroq",
+              "desc": "Navbat yo'q — yuzlab leadga bir vaqtda, 24/7 rejimida qo'ng'iroq qiladi."
+            }
+          ]
+        },
+        "cta": {
+          "title": "Bir kunda o'tkazib yuborilgan leadlaringizni sanab chiqing",
+          "subtitle": "Ovozli agent ularning har biriga 60 soniya ichida qo'ng'iroq qiladi va natijani CRM'ga yozadi. Ulanish — 1 kun.",
+          "primary": "Bepul demo qo'ng'iroq",
+          "secondary": "Menejer bilan bog'lanish"
+        },
+        "demo": {
+          "ig": {
+            "caption": "Homiylangan",
+            "cta": "Ro'yxatdan o'tish",
+            "likes": "1 248 ta yoqtirish",
+            "post": "Implantatsiya bo'yicha bepul konsultatsiya — joylar cheklangan",
+            "imageAlt": "Stomatologiya klinikasi kabineti",
+            "sheetTitle": "Ro'yxatdan o'tish",
+            "sheetSub": "Bepul konsultatsiya uchun ma'lumotlaringizni qoldiring",
+            "nameLabel": "Ism familiya",
+            "phoneLabel": "Telefon raqam",
+            "submit": "Yuborish",
+            "alt": "Instagram lead formasi ochilgan telefon ekrani",
+            "nameValue": "Dilshod Rahimov",
+            "phoneValue": "+998 90 123 45 67"
+          },
+          "leads": {
+            "window": "CRM · Leadlar",
+            "title": "Yangi leadlar",
+            "badge": "+1 yangi",
+            "search": "Qidirish",
+            "filter": "Filtr",
+            "cols": {
+              "name": "Mijoz",
+              "phone": "Telefon",
+              "source": "Manba",
+              "time": "Vaqt",
+              "status": "Holat"
+            },
+            "footer": "Jami 128 ta lead · bugun 14 ta",
+            "webhook": "Webhook ulangan",
+            "alt": "CRM'dagi yangi leadlar ro'yxati",
+            "rows": [
+              {
+                "name": "Dilshod Rahimov",
+                "phone": "+998 90 123 45 67",
+                "source": "Instagram",
+                "time": "hozir",
+                "status": "Yangi",
+                "tone": "accent"
+              },
+              {
+                "name": "Nilufar Qodirova",
+                "phone": "+998 93 244 11 08",
+                "source": "Instagram",
+                "time": "2 daq oldin",
+                "status": "Qo'ng'iroqda",
+                "tone": "warning"
+              },
+              {
+                "name": "Jasur To'rayev",
+                "phone": "+998 97 810 55 32",
+                "source": "Telegram",
+                "time": "14 daq oldin",
+                "status": "Yozildi",
+                "tone": "success"
+              },
+              {
+                "name": "Kamola Sattorova",
+                "phone": "+998 91 703 26 40",
+                "source": "Sayt",
+                "time": "41 daq oldin",
+                "status": "Yozildi",
+                "tone": "success"
+              }
+            ]
+          },
+          "call": {
+            "sip": "SIP trunk · ulandi",
+            "agent": "Doppi AI · Ovozli agent",
+            "meta": "+998 90 123 45 67 · 00:42",
+            "roles": {
+              "agent": "AGENT",
+              "client": "MIJOZ"
+            },
+            "turns": [
+              {
+                "role": "agent",
+                "text": "Assalomu alaykum, Dilshod! Doppi klinikasidan qo'ng'iroq qilyapman."
+              },
+              {
+                "role": "client",
+                "text": "Ha, eshitaman. Ertaga ertalab bo'lsa qulay edi."
+              },
+              {
+                "role": "agent",
+                "text": "Unda shifokor qabuliga ertaga soat 10:00 ga yozib qo'yaman."
+              }
+            ],
+            "alt": "Ovozli agent qo'ng'iroq qilayotgan telefon ekrani"
+          },
+          "result": {
+            "window": "CRM · Lead kartasi",
+            "meta": "+998 90 123 45 67 · Instagram lead · bugun 14:38",
+            "status": "Qabulga yozildi",
+            "apptTitle": "Shifokor qabuliga yozildi",
+            "apptSub": "Doppi AI ovozli agent tomonidan · avtomatik",
+            "date": "23-sentabr, seshanba",
+            "fields": [
+              {
+                "label": "Shifokor",
+                "value": "Dr. K. Kamolov"
+              },
+              {
+                "label": "Xizmat",
+                "value": "Implantatsiya konsultatsiyasi"
+              },
+              {
+                "label": "Filial",
+                "value": "Chilonzor, 12-uy"
+              }
+            ],
+            "aiLabel": "AI xulosa",
+            "aiText": "Mijoz implantatsiya narxi bilan qiziqdi va ertalabki vaqtni so'radi. Qabul 23-sentabr 10:00 ga belgilandi, mijozga eslatma SMS yuboriladi. Qo'shimcha savol qolmadi.",
+            "transcript": "Transkript",
+            "play": "Yozuvni eshitish",
+            "alt": "CRM'dagi lead kartasi va qabul yozuvi",
+            "name": "Dilshod Rahimov"
+          }
+        }
       }
     },
     "video": {

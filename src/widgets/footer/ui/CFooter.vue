@@ -2,7 +2,7 @@
 import { computed } from "vue"
 import { useI18n } from "vue-i18n"
 import type { RouteLocationRaw } from "vue-router"
-import { CIcon, CLogo } from "@/shared/ui"
+import { CIcon, CLogo, CSocialMark } from "@/shared/ui"
 import { SOCIALS } from "@/shared/config/socials"
 import { SERVICE_NAV } from "@/shared/config/services"
 
@@ -62,7 +62,7 @@ const socials = SOCIALS
               :aria-label="social.label"
               class="grid h-10 w-10 place-items-center rounded-full border border-sand-200 bg-white text-sand-500 transition-all duration-200 hover:-translate-y-0.5 hover:border-sand-400 hover:text-sand-950"
             >
-              <CIcon :name="social.icon" class="h-4 w-4" />
+              <CSocialMark :name="social.icon" class="h-5 w-5" />
             </a>
           </div>
         </div>

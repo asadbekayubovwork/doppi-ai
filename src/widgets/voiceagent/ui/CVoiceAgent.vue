@@ -74,7 +74,6 @@ const miniBars = [0.5, 0.9, 0.6, 1, 0.7]
 
 <template>
   <section id="voice" class="section-ground py-[60px] sm:py-[100px]">
-    <div class="ambient-glow -right-16 top-1/3 h-72 w-[30rem]" aria-hidden="true" />
 
     <div class="container relative z-10">
       <div class="grid items-center gap-12 lg:grid-cols-2">
@@ -113,7 +112,6 @@ const miniBars = [0.5, 0.9, 0.6, 1, 0.7]
           data-aos-duration="1000"
           data-aos-delay="200"
         >
-          <div class="ambient-glow -inset-6" aria-hidden="true" />
 
           <div ref="card" class="relative rounded-[28px] border border-sand-200 bg-white/90 p-6 shadow-[0_24px_60px_-28px_rgba(12,10,9,0.25)] backdrop-blur">
             <div class="flex items-center justify-between gap-4 border-b border-sand-200 pb-4">

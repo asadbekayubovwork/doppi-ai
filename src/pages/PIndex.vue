@@ -6,7 +6,6 @@ import {
   CSolution,
   CFeatures,
   CHowItWorks,
-  CVoiceAgent,
   CResults,
   CPricingList,
   CFaq,
@@ -25,7 +24,6 @@ useSeo("/")
     <CSolution />
     <CFeatures />
     <CHowItWorks />
-    <CVoiceAgent />
     <CResults />
     <CPricingList />
     <CFaq />

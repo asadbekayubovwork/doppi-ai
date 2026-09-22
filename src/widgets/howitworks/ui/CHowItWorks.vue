@@ -17,7 +17,6 @@ const showConnector = (index: number) => (index + 1) % 4 !== 0 && index !== step
 <template>
   <section id="how" class="section-ground py-[60px] sm:py-[100px]">
     <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-40" aria-hidden="true" />
-    <div class="ambient-glow left-1/2 top-8 h-64 w-[40rem] -translate-x-1/2 opacity-70" aria-hidden="true" />
 
     <div class="container relative z-10">
       <CSectionHeading

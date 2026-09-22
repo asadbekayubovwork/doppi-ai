@@ -23,4 +23,18 @@ export { CTeamCards } from "./team"
 export { CContact } from "./contact"
 
 // Service pages (/rag-agent, /voice-agent, /video-generator)
-export { CServiceHero, CServiceFeatures, CServiceSteps, CServiceLinks, CServiceCta } from "./service"
+export {
+  CServiceHero,
+  CServiceFeatures,
+  CServiceSteps,
+  CServiceLinks,
+  CServiceCta,
+} from "./service"
+
+// The bespoke /voice-agent landing
+export {
+  CVoiceHero,
+  CVoiceSteps,
+  CVoiceCapabilities,
+  CVoiceCta,
+} from "./voice-landing"

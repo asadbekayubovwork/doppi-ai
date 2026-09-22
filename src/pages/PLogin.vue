@@ -4,7 +4,7 @@ import { useHead } from "@unhead/vue"
 import { useRoute, useRouter } from "vue-router"
 import {
   AuthShell,
-  CTelegramLogin,
+  // CTelegramLogin,
   CMfaChallenge,
   useAuthStore,
   authApi,
@@ -123,30 +123,30 @@ const startGoogle = () => {
   window.location.assign(authApi.googleAuthorizeUrl())
 }
 
-const handleTelegram = async (data: Record<string, string | number>) => {
-  const pending = toast.loading("Telegram tasdiqlanmoqda...")
-  try {
-    const response = await auth.telegramLogin(data)
-    if (response.status === "challenge_required") {
-      await router.replace({
-        name: "TelegramAuth",
-        query: { challenge_id: response.challenge_id },
-      })
-      return
-    }
-    await router.replace(destination())
-  } catch (error) {
-    toast.error(
-      "Telegram orqali kirish amalga oshmadi",
-      messageForProblem(error, "Qayta urinib ko'ring.", {
-        TELEGRAM_NOT_CONFIGURED: "Telegram orqali kirish hozircha mavjud emas.",
-        AUTHENTICATION_REQUIRED: "Telegram tasdiqlovi yaroqsiz.",
-      })
-    )
-  } finally {
-    toast.dismiss(pending)
-  }
-}
+// const handleTelegram = async (data: Record<string, string | number>) => {
+//   const pending = toast.loading("Telegram tasdiqlanmoqda...")
+//   try {
+//     const response = await auth.telegramLogin(data)
+//     if (response.status === "challenge_required") {
+//       await router.replace({
+//         name: "TelegramAuth",
+//         query: { challenge_id: response.challenge_id },
+//       })
+//       return
+//     }
+//     await router.replace(destination())
+//   } catch (error) {
+//     toast.error(
+//       "Telegram orqali kirish amalga oshmadi",
+//       messageForProblem(error, "Qayta urinib ko'ring.", {
+//         TELEGRAM_NOT_CONFIGURED: "Telegram orqali kirish hozircha mavjud emas.",
+//         AUTHENTICATION_REQUIRED: "Telegram tasdiqlovi yaroqsiz.",
+//       })
+//     )
+//   } finally {
+//     toast.dismiss(pending)
+//   }
+// }
 </script>
 
 <template>
@@ -239,7 +239,7 @@ const handleTelegram = async (data: Record<string, string | number>) => {
           />
         </button>
       </form>
-      <div class="mt-4"><CTelegramLogin @auth="handleTelegram" /></div>
+      <!-- <div class="mt-4"><CTelegramLogin @auth="handleTelegram" /></div> -->
       <p class="mt-4 text-center text-[13.5px] text-[#6A6A74]">
         Do'ppi AI'da yangimisiz?
         <RouterLink to="/register" class="font-semibold text-[#5B4BE8]"

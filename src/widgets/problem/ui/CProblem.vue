@@ -13,10 +13,6 @@ const items = useI18nList<ProblemItem>("problem.items")
 
 <template>
   <section id="problem" class="section-ground py-[60px] sm:py-[100px]">
-    <div
-      class="ambient-glow right-0 top-12 h-64 w-[26rem] translate-x-1/3 opacity-60"
-      aria-hidden="true"
-    />
 
     <div class="container relative z-10">
       <CSectionHeading

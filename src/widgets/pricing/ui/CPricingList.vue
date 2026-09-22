@@ -22,10 +22,6 @@ const tiers = useI18nList<Tier>("pricing.tiers")
 
 <template>
   <section id="pricing" class="section-ground py-[60px] sm:py-[100px]">
-    <div
-      class="ambient-glow left-1/2 top-24 h-64 w-[40rem] -translate-x-1/2 opacity-70"
-      aria-hidden="true"
-    />
 
     <div class="container relative z-10">
       <CSectionHeading

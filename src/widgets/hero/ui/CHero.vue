@@ -47,12 +47,6 @@ const toggleCall = () => (isActive.value ? stop() : start())
 <template>
   <section id="top" class="hero section-ground pt-[120px] pb-[60px] sm:pt-[160px] sm:pb-[100px] h-screen">
     <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-70" aria-hidden="true" />
-    <div class="ambient-glow animate-drift left-[6%] -top-40 h-72 w-[34rem]" aria-hidden="true" />
-    <div
-      class="ambient-glow animate-drift right-[4%] top-10 h-64 w-[28rem]"
-      style="animation-delay: -13s"
-      aria-hidden="true"
-    />
 
     <div class="container relative z-10">
       <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
@@ -117,8 +111,6 @@ const toggleCall = () => (isActive.value ? stop() : start())
           data-aos-duration="1000"
           data-aos-delay="300"
         >
-          <div class="ambient-glow -inset-6" aria-hidden="true" />
-
           <div
             class="relative flex flex-col items-center rounded-[32px] border border-sand-200 bg-white px-8 py-14 shadow-[0_24px_60px_-28px_rgba(12,10,9,0.25)] sm:py-16"
           >

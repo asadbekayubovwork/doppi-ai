@@ -41,7 +41,7 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<template>
+<!-- <template>
   <div
     v-if="configuredUsername"
     ref="container"
@@ -55,4 +55,4 @@ onBeforeUnmount(() => {
   >
     Telegram orqali kirish tez orada
   </p>
-</template>
+</template> -->

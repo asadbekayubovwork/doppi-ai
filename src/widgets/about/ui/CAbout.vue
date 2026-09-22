@@ -19,10 +19,6 @@ const facts = useI18nList<Fact>("about.facts")
 
 <template>
   <section id="about" class="section-ground py-[60px] sm:py-[100px]">
-    <div
-      class="ambient-glow right-1/4 top-0 h-64 w-[30rem]"
-      aria-hidden="true"
-    />
 
     <div class="container relative z-10">
       <div class="grid items-start gap-12 lg:grid-cols-2">

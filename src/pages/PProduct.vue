@@ -16,7 +16,6 @@ useSeo("/product")
   <div>
     <section class="section-ground pt-[130px] pb-[40px] sm:pt-[180px] sm:pb-[60px]">
       <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-60" aria-hidden="true" />
-      <div class="ambient-glow left-1/2 -top-24 h-64 w-[38rem] -translate-x-1/2" aria-hidden="true" />
 
       <div class="container relative z-10 text-center">
         <h1

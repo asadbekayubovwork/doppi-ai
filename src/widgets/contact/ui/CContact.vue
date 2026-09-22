@@ -120,10 +120,6 @@ const handleSubmit = async () => {
       class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-50"
       aria-hidden="true"
     />
-    <div
-      class="ambient-glow -right-24 top-4 h-72 w-[30rem]"
-      aria-hidden="true"
-    />
 
     <div class="container relative z-10">
       <div class="grid items-start gap-12 lg:grid-cols-2">

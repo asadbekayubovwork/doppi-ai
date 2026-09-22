@@ -1,7 +1,8 @@
 import type { RouteRecordRaw } from "vue-router"
 import { SERVICE_KEYS, SERVICE_PATHS } from "@/shared/config/seoPages"
 
-// One public landing page per service, all rendered by PService.
+// One public landing page per service. They share PService, except for
+// /voice-agent, which has its own page built around the lead-to-booking chain.
 const serviceRoutes: RouteRecordRaw[] = SERVICE_KEYS.map((service) => ({
   path: SERVICE_PATHS[service],
   name: `Service-${service}`,
@@ -9,7 +10,10 @@ const serviceRoutes: RouteRecordRaw[] = SERVICE_KEYS.map((service) => ({
   meta: {
     layout: "DefaultLayout",
   },
-  component: () => import("./PService.vue"),
+  component:
+    service === "voice"
+      ? () => import("./PVoiceAgentLanding.vue")
+      : () => import("./PService.vue"),
 }))
 
 const routes: Array<RouteRecordRaw> = [

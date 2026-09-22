@@ -950,6 +950,240 @@
       "cta": {
         "title": "Try the voice agent",
         "subtitle": "14-day free trial — hear how the agent sounds for your business."
+      },
+      "landing": {
+        "badge": "AI voice agent · SIP telephony · CRM",
+        "title": "A lead came in on Instagram — the AI called back in 60 seconds",
+        "subtitle": "The voice agent calls the person who filled in your form, answers their questions, books the appointment and writes the outcome straight into your CRM.",
+        "ctaPrimary": "Launch the agent",
+        "ctaSecondary": "Listen to a call recording",
+        "flow": [
+          {
+            "icon": "instagram",
+            "label": "Instagram form"
+          },
+          {
+            "icon": "database",
+            "label": "Lead in CRM"
+          },
+          {
+            "icon": "phone-call",
+            "label": "SIP call"
+          },
+          {
+            "icon": "calendar-check",
+            "label": "Result in CRM"
+          }
+        ],
+        "steps": {
+          "eyebrow": "How it works",
+          "title": "From lead to booking — four steps, no one in between",
+          "subtitle": "Instagram form → CRM → voice call → result in CRM. One unbroken chain.",
+          "items": [
+            {
+              "tag": "Lead capture",
+              "title": "They sign up from the button under your Instagram post",
+              "desc": "The customer taps «Sign up» under your ad and leaves nothing but a name and a phone number — you ask for nothing else.",
+              "bullets": [
+                "Instagram and Facebook lead forms",
+                "Telegram bot and website forms",
+                "The data reaches your system instantly"
+              ]
+            },
+            {
+              "tag": "Straight into CRM",
+              "title": "The lead appears in your CRM the moment the form is sent",
+              "desc": "Nothing is copied by hand. Name, phone, source and time are recorded automatically and the lead joins the queue at once — nobody has to be watching.",
+              "bullets": [
+                "Real-time synchronisation",
+                "Source and UTM tags are kept",
+                "Duplicate numbers are merged"
+              ]
+            },
+            {
+              "tag": "Voice call",
+              "title": "The agent calls the customer itself over SIP",
+              "desc": "As soon as the lead lands, the voice agent calls from a real number. It speaks naturally in Uzbek, answers questions and agrees on a time.",
+              "bullets": [
+                "A real city number over a SIP trunk",
+                "Natural speech in Uzbek and Russian",
+                "No answer — it retries at the time you set"
+              ]
+            },
+            {
+              "tag": "Result in CRM",
+              "title": "The outcome of the conversation is written back to CRM",
+              "desc": "The agent records what was agreed: the date and time, the doctor, the service and a short summary. Your manager opens the CRM and reads it — «Booked for 10:00».",
+              "bullets": [
+                "Date and time saved automatically",
+                "Call recording and a full transcript",
+                "The lead status updates by itself"
+              ]
+            }
+          ]
+        },
+        "capabilities": {
+          "eyebrow": "Capabilities",
+          "title": "What else the voice agent handles",
+          "items": [
+            {
+              "icon": "phone-call",
+              "title": "SIP telephony",
+              "desc": "Outbound and inbound calls from a real city number. It connects to your existing PBX."
+            },
+            {
+              "icon": "languages",
+              "title": "Uzbek and Russian",
+              "desc": "Natural speech, live intonation and the patience to hear the customer out."
+            },
+            {
+              "icon": "database-zap",
+              "title": "Straight into CRM",
+              "desc": "Lead, appointment time, summary and status — all written in real time over the API."
+            },
+            {
+              "icon": "calendar-clock",
+              "title": "Appointment booking",
+              "desc": "It checks open slots, agrees on one with the customer and confirms the booking."
+            },
+            {
+              "icon": "audio-lines",
+              "title": "Recording and transcript",
+              "desc": "Every call is stored: audio, text and sentiment analysis."
+            },
+            {
+              "icon": "gauge",
+              "title": "100+ parallel calls",
+              "desc": "No queue — hundreds of leads called at once, around the clock."
+            }
+          ]
+        },
+        "cta": {
+          "title": "Count the leads you missed in a single day",
+          "subtitle": "The voice agent calls every one of them within 60 seconds and writes the result into your CRM. Setup takes a day.",
+          "primary": "Book a free demo call",
+          "secondary": "Talk to a manager"
+        },
+        "demo": {
+          "ig": {
+            "caption": "Sponsored",
+            "cta": "Sign up",
+            "likes": "1,248 likes",
+            "post": "Free implant consultation — limited places",
+            "imageAlt": "Dental clinic treatment room",
+            "sheetTitle": "Sign up",
+            "sheetSub": "Leave your details for a free consultation",
+            "nameLabel": "Full name",
+            "phoneLabel": "Phone number",
+            "submit": "Send",
+            "alt": "Phone screen with an Instagram lead form open",
+            "nameValue": "Dilshod Rahimov",
+            "phoneValue": "+998 90 123 45 67"
+          },
+          "leads": {
+            "window": "CRM · Leads",
+            "title": "New leads",
+            "badge": "+1 new",
+            "search": "Search",
+            "filter": "Filter",
+            "cols": {
+              "name": "Customer",
+              "phone": "Phone",
+              "source": "Source",
+              "time": "Time",
+              "status": "Status"
+            },
+            "footer": "128 leads in total · 14 today",
+            "webhook": "Webhook connected",
+            "alt": "A list of new leads in the CRM",
+            "rows": [
+              {
+                "name": "Dilshod Rahimov",
+                "phone": "+998 90 123 45 67",
+                "source": "Instagram",
+                "time": "now",
+                "status": "New",
+                "tone": "accent"
+              },
+              {
+                "name": "Nilufar Qodirova",
+                "phone": "+998 93 244 11 08",
+                "source": "Instagram",
+                "time": "2 min ago",
+                "status": "On a call",
+                "tone": "warning"
+              },
+              {
+                "name": "Jasur To'rayev",
+                "phone": "+998 97 810 55 32",
+                "source": "Telegram",
+                "time": "14 min ago",
+                "status": "Booked",
+                "tone": "success"
+              },
+              {
+                "name": "Kamola Sattorova",
+                "phone": "+998 91 703 26 40",
+                "source": "Website",
+                "time": "41 min ago",
+                "status": "Booked",
+                "tone": "success"
+              }
+            ]
+          },
+          "call": {
+            "sip": "SIP trunk · connected",
+            "agent": "Doppi AI · Voice agent",
+            "meta": "+998 90 123 45 67 · 00:42",
+            "roles": {
+              "agent": "AGENT",
+              "client": "CUSTOMER"
+            },
+            "turns": [
+              {
+                "role": "agent",
+                "text": "Hello Dilshod! I am calling from the Doppi clinic."
+              },
+              {
+                "role": "client",
+                "text": "Yes, I am listening. Tomorrow morning would suit me."
+              },
+              {
+                "role": "agent",
+                "text": "Then I will book you with the doctor for 10:00 tomorrow."
+              }
+            ],
+            "alt": "Phone screen with the voice agent on a call"
+          },
+          "result": {
+            "window": "CRM · Lead card",
+            "meta": "+998 90 123 45 67 · Instagram lead · today 14:38",
+            "status": "Appointment booked",
+            "apptTitle": "Booked with the doctor",
+            "apptSub": "By the Doppi AI voice agent · automatic",
+            "date": "Tuesday, 23 September",
+            "fields": [
+              {
+                "label": "Doctor",
+                "value": "Dr. K. Kamolov"
+              },
+              {
+                "label": "Service",
+                "value": "Implant consultation"
+              },
+              {
+                "label": "Branch",
+                "value": "Chilonzor, 12"
+              }
+            ],
+            "aiLabel": "AI summary",
+            "aiText": "The customer asked about implant pricing and requested a morning slot. The appointment is set for 23 September at 10:00 and a reminder SMS will be sent. No open questions left.",
+            "transcript": "Transcript",
+            "play": "Play the recording",
+            "alt": "A lead card in the CRM with the booked appointment",
+            "name": "Dilshod Rahimov"
+          }
+        }
       }
     },
     "video": {

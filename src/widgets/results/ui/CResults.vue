@@ -12,14 +12,6 @@ const stats = useI18nList<Stat>("results.stats")
 
 <template>
   <section id="results" class="section-ground py-[60px] sm:py-[100px]">
-    <div
-      class="ambient-glow -right-24 top-1/3 h-72 w-[32rem]"
-      aria-hidden="true"
-    />
-    <div
-      class="ambient-glow -left-24 bottom-0 h-64 w-[26rem] opacity-60"
-      aria-hidden="true"
-    />
 
     <div class="container relative z-10">
       <CSectionHeading

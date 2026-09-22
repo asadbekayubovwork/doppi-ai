@@ -159,7 +159,7 @@ const onHover = (i: number | null) => {
 <template>
   <section id="solution" class="section-ground py-[60px] sm:py-[100px]">
     <div
-      class="ambient-glow ambient-glow-cool left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2"
+      class="ambient-glow-cool left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2"
       aria-hidden="true"
     />
 
