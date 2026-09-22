@@ -2,6 +2,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { useToast } from "@/shared/lib"
 import {
+  resolveMediaUrl,
   videoApi,
   type VideoListParams,
   type VideoSyncStatus,
@@ -89,11 +90,15 @@ export const useVideoGenerator = () => {
     Boolean(businessId.value && form.topic.trim())
   )
 
-  // Same-origin URL the browser can stream in a <video> tag. Prefer the
-  // provider's result_url; fall back to the secure download endpoint.
+  // Only the control-plane URL is used by the browser. The provider result_url
+  // may be temporary, cross-origin, or require credentials unavailable to the
+  // browser, so it remains a diagnostic field rather than a playback source.
   const playbackUrl = (job: VideoJob) =>
     job.status === "completed"
-      ? job.result_url || videoApi.downloadUrl(businessId.value, job.id)
+      ? resolveMediaUrl(
+          job.stream_url,
+          videoApi.streamUrl(businessId.value, job.id)
+        )
       : null
 
   const replaceJob = (next: VideoJob) => {
@@ -283,7 +288,12 @@ export const useVideoGenerator = () => {
 
   const download = (job: VideoJob) => {
     if (!businessId.value || job.status !== "completed") return
-    window.location.assign(videoApi.downloadUrl(businessId.value, job.id))
+    window.location.assign(
+      resolveMediaUrl(
+        job.download_url,
+        videoApi.downloadUrl(businessId.value, job.id)
+      )
+    )
   }
 
   let timer: number | undefined

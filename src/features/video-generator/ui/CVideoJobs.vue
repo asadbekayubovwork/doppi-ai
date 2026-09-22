@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { formatTimeAgo } from "@/shared/lib"
+import { formatTimeAgo, useCopyToClipboard } from "@/shared/lib"
 import { CAppButton, CBadge, CEmptyState, CIcon, CSkeleton } from "@/shared/ui"
 import type { BadgeTone } from "@/shared/ui/types"
+import { resolveMediaUrl, videoApi } from "../api/videoApi"
 import type { VideoJob, VideoJobStatus } from "../api/types"
 
 defineProps<{
@@ -14,6 +15,19 @@ defineEmits<{
   sync: []
   download: [job: VideoJob]
 }>()
+
+const copy = useCopyToClipboard()
+
+const streamUrl = (job: VideoJob) =>
+  resolveMediaUrl(job.stream_url, videoApi.streamUrl(job.business_id, job.id))
+
+const downloadUrl = (job: VideoJob) =>
+  resolveMediaUrl(
+    job.download_url,
+    videoApi.downloadUrl(job.business_id, job.id)
+  )
+
+const copyUrl = (url: string, label: string) => copy(url, `${label} copied`)
 
 const STATUS: Record<
   VideoJobStatus,
@@ -141,6 +155,43 @@ const progress = (job: VideoJob) => {
           >
             {{ job.error_message }}
           </p>
+          <div
+            v-if="job.status === 'completed'"
+            class="mt-3 space-y-1 rounded-xl border border-[#ECECE8] bg-[#FAFAF9] p-3 text-[11px]"
+          >
+            <div class="flex items-start gap-2">
+              <span class="w-16 shrink-0 font-medium text-[#73737D]"
+                >Preview</span
+              >
+              <code class="min-w-0 flex-1 break-all text-[#5B4BE8]">{{
+                streamUrl(job)
+              }}</code>
+              <button
+                type="button"
+                class="shrink-0 text-[#73737D] transition hover:text-[#5B4BE8]"
+                title="Copy preview URL"
+                @click="copyUrl(streamUrl(job), 'Preview URL')"
+              >
+                <CIcon name="copy" class="h-3.5 w-3.5" />
+              </button>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="w-16 shrink-0 font-medium text-[#73737D]"
+                >Download</span
+              >
+              <code class="min-w-0 flex-1 break-all text-[#5B4BE8]">{{
+                downloadUrl(job)
+              }}</code>
+              <button
+                type="button"
+                class="shrink-0 text-[#73737D] transition hover:text-[#5B4BE8]"
+                title="Copy download URL"
+                @click="copyUrl(downloadUrl(job), 'Download URL')"
+              >
+                <CIcon name="copy" class="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="flex items-center gap-2 sm:justify-end">
@@ -159,6 +210,16 @@ const progress = (job: VideoJob) => {
           >
             Download
           </CAppButton>
+          <a
+            v-if="job.status === 'completed'"
+            :href="streamUrl(job)"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex h-8 items-center gap-1.5 rounded-[10px] border border-[#E5E5E1] bg-white px-3 text-[13px] font-semibold text-[#15151B] transition hover:border-[#D6D6D1] hover:bg-[#FAFAF9]"
+          >
+            <CIcon name="external-link" class="h-3.5 w-3.5" />
+            Preview
+          </a>
         </div>
       </article>
     </div>

@@ -106,7 +106,8 @@ describe("video async isolation and submission safety", () => {
   })
 
   it("allows an explicitly confirmed new attempt after a definite failure", async () => {
-    const create = vi.spyOn(videoApi, "create")
+    const create = vi
+      .spyOn(videoApi, "create")
       .mockResolvedValueOnce(makeJob({ status: "submission_failed" }))
       .mockResolvedValueOnce(makeJob())
     await mountController()
@@ -172,6 +173,20 @@ describe("video async isolation and submission safety", () => {
     expect(get).toHaveBeenCalledWith("business-1", "job-1")
     expect(refresh).not.toHaveBeenCalled()
     expect(video.jobs.value[0].status).toBe("queued")
+  })
+
+  it("uses the backend media URL for playback instead of the provider URL", async () => {
+    const streamUrl = "/api/v1/businesses/business-1/video-jobs/job-1/stream"
+    vi.mocked(videoApi.list).mockResolvedValue([
+      makeJob({
+        status: "completed",
+        result_url: "https://provider.example/video.mp4",
+        stream_url: streamUrl,
+      }),
+    ])
+    await mountController()
+
+    expect(video.playbackUrl(video.jobs.value[0])).toBe(streamUrl)
   })
 
   it("ignores responses after leaving the page", async () => {

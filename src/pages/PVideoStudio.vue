@@ -2,7 +2,7 @@
 import { computed, ref } from "vue"
 import { useHead } from "@unhead/vue"
 import { usePageHeading } from "@/shared/lib"
-import { useVideoGenerator } from "@/features/video-generator"
+import { CVideoJobs, useVideoGenerator } from "@/features/video-generator"
 import {
   CPublishModal,
   CStudioComposer,
@@ -21,8 +21,12 @@ const {
   form,
   canCreate,
   isCreating,
+  jobs,
+  isLoading,
+  isSyncing,
   create,
   download,
+  sync,
   sessionJob,
   progressPct,
   playbackUrl,
@@ -35,6 +39,10 @@ const {
 const currentPlaybackUrl = computed(() =>
   sessionJob.value ? playbackUrl(sessionJob.value) : null
 )
+
+const scrollToJobs = () => {
+  document.getElementById("plans")?.scrollIntoView({ behavior: "smooth" })
+}
 
 const publishOpen = ref(false)
 const onDownload = () => {
@@ -77,7 +85,8 @@ const onRegenerate = () => {
           Yangi video yaratish
         </h1>
         <p class="mt-1 text-[13.5px] text-[#73737D]">
-          Plandan tashqari: kontekst, prompt va rasmlar bilan o'zingiz boshqarasiz
+          Plandan tashqari: kontekst, prompt va rasmlar bilan o'zingiz
+          boshqarasiz
         </p>
       </div>
       <div class="flex items-center gap-2.5">
@@ -86,7 +95,9 @@ const onRegenerate = () => {
         >
           1,860 kredit
         </span>
-        <CAppButton icon="history">Barcha videolarim</CAppButton>
+        <CAppButton icon="history" @click="scrollToJobs"
+          >Barcha videolarim</CAppButton
+        >
       </div>
     </div>
 
@@ -121,6 +132,14 @@ const onRegenerate = () => {
       />
       <CStudioLibrary :videos="STUDIO_VIDEOS" />
     </div>
+
+    <CVideoJobs
+      :jobs="jobs"
+      :is-loading="isLoading"
+      :is-syncing="isSyncing"
+      @sync="sync"
+      @download="download"
+    />
 
     <CPublishModal v-model:open="publishOpen" @publish="onPublish" />
   </div>
