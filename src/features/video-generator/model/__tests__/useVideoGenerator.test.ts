@@ -91,6 +91,11 @@ describe("video async isolation and submission safety", () => {
     vi.useFakeTimers({ toFake: ["setInterval", "clearInterval"] })
     vi.spyOn(window, "confirm").mockReturnValue(true)
     vi.spyOn(videoApi, "list").mockResolvedValue([])
+    vi.spyOn(videoApi, "sync").mockResolvedValue({
+      examined: 0,
+      imported: 0,
+      updated: 0,
+    })
     vi.spyOn(videoApi, "models").mockResolvedValue(modelCatalog)
   })
   afterEach(() => {
@@ -122,9 +127,20 @@ describe("video async isolation and submission safety", () => {
     await mountController()
 
     expect(videoApi.models).toHaveBeenCalledWith("business-1")
+    expect(videoApi.sync).toHaveBeenCalledWith("business-1", undefined)
     expect(video.form.videoModel).toBe("model-a")
     expect(video.form.videoResolution).toBe("720p")
     expect(video.modelCatalog.value?.models).toHaveLength(2)
+  })
+
+  it("synchronizes provider history when the active workspace changes", async () => {
+    await mountController()
+
+    auth.activeBusinessId = "business-2"
+    await flushPromises()
+
+    expect(videoApi.sync).toHaveBeenNthCalledWith(1, "business-1", undefined)
+    expect(videoApi.sync).toHaveBeenNthCalledWith(2, "business-2", undefined)
   })
 
   it("does not poll or resubmit uncertain upstream submissions", async () => {

@@ -89,12 +89,12 @@ describe("video studio integration", () => {
     vi.spyOn(videoApi, "models").mockResolvedValue(modelCatalog)
   })
 
-  it("loads only local history on mount and keeps generation explicit", async () => {
+  it("hydrates provider history on mount and keeps generation explicit", async () => {
     const create = vi.spyOn(videoApi, "create").mockResolvedValue(job)
     vi.spyOn(window, "confirm").mockReturnValue(false)
     const wrapper = await mountPage()
 
-    expect(videoApi.list).toHaveBeenCalledWith("business-1", {})
+    expect(videoApi.list).toHaveBeenCalledWith("business-1", { limit: 100 })
     expect(wrapper.text()).toContain("Yangi video yaratish")
     expect(wrapper.text()).toContain("Prompt va kontekst")
     expect(wrapper.text()).toContain("Generation jobs")

@@ -86,5 +86,6 @@ export interface VideoModelCatalog {
 
 export interface VideoSyncResult {
   examined: number
+  imported: number
   updated: number
 }

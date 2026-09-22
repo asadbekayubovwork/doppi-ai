@@ -1,59 +1,38 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { useToast } from "@/shared/lib"
-import {
-  resolveMediaUrl,
-  videoApi,
-  type VideoListParams,
-  type VideoSyncStatus,
-} from "../api/videoApi"
+import { resolveMediaUrl, videoApi } from "../api/videoApi"
 import type { VideoJob, VideoJobCreatePayload } from "../api/types"
 import { useVideoModelCatalog } from "./useVideoModelCatalog"
-
-const ACTIVE = new Set(["submitting", "queued", "processing"])
-
-const requestKey = () => {
-  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
-    return crypto.randomUUID()
-  }
-  return `${Date.now()}-${Math.random().toString(36).slice(2)}-video`
-}
-
-const secureUrls = (raw: string) => {
-  const values = raw
-    .split("\n")
-    .map((item) => item.trim())
-    .filter(Boolean)
-  for (const value of values) {
-    const parsed = new URL(value)
-    if (parsed.protocol !== "https:")
-      throw new Error("Only HTTPS reference URLs are accepted.")
-  }
-  return values
-}
-
-// Optional string field → trimmed value or undefined, so empty inputs are
-// omitted from the brief rather than sent as blanks.
-const optional = (value: string) => {
-  const trimmed = value.trim()
-  return trimmed ? trimmed : undefined
-}
+import { useVideoHistory } from "./useVideoHistory"
+import {
+  ACTIVE_VIDEO_STATUSES,
+  optionalVideoText,
+  secureReferenceUrls,
+  videoRequestKey,
+} from "./videoGeneratorUtils"
 
 export const useVideoGenerator = () => {
   const auth = useAuthStore()
   const toast = useToast()
-  const jobs = ref<VideoJob[]>([])
-  const isLoading = ref(false)
   const isCreating = ref(false)
-  const isSyncing = ref(false)
   const pollInFlight = ref(false)
   const businessId = computed(() => auth.activeBusiness?.id ?? "")
   let disposed = false
   let generation = 0
-  let loadSequence = 0
   const attempts = new Map<string, { signature: string; key: string }>()
   const isCurrent = (workspace: string, epoch: number) =>
     !disposed && workspace === businessId.value && epoch === generation
+  const history = useVideoHistory(businessId, () => generation, isCurrent)
+  const {
+    jobs,
+    isLoading,
+    isSyncing,
+    load,
+    sync,
+    reset: resetHistory,
+    download,
+  } = history
   const form = reactive({
     topic: "",
     tone: "",
@@ -81,7 +60,7 @@ export const useVideoGenerator = () => {
   } = useVideoModelCatalog(businessId, form, () => generation, isCurrent)
 
   const activeJobs = computed(() =>
-    jobs.value.filter((job) => ACTIVE.has(job.status))
+    jobs.value.filter((job) => ACTIVE_VIDEO_STATUSES.has(job.status))
   )
   // Only a job created in this session drives the studio result panel, so a
   // reload starts on a clean composer instead of surfacing an old failed job.
@@ -128,7 +107,10 @@ export const useVideoGenerator = () => {
     // even if they navigated away from the composer.
     const previous = jobs.value[index]
     jobs.value[index] = next
-    if (previous.status !== next.status && ACTIVE.has(previous.status)) {
+    if (
+      previous.status !== next.status &&
+      ACTIVE_VIDEO_STATUSES.has(previous.status)
+    ) {
       if (next.status === "completed") {
         toast.success("Video tayyor", "Uni ko'rish va joylash mumkin.")
       } else if (next.status === "failed") {
@@ -137,32 +119,6 @@ export const useVideoGenerator = () => {
           next.error_message || "Qayta urinib ko'ring."
         )
       }
-    }
-  }
-
-  const load = async (params: VideoListParams = {}) => {
-    const workspace = businessId.value
-    const epoch = generation
-    const sequence = ++loadSequence
-    if (!businessId.value) {
-      jobs.value = []
-      isLoading.value = false
-      return
-    }
-    isLoading.value = true
-    try {
-      const result = await videoApi.list(workspace, params)
-      if (isCurrent(workspace, epoch) && sequence === loadSequence)
-        jobs.value = result
-    } catch (error) {
-      if (!isCurrent(workspace, epoch)) return
-      toast.error(
-        "Couldn't load video jobs",
-        messageForProblem(error, "Try again in a moment.")
-      )
-    } finally {
-      if (isCurrent(workspace, epoch) && sequence === loadSequence)
-        isLoading.value = false
     }
   }
 
@@ -177,8 +133,8 @@ export const useVideoGenerator = () => {
     let links: string[]
     let images: string[]
     try {
-      links = secureUrls(form.referenceLinks)
-      images = secureUrls(form.referenceImages)
+      links = secureReferenceUrls(form.referenceLinks)
+      images = secureReferenceUrls(form.referenceImages)
     } catch (error) {
       toast.warning("Check reference links", (error as Error).message)
       return
@@ -198,9 +154,9 @@ export const useVideoGenerator = () => {
         // Research mode is only meaningful when research runs at all.
         skip_research: form.skipResearch || undefined,
         research_mode: form.skipResearch ? undefined : form.researchMode,
-        tone: optional(form.tone),
-        source_text: optional(form.sourceText),
-        cta: optional(form.cta),
+        tone: optionalVideoText(form.tone),
+        source_text: optionalVideoText(form.sourceText),
+        cta: optionalVideoText(form.cta),
         reference_links: links.length ? links : undefined,
         reference_image_urls: images.length ? images : undefined,
       },
@@ -212,7 +168,7 @@ export const useVideoGenerator = () => {
     const signature = JSON.stringify(payload)
     let attempt = attempts.get(workspace)
     if (!attempt || attempt.signature !== signature) {
-      attempt = { signature, key: requestKey() }
+      attempt = { signature, key: videoRequestKey() }
       attempts.set(workspace, attempt)
     }
     try {
@@ -283,41 +239,10 @@ export const useVideoGenerator = () => {
     }
   }
 
-  const sync = async (status?: VideoSyncStatus) => {
-    if (!businessId.value || isSyncing.value) return
-    isSyncing.value = true
-    const workspace = businessId.value
-    const epoch = generation
-    try {
-      const result = await videoApi.sync(workspace, status)
-      if (!isCurrent(workspace, epoch)) return
-      await load()
-      if (!isCurrent(workspace, epoch)) return
-      toast.success("Video jobs synchronized", `${result.updated} job updated.`)
-    } catch (error) {
-      if (!isCurrent(workspace, epoch)) return
-      toast.error(
-        "Couldn't synchronize jobs",
-        messageForProblem(error, "Try again in a moment.")
-      )
-    } finally {
-      if (isCurrent(workspace, epoch)) isSyncing.value = false
-    }
-  }
-
-  const download = (job: VideoJob) => {
-    if (!businessId.value || job.status !== "completed") return
-    window.location.assign(
-      resolveMediaUrl(
-        job.download_url,
-        videoApi.downloadUrl(businessId.value, job.id)
-      )
-    )
-  }
-
   let timer: number | undefined
   onMounted(() => {
     void load()
+    void sync(undefined, { silent: true })
     void loadModels()
     timer = window.setInterval(() => void poll(), 5_000)
   })
@@ -329,12 +254,12 @@ export const useVideoGenerator = () => {
   watch(businessId, () => {
     generation++
     resetModels()
-    jobs.value = []
+    resetHistory()
     sessionJobId.value = null
     isCreating.value = false
-    isSyncing.value = false
     pollInFlight.value = false
     void load()
+    void sync(undefined, { silent: true })
     void loadModels()
   })
 
