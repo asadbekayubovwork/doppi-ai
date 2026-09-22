@@ -8,8 +8,13 @@ interface Capability {
   desc: string
 }
 
-const base = "services.voice.landing.capabilities"
-const items = useI18nList<Capability>(`${base}.items`)
+/** The "what else it handles" card grid, shared by the service landings. */
+const props = defineProps<{
+  /** i18n branch holding eyebrow, title and items. */
+  base: string
+}>()
+
+const items = useI18nList<Capability>(`${props.base}.items`)
 </script>
 
 <template>

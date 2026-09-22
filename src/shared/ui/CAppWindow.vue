@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * The CRM window both desktop mockups sit in. Colours come from the dashboard
+ * The app window the landing's desktop mockups sit in. Colours come from the dashboard
  * token set (app/styles/tokens.css) rather than the landing's sand scale —
  * these panels are a picture of the product's own UI.
  */

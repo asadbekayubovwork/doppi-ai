@@ -1,112 +1,95 @@
 <script setup lang="ts">
 import { useI18nList } from "@/shared/lib"
-import { CIcon } from "@/shared/ui"
-import CPhoneFrame from "./CPhoneFrame.vue"
+import { CIcon, CPhoneFrame } from "@/shared/ui"
 
-interface Turn {
-  role: "agent" | "client"
-  text: string
+interface Control {
+  icon: string
+  key: string
+  label: string
 }
 
-// Step 03: the agent on the line, 42 seconds into the call.
+// Step 03: the agent on the line, 42 seconds in and recording, as the phone
+// itself shows it.
 const base = "services.voice.landing.demo.call"
-const turns = useI18nList<Turn>(`${base}.turns`)
+const controls = useI18nList<Control>(`${base}.controls`)
 
-// Bar heights in px; every fourth-ish bar is lit, so the wave reads as speech
-// rather than as an even equaliser.
-const BARS = [
-  8, 14, 22, 32, 18, 26, 38, 24, 12, 20, 30, 42, 26, 16, 10, 22, 34, 44, 28, 18,
-  12, 24, 36, 20, 14, 8, 16, 28, 20, 10,
-]
-const LIT = new Set([3, 6, 10, 11, 16, 17, 22])
+// A voice agent has no camera, so the dialler greys that one control out.
+const isOff = (control: Control) => control.key === "videoCall"
 </script>
 
 <template>
   <CPhoneFrame
     :label="$t(`${base}.alt`)"
-    screen-class="bg-gradient-to-br from-[#2F2668] via-[#241E52] to-[#171338]"
+    time="12:36"
+    nav="android"
+    screen-class="screen-call-gradient"
   >
-    <div class="flex flex-1 flex-col">
-      <!-- Who is calling -->
-      <div class="flex flex-col items-center gap-2.5 px-5 pt-2.5">
-        <span
-          class="flex items-center gap-1.5 rounded-full bg-white/10 px-[11px] py-[5px] text-[11px] font-medium text-[#E6E6EE]"
-        >
-          <span class="h-1.5 w-1.5 rounded-full bg-[#B6ABFF]" />
-          {{ $t(`${base}.sip`) }}
+    <div class="flex flex-1 flex-col px-4 pb-2">
+      <!-- Call timer and recording state -->
+      <div class="flex items-center justify-between pt-1.5 text-white">
+        <span class="w-4" />
+        <span class="flex items-center gap-1.5 text-[13px]">
+          <CIcon name="phone" class="h-3.5 w-3.5" />
+          {{ $t(`${base}.duration`) }}
+          <span class="px-0.5 text-white/40">/</span>
+          <span class="h-[7px] w-[7px] rounded-full bg-[#E5484D]" />
+          {{ $t(`${base}.rec`) }} {{ $t(`${base}.duration`) }}
         </span>
+        <CIcon name="ellipsis-vertical" class="h-4 w-4 text-white/80" />
+      </div>
 
+      <!-- Who is on the line -->
+      <div class="mt-7 flex flex-col items-center gap-3">
+        <span class="text-[26px] font-medium tracking-[-0.5px] text-white">
+          {{ $t(`${base}.number`) }}
+        </span>
         <span
-          class="grid h-16 w-16 place-items-center rounded-full border border-white/15 bg-gradient-to-br from-[#6C5CF5] to-[#3A2F9E] text-white"
+          class="flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-[12.5px] text-white"
         >
-          <CIcon name="audio-lines" class="h-7 w-7" />
+          <span class="h-[7px] w-[7px] rounded-full bg-[#D3F26A]" />
+          {{ $t(`${base}.caller`) }}
         </span>
+      </div>
 
-        <span class="text-base font-semibold tracking-[-0.3px] text-white">
-          {{ $t(`${base}.agent`) }}
-        </span>
-        <span class="-mt-2 text-[11.5px] text-[#A8A8B8]">{{
-          $t(`${base}.meta`)
+      <!-- What the agent has just agreed to -->
+      <div
+        class="mt-auto flex items-center gap-2.5 rounded-full border border-white/15 bg-white/15 px-4 py-3 backdrop-blur-sm"
+      >
+        <CIcon name="audio-lines" class="h-4 w-4 shrink-0 text-[#D3F26A]" />
+        <span class="text-[12px] leading-tight text-white">{{
+          $t(`${base}.line`)
         }}</span>
       </div>
 
-      <!-- Live waveform -->
-      <div class="flex h-10 items-center justify-center gap-[3px] px-[26px]">
-        <span
-          v-for="(height, i) in BARS"
-          :key="i"
-          class="wave-bar w-[3px] origin-center rounded-full"
-          :class="LIT.has(i) ? 'bg-[#B6ABFF]' : 'bg-white/35'"
-          :style="{
-            height: `${height}px`,
-            animation: `wave 1.4s ease-in-out ${(i % 7) * 0.13}s infinite`,
-          }"
-        />
-      </div>
-
-      <!-- Transcript -->
-      <div class="flex flex-col gap-1.5 px-4 py-1">
-        <span
-          v-for="(turn, i) in turns"
-          :key="i"
-          class="flex flex-col gap-[3px] rounded-xl px-[11px] py-2"
-          :class="turn.role === 'agent' ? 'bg-white/10' : 'bg-white/15'"
-        >
-          <span
-            class="text-[9px] font-semibold tracking-[1px]"
-            :class="turn.role === 'agent' ? 'text-[#B6ABFF]' : 'text-[#A8A8B8]'"
-          >
-            {{
-              turn.role === "agent"
-                ? $t(`${base}.roles.agent`)
-                : $t(`${base}.roles.client`)
-            }}
-          </span>
-          <span class="text-[11px] leading-[15px] text-[#E9E9F0]">{{
-            turn.text
-          }}</span>
-        </span>
-      </div>
-
-      <!-- Controls -->
+      <!-- Dialler controls -->
       <div
-        class="mt-auto flex flex-col items-center gap-[18px] px-[34px] pt-[22px]"
+        class="mt-3 rounded-[26px] border border-white/12 bg-white/15 px-4 pb-4 pt-5 backdrop-blur-sm"
       >
-        <span class="flex w-full items-center justify-between">
+        <div class="grid grid-cols-3 gap-y-5">
           <span
-            v-for="control in ['mic-off', 'grid-3x3', 'volume-2']"
-            :key="control"
-            class="grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white"
+            v-for="control in controls"
+            :key="control.key"
+            class="flex flex-col items-center gap-2"
+            :class="isOff(control) ? 'text-white/35' : 'text-white'"
           >
-            <CIcon :name="control" class="h-[19px] w-[19px]" />
+            <CIcon
+              :name="control.icon"
+              class="h-[22px] w-[22px]"
+              :class="control.key === 'stopRecording' ? 'text-[#D3F26A]' : ''"
+            />
+            <span class="text-center text-[11px] leading-tight">{{
+              control.label
+            }}</span>
           </span>
-        </span>
+        </div>
 
-        <span
-          class="grid h-[50px] w-[50px] place-items-center rounded-full bg-[#C42B2B] text-white"
-        >
-          <CIcon name="phone-off" class="h-5 w-5" />
-        </span>
+        <div class="mt-5 flex justify-center">
+          <span
+            class="grid h-[54px] w-[54px] place-items-center rounded-full bg-[#E5484D] text-white"
+          >
+            <CIcon name="phone-off" class="h-6 w-6" />
+          </span>
+        </div>
       </div>
     </div>
   </CPhoneFrame>

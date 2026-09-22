@@ -31,10 +31,25 @@ export {
   CServiceCta,
 } from "./service"
 
-// The bespoke /voice-agent landing
+// Shared shells for the bespoke service landings, and the mockups each one shows
 export {
-  CVoiceHero,
-  CVoiceSteps,
-  CVoiceCapabilities,
-  CVoiceCta,
+  CLandingHero,
+  CLandingSteps,
+  CLandingCapabilities,
+  CLandingCta,
+  HERO_PRIMARY,
+  HERO_SECONDARY,
+  BAND_PRIMARY,
+  BAND_SECONDARY,
+} from "./service-landing"
+export {
+  CDemoInstagram,
+  CDemoLeads,
+  CDemoCall,
+  CDemoResult,
 } from "./voice-landing"
+export {
+  CDemoKnowledgeBase,
+  CDemoTelegram,
+  CDemoConversations,
+} from "./rag-landing"

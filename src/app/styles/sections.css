@@ -156,6 +156,35 @@
   );
 }
 
+/* Mockups ---------------------------------------------------------------- */
+
+/*
+   The in-call screen of the phone mockup: a phone wallpaper seen through the
+   dialler, dark navy at the top and warm sand at the bottom, so the glass
+   panels over it read as glass.
+*/
+.screen-call-gradient {
+  background:
+    radial-gradient(
+      75% 45% at 70% 28%,
+      rgba(126, 92, 150, 0.55) 0%,
+      rgba(126, 92, 150, 0) 70%
+    ),
+    radial-gradient(
+      110% 75% at 88% 108%,
+      #dcc098 0%,
+      rgba(220, 192, 152, 0) 58%
+    ),
+    linear-gradient(
+      158deg,
+      #14112a 0%,
+      #241e3c 30%,
+      #4a3b5c 55%,
+      #7e6e78 78%,
+      #b79c82 100%
+    );
+}
+
 /* Motion ----------------------------------------------------------------- */
 
 @keyframes wave {

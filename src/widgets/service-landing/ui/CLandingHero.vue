@@ -1,18 +1,23 @@
 <script setup lang="ts">
 import { useI18nList } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
-import { SERVICE_PATHS } from "@/shared/config/seoPages"
 
 interface FlowStep {
   icon: string
   label: string
 }
 
-const base = "services.voice.landing"
-const flow = useI18nList<FlowStep>(`${base}.flow`)
+/**
+ * Hero shared by the bespoke service landings: badge, headline, subhead and
+ * the chain of steps the page then walks through. The buttons come from the
+ * page through the `actions` slot, because each service links somewhere else.
+ */
+const props = defineProps<{
+  /** i18n branch holding badge, title, subtitle and flow (e.g. `services.rag.landing`). */
+  base: string
+}>()
 
-// The secondary CTA drops the visitor at the step that plays the call back.
-const flowAnchor = { path: SERVICE_PATHS.voice, hash: "#voice-flow" }
+const flow = useI18nList<FlowStep>(`${props.base}.flow`)
 </script>
 
 <template>
@@ -44,7 +49,7 @@ const flowAnchor = { path: SERVICE_PATHS.voice, hash: "#voice-flow" }
       </h1>
 
       <p
-        class="mt-6 max-w-[660px] text-base leading-[160%] text-sand-500 sm:text-[17px]"
+        class="mt-6 max-w-[680px] text-base leading-[160%] text-sand-500 sm:text-[17px]"
         data-aos="fade-up"
         data-aos-duration="1000"
         data-aos-delay="150"
@@ -58,20 +63,7 @@ const flowAnchor = { path: SERVICE_PATHS.voice, hash: "#voice-flow" }
         data-aos-duration="1000"
         data-aos-delay="250"
       >
-        <RouterLink
-          to="/login"
-          class="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-sand-950 px-7 font-medium text-white transition-300 hover:bg-sand-800 sm:w-auto"
-        >
-          {{ $t(`${base}.ctaPrimary`) }}
-          <CIcon name="arrow-right" class="h-4 w-4" />
-        </RouterLink>
-        <RouterLink
-          :to="flowAnchor"
-          class="flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-sand-200 bg-white px-6 font-medium text-sand-950 transition-300 hover:bg-sand-100 sm:w-auto"
-        >
-          <CIcon name="circle-play" class="h-4 w-4" />
-          {{ $t(`${base}.ctaSecondary`) }}
-        </RouterLink>
+        <slot name="actions" />
       </div>
 
       <!-- The chain the page then walks through, step by step. -->

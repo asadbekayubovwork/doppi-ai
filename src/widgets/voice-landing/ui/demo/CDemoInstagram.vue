@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { CIcon } from "@/shared/ui"
+import { CIcon, CPhoneFrame } from "@/shared/ui"
 import postImage from "@/shared/assets/png/ig-post-clinic.jpg"
-import CPhoneFrame from "./CPhoneFrame.vue"
 
 // Step 01: the lead form under an Instagram ad, filled in and about to be sent.
 const base = "services.voice.landing.demo.ig"
