@@ -4,6 +4,7 @@ import { routes } from "@/pages"
 import { useAuthStore } from "@/features/auth"
 import { pinia } from "./pinia"
 import { safeLocalPath } from "@/features/auth/model/redirect"
+import { platformAdminApi } from "@/features/platform-admin"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,14 @@ router.beforeEach(async (to) => {
 
   if (to.meta.guestOnly === true && auth.isAuthenticated) {
     return safeLocalPath(to.query.redirect)
+  }
+
+  if (to.meta.requiresAdmin === true && auth.isAuthenticated) {
+    try {
+      await platformAdminApi.me()
+    } catch {
+      return { name: "DashboardHome" }
+    }
   }
 
   return true

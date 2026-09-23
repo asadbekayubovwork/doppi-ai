@@ -1,5 +1,6 @@
 import { routes } from "@/pages"
 import { authApi, useAuthStore } from "@/features/auth"
+import { platformAdminApi } from "@/features/platform-admin"
 import { pinia } from "../pinia"
 import { router, safeLocalPath } from "../router"
 
@@ -59,5 +60,19 @@ describe("auth route boundary", () => {
 
     expect(router.currentRoute.value.name).toBe("RagAgent")
     expect(useAuthStore(pinia).isAuthenticated).toBe(true)
+  })
+
+  it("guards the unified admin page and redirects old RAG admin links", async () => {
+    const auth = useAuthStore(pinia)
+    auth.status = "authenticated"
+    auth.user = user
+    vi.spyOn(platformAdminApi, "me").mockRejectedValueOnce(new Error("forbidden"))
+    await router.push("/app/admin")
+    expect(router.currentRoute.value.name).toBe("DashboardHome")
+
+    vi.spyOn(platformAdminApi, "me").mockResolvedValue({ is_admin: true, email: user.email })
+    await router.push("/app/admin/rag")
+    expect(router.currentRoute.value.name).toBe("PlatformAdmin")
+    expect(router.currentRoute.value.query.tab).toBe("rag")
   })
 })
