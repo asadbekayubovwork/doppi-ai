@@ -9,6 +9,7 @@ export type {
   VideoJob,
   VideoJobCreatePayload,
   VideoJobStatus,
+  VideoLanguage,
   VideoModel,
   VideoModelCatalog,
   VideoSyncResult,

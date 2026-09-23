@@ -7,6 +7,8 @@ export type VideoJobStatus =
   | "completed"
   | "failed"
 
+export type VideoLanguage = "uz" | "ru" | "en"
+
 export interface VideoBrief {
   topic: string
   tone?: string

@@ -2,7 +2,11 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { useToast } from "@/shared/lib"
 import { resolveMediaUrl, videoApi } from "../api/videoApi"
-import type { VideoJob, VideoJobCreatePayload } from "../api/types"
+import type {
+  VideoJob,
+  VideoJobCreatePayload,
+  VideoLanguage,
+} from "../api/types"
 import { useVideoModelCatalog } from "./useVideoModelCatalog"
 import { useVideoHistory } from "./useVideoHistory"
 import {
@@ -18,6 +22,10 @@ export const useVideoGenerator = () => {
   const isCreating = ref(false)
   const pollInFlight = ref(false)
   const businessId = computed(() => auth.activeBusiness?.id ?? "")
+  const defaultLanguage = (): VideoLanguage => {
+    const language = auth.activeBusiness?.default_language
+    return language === "ru" || language === "en" ? language : "uz"
+  }
   let disposed = false
   let generation = 0
   const attempts = new Map<string, { signature: string; key: string }>()
@@ -48,6 +56,7 @@ export const useVideoGenerator = () => {
     previewOnly: false,
     skipResearch: false,
     researchMode: "fast" as "fast" | "deep",
+    language: defaultLanguage(),
   })
   const {
     modelCatalog,
@@ -124,12 +133,6 @@ export const useVideoGenerator = () => {
 
   const create = async (publishTo: string[] = []) => {
     if (!canCreate.value || isCreating.value) return
-    const confirmation = form.previewOnly
-      ? "Start prompt preview? This sends one request to the video service without rendering clips."
-      : "Start full video generation? This sends one paid generation request to the video service."
-    if (!window.confirm(confirmation)) {
-      return
-    }
     let links: string[]
     let images: string[]
     try {
@@ -144,7 +147,7 @@ export const useVideoGenerator = () => {
       brief: {
         topic: form.topic.trim(),
         duration_sec: form.durationSec,
-        language: auth.activeBusiness?.default_language || "uz",
+        language: form.language,
         aspect_ratio: form.aspectRatio,
         video_provider: modelCatalog.value?.provider,
         video_model: form.videoModel,
@@ -253,6 +256,7 @@ export const useVideoGenerator = () => {
   })
   watch(businessId, () => {
     generation++
+    form.language = defaultLanguage()
     resetModels()
     resetHistory()
     sessionJobId.value = null

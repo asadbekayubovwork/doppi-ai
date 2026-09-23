@@ -8,7 +8,7 @@ import {
 } from "@/features/rag-admin"
 import { messageForProblem } from "@/features/auth"
 import { useToast } from "@/shared/lib"
-import { CAppButton, CEmptyState } from "@/shared/ui"
+import { CAppButton, CEmptyState, CSelect } from "@/shared/ui"
 
 useHead({ title: "RAG administration — Do'ppi AI" })
 
@@ -64,6 +64,13 @@ onMounted(() => void load())
 
 const editModel = (model?: AdminModel) =>
   Object.assign(modelForm, model ?? emptyModel())
+const tenantOptions = computed(() =>
+  tenants.value.map((tenant) => ({
+    value: tenant.business_id,
+    label: tenant.tenant_name,
+    hint: tenant.business_id,
+  }))
+)
 const editTenant = () => Object.assign(tenantForm, selectedTenant.value ?? {})
 
 const saveModel = async () => {
@@ -235,19 +242,15 @@ const saveTenant = async () => {
       <section class="rounded-2xl border border-[#E5E5E1] bg-white p-5">
         <h2 class="text-base font-semibold text-[#15151B]">Tenant limits</h2>
         <div class="mt-4 flex gap-3">
-          <select
+          <CSelect
             v-model="selectedTenantId"
-            class="control flex-1"
+            :options="tenantOptions"
+            aria-label="Tenant"
+            icon="building-2"
+            placeholder="Tenant tanlang"
+            class="flex-1"
             @change="editTenant"
-          >
-            <option
-              v-for="tenant in tenants"
-              :key="tenant.business_id"
-              :value="tenant.business_id"
-            >
-              {{ tenant.tenant_name }} · {{ tenant.business_id }}
-            </option>
-          </select>
+          />
           <CAppButton @click="editTenant">Load limits</CAppButton>
         </div>
         <form
