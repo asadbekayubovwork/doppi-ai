@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { CVideoThumb } from "@/entities/video"
 import { CAppButton, CBadge, CIcon, CSelect, CSwitch } from "@/shared/ui"
 import CStudioModelSettings from "./CStudioModelSettings.vue"
 import type { VideoLanguage, VideoModel } from "@/features/video-generator"
@@ -10,6 +9,8 @@ defineProps<{
   models: VideoModel[]
   modelsLoading: boolean
   modelError: string | null
+  estimatedCredits: number | null
+  availableCredits: number | null
 }>()
 
 defineEmits<{ submit: []; retryModels: [] }>()
@@ -53,14 +54,6 @@ const LANGUAGE_OPTIONS: { value: VideoLanguage; label: string }[] = [
   { value: "ru", label: "Русский" },
   { value: "en", label: "English" },
 ]
-
-// Static context chips + references while the catalog endpoints are stubbed.
-const CONTEXT = [
-  { icon: "building-2", label: "Aura Store brendi" },
-  { icon: "globe", label: "UZ" },
-  { icon: "tag", label: "Brend ranglari" },
-]
-const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
 </script>
 
 <template>
@@ -94,48 +87,6 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
           class="min-h-28 resize-y rounded-xl border border-[#DEDEE4] bg-[#FCFCFB] px-3.5 py-3 text-[13px] leading-6 text-[#1D1D22] outline-none transition placeholder:text-[#AAAAB3] focus:border-[#8175EA] focus:bg-white focus:ring-4 focus:ring-[#5B4BE8]/10"
         />
       </label>
-
-      <div class="grid gap-2">
-        <span
-          class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
-        >
-          Kontekst
-        </span>
-        <div class="flex flex-wrap gap-2">
-          <span
-            v-for="chip in CONTEXT"
-            :key="chip.label"
-            class="inline-flex items-center gap-1.5 rounded-lg bg-[#F2F0FC] px-2.5 py-1.5 text-[12px] font-medium text-[#5B4BE8]"
-          >
-            <CIcon :name="chip.icon" class="h-3.5 w-3.5" />
-            {{ chip.label }}
-          </span>
-        </div>
-      </div>
-
-      <div class="grid gap-2">
-        <span
-          class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
-        >
-          Referens rasmlar
-        </span>
-        <div class="flex flex-wrap gap-2.5">
-          <CVideoThumb
-            v-for="(image, index) in REFERENCES"
-            :key="index"
-            :color="image"
-            rounded="rounded-lg"
-            class="h-14 w-16"
-          />
-          <button
-            type="button"
-            class="flex h-14 w-16 flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-[#DEDEE4] text-[#9A9AA2] transition hover:border-[#C9C0F5] hover:text-[#5B4BE8]"
-          >
-            <CIcon name="cloud-upload" class="h-4 w-4" />
-            <span class="text-[10px] font-medium">Yuklash</span>
-          </button>
-        </div>
-      </div>
 
       <div class="grid gap-2">
         <span
@@ -294,12 +245,35 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
       </details>
 
       <div class="mt-auto border-t border-[#ECECE8] pt-4">
+        <p class="mb-3 text-center text-xs text-[#777782]">
+          Taxminiy sarf:
+          {{
+            estimatedCredits === null
+              ? "hisoblanmoqda"
+              : `${estimatedCredits.toLocaleString("uz-UZ")} kredit`
+          }}
+        </p>
+        <p
+          v-if="
+            estimatedCredits !== null &&
+            availableCredits !== null &&
+            estimatedCredits > availableCredits
+          "
+          class="mb-3 text-center text-xs font-semibold text-amber-700"
+        >
+          Balans yetarli emas.
+        </p>
         <CAppButton
           type="submit"
           variant="primary"
           icon="wand-sparkles"
           class="w-full"
-          :disabled="!canCreate"
+          :disabled="
+            !canCreate ||
+            (estimatedCredits !== null &&
+              availableCredits !== null &&
+              estimatedCredits > availableCredits)
+          "
           :loading="isCreating"
         >
           Video yaratish

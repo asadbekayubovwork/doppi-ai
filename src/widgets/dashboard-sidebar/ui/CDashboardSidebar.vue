@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue"
+import { computed, ref, watch } from "vue"
+import { useAuthStore } from "@/features/auth"
+import { useBillingStore } from "@/features/billing"
+import { platformAdminApi } from "@/features/platform-admin"
 import { CIcon, CLogo } from "@/shared/ui"
 import { HOME, SERVICES, WORKSPACE } from "../model/navigation"
 import CSidebarNavItem from "./CSidebarNavItem.vue"
@@ -7,11 +10,33 @@ import CSidebarNavItem from "./CSidebarNavItem.vue"
 defineProps<{ open?: boolean }>()
 defineEmits<{ close: [] }>()
 
-
-// Placeholder figures until the billing endpoint is wired up.
-const balance = { amount: "$248.60", currency: "USD", limit: 400, used: 62 }
-const balanceHint = computed(
-  () => `$${balance.limit} oylik limitning ${balance.used}% ishlatilgan`
+const auth = useAuthStore()
+const billing = useBillingStore()
+const isAdmin = ref(false)
+const businessId = computed(() => auth.activeBusiness?.id ?? "")
+watch(businessId, (id) => void billing.load(id), { immediate: true })
+watch(
+  () => auth.user?.id,
+  async (id) => {
+    isAdmin.value = false
+    if (!id) return
+    try {
+      isAdmin.value = (await platformAdminApi.me()).is_admin
+    } catch {
+      isAdmin.value = false
+    }
+  },
+  { immediate: true }
+)
+const wallet = computed(() =>
+  billing.wallet?.business_id === businessId.value ? billing.wallet : null
+)
+const promoExpiry = computed(() =>
+  wallet.value?.promo_expires_at
+    ? new Intl.DateTimeFormat("uz-UZ", { dateStyle: "medium" }).format(
+        new Date(wallet.value.promo_expires_at)
+      )
+    : null
 )
 </script>
 
@@ -43,7 +68,7 @@ const balanceHint = computed(
       <span
         class="rounded-md bg-[#292832] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-[#9E9BAA]"
       >
-        Pro
+        {{ wallet?.tier === "pro" ? "Pro" : "Free" }}
       </span>
     </div>
 
@@ -59,6 +84,15 @@ const balanceHint = computed(
       </p>
       <ul class="space-y-1">
         <CSidebarNavItem v-for="item in SERVICES" :key="item.to" :item="item" />
+      </ul>
+      <ul v-if="isAdmin" class="mt-2 space-y-1">
+        <CSidebarNavItem
+          :item="{
+            label: 'Platform admin',
+            to: '/app/admin',
+            icon: 'shield-check',
+          }"
+        />
       </ul>
 
       <p
@@ -78,41 +112,35 @@ const balanceHint = computed(
     <div class="px-4 pb-3">
       <div class="rounded-xl border border-white/[0.09] bg-[#1C1C23] p-3">
         <div class="flex items-center justify-between gap-3">
-          <span class="text-[13px] text-[#A09EAA]">Available balance</span>
+          <span class="text-[13px] text-[#A09EAA]">Kredit balansi</span>
           <CIcon name="wallet" class="h-4 w-4 text-white/40" />
         </div>
         <p class="mt-1 text-2xl font-bold tracking-tight text-white">
-          {{ balance.amount }}
-          <span class="ml-1 text-xs font-medium text-white/45">
-            {{ balance.currency }}
-          </span>
+          {{
+            wallet?.available?.toLocaleString("uz-UZ") ??
+            (billing.loading ? "…" : "—")
+          }}
+          <span class="ml-1 text-xs font-medium text-white/45"> kredit </span>
         </p>
-
-        <div
-          class="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10"
-          role="img"
-          :aria-label="balanceHint"
+        <p
+          v-if="promoExpiry"
+          class="mt-1.5 text-[11.5px] leading-4 text-[#8D8B98]"
         >
-          <span
-            class="block h-full rounded-full bg-[#C0F04A]"
-            :style="{ width: `${balance.used}%` }"
-          />
-        </div>
-        <p class="mt-1.5 text-[11.5px] leading-4 text-[#8D8B98]">
-          {{ balance.used }}% of ${{ balance.limit }} monthly limit used
+          Bonus {{ promoExpiry }} gacha amal qiladi
+        </p>
+        <p v-if="billing.error" class="mt-1.5 text-[11.5px] text-amber-300">
+          Balansni yuklab bo‘lmadi
         </p>
 
-        <button
-          type="button"
+        <RouterLink
+          to="/app/usage"
           class="mt-2.5 flex h-9 w-full items-center justify-center gap-2 rounded-lg bg-[#C9F354] text-[13px] font-bold text-[#1A1A13] transition hover:bg-[#BCE943]"
         >
-          <CIcon name="plus" class="h-4 w-4" />
-          Top up balance
-        </button>
+          <CIcon name="wallet" class="h-4 w-4" />
+          Balans tafsiloti
+        </RouterLink>
       </div>
     </div>
-
-  
   </aside>
 </template>
 

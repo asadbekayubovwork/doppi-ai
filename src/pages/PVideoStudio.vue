@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue"
+import { computed, onMounted, ref } from "vue"
 import { useHead } from "@unhead/vue"
 import { usePageHeading } from "@/shared/lib"
 import {
@@ -18,11 +18,28 @@ import {
 } from "@/features/video-studio"
 import type { StudioVideo } from "@/entities/video"
 import { CAppButton } from "@/shared/ui"
+import { billingApi, useBillingStore } from "@/features/billing"
+import { useAuthStore } from "@/features/auth"
 
 useHead({ title: "Yangi video — Do'ppi AI" })
 usePageHeading(() => ({
   subtitle: "Navbatdan tashqari video · o'z prompt va kontekstingiz bilan",
 }))
+const billing = useBillingStore()
+const auth = useAuthStore()
+const videoRate = ref<number | null>(null)
+onMounted(async () => {
+  try {
+    videoRate.value =
+      (await billingApi.rates()).find((rate) => rate.code === "video_second")
+        ?.credits_per_unit ?? null
+  } catch {
+    videoRate.value = null
+  }
+})
+const estimatedCredits = computed(() =>
+  videoRate.value === null ? null : form.durationSec * videoRate.value
+)
 
 const {
   form,
@@ -155,7 +172,7 @@ const onRegenerate = () => {
         <span
           class="inline-flex h-9 items-center gap-2 rounded-[10px] border border-[#E5E5E1] bg-white px-3.5 text-[13px] font-semibold text-[#42424B]"
         >
-          1,860 kredit
+          {{ billing.wallet?.available?.toLocaleString("uz-UZ") ?? "—" }} kredit
         </span>
         <CAppButton icon="history" @click="scrollToJobs"
           >Barcha videolarim</CAppButton
@@ -186,6 +203,12 @@ const onRegenerate = () => {
         :models="modelCatalog?.models ?? []"
         :models-loading="isLoadingModels"
         :model-error="modelError"
+        :estimated-credits="estimatedCredits"
+        :available-credits="
+          billing.wallet?.business_id === auth.activeBusiness?.id
+            ? billing.wallet.available
+            : null
+        "
         @submit="create()"
         @retry-models="loadModels"
       />

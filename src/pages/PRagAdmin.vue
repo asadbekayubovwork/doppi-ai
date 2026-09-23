@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from "vue"
-import { useHead } from "@unhead/vue"
 import {
   ragAdminApi,
   type AdminModel,
@@ -10,7 +9,6 @@ import { messageForProblem } from "@/features/auth"
 import { useToast } from "@/shared/lib"
 import { CAppButton, CEmptyState, CSelect } from "@/shared/ui"
 
-useHead({ title: "RAG administration — Do'ppi AI" })
 
 const toast = useToast()
 const loading = ref(true)
@@ -117,7 +115,7 @@ const saveTenant = async () => {
 </script>
 
 <template>
-  <main>
+  <section>
     <CEmptyState
       v-if="denied"
       icon="lock"
@@ -294,7 +292,7 @@ const saveTenant = async () => {
         </p>
       </section>
     </div>
-  </main>
+  </section>
 </template>
 
 <style scoped>

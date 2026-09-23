@@ -192,14 +192,20 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/app/admin/rag",
-    name: "RagAdmin",
+    redirect: "/app/admin?tab=rag",
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/app/admin",
+    name: "PlatformAdmin",
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "RAG administration",
-      subtitle: "Modellar, narxlar va tenant limitlari",
+      requiresAdmin: true,
+      title: "Platform admin",
+      subtitle: "Foydalanuvchilar va kredit siyosati",
     },
-    component: () => import("./PRagAdmin.vue"),
+    component: () => import("./PPlatformAdmin.vue"),
   },
   {
     path: "/app/rag/conversations/:chatId",

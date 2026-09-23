@@ -13,6 +13,7 @@ declare module "vue-router" {
     /** Heading shown by the dashboard header. */
     title?: string
     subtitle?: string
+    requiresAdmin?: boolean
   }
 }
 

@@ -31,7 +31,7 @@
     "titleHighlight": "all in one system",
     "titleBottom": "powered by AI",
     "subtitle": "Do'ppi AI is the AI marketing operating system for your business. Voice agent, social media automation, video & content, CRM and chatbots — all working together in one place.",
-    "ctaPrimary": "Start free trial",
+    "ctaPrimary": "Get started",
     "ctaSecondary": "Watch demo",
     "stats": [
       {
@@ -361,7 +361,7 @@
     "eyebrow": "Pricing",
     "title": "Choose the plan that fits your business",
     "subtitle": "From a small team to a large enterprise — a clear plan for every stage.",
-    "trialNote": "14-day free trial on every plan. No credit card required.",
+    "trialNote": "New accounts receive one introductory credit grant. See current amount and expiry on the pricing page.",
     "popularLabel": "Most popular",
     "pageTitle": "Simple, transparent pricing",
     "pageSubtitle": "Pick the plan that matches your stage — you can change it at any time.",
@@ -515,8 +515,8 @@
         "a": "Your data is stored in a protected cloud, backed up regularly, and always belongs to you."
       },
       {
-        "q": "How does the free trial work?",
-        "a": "Every plan includes a 14-day free trial with no credit card required. You can cancel anytime."
+        "q": "How do introductory credits work?",
+        "a": "New accounts receive a one-time introductory credit grant. Its amount and expiry are shown on the pricing page; no card is required."
       }
     ]
   },
@@ -650,8 +650,8 @@
         {
           "heading": "Subscriptions, trial & billing",
           "paragraphs": [
-            "Do'ppi AI offers subscription-based plans: Starter ($19/mo), Growth ($49/mo), Pro ($99/mo) and an Enterprise plan with custom pricing for larger organizations.",
-            "Every plan includes a 14-day free trial. Fees are billed on a recurring (monthly) basis according to the plan you select. You may cancel anytime — cancellation takes effect at the end of the current billing period.",
+            "Do'ppi AI services are metered in credits. Current packages, prices, and credit amounts are shown on the pricing page.",
+            "New accounts receive a one-time introductory credit grant with the expiry shown on the pricing page. Payment is taken only for a separately confirmed purchase.",
             "Prices and features may change with prior notice. Except where required by law, amounts already paid are non-refundable."
           ],
           "bullets": []
@@ -735,7 +735,7 @@
     },
     "pricing": {
       "title": "Pricing — Do'ppi AI",
-      "description": "Do'ppi AI plans: Starter, Growth, Pro and Enterprise. Every plan includes a 14-day free trial."
+      "description": "Do'ppi AI credit packages and per-service usage prices, with introductory credit for new accounts."
     },
     "about": {
       "title": "About — Do'ppi AI",
@@ -757,7 +757,7 @@
   "services": {
     "navLabel": "Services",
     "breadcrumbHome": "Home",
-    "ctaPrimary": "Start free trial",
+    "ctaPrimary": "Get started",
     "ctaSecondary": "Request a demo",
     "breadcrumbLabel": "Breadcrumb",
     "othersTitle": "More from Do'ppi AI",
@@ -856,7 +856,7 @@
       },
       "cta": {
         "title": "Try the RAG Agent in your business",
-        "subtitle": "14-day free trial — upload your documents and see for yourself how the agent answers."
+        "subtitle": "Use introductory credit to upload documents and try the agent's answers."
       },
       "landing": {
         "badge": "RAG agent · Knowledge base · Telegram · CRM",
@@ -1200,7 +1200,7 @@
       },
       "cta": {
         "title": "Try the voice agent",
-        "subtitle": "14-day free trial — hear how the agent sounds for your business."
+        "subtitle": "Use introductory credit to explore voice agent capabilities."
       },
       "landing": {
         "badge": "AI voice agent · SIP telephony · CRM",
@@ -1537,13 +1537,13 @@
           },
           {
             "q": "How much does it cost?",
-            "a": "Compare the plans and what each includes on the pricing page — every plan starts with a 14-day free trial."
+            "a": "See current credit packages and per-service usage rates on the pricing page."
           }
         ]
       },
       "cta": {
         "title": "Create your first video",
-        "subtitle": "Start with a 14-day free trial."
+        "subtitle": "Start with introductory credit."
       },
       "landing": {
         "badge": "Video generator · Auto-posting · Analytics",
