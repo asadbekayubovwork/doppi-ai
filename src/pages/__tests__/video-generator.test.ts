@@ -3,6 +3,7 @@ import { flushPromises, mount } from "@vue/test-utils"
 import { createPinia, setActivePinia } from "pinia"
 import { useAuthStore } from "@/features/auth"
 import {
+  CVideoPreviewDialog,
   videoApi,
   type VideoJob,
   type VideoModelCatalog,
@@ -96,7 +97,7 @@ describe("video studio integration", () => {
     expect(videoApi.list).toHaveBeenCalledWith("business-1", { limit: 100 })
     expect(wrapper.text()).toContain("Yangi video yaratish")
     expect(wrapper.text()).toContain("Prompt va kontekst")
-    expect(wrapper.text()).toContain("Generation jobs")
+    expect(wrapper.text()).toContain("Yaratilgan videolar")
 
     expect(create).not.toHaveBeenCalled()
     wrapper.unmount()
@@ -173,11 +174,35 @@ describe("video studio integration", () => {
     expect(library?.text()).toContain("Live result")
     expect(library?.text()).not.toContain("Barista tanlovi teaser")
     expect(
-      library?.find('a[aria-label="Videoni ko\'rish"]').attributes("href")
-    ).toContain("/video-jobs/job-1/stream")
+      library?.find('button[aria-label="Videoni ko\'rish"]').exists()
+    ).toBe(true)
     expect(
       library?.find('a[aria-label="Videoni yuklab olish"]').attributes("href")
     ).toContain("/video-jobs/job-1/download")
+    wrapper.unmount()
+  })
+
+  it("plays a history item inside the studio instead of opening a blank tab", async () => {
+    vi.mocked(videoApi.list).mockResolvedValue([
+      {
+        ...job,
+        status: "completed",
+        brief: { ...job.brief, topic: "Live result" },
+        stream_url: "/api/v1/businesses/business-1/video-jobs/job-1/stream",
+        download_url: "/api/v1/businesses/business-1/video-jobs/job-1/download",
+      },
+    ])
+    const wrapper = await mountPage()
+    const library = wrapper.findComponent({ name: "CStudioLibrary" })
+
+    await library.find('button[aria-label="Videoni ko\'rish"]').trigger("click")
+
+    expect(
+      wrapper.findComponent(CVideoPreviewDialog).props("job")
+    ).toMatchObject({
+      id: "job-1",
+      brief: { topic: "Live result" },
+    })
     wrapper.unmount()
   })
 })

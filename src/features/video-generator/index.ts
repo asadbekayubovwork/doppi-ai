@@ -17,3 +17,4 @@ export type {
 export { useVideoGenerator } from "./model/useVideoGenerator"
 export { default as CVideoComposer } from "./ui/CVideoComposer.vue"
 export { default as CVideoJobs } from "./ui/CVideoJobs.vue"
+export { default as CVideoPreviewDialog } from "./ui/CVideoPreviewDialog.vue"
