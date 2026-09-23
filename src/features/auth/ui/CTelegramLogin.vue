@@ -23,7 +23,7 @@ const callback = (data: TelegramLoginData) => emit("auth", data)
 
 onMounted(() => {
   if (!configuredUsername || !container.value) return
-  const globalWindow = window as Window & Record<string, unknown>
+  const globalWindow = window as unknown as Window & Record<string, unknown>
   globalWindow[callbackName] = callback
   const script = document.createElement("script")
   script.async = true
@@ -36,7 +36,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  const globalWindow = window as Window & Record<string, unknown>
+  const globalWindow = window as unknown as Window & Record<string, unknown>
   delete globalWindow[callbackName]
 })
 </script>

@@ -2,8 +2,12 @@ import { apiClient } from "@/shared/api"
 import { authApi } from "../authApi"
 
 describe("backend auth API contracts", () => {
-  beforeEach(() => vi.restoreAllMocks())
-  afterEach(() => vi.unstubAllEnvs())
+  beforeEach(() => {
+    vi.restoreAllMocks()
+  })
+  afterEach(() => {
+    vi.unstubAllEnvs()
+  })
 
   it("keeps the local callback origin when an OAuth URL override is configured", () => {
     vi.stubEnv("VITE_GOOGLE_OAUTH_URL", "/api/v1/auth/oauth/google/authorize")
