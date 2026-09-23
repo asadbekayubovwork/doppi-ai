@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest"
-import { enableAutoUnmount, mount } from "@vue/test-utils"
+import { enableAutoUnmount, mount, type VueWrapper } from "@vue/test-utils"
 import CSelect from "../CSelect.vue"
 
 enableAutoUnmount(afterEach)
@@ -10,18 +10,18 @@ const options = [
   { value: "1080p", label: "1080p" },
 ]
 
-const mountSelect = (modelValue = "480p") =>
+const mountSelect = (modelValue = "480p"): VueWrapper =>
   mount(CSelect, {
     props: {
       options,
       label: "Resolution",
       modelValue,
-      "onUpdate:modelValue": (value: string) =>
+      "onUpdate:modelValue": (value: string | number | undefined) =>
         wrapper.setProps({ modelValue: value }),
     },
     global: { stubs: { teleport: true } },
   })
-let wrapper: ReturnType<typeof mountSelect>
+let wrapper: VueWrapper
 
 describe("CSelect", () => {
   it("shows the selected label and opens a listbox on click", async () => {

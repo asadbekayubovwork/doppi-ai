@@ -3,7 +3,9 @@ import { afterEach, describe, expect, it, vi } from "vitest"
 import CTelegramLogin from "../CTelegramLogin.vue"
 
 describe("official Telegram login widget", () => {
-  afterEach(() => vi.unstubAllEnvs())
+  afterEach(() => {
+    vi.unstubAllEnvs()
+  })
 
   it("renders no placeholder and emits no Vue warning while Telegram auth is disabled", () => {
     const warning = vi.spyOn(console, "warn").mockImplementation(() => {})

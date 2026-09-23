@@ -88,7 +88,7 @@ const signIn = async () => {
       // the default the backend is asked for.
       remember_me: true,
     })
-    if (response.status === "mfa_required") {
+    if ("status" in response && response.status === "mfa_required") {
       step.value = "mfa"
       code.value = ""
       return

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { formatTimeAgo, useCopyToClipboard } from "@/shared/lib"
+import { formatTimeAgo } from "@/shared/lib"
 import { CAppButton, CBadge, CEmptyState, CIcon, CSkeleton } from "@/shared/ui"
 import type { BadgeTone } from "@/shared/ui/types"
-import { resolveMediaUrl, videoApi } from "../api/videoApi"
 import type { VideoJob, VideoJobStatus } from "../api/types"
 
 defineProps<{
@@ -14,40 +13,28 @@ defineProps<{
 defineEmits<{
   sync: []
   download: [job: VideoJob]
+  preview: [job: VideoJob]
 }>()
-
-const copy = useCopyToClipboard()
-
-const streamUrl = (job: VideoJob) =>
-  resolveMediaUrl(job.stream_url, videoApi.streamUrl(job.business_id, job.id))
-
-const downloadUrl = (job: VideoJob) =>
-  resolveMediaUrl(
-    job.download_url,
-    videoApi.downloadUrl(job.business_id, job.id)
-  )
-
-const copyUrl = (url: string, label: string) => copy(url, `${label} copied`)
 
 const STATUS: Record<
   VideoJobStatus,
   { label: string; tone: BadgeTone; icon: string }
 > = {
-  submitting: { label: "Submitting", tone: "accent", icon: "upload" },
+  submitting: { label: "Yuborilmoqda", tone: "accent", icon: "upload" },
   submission_failed: {
-    label: "Not submitted",
+    label: "Yuborilmadi",
     tone: "danger",
     icon: "triangle-alert",
   },
   submission_unknown: {
-    label: "Needs verification",
+    label: "Tekshirilmoqda",
     tone: "warning",
     icon: "clock-alert",
   },
-  queued: { label: "Queued", tone: "neutral", icon: "timer" },
-  processing: { label: "Generating", tone: "accent", icon: "sparkles" },
-  completed: { label: "Ready", tone: "success", icon: "circle-check" },
-  failed: { label: "Failed", tone: "danger", icon: "triangle-alert" },
+  queued: { label: "Navbatda", tone: "neutral", icon: "timer" },
+  processing: { label: "Yaratilmoqda", tone: "accent", icon: "sparkles" },
+  completed: { label: "Tayyor", tone: "success", icon: "circle-check" },
+  failed: { label: "Xatolik", tone: "danger", icon: "triangle-alert" },
 }
 
 const eventCount = (job: VideoJob) => {
@@ -71,10 +58,10 @@ const progress = (job: VideoJob) => {
     >
       <div>
         <h2 class="text-[17px] font-semibold text-[#15151B]">
-          Generation jobs
+          Yaratilgan videolar
         </h2>
         <p class="mt-1 text-[13px] text-[#73737D]">
-          Local history is loaded without contacting the generation service.
+          Videolaringiz holati va tayyor natijalari shu yerda ko‘rinadi.
         </p>
       </div>
       <CAppButton
@@ -83,7 +70,7 @@ const progress = (job: VideoJob) => {
         :loading="isSyncing"
         @click="$emit('sync')"
       >
-        Sync upstream
+        Tarixni yangilash
       </CAppButton>
     </header>
 
@@ -95,8 +82,8 @@ const progress = (job: VideoJob) => {
       v-else-if="!jobs.length"
       class="m-5 sm:m-6"
       icon="clapperboard"
-      title="No video jobs yet"
-      description="Your first generation job will appear here with live status and a secure download."
+      title="Hali video yo‘q"
+      description="Yangi yaratgan videolaringiz shu yerda paydo bo‘ladi."
     />
 
     <div v-else class="divide-y divide-[#ECECE8]">
@@ -116,12 +103,6 @@ const progress = (job: VideoJob) => {
             <span class="text-xs text-[#8A8A94]">
               {{ formatTimeAgo(new Date(job.created_at)) }}
             </span>
-            <span
-              v-if="job.external_job_id"
-              class="font-mono text-[11px] text-[#AAAAB2]"
-            >
-              {{ job.external_job_id.slice(0, 12) }}
-            </span>
           </div>
           <h3 class="mt-2 truncate text-[15px] font-semibold text-[#24242A]">
             {{ job.brief.topic }}
@@ -129,15 +110,15 @@ const progress = (job: VideoJob) => {
           <div
             class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#73737D]"
           >
-            <span>{{ job.brief.aspect_ratio || "Auto format" }}</span>
+            <span>{{ job.brief.aspect_ratio || "Avto format" }}</span>
             <span>{{
               job.brief.duration_sec
                 ? `${job.brief.duration_sec}s`
                 : "Auto duration"
             }}</span>
-            <span>{{ job.brief.language?.toUpperCase() || "AUTO" }}</span>
+            <span>{{ job.brief.language?.toUpperCase() || "Avto" }}</span>
             <span v-if="eventCount(job)"
-              >{{ eventCount(job) }} pipeline events</span
+              >{{ eventCount(job) }} ta yangilanish</span
             >
           </div>
           <div
@@ -155,43 +136,6 @@ const progress = (job: VideoJob) => {
           >
             {{ job.error_message }}
           </p>
-          <div
-            v-if="job.status === 'completed'"
-            class="mt-3 space-y-1 rounded-xl border border-[#ECECE8] bg-[#FAFAF9] p-3 text-[11px]"
-          >
-            <div class="flex items-start gap-2">
-              <span class="w-16 shrink-0 font-medium text-[#73737D]"
-                >Preview</span
-              >
-              <code class="min-w-0 flex-1 break-all text-[#5B4BE8]">{{
-                streamUrl(job)
-              }}</code>
-              <button
-                type="button"
-                class="shrink-0 text-[#73737D] transition hover:text-[#5B4BE8]"
-                title="Copy preview URL"
-                @click="copyUrl(streamUrl(job), 'Preview URL')"
-              >
-                <CIcon name="copy" class="h-3.5 w-3.5" />
-              </button>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="w-16 shrink-0 font-medium text-[#73737D]"
-                >Download</span
-              >
-              <code class="min-w-0 flex-1 break-all text-[#5B4BE8]">{{
-                downloadUrl(job)
-              }}</code>
-              <button
-                type="button"
-                class="shrink-0 text-[#73737D] transition hover:text-[#5B4BE8]"
-                title="Copy download URL"
-                @click="copyUrl(downloadUrl(job), 'Download URL')"
-              >
-                <CIcon name="copy" class="h-3.5 w-3.5" />
-              </button>
-            </div>
-          </div>
         </div>
 
         <div class="flex items-center gap-2 sm:justify-end">
@@ -200,7 +144,7 @@ const progress = (job: VideoJob) => {
             class="inline-flex items-center gap-2 text-xs font-medium text-[#5B4BE8]"
           >
             <CIcon name="refresh-cw" class="h-3.5 w-3.5 animate-spin" />
-            Live updates
+            Jonli yangilanadi
           </span>
           <CAppButton
             v-if="job.status === 'completed'"
@@ -208,18 +152,18 @@ const progress = (job: VideoJob) => {
             icon="download"
             @click="$emit('download', job)"
           >
-            Download
+            Yuklab olish
           </CAppButton>
-          <a
+          <button
             v-if="job.status === 'completed'"
-            :href="streamUrl(job)"
-            target="_blank"
-            rel="noopener noreferrer"
+            type="button"
+            aria-label="Videoni ilovada ko'rish"
             class="inline-flex h-8 items-center gap-1.5 rounded-[10px] border border-[#E5E5E1] bg-white px-3 text-[13px] font-semibold text-[#15151B] transition hover:border-[#D6D6D1] hover:bg-[#FAFAF9]"
+            @click="$emit('preview', job)"
           >
-            <CIcon name="external-link" class="h-3.5 w-3.5" />
-            Preview
-          </a>
+            <CIcon name="play" class="h-3.5 w-3.5" />
+            Ko‘rish
+          </button>
         </div>
       </article>
     </div>

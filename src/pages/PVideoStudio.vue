@@ -4,9 +4,11 @@ import { useHead } from "@unhead/vue"
 import { usePageHeading } from "@/shared/lib"
 import {
   CVideoJobs,
+  CVideoPreviewDialog,
   resolveMediaUrl,
   useVideoGenerator,
   videoApi,
+  type VideoJob,
 } from "@/features/video-generator"
 import {
   CPublishModal,
@@ -93,8 +95,21 @@ const scrollToJobs = () => {
 }
 
 const publishOpen = ref(false)
+const previewJobId = ref<string | null>(null)
+const previewJob = computed(
+  () => jobs.value.find((job) => job.id === previewJobId.value) ?? null
+)
 const onDownload = () => {
   if (sessionJob.value?.status === "completed") download(sessionJob.value)
+}
+
+const openPreview = (job: VideoJob) => {
+  previewJobId.value = job.id
+}
+
+const openLibraryPreview = (video: StudioVideo) => {
+  const job = jobs.value.find((item) => item.id === video.id)
+  if (job) openPreview(job)
 }
 
 // The publish modal returns the platforms the user kept enabled; they ride
@@ -183,7 +198,11 @@ const onRegenerate = () => {
         @download="onDownload"
         @regenerate="onRegenerate"
       />
-      <CStudioLibrary :videos="libraryVideos" :loading="isLoading" />
+      <CStudioLibrary
+        :videos="libraryVideos"
+        :loading="isLoading"
+        @preview="openLibraryPreview"
+      />
     </div>
 
     <CVideoJobs
@@ -191,6 +210,13 @@ const onRegenerate = () => {
       :is-loading="isLoading"
       :is-syncing="isSyncing"
       @sync="sync"
+      @download="download"
+      @preview="openPreview"
+    />
+
+    <CVideoPreviewDialog
+      :job="previewJob"
+      @close="previewJobId = null"
       @download="download"
     />
 

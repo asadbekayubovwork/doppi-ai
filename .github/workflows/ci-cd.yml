@@ -48,7 +48,7 @@ jobs:
           set -euo pipefail
           pnpm test
           pnpm lint
-          pnpm exec vue-tsc --noEmit
+          pnpm exec vue-tsc --noEmit -p tsconfig.app.json
           pnpm audit --prod --audit-level high
           git diff --check
           # Generated Lucide geometry is data, not hand-maintained source.

@@ -2,7 +2,9 @@ import { apiClient } from "@/shared/api"
 import { workspaceApi } from "../workspaceApi"
 
 describe("workspace backend contracts", () => {
-  beforeEach(() => vi.restoreAllMocks())
+  beforeEach(() => {
+    vi.restoreAllMocks()
+  })
 
   it("uses profile and session endpoints", async () => {
     const get = vi.spyOn(apiClient, "get").mockResolvedValue([] as never)

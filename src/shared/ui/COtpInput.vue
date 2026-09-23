@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, watch } from "vue"
+import {
+  computed,
+  nextTick,
+  onMounted,
+  ref,
+  watch,
+  type ComponentPublicInstance,
+} from "vue"
 
 const props = withDefaults(
   defineProps<{
@@ -53,7 +60,10 @@ const boxClass = (index: number) => {
   ]
 }
 
-const setInput = (element: Element | null, index: number) => {
+const setInput = (
+  element: Element | ComponentPublicInstance | null,
+  index: number
+) => {
   if (element instanceof HTMLInputElement) inputs.value[index] = element
 }
 

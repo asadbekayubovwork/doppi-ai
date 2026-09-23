@@ -22,7 +22,7 @@ const job: VideoJob = {
 }
 
 describe("CVideoJobs", () => {
-  it("renders secure preview and download URLs for completed jobs", () => {
+  it("opens the selected completed job in the frontend player", async () => {
     const wrapper = mount(CVideoJobs, {
       props: { jobs: [job], isLoading: false, isSyncing: false },
       global: {
@@ -36,10 +36,11 @@ describe("CVideoJobs", () => {
       },
     })
 
-    expect(wrapper.text()).toContain(job.stream_url)
-    expect(wrapper.text()).toContain(job.download_url)
-    expect(wrapper.find("a[target='_blank']").attributes("href")).toBe(
-      job.stream_url
-    )
+    expect(wrapper.text()).not.toContain(job.stream_url)
+    expect(wrapper.text()).toContain("Ko‘rish")
+    await wrapper
+      .find('button[aria-label="Videoni ilovada ko\'rish"]')
+      .trigger("click")
+    expect(wrapper.emitted("preview")?.[0]?.[0]).toEqual(job)
   })
 })

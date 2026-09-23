@@ -43,7 +43,8 @@ router.beforeEach(async (to) => {
   if (authBypass && to.meta.requiresAuth === true) return true
 
   const auth = useAuthStore(pinia)
-  const needsSession = to.meta.requiresAuth === true || to.meta.guestOnly === true
+  const needsSession =
+    to.meta.requiresAuth === true || to.meta.guestOnly === true
 
   if (needsSession && auth.status === "unknown") await auth.bootstrap()
 
