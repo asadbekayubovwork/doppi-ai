@@ -8,12 +8,12 @@ interface FlowStep {
 }
 
 /**
- * Hero shared by the bespoke service landings: badge, headline, subhead and
- * the chain of steps the page then walks through. The buttons come from the
- * page through the `actions` slot, because each service links somewhere else.
+ * Hero shared by the bespoke service landings: headline and the chain of
+ * steps the page then walks through. The buttons come from the page through
+ * the `actions` slot, because each service links somewhere else.
  */
 const props = defineProps<{
-  /** i18n branch holding badge, title, subtitle and flow (e.g. `services.rag.landing`). */
+  /** i18n branch holding title and flow (e.g. `services.rag.landing`). */
   base: string
 }>()
 
@@ -28,34 +28,13 @@ const flow = useI18nList<FlowStep>(`${props.base}.flow`)
     />
 
     <div class="container relative z-10 flex flex-col items-center text-center">
-      <span
-        class="inline-flex items-center gap-2 rounded-full border border-sand-200 bg-white px-3.5 py-[7px] text-[13px] text-sand-500"
-        data-aos="fade-up"
-        data-aos-duration="800"
-      >
-        <span
-          class="h-[7px] w-[7px] rounded-full bg-signal"
-          aria-hidden="true"
-        />
-        {{ $t(`${base}.badge`) }}
-      </span>
-
       <h1
-        class="mt-6 max-w-[920px] text-[32px] font-bold leading-[110%] tracking-tight text-sand-950 sm:text-5xl lg:text-[62px]"
+        class="max-w-[920px] text-[32px] font-bold leading-[110%] tracking-tight text-sand-950 sm:text-5xl lg:text-[62px]"
         data-aos="fade-up"
         data-aos-duration="1000"
       >
         {{ $t(`${base}.title`) }}
       </h1>
-
-      <p
-        class="mt-6 max-w-[680px] text-base leading-[160%] text-sand-500 sm:text-[17px]"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-        data-aos-delay="150"
-      >
-        {{ $t(`${base}.subtitle`) }}
-      </p>
 
       <div
         class="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row"

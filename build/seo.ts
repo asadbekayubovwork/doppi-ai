@@ -46,12 +46,6 @@ export const message = (tree: Messages, key: string): string => {
   return value.replace(/\{'([^']*)'\}/g, "$1")
 }
 
-const list = <T>(tree: Messages, key: string): T[] => {
-  const value = lookup(tree, key)
-  if (!Array.isArray(value)) throw new Error(`seo: missing list "${key}"`)
-  return value as T[]
-}
-
 const organizationId = `${SITE_URL}/#organization`
 
 const organization = (tree: Messages) => ({
@@ -126,15 +120,7 @@ export const structuredData = (tree: Messages, page: SeoPage) => {
         image,
         provider: { "@id": organizationId },
       },
-      breadcrumb(tree, page, message(tree, `${base}.name`)),
-      {
-        "@type": "FAQPage",
-        mainEntity: list<{ q: string; a: string }>(tree, `${base}.faq.items`).map((item) => ({
-          "@type": "Question",
-          name: item.q,
-          acceptedAnswer: { "@type": "Answer", text: item.a },
-        })),
-      }
+      breadcrumb(tree, page, message(tree, `${base}.name`))
     )
   } else {
     // "Narxlar — Do'ppi AI" names the crumb "Narxlar".

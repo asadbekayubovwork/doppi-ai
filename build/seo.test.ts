@@ -68,20 +68,16 @@ describe("build/seo", () => {
     expect(ogImageFor(pageAt(SERVICE_PATHS.voice))).toBe("/og/voice.png")
   })
 
-  it("publishes the brand, the services and their FAQs as structured data", () => {
+  it("publishes the brand and the services as structured data", () => {
     expect(graphTypes(uz, "/")).toEqual(["Organization", "WebSite", "SoftwareApplication"])
+    // The service landings carry no FAQ, so they claim none: structured data
+    // may only describe what is visible on the page.
     expect(graphTypes(uz, SERVICE_PATHS.voice)).toEqual([
       "Organization",
       "Service",
       "BreadcrumbList",
-      "FAQPage",
     ])
     expect(graphTypes(uz, "/pricing")).toEqual(["Organization", "BreadcrumbList"])
-
-    const data = structuredData(uz, pageAt(SERVICE_PATHS.rag))["@graph"] as Tree[]
-    const faq = data.find((node) => node["@type"] === "FAQPage") as { mainEntity: unknown[] }
-    const services = uz.services as { rag: { faq: { items: unknown[] } } }
-    expect(faq.mainEntity).toHaveLength(services.rag.faq.items.length)
   })
 
   it("escapes message text in attributes and inside the JSON-LD script", () => {

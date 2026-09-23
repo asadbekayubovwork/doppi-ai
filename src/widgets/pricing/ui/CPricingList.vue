@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
 import { billingApi, type CreditPack } from "@/features/billing"
-import { CIcon, CSectionHeading } from "@/shared/ui"
-
-const props = withDefaults(defineProps<{ showHeading?: boolean }>(), {
-  showHeading: true,
-})
+import { CIcon } from "@/shared/ui"
 
 const packs = ref<CreditPack[]>([])
 const intro = ref<{
@@ -36,13 +32,6 @@ onMounted(async () => {
 <template>
   <section id="pricing" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
-      <CSectionHeading
-        v-if="props.showHeading"
-        :eyebrow="$t('pricing.eyebrow')"
-        :title="$t('pricing.title')"
-        :subtitle="$t('pricing.subtitle')"
-      />
-
       <div
         v-if="intro"
         class="mt-14 grid grid-cols-1 items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3"

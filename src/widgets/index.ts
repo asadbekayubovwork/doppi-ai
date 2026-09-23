@@ -9,7 +9,6 @@ export { CFooter } from "./footer"
 // Landing sections (in page order)
 export { CHero } from "./hero"
 export { CTrustBar } from "./trustbar"
-export { CProblem } from "./problem"
 export { CSolution } from "./solution"
 export { CFeatures } from "./features"
 export { CAudience } from "./audience"
