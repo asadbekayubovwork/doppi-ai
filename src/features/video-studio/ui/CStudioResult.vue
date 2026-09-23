@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
-import { CVideoPlayer, CVideoThumb, type VideoJob } from "@/entities/video"
+import { CVideoPlayer, CVideoThumb } from "@/entities/video"
+import type { VideoJob } from "@/features/video-generator"
 import { CAppButton, CBadge, CIcon } from "@/shared/ui"
 import { formatClockTime } from "@/shared/lib"
 
@@ -81,10 +82,18 @@ const PIPELINE = [
         <CBadge v-if="phase === 'completed'" tone="success" icon="circle-check">
           Tayyor
         </CBadge>
-        <CBadge v-else-if="phase === 'active'" tone="accent" icon="loader-circle">
+        <CBadge
+          v-else-if="phase === 'active'"
+          tone="accent"
+          icon="loader-circle"
+        >
           Yaratilmoqda
         </CBadge>
-        <CBadge v-else-if="phase === 'failed'" tone="danger" icon="triangle-alert">
+        <CBadge
+          v-else-if="phase === 'failed'"
+          tone="danger"
+          icon="triangle-alert"
+        >
           Xatolik
         </CBadge>
       </div>
@@ -117,13 +126,18 @@ const PIPELINE = [
               {{ currentStep }}
             </span>
             <!-- Progress bar (falls back to indeterminate shimmer) -->
-            <div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-white/20">
+            <div
+              class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-white/20"
+            >
               <div
                 v-if="progress !== null"
                 class="h-full rounded-full bg-white transition-all duration-500"
                 :style="{ width: `${progress}%` }"
               />
-              <div v-else class="h-full w-1/3 animate-pulse rounded-full bg-white/70" />
+              <div
+                v-else
+                class="h-full w-1/3 animate-pulse rounded-full bg-white/70"
+              />
             </div>
             <span v-if="progress !== null" class="text-[11px] text-white/80">
               {{ progress }}%
@@ -138,7 +152,9 @@ const PIPELINE = [
           rounded="rounded-[24px]"
           class="aspect-[9/16] w-full border-4 border-[#15151B]/5"
         >
-          <div class="flex flex-col items-center gap-2 px-6 text-center text-white">
+          <div
+            class="flex flex-col items-center gap-2 px-6 text-center text-white"
+          >
             <CIcon name="triangle-alert" class="h-8 w-8" />
             <span class="text-[12.5px]">
               {{ job?.error_message || "Video yaratilmadi" }}
@@ -151,7 +167,9 @@ const PIPELINE = [
           v-else
           class="flex aspect-[9/16] w-full flex-col items-center justify-center gap-3 rounded-[24px] border border-dashed border-[#DEDEE4] bg-[#FAFAF9] px-6 text-center"
         >
-          <span class="grid h-12 w-12 place-items-center rounded-2xl bg-[#EFECFF] text-[#5B4BE8]">
+          <span
+            class="grid h-12 w-12 place-items-center rounded-2xl bg-[#EFECFF] text-[#5B4BE8]"
+          >
             <CIcon name="wand-sparkles" class="h-6 w-6" />
           </span>
           <p class="text-[13px] text-[#73737D]">
@@ -161,12 +179,17 @@ const PIPELINE = [
 
         <div v-if="phase !== 'idle'" class="mt-4 text-center">
           <h3 class="text-[15px] font-semibold text-[#15151B]">{{ title }}</h3>
-          <p v-if="meta" class="mt-0.5 text-[12px] text-[#8A8A94]">{{ meta }}</p>
+          <p v-if="meta" class="mt-0.5 text-[12px] text-[#8A8A94]">
+            {{ meta }}
+          </p>
         </div>
       </div>
 
       <!-- Actions (only once something has been generated this session) -->
-      <div v-if="phase !== 'idle'" class="mt-5 w-full max-w-[340px] space-y-2.5">
+      <div
+        v-if="phase !== 'idle'"
+        class="mt-5 w-full max-w-[340px] space-y-2.5"
+      >
         <CAppButton
           v-if="phase !== 'failed'"
           variant="primary"

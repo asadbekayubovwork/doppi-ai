@@ -5,6 +5,7 @@ import { CBadge, CEmptyState, CIcon, CSkeleton } from "@/shared/ui"
 import type { StudioVideoStatus } from "@/entities/video"
 
 const props = defineProps<{ videos: StudioVideo[]; loading?: boolean }>()
+defineEmits<{ preview: [video: StudioVideo] }>()
 
 type Filter = "all" | "ready" | "processing" | "issues"
 const filter = ref<Filter>("all")
@@ -109,16 +110,15 @@ const visible = computed(() =>
           </div>
         </div>
         <div class="flex shrink-0 items-center gap-0.5">
-          <a
+          <button
             v-if="video.previewUrl"
-            :href="video.previewUrl"
-            target="_blank"
-            rel="noopener noreferrer"
+            type="button"
             aria-label="Videoni ko'rish"
             class="grid h-11 w-11 place-items-center rounded-lg text-[#73737D] transition hover:bg-[#F5F4FB] hover:text-[#5B4BE8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8175EA]"
+            @click="$emit('preview', video)"
           >
             <CIcon name="external-link" class="h-4 w-4" />
-          </a>
+          </button>
           <a
             v-if="video.downloadUrl"
             :href="video.downloadUrl"
