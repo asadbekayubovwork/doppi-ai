@@ -136,7 +136,7 @@ const mountAt = async (
   }
   await router.push(path)
   const wrapper = mount(component as never, {
-    props,
+    props: props as never,
     global: { plugins: [pinia, router, createHead()] },
   })
   await flushPromises()
@@ -168,7 +168,9 @@ beforeEach(() => {
   Element.prototype.scrollIntoView = vi.fn()
 })
 
-afterEach(() => vi.restoreAllMocks())
+afterEach(() => {
+  vi.restoreAllMocks()
+})
 
 describe("RAG agent pages", () => {
   it("renders data loaded through the RAG API", async () => {

@@ -112,7 +112,7 @@ const handleTelegram = async (data: Record<string, string | number>) => {
   const pending = toast.loading("Telegram tasdiqlanmoqda...")
   try {
     const response = await authApi.telegramLogin(data)
-    if (response.status === "challenge_required") {
+    if ("status" in response) {
       await router.replace({
         name: "TelegramAuth",
         query: { challenge_id: response.challenge_id },

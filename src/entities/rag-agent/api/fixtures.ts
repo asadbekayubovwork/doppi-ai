@@ -1,12 +1,9 @@
+import type { ConversationDetail, ConversationSummary } from "../model/types"
 import type {
-  ConversationDetail,
-  ConversationSummary,
-  RagAgent,
-  SourceCitation,
-} from "../model/types"
-
-// Stand-in data for the RAG agent screens until the control plane exposes the
-// endpoints. Timestamps are relative to page load so "18 min ago" stays true.
+  LegacyConversationDetail,
+  LegacyRagAgent,
+  LegacySourceCitation,
+} from "./legacyFixtureTypes"
 
 const minutesAgo = (minutes: number) =>
   new Date(Date.now() - minutes * 60_000).toISOString()
@@ -19,7 +16,7 @@ const DOCS = {
   faq: "Store FAQ.docx",
 }
 
-export const AGENT_FIXTURE: RagAgent = {
+export const AGENT_FIXTURE: LegacyRagAgent = {
   id: "agent_aura",
   name: "Aura Support Agent",
   description: "Answers product, pricing and delivery questions",
@@ -48,7 +45,7 @@ interface ConversationSeed extends Omit<ConversationSummary, "updatedAt"> {
   minutesAgo: number
   customer: ConversationDetail["customer"]
   reply: string
-  citation: SourceCitation
+  citation: LegacySourceCitation
 }
 
 const SEEDS: ConversationSeed[] = [
@@ -295,7 +292,7 @@ const toSummary = (seed: ConversationSeed): ConversationSummary => ({
 })
 
 /** The customer's question and the agent's answer — enough to open any chat. */
-const excerptThread = (seed: ConversationSeed): ConversationDetail => ({
+const excerptThread = (seed: ConversationSeed): LegacyConversationDetail => ({
   ...toSummary(seed),
   customer: seed.customer,
   startedAt: minutesAgo(seed.minutesAgo + 6),
@@ -325,7 +322,7 @@ const excerptThread = (seed: ConversationSeed): ConversationDetail => ({
   rating: null,
 })
 
-const pricingThread = (seed: ConversationSeed): ConversationDetail => ({
+const pricingThread = (seed: ConversationSeed): LegacyConversationDetail => ({
   ...toSummary(seed),
   customer: seed.customer,
   startedAt: minutesAgo(36),
@@ -394,6 +391,7 @@ const pricingThread = (seed: ConversationSeed): ConversationDetail => ({
 export const CONVERSATION_SUMMARIES: ConversationSummary[] =
   SEEDS.map(toSummary)
 
-export const CONVERSATION_DETAILS: ConversationDetail[] = SEEDS.map((seed) =>
-  seed.id === "chat_5c73aa90" ? pricingThread(seed) : excerptThread(seed)
+export const CONVERSATION_DETAILS: LegacyConversationDetail[] = SEEDS.map(
+  (seed) =>
+    seed.id === "chat_5c73aa90" ? pricingThread(seed) : excerptThread(seed)
 )

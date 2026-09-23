@@ -13,7 +13,6 @@ export function setupProviders(app: App) {
   app.use(router)
   app.use(i18n)
   app.use(head)
-  app.use(AOS)
   // `once: true` — an element that has already animated in is never hidden
   // again. With the default (`once: false`) AOS strips `aos-animate` whenever it
   // recalculates positions, which made height-changing content (the FAQ

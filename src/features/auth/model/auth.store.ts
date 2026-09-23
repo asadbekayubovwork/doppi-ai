@@ -22,7 +22,7 @@ let bootstrapGeneration = 0
 const isMfaResponse = (
   response: LoginResponse
 ): response is Extract<LoginResponse, { status: "mfa_required" }> =>
-  response.status === "mfa_required"
+  "status" in response && response.status === "mfa_required"
 
 const generatedIdempotencyKey = () => {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
@@ -47,7 +47,9 @@ export const useAuthStore = defineStore("auth", {
   getters: {
     isAuthenticated: (state) => state.status === "authenticated",
     activeBusiness: (state) =>
-      state.businesses.find((business) => business.id === state.activeBusinessId) ??
+      state.businesses.find(
+        (business) => business.id === state.activeBusinessId
+      ) ??
       state.businesses[0] ??
       null,
     safeRedirect: () => (value: unknown) => safeLocalPath(value),
@@ -81,7 +83,9 @@ export const useAuthStore = defineStore("auth", {
         this.businesses = await authApi.listBusinesses()
         if (
           this.activeBusinessId === null ||
-          !this.businesses.some((business) => business.id === this.activeBusinessId)
+          !this.businesses.some(
+            (business) => business.id === this.activeBusinessId
+          )
         ) {
           this.activeBusinessId = this.businesses[0]?.id ?? null
         }
@@ -113,7 +117,7 @@ export const useAuthStore = defineStore("auth", {
           this.bootstrapError = error
           return false
         } finally {
-          if (bootstrapRequest === request) bootstrapRequest = null
+          if (generation === bootstrapGeneration) bootstrapRequest = null
         }
       })()
       bootstrapRequest = request
@@ -157,10 +161,9 @@ export const useAuthStore = defineStore("auth", {
       data: Record<string, string | number>
     ): Promise<TelegramAuthResponse> {
       const response = await authApi.telegramLogin(data)
-      if (response.status !== "challenge_required") {
-        this.setSession(response)
-        await this.loadBusinesses()
-      }
+      if ("status" in response) return response
+      this.setSession(response)
+      await this.loadBusinesses()
       return response
     },
 
@@ -177,7 +180,10 @@ export const useAuthStore = defineStore("auth", {
     },
 
     async createBusiness(payload: BusinessCreatePayload) {
-      const business = await authApi.createBusiness(payload, generatedIdempotencyKey())
+      const business = await authApi.createBusiness(
+        payload,
+        generatedIdempotencyKey()
+      )
       this.businesses.push(business)
       this.activeBusinessId = business.id
       return business

@@ -2,7 +2,9 @@ import { apiClient } from "@/shared/api"
 import { resolveMediaUrl, videoApi } from "../videoApi"
 
 describe("video backend contracts", () => {
-  beforeEach(() => vi.restoreAllMocks())
+  beforeEach(() => {
+    vi.restoreAllMocks()
+  })
 
   it("uses local job endpoints and requires an idempotency key for create", async () => {
     const get = vi.spyOn(apiClient, "get").mockResolvedValue([] as never)
