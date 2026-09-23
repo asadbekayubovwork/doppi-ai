@@ -46,7 +46,9 @@ const mountAt = async (
   return wrapper
 }
 
-afterEach(() => vi.useRealTimers())
+afterEach(() => {
+  vi.useRealTimers()
+})
 
 describe("workspace home", () => {
   it("greets the user for the time of day", async () => {

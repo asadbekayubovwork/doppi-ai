@@ -4,8 +4,12 @@ import CAuthTestimonials from "../CAuthTestimonials.vue"
 
 const ROTATE_MS = 6000
 
-beforeEach(() => vi.useFakeTimers())
-afterEach(() => vi.useRealTimers())
+beforeEach(() => {
+  vi.useFakeTimers()
+})
+afterEach(() => {
+  vi.useRealTimers()
+})
 
 const dots = (wrapper: ReturnType<typeof mount>) =>
   wrapper.findAll('[role="tab"]')

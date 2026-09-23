@@ -43,7 +43,7 @@ const mountPage = (
   })
 
   return mount(component as never, {
-    props,
+    props: props as never,
     global: { plugins: [i18n, router, createHead()] },
   })
 }

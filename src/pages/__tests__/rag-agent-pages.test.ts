@@ -173,7 +173,9 @@ beforeEach(() => {
   Element.prototype.scrollIntoView = vi.fn()
 })
 
-afterEach(() => vi.restoreAllMocks())
+afterEach(() => {
+  vi.restoreAllMocks()
+})
 
 describe("RAG agent pages", () => {
   it("renders data loaded through the RAG API", async () => {

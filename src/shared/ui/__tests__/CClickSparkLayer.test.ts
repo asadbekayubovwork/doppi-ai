@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { mount, type VueWrapper } from "@vue/test-utils"
+import type { MockInstance } from "vitest"
 
 // Note: TypeScript errors in test files are expected and can be ignored
 import CClickSparkLayer from "../CClickSparkLayer.vue"
@@ -10,7 +11,7 @@ import CClickSparkLayer from "../CClickSparkLayer.vue"
  * backing store are released once the sparks die, and nothing outlives unmount.
  */
 describe("CClickSparkLayer", () => {
-  let raf: ReturnType<typeof vi.spyOn>
+  let raf: MockInstance<[callback: FrameRequestCallback], number>
   let layer: VueWrapper | null = null
   let ctx: Record<string, ReturnType<typeof vi.fn>>
 

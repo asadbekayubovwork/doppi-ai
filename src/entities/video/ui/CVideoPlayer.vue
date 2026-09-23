@@ -14,11 +14,28 @@ const props = withDefaults(
 )
 
 const failed = ref(false)
+const loading = ref(true)
+const attempt = ref(0)
 // Reset the error state when a new clip is loaded.
 watch(
   () => props.src,
-  () => (failed.value = false)
+  () => {
+    failed.value = false
+    loading.value = true
+    attempt.value++
+  }
 )
+
+const retry = () => {
+  failed.value = false
+  loading.value = true
+  attempt.value++
+}
+
+const onError = () => {
+  loading.value = false
+  failed.value = true
+}
 </script>
 
 <template>
@@ -29,19 +46,43 @@ watch(
   >
     <video
       v-if="!failed"
+      :key="attempt"
       :src="src"
       controls
       playsinline
       preload="metadata"
+      aria-label="Yaratilgan video"
       class="h-full w-full object-contain"
-      @error="failed = true"
+      @loadstart="loading = true"
+      @loadedmetadata="loading = false"
+      @loadeddata="loading = false"
+      @canplay="loading = false"
+      @error="onError"
     />
     <div
-      v-else
-      class="flex flex-col items-center gap-2 px-6 text-center text-white/90"
+      v-if="loading && !failed"
+      role="status"
+      aria-live="polite"
+      class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#17171C]/90 text-center text-white"
     >
-      <CIcon name="triangle-alert" class="h-7 w-7" />
-      <p class="text-[12.5px]">Videoni yuklab bo'lmadi. Qayta urinib ko'ring.</p>
+      <CIcon name="loader-circle" class="h-8 w-8 animate-spin text-[#B7AEFF]" />
+      <span class="text-[12.5px] font-medium">Video yuklanmoqda…</span>
+    </div>
+    <div
+      v-else-if="failed"
+      class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#17171C] px-6 text-center text-white/90"
+    >
+      <CIcon name="triangle-alert" class="h-7 w-7 text-[#F3C27A]" />
+      <p class="max-w-[240px] text-[12.5px] leading-5">
+        Video hozir ochilmadi. Qayta urinib ko‘ring yoki yuklab oling.
+      </p>
+      <button
+        type="button"
+        class="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-xs font-semibold transition hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        @click="retry"
+      >
+        Qayta yuklash
+      </button>
     </div>
   </div>
 </template>

@@ -1,4 +1,5 @@
 import { mount, type VueWrapper } from "@vue/test-utils"
+import type { MockInstance } from "vitest"
 import CBorderGlowLayer from "../CBorderGlowLayer.vue"
 
 /**
@@ -7,7 +8,7 @@ import CBorderGlowLayer from "../CBorderGlowLayer.vue"
  * a card that is left fades and frees its layer, and nothing outlives unmount.
  */
 describe("CBorderGlowLayer", () => {
-  let raf: ReturnType<typeof vi.spyOn>
+  let raf: MockInstance<[callback: FrameRequestCallback], number>
   let layer: VueWrapper | null = null
 
   beforeEach(() => {

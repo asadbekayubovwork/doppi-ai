@@ -20,7 +20,9 @@ const catalog: VideoModelCatalog = {
 }
 
 describe("useVideoModelCatalog", () => {
-  afterEach(() => vi.restoreAllMocks())
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
 
   it("loads live model options and replaces an unsupported duration", async () => {
     vi.spyOn(videoApi, "models").mockResolvedValue(catalog)
