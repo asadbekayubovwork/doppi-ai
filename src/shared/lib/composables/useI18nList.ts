@@ -4,7 +4,7 @@ import { useI18n } from "vue-i18n"
 type Raw = unknown
 
 /**
- * Reads an ARRAY from the i18n message tree (e.g. `problem.items`) and resolves
+ * Reads an ARRAY from the i18n message tree (e.g. `features.items`) and resolves
  * every leaf into a plain string.
  *
  * `tm()` returns compiled message functions rather than strings, so each leaf

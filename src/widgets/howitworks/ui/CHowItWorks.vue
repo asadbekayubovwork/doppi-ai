@@ -19,11 +19,7 @@ const showConnector = (index: number) => (index + 1) % 4 !== 0 && index !== step
     <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-40" aria-hidden="true" />
 
     <div class="container relative z-10">
-      <CSectionHeading
-        :eyebrow="$t('how.eyebrow')"
-        :title="$t('how.title')"
-        :subtitle="$t('how.subtitle')"
-      />
+      <CSectionHeading :title="$t('how.title')" />
 
       <ul class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <li

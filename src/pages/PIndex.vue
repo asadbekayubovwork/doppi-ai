@@ -7,10 +7,8 @@ import {
   CFeatures,
   CHowItWorks,
   CResults,
-  CPricingList,
   CFaq,
   CAbout,
-  CTeamCards,
   CContact,
 } from "@/widgets"
 
@@ -25,10 +23,8 @@ useSeo("/")
     <CFeatures />
     <CHowItWorks />
     <CResults />
-    <CPricingList />
     <CFaq />
     <CAbout />
-    <CTeamCards />
     <CContact />
   </div>
 </template>

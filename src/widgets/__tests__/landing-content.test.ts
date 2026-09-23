@@ -4,7 +4,6 @@ import { createI18n } from "vue-i18n"
 import { messages } from "@/shared/config/i18n"
 
 // Note: TypeScript errors in test files are expected and can be ignored
-import CProblem from "../problem/ui/CProblem.vue"
 import CFeatures from "../features/ui/CFeatures.vue"
 import CPricingList from "../pricing/ui/CPricingList.vue"
 import CFaq from "../faq/ui/CFaq.vue"
@@ -38,15 +37,6 @@ const mountWithI18n = (component: unknown, locale = "uz") => {
 enableAutoUnmount(afterEach)
 
 describe("landing sections render i18n list content", () => {
-  it("renders all six problem cards with their copy", () => {
-    const wrapper = mountWithI18n(CProblem)
-    const cards = wrapper.findAll("li")
-
-    expect(cards).toHaveLength(6)
-    expect(wrapper.text()).toContain("Reklama ketadi, mijoz yo'qoladi")
-    expect(wrapper.text()).toContain("Qo'ng'iroqlar javobsiz")
-  })
-
   it("renders all six feature modules", () => {
     const wrapper = mountWithI18n(CFeatures)
 
@@ -105,10 +95,10 @@ describe("landing sections render i18n list content", () => {
   })
 
   it("switches every list to the selected locale", () => {
-    const ru = mountWithI18n(CProblem, "ru")
+    const ru = mountWithI18n(CFeatures, "ru")
     const en = mountWithI18n(CFeatures, "en")
 
-    expect(ru.text()).toContain("Реклама идёт, а клиенты теряются")
+    expect(ru.text()).toContain("Автоматизация соцсетей")
     expect(en.text()).toContain("Social Media Automation")
   })
 })

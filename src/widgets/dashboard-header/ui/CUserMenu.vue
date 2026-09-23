@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
+import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 import { useDismiss, useToast } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
@@ -12,6 +13,7 @@ const props = defineProps<{
   balance: string
 }>()
 
+const { t } = useI18n()
 const router = useRouter()
 const auth = useAuthStore()
 const toast = useToast()
@@ -30,11 +32,8 @@ const signOut = async () => {
   } catch (error) {
     failed = true
     toast.warning(
-      "Chiqish to'liq yakunlanmadi",
-      messageForProblem(
-        error,
-        "Sessiya serverda yopilmadi, lekin bu qurilmadagi holat tozalandi."
-      )
+      t("dashboard.userMenu.signOutIncomplete"),
+      messageForProblem(error, t("dashboard.userMenu.signOutIncompleteHint"))
     )
   } finally {
     await router.push({
@@ -105,7 +104,7 @@ const signOut = async () => {
               name="user-round"
               class="h-[18px] w-[18px] shrink-0 text-[#8E8E9C]"
             />
-            <span class="flex-1">Hisob sozlamalari</span>
+            <span class="flex-1">{{ $t("dashboard.userMenu.account") }}</span>
           </RouterLink>
 
           <RouterLink
@@ -118,7 +117,7 @@ const signOut = async () => {
               name="credit-card"
               class="h-[18px] w-[18px] shrink-0 text-[#8E8E9C]"
             />
-            <span class="flex-1">To'lov va balans</span>
+            <span class="flex-1">{{ $t("dashboard.userMenu.billing") }}</span>
             <span class="text-[13px] text-[#8E8E9C]">{{ props.balance }}</span>
           </RouterLink>
         </div>
@@ -131,7 +130,7 @@ const signOut = async () => {
             @click="signOut"
           >
             <CIcon name="log-out" class="h-[18px] w-[18px] shrink-0" />
-            Chiqish
+            {{ $t("dashboard.userMenu.signOut") }}
           </button>
         </div>
       </div>

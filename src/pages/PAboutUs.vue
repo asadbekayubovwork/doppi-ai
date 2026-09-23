@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSeo } from "@/shared/lib"
-import { CAbout, CProblem, CSolution, CResults, CTeamCards } from "@/widgets"
+import { CResults, CTeamCards } from "@/widgets"
 
 useSeo("/about")
 </script>
@@ -29,9 +29,6 @@ useSeo("/about")
       </div>
     </section>
 
-    <CAbout />
-    <CProblem />
-    <CSolution />
     <CResults />
     <CTeamCards />
   </div>

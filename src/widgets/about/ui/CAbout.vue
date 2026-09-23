@@ -24,11 +24,7 @@ const facts = useI18nList<Fact>("about.facts")
       <div class="grid items-start gap-12 lg:grid-cols-2">
         <!-- Narrative + facts -->
         <div>
-          <CSectionHeading
-            align="left"
-            :eyebrow="$t('about.eyebrow')"
-            :title="$t('about.title')"
-          />
+          <CSectionHeading align="left" :title="$t('about.title')" />
 
           <p
             class="mt-6 text-base leading-relaxed text-sand-800 sm:text-lg"
@@ -36,14 +32,6 @@ const facts = useI18nList<Fact>("about.facts")
             data-aos-duration="800"
           >
             {{ $t("about.lead") }}
-          </p>
-          <p
-            class="mt-4 leading-relaxed text-sand-500"
-            data-aos="fade-up"
-            data-aos-duration="800"
-            data-aos-delay="100"
-          >
-            {{ $t("about.vision") }}
           </p>
 
           <dl

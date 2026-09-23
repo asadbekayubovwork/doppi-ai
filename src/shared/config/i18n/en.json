@@ -23,7 +23,10 @@
     "contact": "Contact",
     "signIn": "Sign in",
     "cta": "Start free",
-    "product": "Product"
+    "resources": "Resources",
+    "blog": "Blog",
+    "languages": "Languages",
+    "comingSoon": "Coming soon"
   },
   "hero": {
     "badge": "The AI Marketing OS for businesses worldwide",
@@ -61,7 +64,6 @@
     }
   },
   "trust": {
-    "label": "Every channel, unified in one system",
     "channels": [
       {
         "icon": "instagram",
@@ -97,47 +99,8 @@
       }
     ]
   },
-  "problem": {
-    "eyebrow": "The problem",
-    "title": "Marketing is broken for most businesses",
-    "subtitle": "Ad budgets are spent, but results aren't systematic. Most teams hit the same walls again and again.",
-    "items": [
-      {
-        "icon": "megaphone-off",
-        "title": "Ads run, customers slip away",
-        "desc": "Campaigns drive traffic, but leads aren't captured and quietly disappear."
-      },
-      {
-        "icon": "clock-alert",
-        "title": "Manual work — slow and error-prone",
-        "desc": "Handling leads by hand is slow, exhausting, and full of mistakes."
-      },
-      {
-        "icon": "unplug",
-        "title": "Conversations go cold",
-        "desc": "No follow-up means prospects lose interest and go to a competitor."
-      },
-      {
-        "icon": "phone-missed",
-        "title": "Calls go unanswered",
-        "desc": "A share of inbound calls are never picked up — and never called back."
-      },
-      {
-        "icon": "split",
-        "title": "Channels work in silos",
-        "desc": "Instagram, Telegram, phone — everything is disconnected."
-      },
-      {
-        "icon": "chart-column-decreasing",
-        "title": "Results are hard to measure",
-        "desc": "It's unclear what's working, so decisions are based on guesswork."
-      }
-    ]
-  },
   "solution": {
-    "eyebrow": "The solution",
     "title": "Do'ppi AI — everything in one AI system",
-    "subtitle": "An all-in-one AI marketing platform that unifies advertising, conversations, sales and analytics into a single operating system.",
     "centerLabel": "Do'ppi AI",
     "modules": [
       {
@@ -164,11 +127,9 @@
         "icon": "headset",
         "label": "SIP Call Center"
       }
-    ],
-    "note": "One dashboard, one database, one team — every process under control."
+    ]
   },
   "features": {
-    "eyebrow": "Features",
     "title": "One platform, six powerful modules",
     "subtitle": "Each module works on your behalf and writes the result straight to your CRM.",
     "items": [
@@ -252,9 +213,7 @@
     ]
   },
   "how": {
-    "eyebrow": "How it works",
     "title": "From ad to sale — one automated flow",
-    "subtitle": "Every step is automated, so no lead ever falls through the cracks.",
     "steps": [
       {
         "icon": "megaphone",
@@ -327,9 +286,7 @@
     "callLabel": "Live call"
   },
   "results": {
-    "eyebrow": "Results",
     "title": "Take your business to the next level",
-    "subtitle": "Businesses running on Do'ppi AI see growth from the very first months.",
     "stats": [
       {
         "value": "2–5×",
@@ -358,9 +315,6 @@
     ]
   },
   "pricing": {
-    "eyebrow": "Pricing",
-    "title": "Choose the plan that fits your business",
-    "subtitle": "From a small team to a large enterprise — a clear plan for every stage.",
     "trialNote": "14-day free trial on every plan. No credit card required.",
     "popularLabel": "Most popular",
     "pageTitle": "Simple, transparent pricing",
@@ -436,10 +390,8 @@
     ]
   },
   "about": {
-    "eyebrow": "About us",
     "title": "The future for businesses everywhere — with AI, starting today",
     "lead": "Do'ppi AI makes AI-powered marketing automation effortless for every business — from the first ad to the closed sale.",
-    "vision": "Our mission is to help every business, anywhere in the world, grow with AI — through a system that adapts to its customers' language, channels and telephony.",
     "pageTitle": "The purpose behind Do'ppi AI",
     "pageSubtitle": "We turn artificial intelligence into an everyday working tool for businesses around the world.",
     "points": [
@@ -475,9 +427,7 @@
     ]
   },
   "team": {
-    "eyebrow": "Team",
     "title": "The team behind Do'ppi AI",
-    "subtitle": "Specialists in AI, marketing and product — building one system for businesses around the world.",
     "roles": {
       "rifat": "Head of Growth",
       "jaxongir": "CTO",
@@ -494,9 +444,7 @@
     }
   },
   "faq": {
-    "eyebrow": "FAQ",
     "title": "Frequently asked questions",
-    "subtitle": "Answers to the most common questions about Do'ppi AI.",
     "items": [
       {
         "q": "Does Do'ppi AI work in Uzbek?",
@@ -521,9 +469,7 @@
     ]
   },
   "contact": {
-    "eyebrow": "Contact",
     "title": "Let's automate your marketing together",
-    "subtitle": "Book a demo — our team will show you the system built for your business.",
     "pageTitle": "Get in touch",
     "pageSubtitle": "We'll answer your questions and prepare a demo for your business.",
     "form": {
@@ -551,15 +497,12 @@
     "phone": "+998 93 903 33 01",
     "website": "doppiai.uz",
     "location": "Tashkent, Uzbekistan",
-    "reachTitle": "Reach us directly",
-    "reachSubtitle": "Have a question? We're always in touch.",
-    "socialsTitle": "Social profiles"
+    "reachTitle": "Reach us directly"
   },
   "footer": {
     "tagline": "The future for businesses everywhere — with AI, starting today.",
     "product": "Product",
     "company": "Company",
-    "contactTitle": "Contact",
     "rights": "© {year} Do'ppi AI. All rights reserved.",
     "madeIn": "Made with care in Tashkent",
     "privacy": "Privacy Policy",
@@ -762,6 +705,32 @@
     "breadcrumbLabel": "Breadcrumb",
     "othersTitle": "More from Do'ppi AI",
     "learnMore": "Learn more",
+    "menu": {
+      "useCases": "Voice agent use cases",
+      "industries": "Industries",
+      "items": {
+        "marketRadar": "Market Radar",
+        "personalBlogs": "Personal blogs",
+        "farmers": "Farmers",
+        "ytBusiness": "YouTube business",
+        "meeting": "Meeting AI",
+        "isolator": "Voice isolator",
+        "voices": "Voice library",
+        "audiobooks": "Audiobooks",
+        "dubbing": "Dubbing",
+        "subtitles": "Subtitles",
+        "support": "Support",
+        "sales": "Sales",
+        "booking": "Booking",
+        "surveys": "Surveys",
+        "healthcare": "Healthcare",
+        "realEstate": "Real estate",
+        "travel": "Travel & hospitality",
+        "automotive": "Automotive",
+        "banking": "Banking",
+        "ecommerce": "E-commerce"
+      }
+    },
     "rag": {
       "name": "RAG Agent",
       "navDesc": "AI chatbot that answers from your documents",
@@ -828,9 +797,7 @@
         ]
       },
       "faq": {
-        "eyebrow": "FAQ",
         "title": "RAG Agent questions",
-        "subtitle": "Short answers to the most common questions.",
         "items": [
           {
             "q": "What is RAG?",
@@ -859,9 +826,7 @@
         "subtitle": "14-day free trial — upload your documents and see for yourself how the agent answers."
       },
       "landing": {
-        "badge": "RAG agent · Knowledge base · Telegram · CRM",
         "title": "Upload what you know — let the agent answer for you",
-        "subtitle": "You upload your documents, your price list and your website. The RAG agent answers on Telegram from that material and nothing else — and every conversation is kept in your CRM.",
         "ctaPrimary": "Upload a knowledge base",
         "ctaSecondary": "Try it on Telegram",
         "flow": [
@@ -883,9 +848,7 @@
           }
         ],
         "steps": {
-          "eyebrow": "How it works",
           "title": "Three steps: upload, let it answer, read it in CRM",
-          "subtitle": "Knowledge base → the answer on Telegram → the conversation history in CRM. One unbroken chain.",
           "items": [
             {
               "tag": "Knowledge base",
@@ -920,7 +883,6 @@
           ]
         },
         "capabilities": {
-          "eyebrow": "Capabilities",
           "title": "What else the RAG agent handles",
           "items": [
             {
@@ -1176,9 +1138,7 @@
         ]
       },
       "faq": {
-        "eyebrow": "FAQ",
         "title": "Voice Agent questions",
-        "subtitle": "Short answers to the most common questions.",
         "items": [
           {
             "q": "Which languages does the agent speak?",
@@ -1203,9 +1163,7 @@
         "subtitle": "14-day free trial — hear how the agent sounds for your business."
       },
       "landing": {
-        "badge": "AI voice agent · SIP telephony · CRM",
         "title": "A lead came in on Instagram — the AI called back in 60 seconds",
-        "subtitle": "The voice agent calls the person who filled in your form, answers their questions, books the appointment and writes the outcome straight into your CRM.",
         "ctaPrimary": "Launch the agent",
         "ctaSecondary": "Listen to a call recording",
         "flow": [
@@ -1227,9 +1185,7 @@
           }
         ],
         "steps": {
-          "eyebrow": "How it works",
           "title": "From lead to booking — four steps, no one in between",
-          "subtitle": "Instagram form → CRM → voice call → result in CRM. One unbroken chain.",
           "items": [
             {
               "tag": "Lead capture",
@@ -1274,7 +1230,6 @@
           ]
         },
         "capabilities": {
-          "eyebrow": "Capabilities",
           "title": "What else the voice agent handles",
           "items": [
             {
@@ -1519,9 +1474,7 @@
         ]
       },
       "faq": {
-        "eyebrow": "FAQ",
         "title": "Video Generator questions",
-        "subtitle": "Short answers to the most common questions.",
         "items": [
           {
             "q": "Do I need video editing experience?",
@@ -1546,9 +1499,7 @@
         "subtitle": "Start with a 14-day free trial."
       },
       "landing": {
-        "badge": "Video generator · Auto-posting · Analytics",
         "title": "Approve the week's plan — the videos make and post themselves",
-        "subtitle": "You fill in the content plan once. The AI agent writes the script, assembles the video, posts it to Instagram at the time you set and brings the numbers back.",
         "ctaPrimary": "Build a weekly plan",
         "ctaSecondary": "Watch sample videos",
         "flow": [
@@ -1570,9 +1521,7 @@
           }
         ],
         "steps": {
-          "eyebrow": "How it works",
           "title": "From plan to report — four steps, one agent",
-          "subtitle": "Weekly plan → automatic generation → Instagram post → analytics. All you do is read the result.",
           "items": [
             {
               "tag": "Weekly plan",
@@ -1617,7 +1566,6 @@
           ]
         },
         "capabilities": {
-          "eyebrow": "Capabilities",
           "title": "What else the video agent handles",
           "items": [
             {
@@ -1963,6 +1911,176 @@
             "alt": "Someone opening Instagram on their phone, next to the week's result"
           }
         }
+      }
+    }
+  },
+  "dashboard": {
+    "workspaceLabel": "Do'ppi AI workspace",
+    "common": {
+      "retry": "Please try again.",
+      "checkDetails": "Check the details and try again.",
+      "saving": "Saving...",
+      "loading": "Loading..."
+    },
+    "nav": {
+      "services": "Services",
+      "workspace": "Workspace",
+      "home": "Home",
+      "rag": "Universal RAG Agent",
+      "ragCreate": "Create agent",
+      "voice": "Voice Agent",
+      "video": "Video Generator",
+      "videoPlans": "Plans",
+      "videoNew": "New video",
+      "usage": "Usage & Billing",
+      "settings": "Settings",
+      "expand": "Expand {label}",
+      "collapse": "Collapse {label}"
+    },
+    "balance": {
+      "available": "Available balance",
+      "used": "{used}% of ${limit} monthly limit used",
+      "topUp": "Top up balance"
+    },
+    "header": {
+      "fallbackTitle": "Workspace",
+      "openMenu": "Open menu",
+      "notifications": "Notifications",
+      "fallbackUser": "User",
+      "fallbackPlan": "Workspace",
+      "businessSelectFailed": "Couldn't switch business",
+      "businessCreated": "Business created",
+      "businessCreateFailed": "Couldn't create the business",
+      "businessListFailed": "Couldn't load your businesses"
+    },
+    "business": {
+      "choose": "Choose a business",
+      "label": "Business",
+      "yours": "Your businesses",
+      "members": "{count} members",
+      "create": "Create new business",
+      "settings": "Business settings"
+    },
+    "businessModal": {
+      "title": "Create a new business",
+      "description": "Every business gets its own agents, team and API keys.",
+      "close": "Close",
+      "name": "Business name",
+      "language": "Primary language",
+      "region": "Billing region",
+      "note": "Once the business exists, you can set up its team and integrations separately.",
+      "cancel": "Cancel",
+      "submit": "Create business",
+      "submitting": "Creating...",
+      "regions": {
+        "UZ": "Uzbekistan",
+        "KZ": "Kazakhstan",
+        "US": "USA",
+        "EU": "Europe"
+      }
+    },
+    "userMenu": {
+      "account": "Account settings",
+      "billing": "Billing & balance",
+      "signOut": "Sign out",
+      "signOutIncomplete": "Sign-out didn't fully complete",
+      "signOutIncompleteHint": "The session wasn't closed on the server, but this device has been cleared."
+    },
+    "routes": {
+      "home": {
+        "title": "Home",
+        "subtitle": "Workspace overview"
+      },
+      "rag": {
+        "title": "Universal RAG Agent",
+        "subtitle": "Knowledge bases and retrieval quality"
+      },
+      "ragCreate": {
+        "title": "Universal RAG Agent",
+        "subtitle": "Agent setup"
+      },
+      "ragPlayground": {
+        "title": "RAG playground",
+        "subtitle": "Test retrieval and answers in real time"
+      },
+      "ragSettings": {
+        "title": "Universal RAG Agent",
+        "subtitle": "Agent configuration"
+      },
+      "ragAdmin": {
+        "title": "RAG administration",
+        "subtitle": "Models, pricing and tenant limits"
+      },
+      "ragConversation": {
+        "title": "Universal RAG Agent",
+        "subtitle": "Conversations"
+      },
+      "voice": {
+        "title": "Voice Agent",
+        "subtitle": "Calls, scripts and numbers"
+      },
+      "video": {
+        "title": "Video Generator",
+        "subtitle": "From prompt to finished video"
+      },
+      "videoPlans": {
+        "title": "Plans",
+        "subtitle": "Weekly content plans"
+      },
+      "videoNew": {
+        "title": "New video",
+        "subtitle": "A video outside the weekly plan"
+      },
+      "usage": {
+        "title": "Usage & Billing",
+        "subtitle": "Balance, limits and invoices"
+      },
+      "team": {
+        "title": "Team",
+        "subtitle": "Members and permissions"
+      },
+      "settings": {
+        "title": "Settings",
+        "subtitle": "Workspace and business settings"
+      }
+    },
+    "settings": {
+      "pageTitle": "Settings — Do'ppi AI",
+      "profile": {
+        "title": "Profile",
+        "description": "Your personal details and interface preferences.",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "language": "Language",
+        "timezone": "Time zone",
+        "save": "Save profile",
+        "saved": "Profile saved",
+        "saveFailed": "Couldn't save your profile"
+      },
+      "security": {
+        "title": "Sign-in security",
+        "description": "Connect your Google account or update your current password.",
+        "linkGoogle": "Connect Google account",
+        "currentPassword": "Current password",
+        "newPassword": "New password — at least 12 characters",
+        "submit": "Update password",
+        "updated": "Password updated",
+        "updateFailed": "Couldn't update your password",
+        "checkCurrent": "Check your current password."
+      },
+      "sessions": {
+        "title": "Active sessions",
+        "description": "Manage the devices where your account is signed in.",
+        "signOutAll": "Sign out everywhere",
+        "unknownDevice": "Unknown device",
+        "unknownIp": "Unknown IP",
+        "revoke": "End session",
+        "none": "No other active sessions.",
+        "loadFailed": "Couldn't load sessions",
+        "reload": "Reload the page.",
+        "revoked": "Session ended",
+        "revokeFailed": "Couldn't end the session",
+        "signOutAllFailed": "Couldn't end all sessions"
       }
     }
   }

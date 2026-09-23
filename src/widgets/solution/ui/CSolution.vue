@@ -164,11 +164,7 @@ const onHover = (i: number | null) => {
     />
 
     <div class="container relative z-10">
-      <CSectionHeading
-        :eyebrow="$t('solution.eyebrow')"
-        :title="$t('solution.title')"
-        :subtitle="$t('solution.subtitle')"
-      />
+      <CSectionHeading :title="$t('solution.title')" />
 
       <div ref="stage" :class="{ 'is-paused': !visible }">
         <!-- Desktop: constellation of modules around the Do'ppi hub -->
@@ -184,14 +180,6 @@ const onHover = (i: number | null) => {
         <!-- Mobile / tablet: hub chip + module grid -->
         <CSolutionModuleList :modules="modules" :current="current" />
       </div>
-
-      <p
-        class="mx-auto mt-14 max-w-[560px] text-center text-sand-500"
-        data-aos="fade-up"
-        data-aos-duration="800"
-      >
-        {{ $t("solution.note") }}
-      </p>
     </div>
   </section>
 </template>

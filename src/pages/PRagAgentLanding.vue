@@ -12,8 +12,6 @@ import {
   CDemoKnowledgeBase,
   CDemoTelegram,
   CDemoConversations,
-  CFaq,
-  CServiceLinks,
   HERO_PRIMARY,
   HERO_SECONDARY,
   BAND_PRIMARY,
@@ -24,10 +22,6 @@ import {
  * `/rag-agent` has its own landing rather than the shared PService layout: the
  * page follows one question from the uploaded document through the Telegram
  * answer to the conversation waiting in the CRM, with a mockup per step.
- *
- * The FAQ and the cross-links stay: the build publishes FAQPage structured data
- * for every service page (build/seo.ts), and those answers have to be visible
- * on the page they are claimed for.
  */
 useSeo(() => SERVICE_PATHS.rag)
 
@@ -68,9 +62,6 @@ const telegram = computed(() =>
     <CLandingSteps id="rag-flow" :base="`${base}.steps`" :visuals="visuals" />
 
     <CLandingCapabilities :base="`${base}.capabilities`" />
-
-    <CFaq i18n-key="services.rag.faq" />
-    <CServiceLinks exclude="rag" />
 
     <CLandingCta :base="`${base}.cta`">
       <template #actions>

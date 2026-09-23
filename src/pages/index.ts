@@ -141,8 +141,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Home",
-      subtitle: "Workspace overview",
+      heading: "home",
     },
     component: () => import("./PDashboardHome.vue"),
   },
@@ -152,8 +151,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Universal RAG Agent",
-      subtitle: "Bilim bazalari va qidiruv sifati",
+      heading: "rag",
     },
     component: () => import("./PRagAgent.vue"),
   },
@@ -163,8 +161,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Universal RAG Agent",
-      subtitle: "Agent sozlamalari",
+      heading: "ragCreate",
     },
     component: () => import("./PRagAgentCreate.vue"),
   },
@@ -174,8 +171,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "RAG playground",
-      subtitle: "Retrieval va javoblarni real vaqtda tekshirish",
+      heading: "ragPlayground",
     },
     component: () => import("./PRagPlayground.vue"),
   },
@@ -185,8 +181,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Universal RAG Agent",
-      subtitle: "Agent konfiguratsiyasi",
+      heading: "ragSettings",
     },
     component: () => import("./PRagAgentSettings.vue"),
   },
@@ -196,8 +191,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "RAG administration",
-      subtitle: "Modellar, narxlar va tenant limitlari",
+      heading: "ragAdmin",
     },
     component: () => import("./PRagAdmin.vue"),
   },
@@ -208,8 +202,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Universal RAG Agent",
-      subtitle: "Suhbatlar",
+      heading: "ragConversation",
     },
     component: () => import("./PRagConversation.vue"),
   },
@@ -219,8 +212,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Ovozli agent",
-      subtitle: "Qo'ng'iroqlar, ssenariylar va raqamlar",
+      heading: "voice",
     },
     component: () => import("./PVoiceAgentApp.vue"),
   },
@@ -230,8 +222,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Video Generator",
-      subtitle: "Promptdan tayyor videogacha",
+      heading: "video",
     },
     component: () => import("./PVideoGenerator.vue"),
   },
@@ -241,8 +232,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Plans",
-      subtitle: "Haftalik kontent rejalari",
+      heading: "videoPlans",
     },
     component: () => import("./PVideoPlans.vue"),
   },
@@ -252,8 +242,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "New video",
-      subtitle: "Navbatdan tashqari video",
+      heading: "videoNew",
     },
     component: () => import("./PVideoStudio.vue"),
   },
@@ -263,8 +252,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Sarf va to'lovlar",
-      subtitle: "Balans, limitlar va hisob-fakturalar",
+      heading: "usage",
     },
     component: () => import("./PUsageBilling.vue"),
   },
@@ -274,8 +262,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Jamoa",
-      subtitle: "A'zolar va ruxsatlar",
+      heading: "team",
     },
     component: () => import("./PTeamApp.vue"),
   },
@@ -285,8 +272,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      title: "Sozlamalar",
-      subtitle: "Ish maydoni va biznes sozlamalari",
+      heading: "settings",
     },
     component: () => import("./PSettings.vue"),
   },

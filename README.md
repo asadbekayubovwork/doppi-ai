@@ -360,7 +360,7 @@ The pages meant for search are listed once, in
 [`src/shared/config/seoPages.ts`](src/shared/config/seoPages.ts). For each one
 the build ([`build/seo.ts`](build/seo.ts)) writes `<path>.html` carrying that
 page's title, description, canonical link, Open Graph tags and schema.org data
-(organization, services, breadcrumbs, FAQ), and lists it in `sitemap.xml`.
+(organization, services, breadcrumbs), and lists it in `sitemap.xml`.
 Crawlers that don't run JavaScript — link previews in Telegram and Facebook,
 Google's first pass — therefore see each page as it is. Every other route gets
 `app.html`, marked `noindex`, so sign-in and the dashboard stay out of results.

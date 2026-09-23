@@ -15,11 +15,7 @@ import { TEAM_MEMBERS, realSocials } from "../model/members"
   <section id="team" class="section-ground py-[60px] sm:py-[100px]">
 
     <div class="container relative z-10">
-      <CSectionHeading
-        :eyebrow="$t('team.eyebrow')"
-        :title="$t('team.title')"
-        :subtitle="$t('team.subtitle')"
-      />
+      <CSectionHeading :title="$t('team.title')" />
 
       <!-- Flex-wrap rather than a grid so an incomplete last row stays centred. -->
       <ul class="mt-14 flex flex-wrap justify-center gap-5">
