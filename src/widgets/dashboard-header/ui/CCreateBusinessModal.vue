@@ -1,6 +1,18 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
-import { CIcon } from "@/shared/ui"
+import { CIcon, CSelect } from "@/shared/ui"
+
+const LANGUAGE_OPTIONS = [
+  { value: "uz", label: "O'zbekcha" },
+  { value: "ru", label: "Русский" },
+  { value: "en", label: "English" },
+]
+const REGION_OPTIONS = [
+  { value: "UZ", label: "O'zbekiston" },
+  { value: "KZ", label: "Qozog'iston" },
+  { value: "US", label: "AQSh" },
+  { value: "EU", label: "Yevropa" },
+]
 
 const props = defineProps<{
   open: boolean
@@ -100,27 +112,20 @@ const submit = () => {
             <div class="grid gap-4 sm:grid-cols-2">
               <label
                 class="grid gap-1.5 text-[13.5px] font-medium text-[#3D3D4A]"
-                >Asosiy til<select
+                >Asosiy til<CSelect
                   v-model="language"
-                  class="h-12 rounded-xl border border-[#E1E1E9] bg-white px-4 text-[14.5px]"
-                >
-                  <option value="uz">O'zbekcha</option>
-                  <option value="ru">Русский</option>
-                  <option value="en">English</option>
-                </select></label
-              >
+                  :options="LANGUAGE_OPTIONS"
+                  icon="languages"
+                  size="xl"
+              /></label>
               <label
                 class="grid gap-1.5 text-[13.5px] font-medium text-[#3D3D4A]"
-                >To'lov hududi<select
+                >To'lov hududi<CSelect
                   v-model="region"
-                  class="h-12 rounded-xl border border-[#E1E1E9] bg-white px-4 text-[14.5px]"
-                >
-                  <option value="UZ">O'zbekiston</option>
-                  <option value="KZ">Qozog'iston</option>
-                  <option value="US">AQSh</option>
-                  <option value="EU">Yevropa</option>
-                </select></label
-              >
+                  :options="REGION_OPTIONS"
+                  icon="globe"
+                  size="xl"
+              /></label>
             </div>
             <p
               class="rounded-xl bg-[#F3F0FE] px-3.5 py-3 text-[13.5px] leading-5 text-[#4B21C4]"

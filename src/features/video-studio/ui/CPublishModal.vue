@@ -14,11 +14,16 @@ import { CBadge, CIcon, CSwitch } from "@/shared/ui"
 const props = defineProps<{ open: boolean }>()
 const emit = defineEmits<{
   "update:open": [value: boolean]
-  publish: [targets: string[]]
+  publish: [targets: string[], caption: string]
 }>()
+
+const CAPTION_MAX = 2200
+const defaultCaption = () =>
+  `${STUDIO_CAPTION}\n\n${STUDIO_HASHTAGS.join(" ")}`
 
 const targets = ref<PublishTarget[]>([])
 const schedule = ref<"now" | "later">("now")
+const caption = ref("")
 
 // Reset the toggles to their defaults each time the modal opens.
 watch(
@@ -27,6 +32,7 @@ watch(
     if (!open) return
     targets.value = PUBLISH_TARGETS.map((target) => ({ ...target }))
     schedule.value = "now"
+    caption.value = defaultCaption()
   },
   { immediate: true }
 )
@@ -37,7 +43,8 @@ const selectedTargets = computed(() =>
 const selectedCount = computed(() => selectedTargets.value.length)
 
 const close = () => emit("update:open", false)
-const publish = () => emit("publish", selectedTargets.value)
+const publish = () =>
+  emit("publish", selectedTargets.value, caption.value.trim())
 </script>
 
 <template>
@@ -137,11 +144,12 @@ const publish = () => emit("publish", selectedTargets.value)
             <!-- Caption -->
             <div>
               <div class="mb-1.5 flex items-center justify-between">
-                <span
+                <label
+                  for="publish-caption"
                   class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
                 >
                   Matn (AI tayyorladi)
-                </span>
+                </label>
                 <button
                   type="button"
                   class="inline-flex items-center gap-1 text-[12px] font-semibold text-[#5B4BE8] transition hover:text-[#4F3FDC]"
@@ -150,13 +158,20 @@ const publish = () => emit("publish", selectedTargets.value)
                   Qayta yozish
                 </button>
               </div>
-              <div
-                class="rounded-xl border border-[#E5E5E1] bg-[#FCFCFB] p-3 text-[13px] leading-5 text-[#2A2A31]"
-              >
-                {{ STUDIO_CAPTION }}
-                <p class="mt-1.5 font-medium text-[#5B4BE8]">
-                  {{ STUDIO_HASHTAGS.join(" ") }}
-                </p>
+              <div class="relative">
+                <textarea
+                  id="publish-caption"
+                  v-model="caption"
+                  rows="4"
+                  :maxlength="CAPTION_MAX"
+                  placeholder="Post matni va hashtaglar"
+                  class="block min-h-24 w-full resize-y rounded-xl border border-[#E5E5E1] bg-[#FCFCFB] px-3 pb-6 pt-2.5 text-[13px] leading-5 text-[#2A2A31] outline-none transition placeholder:text-[#A1A1AA] hover:border-[#D6D6DE] focus:border-[#8175EA] focus:bg-white focus:ring-[3px] focus:ring-[#8175EA]/15"
+                />
+                <span
+                  class="pointer-events-none absolute bottom-2 right-3 text-[11px] tabular-nums text-[#A1A1AA]"
+                >
+                  {{ caption.length }}/{{ CAPTION_MAX }}
+                </span>
               </div>
             </div>
 
@@ -245,7 +260,7 @@ const publish = () => emit("publish", selectedTargets.value)
               <button
                 type="button"
                 class="inline-flex h-10 items-center gap-2 rounded-[10px] bg-[#5B4BE8] px-4 text-[13px] font-semibold text-white transition hover:bg-[#4F3FDC] disabled:opacity-50"
-                :disabled="!selectedCount"
+                :disabled="!selectedCount || !caption.trim()"
                 @click="publish"
               >
                 <CIcon name="send" class="h-4 w-4" />

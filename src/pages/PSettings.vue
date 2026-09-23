@@ -4,6 +4,13 @@ import { useHead } from "@unhead/vue"
 import { useRouter } from "vue-router"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { useToast } from "@/shared/lib"
+import { CSelect } from "@/shared/ui"
+
+const LOCALE_OPTIONS = [
+  { value: "uz", label: "O'zbekcha" },
+  { value: "ru", label: "Русский" },
+  { value: "en", label: "English" },
+]
 import { workspaceApi, type SessionItem } from "@/features/workspace"
 
 const auth = useAuthStore()
@@ -131,15 +138,12 @@ onMounted(loadSessions)
             class="h-11 rounded-[10px] border border-[#D6D6D1] px-3 outline-none focus:border-[#5B4BE8]"
         /></label>
         <label class="grid gap-1.5 text-sm"
-          >Til<select
+          >Til<CSelect
             v-model="locale"
-            class="h-11 rounded-[10px] border border-[#D6D6D1] px-3"
-          >
-            <option value="uz">O'zbekcha</option>
-            <option value="ru">Русский</option>
-            <option value="en">English</option>
-          </select></label
-        >
+            :options="LOCALE_OPTIONS"
+            icon="languages"
+            size="lg"
+        /></label>
         <label class="grid gap-1.5 text-sm"
           >Vaqt mintaqasi<input
             v-model="timezone"

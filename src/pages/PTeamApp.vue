@@ -4,6 +4,14 @@ import { useHead } from "@unhead/vue"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { workspaceApi, type Membership } from "@/features/workspace"
 import { useToast } from "@/shared/lib"
+import { CSelect } from "@/shared/ui"
+
+const ROLE_OPTIONS: { value: Membership["role"]; label: string }[] = [
+  { value: "owner", label: "Egasi" },
+  { value: "admin", label: "Administrator" },
+  { value: "member", label: "A'zo" },
+  { value: "viewer", label: "Kuzatuvchi" },
+]
 
 const auth = useAuthStore()
 const toast = useToast()
@@ -126,14 +134,12 @@ onMounted(loadMembers)
           placeholder="hamkasb@kompaniya.uz"
           class="h-11 rounded-[10px] border border-[#D6D6D1] px-3 outline-none focus:border-[#5B4BE8]"
         />
-        <select
+        <CSelect
           v-model="role"
-          class="h-11 rounded-[10px] border border-[#D6D6D1] px-3"
-        >
-          <option value="admin">Administrator</option>
-          <option value="member">A'zo</option>
-          <option value="viewer">Kuzatuvchi</option>
-        </select>
+          :options="ROLE_OPTIONS.filter((option) => option.value !== 'owner')"
+          aria-label="Rol"
+          size="lg"
+        />
         <button
           :disabled="loading"
           class="h-11 rounded-[10px] bg-[#5B4BE8] px-5 text-sm font-semibold text-white disabled:opacity-60"
@@ -193,22 +199,14 @@ onMounted(loadMembers)
               {{ new Date(member.joined_at).toLocaleDateString("uz-UZ") }}
             </p>
           </div>
-          <select
-            :value="member.role"
+          <CSelect
+            :model-value="member.role"
+            :options="ROLE_OPTIONS"
             :disabled="!canManage"
-            class="h-10 rounded-[10px] border border-[#D6D6D1] px-3 text-sm disabled:bg-[#FAFAF9]"
-            @change="
-              updateRole(
-                member,
-                ($event.target as HTMLSelectElement).value as Membership['role']
-              )
-            "
-          >
-            <option value="owner">Egasi</option>
-            <option value="admin">Administrator</option>
-            <option value="member">A'zo</option>
-            <option value="viewer">Kuzatuvchi</option>
-          </select>
+            aria-label="A'zo roli"
+            class="w-44"
+            @change="updateRole(member, $event)"
+          />
           <button
             v-if="canManage && member.user_id !== auth.user?.id"
             class="h-10 rounded-[10px] border border-[#E7B8B8] px-3 text-sm text-[#C42B2B]"

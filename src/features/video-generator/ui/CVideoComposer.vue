@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CAppButton, CBadge, CIcon } from "@/shared/ui"
+import { CAppButton, CBadge, CIcon, CSelect } from "@/shared/ui"
 
 defineProps<{
   language: string
@@ -71,14 +71,15 @@ const researchMode = defineModel<"fast" | "deep">("researchMode", {
       <div class="grid gap-4 md:grid-cols-3">
         <label class="grid gap-2">
           <span class="text-xs font-medium text-[#55555F]">Format</span>
-          <select
+          <CSelect
             v-model="aspectRatio"
-            class="h-10 rounded-xl border border-[#DEDEE4] bg-white px-3 text-sm text-[#202027] outline-none focus:border-[#8175EA]"
-          >
-            <option value="9:16">9:16 · Vertical</option>
-            <option value="1:1">1:1 · Square</option>
-            <option value="16:9">16:9 · Landscape</option>
-          </select>
+            :options="[
+              { value: '9:16', label: '9:16', hint: 'Vertical' },
+              { value: '1:1', label: '1:1', hint: 'Square' },
+              { value: '16:9', label: '16:9', hint: 'Landscape' },
+            ]"
+            icon="layout-grid"
+          />
         </label>
         <label class="grid gap-2">
           <span class="text-xs font-medium text-[#55555F]">Duration</span>
@@ -98,13 +99,14 @@ const researchMode = defineModel<"fast" | "deep">("researchMode", {
         </label>
         <label class="grid gap-2">
           <span class="text-xs font-medium text-[#55555F]">Research</span>
-          <select
+          <CSelect
             v-model="researchMode"
-            class="h-10 rounded-xl border border-[#DEDEE4] bg-white px-3 text-sm text-[#202027] outline-none focus:border-[#8175EA]"
-          >
-            <option value="fast">Fast research</option>
-            <option value="deep">Deep research</option>
-          </select>
+            :options="[
+              { value: 'fast', label: 'Fast research' },
+              { value: 'deep', label: 'Deep research' },
+            ]"
+            icon="search"
+          />
         </label>
       </div>
 
@@ -191,8 +193,8 @@ const researchMode = defineModel<"fast" | "deep">("researchMode", {
         </CAppButton>
       </div>
       <p class="text-xs leading-5 text-[#81818B]">
-        Full generation is sent only after confirmation. Provider and voice use
-        the service-managed defaults until catalog endpoints are available.
+        Provider and voice use the service-managed defaults until catalog
+        endpoints are available.
       </p>
     </form>
   </section>

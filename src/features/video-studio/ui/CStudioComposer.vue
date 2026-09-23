@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { CVideoThumb } from "@/entities/video"
-import { CAppButton, CBadge, CIcon, CSwitch } from "@/shared/ui"
+import { CAppButton, CBadge, CIcon, CSelect, CSwitch } from "@/shared/ui"
 import CStudioModelSettings from "./CStudioModelSettings.vue"
-import type { VideoModel } from "@/features/video-generator"
+import type { VideoLanguage, VideoModel } from "@/features/video-generator"
 
 defineProps<{
   isCreating: boolean
@@ -26,8 +26,8 @@ const videoResolution = defineModel<string>("videoResolution", {
 const researchMode = defineModel<"fast" | "deep">("researchMode", {
   required: true,
 })
-const skipResearch = defineModel<boolean>("skipResearch", { required: true })
 const subtitles = defineModel<boolean>("subtitles", { required: true })
+const language = defineModel<VideoLanguage>("language", { required: true })
 const previewOnly = defineModel<boolean>("previewOnly", { required: true })
 const tone = defineModel<string>("tone", { required: true })
 const cta = defineModel<string>("cta", { required: true })
@@ -36,6 +36,23 @@ const referenceLinks = defineModel<string>("referenceLinks", { required: true })
 const referenceImages = defineModel<string>("referenceImages", {
   required: true,
 })
+
+const ASPECT_OPTIONS = [
+  { value: "9:16" as const, label: "9:16" },
+  { value: "1:1" as const, label: "1:1" },
+  { value: "16:9" as const, label: "16:9" },
+]
+
+const RESEARCH_MODES = [
+  { value: "fast" as const, label: "Tez" },
+  { value: "deep" as const, label: "Chuqur" },
+]
+
+const LANGUAGE_OPTIONS: { value: VideoLanguage; label: string }[] = [
+  { value: "uz", label: "O'zbekcha" },
+  { value: "ru", label: "Русский" },
+  { value: "en", label: "English" },
+]
 
 // Static context chips + references while the catalog endpoints are stubbed.
 const CONTEXT = [
@@ -127,25 +144,13 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
           Sozlamalar
         </span>
         <div class="grid grid-cols-2 gap-2.5">
-          <label class="relative">
-            <span
-              class="pointer-events-none absolute left-9 top-1.5 text-[10px] text-[#9A9AA2]"
-            >
-              Format
-            </span>
-            <CIcon
-              name="layout-grid"
-              class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#84848E]"
-            />
-            <select
-              v-model="aspectRatio"
-              class="h-12 w-full rounded-xl border border-[#DEDEE4] bg-white pl-9 pr-3 pt-3.5 text-[13px] font-medium text-[#202027] outline-none focus:border-[#8175EA]"
-            >
-              <option value="9:16">9:16</option>
-              <option value="1:1">1:1</option>
-              <option value="16:9">16:9</option>
-            </select>
-          </label>
+          <CSelect
+            v-model="aspectRatio"
+            :options="ASPECT_OPTIONS"
+            label="Format"
+            icon="layout-grid"
+            size="xl"
+          />
 
           <CStudioModelSettings
             v-model:model="videoModel"
@@ -158,17 +163,13 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
             @retry="$emit('retryModels')"
           />
 
-          <div
-            class="flex h-12 items-center gap-2.5 rounded-xl border border-[#DEDEE4] bg-white px-3"
-          >
-            <CIcon name="mic" class="h-4 w-4 text-[#84848E]" />
-            <span class="flex flex-col leading-tight">
-              <span class="text-[10px] text-[#9A9AA2]">Ovoz</span>
-              <span class="text-[13px] font-medium text-[#202027]"
-                >UZ ayol</span
-              >
-            </span>
-          </div>
+          <CSelect
+            v-model="language"
+            :options="LANGUAGE_OPTIONS"
+            label="Ovoz"
+            icon="mic"
+            size="xl"
+          />
         </div>
       </div>
 
@@ -179,39 +180,22 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
           Research
         </span>
         <div
-          class="grid grid-cols-3 gap-0.5 rounded-xl border border-[#DEDEE4] bg-[#F5F4FB] p-0.5"
+          class="grid grid-cols-2 gap-0.5 rounded-xl border border-[#DEDEE4] bg-[#F5F4FB] p-0.5"
           role="tablist"
         >
           <button
-            v-for="mode in [
-              { value: 'fast', label: 'Tez' },
-              { value: 'deep', label: 'Chuqur' },
-              { value: 'skip', label: 'Researchsiz' },
-            ]"
+            v-for="mode in RESEARCH_MODES"
             :key="mode.value"
             type="button"
             role="tab"
-            :aria-selected="
-              mode.value === 'skip'
-                ? skipResearch
-                : !skipResearch && researchMode === mode.value
-            "
+            :aria-selected="researchMode === mode.value"
             class="h-8 rounded-[9px] text-[12px] font-semibold transition"
             :class="
-              (
-                mode.value === 'skip'
-                  ? skipResearch
-                  : !skipResearch && researchMode === mode.value
-              )
+              researchMode === mode.value
                 ? 'bg-white text-[#15151B] shadow-[0_1px_2px_rgba(22,22,27,0.08)]'
                 : 'text-[#73737D] hover:text-[#15151B]'
             "
-            @click="
-              mode.value === 'skip'
-                ? (skipResearch = true)
-                : ((skipResearch = false),
-                  (researchMode = mode.value as 'fast' | 'deep'))
-            "
+            @click="researchMode = mode.value"
           >
             {{ mode.label }}
           </button>

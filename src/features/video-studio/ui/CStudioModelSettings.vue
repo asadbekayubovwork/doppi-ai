@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue"
-import { CIcon } from "@/shared/ui"
+import { CIcon, CSelect } from "@/shared/ui"
 import type { VideoModel } from "@/features/video-generator"
 
 const props = defineProps<{
@@ -29,8 +29,23 @@ const estimatedPrice = computed(() => {
       }).format(rate * durationSec.value)
 })
 
-const onModelChange = (event: Event) => {
-  const nextId = (event.target as HTMLSelectElement).value
+const modelOptions = computed(() =>
+  props.models.map((item) => ({ value: item.model, label: item.name }))
+)
+const resolutionOptions = computed(() =>
+  (selectedModel.value?.resolutions ?? []).map((value) => ({
+    value,
+    label: value,
+  }))
+)
+const durationOptions = computed(() =>
+  (selectedModel.value?.durations_seconds ?? []).map((seconds) => ({
+    value: seconds,
+    label: `${seconds}s`,
+  }))
+)
+
+const onModelChange = (nextId: string | undefined) => {
   const next = props.models.find((item) => item.model === nextId)
   if (!next) return
   model.value = next.model
@@ -74,76 +89,32 @@ const onModelChange = (event: Event) => {
     </div>
 
     <div v-else class="grid grid-cols-2 gap-2.5">
-      <label class="relative min-w-0">
-        <span
-          class="pointer-events-none absolute left-3 top-1.5 text-[10px] text-[#9A9AA2]"
-        >
-          Model
-        </span>
-        <CIcon
-          name="cpu"
-          class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#84848E]"
-        />
-        <select
-          :value="model"
-          aria-label="Video model"
-          :disabled="!models.length"
-          class="h-12 w-full rounded-xl border border-[#DEDEE4] bg-white pl-9 pr-2 pt-3.5 text-[13px] font-medium text-[#202027] outline-none focus:border-[#8175EA] disabled:cursor-not-allowed disabled:bg-[#F5F5F3]"
-          @change="onModelChange"
-        >
-          <option v-for="item in models" :key="item.model" :value="item.model">
-            {{ item.name }}
-          </option>
-        </select>
-      </label>
+      <CSelect
+        :model-value="model"
+        :options="modelOptions"
+        label="Model"
+        aria-label="Video model"
+        icon="cpu"
+        size="xl"
+        @update:model-value="onModelChange"
+      />
 
-      <label class="relative min-w-0">
-        <span
-          class="pointer-events-none absolute left-3 top-1.5 text-[10px] text-[#9A9AA2]"
-        >
-          Resolution
-        </span>
-        <select
-          v-model="resolution"
-          aria-label="Resolution"
-          :disabled="!selectedModel?.resolutions.length"
-          class="h-12 w-full rounded-xl border border-[#DEDEE4] bg-white px-3 pt-3.5 text-[13px] font-medium text-[#202027] outline-none focus:border-[#8175EA] disabled:cursor-not-allowed disabled:bg-[#F5F5F3]"
-        >
-          <option
-            v-for="value in selectedModel?.resolutions ?? []"
-            :key="value"
-            :value="value"
-          >
-            {{ value }}
-          </option>
-        </select>
-      </label>
+      <CSelect
+        v-model="resolution"
+        :options="resolutionOptions"
+        label="Resolution"
+        icon="gauge"
+        size="xl"
+      />
 
-      <label class="relative min-w-0">
-        <span
-          class="pointer-events-none absolute left-3 top-1.5 text-[10px] text-[#9A9AA2]"
-        >
-          Davomiylik
-        </span>
-        <CIcon
-          name="clock"
-          class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#84848E]"
-        />
-        <select
-          v-model.number="durationSec"
-          aria-label="Duration"
-          :disabled="!selectedModel?.durations_seconds.length"
-          class="h-12 w-full rounded-xl border border-[#DEDEE4] bg-white pl-9 pr-2 pt-3.5 text-[13px] font-medium text-[#202027] outline-none focus:border-[#8175EA] disabled:cursor-not-allowed disabled:bg-[#F5F5F3]"
-        >
-          <option
-            v-for="seconds in selectedModel?.durations_seconds ?? []"
-            :key="seconds"
-            :value="seconds"
-          >
-            {{ seconds }}s
-          </option>
-        </select>
-      </label>
+      <CSelect
+        v-model="durationSec"
+        :options="durationOptions"
+        label="Davomiylik"
+        aria-label="Duration"
+        icon="clock"
+        size="xl"
+      />
 
       <div
         class="flex min-h-12 items-center gap-2 rounded-xl border border-[#DEDEE4] bg-white px-3"

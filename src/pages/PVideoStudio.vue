@@ -117,7 +117,6 @@ const onRegenerate = () => {
     if (brief.aspect_ratio) form.aspectRatio = brief.aspect_ratio
     form.subtitles = brief.subtitles ?? form.subtitles
     form.researchMode = brief.research_mode ?? form.researchMode
-    form.skipResearch = brief.skip_research ?? form.skipResearch
     form.referenceLinks = (brief.reference_links ?? []).join("\n")
     form.referenceImages = (brief.reference_image_urls ?? []).join("\n")
   }
@@ -159,9 +158,9 @@ const onRegenerate = () => {
         v-model:video-model="form.videoModel"
         v-model:video-resolution="form.videoResolution"
         v-model:research-mode="form.researchMode"
-        v-model:skip-research="form.skipResearch"
         v-model:subtitles="form.subtitles"
         v-model:preview-only="form.previewOnly"
+        v-model:language="form.language"
         v-model:tone="form.tone"
         v-model:cta="form.cta"
         v-model:source-text="form.sourceText"

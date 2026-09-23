@@ -89,9 +89,8 @@ describe("video studio integration", () => {
     vi.spyOn(videoApi, "models").mockResolvedValue(modelCatalog)
   })
 
-  it("hydrates provider history on mount and keeps generation explicit", async () => {
+  it("hydrates provider history on mount without starting a generation", async () => {
     const create = vi.spyOn(videoApi, "create").mockResolvedValue(job)
-    vi.spyOn(window, "confirm").mockReturnValue(false)
     const wrapper = await mountPage()
 
     expect(videoApi.list).toHaveBeenCalledWith("business-1", { limit: 100 })
@@ -99,18 +98,13 @@ describe("video studio integration", () => {
     expect(wrapper.text()).toContain("Prompt va kontekst")
     expect(wrapper.text()).toContain("Generation jobs")
 
-    await wrapper.find("textarea").setValue("Autumn launch")
-    await wrapper.find("form").trigger("submit")
-    await flushPromises()
-
-    expect(window.confirm).toHaveBeenCalled()
     expect(create).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 
-  it("submits the documented brief after confirmation", async () => {
+  it("submits the documented brief without a confirmation prompt", async () => {
     const create = vi.spyOn(videoApi, "create").mockResolvedValue(job)
-    vi.spyOn(window, "confirm").mockReturnValue(true)
+    const confirm = vi.spyOn(window, "confirm")
     const wrapper = await mountPage()
 
     await wrapper.find("textarea").setValue("Autumn launch")
@@ -135,21 +129,28 @@ describe("video studio integration", () => {
       },
       expect.any(String)
     )
+    expect(confirm).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 
   it("offers model-specific resolutions from the catalog", async () => {
     const wrapper = await mountPage()
-    const model = wrapper.find('select[aria-label="Video model"]')
-    const resolution = wrapper.find('select[aria-label="Resolution"]')
-    const duration = wrapper.find('select[aria-label="Duration"]')
+    const model = wrapper.find('[role="combobox"][aria-label="Video model"]')
 
     expect(model.exists()).toBe(true)
-    await model.setValue("model-b")
+    await model.trigger("click")
+    const option = wrapper
+      .findAll('[role="option"]')
+      .find((el) => el.text().includes("Model B"))
+    await option?.trigger("click")
     await flushPromises()
 
-    expect(resolution.element.value).toBe("480p")
-    expect(duration.element.value).toBe("8")
+    expect(
+      wrapper.find('[role="combobox"][aria-label="Resolution"]').text()
+    ).toContain("480p")
+    expect(
+      wrapper.find('[role="combobox"][aria-label="Duration"]').text()
+    ).toContain("8s")
     expect(wrapper.text()).toContain("Model B")
     wrapper.unmount()
   })
