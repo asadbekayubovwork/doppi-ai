@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue"
+import { useI18n } from "vue-i18n"
 import { useRoute } from "vue-router"
 import { useAuthStore, messageForProblem } from "@/features/auth"
 import { useClaimedPageHeading, useToast } from "@/shared/lib"
@@ -11,6 +12,7 @@ import CUserMenu from "./CUserMenu.vue"
 
 defineEmits<{ openNav: [] }>()
 
+const { t } = useI18n()
 const route = useRoute()
 const auth = useAuthStore()
 const toast = useToast()
@@ -30,16 +32,27 @@ const toViewBusiness = (
 ): Business => ({
   ...business,
   initials: initialsFor(business.name),
-  plan: business.role || "Workspace",
+  plan: business.role || t("dashboard.header.fallbackPlan"),
 })
 
 // A page can replace the route's static heading with one built from its data.
 const claimedHeading = useClaimedPageHeading()
+const routeHeading = computed(() => {
+  const key = route.meta.heading
+  if (!key) return null
+  return {
+    title: t(`dashboard.routes.${key}.title`),
+    subtitle: t(`dashboard.routes.${key}.subtitle`),
+  }
+})
 const title = computed(
-  () => claimedHeading.value?.title || route.meta.title || "Ish maydoni"
+  () =>
+    claimedHeading.value?.title ||
+    routeHeading.value?.title ||
+    t("dashboard.header.fallbackTitle")
 )
 const subtitle = computed(
-  () => claimedHeading.value?.subtitle || route.meta.subtitle
+  () => claimedHeading.value?.subtitle || routeHeading.value?.subtitle
 )
 const businesses = computed(() => auth.businesses.map(toViewBusiness))
 const activeBusinessId = computed({
@@ -49,7 +62,10 @@ const activeBusinessId = computed({
 const user = computed(() => {
   const first = auth.user?.first_name || ""
   const last = auth.user?.last_name || ""
-  const name = `${first} ${last}`.trim() || auth.user?.email || "Foydalanuvchi"
+  const name =
+    `${first} ${last}`.trim() ||
+    auth.user?.email ||
+    t("dashboard.header.fallbackUser")
   return {
     name,
     email: auth.user?.email || "",
@@ -68,8 +84,8 @@ const selectBusiness = async (id: string) => {
     await auth.selectBusiness(id)
   } catch (error) {
     toast.error(
-      "Biznesni tanlab bo'lmadi",
-      messageForProblem(error, "Qayta urinib ko'ring.")
+      t("dashboard.header.businessSelectFailed"),
+      messageForProblem(error, t("dashboard.common.retry"))
     )
   }
 }
@@ -83,11 +99,11 @@ const createBusiness = async (payload: {
   try {
     await auth.createBusiness(payload)
     isCreateOpen.value = false
-    toast.success("Biznes yaratildi", payload.name)
+    toast.success(t("dashboard.header.businessCreated"), payload.name)
   } catch (error) {
     toast.error(
-      "Biznes yaratib bo'lmadi",
-      messageForProblem(error, "Ma'lumotlarni tekshirib ko'ring.")
+      t("dashboard.header.businessCreateFailed"),
+      messageForProblem(error, t("dashboard.common.checkDetails"))
     )
   } finally {
     creatingBusiness.value = false
@@ -101,8 +117,8 @@ watch(
   (failure) => {
     if (!failure) return
     toast.error(
-      "Bizneslar ro'yxatini yuklab bo'lmadi",
-      messageForProblem(failure, "Qayta urinib ko'ring."),
+      t("dashboard.header.businessListFailed"),
+      messageForProblem(failure, t("dashboard.common.retry")),
       6000
     )
   }
@@ -116,7 +132,7 @@ watch(
     <button
       type="button"
       class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[#6A6A74] hover:bg-[#FAFAF9] lg:hidden"
-      aria-label="Menyuni ochish"
+      :aria-label="$t('dashboard.header.openMenu')"
       @click="$emit('openNav')"
     >
       <CIcon name="menu" class="h-5 w-5" />
@@ -141,7 +157,7 @@ watch(
       /><button
         type="button"
         class="relative inline-flex h-9 w-9 items-center justify-center rounded-[10px] text-[#6A6A74] hover:bg-[#FAFAF9]"
-        aria-label="Bildirishnomalar"
+        :aria-label="$t('dashboard.header.notifications')"
       >
         <CIcon name="bell" class="h-5 w-5" /></button
       ><CUserMenu

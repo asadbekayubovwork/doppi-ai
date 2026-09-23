@@ -28,7 +28,6 @@ const pageFor: Record<string, string> = {
   <section id="features" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
       <CSectionHeading
-        :eyebrow="$t('features.eyebrow')"
         :title="$t('features.title')"
         :subtitle="$t('features.subtitle')"
       />

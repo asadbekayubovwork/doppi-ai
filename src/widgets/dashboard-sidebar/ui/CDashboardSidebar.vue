@@ -61,7 +61,7 @@ const promoExpiry = computed(() =>
       <RouterLink
         to="/app"
         class="inline-flex items-center"
-        aria-label="Do'ppi AI ish maydoni"
+        :aria-label="$t('dashboard.workspaceLabel')"
       >
         <CLogo />
       </RouterLink>
@@ -80,7 +80,7 @@ const promoExpiry = computed(() =>
       <p
         class="px-2 pb-2 pt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D6B77]"
       >
-        Services
+        {{ $t("dashboard.nav.services") }}
       </p>
       <ul class="space-y-1">
         <CSidebarNavItem v-for="item in SERVICES" :key="item.to" :item="item" />
@@ -88,7 +88,7 @@ const promoExpiry = computed(() =>
       <ul v-if="isAdmin" class="mt-2 space-y-1">
         <CSidebarNavItem
           :item="{
-            label: 'Platform admin',
+            labelKey: 'dashboard.nav.platformAdmin',
             to: '/app/admin',
             icon: 'shield-check',
           }"
@@ -98,7 +98,7 @@ const promoExpiry = computed(() =>
       <p
         class="px-2 pb-2 pt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D6B77]"
       >
-        Workspace
+        {{ $t("dashboard.nav.workspace") }}
       </p>
       <ul class="space-y-1">
         <CSidebarNavItem
@@ -112,7 +112,9 @@ const promoExpiry = computed(() =>
     <div class="px-4 pb-3">
       <div class="rounded-xl border border-white/[0.09] bg-[#1C1C23] p-3">
         <div class="flex items-center justify-between gap-3">
-          <span class="text-[13px] text-[#A09EAA]">Kredit balansi</span>
+          <span class="text-[13px] text-[#A09EAA]">
+            {{ $t("dashboard.balance.available") }}
+          </span>
           <CIcon name="wallet" class="h-4 w-4 text-white/40" />
         </div>
         <p class="mt-1 text-2xl font-bold tracking-tight text-white">
@@ -120,16 +122,18 @@ const promoExpiry = computed(() =>
             wallet?.available?.toLocaleString("uz-UZ") ??
             (billing.loading ? "…" : "—")
           }}
-          <span class="ml-1 text-xs font-medium text-white/45"> kredit </span>
+          <span class="ml-1 text-xs font-medium text-white/45">{{
+            $t("dashboard.balance.creditUnit")
+          }}</span>
         </p>
         <p
           v-if="promoExpiry"
           class="mt-1.5 text-[11.5px] leading-4 text-[#8D8B98]"
         >
-          Bonus {{ promoExpiry }} gacha amal qiladi
+          {{ $t("dashboard.balance.bonusExpiry", { date: promoExpiry }) }}
         </p>
         <p v-if="billing.error" class="mt-1.5 text-[11.5px] text-amber-300">
-          Balansni yuklab bo‘lmadi
+          {{ $t("dashboard.balance.loadError") }}
         </p>
 
         <RouterLink
@@ -137,7 +141,7 @@ const promoExpiry = computed(() =>
           class="mt-2.5 flex h-9 w-full items-center justify-center gap-2 rounded-lg bg-[#C9F354] text-[13px] font-bold text-[#1A1A13] transition hover:bg-[#BCE943]"
         >
           <CIcon name="wallet" class="h-4 w-4" />
-          Balans tafsiloti
+          {{ $t("dashboard.balance.details") }}
         </RouterLink>
       </div>
     </div>

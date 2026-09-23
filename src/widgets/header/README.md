@@ -24,8 +24,19 @@ import { CHeader } from "@/widgets"
 
 The header includes links to:
 
-- Home
+- Services (dropdown)
+- Pricing
 - About Us
-- Developers
+- Resources (dropdown, includes Contact)
 
 Modify the `navigation` array in the component to add or remove navigation items.
+
+## Dropdown menus
+
+"Services" and "Resources" both open on hover through `CNavMenu`. Services is a
+three-column panel (services, voice agent use cases, industries); Resources is
+a single list (blog, languages, contact). Their content lives in
+`model/navMenus.ts`; labels come from `services.menu.*` and `nav.*` in the
+locale files. An item without `to` renders with a "Coming soon" tag instead of
+a link — give it a `to` once its page exists. The mobile drawer has no
+dropdowns and lists only the live pages.

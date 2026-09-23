@@ -2,12 +2,22 @@ import { flushPromises, mount } from "@vue/test-utils"
 import { createPinia } from "pinia"
 import { createHead } from "@unhead/vue/client"
 import { createRouter, createMemoryHistory } from "vue-router"
+import { createI18n } from "vue-i18n"
+import { messages } from "@/shared/config/i18n"
 import { CDashboardSidebar } from "@/widgets/dashboard-sidebar"
 import PDashboardHome from "../PDashboardHome.vue"
 
 const stub = { template: "<div />" }
 
-const mountAt = async (path: string, component: unknown) => {
+// Navigation labels come from the locale files; English keeps the assertions
+// readable unless a test brings its own i18n instance.
+const englishI18n = () => createI18n({ legacy: false, locale: "en", messages })
+
+const mountAt = async (
+  path: string,
+  component: unknown,
+  i18n = englishI18n()
+) => {
   const router = createRouter({
     history: createMemoryHistory(),
     routes: [{ path: "/:pathMatch(.*)*", component: stub }],
@@ -30,7 +40,7 @@ const mountAt = async (path: string, component: unknown) => {
   }
   await router.push(path)
   const wrapper = mount(component as never, {
-    global: { plugins: [pinia, router, createHead()] },
+    global: { plugins: [pinia, router, createHead(), i18n] },
   })
   await flushPromises()
   return wrapper
@@ -78,6 +88,25 @@ describe("sidebar home link", () => {
     const wrapper = await mountAt("/app/rag", CDashboardSidebar)
     expect(homeLink(wrapper)?.attributes("aria-current")).toBeUndefined()
     expect(homeLink(wrapper)?.classes()).not.toContain("bg-[#28272F]")
+    wrapper.unmount()
+  })
+})
+
+describe("sidebar language", () => {
+  it("follows the interface language when it is switched", async () => {
+    const i18n = createI18n({ legacy: false, locale: "uz", messages })
+    const wrapper = await mountAt("/app", CDashboardSidebar, i18n)
+    const labels = () => wrapper.findAll("nav a").map((link) => link.text())
+
+    expect(labels()).toContain("Bosh sahifa")
+    expect(labels()).toContain("Sozlamalar")
+
+    i18n.global.locale.value = "ru"
+    await flushPromises()
+
+    expect(labels()).toContain("Главная")
+    expect(labels()).toContain("Настройки")
+    expect(wrapper.text()).toContain("Пополнить баланс")
     wrapper.unmount()
   })
 })

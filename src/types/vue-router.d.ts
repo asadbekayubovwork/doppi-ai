@@ -10,10 +10,12 @@ declare module "@vue/runtime-core" {
 declare module "vue-router" {
   interface RouteMeta {
     layout?: string
-    /** Heading shown by the dashboard header. */
-    title?: string
-    subtitle?: string
     requiresAdmin?: boolean
+    /**
+     * Key of the dashboard header's heading: `dashboard.routes.<heading>` in
+     * the locale files holds its title and subtitle.
+     */
+    heading?: string
   }
 }
 

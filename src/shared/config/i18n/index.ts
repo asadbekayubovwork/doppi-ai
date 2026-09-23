@@ -10,3 +10,6 @@ export const messages = {
 
 export const defaultLocale = "uz"
 export const availableLocales = Object.keys(messages)
+
+/** Where the chosen interface language is remembered between visits. */
+export const LOCALE_STORAGE_KEY = "locale"

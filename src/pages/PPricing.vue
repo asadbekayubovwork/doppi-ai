@@ -29,7 +29,7 @@ useSeo("/pricing")
       </div>
     </section>
 
-    <CPricingList :show-heading="false" />
+    <CPricingList />
     <CFaq />
   </div>
 </template>

@@ -42,7 +42,7 @@ describe("PIndex (landing page)", () => {
     const wrapper = buildApp()
 
     // The section anchors the navigation and footer link to must all exist.
-    for (const id of ["top", "solution", "features", "how", "results", "pricing", "faq", "about", "team", "contact"]) {
+    for (const id of ["top", "solution", "features", "how", "results", "faq", "about", "contact"]) {
       expect(wrapper.find(`#${id}`).exists(), `#${id} is missing`).toBe(true)
     }
 

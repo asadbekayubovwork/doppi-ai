@@ -14,11 +14,7 @@ const stats = useI18nList<Stat>("results.stats")
   <section id="results" class="section-ground py-[60px] sm:py-[100px]">
 
     <div class="container relative z-10">
-      <CSectionHeading
-        :eyebrow="$t('results.eyebrow')"
-        :title="$t('results.title')"
-        :subtitle="$t('results.subtitle')"
-      />
+      <CSectionHeading :title="$t('results.title')" />
 
       <ul class="mt-14 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
         <!-- AOS owns the <li>; the card sits inside so its hover transition survives. -->

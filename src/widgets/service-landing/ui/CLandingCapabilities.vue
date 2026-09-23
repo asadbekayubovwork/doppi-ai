@@ -10,7 +10,7 @@ interface Capability {
 
 /** The "what else it handles" card grid, shared by the service landings. */
 const props = defineProps<{
-  /** i18n branch holding eyebrow, title and items. */
+  /** i18n branch holding title and items. */
   base: string
 }>()
 
@@ -20,10 +20,7 @@ const items = useI18nList<Capability>(`${props.base}.items`)
 <template>
   <section class="section-ground pb-[60px] sm:pb-[100px]">
     <div class="container relative z-10">
-      <CSectionHeading
-        :eyebrow="$t(`${base}.eyebrow`)"
-        :title="$t(`${base}.title`)"
-      />
+      <CSectionHeading :title="$t(`${base}.title`)" />
 
       <ul class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <li
