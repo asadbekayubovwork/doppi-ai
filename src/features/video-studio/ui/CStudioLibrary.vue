@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
-import { CVideoThumb, type StudioVideo } from "@/entities/video"
+import {
+  CVideoFrameThumb,
+  CVideoThumb,
+  type StudioVideo,
+} from "@/entities/video"
 import { CBadge, CEmptyState, CIcon, CSkeleton } from "@/shared/ui"
 import type { StudioVideoStatus } from "@/entities/video"
 
@@ -91,7 +95,13 @@ const visible = computed(() =>
         :key="video.id"
         class="flex items-center gap-3 px-4 py-3 transition hover:bg-[#FCFCFA]"
       >
+        <CVideoFrameThumb
+          v-if="video.previewUrl"
+          :src="video.previewUrl"
+          :color="video.thumbnail"
+        />
         <CVideoThumb
+          v-else
           :color="video.thumbnail"
           rounded="rounded-lg"
           class="h-11 w-11 shrink-0"
