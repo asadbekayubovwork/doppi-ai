@@ -141,7 +141,7 @@ const mountAt = async (
   // assertions readable.
   const i18n = createI18n({ legacy: false, locale: "en", messages })
   const wrapper = mount(component as never, {
-    props,
+    props: props as never,
     global: { plugins: [pinia, router, createHead(), i18n] },
   })
   await flushPromises()

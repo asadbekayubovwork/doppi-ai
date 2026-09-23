@@ -4,8 +4,6 @@ import { createI18n } from "vue-i18n"
 import { createRouter, createWebHistory } from "vue-router"
 import { messages } from "@/shared/config/i18n"
 import { SERVICE_PATHS } from "@/shared/config/seoPages"
-
-// Note: TypeScript errors in test files are expected and can be ignored
 import CNavMenu from "../ui/CNavMenu.vue"
 import { RESOURCES_MENU, SERVICES_MENU, type NavMenuColumn } from "../model/navMenus"
 
@@ -29,7 +27,7 @@ const mountMenu = (menu: keyof typeof MENUS, locale = "uz") => {
   })
 
   return mount(CNavMenu as never, {
-    props: MENUS[menu],
+    props: MENUS[menu] as never,
     global: { plugins: [i18n, router] },
   })
 }
