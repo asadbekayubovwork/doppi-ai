@@ -173,6 +173,9 @@ describe("video studio integration", () => {
 
     expect(library?.text()).toContain("Live result")
     expect(library?.text()).not.toContain("Barista tanlovi teaser")
+    expect(library?.find("video").attributes("src")).toContain(
+      "/video-jobs/job-1/stream"
+    )
     expect(
       library?.find('button[aria-label="Videoni ko\'rish"]').exists()
     ).toBe(true)
