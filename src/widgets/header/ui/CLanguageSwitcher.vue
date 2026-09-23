@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue"
-import { useI18n } from "vue-i18n"
+import { useAppLocale } from "@/shared/lib"
 
 interface Language {
   code: string
@@ -8,7 +8,7 @@ interface Language {
   flag: string
 }
 
-const { locale } = useI18n()
+const { locale, setLocale } = useAppLocale()
 
 const languages: Language[] = [
   { code: "en", name: "English", flag: "🇺🇸" },
@@ -33,9 +33,7 @@ const closeDropdown = () => {
 
 const selectLanguage = (language: Language) => {
   selectedLanguage.value = language
-  locale.value = language.code
-  // Save to localStorage
-  localStorage.setItem("locale", language.code)
+  setLocale(language.code)
   closeDropdown()
 }
 

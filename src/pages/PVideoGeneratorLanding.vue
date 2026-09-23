@@ -13,8 +13,6 @@ import {
   CDemoQueue,
   CDemoPostStats,
   CDemoWeekResult,
-  CFaq,
-  CServiceLinks,
   HERO_PRIMARY,
   HERO_SECONDARY,
   BAND_PRIMARY,
@@ -30,10 +28,6 @@ interface Platform {
  * `/video-generator` has its own landing rather than the shared PService
  * layout: the page follows one week of content from the plan through the
  * render queue to the published post and its numbers, with a mockup per step.
- *
- * The FAQ and the cross-links stay: the build publishes FAQPage structured data
- * for every service page (build/seo.ts), and those answers have to be visible
- * on the page they are claimed for.
  */
 useSeo(() => SERVICE_PATHS.video)
 
@@ -89,9 +83,6 @@ const instagram = computed(() =>
         </span>
       </template>
     </CLandingCapabilities>
-
-    <CFaq i18n-key="services.video.faq" />
-    <CServiceLinks exclude="video" />
 
     <CLandingCta :base="`${base}.cta`">
       <template #actions>

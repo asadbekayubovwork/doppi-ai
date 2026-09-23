@@ -23,7 +23,10 @@
     "contact": "Aloqa",
     "signIn": "Kirish",
     "cta": "Bepul boshlash",
-    "product": "Mahsulot"
+    "resources": "Resurslar",
+    "blog": "Blog",
+    "languages": "Tillar",
+    "comingSoon": "Tez kunda"
   },
   "hero": {
     "badge": "Butun dunyo uchun AI Marketing tizimi",
@@ -61,7 +64,6 @@
     }
   },
   "trust": {
-    "label": "Barcha kanallar bitta tizimda birlashadi",
     "channels": [
       {
         "icon": "instagram",
@@ -97,47 +99,8 @@
       }
     ]
   },
-  "problem": {
-    "eyebrow": "Muammo",
-    "title": "Ko'pchilik bizneslarda marketing tizimli ishlamaydi",
-    "subtitle": "Reklamaga pul ketadi, lekin natija tizimli emas. Ko'p bizneslar bir xil to'siqlarga duch keladi.",
-    "items": [
-      {
-        "icon": "megaphone-off",
-        "title": "Reklama ketadi, mijoz yo'qoladi",
-        "desc": "Reklama ishlaydi, lekin leadlar to'planmaydi va yo'qolib ketadi."
-      },
-      {
-        "icon": "clock-alert",
-        "title": "Qo'lda ishlash — vaqt va xato",
-        "desc": "Leadlarni qo'lda boshqarish sekin, charchatadi va xatolarga olib keladi."
-      },
-      {
-        "icon": "unplug",
-        "title": "Mijoz bilan aloqa uziladi",
-        "desc": "Follow-up qilinmaydi, mijoz sovib qoladi va raqobatchiga ketadi."
-      },
-      {
-        "icon": "phone-missed",
-        "title": "Qo'ng'iroqlar javobsiz",
-        "desc": "Kelgan qo'ng'iroqlarning bir qismi umuman javobsiz qoladi."
-      },
-      {
-        "icon": "split",
-        "title": "Kanallar alohida ishlaydi",
-        "desc": "Instagram, Telegram, telefon — hammasi bir-biridan uzilgan."
-      },
-      {
-        "icon": "chart-column-decreasing",
-        "title": "Natijani tahlil qilish qiyin",
-        "desc": "Qaysi kanal ishlayapti — aniq emas, qarorlar taxminga asoslanadi."
-      }
-    ]
-  },
   "solution": {
-    "eyebrow": "Yechim",
     "title": "Do'ppi AI — hammasi bitta AI tizimida",
-    "subtitle": "Reklama, aloqa, sotuv va tahlil — bitta operatsion tizimda birlashtirilgan All-in-One AI marketing platformasi.",
     "centerLabel": "Do'ppi AI",
     "modules": [
       {
@@ -164,11 +127,9 @@
         "icon": "headset",
         "label": "SIP Call-markaz"
       }
-    ],
-    "note": "Bitta panel, bitta baza, bitta jamoa — barcha jarayonlar nazorat ostida."
+    ]
   },
   "features": {
-    "eyebrow": "Imkoniyatlar",
     "title": "Bitta platforma, oltita kuchli modul",
     "subtitle": "Har bir modul sizning o'rningizga ishlaydi va natijani CRM'ga yozadi.",
     "items": [
@@ -252,9 +213,7 @@
     ]
   },
   "how": {
-    "eyebrow": "Qanday ishlaydi",
     "title": "Reklamadan sotuvgacha — avtomatik oqim",
-    "subtitle": "Har bir qadam avtomatlashtirilgan, hech bir lead yo'qolmaydi.",
     "steps": [
       {
         "icon": "megaphone",
@@ -327,9 +286,7 @@
     "callLabel": "Jonli qo'ng'iroq"
   },
   "results": {
-    "eyebrow": "Natijalar",
     "title": "Biznesingizni keyingi bosqichga olib chiqing",
-    "subtitle": "Do'ppi AI bilan ishlagan bizneslar birinchi oylardanoq o'sishni ko'radi.",
     "stats": [
       {
         "value": "2–5×",
@@ -358,9 +315,6 @@
     ]
   },
   "pricing": {
-    "eyebrow": "Narxlar",
-    "title": "Biznesingizga mos rejani tanlang",
-    "subtitle": "Kichik jamoadan yirik korxonagacha — har bir bosqich uchun aniq reja.",
     "trialNote": "Barcha rejalar uchun 14 kunlik bepul sinov. Karta talab qilinmaydi.",
     "popularLabel": "Eng ommabop",
     "pageTitle": "Ochiq va tushunarli narxlar",
@@ -436,10 +390,8 @@
     ]
   },
   "about": {
-    "eyebrow": "Biz haqimizda",
     "title": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan",
     "lead": "Do'ppi AI — har bir biznes uchun sun'iy intellekt orqali marketingni avtomatlashtirishni maksimal darajada osonlashtiruvchi platforma.",
-    "vision": "Bizning vazifamiz — dunyoning istalgan nuqtasidagi har bir biznesga AI yordamida o'sish imkonini berish. Mijozlarining tili, kanallari va telefoniyasiga moslashadigan AI tizimi bilan.",
     "pageTitle": "Do'ppi AI ortidagi maqsad",
     "pageSubtitle": "Biz butun dunyo bizneslari uchun sun'iy intellektni kundalik ish quroliga aylantiramiz.",
     "points": [
@@ -475,9 +427,7 @@
     ]
   },
   "team": {
-    "eyebrow": "Jamoa",
     "title": "Do'ppi AI ortidagi jamoa",
-    "subtitle": "Sun'iy intellekt, marketing va mahsulot mutaxassislari — butun dunyo bizneslari uchun yagona tizim quramiz.",
     "roles": {
       "rifat": "O'sish bo'yicha rahbar",
       "jaxongir": "Bosh texnolog (CTO)",
@@ -494,9 +444,7 @@
     }
   },
   "faq": {
-    "eyebrow": "Savol-javob",
     "title": "Ko'p so'raladigan savollar",
-    "subtitle": "Do'ppi AI haqida eng ko'p beriladigan savollarga javoblar.",
     "items": [
       {
         "q": "Do'ppi AI o'zbek tilida ishlaydimi?",
@@ -521,9 +469,7 @@
     ]
   },
   "contact": {
-    "eyebrow": "Aloqa",
     "title": "Keling, marketingni birga avtomatlashtiramiz",
-    "subtitle": "Demoga yoziling — jamoamiz biznesingiz uchun tizimni ko'rsatadi.",
     "pageTitle": "Biz bilan bog'laning",
     "pageSubtitle": "Savollaringizga javob beramiz va biznesingiz uchun demo tayyorlaymiz.",
     "form": {
@@ -551,15 +497,12 @@
     "phone": "+998 93 903 33 01",
     "website": "doppiai.uz",
     "location": "Toshkent, O'zbekiston",
-    "reachTitle": "To'g'ridan-to'g'ri bog'laning",
-    "reachSubtitle": "Savollaringiz bo'lsa, biz doim aloqadamiz.",
-    "socialsTitle": "Ijtimoiy tarmoqlar"
+    "reachTitle": "To'g'ridan-to'g'ri bog'laning"
   },
   "footer": {
     "tagline": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan.",
     "product": "Mahsulot",
     "company": "Kompaniya",
-    "contactTitle": "Aloqa",
     "rights": "© {year} Do'ppi AI. Barcha huquqlar himoyalangan.",
     "madeIn": "Toshkentda mehr bilan yaratilgan",
     "privacy": "Maxfiylik siyosati",
@@ -762,6 +705,32 @@
     "breadcrumbLabel": "Sahifa yo'li",
     "othersTitle": "Boshqa xizmatlarimiz",
     "learnMore": "Batafsil",
+    "menu": {
+      "useCases": "Ovozli agent yechimlari",
+      "industries": "Sohalar",
+      "items": {
+        "marketRadar": "Market Radar",
+        "personalBlogs": "Personal bloglar",
+        "farmers": "Fermerlar",
+        "ytBusiness": "YouTube biznes",
+        "meeting": "Uchrashuv yordamchisi",
+        "isolator": "Ovozni tozalash",
+        "voices": "Ovozlar kutubxonasi",
+        "audiobooks": "Audiokitoblar",
+        "dubbing": "Dublyaj",
+        "subtitles": "Subtitrlar",
+        "support": "Mijozlarni qo'llab-quvvatlash",
+        "sales": "Sotuv",
+        "booking": "Qabulga yozish",
+        "surveys": "So'rovnomalar",
+        "healthcare": "Tibbiyot",
+        "realEstate": "Ko'chmas mulk",
+        "travel": "Turizm va mehmonxonalar",
+        "automotive": "Avtomobil",
+        "banking": "Bank",
+        "ecommerce": "Elektron tijorat"
+      }
+    },
     "rag": {
       "name": "RAG Agent",
       "navDesc": "Hujjatlaringiz asosida javob beradigan AI chatbot",
@@ -828,9 +797,7 @@
         ]
       },
       "faq": {
-        "eyebrow": "Savollar",
         "title": "RAG Agent haqida savollar",
-        "subtitle": "Eng ko'p beriladigan savollarga qisqa javoblar.",
         "items": [
           {
             "q": "RAG nima?",
@@ -859,9 +826,7 @@
         "subtitle": "14 kunlik bepul sinov — hujjatlaringizni yuklang va agent qanday javob berishini o'zingiz ko'ring."
       },
       "landing": {
-        "badge": "RAG agent · Bilim bazasi · Telegram · CRM",
         "title": "Ma'lumotlaringizni yuklang — agent mijozga o'zi javob bersin",
-        "subtitle": "Hujjat, narx ro'yxati va saytingizni yuklaysiz. RAG agent faqat shu ma'lumotlar asosida Telegramda javob beradi — har bir suhbat esa CRM'da saqlanib boradi.",
         "ctaPrimary": "Bilim bazasini yuklash",
         "ctaSecondary": "Telegramda sinab ko'rish",
         "flow": [
@@ -883,9 +848,7 @@
           }
         ],
         "steps": {
-          "eyebrow": "Qanday ishlaydi",
           "title": "Uch qadam: yuklang, javob bersin, CRM'da ko'ring",
-          "subtitle": "Bilim bazasi → Telegramdagi javob → CRM'dagi suhbat tarixi. Hammasi bitta zanjirda.",
           "items": [
             {
               "tag": "Bilim bazasi",
@@ -920,7 +883,6 @@
           ]
         },
         "capabilities": {
-          "eyebrow": "Imkoniyatlar",
           "title": "RAG agent yana nimalarni uddalaydi",
           "items": [
             {
@@ -1176,9 +1138,7 @@
         ]
       },
       "faq": {
-        "eyebrow": "Savollar",
         "title": "Ovozli agent haqida savollar",
-        "subtitle": "Eng ko'p beriladigan savollarga qisqa javoblar.",
         "items": [
           {
             "q": "Agent qaysi tillarda gaplashadi?",
@@ -1203,9 +1163,7 @@
         "subtitle": "14 kunlik bepul sinov — agent biznesingiz uchun qanday gaplashishini eshiting."
       },
       "landing": {
-        "badge": "Ovozli AI agent · SIP telefoniya · CRM",
         "title": "Instagramda lead qoldirdi — 60 soniyada AI qo'ng'iroq qildi",
-        "subtitle": "Ovozli agent formadan kelgan mijozga o'zi telefon qiladi, savollarga javob beradi, qabulga yozadi va suhbat natijasini to'g'ridan-to'g'ri CRM'ga yozib qo'yadi.",
         "ctaPrimary": "Agentni ishga tushirish",
         "ctaSecondary": "Qo'ng'iroq yozuvini eshitish",
         "flow": [
@@ -1227,9 +1185,7 @@
           }
         ],
         "steps": {
-          "eyebrow": "Qanday ishlaydi",
           "title": "Lead'dan yozuvgacha — to'rt qadam, odam aralashuvisiz",
-          "subtitle": "Instagram formasi → CRM → ovozli qo'ng'iroq → CRM'da natija. Hammasi bir zanjirda.",
           "items": [
             {
               "tag": "Lead yig'ish",
@@ -1274,7 +1230,6 @@
           ]
         },
         "capabilities": {
-          "eyebrow": "Imkoniyatlar",
           "title": "Ovozli agent yana nimalarni uddalaydi",
           "items": [
             {
@@ -1519,9 +1474,7 @@
         ]
       },
       "faq": {
-        "eyebrow": "Savollar",
         "title": "Video generator haqida savollar",
-        "subtitle": "Eng ko'p beriladigan savollarga qisqa javoblar.",
         "items": [
           {
             "q": "Video yaratish uchun montaj tajribasi kerakmi?",
@@ -1546,9 +1499,7 @@
         "subtitle": "14 kunlik bepul sinov bilan boshlang."
       },
       "landing": {
-        "badge": "Video generator · Avto-post · Analitika",
         "title": "Haftalik rejani tasdiqlang — videolar o'zi chiqib, o'zi joylanadi",
-        "subtitle": "Siz bir marta kontent rejasini kiritasiz. AI agent ssenariy yozadi, videoni yig'adi, belgilangan vaqtda Instagramga joylaydi va natijani statistika bilan qaytaradi.",
         "ctaPrimary": "Haftalik reja tuzish",
         "ctaSecondary": "Namunaviy videolarni ko'rish",
         "flow": [
@@ -1570,9 +1521,7 @@
           }
         ],
         "steps": {
-          "eyebrow": "Qanday ishlaydi",
           "title": "Rejadan tortib hisobotgacha — to'rt qadam, bitta agent",
-          "subtitle": "Haftalik reja → avtomatik generatsiya → Instagramga post → statistika. Siz faqat natijani ko'rasiz.",
           "items": [
             {
               "tag": "Haftalik reja",
@@ -1617,7 +1566,6 @@
           ]
         },
         "capabilities": {
-          "eyebrow": "Imkoniyatlar",
           "title": "Video agent yana nimalarni uddalaydi",
           "items": [
             {
@@ -1963,6 +1911,176 @@
             "alt": "Telefonida Instagram ochib turgan odam va haftalik natija"
           }
         }
+      }
+    }
+  },
+  "dashboard": {
+    "workspaceLabel": "Do'ppi AI ish maydoni",
+    "common": {
+      "retry": "Qayta urinib ko'ring.",
+      "checkDetails": "Ma'lumotlarni tekshirib ko'ring.",
+      "saving": "Saqlanmoqda...",
+      "loading": "Yuklanmoqda..."
+    },
+    "nav": {
+      "services": "Xizmatlar",
+      "workspace": "Ish maydoni",
+      "home": "Bosh sahifa",
+      "rag": "Universal RAG Agent",
+      "ragCreate": "Agent yaratish",
+      "voice": "Ovozli agent",
+      "video": "Video generator",
+      "videoPlans": "Rejalar",
+      "videoNew": "Yangi video",
+      "usage": "Sarf va to'lovlar",
+      "settings": "Sozlamalar",
+      "expand": "{label} bo'limini ochish",
+      "collapse": "{label} bo'limini yopish"
+    },
+    "balance": {
+      "available": "Mavjud balans",
+      "used": "${limit} oylik limitning {used}% ishlatilgan",
+      "topUp": "Balansni to'ldirish"
+    },
+    "header": {
+      "fallbackTitle": "Ish maydoni",
+      "openMenu": "Menyuni ochish",
+      "notifications": "Bildirishnomalar",
+      "fallbackUser": "Foydalanuvchi",
+      "fallbackPlan": "Ish maydoni",
+      "businessSelectFailed": "Biznesni tanlab bo'lmadi",
+      "businessCreated": "Biznes yaratildi",
+      "businessCreateFailed": "Biznes yaratib bo'lmadi",
+      "businessListFailed": "Bizneslar ro'yxatini yuklab bo'lmadi"
+    },
+    "business": {
+      "choose": "Biznes tanlang",
+      "label": "Biznes",
+      "yours": "Sizning bizneslaringiz",
+      "members": "{count} a'zo",
+      "create": "Yangi biznes yaratish",
+      "settings": "Biznes sozlamalari"
+    },
+    "businessModal": {
+      "title": "Yangi biznes yaratish",
+      "description": "Har bir biznesning o'z agentlari, jamoasi va API kalitlari bo'ladi.",
+      "close": "Yopish",
+      "name": "Biznes nomi",
+      "language": "Asosiy til",
+      "region": "To'lov hududi",
+      "note": "Biznes yaratilgach, jamoa va integratsiyalarni alohida sozlashingiz mumkin.",
+      "cancel": "Bekor qilish",
+      "submit": "Biznes yaratish",
+      "submitting": "Yaratilmoqda...",
+      "regions": {
+        "UZ": "O'zbekiston",
+        "KZ": "Qozog'iston",
+        "US": "AQSh",
+        "EU": "Yevropa"
+      }
+    },
+    "userMenu": {
+      "account": "Hisob sozlamalari",
+      "billing": "To'lov va balans",
+      "signOut": "Chiqish",
+      "signOutIncomplete": "Chiqish to'liq yakunlanmadi",
+      "signOutIncompleteHint": "Sessiya serverda yopilmadi, lekin bu qurilmadagi holat tozalandi."
+    },
+    "routes": {
+      "home": {
+        "title": "Bosh sahifa",
+        "subtitle": "Ish maydoni sharhi"
+      },
+      "rag": {
+        "title": "Universal RAG Agent",
+        "subtitle": "Bilim bazalari va qidiruv sifati"
+      },
+      "ragCreate": {
+        "title": "Universal RAG Agent",
+        "subtitle": "Agent sozlamalari"
+      },
+      "ragPlayground": {
+        "title": "RAG playground",
+        "subtitle": "Retrieval va javoblarni real vaqtda tekshirish"
+      },
+      "ragSettings": {
+        "title": "Universal RAG Agent",
+        "subtitle": "Agent konfiguratsiyasi"
+      },
+      "ragAdmin": {
+        "title": "RAG administratsiyasi",
+        "subtitle": "Modellar, narxlar va tenant limitlari"
+      },
+      "ragConversation": {
+        "title": "Universal RAG Agent",
+        "subtitle": "Suhbatlar"
+      },
+      "voice": {
+        "title": "Ovozli agent",
+        "subtitle": "Qo'ng'iroqlar, ssenariylar va raqamlar"
+      },
+      "video": {
+        "title": "Video generator",
+        "subtitle": "Promptdan tayyor videogacha"
+      },
+      "videoPlans": {
+        "title": "Rejalar",
+        "subtitle": "Haftalik kontent rejalari"
+      },
+      "videoNew": {
+        "title": "Yangi video",
+        "subtitle": "Navbatdan tashqari video"
+      },
+      "usage": {
+        "title": "Sarf va to'lovlar",
+        "subtitle": "Balans, limitlar va hisob-fakturalar"
+      },
+      "team": {
+        "title": "Jamoa",
+        "subtitle": "A'zolar va ruxsatlar"
+      },
+      "settings": {
+        "title": "Sozlamalar",
+        "subtitle": "Ish maydoni va biznes sozlamalari"
+      }
+    },
+    "settings": {
+      "pageTitle": "Sozlamalar — Do'ppi AI",
+      "profile": {
+        "title": "Profil",
+        "description": "Shaxsiy ma'lumotlaringiz va interfeys sozlamalari.",
+        "firstName": "Ism",
+        "lastName": "Familiya",
+        "language": "Til",
+        "timezone": "Vaqt mintaqasi",
+        "save": "Profilni saqlash",
+        "saved": "Profil saqlandi",
+        "saveFailed": "Profilni saqlab bo'lmadi"
+      },
+      "security": {
+        "title": "Kirish xavfsizligi",
+        "description": "Google hisobini ulang yoki mavjud parolni yangilang.",
+        "linkGoogle": "Google hisobini ulash",
+        "currentPassword": "Joriy parol",
+        "newPassword": "Yangi parol — kamida 12 belgi",
+        "submit": "Parolni yangilash",
+        "updated": "Parol yangilandi",
+        "updateFailed": "Parolni yangilab bo'lmadi",
+        "checkCurrent": "Joriy parolni tekshirib ko'ring."
+      },
+      "sessions": {
+        "title": "Faol sessiyalar",
+        "description": "Hisobingiz ochiq turgan qurilmalarni boshqaring.",
+        "signOutAll": "Barchasidan chiqish",
+        "unknownDevice": "Noma'lum qurilma",
+        "unknownIp": "IP noma'lum",
+        "revoke": "Yakunlash",
+        "none": "Boshqa faol sessiya yo'q.",
+        "loadFailed": "Sessiyalarni yuklab bo'lmadi",
+        "reload": "Sahifani yangilang.",
+        "revoked": "Sessiya yakunlandi",
+        "revokeFailed": "Sessiyani yakunlab bo'lmadi",
+        "signOutAllFailed": "Barcha sessiyalarni yakunlab bo'lmadi"
       }
     }
   }

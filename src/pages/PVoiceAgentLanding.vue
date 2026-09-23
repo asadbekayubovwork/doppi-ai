@@ -13,8 +13,6 @@ import {
   CDemoLeads,
   CDemoCall,
   CDemoResult,
-  CFaq,
-  CServiceLinks,
   HERO_PRIMARY,
   HERO_SECONDARY,
   BAND_PRIMARY,
@@ -25,10 +23,6 @@ import {
  * `/voice-agent` has its own landing rather than the shared PService layout:
  * the page walks one lead through the whole chain — Instagram form, CRM, SIP
  * call, booking back in the CRM — with a mockup per step.
- *
- * The FAQ and the cross-links stay: the build publishes FAQPage structured data
- * for every service page (build/seo.ts), and those answers have to be visible
- * on the page they are claimed for.
  */
 useSeo(() => SERVICE_PATHS.voice)
 
@@ -61,9 +55,6 @@ const telegram = computed(() =>
     <CLandingSteps id="voice-flow" :base="`${base}.steps`" :visuals="visuals" />
 
     <CLandingCapabilities :base="`${base}.capabilities`" />
-
-    <CFaq i18n-key="services.voice.faq" />
-    <CServiceLinks exclude="voice" />
 
     <CLandingCta :base="`${base}.cta`">
       <template #actions>

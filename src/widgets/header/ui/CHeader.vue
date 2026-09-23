@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from "vue"
+import { computed, ref, onMounted, onUnmounted, watch } from "vue"
 import { useRoute, type RouteLocationRaw } from "vue-router"
 import CLanguageSwitcher from "./CLanguageSwitcher.vue"
-import CServicesMenu from "./CServicesMenu.vue"
+import CNavMenu from "./CNavMenu.vue"
 import { CIcon, CLogo } from "@/shared/ui"
 import { SERVICE_NAV } from "@/shared/config/services"
+import { RESOURCES_MENU, SERVICES_MENU } from "../model/navMenus"
 
 interface NavItem {
   key: string
   to: RouteLocationRaw
 }
 
-withDefaults(defineProps<{ hideBackground?: boolean }>(), {
+const props = withDefaults(defineProps<{ hideBackground?: boolean }>(), {
   hideBackground: false,
 })
 
@@ -19,24 +20,30 @@ const route = useRoute()
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 
-// Every entry is a real page; section anchors live in the footer.
+// Flat and transparent at the very top; once the page moves, the bar lifts
+// into a floating pill. Pages without a header background (404) stay flat.
+const isFloating = computed(() => isScrolled.value && !props.hideBackground)
+
+// Every entry is a real page; section anchors live in the footer. Contact sits
+// in the Resources menu.
 const navigation: NavItem[] = [
-  { key: "nav.product", to: { path: "/product" } },
   { key: "nav.pricing", to: { path: "/pricing" } },
   { key: "nav.about", to: { path: "/about" } },
-  { key: "nav.team", to: { path: "/about", hash: "#team" } },
-  { key: "nav.contact", to: { path: "/contact-us" } },
 ]
 
-const isActive = (item: NavItem) => {
-  const target = item.to as { path: string; hash?: string }
-  if (target.hash)
-    return route.path === target.path && route.hash === target.hash
-  return route.path === target.path
-}
+// The drawer has no dropdowns, so the live Resources pages join the list.
+const mobileNavigation: NavItem[] = [
+  ...navigation,
+  ...RESOURCES_MENU.flatMap((column) => column.items).flatMap((item) =>
+    item.to ? [{ key: item.label, to: { path: item.to } }] : []
+  ),
+]
+
+const isActive = (item: NavItem) =>
+  route.path === (item.to as { path: string }).path
 
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 8
+  isScrolled.value = window.scrollY > 16
 }
 
 const closeMobileMenu = () => {
@@ -68,18 +75,19 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header
-    class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
-    :class="[
-      isScrolled && !hideBackground
-        ? 'border-b border-sand-200 bg-ground/80 backdrop-blur-2xl'
-        : 'border-b border-transparent',
-    ]"
-  >
+  <!-- The header itself never takes a filter or transform: either would turn it
+       into the containing block of the fixed mobile drawer inside it. -->
+  <header class="fixed inset-x-0 top-0 z-50">
     <div class="container relative z-50">
+      <!-- The radius and border width never change, so only colour, spacing
+           and shadow animate: at the top the pill is simply invisible. -->
       <div
-        class="flex items-center justify-between transition-all duration-300"
-        :class="isScrolled ? 'py-3' : 'py-4 sm:py-5'"
+        class="flex items-center justify-between rounded-full border transition-[margin,padding,background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+        :class="
+          isFloating
+            ? 'mt-3 border-sand-200/80 bg-white/80 py-3 pl-5 pr-3 shadow-[0_12px_40px_-12px_rgba(12,10,9,0.18)] backdrop-blur-xl sm:mt-4 sm:pl-7'
+            : 'mt-0 border-transparent bg-white/0 px-0 py-4 shadow-[0_12px_40px_-12px_rgba(12,10,9,0)] sm:py-5'
+        "
       >
         <RouterLink to="/" aria-label="Do'ppi AI">
           <CLogo :with-wordmark="false" surface="light" class="sm:hidden" />
@@ -87,20 +95,27 @@ onUnmounted(() => {
         </RouterLink>
 
         <nav class="hidden items-center gap-7 lg:flex">
-          <CServicesMenu />
+          <CNavMenu
+            id="services-menu"
+            label="services.navLabel"
+            :columns="SERVICES_MENU"
+          />
+          <!-- Same pill as the CNavMenu triggers, so every nav item answers
+               hover alike; the negative margin keeps the gap-7 rhythm. -->
           <RouterLink
             v-for="item in navigation"
             :key="item.key"
             :to="item.to"
-            class="text-sm transition-200"
-            :class="
-              isActive(item)
-                ? 'text-sand-950'
-                : 'text-sand-500 hover:text-sand-950'
-            "
+            class="-mx-3 rounded-full px-3 py-1.5 text-sm transition-200 hover:bg-sand-100 hover:text-sand-950"
+            :class="isActive(item) ? 'text-sand-950' : 'text-sand-500'"
           >
             {{ $t(item.key) }}
           </RouterLink>
+          <CNavMenu
+            id="resources-menu"
+            label="nav.resources"
+            :columns="RESOURCES_MENU"
+          />
         </nav>
 
         <div class="hidden items-center gap-4 lg:flex">
@@ -111,9 +126,14 @@ onUnmounted(() => {
           >
             {{ $t("nav.signIn") }}
           </RouterLink>
+          <!-- In the pill the button turns into a pill too, concentric with the
+               bar: its inset (12px padding + 1px border) plus its 20px radius
+               equals the bar's half-height. An explicit 20px rather than
+               rounded-full keeps the radius tweening instead of snapping. -->
           <RouterLink
             to="/login"
-            class="flex h-10 items-center justify-center rounded-xl bg-sand-950 px-5 text-sm font-medium text-white transition-300 hover:bg-sand-800"
+            class="flex h-10 items-center justify-center bg-sand-950 px-5 text-sm font-medium text-white transition-[background-color,border-radius] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-sand-800 motion-reduce:transition-none"
+            :class="isFloating ? 'rounded-[20px]' : 'rounded-xl'"
           >
             {{ $t("nav.cta") }}
           </RouterLink>
@@ -191,7 +211,7 @@ onUnmounted(() => {
           </RouterLink>
           <span class="my-2 h-px bg-sand-200" aria-hidden="true" />
           <RouterLink
-            v-for="item in navigation"
+            v-for="item in mobileNavigation"
             :key="item.key"
             :to="item.to"
             class="rounded-lg px-3 py-3 text-base transition-colors"

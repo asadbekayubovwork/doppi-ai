@@ -2,7 +2,9 @@ import { flushPromises, mount } from "@vue/test-utils"
 import { createPinia } from "pinia"
 import { createHead } from "@unhead/vue/client"
 import { createRouter, createMemoryHistory } from "vue-router"
+import { createI18n } from "vue-i18n"
 import { HttpError } from "@/shared/api"
+import { messages } from "@/shared/config/i18n"
 import {
   ragAgentApi,
   type ConversationDetail,
@@ -135,9 +137,12 @@ const mountAt = async (
     activeBusinessId: "business-test",
   }
   await router.push(path)
+  // The sidebar's labels come from the locale files; English keeps the
+  // assertions readable.
+  const i18n = createI18n({ legacy: false, locale: "en", messages })
   const wrapper = mount(component as never, {
     props,
-    global: { plugins: [pinia, router, createHead()] },
+    global: { plugins: [pinia, router, createHead(), i18n] },
   })
   await flushPromises()
   return wrapper

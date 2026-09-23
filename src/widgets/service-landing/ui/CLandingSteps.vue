@@ -16,7 +16,7 @@ interface Step {
  * the mockups; everything else comes from the i18n branch.
  */
 const props = defineProps<{
-  /** i18n branch holding eyebrow, title, subtitle and items. */
+  /** i18n branch holding title and items. */
   base: string
   /** One component per step, in the order the chain runs. */
   visuals: Component[]
@@ -34,11 +34,7 @@ const visualFirst = (index: number) => index % 2 === 0
 <template>
   <section :id="id" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
-      <CSectionHeading
-        :eyebrow="$t(`${base}.eyebrow`)"
-        :title="$t(`${base}.title`)"
-        :subtitle="$t(`${base}.subtitle`)"
-      />
+      <CSectionHeading :title="$t(`${base}.title`)" />
 
       <ol class="mt-16 flex flex-col gap-16 sm:gap-24">
         <li

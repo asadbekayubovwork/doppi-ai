@@ -1,18 +1,23 @@
 <script setup lang="ts">
-import { ref, watch } from "vue"
+import { computed, ref, watch } from "vue"
+import { useI18n } from "vue-i18n"
 import { CIcon, CSelect } from "@/shared/ui"
 
+// Language names stay in their own language, whatever the interface speaks.
 const LANGUAGE_OPTIONS = [
   { value: "uz", label: "O'zbekcha" },
   { value: "ru", label: "Русский" },
   { value: "en", label: "English" },
 ]
-const REGION_OPTIONS = [
-  { value: "UZ", label: "O'zbekiston" },
-  { value: "KZ", label: "Qozog'iston" },
-  { value: "US", label: "AQSh" },
-  { value: "EU", label: "Yevropa" },
-]
+const REGIONS = ["UZ", "KZ", "US", "EU"]
+
+const { t } = useI18n()
+const regionOptions = computed(() =>
+  REGIONS.map((value) => ({
+    value,
+    label: t(`dashboard.businessModal.regions.${value}`),
+  }))
+)
 
 const props = defineProps<{
   open: boolean
@@ -76,18 +81,17 @@ const submit = () => {
                 id="create-business-title"
                 class="text-[19px] font-bold tracking-tight text-[#0F0F17]"
               >
-                Yangi biznes yaratish
+                {{ $t("dashboard.businessModal.title") }}
               </h2>
               <p class="mt-1 text-[13.5px] leading-5 text-[#6B6B78]">
-                Har bir biznesning o'z agentlari, jamoasi va API kalitlari
-                bo'ladi.
+                {{ $t("dashboard.businessModal.description") }}
               </p>
             </div>
             <button
               type="button"
               :disabled="loading"
               class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#E4E4EB] text-[#8E8E9C] hover:bg-[#F7F7F9]"
-              aria-label="Yopish"
+              :aria-label="$t('dashboard.businessModal.close')"
               @click="close"
             >
               <CIcon name="x" class="h-4 w-4" />
@@ -100,7 +104,7 @@ const submit = () => {
             @submit.prevent="submit"
           >
             <label class="grid gap-1.5 text-[13.5px] font-medium text-[#3D3D4A]"
-              >Biznes nomi<input
+              >{{ $t("dashboard.businessModal.name") }}<input
                 v-model="name"
                 required
                 minlength="2"
@@ -112,7 +116,7 @@ const submit = () => {
             <div class="grid gap-4 sm:grid-cols-2">
               <label
                 class="grid gap-1.5 text-[13.5px] font-medium text-[#3D3D4A]"
-                >Asosiy til<CSelect
+                >{{ $t("dashboard.businessModal.language") }}<CSelect
                   v-model="language"
                   :options="LANGUAGE_OPTIONS"
                   icon="languages"
@@ -120,9 +124,9 @@ const submit = () => {
               /></label>
               <label
                 class="grid gap-1.5 text-[13.5px] font-medium text-[#3D3D4A]"
-                >To'lov hududi<CSelect
+                >{{ $t("dashboard.businessModal.region") }}<CSelect
                   v-model="region"
-                  :options="REGION_OPTIONS"
+                  :options="regionOptions"
                   icon="globe"
                   size="xl"
               /></label>
@@ -130,8 +134,7 @@ const submit = () => {
             <p
               class="rounded-xl bg-[#F3F0FE] px-3.5 py-3 text-[13.5px] leading-5 text-[#4B21C4]"
             >
-              Biznes yaratilgach, jamoa va integratsiyalarni alohida
-              sozlashingiz mumkin.
+              {{ $t("dashboard.businessModal.note") }}
             </p>
           </form>
 
@@ -144,7 +147,7 @@ const submit = () => {
               class="h-11 rounded-xl border border-[#E3E3EB] bg-white px-4 text-sm font-semibold"
               @click="close"
             >
-              Bekor qilish
+              {{ $t("dashboard.businessModal.cancel") }}
             </button>
             <button
               type="submit"
@@ -153,7 +156,9 @@ const submit = () => {
               class="inline-flex h-11 items-center gap-2 rounded-xl bg-[#6633EE] px-4 text-sm font-semibold text-white disabled:opacity-60"
             >
               <CIcon name="plus" class="h-4 w-4" />{{
-                loading ? "Yaratilmoqda..." : "Biznes yaratish"
+                loading
+                  ? $t("dashboard.businessModal.submitting")
+                  : $t("dashboard.businessModal.submit")
               }}
             </button>
           </div>

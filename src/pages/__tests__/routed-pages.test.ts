@@ -78,10 +78,7 @@ describe("routed pages", () => {
   it("renders the about page with the team", () => {
     const wrapper = mountPage(PAboutUs)
 
-    expect(wrapper.find("#about").exists()).toBe(true)
-    // The checklist wants the problem and the product described on About too.
-    expect(wrapper.find("#problem").exists()).toBe(true)
-    expect(wrapper.find("#solution").exists()).toBe(true)
+    expect(wrapper.find("#results").exists()).toBe(true)
     expect(wrapper.find("#team").exists()).toBe(true)
     expect(wrapper.text()).toContain("Jaxongir Abduxamidov")
     wrapper.unmount()
@@ -94,16 +91,10 @@ describe("routed pages", () => {
     expect(wrapper.find("#contact-phone").exists()).toBe(true)
     expect(wrapper.find("#contact-message").exists()).toBe(true)
 
-    // Company contact details: domain email, location and real social profiles
-    // (a placeholder href would have been filtered out of SOCIALS entirely).
+    // Company contact details: domain email and location.
     const text = wrapper.text()
     expect(text).toContain("transformation@doppiai.uz")
     expect(text).toContain("Toshkent, O'zbekiston")
-    const socialHrefs = wrapper
-      .findAll('a[target="_blank"]')
-      .map((a) => a.attributes("href"))
-    expect(socialHrefs).toContain("https://t.me/doppi_ai")
-    expect(socialHrefs).toContain("https://instagram.com/doppi_ai")
     wrapper.unmount()
   })
 
@@ -164,13 +155,6 @@ describe("routed pages", () => {
     expect(text).toContain(copy.demo.leads.rows[0].name)
     expect(text).toContain(copy.demo.call.line)
     expect(text).toContain(copy.demo.result.aiText)
-
-    // The FAQ and the cross-links are what the build's structured data claims
-    // this page carries, so they have to stay visible.
-    expect(text).toContain(messages.uz.services.voice.faq.items[0].q)
-    const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
-    expect(hrefs).toContain(SERVICE_PATHS.rag)
-    expect(hrefs).toContain(SERVICE_PATHS.video)
     wrapper.unmount()
   })
 
@@ -190,13 +174,6 @@ describe("routed pages", () => {
     // An answer is only worth anything with the source it came from.
     expect(text).toContain(copy.demo.chat.turns[1].source)
     expect(text).toContain(copy.demo.crm.chats[0].name)
-
-    // The FAQ and the cross-links are what the build's structured data claims
-    // this page carries, so they have to stay visible.
-    expect(text).toContain(messages.uz.services.rag.faq.items[0].q)
-    const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
-    expect(hrefs).toContain(SERVICE_PATHS.voice)
-    expect(hrefs).toContain(SERVICE_PATHS.video)
     wrapper.unmount()
   })
 
@@ -220,13 +197,6 @@ describe("routed pages", () => {
     // The channels the agent publishes to are named, not just implied.
     for (const platform of copy.capabilities.platforms)
       expect(text).toContain(platform.label)
-
-    // The FAQ and the cross-links are what the build's structured data claims
-    // this page carries, so they have to stay visible.
-    expect(text).toContain(messages.uz.services.video.faq.items[0].q)
-    const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
-    expect(hrefs).toContain(SERVICE_PATHS.rag)
-    expect(hrefs).toContain(SERVICE_PATHS.voice)
     wrapper.unmount()
   })
 

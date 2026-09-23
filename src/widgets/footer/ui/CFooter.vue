@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { computed } from "vue"
-import { useI18n } from "vue-i18n"
 import type { RouteLocationRaw } from "vue-router"
-import { CIcon, CLogo, CSocialMark } from "@/shared/ui"
+import { CLogo, CSocialMark } from "@/shared/ui"
 import { SOCIALS } from "@/shared/config/socials"
 import { SERVICE_NAV } from "@/shared/config/services"
 
-const { t } = useI18n()
 const currentYear = new Date().getFullYear()
 
 interface FooterLink {
@@ -15,7 +12,6 @@ interface FooterLink {
 }
 
 const productLinks: FooterLink[] = [
-  { key: "nav.product", to: { path: "/product" } },
   { key: "nav.features", to: { path: "/product", hash: "#features" } },
   { key: "nav.how", to: { path: "/product", hash: "#how" } },
   { key: "nav.voice", to: { path: "/product", hash: "#voice" } },
@@ -29,23 +25,13 @@ const companyLinks: FooterLink[] = [
   { key: "nav.contact", to: { path: "/contact-us" } },
 ]
 
-const email = computed(() => t("contact.email"))
-const phone = computed(() => t("contact.phone"))
-
-const contactRows = computed(() => [
-  { icon: "mail", label: email.value, href: `mailto:${email.value}` },
-  { icon: "phone", label: phone.value, href: `tel:${phone.value.replace(/\s+/g, "")}` },
-  { icon: "globe", label: t("contact.website"), href: `https://${t("contact.website")}` },
-  { icon: "map-pin", label: t("contact.location") },
-])
-
 const socials = SOCIALS
 </script>
 
 <template>
   <footer class="section-ground border-t border-sand-200">
     <div class="container relative z-10 py-14">
-      <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr]">
+      <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div class="max-w-xs">
           <RouterLink to="/" aria-label="Do'ppi AI">
             <CLogo surface="light" />
@@ -109,22 +95,6 @@ const socials = SOCIALS
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-sm font-semibold text-sand-950">{{ $t("footer.contactTitle") }}</h3>
-          <ul class="mt-4 space-y-3 text-sm text-sand-500">
-            <li v-for="row in contactRows" :key="row.label">
-              <component
-                :is="row.href ? 'a' : 'span'"
-                :href="row.href"
-                class="inline-flex items-center gap-2.5 transition-colors"
-                :class="row.href ? 'hover:text-sand-950' : ''"
-              >
-                <CIcon :name="row.icon" class="h-4 w-4 text-sand-950" />
-                {{ row.label }}
-              </component>
-            </li>
-          </ul>
-        </div>
       </div>
 
       <div

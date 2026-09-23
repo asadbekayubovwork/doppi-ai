@@ -10,7 +10,7 @@ interface FaqItem {
 
 const props = withDefaults(
   defineProps<{
-    /** Branch holding eyebrow, title, subtitle and items; service pages pass their own. */
+    /** Branch holding title and items; service pages pass their own. */
     i18nKey?: string
   }>(),
   { i18nKey: "faq" }
@@ -60,11 +60,7 @@ const onTransitionDone = (element: Element) => {
 <template>
   <section id="faq" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
-      <CSectionHeading
-        :eyebrow="$t(`${i18nKey}.eyebrow`)"
-        :title="$t(`${i18nKey}.title`)"
-        :subtitle="$t(`${i18nKey}.subtitle`)"
-      />
+      <CSectionHeading :title="$t(`${i18nKey}.title`)" />
 
       <div class="mx-auto mt-12 max-w-[760px] space-y-3">
         <!-- The AOS-animated element must keep a STATIC class list: AOS adds

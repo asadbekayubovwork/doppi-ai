@@ -54,7 +54,7 @@ function onRowClick(event: MouseEvent) {
           class="h-[18px] w-[18px] shrink-0"
           :class="isInSection ? 'text-[#B9A7FF]' : ''"
         />
-        <span class="flex-1 truncate">{{ item.label }}</span>
+        <span class="flex-1 truncate">{{ $t(item.labelKey) }}</span>
         <!-- <span
           v-if="item.badge"
           class="flex h-6 min-w-6 items-center justify-center rounded-lg bg-[#6046E8] px-1.5 text-xs font-bold text-white"
@@ -71,7 +71,11 @@ function onRowClick(event: MouseEvent) {
         class="absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-[#9795A2] transition hover:bg-white/[0.08] hover:text-white"
         :aria-expanded="isOpen"
         :aria-controls="groupId"
-        :aria-label="`${isOpen ? 'Collapse' : 'Expand'} ${item.label}`"
+        :aria-label="
+          $t(isOpen ? 'dashboard.nav.collapse' : 'dashboard.nav.expand', {
+            label: $t(item.labelKey),
+          })
+        "
         @click="isOpen = !isOpen"
       >
         <CIcon
@@ -103,7 +107,7 @@ function onRowClick(event: MouseEvent) {
             :aria-current="isChildActive(child) ? 'page' : undefined"
           >
             <CIcon :name="child.icon" class="h-[18px] w-[18px] shrink-0" />
-            <span class="flex-1 truncate">{{ child.label }}</span>
+            <span class="flex-1 truncate">{{ $t(child.labelKey) }}</span>
             <span
               v-if="child.badge"
               class="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#28272F] px-1.5 text-xs font-semibold text-[#9896A2]"

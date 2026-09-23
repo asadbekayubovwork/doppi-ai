@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18nList } from "@/shared/lib"
-import { CIcon, CSectionHeading, CCountUp } from "@/shared/ui"
+import { CIcon, CCountUp } from "@/shared/ui"
 
 interface Tier {
   id: string
@@ -13,10 +13,7 @@ interface Tier {
   features: string[]
 }
 
-const props = withDefaults(defineProps<{ showHeading?: boolean }>(), {
-  showHeading: true,
-})
-
+// Lives only on /pricing, under that page's own title — so no heading here.
 const tiers = useI18nList<Tier>("pricing.tiers")
 </script>
 
@@ -24,13 +21,6 @@ const tiers = useI18nList<Tier>("pricing.tiers")
   <section id="pricing" class="section-ground py-[60px] sm:py-[100px]">
 
     <div class="container relative z-10">
-      <CSectionHeading
-        v-if="props.showHeading"
-        :eyebrow="$t('pricing.eyebrow')"
-        :title="$t('pricing.title')"
-        :subtitle="$t('pricing.subtitle')"
-      />
-
       <div class="mt-14 grid grid-cols-1 items-stretch gap-5 md:grid-cols-2 lg:grid-cols-4">
         <div
           v-for="(tier, i) in tiers"

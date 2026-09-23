@@ -1,5 +1,6 @@
 export interface NavLink {
-  label: string
+  /** i18n key under `dashboard.nav`, resolved where the link is rendered. */
+  labelKey: string
   to: string
   icon: string
   badge?: number
@@ -14,7 +15,7 @@ export interface NavItem extends NavLink {
 
 // Every /app page sits below the home path, so it only matches exactly.
 export const HOME: NavItem = {
-  label: "Home",
+  labelKey: "dashboard.nav.home",
   to: "/app",
   icon: "layout-grid",
   exact: true,
@@ -24,31 +25,44 @@ export const HOME: NavItem = {
 // workspace itself is administered.
 export const SERVICES: NavItem[] = [
   {
-    label: "Universal RAG Agent",
+    labelKey: "dashboard.nav.rag",
     to: "/app/rag",
     icon: "library",
     children: [
-      { label: "Create agent", to: "/app/rag/create", icon: "circle-plus" },
+      {
+        labelKey: "dashboard.nav.ragCreate",
+        to: "/app/rag/create",
+        icon: "circle-plus",
+      },
     ],
   },
-  { label: "Voice Agent", to: "/app/voice", icon: "audio-lines", badge: 3 },
   {
-    label: "Video Generator",
+    labelKey: "dashboard.nav.voice",
+    to: "/app/voice",
+    icon: "audio-lines",
+    badge: 3,
+  },
+  {
+    labelKey: "dashboard.nav.video",
     to: "/app/video",
     icon: "clapperboard",
     children: [
       {
-        label: "Plans",
+        labelKey: "dashboard.nav.videoPlans",
         to: "/app/video/plans",
         icon: "calendar-days",
         badge: 3,
       },
-      { label: "New video", to: "/app/video/new", icon: "sparkles" },
+      {
+        labelKey: "dashboard.nav.videoNew",
+        to: "/app/video/new",
+        icon: "sparkles",
+      },
     ],
   },
 ]
 
 export const WORKSPACE: NavItem[] = [
-  { label: "Usage & Billing", to: "/app/usage", icon: "bar-chart-3" },
-  { label: "Settings", to: "/app/settings", icon: "settings" },
+  { labelKey: "dashboard.nav.usage", to: "/app/usage", icon: "bar-chart-3" },
+  { labelKey: "dashboard.nav.settings", to: "/app/settings", icon: "settings" },
 ]

@@ -63,7 +63,7 @@ usePageHeading(() => {
           <span
             class="mt-4 block text-center text-base font-medium text-[#15151B]"
           >
-            {{ service.label }}
+            {{ $t(service.labelKey) }}
           </span>
         </RouterLink>
       </li>

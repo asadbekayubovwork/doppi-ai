@@ -2,7 +2,6 @@
 import { computed, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { CIcon, CSectionHeading } from "@/shared/ui"
-import { SOCIALS } from "@/shared/config/socials"
 
 const { t } = useI18n()
 
@@ -125,19 +124,11 @@ const handleSubmit = async () => {
       <div class="grid items-start gap-12 lg:grid-cols-2">
         <!-- Heading + direct contact details -->
         <div>
-          <CSectionHeading
-            align="left"
-            :eyebrow="$t('contact.eyebrow')"
-            :title="$t('contact.title')"
-            :subtitle="$t('contact.subtitle')"
-          />
+          <CSectionHeading align="left" :title="$t('contact.title')" />
 
           <h3 class="mt-10 text-lg font-semibold text-sand-950">
             {{ $t("contact.reachTitle") }}
           </h3>
-          <p class="mt-2 leading-relaxed text-sand-500">
-            {{ $t("contact.reachSubtitle") }}
-          </p>
 
           <ul class="mt-6 space-y-4">
             <li v-for="row in reachRows" :key="row.label">
@@ -166,28 +157,6 @@ const handleSubmit = async () => {
               </component>
             </li>
           </ul>
-
-          <template v-if="SOCIALS.length">
-            <h4
-              class="mt-8 text-sm font-semibold uppercase tracking-[0.14em] text-sand-500"
-            >
-              {{ $t("contact.socialsTitle") }}
-            </h4>
-            <ul class="mt-4 flex flex-wrap gap-3">
-              <li v-for="social in SOCIALS" :key="social.label">
-                <a
-                  :href="social.href"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2.5 rounded-xl border border-sand-200 bg-white px-4 py-2.5 text-sm text-sand-950 transition-colors hover:border-sand-400"
-                >
-                  <CIcon :name="social.icon" class="h-4 w-4 text-sand-600" />
-                  {{ social.label }}
-                  <span class="text-sand-500">{{ social.handle }}</span>
-                </a>
-              </li>
-            </ul>
-          </template>
         </div>
 
         <!-- Lead form. AOS owns the wrapper; the panel sits inside so its hover

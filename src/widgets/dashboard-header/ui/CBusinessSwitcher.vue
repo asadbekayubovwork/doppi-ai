@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
+import { useI18n } from "vue-i18n"
 import { useDismiss } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 import type { Business } from "../model/types"
@@ -14,6 +15,7 @@ const emit = defineEmits<{
   create: []
 }>()
 
+const { t } = useI18n()
 const root = ref<HTMLElement | null>(null)
 const isOpen = ref(false)
 const close = () => (isOpen.value = false)
@@ -25,7 +27,7 @@ const active = computed(
     props.businesses.find((item) => item.id === props.activeId) ??
     props.businesses[0] ?? {
       id: "",
-      name: "Biznes tanlang",
+      name: t("dashboard.business.choose"),
       slug: "",
       status: "",
       default_language: "uz",
@@ -66,7 +68,7 @@ const requestCreate = () => {
         <span
           class="block text-[9.5px] font-semibold uppercase tracking-[0.1em] text-[#A2A2AE]"
         >
-          Biznes
+          {{ $t("dashboard.business.label") }}
         </span>
         <span class="block text-[13.5px] font-semibold text-[#12121C]">
           {{ active.name }}
@@ -85,7 +87,7 @@ const requestCreate = () => {
           <span
             class="text-[10.5px] font-semibold uppercase tracking-[0.12em] text-[#A2A2AE]"
           >
-            Sizning bizneslaringiz
+            {{ $t("dashboard.business.yours") }}
           </span>
           <span class="text-[12.5px] text-[#A2A2AE]">
             {{ businesses.length }}
@@ -114,7 +116,11 @@ const requestCreate = () => {
                   {{ item.name }}
                 </span>
                 <span class="block truncate text-[12.5px] text-[#8E8E9C]">
-                  {{ item.members === undefined ? item.plan : `${item.plan} · ${item.members} a'zo` }}
+                  {{
+                    item.members === undefined
+                      ? item.plan
+                      : `${item.plan} · ${$t("dashboard.business.members", { count: item.members })}`
+                  }}
                 </span>
               </span>
               <CIcon
@@ -134,7 +140,7 @@ const requestCreate = () => {
             @click="requestCreate"
           >
             <CIcon name="plus" class="h-4 w-4 shrink-0" />
-            Yangi biznes yaratish
+            {{ $t("dashboard.business.create") }}
           </button>
           <RouterLink
             to="/app/settings"
@@ -143,7 +149,7 @@ const requestCreate = () => {
             @click="close"
           >
             <CIcon name="settings" class="h-4 w-4 shrink-0 text-[#8E8E9C]" />
-            Biznes sozlamalari
+            {{ $t("dashboard.business.settings") }}
           </RouterLink>
         </div>
       </div>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 import { CIcon, CLogo } from "@/shared/ui"
 import { HOME, SERVICES, WORKSPACE } from "../model/navigation"
 import CSidebarNavItem from "./CSidebarNavItem.vue"
@@ -7,11 +8,12 @@ import CSidebarNavItem from "./CSidebarNavItem.vue"
 defineProps<{ open?: boolean }>()
 defineEmits<{ close: [] }>()
 
+const { t } = useI18n()
 
 // Placeholder figures until the billing endpoint is wired up.
 const balance = { amount: "$248.60", currency: "USD", limit: 400, used: 62 }
-const balanceHint = computed(
-  () => `$${balance.limit} oylik limitning ${balance.used}% ishlatilgan`
+const balanceUsed = computed(() =>
+  t("dashboard.balance.used", { limit: balance.limit, used: balance.used })
 )
 </script>
 
@@ -36,7 +38,7 @@ const balanceHint = computed(
       <RouterLink
         to="/app"
         class="inline-flex items-center"
-        aria-label="Do'ppi AI ish maydoni"
+        :aria-label="$t('dashboard.workspaceLabel')"
       >
         <CLogo />
       </RouterLink>
@@ -55,7 +57,7 @@ const balanceHint = computed(
       <p
         class="px-2 pb-2 pt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D6B77]"
       >
-        Services
+        {{ $t("dashboard.nav.services") }}
       </p>
       <ul class="space-y-1">
         <CSidebarNavItem v-for="item in SERVICES" :key="item.to" :item="item" />
@@ -64,7 +66,7 @@ const balanceHint = computed(
       <p
         class="px-2 pb-2 pt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D6B77]"
       >
-        Workspace
+        {{ $t("dashboard.nav.workspace") }}
       </p>
       <ul class="space-y-1">
         <CSidebarNavItem
@@ -78,7 +80,9 @@ const balanceHint = computed(
     <div class="px-4 pb-3">
       <div class="rounded-xl border border-white/[0.09] bg-[#1C1C23] p-3">
         <div class="flex items-center justify-between gap-3">
-          <span class="text-[13px] text-[#A09EAA]">Available balance</span>
+          <span class="text-[13px] text-[#A09EAA]">
+            {{ $t("dashboard.balance.available") }}
+          </span>
           <CIcon name="wallet" class="h-4 w-4 text-white/40" />
         </div>
         <p class="mt-1 text-2xl font-bold tracking-tight text-white">
@@ -91,7 +95,7 @@ const balanceHint = computed(
         <div
           class="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10"
           role="img"
-          :aria-label="balanceHint"
+          :aria-label="balanceUsed"
         >
           <span
             class="block h-full rounded-full bg-[#C0F04A]"
@@ -99,7 +103,7 @@ const balanceHint = computed(
           />
         </div>
         <p class="mt-1.5 text-[11.5px] leading-4 text-[#8D8B98]">
-          {{ balance.used }}% of ${{ balance.limit }} monthly limit used
+          {{ balanceUsed }}
         </p>
 
         <button
@@ -107,7 +111,7 @@ const balanceHint = computed(
           class="mt-2.5 flex h-9 w-full items-center justify-center gap-2 rounded-lg bg-[#C9F354] text-[13px] font-bold text-[#1A1A13] transition hover:bg-[#BCE943]"
         >
           <CIcon name="plus" class="h-4 w-4" />
-          Top up balance
+          {{ $t("dashboard.balance.topUp") }}
         </button>
       </div>
     </div>
