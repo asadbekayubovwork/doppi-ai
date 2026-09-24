@@ -413,7 +413,7 @@
         },
         "rag": {
           "name": "Universal RAG Agent",
-          "unit": "10 messages",
+          "unit": "messages",
           "note": "Chat via Telegram, WhatsApp and Instagram Direct"
         },
         "ragIndex": {

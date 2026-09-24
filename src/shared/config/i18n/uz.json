@@ -413,7 +413,7 @@
         },
         "rag": {
           "name": "Universal RAG agent",
-          "unit": "10 ta xabar",
+          "unit": "ta xabar",
           "note": "Telegram, WhatsApp va Instagram Direct orqali chat"
         },
         "ragIndex": {
