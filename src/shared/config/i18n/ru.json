@@ -413,7 +413,7 @@
         },
         "rag": {
           "name": "Universal RAG Agent",
-          "unit": "10 сообщений",
+          "unit": "сообщений",
           "note": "Чат в Telegram, WhatsApp и Instagram Direct"
         },
         "ragIndex": {

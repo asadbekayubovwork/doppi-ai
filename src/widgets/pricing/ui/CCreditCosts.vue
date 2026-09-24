@@ -114,16 +114,17 @@ const creditPrice = computed(() =>
                   {{ count("pricing.credits", cost.credits) }}
                 </span>
                 <span class="whitespace-nowrap text-sand-500">
-                  / {{ $t(`pricing.costs.items.${cost.id}.unit`) }}
+                  / {{ cost.denominator > 1 ? `${cost.denominator} ` : ""
+                  }}{{ $t(`pricing.costs.items.${cost.id}.unit`) }}
                 </span>
               </td>
               <td
                 class="hidden whitespace-nowrap px-6 py-4 tabular-nums text-sand-500 sm:table-cell"
               >
-                ≈
-                {{
-                  formatUsd(cost.credits * (creditPrice ?? 0), { cents: true })
-                }}
+                <template v-if="creditPrice !== null">
+                  ≈ {{ formatUsd(cost.credits * creditPrice, { cents: true }) }}
+                </template>
+                <template v-else>—</template>
               </td>
               <td class="hidden px-6 py-4 text-sand-500 md:table-cell">
                 {{ $t(`pricing.costs.items.${cost.id}.note`) }}
