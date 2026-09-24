@@ -106,7 +106,7 @@ describe("sidebar language", () => {
 
     expect(labels()).toContain("Главная")
     expect(labels()).toContain("Настройки")
-    expect(wrapper.text()).toContain("Пополнить баланс")
+    expect(wrapper.text()).toContain("Детали баланса")
     wrapper.unmount()
   })
 })

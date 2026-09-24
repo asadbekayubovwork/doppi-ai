@@ -34,7 +34,7 @@
     "titleHighlight": "all in one system",
     "titleBottom": "powered by AI",
     "subtitle": "Do'ppi AI is the AI marketing operating system for your business. Voice agent, social media automation, video & content, CRM and chatbots — all working together in one place.",
-    "ctaPrimary": "Start free trial",
+    "ctaPrimary": "Get started",
     "ctaSecondary": "Watch demo",
     "stats": [
       {
@@ -329,7 +329,7 @@
     ]
   },
   "pricing": {
-    "trialNote": "14-day free trial on every plan. No credit card required.",
+    "trialNote": "New accounts receive one introductory credit grant. See current amount and expiry on the pricing page.",
     "popularLabel": "Most popular",
     "pageTitle": "Simple, transparent pricing",
     "pageSubtitle": "Pick the plan that matches your stage — you can change it at any time.",
@@ -477,8 +477,8 @@
         "a": "Your data is stored in a protected cloud, backed up regularly, and always belongs to you."
       },
       {
-        "q": "How does the free trial work?",
-        "a": "Every plan includes a 14-day free trial with no credit card required. You can cancel anytime."
+        "q": "How do introductory credits work?",
+        "a": "New accounts receive a one-time introductory credit grant. Its amount and expiry are shown on the pricing page; no card is required."
       }
     ]
   },
@@ -606,8 +606,8 @@
         {
           "heading": "Subscriptions, trial & billing",
           "paragraphs": [
-            "Do'ppi AI offers subscription-based plans: Starter ($19/mo), Growth ($49/mo), Pro ($99/mo) and an Enterprise plan with custom pricing for larger organizations.",
-            "Every plan includes a 14-day free trial. Fees are billed on a recurring (monthly) basis according to the plan you select. You may cancel anytime — cancellation takes effect at the end of the current billing period.",
+            "Do'ppi AI services are metered in credits. Current packages, prices, and credit amounts are shown on the pricing page.",
+            "New accounts receive a one-time introductory credit grant with the expiry shown on the pricing page. Payment is taken only for a separately confirmed purchase.",
             "Prices and features may change with prior notice. Except where required by law, amounts already paid are non-refundable."
           ],
           "bullets": []
@@ -691,7 +691,7 @@
     },
     "pricing": {
       "title": "Pricing — Do'ppi AI",
-      "description": "Do'ppi AI plans: Starter, Growth, Pro and Enterprise. Every plan includes a 14-day free trial."
+      "description": "Do'ppi AI credit packages and per-service usage prices, with introductory credit for new accounts."
     },
     "about": {
       "title": "About — Do'ppi AI",
@@ -713,7 +713,7 @@
   "services": {
     "navLabel": "Services",
     "breadcrumbHome": "Home",
-    "ctaPrimary": "Start free trial",
+    "ctaPrimary": "Get started",
     "ctaSecondary": "Request a demo",
     "breadcrumbLabel": "Breadcrumb",
     "othersTitle": "More from Do'ppi AI",
@@ -793,7 +793,7 @@
       },
       "cta": {
         "title": "Try the RAG Agent in your business",
-        "subtitle": "14-day free trial — upload your documents and see for yourself how the agent answers."
+        "subtitle": "Use introductory credit to upload documents and try the agent's answers."
       },
       "landing": {
         "title": "Upload what you know — let the agent answer for you",
@@ -1109,7 +1109,7 @@
       },
       "cta": {
         "title": "Try the voice agent",
-        "subtitle": "14-day free trial — hear how the agent sounds for your business."
+        "subtitle": "Use introductory credit to explore voice agent capabilities."
       },
       "landing": {
         "title": "A lead came in on Instagram — the AI called back in 60 seconds",
@@ -1422,9 +1422,30 @@
           }
         ]
       },
+      "faq": {
+        "title": "Video Generator questions",
+        "items": [
+          {
+            "q": "Do I need video editing experience?",
+            "a": "No. You describe what you need in plain words and the AI does the rest."
+          },
+          {
+            "q": "What can I create?",
+            "a": "Reels and short videos, ad clips, images, ad copy and voiceover."
+          },
+          {
+            "q": "Can the voiceover be in Uzbek?",
+            "a": "Yes, content is created in Uzbek and Russian."
+          },
+          {
+            "q": "How much does it cost?",
+            "a": "Compare the plans and what each includes on the pricing page — every plan starts with a 14-day free trial."
+          }
+        ]
+      },
       "cta": {
         "title": "Create your first video",
-        "subtitle": "Start with a 14-day free trial."
+        "subtitle": "Start with introductory credit."
       },
       "landing": {
         "title": "Approve the week's plan — the videos make and post themselves",
@@ -1881,11 +1902,16 @@
       "videoNew": "New video",
       "usage": "Usage & Billing",
       "settings": "Settings",
+      "platformAdmin": "Platform admin",
       "expand": "Expand {label}",
       "collapse": "Collapse {label}"
     },
     "balance": {
       "available": "Available balance",
+      "creditUnit": "credits",
+      "bonusExpiry": "Bonus valid until {date}",
+      "loadError": "Couldn't load balance",
+      "details": "Balance details",
       "used": "{used}% of ${limit} monthly limit used",
       "topUp": "Top up balance"
     },
@@ -1957,6 +1983,10 @@
       "ragAdmin": {
         "title": "RAG administration",
         "subtitle": "Models, pricing and tenant limits"
+      },
+      "platformAdmin": {
+        "title": "Platform admin",
+        "subtitle": "Users and credit policy"
       },
       "ragConversation": {
         "title": "Universal RAG Agent",

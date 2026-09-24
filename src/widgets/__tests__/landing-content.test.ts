@@ -1,7 +1,8 @@
 import { describe, it, expect, afterEach } from "vitest"
-import { mount, enableAutoUnmount } from "@vue/test-utils"
+import { mount, enableAutoUnmount, flushPromises } from "@vue/test-utils"
 import { createI18n } from "vue-i18n"
 import { messages } from "@/shared/config/i18n"
+import { billingApi } from "@/features/billing"
 
 // Note: TypeScript errors in test files are expected and can be ignored
 import CFeatures from "../features/ui/CFeatures.vue"
@@ -45,14 +46,16 @@ describe("landing sections render i18n list content", () => {
     expect(wrapper.text()).toContain("SIP Call-markaz")
   })
 
-  it("renders four pricing tiers including their nested feature lists", () => {
+  it("renders current intro credit and API-managed package prices", async () => {
+    vi.spyOn(billingApi, "intro").mockResolvedValue({ credits: 1000, days: 7, free_video_model: "gemini-omni-1.1" })
+    vi.spyOn(billingApi, "rates").mockResolvedValue([{ code: "rag_answer", credits_per_unit: 2, version: 1 }, { code: "video_second", credits_per_unit: 20, version: 1 }])
+    vi.spyOn(billingApi, "packs").mockResolvedValue([{ id: "pack-1", code: "pro", title: "Pro krediti", credits: 5000, price_cents: 3000 }])
     const wrapper = mountWithI18n(CPricingList)
-
-    expect(wrapper.text()).toContain("Starter")
-    expect(wrapper.text()).toContain("Enterprise")
-    // Nested string array inside each tier must resolve too.
-    expect(wrapper.text()).toContain("Cheksiz lead boshqaruvi")
-    expect(wrapper.text()).toContain("Eng ommabop")
+    await flushPromises()
+    expect(wrapper.text()).toContain("Boshlang‘ich")
+    expect(wrapper.text()).toContain("Pro krediti")
+    expect(wrapper.text()).toContain("$30.00")
+    expect(wrapper.text()).toContain("7 kun amal qiladi")
   })
 
   it("renders the FAQ and opens the first answer by default", () => {
