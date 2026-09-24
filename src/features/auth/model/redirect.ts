@@ -5,11 +5,12 @@ const AUTH_ENTRY_PATHS = new Set([
   "/auth/callback",
 ])
 
-export const safeLocalPath = (
-  value: unknown,
-  fallback = "/app"
-): string => {
-  if (typeof value !== "string" || !value.startsWith("/") || value.startsWith("//")) {
+export const safeLocalPath = (value: unknown, fallback = "/app"): string => {
+  if (
+    typeof value !== "string" ||
+    !value.startsWith("/") ||
+    value.startsWith("//")
+  ) {
     return fallback
   }
 
@@ -21,7 +22,11 @@ export const safeLocalPath = (
       pathname.includes("\\") ||
       pathname.split("/").includes("..") ||
       AUTH_ENTRY_PATHS.has(pathname) ||
-      !(pathname === "/app" || pathname.startsWith("/app/"))
+      !(
+        pathname === "/admin" ||
+        pathname === "/app" ||
+        pathname.startsWith("/app/")
+      )
     ) {
       return fallback
     }

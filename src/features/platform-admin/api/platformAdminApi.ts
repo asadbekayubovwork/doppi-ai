@@ -11,6 +11,51 @@ export interface AdminOverview {
   rag_answers: number
 }
 
+export interface AdminAnalytics {
+  period_days: number
+  generated_at: string
+  users: {
+    total: number
+    new: number
+    active: number
+    verified: number
+    suspended: number
+  }
+  businesses: { total: number; pro: number }
+  billing: {
+    available: number
+    held: number
+    spent_all_time: number
+    spent_period: number
+    expiring_7d: number
+    welcome_claims: number
+  }
+  services: Array<{ service: string; events: number; credits: number }>
+  video: {
+    total: number
+    statuses: Record<string, number>
+    recent_failures: Array<{
+      id: string
+      status: string
+      business_name: string
+      updated_at: string
+    }>
+  }
+  top_businesses: Array<{
+    id: string
+    name: string
+    events: number
+    credits: number
+  }>
+  daily: Array<{
+    date: string
+    new_users: number
+    usage_events: number
+    credits_spent: number
+    video_jobs: number
+  }>
+}
+
 export interface AdminUser {
   id: string
   email: string
@@ -69,10 +114,12 @@ export interface AdminActivity {
 export const platformAdminApi = {
   me: () => apiClient.get<{ is_admin: boolean; email: string }>("/admin/me"),
   overview: () => apiClient.get<AdminOverview>("/admin/overview"),
+  analytics: (days: 7 | 30 | 90) =>
+    apiClient.get<AdminAnalytics>("/admin/analytics", { params: { days } }),
   activity: () => apiClient.get<AdminActivity[]>("/admin/activity"),
-  users: (search = "") =>
+  users: (search = "", offset = 0, status = "") =>
     apiClient.get<{ total: number; items: AdminUser[] }>("/admin/users", {
-      params: { search, limit: 50 },
+      params: { search, limit: 20, offset, ...(status ? { status } : {}) },
     }),
   user: (id: string) => apiClient.get<AdminUserDetail>(`/admin/users/${id}`),
   userStatus: (id: string, status: "active" | "suspended", reason: string) =>

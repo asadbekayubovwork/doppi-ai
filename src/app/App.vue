@@ -26,6 +26,7 @@ import { findSeoPage } from "@/shared/config/seoPages"
 import {
   AuthLayout,
   DashboardLayout,
+  AdminLayout,
   DefaultLayout,
   EmptyLayout,
 } from "./layouts"
@@ -34,6 +35,7 @@ const layouts = {
   DefaultLayout,
   EmptyLayout,
   DashboardLayout,
+  AdminLayout,
   AuthLayout,
 }
 
@@ -48,7 +50,9 @@ const detectLayout = computed(() => {
 // auth pages a short slide is what makes navigation feel instant. Auth pages
 // share AuthLayout, so only their right-hand column takes part in it.
 const pageTransition = computed(() =>
-  route.meta.layout === "DashboardLayout" || route.meta.layout === "AuthLayout"
+  route.meta.layout === "DashboardLayout" ||
+  route.meta.layout === "AdminLayout" ||
+  route.meta.layout === "AuthLayout"
     ? "app-page"
     : "page"
 )
@@ -65,7 +69,9 @@ useHead({
   meta: [
     {
       name: "robots",
-      content: computed(() => (findSeoPage(route.path) ? "index, follow" : "noindex, follow")),
+      content: computed(() =>
+        findSeoPage(route.path) ? "index, follow" : "noindex, follow"
+      ),
     },
   ],
 })

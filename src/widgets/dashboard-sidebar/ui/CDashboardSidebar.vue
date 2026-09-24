@@ -93,16 +93,6 @@ const topUpOpen = ref(false)
       <ul class="space-y-1">
         <CSidebarNavItem v-for="item in SERVICES" :key="item.to" :item="item" />
       </ul>
-      <ul v-if="isAdmin" class="mt-2 space-y-1">
-        <CSidebarNavItem
-          :item="{
-            labelKey: 'dashboard.nav.platformAdmin',
-            to: '/app/admin',
-            icon: 'shield-check',
-          }"
-        />
-      </ul>
-
       <p
         class="px-2 pb-2 pt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D6B77]"
       >
@@ -115,6 +105,22 @@ const topUpOpen = ref(false)
           :item="item"
         />
       </ul>
+      <div v-if="isAdmin" class="mt-6 border-t border-white/[0.08] pt-5">
+        <p
+          class="px-2 pb-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D6B77]"
+        >
+          Boshqaruv portali
+        </p>
+        <ul>
+          <CSidebarNavItem
+            :item="{
+              labelKey: 'dashboard.nav.platformAdmin',
+              to: '/admin',
+              icon: 'shield-check',
+            }"
+          />
+        </ul>
+      </div>
     </nav>
 
     <div class="px-4 pb-3">
@@ -126,9 +132,7 @@ const topUpOpen = ref(false)
           <CIcon name="wallet" class="h-4 w-4 text-white/40" />
         </div>
         <p class="mt-1 text-2xl font-bold tracking-tight text-white">
-          {{
-            available ?? (billing.loading ? "…" : "—")
-          }}
+          {{ available ?? (billing.loading ? "…" : "—") }}
           <span class="ml-1 text-xs font-medium text-white/45">{{
             $t("dashboard.balance.creditUnit")
           }}</span>
