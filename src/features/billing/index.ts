@@ -5,5 +5,8 @@ export type {
   UsageEntry,
   CreditRate,
   CreditPack,
+  SubscriptionPlan,
+  IntroOffer,
 } from "./api/billingApi"
 export { useBillingStore } from "./model/billing.store"
+export { usePublicPricing } from "./model/usePublicPricing"

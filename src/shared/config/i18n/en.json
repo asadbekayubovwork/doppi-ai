@@ -331,7 +331,9 @@
   "pricing": {
     "pageTitle": "Automate your business with Do'ppi AI",
     "pageSubtitle": "Choose the plan that fits your needs and get the most out of every AI service.",
-    "trialNote": "Sign up and get 250 free credits to try the platform.",
+    "trialNote": "Sign up and get {credits} free credits to try the platform.",
+    "loading": "Loading prices…",
+    "unavailable": "Prices are temporarily unavailable. Please try again later.",
     "period": {
       "label": "Billing period",
       "monthly": "Monthly",

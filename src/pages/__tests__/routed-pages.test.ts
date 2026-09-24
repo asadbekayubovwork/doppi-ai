@@ -68,11 +68,13 @@ describe("routed pages", () => {
     const wrapper = mountPage(PPricing)
     const text = wrapper.text()
 
-    expect(wrapper.find("h1").text()).toBe("Do'ppi AI bilan biznesingizni avtomatlashtiring")
+    expect(wrapper.find("h1").text()).toBe(
+      "Do'ppi AI bilan biznesingizni avtomatlashtiring"
+    )
     for (const id of ["pricing", "credits", "top-up", "faq"]) {
       expect(wrapper.find(`#${id}`).exists(), `#${id} is missing`).toBe(true)
     }
-    expect(text).toContain("Pro rejaga o'tish")
+    expect(text).toContain("Narxlar yuklanmoqda")
     expect(text).toContain("Kredit sarfi")
     expect(text).toContain("Qo'shimcha kreditlar")
     expect(text).toContain("Sinov muddati bormi?")

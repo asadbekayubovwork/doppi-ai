@@ -1,9 +1,21 @@
 <script setup lang="ts">
-import { TOP_UP_PACKS, formatUsd } from "@/entities/pricing"
+import { computed } from "vue"
+import { TOP_UP_DISPLAY, formatUsd } from "@/entities/pricing"
+import { usePublicPricing } from "@/features/billing"
 import { useCountLabel } from "@/shared/lib"
 import { CIcon, CSectionHeading } from "@/shared/ui"
 
 const count = useCountLabel()
+const pricing = usePublicPricing()
+const packs = computed(() =>
+  pricing.packs.value
+    .filter((pack) => ["mini", "medium", "pro"].includes(pack.code))
+    .map((pack) => ({
+      ...pack,
+      ...TOP_UP_DISPLAY[pack.code],
+      priceUsd: pack.price_cents / 100,
+    }))
+)
 </script>
 
 <template>
@@ -11,16 +23,29 @@ const count = useCountLabel()
     <div class="container relative z-10">
       <CSectionHeading :title="$t('pricing.topUp.title')" />
 
-      <div class="mx-auto mt-14 grid max-w-[960px] grid-cols-1 gap-5 md:grid-cols-3">
+      <p
+        v-if="pricing.error.value"
+        role="alert"
+        class="mt-8 text-center text-sm text-red-700"
+      >
+        {{ $t("pricing.unavailable") }}
+      </p>
+      <div
+        v-else-if="!pricing.loading.value"
+        class="mx-auto mt-14 grid max-w-[960px] grid-cols-1 gap-5 md:grid-cols-3"
+      >
         <div
-          v-for="(pack, i) in TOP_UP_PACKS"
+          v-for="(pack, i) in packs"
           :key="pack.id"
           class="relative"
           data-aos="fade-up"
           data-aos-duration="800"
           :data-aos-delay="100 + i * 90"
         >
-          <div v-if="pack.badge" class="absolute -top-3.5 left-1/2 z-20 -translate-x-1/2">
+          <div
+            v-if="pack.badge"
+            class="absolute -top-3.5 left-1/2 z-20 -translate-x-1/2"
+          >
             <span
               class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1 text-xs font-semibold"
               :class="
@@ -38,10 +63,16 @@ const count = useCountLabel()
             :class="pack.featured ? 'surface-card-accent' : ''"
           >
             <h3 class="text-sm font-medium text-sand-500">
-              {{ $t(`pricing.topUp.packs.${pack.id}`) }}
+              {{ $t(`pricing.topUp.packs.${pack.code}`) }}
             </h3>
-            <p class="mt-3 flex items-center gap-2 text-2xl font-bold text-sand-950">
-              <CIcon name="zap" class="h-5 w-5 text-cobalt" stroke-width="2.25" />
+            <p
+              class="mt-3 flex items-center gap-2 text-2xl font-bold text-sand-950"
+            >
+              <CIcon
+                name="zap"
+                class="h-5 w-5 text-cobalt"
+                stroke-width="2.25"
+              />
               {{ count("pricing.credits", pack.credits) }}
             </p>
 

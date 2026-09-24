@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { nextTick, ref, watch } from "vue"
 import { CPricingCards } from "@/entities/pricing"
+import { usePublicPricing } from "@/features/billing"
 import { CIcon } from "@/shared/ui"
 
 const props = defineProps<{ open: boolean }>()
+const pricing = usePublicPricing()
 const emit = defineEmits<{ "update:open": [value: boolean] }>()
 
 const closeButton = ref<HTMLButtonElement | null>(null)
@@ -73,7 +75,13 @@ watch(
             <div class="bg-[#F7F7F8] px-5 pb-6 pt-9 sm:px-6">
               <CPricingCards />
               <p class="mt-6 text-center text-[13px] text-[#6B6B78]">
-                {{ $t("pricing.trialNote") }}
+                {{
+                  pricing.intro.value
+                    ? $t("pricing.trialNote", {
+                        credits: pricing.intro.value.credits,
+                      })
+                    : ""
+                }}
               </p>
             </div>
           </div>

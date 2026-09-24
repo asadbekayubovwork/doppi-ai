@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { useCountLabel } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
-import { PLANS, formatUsd, monthlyPrice, type BillingPeriod } from "../model/plans"
+import { computed } from "vue"
+import { usePublicPricing } from "@/features/billing"
+import {
+  PLAN_DISPLAY,
+  formatUsd,
+  monthlyPrice,
+  type BillingPeriod,
+} from "../model/plans"
 
 withDefaults(
   defineProps<{
@@ -13,6 +20,28 @@ withDefaults(
 )
 
 const count = useCountLabel()
+const pricing = usePublicPricing()
+const starter = computed(() =>
+  pricing.plans.value.find((plan) => plan.code === "starter")
+)
+const plans = computed(() =>
+  pricing.plans.value
+    .filter((plan) => PLAN_DISPLAY.some((display) => display.id === plan.code))
+    .map((plan) => ({
+      ...plan,
+      ...PLAN_DISPLAY.find((display) => display.id === plan.code)!,
+      credits: plan.credits_per_month,
+      bonusPercent:
+        plan.code === "starter" || !starter.value
+          ? 0
+          : Math.round(
+              ((plan.credits_per_month * starter.value.monthly_price_cents) /
+                (plan.monthly_price_cents * starter.value.credits_per_month) -
+                1) *
+                100
+            ),
+    }))
+)
 
 const aos = (index: number) => ({
   "data-aos": "fade-up",
@@ -22,14 +51,30 @@ const aos = (index: number) => ({
 </script>
 
 <template>
-  <div class="grid grid-cols-1 items-stretch gap-5 md:grid-cols-3">
+  <p
+    v-if="pricing.error.value"
+    role="alert"
+    class="text-center text-sm text-red-700"
+  >
+    {{ $t("pricing.unavailable") }}
+  </p>
+  <p
+    v-else-if="pricing.loading.value"
+    class="text-center text-sm text-sand-500"
+  >
+    {{ $t("pricing.loading") }}
+  </p>
+  <div v-else class="grid grid-cols-1 items-stretch gap-5 md:grid-cols-3">
     <div
-      v-for="(plan, i) in PLANS"
+      v-for="(plan, i) in plans"
       :key="plan.id"
       class="relative"
       v-bind="animated ? aos(i) : {}"
     >
-      <div v-if="plan.badge" class="absolute -top-3.5 left-1/2 z-20 -translate-x-1/2">
+      <div
+        v-if="plan.badge"
+        class="absolute -top-3.5 left-1/2 z-20 -translate-x-1/2"
+      >
         <span
           class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1 text-xs font-semibold"
           :class="
@@ -60,11 +105,16 @@ const aos = (index: number) => ({
 
         <div class="mt-5 flex items-baseline gap-1">
           <Transition name="price" mode="out-in">
-            <span :key="period" class="text-4xl font-bold tabular-nums text-sand-950">
+            <span
+              :key="period"
+              class="text-4xl font-bold tabular-nums text-sand-950"
+            >
               {{ formatUsd(monthlyPrice(plan, period)) }}
             </span>
           </Transition>
-          <span class="text-sm text-sand-500">{{ $t("pricing.period.perMonth") }}</span>
+          <span class="text-sm text-sand-500">{{
+            $t("pricing.period.perMonth")
+          }}</span>
         </div>
         <p class="mt-1 text-xs text-sand-500">
           {{
@@ -76,11 +126,19 @@ const aos = (index: number) => ({
           }}
         </p>
 
-        <div class="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl bg-sand-50 px-4 py-3">
-          <CIcon name="zap" class="h-4 w-4 shrink-0 text-cobalt" stroke-width="2.25" />
+        <div
+          class="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl bg-sand-50 px-4 py-3"
+        >
+          <CIcon
+            name="zap"
+            class="h-4 w-4 shrink-0 text-cobalt"
+            stroke-width="2.25"
+          />
           <span class="text-sm font-semibold text-sand-950">
             {{
-              $t("pricing.creditsPerMonth", { credits: count("pricing.credits", plan.credits) })
+              $t("pricing.creditsPerMonth", {
+                credits: count("pricing.credits", plan.credits),
+              })
             }}
           </span>
           <span

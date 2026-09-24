@@ -27,19 +27,25 @@ const count = useCountLabel()
 usePageHeading(() => ({ subtitle: t("dashboard.video.studio.subtitle") }))
 const billing = useBillingStore()
 const auth = useAuthStore()
-const videoRate = ref<number | null>(null)
+const videoRates = ref<Record<string, number>>({})
 onMounted(async () => {
   try {
-    videoRate.value =
-      (await billingApi.rates()).find((rate) => rate.code === "video_second")
-        ?.credits_per_unit ?? null
+    videoRates.value = Object.fromEntries(
+      (await billingApi.rates()).map((rate) => [
+        rate.code,
+        rate.credits_per_unit,
+      ])
+    )
   } catch {
-    videoRate.value = null
+    videoRates.value = {}
   }
 })
-const estimatedCredits = computed(() =>
-  videoRate.value === null ? null : form.durationSec * videoRate.value
-)
+const estimatedCredits = computed(() => {
+  const code = ["1080p", "4k"].includes(form.videoResolution.toLowerCase())
+    ? "video_hd_job"
+    : "video_sd_job"
+  return videoRates.value[code] ?? null
+})
 
 const {
   form,

@@ -1,17 +1,14 @@
 export { default as CPricingCards } from "./ui/CPricingCards.vue"
 export { default as CBillingToggle } from "./ui/CBillingToggle.vue"
 export {
-  PLANS,
-  CREDIT_COSTS,
-  TOP_UP_PACKS,
-  CREDIT_PRICE_USD,
-  YEARLY_DISCOUNT,
+  PLAN_DISPLAY,
+  CREDIT_COST_DISPLAY,
+  TOP_UP_DISPLAY,
   monthlyPrice,
   formatUsd,
   type BillingPeriod,
-  type Plan,
+  type PlanDisplay,
   type PlanFeature,
-  type CreditCost,
-  type TopUpPack,
+  type CreditCostDisplay,
   type PricingBadge,
 } from "./model/plans"

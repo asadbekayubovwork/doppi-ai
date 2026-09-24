@@ -21,11 +21,13 @@ export interface CreditLedgerEntry {
 
 export interface UsageEntry {
   id: string
-  service: "rag" | "voice" | "video"
+  service: "rag" | "rag_index" | "voice" | "video" | "planner" | "autopost"
   resource_id: string
   quantity: number
   unit: string
   rate_snapshot: number
+  rate_denominator: number
+  rate_version: number
   credits_charged: number
   occurred_at: string
 }
@@ -33,6 +35,7 @@ export interface UsageEntry {
 export interface CreditRate {
   code: string
   credits_per_unit: number
+  units_per_charge: number
   version: number
 }
 
@@ -42,6 +45,19 @@ export interface CreditPack {
   title: string
   price_cents: number
   credits: number
+}
+
+export interface SubscriptionPlan {
+  code: string
+  monthly_price_cents: number
+  credits_per_month: number
+  yearly_discount_bps: number
+}
+
+export interface IntroOffer {
+  credits: number
+  days: number
+  free_video_model: string
 }
 
 const root = (businessId: string) => `/businesses/${businessId}/billing`
@@ -55,8 +71,6 @@ export const billingApi = {
     apiClient.get<UsageEntry[]>(`${root(businessId)}/usage`),
   rates: () => apiClient.get<CreditRate[]>("/pricing/rates"),
   packs: () => apiClient.get<CreditPack[]>("/pricing/packs"),
-  intro: () =>
-    apiClient.get<{ credits: number; days: number; free_video_model: string }>(
-      "/pricing/intro"
-    ),
+  plans: () => apiClient.get<SubscriptionPlan[]>("/pricing/plans"),
+  intro: () => apiClient.get<IntroOffer>("/pricing/intro"),
 }
