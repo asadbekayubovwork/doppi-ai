@@ -43,11 +43,23 @@ describe("CNavMenu", () => {
       .findAll("#services-menu ul")
       .map((ul) => ul.findAll("li").map((li) => li.text()))
 
-    expect(hrefs).toEqual(Object.values(SERVICE_PATHS))
+    // The four voice agent use cases share the voice agent page for now.
+    expect(hrefs).toEqual([...Object.values(SERVICE_PATHS), ...Array(4).fill(SERVICE_PATHS.voice)])
     expect(columns).toEqual([
-      ["RAG Agent", "Ovozli agent", "Video generator"],
       [
+        "RAG Agent",
+        "Ovozli agent",
+        "Video generator",
         "Market Radar Tez kunda",
+      ],
+      ["Mijozlarni qo'llab-quvvatlash", "Sotuv", "Qabulga yozish", "So'rovnomalar"],
+      [
+        "Tibbiyot Tez kunda",
+        "Ko'chmas mulk Tez kunda",
+        "Turizm va mehmonxonalar Tez kunda",
+        "Avtomobil Tez kunda",
+        "Bank Tez kunda",
+        "Elektron tijorat Tez kunda",
         "Personal bloglar Tez kunda",
         "Fermerlar Tez kunda",
         "YaTT Tez kunda",

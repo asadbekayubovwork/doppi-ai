@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useSeo } from "@/shared/lib"
-import { CPricingList } from "@/widgets"
+import { CCreditCosts, CFaq, CPricingList, CTopUpPacks } from "@/widgets"
 
 useSeo("/pricing")
 </script>
 
 <template>
   <div>
-    <section class="section-ground pt-[130px] pb-[40px] sm:pt-[180px] sm:pb-[60px]">
+    <section class="section-ground pt-[130px] pb-[32px] sm:pt-[180px] sm:pb-[40px]">
       <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-60" aria-hidden="true" />
 
       <div class="container relative z-10 text-center">
@@ -30,5 +30,8 @@ useSeo("/pricing")
     </section>
 
     <CPricingList />
+    <CCreditCosts />
+    <CTopUpPacks />
+    <CFaq base="pricing.faq" />
   </div>
 </template>

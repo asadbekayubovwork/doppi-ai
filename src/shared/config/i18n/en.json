@@ -167,7 +167,7 @@
   },
   "studio": {
     "badge": "New model",
-    "title": "Doppi Video Studio",
+    "title": "Do'ppi Video Studio",
     "subtitle": "Dozens of formats from a single script — Reels, Shorts, avatar and product videos. All on brand, published on the weekly plan you approve.",
     "ctaPrimary": "Try for free",
     "ctaSecondary": "Learn more",
@@ -329,79 +329,145 @@
     ]
   },
   "pricing": {
-    "trialNote": "New accounts receive one introductory credit grant. See current amount and expiry on the pricing page.",
-    "popularLabel": "Most popular",
-    "pageTitle": "Simple, transparent pricing",
-    "pageSubtitle": "Pick the plan that matches your stage — you can change it at any time.",
-    "tiers": [
-      {
-        "id": "starter",
+    "pageTitle": "Automate your business with Do'ppi AI",
+    "pageSubtitle": "Choose the plan that fits your needs and get the most out of every AI service.",
+    "trialNote": "Sign up and get 250 free credits to try the platform.",
+    "period": {
+      "label": "Billing period",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "yearlyBadge": "2 months free",
+      "perMonth": "/mo",
+      "billedMonthly": "Billed monthly",
+      "billedYearly": "{total} billed yearly"
+    },
+    "credits": "{count} credit | {count} credits",
+    "creditsPerMonth": "{credits} / month",
+    "bonus": "+{percent}% bonus",
+    "notIncluded": "Not included",
+    "badges": {
+      "popular": "Most popular",
+      "max": "Maximum performance",
+      "value": "Best value"
+    },
+    "plans": {
+      "starter": {
         "name": "Starter",
-        "price": "$19",
-        "period": "/mo",
-        "tagline": "For new businesses and small teams",
-        "popular": false,
+        "tagline": "The ideal starter package for small businesses and freelancers.",
         "cta": "Get started",
-        "features": [
-          "Up to 1,000 leads managed",
-          "Contacts database",
-          "5,000 emails per month",
-          "Core reports",
-          "Mobile app",
-          "1 user"
-        ]
+        "features": {
+          "voice": "100 minutes of Voice Agent calls",
+          "rag": "Telegram & WhatsApp RAG Agent",
+          "files": "Up to 3 file uploads (15 MB)",
+          "video": "20 AI videos (720p/1080p)",
+          "instagram": "1 Instagram account",
+          "watermark": "Watermark-free videos",
+          "cloning": "Voice cloning & Instagram Direct RAG"
+        }
       },
-      {
-        "id": "growth",
-        "name": "Growth",
-        "price": "$49",
-        "period": "/mo",
-        "tagline": "For growing businesses",
-        "popular": false,
-        "cta": "Get started",
-        "features": [
-          "Up to 10,000 leads managed",
-          "Automated email & SMS",
-          "Advanced reports",
-          "Up to 5 users",
-          "24/7 support"
-        ]
-      },
-      {
-        "id": "pro",
+      "pro": {
         "name": "Pro",
-        "price": "$99",
-        "period": "/mo",
-        "tagline": "For professional teams",
-        "popular": true,
-        "cta": "Get started",
-        "features": [
-          "Unlimited lead management",
-          "Marketing automation",
-          "AI analytics & forecasting",
-          "Custom reporting dashboard",
-          "Unlimited users",
-          "24/7 priority support"
-        ]
+        "tagline": "For growing SMBs and teams automating their sales.",
+        "cta": "Upgrade to Pro",
+        "features": {
+          "voice": "300 minutes of Voice Agent + voice cloning",
+          "rag": "Telegram, WhatsApp & Instagram Direct RAG",
+          "files": "Unlimited files (up to 100 MB)",
+          "video": "80 HD videos (no watermark)",
+          "planner": "Autopilot content plan agent",
+          "instagram": "Manage 3 Instagram accounts",
+          "analytics": "In-depth analytics & conversion insights"
+        }
       },
-      {
-        "id": "enterprise",
-        "name": "Enterprise",
-        "price": "Custom",
-        "period": "",
-        "tagline": "For large enterprises and custom solutions",
-        "popular": false,
-        "cta": "Contact us",
-        "features": [
-          "Everything in Pro",
-          "Custom integrations",
-          "AI assistant configuration",
-          "Security & access levels",
-          "SLA guarantee",
-          "Dedicated manager & training"
-        ]
+      "business": {
+        "name": "Business",
+        "tagline": "For large brands, multi-location businesses and agencies.",
+        "cta": "Contact sales",
+        "features": {
+          "voice": "800 minutes of Voice Agent (10+ parallel lines)",
+          "rag": "Omnichannel RAG + web widget + live scraper",
+          "video": "200 Ultra HD videos (4K)",
+          "autopilot": "Multi-agent autopilot + Trend Hunter",
+          "instagram": "10 Instagram accounts",
+          "crm": "AmoCRM & Bitrix24 integration",
+          "priority": "Priority GPU queue & dedicated manager"
+        }
       }
-    ]
+    },
+    "costs": {
+      "title": "Credit usage",
+      "rate": "1 credit = {price}",
+      "columns": {
+        "service": "Service",
+        "credits": "Credits",
+        "price": "Cost",
+        "note": "Details"
+      },
+      "items": {
+        "voice": {
+          "name": "Voice Agent",
+          "unit": "minute",
+          "note": "Real-time AI phone conversations"
+        },
+        "rag": {
+          "name": "Universal RAG Agent",
+          "unit": "10 messages",
+          "note": "Chat via Telegram, WhatsApp and Instagram Direct"
+        },
+        "ragIndex": {
+          "name": "RAG indexing",
+          "unit": "file",
+          "note": "PDF and DOC knowledge base"
+        },
+        "videoSd": {
+          "name": "Video Generator (SD)",
+          "unit": "video",
+          "note": "15–30 second ad clip"
+        },
+        "videoHd": {
+          "name": "Video Generator (HD)",
+          "unit": "video",
+          "note": "60 second Full HD clip"
+        },
+        "planner": {
+          "name": "Auto-planner agent",
+          "unit": "plan",
+          "note": "Weekly content plan"
+        },
+        "autopost": {
+          "name": "Auto-post & analytics",
+          "unit": "post",
+          "note": "Auto-publishing and social media analytics"
+        }
+      }
+    },
+    "topUp": {
+      "title": "Top-up credits",
+      "perCredit": "{price} per credit",
+      "cta": "Buy credits",
+      "packs": {
+        "mini": "Mini",
+        "medium": "Medium",
+        "pro": "Pro"
+      }
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "What happens if I run out of credits?",
+          "a": "You can upgrade to Pro or Business, or buy a separate top-up credit pack."
+        },
+        {
+          "q": "Do credits roll over from month to month?",
+          "a": "Plan credits renew every month. Credits bought as a top-up never expire."
+        },
+        {
+          "q": "Is there a free trial?",
+          "a": "Yes. When you sign up, you get 250 free credits to test the platform."
+        }
+      ]
+    }
   },
   "about": {
     "title": "The future for businesses everywhere — with AI, starting today",
@@ -691,7 +757,7 @@
     },
     "pricing": {
       "title": "Pricing — Do'ppi AI",
-      "description": "Do'ppi AI credit packages and per-service usage prices, with introductory credit for new accounts."
+      "description": "Do'ppi AI plans: Starter, Pro and Business, per-service credit usage and top-up credit packs."
     },
     "about": {
       "title": "About — Do'ppi AI",
@@ -719,11 +785,23 @@
     "othersTitle": "More from Do'ppi AI",
     "learnMore": "Learn more",
     "menu": {
+      "useCases": "Voice agent use cases",
+      "industries": "Industries",
       "items": {
         "marketRadar": "Market Radar",
         "personalBlogs": "Personal blogs",
         "farmers": "Farmers",
-        "ytBusiness": "Sole proprietors"
+        "ytBusiness": "Sole proprietors",
+        "support": "Support",
+        "sales": "Sales",
+        "booking": "Booking",
+        "surveys": "Surveys",
+        "healthcare": "Healthcare",
+        "realEstate": "Real estate",
+        "travel": "Travel & hospitality",
+        "automotive": "Automotive",
+        "banking": "Banking",
+        "ecommerce": "E-commerce"
       }
     },
     "rag": {
@@ -1439,7 +1517,7 @@
           },
           {
             "q": "How much does it cost?",
-            "a": "Compare the plans and what each includes on the pricing page — every plan starts with a 14-day free trial."
+            "a": "See current credit packages and per-service usage rates on the pricing page."
           }
         ]
       },

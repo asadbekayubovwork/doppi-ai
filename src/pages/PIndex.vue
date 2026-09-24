@@ -4,7 +4,6 @@ import {
   CHero,
   CTrustBar,
   CSolution,
-  CFeatures,
   CVideoShowcase,
   CHowItWorks,
   CResults,
@@ -20,7 +19,6 @@ useSeo("/")
     <CHero />
     <CTrustBar />
     <CSolution />
-    <CFeatures />
     <CVideoShowcase />
     <CHowItWorks />
     <CResults />

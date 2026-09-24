@@ -167,7 +167,7 @@
   },
   "studio": {
     "badge": "Yangi model",
-    "title": "Doppi Video Studio",
+    "title": "Do'ppi Video Studio",
     "subtitle": "Bitta ssenariydan o'nlab format — Reels, Shorts, avatar va mahsulot videolari. Hammasi brend uslubida, siz tasdiqlagan haftalik reja bo'yicha chiqadi.",
     "ctaPrimary": "Bepul sinash",
     "ctaSecondary": "Batafsil",
@@ -329,79 +329,145 @@
     ]
   },
   "pricing": {
-    "trialNote": "Yangi foydalanuvchiga boshlang‘ich kredit bir marta beriladi. Amaldagi miqdor va muddat narxlar sahifasida ko‘rsatiladi.",
-    "popularLabel": "Eng ommabop",
-    "pageTitle": "Ochiq va tushunarli narxlar",
-    "pageSubtitle": "Biznesingiz bosqichiga mos rejani tanlang — istalgan vaqtda o'zgartirishingiz mumkin.",
-    "tiers": [
-      {
-        "id": "starter",
+    "pageTitle": "Do'ppi AI bilan biznesingizni avtomatlashtiring",
+    "pageSubtitle": "Ehtiyojingizga mos tarifni tanlang va barcha AI servislardan unumli foydalaning.",
+    "trialNote": "Ro'yxatdan o'tganingizda platformani sinab ko'rish uchun 250 bepul kredit beriladi.",
+    "period": {
+      "label": "To'lov davri",
+      "monthly": "Oylik",
+      "yearly": "Yillik",
+      "yearlyBadge": "2 oy bepul",
+      "perMonth": "/oy",
+      "billedMonthly": "Har oy to'lanadi",
+      "billedYearly": "Yiliga {total} to'lanadi"
+    },
+    "credits": "{count} kredit",
+    "creditsPerMonth": "{credits} / oyiga",
+    "bonus": "+{percent}% bonus",
+    "notIncluded": "Kirmaydi",
+    "badges": {
+      "popular": "Eng ommabop",
+      "max": "Maksimal unumdorlik",
+      "value": "Tejamkor"
+    },
+    "plans": {
+      "starter": {
         "name": "Starter",
-        "price": "$19",
-        "period": "/oy",
-        "tagline": "Yangi bizneslar va kichik jamoalar uchun",
-        "popular": false,
+        "tagline": "Kichik biznes va frilanserlar uchun ideal boshlang'ich paket.",
         "cta": "Boshlash",
-        "features": [
-          "1 000 tagacha lead boshqaruvi",
-          "Kontaktlar bazasi",
-          "Oyiga 5 000 ta email",
-          "Asosiy hisobotlar",
-          "Mobil ilova",
-          "1 foydalanuvchi"
-        ]
+        "features": {
+          "voice": "100 daqiqa ovozli agent qo'ng'irog'i",
+          "rag": "Telegram va WhatsApp RAG agent",
+          "files": "3 tagacha fayl yuklash (15 MB)",
+          "video": "20 ta AI video (720p/1080p)",
+          "instagram": "1 ta Instagram akkaunt",
+          "watermark": "Watermark'siz video",
+          "cloning": "Ovoz klonlash va Instagram Direct RAG"
+        }
       },
-      {
-        "id": "growth",
-        "name": "Growth",
-        "price": "$49",
-        "period": "/oy",
-        "tagline": "O'sayotgan bizneslar uchun",
-        "popular": false,
-        "cta": "Boshlash",
-        "features": [
-          "10 000 tagacha lead boshqaruvi",
-          "Avtomatik email & SMS",
-          "Kengaytirilgan hisobotlar",
-          "5 tagacha foydalanuvchi",
-          "24/7 qo'llab-quvvatlash"
-        ]
-      },
-      {
-        "id": "pro",
+      "pro": {
         "name": "Pro",
-        "price": "$99",
-        "period": "/oy",
-        "tagline": "Professional jamoalar uchun",
-        "popular": true,
-        "cta": "Boshlash",
-        "features": [
-          "Cheksiz lead boshqaruvi",
-          "Marketing avtomatlashuvi",
-          "AI tahlil va bashoratlar",
-          "Maxsus hisobot paneli",
-          "Cheksiz foydalanuvchi",
-          "24/7 ustuvor qo'llab-quvvatlash"
-        ]
+        "tagline": "O'sayotgan KOB va sotuvini avtomatlashtiruvchi jamoalar uchun.",
+        "cta": "Pro rejaga o'tish",
+        "features": {
+          "voice": "300 daqiqa ovozli agent + ovoz klonlash",
+          "rag": "Telegram, WhatsApp va Instagram Direct RAG",
+          "files": "Cheksiz fayllar (100 MB gacha)",
+          "video": "80 ta HD video (watermark'siz)",
+          "planner": "Avtopilot kontent-reja agenti",
+          "instagram": "3 ta Instagram akkaunt boshqaruvi",
+          "analytics": "Chuqur analitika va konversiya tahlili"
+        }
       },
-      {
-        "id": "enterprise",
-        "name": "Enterprise",
-        "price": "Maxsus",
-        "period": "",
-        "tagline": "Yirik korxonalar va maxsus yechimlar uchun",
-        "popular": false,
-        "cta": "Aloqaga chiqish",
-        "features": [
-          "Barcha Pro imkoniyatlari",
-          "Maxsus integratsiyalar",
-          "AI assistant sozlamalari",
-          "Xavfsizlik va kirish darajalari",
-          "SLA kafolati",
-          "Shaxsiy menejer va trening"
-        ]
+      "business": {
+        "name": "Business",
+        "tagline": "Yirik brendlar, tarmoqli biznes va agentliklar uchun.",
+        "cta": "Biznes bilan bog'lanish",
+        "features": {
+          "voice": "800 daqiqa ovozli agent (10+ parallel liniya)",
+          "rag": "Omnichannel RAG + web vidjet + live scraper",
+          "video": "200 ta Ultra HD video (4K sifat)",
+          "autopilot": "Multi-agent avtopilot + Trend Hunter",
+          "instagram": "10 ta Instagram akkaunt",
+          "crm": "AmoCRM va Bitrix24 integratsiyasi",
+          "priority": "Ustuvor GPU navbati va shaxsiy menejer"
+        }
       }
-    ]
+    },
+    "costs": {
+      "title": "Kredit sarfi",
+      "rate": "1 kredit = {price}",
+      "columns": {
+        "service": "Servis",
+        "credits": "Kredit",
+        "price": "Narxi",
+        "note": "Izoh"
+      },
+      "items": {
+        "voice": {
+          "name": "Ovozli agent",
+          "unit": "daqiqa",
+          "note": "Real vaqtda AI telefon muloqoti"
+        },
+        "rag": {
+          "name": "Universal RAG agent",
+          "unit": "10 ta xabar",
+          "note": "Telegram, WhatsApp va Instagram Direct orqali chat"
+        },
+        "ragIndex": {
+          "name": "RAG indeksatsiya",
+          "unit": "fayl",
+          "note": "PDF va DOC ma'lumotlar bazasi"
+        },
+        "videoSd": {
+          "name": "Video generator (SD)",
+          "unit": "video",
+          "note": "15–30 soniyalik reklama roligi"
+        },
+        "videoHd": {
+          "name": "Video generator (HD)",
+          "unit": "video",
+          "note": "60 soniyalik Full HD rolik"
+        },
+        "planner": {
+          "name": "Auto-planner agent",
+          "unit": "reja",
+          "note": "Haftalik kontent-reja tuzish"
+        },
+        "autopost": {
+          "name": "Auto-post va analitika",
+          "unit": "post",
+          "note": "Avto-nashr va ijtimoiy tarmoq analitikasi"
+        }
+      }
+    },
+    "topUp": {
+      "title": "Qo'shimcha kreditlar",
+      "perCredit": "{price} / kredit",
+      "cta": "Sotib olish",
+      "packs": {
+        "mini": "Mini",
+        "medium": "Medium",
+        "pro": "Pro"
+      }
+    },
+    "faq": {
+      "title": "Ko'p beriladigan savollar",
+      "items": [
+        {
+          "q": "Kreditlarim tugab qolsa nima bo'ladi?",
+          "a": "Rejangizni Pro yoki Business'ga oshirishingiz yoki alohida qo'shimcha kredit paketlarini sotib olishingiz mumkin."
+        },
+        {
+          "q": "Kreditlar oydan-oyga o'tadimi?",
+          "a": "Tarif doirasida berilgan kreditlar har oy yangilanadi. Qo'shimcha paket orqali sotib olingan kreditlar esa kuymaydi."
+        },
+        {
+          "q": "Sinov muddati bormi?",
+          "a": "Ha, ro'yxatdan o'tganingizda platformani sinab ko'rish uchun 250 bepul kredit beriladi."
+        }
+      ]
+    }
   },
   "about": {
     "title": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan",
@@ -691,7 +757,7 @@
     },
     "pricing": {
       "title": "Narxlar — Do'ppi AI",
-      "description": "Do'ppi AI kredit paketlari va xizmatlar bo‘yicha sarf narxlari. Yangi akkaunt uchun boshlang‘ich kredit."
+      "description": "Do'ppi AI tariflari: Starter, Pro va Business rejalari, xizmatlar bo'yicha kredit sarfi va qo'shimcha kredit paketlari."
     },
     "about": {
       "title": "Biz haqimizda — Do'ppi AI",
@@ -719,11 +785,23 @@
     "othersTitle": "Boshqa xizmatlarimiz",
     "learnMore": "Batafsil",
     "menu": {
+      "useCases": "Ovozli agent yechimlari",
+      "industries": "Sohalar",
       "items": {
         "marketRadar": "Market Radar",
         "personalBlogs": "Personal bloglar",
         "farmers": "Fermerlar",
-        "ytBusiness": "YaTT"
+        "ytBusiness": "YaTT",
+        "support": "Mijozlarni qo'llab-quvvatlash",
+        "sales": "Sotuv",
+        "booking": "Qabulga yozish",
+        "surveys": "So'rovnomalar",
+        "healthcare": "Tibbiyot",
+        "realEstate": "Ko'chmas mulk",
+        "travel": "Turizm va mehmonxonalar",
+        "automotive": "Avtomobil",
+        "banking": "Bank",
+        "ecommerce": "Elektron tijorat"
       }
     },
     "rag": {

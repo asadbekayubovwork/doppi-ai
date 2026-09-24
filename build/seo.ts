@@ -104,7 +104,7 @@ export const structuredData = (tree: Messages, page: SeoPage) => {
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         // Starter plan, the lowest listed price on /pricing.
-        offers: { "@type": "Offer", price: "19", priceCurrency: "USD" },
+        offers: { "@type": "Offer", price: "20", priceCurrency: "USD" },
         publisher: { "@id": organizationId },
       }
     )
