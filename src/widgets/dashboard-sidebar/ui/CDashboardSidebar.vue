@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, watch, ref } from "vue"
+import { computed, ref, watch } from "vue"
+import { useI18n } from "vue-i18n"
 import { useAuthStore } from "@/features/auth"
 import { useBillingStore } from "@/features/billing"
 import { platformAdminApi } from "@/features/platform-admin"
+import { formatCount, formatDate } from "@/shared/lib"
 import { CIcon, CLogo } from "@/shared/ui"
 import { HOME, SERVICES, WORKSPACE } from "../model/navigation"
 import CSidebarNavItem from "./CSidebarNavItem.vue"
@@ -11,12 +13,35 @@ import CTopUpModal from "./CTopUpModal.vue"
 defineProps<{ open?: boolean }>()
 defineEmits<{ close: [] }>()
 
-const { t } = useI18n()
-
-// Placeholder figures until the billing endpoint is wired up.
-const balance = { amount: "$248.60", currency: "USD", limit: 400, used: 62 }
-const balanceUsed = computed(() =>
-  t("dashboard.balance.used", { limit: balance.limit, used: balance.used })
+const { locale } = useI18n()
+const auth = useAuthStore()
+const billing = useBillingStore()
+const isAdmin = ref(false)
+const businessId = computed(() => auth.activeBusiness?.id ?? "")
+watch(businessId, (id) => void billing.load(id), { immediate: true })
+watch(
+  () => auth.user?.id,
+  async (id) => {
+    isAdmin.value = false
+    if (!id) return
+    try {
+      isAdmin.value = (await platformAdminApi.me()).is_admin
+    } catch {
+      isAdmin.value = false
+    }
+  },
+  { immediate: true }
+)
+const wallet = computed(() =>
+  billing.wallet?.business_id === businessId.value ? billing.wallet : null
+)
+const available = computed(() =>
+  wallet.value ? formatCount(wallet.value.available, locale.value) : null
+)
+const promoExpiry = computed(() =>
+  wallet.value?.promo_expires_at
+    ? formatDate(wallet.value.promo_expires_at, locale.value)
+    : null
 )
 
 // Until payments are wired up, topping up means picking a plan.
@@ -102,8 +127,7 @@ const topUpOpen = ref(false)
         </div>
         <p class="mt-1 text-2xl font-bold tracking-tight text-white">
           {{
-            wallet?.available?.toLocaleString("uz-UZ") ??
-            (billing.loading ? "…" : "—")
+            available ?? (billing.loading ? "…" : "—")
           }}
           <span class="ml-1 text-xs font-medium text-white/45">{{
             $t("dashboard.balance.creditUnit")
