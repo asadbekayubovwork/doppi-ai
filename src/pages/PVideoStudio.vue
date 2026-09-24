@@ -165,7 +165,11 @@ const onRegenerate = () => {
         <span
           class="inline-flex h-9 items-center gap-2 rounded-[10px] border border-[#E5E5E1] bg-white px-3.5 text-[13px] font-semibold text-[#42424B]"
         >
-          {{ billing.wallet?.available?.toLocaleString("uz-UZ") ?? "—" }} kredit
+          {{
+            billing.wallet
+              ? count("dashboard.plural.credits", billing.wallet.available)
+              : "—"
+          }}
         </span>
         <CAppButton icon="history" @click="scrollToJobs">
           {{ $t("dashboard.video.studio.allVideos") }}
