@@ -33,10 +33,11 @@ Modify the `navigation` array in the component to add or remove navigation items
 
 ## Dropdown menus
 
-"Services" and "Resources" both open on hover through `CNavMenu`. Services is a
-three-column panel (services, voice agent use cases, industries); Resources is
-a single list (blog, languages, contact). Their content lives in
-`model/navMenus.ts`; labels come from `services.menu.*` and `nav.*` in the
+"Services" and "Resources" both open on hover through `CNavMenu`. Services is
+two columns side by side: the live services, then the upcoming ones (Market
+Radar, personal blogs, farmers, sole proprietors). Resources is a single list
+(blog, languages, contact).
+Their content lives in `model/navMenus.ts`; labels come from `services.menu.*` and `nav.*` in the
 locale files. An item without `to` renders with a "Coming soon" tag instead of
 a link — give it a `to` once its page exists. The mobile drawer has no
 dropdowns and lists only the live pages.

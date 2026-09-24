@@ -165,6 +165,20 @@
       }
     ]
   },
+  "studio": {
+    "badge": "Yangi model",
+    "title": "Doppi Video Studio",
+    "subtitle": "Bitta ssenariydan o'nlab format — Reels, Shorts, avatar va mahsulot videolari. Hammasi brend uslubida, siz tasdiqlagan haftalik reja bo'yicha chiqadi.",
+    "ctaPrimary": "Bepul sinash",
+    "ctaSecondary": "Batafsil",
+    "gallery": "Barcha namunalarni ko'rish",
+    "tags": {
+      "reels": "Reels · 9:16",
+      "shorts": "Shorts",
+      "avatar": "AI avatar",
+      "product": "Mahsulot videosi"
+    }
+  },
   "audience": {
     "eyebrow": "Kim uchun",
     "title": "Do'ppi AI kimlar uchun",
@@ -501,7 +515,6 @@
   },
   "footer": {
     "tagline": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan.",
-    "product": "Mahsulot",
     "company": "Kompaniya",
     "rights": "© {year} Do'ppi AI. Barcha huquqlar himoyalangan.",
     "madeIn": "Toshkentda mehr bilan yaratilgan",
@@ -706,29 +719,11 @@
     "othersTitle": "Boshqa xizmatlarimiz",
     "learnMore": "Batafsil",
     "menu": {
-      "useCases": "Ovozli agent yechimlari",
-      "industries": "Sohalar",
       "items": {
         "marketRadar": "Market Radar",
         "personalBlogs": "Personal bloglar",
         "farmers": "Fermerlar",
-        "ytBusiness": "YouTube biznes",
-        "meeting": "Uchrashuv yordamchisi",
-        "isolator": "Ovozni tozalash",
-        "voices": "Ovozlar kutubxonasi",
-        "audiobooks": "Audiokitoblar",
-        "dubbing": "Dublyaj",
-        "subtitles": "Subtitrlar",
-        "support": "Mijozlarni qo'llab-quvvatlash",
-        "sales": "Sotuv",
-        "booking": "Qabulga yozish",
-        "surveys": "So'rovnomalar",
-        "healthcare": "Tibbiyot",
-        "realEstate": "Ko'chmas mulk",
-        "travel": "Turizm va mehmonxonalar",
-        "automotive": "Avtomobil",
-        "banking": "Bank",
-        "ecommerce": "Elektron tijorat"
+        "ytBusiness": "YaTT"
       }
     },
     "rag": {
@@ -793,31 +788,6 @@
           {
             "title": "Natijani kuzating",
             "desc": "Suhbatlar, xodimga uzatilganlar va javob sifatini panelda kuzatib, bilim bazasini to'ldirib boring."
-          }
-        ]
-      },
-      "faq": {
-        "title": "RAG Agent haqida savollar",
-        "items": [
-          {
-            "q": "RAG nima?",
-            "a": "RAG (Retrieval-Augmented Generation) — sun'iy intellekt javob berishdan oldin hujjatlaringizdan kerakli qismni topib, javobni aynan shunga asoslaydigan usul. Shu tufayli agent umumiy gaplar emas, biznesingizga oid aniq ma'lumot beradi."
-          },
-          {
-            "q": "Qanday fayllarni yuklash mumkin?",
-            "a": "PDF, DOCX, XLSX va TXT fayllarni — har birini 50 MB gacha."
-          },
-          {
-            "q": "Agent qaysi kanallarda ishlaydi?",
-            "a": "Instagram, Telegram, WhatsApp va saytingizdagi chat vidjetida."
-          },
-          {
-            "q": "Agent javobini bilmasa nima bo'ladi?",
-            "a": "Suhbatni jamoangizdagi xodimga uzatadi — xodim yozishma tarixini ko'rib, suhbatni davom ettiradi."
-          },
-          {
-            "q": "Qaysi tillarda javob beradi?",
-            "a": "O'zbek va rus tillarida."
           }
         ]
       },
@@ -1137,27 +1107,6 @@
           }
         ]
       },
-      "faq": {
-        "title": "Ovozli agent haqida savollar",
-        "items": [
-          {
-            "q": "Agent qaysi tillarda gaplashadi?",
-            "a": "O'zbek va rus tillarida."
-          },
-          {
-            "q": "Qo'ng'iroqlar qaysi raqamdan amalga oshiriladi?",
-            "a": "Kompaniyangiz raqamidan — raqam SIP telefoniya orqali ulanadi."
-          },
-          {
-            "q": "Suhbatlar yozib olinadimi?",
-            "a": "Ha. Har bir qo'ng'iroq yozib olinadi va CRM'da saqlanadi."
-          },
-          {
-            "q": "Agent kechasi ham ishlaydimi?",
-            "a": "Ha, agent 24/7 ishlaydi — tunda va dam olish kunlarida ham."
-          }
-        ]
-      },
       "cta": {
         "title": "Ovozli agentni sinab ko'ring",
         "subtitle": "14 kunlik bepul sinov — agent biznesingiz uchun qanday gaplashishini eshiting."
@@ -1470,27 +1419,6 @@
           {
             "title": "Yuklab oling va ishlating",
             "desc": "Tayyor kontentni yuklab olib, reklama va sahifalaringizda ishlating."
-          }
-        ]
-      },
-      "faq": {
-        "title": "Video generator haqida savollar",
-        "items": [
-          {
-            "q": "Video yaratish uchun montaj tajribasi kerakmi?",
-            "a": "Yo'q. Nima kerakligini oddiy so'zlar bilan yozasiz, qolganini AI bajaradi."
-          },
-          {
-            "q": "Qanday kontent yaratish mumkin?",
-            "a": "Reels va qisqa videolar, reklama roliklari, rasmlar, reklama matnlari va ovoz."
-          },
-          {
-            "q": "Videoga o'zbek tilida ovoz qo'shsa bo'ladimi?",
-            "a": "Ha, kontent o'zbek va rus tillarida yaratiladi."
-          },
-          {
-            "q": "Qancha turadi?",
-            "a": "Narxlar sahifasida rejalarni va ularga nimalar kirishini solishtiring — har bir reja 14 kunlik bepul sinov bilan boshlanadi."
           }
         ]
       },
@@ -1920,7 +1848,26 @@
       "retry": "Qayta urinib ko'ring.",
       "checkDetails": "Ma'lumotlarni tekshirib ko'ring.",
       "saving": "Saqlanmoqda...",
-      "loading": "Yuklanmoqda..."
+      "loading": "Yuklanmoqda...",
+      "select": "Tanlang",
+      "copied": "Nusxa olindi",
+      "copyFailed": "Nusxa olib bo'lmadi",
+      "copyFailedHint": "Matnni belgilab, qo'lda nusxa oling.",
+      "reload": "Sahifani yangilang.",
+      "tryAgain": "Qayta urinish",
+      "tryLater": "Birozdan so'ng qayta urinib ko'ring.",
+      "checkConnection": "Internet aloqasini tekshirib, qayta urinib ko'ring.",
+      "cancel": "Bekor qilish",
+      "send": "Yuborish",
+      "changed": "O'zgargan",
+      "ago": "{age} oldin",
+      "justNow": "hozir",
+      "optional": "ixtiyoriy",
+      "done": "bajarildi",
+      "notDone": "bajarilmagan",
+      "previousPage": "Oldingi sahifa",
+      "nextPage": "Keyingi sahifa",
+      "close": "Yopish"
     },
     "nav": {
       "services": "Xizmatlar",
@@ -2045,7 +1992,6 @@
       }
     },
     "settings": {
-      "pageTitle": "Sozlamalar — Do'ppi AI",
       "profile": {
         "title": "Profil",
         "description": "Shaxsiy ma'lumotlaringiz va interfeys sozlamalari.",
@@ -2081,6 +2027,834 @@
         "revoked": "Sessiya yakunlandi",
         "revokeFailed": "Sessiyani yakunlab bo'lmadi",
         "signOutAllFailed": "Barcha sessiyalarni yakunlab bo'lmadi"
+      }
+    },
+    "pageTitle": "{title} — Do'ppi AI",
+    "home": {
+      "workspace": "Mening ish maydonim",
+      "greeting": {
+        "morning": "Xayrli tong",
+        "afternoon": "Xayrli kun",
+        "evening": "Xayrli kech"
+      },
+      "greetingNamed": "{greeting}, {name}",
+      "overview": "{business} · ish maydoni sharhi"
+    },
+    "team": {
+      "roles": {
+        "owner": "Egasi",
+        "admin": "Administrator",
+        "member": "A'zo",
+        "viewer": "Kuzatuvchi"
+      },
+      "loadFailed": "Jamoani yuklab bo'lmadi",
+      "invite": {
+        "title": "Jamoaga taklif qilish",
+        "description": "Taklif aynan ko'rsatilgan email manzilidagi hisob uchun amal qiladi.",
+        "emailPlaceholder": "hamkasb{'@'}kompaniya.uz",
+        "role": "Rol",
+        "submit": "Taklif yaratish",
+        "created": "Taklif yaratildi",
+        "failed": "Taklif yaratib bo'lmadi",
+        "checkFields": "Email va rolni tekshirib ko'ring.",
+        "linkOnce": "Taklif havolasi bir marta ko'rsatiladi",
+        "copy": "Nusxalash",
+        "copied": "Taklif havolasi nusxalandi",
+        "copyManually": "Havolani qo'lda belgilab nusxalang."
+      },
+      "members": {
+        "title": "Jamoa a'zolari",
+        "description": "Faol biznesga tegishli a'zolar va rollar.",
+        "you": "Siz",
+        "role": "A'zo roli",
+        "remove": "Olib tashlash",
+        "empty": "Jamoa a'zolari topilmadi.",
+        "roleUpdated": "Rol yangilandi",
+        "roleUpdateFailed": "Rolni yangilab bo'lmadi",
+        "removeConfirm": "Bu a'zoni jamoadan olib tashlaysizmi?",
+        "removed": "A'zo jamoadan olib tashlandi",
+        "removeFailed": "A'zoni olib tashlab bo'lmadi"
+      }
+    },
+    "plural": {
+      "documents": "{count} ta hujjat",
+      "indexedDocuments": "{count} ta indekslangan hujjat",
+      "chunks": "{count} ta bo'lak",
+      "chats": "{count} ta chat",
+      "messages": "{count} ta xabar",
+      "unsavedChanges": "{count} ta saqlanmagan o'zgarish",
+      "filesSkipped": "{count} ta fayl o'tkazib yuborildi",
+      "credits": "{count} kredit",
+      "networksSelected": "{count} ta tarmoq tanlangan",
+      "updates": "{count} ta yangilanish"
+    },
+    "rag": {
+      "status": {
+        "live": "Faol",
+        "paused": "To'xtatilgan"
+      },
+      "onePerBusiness": "Har bir biznesga bitta agent",
+      "createAgent": "Agent yaratish",
+      "loadFailed": "Agentni yuklab bo'lmadi",
+      "loadConfigFailed": "RAG sozlamalarini yuklab bo'lmadi",
+      "fileSkipped": "{name} — {reason}",
+      "agent": {
+        "syncedJustNow": "hozirgina sinxronlandi",
+        "syncedAgo": "{age} oldin sinxronlandi",
+        "subtitle": "{name} · {status} · {synced}",
+        "emptyTitle": "Hali RAG agent yo'q",
+        "emptyDescription": "Har bir biznesda bitta agent ishlaydi. Unga hujjatlaringizni bering, model tanlang va u javob beradigan kanallarni ulang."
+      },
+      "summary": {
+        "model": "{model} · temperatura {temperature}",
+        "knowledge": "{documents} · {chunks}",
+        "noChannels": "Kanallar ulanmagan",
+        "edit": "Sozlamalarni tahrirlash",
+        "playground": "Sinov maydonini ochish",
+        "loading": "Agent yuklanmoqda"
+      },
+      "metrics": {
+        "conversations": "Suhbatlar",
+        "messages30d": "Xabarlar · 30 kun",
+        "avgResponse": "O'rtacha javob vaqti",
+        "accuracy": "Javoblar aniqligi",
+        "escalation": "Operatorga o'tkazilgan"
+      },
+      "table": {
+        "title": "Suhbatlar",
+        "search": "chat_id bo'yicha qidirish",
+        "searchLabel": "Suhbatlarni qidirish",
+        "allChannels": "Barcha kanallar",
+        "filterLabel": "Kanal bo'yicha saralash",
+        "export": "CSV sifatida yuklab olish",
+        "columns": {
+          "chatId": "Chat ID",
+          "channel": "Kanal",
+          "lastMessage": "Oxirgi xabar",
+          "messages": "Xabar",
+          "status": "Holat",
+          "updated": "Yangilangan",
+          "open": "Ochish"
+        },
+        "noMatches": "Filtrlarga mos suhbat topilmadi.",
+        "empty": "Hali suhbatlar yo'q — mijozlar yozishni boshlashi bilan shu yerda paydo bo'ladi.",
+        "showing": "{total} ta suhbatdan {range} ko'rsatilmoqda"
+      },
+      "conversationStatus": {
+        "active": "Faol",
+        "resolved": "Hal qilingan",
+        "escalated": "Operatorga o'tkazilgan"
+      },
+      "channels": {
+        "instagram": {
+          "label": "Instagram",
+          "product": "Instagram",
+          "caption": "Meta Messaging API",
+          "credentials": "Instagram ma'lumotlari"
+        },
+        "telegram": {
+          "label": "Telegram",
+          "product": "Telegram",
+          "caption": "Bot API",
+          "credentials": "Telegram ma'lumotlari"
+        },
+        "whatsapp": {
+          "label": "WhatsApp",
+          "product": "WhatsApp Business",
+          "caption": "Cloud API",
+          "credentials": "WhatsApp Business ma'lumotlari"
+        },
+        "web": {
+          "label": "Veb-vidjet",
+          "product": "Veb-vidjet",
+          "caption": "Saytingizdagi chat oynasi",
+          "credentials": "Veb-vidjet ma'lumotlari"
+        }
+      },
+      "credentials": {
+        "pageId": {
+          "label": "Page ID",
+          "hint": "Ulangan sahifaning Page ID raqamini Meta Business'dan nusxalang."
+        },
+        "metaAccessToken": {
+          "label": "Access token",
+          "hint": "Amal qiladigan uzoq muddatli Meta access token'ini joylang."
+        },
+        "verifyToken": {
+          "label": "Webhook verify token",
+          "placeholder": "Shaxsiy tasdiqlash tokeningiz",
+          "hint": "Kamida 16 ta belgi ishlating."
+        },
+        "appSecret": {
+          "label": "Meta app secret",
+          "placeholder": "App secret",
+          "hint": "App Secret'ni Meta Developers'dan nusxalab joylang."
+        },
+        "botToken": {
+          "label": "Bot token",
+          "hint": "{'@'}BotFather bergan tokenni joylang: raqamlar, ikki nuqta, keyin kalit."
+        },
+        "phoneNumberId": {
+          "label": "Telefon raqami ID",
+          "hint": "Faqat raqamlar — WhatsApp Manager'dan nusxalang."
+        },
+        "cloudAccessToken": {
+          "label": "Access token",
+          "hint": "Cloud API tokeni uchun bu juda qisqa."
+        },
+        "domain": {
+          "label": "Sayt domeni",
+          "hint": "aura.uz kabi domenni https:// siz kiriting."
+        },
+        "show": "Ko'rsatish: {field}",
+        "hide": "Yashirish: {field}"
+      },
+      "checklist": {
+        "title": "Sozlash ro'yxati",
+        "required": "{progress} majburiy",
+        "name": "Agent nomi",
+        "documents": "Hujjatlar yuklangan va indekslangan",
+        "model": "LLM model tanlangan",
+        "prompt": "Tizim prompti yozilgan",
+        "noteTitle": "Har bir biznesga bitta agent",
+        "noteText": "Siz ulagan har bir kanal bitta agentga, bitta bilim bazasiga va bitta suhbatlar tarixiga ulanadi."
+      },
+      "identity": {
+        "title": "Agent nomi",
+        "hint": "Mijozlarga emas, jamoangizga ko'rinadi",
+        "name": "RAG agent nomi",
+        "namePlaceholder": "Aura yordamchi agenti",
+        "description": "Qisqa tavsif",
+        "descriptionPlaceholder": "Mahsulot, narx va yetkazib berish haqidagi savollarga javob beradi"
+      },
+      "knowledge": {
+        "title": "Bilim bazasi",
+        "limits": "PDF, DOCX, XLSX yoki TXT, har biri {size} MB gacha",
+        "loadingLimits": "Yuklash limitlari olinmoqda…",
+        "drop": "Hujjatlarni shu yerga torting yoki",
+        "browse": "fayllarni tanlang",
+        "uploaded": "Yuklangan hujjatlar",
+        "loadFailed": "Bilim bazasini yuklab bo'lmadi",
+        "indexed": "Indekslandi",
+        "failed": "Xato",
+        "embedding": "Indekslanmoqda {percent}%",
+        "embeddingLabel": "Indekslanmoqda: {name}",
+        "failedHint": "o'chirib, qayta yuklang",
+        "remove": "O'chirish: {name}",
+        "rejected": {
+          "unsupported": "fayl turi qo'llab-quvvatlanmaydi",
+          "loading": "sozlamalar hali yuklanmoqda",
+          "tooLarge": "belgilangan limitdan katta",
+          "duplicate": "allaqachon qo'shilgan",
+          "noCollection": "agentda bilim to'plami yo'q"
+        }
+      },
+      "model": {
+        "title": "LLM model",
+        "hint": "Barcha kanallardagi javoblarni shakllantiradi",
+        "legend": "Model",
+        "context": "{tokens} kontekst",
+        "pricingMissing": "Narx sozlanmagan",
+        "pricing": "{currency} {input} kirish · {output} chiqish / 1M",
+        "loading": "Mavjud modellar yuklanmoqda…",
+        "none": "Bu ish maydonida birorta ham model yoqilmagan.",
+        "temperature": "Temperatura",
+        "modes": {
+          "factual": "aniq",
+          "balanced": "muvozanatli",
+          "creative": "ijodiy"
+        }
+      },
+      "retrieval": {
+        "topK": "Olinadigan bo'laklar",
+        "topKHint": "Har bir javob uchun o'qiladigan parchalar, {min}–{max}",
+        "threshold": "O'xshashlik chegarasi",
+        "thresholdHint": "Kuchsizroq mosliklar hisobga olinmaydi, {min} dan {max} gacha"
+      },
+      "prompt": {
+        "title": "Tizim prompti",
+        "hint": "Barcha kanallardagi har bir suhbatga qo'llanadi",
+        "placeholder": "Agentga u kimligini, nimalarga javob bera olishini va qachon suhbatni operatorga topshirishini ayting.",
+        "tokens": "{count} / {limit} token",
+        "useTemplate": "Shablondan foydalanish",
+        "replaceConfirm": "Joriy prompt shablon bilan almashtirilsinmi?",
+        "identityFallback": "yordamchi agent",
+        "businessFallback": "do'konimiz",
+        "template": "Siz — {identity}, {business} uchun qo'llab-quvvatlash agentisiz.\n\n• Faqat bilim bazasiga tayanib javob bering. Narx, shart yoki qoldiqni hech qachon o'ylab topmang.\n• Mijoz qaysi tilda yozsa, shu tilda javob bering (UZ / RU / EN).\n• Foydalangan hujjatingizni doim ko'rsating.\n• Hujjatlarda savolga javob bo'lmasa, buni ochiq ayting va suhbatni operatorga topshiring."
+      },
+      "channelsSection": {
+        "title": "Kanallar va ulanish ma'lumotlari",
+        "hint": "Agent mijozlarga qayerda javob beradi",
+        "add": "Yana kanal qo'shish",
+        "connected": "ulangan",
+        "disconnectsOnSave": "saqlanganda uziladi",
+        "connect": "{channel}ni ulash",
+        "savedPlaceholder": "Saqlangan · almashtirish uchun yozing"
+      },
+      "create": {
+        "title": "RAG agentingizni yarating",
+        "description": "Unga nom bering, hujjatlar yuklang, model tanlang, tizim promptini yozing va javob beradigan kanallarni ulang.",
+        "replaces": "{name} o'rnini egallaydi",
+        "noAgentYet": "Hali agent yo'q · shu biznes uchun yagona agentni yarating",
+        "finishSetup": "Avval sozlashni yakunlang",
+        "created": "Agent yaratildi",
+        "createdDetail": "{name} ishga tushdi.",
+        "createFailed": "Agentni yaratib bo'lmadi"
+      },
+      "settings": {
+        "title": "Sozlamalarni tahrirlash",
+        "description": "Bilim bazasi, model, tizim prompti va kanallarni yangilang. Saqlangan o'zgarishlar yangi suhbatlarga darhol qo'llanadi.",
+        "subtitle": "{name} · sozlamalar tahrirlanmoqda",
+        "subtitleDraft": "{name} · sozlamalar tahrirlanmoqda · qoralama",
+        "noAgentTitle": "Sozlanadigan agent yo'q",
+        "noAgentDescription": "Sozlamalarni ochishdan oldin agent yarating.",
+        "loading": "Sozlamalar yuklanmoqda",
+        "discard": "Bekor qilish",
+        "save": "O'zgarishlarni saqlash",
+        "pause": "Agentni to'xtatish",
+        "resume": "Agentni davom ettirish",
+        "delete": "Agentni o'chirish",
+        "modelHint": "Modelni almashtirish hujjatlarni qayta indekslamaydi",
+        "restorePrompt": "Saqlangan promptni tiklash",
+        "channelsHint": "Shu agentning faol kanallari",
+        "knowledgeHint": "{documents} · {chunks} · yuklanganlar darhol qo'llanadi",
+        "embeddingNotice": "{embedding} hali indekslanmoqda — bu vaqtda agent {indexed} asosida javob beradi.",
+        "you": "Siz",
+        "fileAdded": "{name} qo'shildi",
+        "fileRemoved": "{name} o'chirildi",
+        "removeConfirm": "{name} bilim bazasidan o'chirilsinmi? Agent undan darhol foydalanmay qo'yadi.",
+        "fixFirst": "Saqlashdan oldin quyidagilarni tuzating",
+        "saved": "Sozlamalar saqlandi",
+        "changesSaved": "O'zgarishlar saqlandi",
+        "changesSavedDetail": "Yangi suhbatlar yangilangan sozlamalardan foydalanadi.",
+        "saveFailed": "Barcha o'zgarishlarni saqlab bo'lmadi",
+        "discardConfirm": "{changes} bekor qilinsinmi?",
+        "resumed": "Agent qayta ishga tushdi",
+        "resumedDetail": "U yangi xabarlarga yana javob beradi.",
+        "paused": "Agent to'xtatildi",
+        "pausedDetail": "Siz qayta yoqmaguningizcha u javob bermaydi.",
+        "statusFailed": "Agent holatini o'zgartirib bo'lmadi",
+        "deleteConfirm": "Agent va uning barcha suhbatlari o'chirilsinmi? Buni ortga qaytarib bo'lmaydi.",
+        "deleted": "Agent o'chirildi",
+        "deleteFailed": "O'chirib bo'lmadi",
+        "leaveConfirm": "Saqlamasdan chiqasizmi? Saqlanmagan o'zgarishlar yo'qoladi.",
+        "fields": {
+          "name": "Nomi",
+          "description": "Tavsif",
+          "model": "Model",
+          "temperature": "Temperatura",
+          "topK": "Olinadigan bo'laklar",
+          "similarityThreshold": "O'xshashlik chegarasi",
+          "prompt": "Prompt"
+        },
+        "problems": {
+          "name": "Agent nomi",
+          "model": "LLM model",
+          "prompt": "Tizim prompti",
+          "topK": "Olinadigan bo'laklar",
+          "similarityThreshold": "O'xshashlik chegarasi"
+        },
+        "history": {
+          "title": "O'zgarishlar tarixi",
+          "hint": "Saqlanmagan tahrirlar, shu tashrifdagi amallar va faol versiya",
+          "draft": "Saqlanmagan qoralama",
+          "live": "Faol sozlamalar",
+          "liveDetail": "Serverda oxirgi marta yangilangan"
+        }
+      },
+      "playground": {
+        "title": "Sinov maydoni",
+        "description": "So'rovlar tanlangan model, indekslangan bilimlar va ishchi qidiruv jarayonidan foydalanadi.",
+        "back": "Agent",
+        "noAgentTitle": "Avval agent yarating",
+        "noAgentDescription": "Sinov maydoni uchun indekslangan bilim bazasi va faol agent kerak.",
+        "emptyTitle": "Hujjatlarga asoslangan savol bering",
+        "emptyText": "Javoblarda topilgan hujjat bo'laklari ko'rsatiladi.",
+        "chunk": "{document} · {id}-bo'lak",
+        "placeholder": "Yuklangan hujjatlaringiz haqida so'rang…",
+        "failed": "RAG so'rovi bajarilmadi"
+      },
+      "conversation": {
+        "subtitle": "Suhbatlar · {id}",
+        "back": "Suhbatlarga qaytish",
+        "breadcrumb": "Suhbatlar",
+        "export": "Yozishmani yuklab olish",
+        "takeOver": "Suhbatni o'z qo'limga olish",
+        "handBack": "Agentga qaytarish",
+        "handlingTitle": "Bu suhbatni siz olib boryapsiz",
+        "handlingDetail": "Siz qaytarmaguningizcha agent javob bermaydi.",
+        "handedBack": "Suhbat agentga qaytarildi",
+        "handoverFailed": "Suhbatni kim olib borishini o'zgartirib bo'lmadi",
+        "notSent": "Xabar yuborilmadi",
+        "tagsFailed": "Teglarni saqlab bo'lmadi",
+        "linkCopied": "Havola nusxalandi",
+        "idCopied": "chat_id nusxalandi",
+        "insights": "Suhbat tahlili",
+        "loading": "Suhbat yuklanmoqda",
+        "notFound": "Suhbat topilmadi",
+        "loadFailed": "Bu suhbatni yuklab bo'lmadi",
+        "notFoundDetail": "{id} identifikatorli chat yo'q. U boshqa biznesga tegishli bo'lishi mumkin.",
+        "transcript": "Yozishma",
+        "started": "{contact} · {time} da boshlangan",
+        "actions": "Suhbat amallari",
+        "copyLink": "Havolani nusxalash",
+        "operator": "Operator",
+        "sources": "Manbalar",
+        "trace": "{model} · {seconds} s · {chunks}",
+        "scores": "Vektor {vector} · rerank {rerank}",
+        "feedback": {
+          "positive": "Mijoz bu javobni foydali deb belgiladi",
+          "negative": "Mijoz bu javobni foydasiz deb belgiladi"
+        },
+        "reply": "Mijozga javob",
+        "replyPlaceholder": "Javob yozing… (yangi qator uchun Shift + Enter)",
+        "readOnly": "Faqat o'qish uchun — javob berish uchun suhbatni o'z qo'lingizga oling",
+        "takeOverShort": "O'z qo'limga olish",
+        "list": {
+          "title": "Barcha suhbatlar",
+          "search": "chat_id yoki matn bo'yicha qidirish",
+          "noMatches": "“{query}” bo'yicha suhbat topilmadi."
+        },
+        "details": {
+          "title": "Chat tafsilotlari",
+          "copyId": "chat_id'ni nusxalash",
+          "channel": "Kanal",
+          "customer": "Mijoz",
+          "started": "Boshlangan",
+          "duration": "Davomiyligi",
+          "messages": "Xabarlar",
+          "messagesValue": "{count} (agent: {agent})",
+          "handledBy": "Kim olib bordi",
+          "escalation": "Operatorga o'tkazish",
+          "handedTo": "{name}ga topshirilgan",
+          "noHandover": "Operatorga o'tkazilmagan"
+        },
+        "sourcesCard": {
+          "title": "Topilgan manbalar",
+          "used": "{chunks} ishlatilgan",
+          "relevance": "{document} mosligi",
+          "evidence": "Dalil bo'laklarini ko'rish",
+          "chunk": "{id}-bo'lak · rerank {score}",
+          "empty": "Bu chat uchun hech qanday hujjat topilmadi."
+        },
+        "outcome": {
+          "title": "Natija va teglar",
+          "tags": "Teglar",
+          "removeTag": "{tag} tegini o'chirish",
+          "newTag": "Yangi teg",
+          "add": "Qo'shish",
+          "rated": "Mijoz bahosi: {score}/{outOf}",
+          "notRated": "Mijoz bu chatni hali baholamagan."
+        },
+        "file": {
+          "title": "Suhbat {id}",
+          "channel": "Kanal: {channel}",
+          "customer": "Mijoz: {name} ({contact})",
+          "started": "Boshlangan: {date}",
+          "sources": "Manbalar: {sources}"
+        }
+      },
+      "admin": {
+        "unavailable": "Admin ma'lumotlari mavjud emas",
+        "accessDenied": "Ruxsat yo'q.",
+        "modelSaved": "Modellar katalogi yangilandi",
+        "modelFailed": "Model saqlanmadi",
+        "checkFields": "Maydonlarni tekshiring.",
+        "tenantSaved": "Tenant limitlari yangilandi",
+        "tenantFailed": "Limitlar saqlanmadi",
+        "checkValues": "Qiymatlarni tekshiring.",
+        "deniedTitle": "Platforma administratori huquqi kerak",
+        "deniedDescription": "Bu bo'lim control-plane admin ro'yxati bilan cheklangan.",
+        "catalogTitle": "Dinamik modellar katalogi",
+        "catalogDescription": "Frontend variantlari va aniq narxlar shu katalogdan olinadi.",
+        "newModel": "Yangi model",
+        "columns": {
+          "model": "Model",
+          "provider": "Provayder",
+          "input": "Kirish / 1M",
+          "output": "Chiqish / 1M",
+          "state": "Holat"
+        },
+        "notSet": "Belgilanmagan",
+        "enabled": "Yoqilgan",
+        "disabled": "O'chirilgan",
+        "default": "Standart",
+        "form": {
+          "id": "Model ID",
+          "displayName": "Ko'rinadigan nomi",
+          "provider": "Provayder",
+          "contextTokens": "Kontekst tokenlari",
+          "input": "Kirish USD / 1M",
+          "output": "Chiqish USD / 1M"
+        },
+        "saveModel": "Modelni saqlash",
+        "tenantTitle": "Tenant limitlari",
+        "tenant": "Tenant",
+        "tenantPlaceholder": "Tenant tanlang",
+        "loadLimits": "Limitlarni yuklash",
+        "saveTenant": "Tenant limitlarini saqlash",
+        "loading": "Sozlamalar yuklanmoqda…",
+        "limits": {
+          "max_documents": "Maksimal hujjatlar",
+          "max_storage_bytes": "Maksimal xotira (bayt)",
+          "max_agents": "Maksimal agentlar",
+          "monthly_queries": "Oylik so'rovlar",
+          "monthly_tokens": "Oylik tokenlar",
+          "monthly_cost_microusd": "Oylik xarajat (mikro-USD)",
+          "max_file_bytes": "Maksimal fayl hajmi (bayt)",
+          "max_files_per_request": "Bir so'rovdagi maksimal fayllar",
+          "max_pdf_pages": "Maksimal PDF sahifalari",
+          "query_rate_per_minute": "Daqiqasiga so'rovlar",
+          "upload_rate_per_minute": "Daqiqasiga yuklashlar"
+        }
+      }
+    },
+    "video": {
+      "period": "{month} · hafta {week}",
+      "dateTime": "{date} · {time}",
+      "planStatus": {
+        "done": "Done",
+        "ongoing": "Ongoing",
+        "upcoming": "Upcoming"
+      },
+      "railTitle": {
+        "done": "Bajarilgan planlar",
+        "ongoing": "Faol plan",
+        "upcoming": "Tasdiqlash kutilmoqda"
+      },
+      "videoState": {
+        "processing": "Process",
+        "scheduled": "Rejada",
+        "draft": "Draft"
+      },
+      "dashboard": {
+        "subtitle": "{videos} video · {published} tasi ijtimoiy tarmoqda · {views} ko'rish",
+        "tomorrowAt": "ertaga {time}",
+        "metrics": {
+          "generated": "Videolar yaratildi · barcha vaqt",
+          "published": "Ijtimoiy tarmoqqa joylandi",
+          "views": "Umumiy ko'rish · 30 kun",
+          "engagement": "Engagement rate",
+          "thisMonth": "bu oy",
+          "high": "Yuqori",
+          "engagementHint": "Like + comment + share / ko'rishlar"
+        },
+        "topVideos": {
+          "title": "Eng yaxshi natija bergan videolar",
+          "days7": "7 kun",
+          "days30": "30 kun",
+          "all": "Barchasi",
+          "columns": {
+            "video": "Video",
+            "platform": "Platforma",
+            "date": "Sana",
+            "views": "Ko'rishlar",
+            "engagement": "Engagement",
+            "growth": "O'sish"
+          }
+        },
+        "channels": {
+          "title": "Ko'rishlar · kanallar"
+        },
+        "weeklyPlan": {
+          "title": "Bu haftaning plani",
+          "produced": "Chiqarilgan videolar",
+          "nextPost": "Keyingi post · {time}",
+          "open": "Planni ochish"
+        },
+        "recommendations": {
+          "title": "Tavsiyalar · sizning sohangizdagi kontent",
+          "agent": "Research agent",
+          "franchise": "Franshiza hamkorlar top",
+          "trending": "Hozir trendda",
+          "updated": "{time} da yangilandi",
+          "trend": "Trend",
+          "addToPlan": "Rejaga",
+          "tags": {
+            "franchise": "franshiza",
+            "trend": "trend"
+          },
+          "trendingPosts": "Hozir trendda · {count} post"
+        }
+      },
+      "plans": {
+        "subtitle": "Haftalik kontent rejalari · {month}",
+        "title": "Rejalar",
+        "description": "Agentlar tizimi har hafta uchun kontent rejasini tuzadi",
+        "legend": {
+          "newPlan": "yangi reja",
+          "currentWeek": "joriy hafta",
+          "completed": "yakunlangan",
+          "published": "chiqarilgan",
+          "plannedInactive": "rejada · faol emas",
+          "otherPlan": "boshqa plan",
+          "publishedVideo": "chiqarilgan video"
+        },
+        "summary": {
+          "published": "Chiqarilgan video",
+          "views": "Umumiy ko'rish",
+          "er": "O'rtacha ER",
+          "research": "Research xulosasi",
+          "monthResults": "{month} yakunlari"
+        },
+        "approval": {
+          "reject": "Rad etish",
+          "edit": "AI bilan tahrirlash",
+          "approve": "Planni tasdiqlash"
+        },
+        "calendar": {
+          "previous": "Oldingi oy",
+          "next": "Keyingi oy"
+        },
+        "filter": "Filtrlash",
+        "timeline": {
+          "locked": "Scriptlar qulflangan",
+          "upcomingEditable": "Kelgusi scriptlar tahrirlanadi",
+          "editable": "Tahrirlanadi",
+          "download": "Planni yuklab olish"
+        },
+        "item": {
+          "edit": "Tahrirlash",
+          "noEdit": "Edit yo'q"
+        },
+        "detail": {
+          "kind": {
+            "video": "video",
+            "draft": "draft",
+            "scheduled": "rejada"
+          },
+          "generating": "Video generatsiya qilinmoqda…",
+          "notGenerated": "Video hali generatsiya qilinmagan",
+          "meta": "{date} {time} · plan: {plan} · {order}-video",
+          "stats": {
+            "views": "ko'rish",
+            "likes": "like",
+            "comments": "izoh",
+            "shares": "share"
+          },
+          "lockedDraft": "Plan tasdiqlanmagan — script tahrirlanadi, video sana kelganda yaratiladi.",
+          "lockedScheduled": "Sana kelmagan — tugmalar faol emas. Video chiqqach havola va yuklab olish ochiladi.",
+          "openReels": "Reels'da ochish",
+          "download": "Yuklab olish",
+          "editScript": "Scriptni AI bilan tahrirlash"
+        },
+        "script": {
+          "meta": "{order}-video · {title} · {date} {time} · faqat shu video uchun",
+          "quick": {
+            "shorter": "Yanada qisqaroq",
+            "cta": "CTA kuchaytir",
+            "hook": "Boshqa hook ber"
+          },
+          "placeholder": "Scriptni qanday o'zgartiramiz?",
+          "current": "Joriy script",
+          "proposed": "Yangi script",
+          "scopeNote": "O'zgarish faqat shu videoga tegishli. Tasdiqlangach video shu prompt bo'yicha yaratiladi.",
+          "footer": "Plan tasdiqlanmagan · o'zgarishlar hafta boshlanishigacha kiritiladi",
+          "approve": "Yangi scriptni tasdiqlash"
+        }
+      },
+      "demo": {
+        "approvalTitle": "Yangi haftalik plan tayyor — tasdiqlashingizni kutmoqda",
+        "approvalSubtitle": "Agentlar 11-sentabr (juma) research asosida tuzdi · 15-sentabr dushanba 00:00 da avtomatik ishga tushadi",
+        "railNote": {
+          "upcoming": "15-sentabr dushanbada avtomatik ishga tushadi",
+          "ongoing": "14-sentabr yakunlanganda plan avtomatik Done bo'ladi"
+        },
+        "insights": {
+          "trendAudio": "Trend audio ishlatilgan videolar ↑ 42%",
+          "ugc": "UGC formatlari eng yuqori ER beryapti",
+          "bestTime": "Eng samarali vaqt: 18:00–20:00"
+        },
+        "weeks": {
+          "upcoming": {
+            "range": "15–21 sentabr · 7 video · research asosida",
+            "note": "Dushanbagacha tahrir qilinmasa, plan avtomatik Ongoing bo'ladi"
+          },
+          "ongoing": {
+            "range": "8–14 sentabr · 7 video · 3 chiqarildi · bugun 10 sentabr",
+            "note": "Faqat vaqti kelmagan videolar tahrirlanadi · hafta yakunida plan Done bo'ladi"
+          },
+          "done": {
+            "range": "1–7 sentabr · 6 video · 1.9M ko'rish · o'rtacha ER 8.4%",
+            "note": "Hafta yakunlandi · natijalar umumiy dashboard statistikasiga qo'shildi"
+          }
+        }
+      },
+      "studio": {
+        "subtitle": "Navbatdan tashqari video · o'z prompt va kontekstingiz bilan",
+        "title": "Yangi video yaratish",
+        "description": "Plandan tashqari: kontekst, prompt va rasmlar bilan o'zingiz boshqarasiz",
+        "allVideos": "Barcha videolarim",
+        "untitled": "Video",
+        "composer": {
+          "title": "Prompt va kontekst",
+          "aiHelp": "AI yordam",
+          "prompt": "Video prompti",
+          "promptPlaceholder": "Video nimani ko'rsatsin? Kadrlar, ohang va yakuniy matnni yozing.",
+          "context": "Kontekst",
+          "brand": "{brand} brendi",
+          "brandColors": "Brend ranglari",
+          "references": "Referens rasmlar",
+          "upload": "Yuklash",
+          "settings": "Sozlamalar",
+          "format": "Format",
+          "voice": "Ovoz",
+          "research": "Research",
+          "fast": "Tez",
+          "deep": "Chuqur",
+          "subtitles": "Subtitrlarni yoqish",
+          "previewOnly": "Faqat prompt-preview",
+          "advanced": "Qo'shimcha yo'nalish va referenslar",
+          "tone": "Ohang (tone)",
+          "tonePlaceholder": "Masalan: samimiy, energiyali, ishonchli",
+          "cta": "Call to action",
+          "ctaPlaceholder": "Masalan: Profildagi havola orqali buyurtma bering",
+          "source": "Tayyor script yoki manba matn",
+          "sourcePlaceholder": "Tasdiqlangan matn bo'lsa, shu yerga qo'ying",
+          "links": "Referens havolalar · har qatorda bitta HTTPS URL",
+          "images": "Referens rasm URL'lari · har qatorda bitta HTTPS URL",
+          "submit": "Video yaratish"
+        },
+        "model": {
+          "title": "Video modeli",
+          "loading": "Modellar yuklanmoqda",
+          "loadFailed": "Video modellari hozir yuklanmadi. Qayta urinib ko'ring.",
+          "reload": "Qayta yuklash",
+          "model": "Model",
+          "resolution": "Sifat",
+          "duration": "Davomiylik",
+          "audio": "Audio bor",
+          "noAudio": "Audio yo'q",
+          "estimate": "Provayder taxmini",
+          "noPrice": "Narx ko'rsatilmagan"
+        },
+        "result": {
+          "title": "Natija",
+          "ready": "Tayyor",
+          "creating": "Yaratilmoqda",
+          "error": "Xatolik",
+          "status": {
+            "submitting": "Yuborilmoqda…",
+            "queued": "Navbatda…",
+            "processing": "Video montaj qilinmoqda…",
+            "submission_unknown": "Tekshirilmoqda…"
+          },
+          "sending": "So'rov yuborilmoqda…",
+          "preparing": "Tayyorlanmoqda…",
+          "untitled": "Yangi video",
+          "failed": "Video yaratilmadi",
+          "idle": "Prompt yozing va “Video yaratish” tugmasini bosing",
+          "publish": "Ijtimoiy tarmoqqa joylash",
+          "download": "Yuklab olish",
+          "retry": "Qayta urinish",
+          "regenerate": "Qayta yaratish",
+          "pipeline": {
+            "script": "Script",
+            "shots": "Kadrlar",
+            "montage": "Montaj",
+            "voice": "Ovoz"
+          }
+        },
+        "library": {
+          "title": "Mening videolarim",
+          "count": "{count} ta",
+          "filters": {
+            "all": "Barchasi",
+            "ready": "Tayyor",
+            "processing": "Jarayonda",
+            "issues": "Muammo"
+          },
+          "status": {
+            "ready": "Tayyor",
+            "processing": "Jarayonda",
+            "failed": "Xato",
+            "review": "Tekshirish kerak",
+            "published": "Joylangan",
+            "draft": "Draft"
+          },
+          "watch": "Videoni ko'rish",
+          "download": "Videoni yuklab olish",
+          "empty": "Hali video yo‘q",
+          "emptyFilter": "Bu holatda video topilmadi",
+          "emptyDescription": "Yaratilgan videolar shu yerda statusi va xavfsiz ko'rish/yuklab olish havolalari bilan chiqadi.",
+          "footer": "O'zingiz yaratgan videolar plan statistikasiga ta'sir qilmaydi."
+        },
+        "publish": {
+          "title": "Video tayyor — ijtimoiy tarmoqqa joylaymizmi?",
+          "where": "Qayerga joylash",
+          "postTo": "{channel}ga joylash",
+          "caption": "Matn (AI tayyorladi)",
+          "rewrite": "Qayta yozish",
+          "captionPlaceholder": "Post matni va hashtaglar",
+          "when": "Qachon",
+          "now": "Hozir",
+          "schedule": "Rejalashtirish",
+          "statsNote": "Joylangach video statistikasi (ko'rish, ER) dashboardga avtomatik tushadi.",
+          "later": "Keyinroq",
+          "submit": "Joylash"
+        },
+        "jobs": {
+          "status": {
+            "submitting": "Yuborilmoqda",
+            "submission_failed": "Yuborilmadi",
+            "submission_unknown": "Tekshirilmoqda",
+            "queued": "Navbatda",
+            "processing": "Yaratilmoqda",
+            "completed": "Tayyor",
+            "failed": "Xatolik"
+          },
+          "title": "Yaratilgan videolar",
+          "description": "Videolaringiz holati va tayyor natijalari shu yerda ko‘rinadi.",
+          "sync": "Tarixni yangilash",
+          "empty": "Hali video yo‘q",
+          "emptyDescription": "Yangi yaratgan videolaringiz shu yerda paydo bo‘ladi.",
+          "autoFormat": "Avto format",
+          "autoDuration": "Avto davomiylik",
+          "autoLanguage": "Avto",
+          "live": "Jonli yangilanadi",
+          "download": "Yuklab olish",
+          "watchInApp": "Videoni ilovada ko'rish",
+          "watch": "Ko‘rish"
+        },
+        "preview": {
+          "eyebrow": "Videoni ko‘rish",
+          "untitled": "Yaratilgan video",
+          "close": "Videoni yopish",
+          "details": "Video tafsilotlari",
+          "status": "Holati",
+          "ready": "Tayyor",
+          "format": "Format",
+          "auto": "Avto",
+          "duration": "Davomiyligi",
+          "model": "Model",
+          "download": "Videoni yuklab olish"
+        },
+        "player": {
+          "label": "Yaratilgan video",
+          "loading": "Video yuklanmoqda…",
+          "failed": "Video hozir ochilmadi. Qayta urinib ko‘ring yoki yuklab oling.",
+          "reload": "Qayta yuklash"
+        },
+        "toasts": {
+          "ready": "Video tayyor",
+          "readyDetail": "Uni ko'rish va joylash mumkin.",
+          "failed": "Video yaratilmadi",
+          "checkLinks": "Referens havolalarni tekshiring",
+          "httpsOnly": "Faqat HTTPS havolalar qabul qilinadi.",
+          "needsVerification": "Yuborishni tekshirish kerak",
+          "needsVerificationDetail": "Qayta yaratishdan oldin shu vazifani tekshiring. Avtomatik qayta yuborilmaydi.",
+          "notCompleted": "Generatsiya yakunlanmadi",
+          "checkJob": "Vazifa tafsilotlarini tekshiring.",
+          "previewQueued": "Preview navbatga qo'yildi",
+          "queued": "Video generatsiyasi navbatga qo'yildi",
+          "queuedDetail": "Jarayon quyidagi ro'yxatda ko'rinadi.",
+          "startFailed": "Video generatsiyasini boshlab bo'lmadi",
+          "checkListFirst": "Qayta urinishdan oldin ro'yxatni tekshiring.",
+          "loadFailed": "Videolarni yuklab bo'lmadi",
+          "synced": "Videolar sinxronlandi",
+          "syncedDetail": "{imported} ta import qilindi, {updated} ta yangilandi.",
+          "syncFailed": "Videolarni sinxronlab bo'lmadi"
+        }
       }
     }
   }

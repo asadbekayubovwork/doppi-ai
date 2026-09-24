@@ -7,7 +7,6 @@ import {
   CServiceSteps,
   CServiceLinks,
   CServiceCta,
-  CFaq,
 } from "@/widgets"
 
 const props = defineProps<{ service: ServiceKey }>()
@@ -23,7 +22,6 @@ useSeo(() => SERVICE_PATHS[props.service])
     <CServiceHero :service="service" />
     <CServiceFeatures :service="service" />
     <CServiceSteps :service="service" />
-    <CFaq :i18n-key="`services.${service}.faq`" />
     <CServiceLinks :exclude="service" />
     <CServiceCta :service="service" />
   </div>

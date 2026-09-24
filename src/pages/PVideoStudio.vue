@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
-import { useHead } from "@unhead/vue"
-import { usePageHeading } from "@/shared/lib"
+import { useI18n } from "vue-i18n"
+import { formatShortDate, useCountLabel, usePageHeading } from "@/shared/lib"
 import {
   CVideoJobs,
   CVideoPreviewDialog,
@@ -19,10 +19,10 @@ import {
 import type { StudioVideo } from "@/entities/video"
 import { CAppButton } from "@/shared/ui"
 
-useHead({ title: "Yangi video — Do'ppi AI" })
-usePageHeading(() => ({
-  subtitle: "Navbatdan tashqari video · o'z prompt va kontekstingiz bilan",
-}))
+const { t, locale } = useI18n()
+const count = useCountLabel()
+
+usePageHeading(() => ({ subtitle: t("dashboard.video.studio.subtitle") }))
 
 const {
   form,
@@ -57,14 +57,8 @@ const libraryVideos = computed<StudioVideo[]>(() =>
     const ready = status === "ready"
     return {
       id: job.id,
-      title: job.brief.topic || "Video",
-      meta: `${job.brief.duration_sec ?? "—"}s · ${new Intl.DateTimeFormat(
-        "uz-UZ",
-        {
-          day: "numeric",
-          month: "short",
-        }
-      ).format(new Date(job.created_at))}`,
+      title: job.brief.topic || t("dashboard.video.studio.untitled"),
+      meta: `${job.brief.duration_sec ?? "—"}s · ${formatShortDate(job.created_at, locale.value)}`,
       status,
       thumbnail: "#E8E6E2",
       previewUrl: ready
@@ -144,22 +138,21 @@ const onRegenerate = () => {
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div>
         <h1 class="text-2xl font-bold tracking-tight text-[#15151B]">
-          Yangi video yaratish
+          {{ $t("dashboard.video.studio.title") }}
         </h1>
         <p class="mt-1 text-[13.5px] text-[#73737D]">
-          Plandan tashqari: kontekst, prompt va rasmlar bilan o'zingiz
-          boshqarasiz
+          {{ $t("dashboard.video.studio.description") }}
         </p>
       </div>
       <div class="flex items-center gap-2.5">
         <span
           class="inline-flex h-9 items-center gap-2 rounded-[10px] border border-[#E5E5E1] bg-white px-3.5 text-[13px] font-semibold text-[#42424B]"
         >
-          1,860 kredit
+          {{ count("dashboard.plural.credits", 1860) }}
         </span>
-        <CAppButton icon="history" @click="scrollToJobs"
-          >Barcha videolarim</CAppButton
-        >
+        <CAppButton icon="history" @click="scrollToJobs">
+          {{ $t("dashboard.video.studio.allVideos") }}
+        </CAppButton>
       </div>
     </div>
 

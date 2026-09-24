@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
+import { useI18n } from "vue-i18n"
 import { CIcon, CTextField } from "@/shared/ui"
 import type { CredentialField } from "../model/channel-setup"
 
@@ -11,6 +12,12 @@ const props = defineProps<{
 
 const value = defineModel<string>({ default: "" })
 
+const { t } = useI18n()
+const label = computed(() => t(props.field.label))
+const fieldPlaceholder = computed(() =>
+  props.field.placeholder ? t(props.field.placeholder) : props.field.example
+)
+
 const isRevealed = ref(false)
 const isValid = computed(() => props.field.isValid(value.value))
 // Stay quiet until there is something to judge.
@@ -20,12 +27,12 @@ const isInvalid = computed(() => value.value.trim() !== "" && !isValid.value)
 <template>
   <CTextField
     v-model="value"
-    :label="field.label"
+    :label="label"
     :type="field.secret && !isRevealed ? 'password' : 'text'"
-    :placeholder="placeholder ?? field.placeholder"
+    :placeholder="placeholder ?? fieldPlaceholder"
     :autocomplete="field.secret ? 'new-password' : 'off'"
     :invalid="isInvalid"
-    :hint="isInvalid ? field.invalidHint : undefined"
+    :hint="isInvalid ? $t(field.invalidHint) : undefined"
   >
     <!-- Secrets get a reveal toggle; plain values a check once they are valid. -->
     <template v-if="field.secret || isValid" #suffix>
@@ -33,7 +40,11 @@ const isInvalid = computed(() => value.value.trim() !== "" && !isValid.value)
         v-if="field.secret"
         type="button"
         class="flex h-7 w-7 items-center justify-center rounded-md text-[#84848E] transition hover:bg-[#F2F2EF] hover:text-[#15151B]"
-        :aria-label="`${isRevealed ? 'Hide' : 'Show'} ${field.label.toLowerCase()}`"
+        :aria-label="
+          $t(`dashboard.rag.credentials.${isRevealed ? 'hide' : 'show'}`, {
+            field: label,
+          })
+        "
         :aria-pressed="isRevealed"
         @click="isRevealed = !isRevealed"
       >

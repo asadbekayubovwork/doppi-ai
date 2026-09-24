@@ -13,10 +13,10 @@ const progress = computed(() => {
 </script>
 
 <template>
-  <CSetupSection title="Setup checklist">
+  <CSetupSection :title="$t('dashboard.rag.checklist.title')">
     <template #aside>
       <span class="text-xs tabular-nums text-[#84848E]">
-        {{ progress }} required
+        {{ $t("dashboard.rag.checklist.required", { progress }) }}
       </span>
     </template>
 
@@ -46,14 +46,16 @@ const progress = computed(() => {
           />
         </span>
         <span class="min-w-0 flex-1">
-          {{ item.label }}
-          <span class="sr-only">— {{ item.done ? "done" : "not done" }}</span>
+          {{ $t(item.label) }}
+          <span class="sr-only">
+            — {{ $t(item.done ? "dashboard.common.done" : "dashboard.common.notDone") }}
+          </span>
         </span>
         <span
           v-if="!item.done && item.optional"
           class="text-[11px] text-[#A1A1AA]"
         >
-          optional
+          {{ $t("dashboard.common.optional") }}
         </span>
       </li>
     </ul>
@@ -62,11 +64,10 @@ const progress = computed(() => {
       <CIcon name="info" class="mt-0.5 h-4 w-4 shrink-0 text-[#5B4BE8]" />
       <div>
         <p class="text-[13px] font-semibold text-[#5B4BE8]">
-          One agent per business
+          {{ $t("dashboard.rag.checklist.noteTitle") }}
         </p>
         <p class="mt-1 text-xs leading-5 text-[#6A6A74]">
-          Every channel you connect feeds the same agent, the same knowledge
-          base and the same chat history.
+          {{ $t("dashboard.rag.checklist.noteText") }}
         </p>
       </div>
     </div>

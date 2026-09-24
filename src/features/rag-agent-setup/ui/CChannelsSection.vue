@@ -36,8 +36,8 @@ const add = (kind: ChannelKind) => {
   <CSetupSection
     :step="5"
     :icon="icon"
-    title="Channels & credentials"
-    :hint="hint ?? 'Where the agent will answer customers'"
+    :title="$t('dashboard.rag.channelsSection.title')"
+    :hint="hint ?? $t('dashboard.rag.channelsSection.hint')"
   >
     <template v-if="$slots.aside" #aside><slot name="aside" /></template>
     <div class="space-y-3">
@@ -60,7 +60,7 @@ const add = (kind: ChannelKind) => {
           @click="isMenuOpen = !isMenuOpen"
         >
           <CIcon name="plus" class="h-4 w-4" />
-          Add another channel
+          {{ $t("dashboard.rag.channelsSection.add") }}
         </button>
         <Transition name="dropdown">
           <div
@@ -77,7 +77,7 @@ const add = (kind: ChannelKind) => {
               @click="add(kind)"
             >
               <CChannelIcon :channel="kind" />
-              {{ CHANNEL_SETUP[kind].title }}
+              {{ $t(CHANNEL_SETUP[kind].title) }}
             </button>
           </div>
         </Transition>

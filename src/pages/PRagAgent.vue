@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from "vue"
-import { useHead } from "@unhead/vue"
+import { useI18n } from "vue-i18n"
 import { useRagAgentStore } from "@/entities/rag-agent"
 import { useAuthStore } from "@/features/auth"
 import { useRouter } from "vue-router"
@@ -12,8 +12,7 @@ import {
   CConversationsTable,
 } from "@/widgets/rag-agent"
 
-useHead({ title: "Universal RAG Agent — Do'ppi AI" })
-
+const { t, locale } = useI18n()
 const store = useRagAgentStore()
 const auth = useAuthStore()
 const router = useRouter()
@@ -29,9 +28,20 @@ const areConversationsPending = computed(() =>
 usePageHeading(() => {
   if (!agent.value) return {}
   const { name, status, syncedAt } = agent.value
-  const age = formatTimeAgo(syncedAt)
-  const synced = age === "now" ? "synced just now" : `synced ${age} ago`
-  return { subtitle: `${name} · ${status} · ${synced}` }
+  const now = Date.now()
+  const synced =
+    now - new Date(syncedAt).getTime() < 60_000
+      ? t("dashboard.rag.agent.syncedJustNow")
+      : t("dashboard.rag.agent.syncedAgo", {
+          age: formatTimeAgo(syncedAt, now, locale.value),
+        })
+  return {
+    subtitle: t("dashboard.rag.agent.subtitle", {
+      name,
+      status: t(`dashboard.rag.status.${status}`),
+      synced,
+    }),
+  }
 })
 
 const businessId = computed(() => auth.activeBusiness?.id ?? "")
@@ -73,24 +83,26 @@ const openConfiguration = () => void router.push({ name: "RagAgentSettings" })
     <CEmptyState
       v-else-if="store.agentState === 'error'"
       icon="triangle-alert"
-      title="Couldn't load the agent"
-      description="Check your connection and try again."
+      :title="$t('dashboard.rag.loadFailed')"
+      :description="$t('dashboard.common.checkConnection')"
     >
-      <CAppButton icon="refresh-cw" @click="load">Try again</CAppButton>
+      <CAppButton icon="refresh-cw" @click="load">
+        {{ $t("dashboard.common.tryAgain") }}
+      </CAppButton>
     </CEmptyState>
 
     <CEmptyState
       v-else
       icon="bot"
-      title="No RAG agent yet"
-      description="Each business runs one agent. Give it your documents, pick a model and connect the channels it should answer on."
+      :title="$t('dashboard.rag.agent.emptyTitle')"
+      :description="$t('dashboard.rag.agent.emptyDescription')"
     >
       <CAppButton
         variant="primary"
         icon="circle-plus"
         :to="{ name: 'RagAgentCreate' }"
       >
-        Create agent
+        {{ $t("dashboard.rag.createAgent") }}
       </CAppButton>
     </CEmptyState>
   </div>

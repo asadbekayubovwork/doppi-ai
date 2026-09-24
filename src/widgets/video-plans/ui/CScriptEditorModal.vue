@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import type { PlanVideo, ScriptMessage } from "@/entities/video"
+import {
+  useVideoLabels,
+  type PlanVideo,
+  type ScriptMessage,
+} from "@/entities/video"
 import { CBadge, CIcon } from "@/shared/ui"
 
 defineProps<{
@@ -17,8 +21,9 @@ const emit = defineEmits<{
   approve: []
 }>()
 
+const { day } = useVideoLabels()
 const draft = ref("")
-const QUICK = ["Yanada qisqaroq", "CTA kuchaytir", "Boshqa hook ber"]
+const QUICK = ["shorter", "cta", "hook"] as const
 
 const close = () => emit("update:open", false)
 const send = () => {
@@ -53,17 +58,23 @@ const send = () => {
                 id="script-editor-title"
                 class="text-[17px] font-semibold tracking-tight text-[#15151B]"
               >
-                Scriptni AI bilan tahrirlash
+                {{ $t("dashboard.video.plans.detail.editScript") }}
               </h2>
               <p class="mt-0.5 text-[12.5px] text-[#8A8A94]">
-                {{ video.order }}-video · {{ video.title }} · {{ video.date }}
-                {{ video.time }} · faqat shu video uchun
+                {{
+                  $t("dashboard.video.plans.script.meta", {
+                    order: video.order,
+                    title: video.title,
+                    date: day(video.date),
+                    time: video.time,
+                  })
+                }}
               </p>
             </div>
             <button
               type="button"
               class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#E5E5E1] text-[#8E8E9C] transition hover:bg-[#FAFAF9]"
-              aria-label="Yopish"
+              :aria-label="$t('dashboard.common.close')"
               @click="close"
             >
               <CIcon name="x" class="h-4 w-4" />
@@ -115,9 +126,9 @@ const send = () => {
                     :key="quick"
                     type="button"
                     class="rounded-full border border-[#E5E5E1] px-3 py-1.5 text-[12px] font-medium text-[#42424B] transition hover:border-[#C9C0F5] hover:bg-[#F7F6FE] hover:text-[#5B4BE8]"
-                    @click="draft = quick"
+                    @click="draft = $t(`dashboard.video.plans.script.quick.${quick}`)"
                   >
-                    {{ quick }}
+                    {{ $t(`dashboard.video.plans.script.quick.${quick}`) }}
                   </button>
                 </div>
                 <form class="flex items-center gap-2" @submit.prevent="send">
@@ -128,7 +139,7 @@ const send = () => {
                     />
                     <input
                       v-model="draft"
-                      placeholder="Scriptni qanday o'zgartiramiz?"
+                      :placeholder="$t('dashboard.video.plans.script.placeholder')"
                       class="h-10 w-full rounded-[10px] border border-[#E5E5E1] bg-white pl-9 pr-3 text-[13px] text-[#15151B] outline-none transition placeholder:text-[#A1A1AA] focus:border-[#5B4BE8] focus:ring-2 focus:ring-[#5B4BE8]/15"
                     />
                   </div>
@@ -136,7 +147,7 @@ const send = () => {
                     type="submit"
                     class="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] bg-[#5B4BE8] text-white transition hover:bg-[#4F3FDC] disabled:opacity-50"
                     :disabled="!draft.trim()"
-                    aria-label="Yuborish"
+                    :aria-label="$t('dashboard.common.send')"
                   >
                     <CIcon name="arrow-up-right" class="h-4 w-4 -rotate-45" />
                   </button>
@@ -151,7 +162,7 @@ const send = () => {
                   class="flex items-center gap-1.5 text-[11.5px] font-semibold uppercase tracking-[0.06em] text-[#9A9AA2]"
                 >
                   <CIcon name="file-text" class="h-3.5 w-3.5" />
-                  Joriy script
+                  {{ $t("dashboard.video.plans.script.current") }}
                 </p>
                 <p class="mt-2 text-[13px] leading-5 text-[#55555F]">
                   {{ currentScript }}
@@ -165,7 +176,7 @@ const send = () => {
                   class="flex items-center gap-1.5 text-[11.5px] font-semibold uppercase tracking-[0.06em] text-[#5B4BE8]"
                 >
                   <CIcon name="wand-sparkles" class="h-3.5 w-3.5" />
-                  Yangi script
+                  {{ $t("dashboard.video.plans.script.proposed") }}
                 </p>
                 <p class="mt-2 text-[13px] leading-5 text-[#2E2A5B]">
                   {{ proposedScript }}
@@ -176,8 +187,7 @@ const send = () => {
                 class="flex items-start gap-2 rounded-lg bg-[#F2F2EF] px-3 py-2.5 text-[11.5px] leading-4 text-[#73737D]"
               >
                 <CIcon name="info" class="mt-0.5 h-3.5 w-3.5 shrink-0" />
-                O'zgarish faqat shu videoga tegishli. Tasdiqlangach video shu
-                prompt bo'yicha yaratiladi.
+                {{ $t("dashboard.video.plans.script.scopeNote") }}
               </p>
             </div>
           </div>
@@ -187,7 +197,7 @@ const send = () => {
             class="flex flex-wrap items-center justify-between gap-3 border-t border-[#ECECE8] bg-[#FBFBFC] px-5 py-4"
           >
             <p class="text-[12px] text-[#8A8A94]">
-              Plan tasdiqlanmagan · o'zgarishlar hafta boshlanishigacha kiritiladi
+              {{ $t("dashboard.video.plans.script.footer") }}
             </p>
             <div class="flex items-center gap-2.5">
               <button
@@ -195,7 +205,7 @@ const send = () => {
                 class="h-10 rounded-[10px] border border-[#E5E5E1] bg-white px-4 text-[13px] font-semibold text-[#15151B] transition hover:bg-[#FAFAF9]"
                 @click="close"
               >
-                Bekor qilish
+                {{ $t("dashboard.common.cancel") }}
               </button>
               <button
                 type="button"
@@ -203,7 +213,7 @@ const send = () => {
                 @click="emit('approve')"
               >
                 <CIcon name="check" class="h-4 w-4" />
-                Yangi scriptni tasdiqlash
+                {{ $t("dashboard.video.plans.script.approve") }}
               </button>
             </div>
           </footer>

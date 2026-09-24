@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { computed } from "vue"
-import { CPlatformPill, CVideoThumb, type PlanVideo } from "@/entities/video"
+import {
+  CPlatformPill,
+  CVideoThumb,
+  useVideoLabels,
+  type PlanVideo,
+} from "@/entities/video"
 import { CBadge, CIcon } from "@/shared/ui"
 import { VIDEO_STATE_META } from "../model/plan-state"
 
@@ -14,6 +19,7 @@ const props = defineProps<{
 
 defineEmits<{ select: []; edit: [] }>()
 
+const { dayTime } = useVideoLabels()
 const meta = computed(() => VIDEO_STATE_META[props.video.state])
 const canEdit = computed(
   () => props.editable && props.video.state !== "published"
@@ -89,7 +95,7 @@ const canEdit = computed(
               :icon="meta.pill.icon"
               size="sm"
             >
-              {{ meta.pill.label }}
+              {{ $t(meta.pill.label) }}
             </CBadge>
           </div>
           <p class="mt-1 line-clamp-2 text-[12.5px] leading-5 text-[#73737D]">
@@ -102,7 +108,7 @@ const canEdit = computed(
             <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
               <CPlatformPill :platform="video.platform" />
               <span class="text-[12px] text-[#9A9AA2]">
-                {{ video.date }} · {{ video.time }}
+                {{ dayTime(video.date, video.time) }}
               </span>
               <span
                 v-if="video.views"
@@ -119,14 +125,20 @@ const canEdit = computed(
               @click.stop="$emit('edit')"
             >
               <CIcon name="wand-sparkles" class="h-3.5 w-3.5" />
-              {{ video.state === "draft" ? "Tahrirlash" : "AI bilan tahrirlash" }}
+              {{
+                $t(
+                  video.state === "draft"
+                    ? "dashboard.video.plans.item.edit"
+                    : "dashboard.video.plans.approval.edit"
+                )
+              }}
             </span>
             <span
               v-else-if="video.locked || video.state === 'published'"
               class="inline-flex items-center gap-1 text-[12px] text-[#B4B4BC]"
             >
               <CIcon name="lock" class="h-3.5 w-3.5" />
-              Edit yo'q
+              {{ $t("dashboard.video.plans.item.noEdit") }}
             </span>
           </div>
         </div>

@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import type { RetrievedSource } from "@/entities/rag-agent"
+import { useCountLabel } from "@/shared/lib"
 import { CIcon, CProgress } from "@/shared/ui"
 import CInsightCard from "./CInsightCard.vue"
 
 const props = defineProps<{ sources: RetrievedSource[] }>()
+
+const count = useCountLabel()
 
 const ranked = computed(() =>
   [...props.sources].sort((left, right) => right.score - left.score)
@@ -12,7 +15,10 @@ const ranked = computed(() =>
 </script>
 
 <template>
-  <CInsightCard title="Retrieved sources" icon="database">
+  <CInsightCard
+    :title="$t('dashboard.rag.conversation.sourcesCard.title')"
+    icon="database"
+  >
     <ul v-if="ranked.length" class="divide-y divide-[#EEEEEA]">
       <li v-for="source in ranked" :key="source.document" class="px-4 py-3">
         <div class="flex items-start gap-2.5">
@@ -25,8 +31,11 @@ const ranked = computed(() =>
               {{ source.document }}
             </p>
             <p class="text-xs text-[#84848E]">
-              {{ source.chunksUsed }}
-              {{ source.chunksUsed === 1 ? "chunk" : "chunks" }} used
+              {{
+                $t("dashboard.rag.conversation.sourcesCard.used", {
+                  chunks: count("dashboard.plural.chunks", source.chunksUsed),
+                })
+              }}
             </p>
           </div>
           <span class="text-[13px] font-semibold tabular-nums text-[#15151B]">
@@ -36,11 +45,15 @@ const ranked = computed(() =>
         <CProgress
           class="mt-2.5"
           :value="source.score"
-          :label="`Relevance of ${source.document}`"
+          :label="
+            $t('dashboard.rag.conversation.sourcesCard.relevance', {
+              document: source.document,
+            })
+          "
         />
         <details class="mt-2 text-xs text-[#6A6A74]">
           <summary class="cursor-pointer font-medium text-[#5B4BE8]">
-            View evidence chunks
+            {{ $t("dashboard.rag.conversation.sourcesCard.evidence") }}
           </summary>
           <div
             v-for="chunk in source.chunks"
@@ -48,8 +61,12 @@ const ranked = computed(() =>
             class="mt-2 rounded-lg border border-[#EEEEEA] bg-[#FAFAF9] p-2.5"
           >
             <p class="font-medium text-[#15151B]">
-              Chunk {{ chunk.chunkId }} · rerank
-              {{ chunk.rerankScore.toFixed(3) }}
+              {{
+                $t("dashboard.rag.conversation.sourcesCard.chunk", {
+                  id: chunk.chunkId,
+                  score: chunk.rerankScore.toFixed(3),
+                })
+              }}
             </p>
             <p class="mt-1 whitespace-pre-wrap text-[11px] leading-4">
               {{ chunk.content }}
@@ -59,7 +76,7 @@ const ranked = computed(() =>
       </li>
     </ul>
     <p v-else class="px-4 py-6 text-center text-[13px] text-[#84848E]">
-      No documents were retrieved for this chat.
+      {{ $t("dashboard.rag.conversation.sourcesCard.empty") }}
     </p>
   </CInsightCard>
 </template>

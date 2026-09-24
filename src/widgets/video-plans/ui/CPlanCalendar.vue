@@ -25,8 +25,18 @@ const MARKER_CLASS: Record<NonNullable<CalendarDay["marker"]>, string> = {
     <header class="flex items-center justify-between">
       <h2 class="text-[15px] font-semibold text-[#15151B]">{{ title }}</h2>
       <div class="flex items-center gap-1">
-        <CIconButton icon="chevron-left" label="Oldingi oy" variant="ghost" size="sm" />
-        <CIconButton icon="chevron-right" label="Keyingi oy" variant="ghost" size="sm" />
+        <CIconButton
+          icon="chevron-left"
+          :label="$t('dashboard.video.plans.calendar.previous')"
+          variant="ghost"
+          size="sm"
+        />
+        <CIconButton
+          icon="chevron-right"
+          :label="$t('dashboard.video.plans.calendar.next')"
+          variant="ghost"
+          size="sm"
+        />
       </div>
     </header>
 

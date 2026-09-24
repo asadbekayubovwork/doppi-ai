@@ -1,3 +1,4 @@
+import { useI18n } from "vue-i18n"
 import { useToast } from "./useToast"
 
 /**
@@ -7,14 +8,15 @@ import { useToast } from "./useToast"
  */
 export function useCopyToClipboard() {
   const toast = useToast()
+  const { t } = useI18n()
 
-  return async (text: string, successTitle = "Copied to clipboard") => {
+  return async (text: string, successTitle = t("dashboard.common.copied")) => {
     try {
       await navigator.clipboard.writeText(text)
       toast.success(successTitle, text)
       return true
     } catch {
-      toast.error("Couldn't copy", "Select the text and copy it manually.")
+      toast.error(t("dashboard.common.copyFailed"), t("dashboard.common.copyFailedHint"))
       return false
     }
   }

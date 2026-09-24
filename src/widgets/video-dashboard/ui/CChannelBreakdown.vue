@@ -15,9 +15,11 @@ defineProps<{ channels: ChannelShare[] }>()
   >
     <div class="flex items-center justify-between">
       <h2 class="text-[15px] font-semibold text-[#15151B]">
-        Ko'rishlar · kanallar
+        {{ $t("dashboard.video.dashboard.channels.title") }}
       </h2>
-      <span class="text-[12px] text-[#9A9AA2]">30 kun</span>
+      <span class="text-[12px] text-[#9A9AA2]">
+        {{ $t("dashboard.video.dashboard.topVideos.days30") }}
+      </span>
     </div>
 
     <ul class="mt-4 space-y-4">

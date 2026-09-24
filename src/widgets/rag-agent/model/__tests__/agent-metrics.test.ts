@@ -14,25 +14,25 @@ const stats: AgentStats = {
   escalationRateChange: -0.009,
 }
 
-const byLabel = (metrics: ReturnType<typeof buildAgentMetrics>) =>
-  Object.fromEntries(metrics.map((metric) => [metric.label, metric]))
+const byKey = (metrics: ReturnType<typeof buildAgentMetrics>) =>
+  Object.fromEntries(metrics.map((metric) => [metric.key, metric]))
 
 describe("agent metrics", () => {
   it("judges each change by whether it is good news, not by its sign", () => {
-    const metrics = byLabel(buildAgentMetrics(stats))
+    const metrics = byKey(buildAgentMetrics(stats))
 
-    expect(metrics["Conversations"]).toMatchObject({
+    expect(metrics.conversations).toMatchObject({
       value: "8,942",
       change: "+12.4%",
       improved: true,
     })
-    expect(metrics["Messages · 30 days"].improved).toBe(false)
-    expect(metrics["Avg. response time"]).toMatchObject({
+    expect(metrics.messages30d.improved).toBe(false)
+    expect(metrics.avgResponse).toMatchObject({
       value: "1.4s",
       change: "-220 ms",
       improved: true,
     })
-    expect(metrics["Escalated to human"]).toMatchObject({
+    expect(metrics.escalation).toMatchObject({
       change: "-0.9%",
       improved: true,
     })
@@ -46,10 +46,10 @@ describe("agent metrics", () => {
       avgResponseMs: 0,
       avgResponseChangeMs: 0,
     })
-    const table = byLabel(metrics)
+    const table = byKey(metrics)
 
-    expect(table["Conversations"]).toMatchObject({ value: "0", change: null })
-    expect(table["Avg. response time"].value).toBe("—")
-    expect(table["Answer accuracy"].value).toBe("—")
+    expect(table.conversations).toMatchObject({ value: "0", change: null })
+    expect(table.avgResponse.value).toBe("—")
+    expect(table.accuracy.value).toBe("—")
   })
 })

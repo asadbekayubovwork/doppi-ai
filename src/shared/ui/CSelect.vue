@@ -24,7 +24,7 @@ const props = withDefaults(
     /** Trigger height: sm 36px · md 40px · lg 44px · xl 48px. */
     size?: "sm" | "md" | "lg" | "xl"
   }>(),
-  { size: "md", placeholder: "Tanlang" }
+  { size: "md" }
 )
 
 const emit = defineEmits<{ change: [value: T] }>()
@@ -256,7 +256,7 @@ onBeforeUnmount(() => {
           class="truncate"
           :class="selected ? '' : 'font-normal text-[#A1A1AA]'"
         >
-          {{ selected?.label ?? placeholder }}
+          {{ selected?.label ?? placeholder ?? $t("dashboard.common.select") }}
         </span>
       </span>
       <CIcon

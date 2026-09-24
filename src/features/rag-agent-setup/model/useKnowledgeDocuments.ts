@@ -13,13 +13,18 @@ export interface DocumentDraft {
   progress: number
   documentId: string | null
   chunkCount: number | null
+  /** The server's reason for a failed upload, when it gave one. */
   error: string | null
 }
 
 export interface FileRejection {
   file: File
+  /** i18n key of why the file was skipped. */
   reason: string
 }
+
+const rejection = (reason: string) =>
+  `dashboard.rag.knowledge.rejected.${reason}`
 
 let draftSequence = 0
 
@@ -69,14 +74,13 @@ export function useKnowledgeDocuments(
 
   const rejectionReason = (file: File): string | null => {
     const extension = file.name.slice(file.name.lastIndexOf(".")).toLowerCase()
-    if (!ACCEPTED_EXTENSIONS.includes(extension)) return "unsupported file type"
-    if (maxFileBytes.value === null) return "configuration is still loading"
-    if (file.size > maxFileBytes.value)
-      return "larger than the configured limit"
+    if (!ACCEPTED_EXTENSIONS.includes(extension)) return rejection("unsupported")
+    if (maxFileBytes.value === null) return rejection("loading")
+    if (file.size > maxFileBytes.value) return rejection("tooLarge")
     const duplicate = documents.value.some(
       (item) => item.name === file.name && item.sizeBytes === file.size
     )
-    return duplicate ? "already added" : null
+    return duplicate ? rejection("duplicate") : null
   }
 
   /** Runs `work` for a row; an error marks the row failed. */
@@ -94,8 +98,7 @@ export function useKnowledgeDocuments(
         const draft = find(key)
         if (draft) {
           draft.status = "failed"
-          draft.error =
-            error instanceof Error ? error.message : "Indexing failed"
+          draft.error = (error instanceof Error && error.message) || null
         }
       }
     } finally {
@@ -112,7 +115,7 @@ export function useKnowledgeDocuments(
     while (!signal.aborted) {
       const rows = await ragAgentApi.listDocuments(businessId(), collection)
       const row = rows.find((item) => item.document_id === documentId)
-      if (!row) throw new Error("Uploaded document disappeared")
+      if (!row) throw new Error()
       const draft = find(key)
       if (!draft) return
       draft.progress =
@@ -124,8 +127,7 @@ export function useKnowledgeDocuments(
         draft.progress = 1
         return
       }
-      if (row.status === "failed")
-        throw new Error(row.error || "Indexing failed")
+      if (row.status === "failed") throw new Error(row.error ?? undefined)
       await pause(1000, signal)
     }
   }
@@ -166,7 +168,7 @@ export function useKnowledgeDocuments(
     for (const file of files) {
       const reason = collection
         ? rejectionReason(file)
-        : "the agent has no knowledge collection"
+        : rejection("noCollection")
       if (reason) rejected.push({ file, reason })
       else upload(file, collection)
     }

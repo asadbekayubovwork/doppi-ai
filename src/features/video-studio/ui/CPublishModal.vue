@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue"
+import { useI18n } from "vue-i18n"
 import {
   CVideoThumb,
   PLATFORMS,
@@ -9,6 +10,7 @@ import {
   STUDIO_HASHTAGS,
   type PublishTarget,
 } from "@/entities/video"
+import { useCountLabel } from "@/shared/lib"
 import { CBadge, CIcon, CSwitch } from "@/shared/ui"
 
 const props = defineProps<{ open: boolean }>()
@@ -16,6 +18,11 @@ const emit = defineEmits<{
   "update:open": [value: boolean]
   publish: [targets: string[], caption: string]
 }>()
+
+const { t } = useI18n()
+const count = useCountLabel()
+const text = (key: string, named: Record<string, unknown> = {}) =>
+  t(`dashboard.video.studio.publish.${key}`, named)
 
 const CAPTION_MAX = 2200
 const defaultCaption = () =>
@@ -73,7 +80,7 @@ const publish = () =>
                 id="publish-title"
                 class="text-[16.5px] font-semibold tracking-tight text-[#15151B]"
               >
-                Video tayyor — ijtimoiy tarmoqqa joylaymizmi?
+                {{ text("title") }}
               </h2>
               <p class="mt-0.5 text-[12.5px] text-[#8A8A94]">
                 Kuzgi menyu e'loni · 15s · 9:16 · 1080×1920
@@ -82,7 +89,7 @@ const publish = () =>
             <button
               type="button"
               class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#E5E5E1] text-[#8E8E9C] transition hover:bg-[#FAFAF9]"
-              aria-label="Yopish"
+              :aria-label="$t('dashboard.common.close')"
               @click="close"
             >
               <CIcon name="x" class="h-4 w-4" />
@@ -101,7 +108,7 @@ const publish = () =>
                 <p
                   class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
                 >
-                  Qayerga joylash
+                  {{ text("where") }}
                 </p>
                 <label
                   v-for="target in targets"
@@ -135,7 +142,7 @@ const publish = () =>
                   </span>
                   <CSwitch
                     v-model="target.enabled"
-                    :label="`${PLATFORM_CHANNELS[target.platform]} ga joylash`"
+                    :label="text('postTo', { channel: PLATFORM_CHANNELS[target.platform] })"
                   />
                 </label>
               </div>
@@ -148,14 +155,14 @@ const publish = () =>
                   for="publish-caption"
                   class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
                 >
-                  Matn (AI tayyorladi)
+                  {{ text("caption") }}
                 </label>
                 <button
                   type="button"
                   class="inline-flex items-center gap-1 text-[12px] font-semibold text-[#5B4BE8] transition hover:text-[#4F3FDC]"
                 >
                   <CIcon name="wand-sparkles" class="h-3.5 w-3.5" />
-                  Qayta yozish
+                  {{ text("rewrite") }}
                 </button>
               </div>
               <div class="relative">
@@ -164,7 +171,7 @@ const publish = () =>
                   v-model="caption"
                   rows="4"
                   :maxlength="CAPTION_MAX"
-                  placeholder="Post matni va hashtaglar"
+                  :placeholder="text('captionPlaceholder')"
                   class="block min-h-24 w-full resize-y rounded-xl border border-[#E5E5E1] bg-[#FCFCFB] px-3 pb-6 pt-2.5 text-[13px] leading-5 text-[#2A2A31] outline-none transition placeholder:text-[#A1A1AA] hover:border-[#D6D6DE] focus:border-[#8175EA] focus:bg-white focus:ring-[3px] focus:ring-[#8175EA]/15"
                 />
                 <span
@@ -180,7 +187,7 @@ const publish = () =>
               <span
                 class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
               >
-                Qachon
+                {{ text("when") }}
               </span>
               <div class="mt-1.5 flex flex-wrap items-center gap-2.5">
                 <div
@@ -196,7 +203,7 @@ const publish = () =>
                     "
                     @click="schedule = 'now'"
                   >
-                    Hozir
+                    {{ text("now") }}
                   </button>
                   <button
                     type="button"
@@ -208,7 +215,7 @@ const publish = () =>
                     "
                     @click="schedule = 'later'"
                   >
-                    Rejalashtirish
+                    {{ text("schedule") }}
                   </button>
                 </div>
                 <div
@@ -240,22 +247,23 @@ const publish = () =>
               class="flex items-start gap-2 rounded-xl bg-[#F2F0FC] px-3 py-2.5 text-[12px] leading-4 text-[#5B4BE8]"
             >
               <CIcon name="info" class="mt-0.5 h-3.5 w-3.5 shrink-0" />
-              Joylangach video statistikasi (ko'rish, ER) dashboardga avtomatik
-              tushadi.
+              {{ text("statsNote") }}
             </p>
           </div>
 
           <footer
             class="flex items-center justify-between gap-3 border-t border-[#ECECE8] bg-[#FBFBFC] px-5 py-4"
           >
-            <CBadge tone="neutral">{{ selectedCount }} ta tarmoq tanlangan</CBadge>
+            <CBadge tone="neutral">
+              {{ count("dashboard.plural.networksSelected", selectedCount) }}
+            </CBadge>
             <div class="flex items-center gap-2.5">
               <button
                 type="button"
                 class="h-10 rounded-[10px] border border-[#E5E5E1] bg-white px-4 text-[13px] font-semibold text-[#15151B] transition hover:bg-[#FAFAF9]"
                 @click="close"
               >
-                Keyinroq
+                {{ text("later") }}
               </button>
               <button
                 type="button"
@@ -264,7 +272,7 @@ const publish = () =>
                 @click="publish"
               >
                 <CIcon name="send" class="h-4 w-4" />
-                Joylash
+                {{ text("submit") }}
               </button>
             </div>
           </footer>

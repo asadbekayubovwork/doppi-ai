@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from "vue"
+import { useI18n } from "vue-i18n"
 import type { ConversationDetail } from "@/entities/rag-agent"
 import { groupMessagesByDay } from "../model/transcript"
 import CChatComposer from "./CChatComposer.vue"
@@ -22,7 +23,10 @@ const emit = defineEmits<{
 
 const draft = defineModel<string>("draft", { default: "" })
 
-const groups = computed(() => groupMessagesByDay(props.conversation.messages))
+const { locale } = useI18n()
+const groups = computed(() =>
+  groupMessagesByDay(props.conversation.messages, new Date(), locale.value)
+)
 const scroller = ref<HTMLElement | null>(null)
 
 const scrollToLatest = async () => {
@@ -42,7 +46,7 @@ watch(
 <template>
   <section
     class="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-2xl border border-[#E5E5E1] bg-white"
-    aria-label="Transcript"
+    :aria-label="$t('dashboard.rag.conversation.transcript')"
   >
     <CChatHeader
       :conversation="conversation"

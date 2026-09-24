@@ -23,19 +23,19 @@ defineEmits<{ export: []; toggleHandover: [] }>()
     <RouterLink
       :to="{ name: 'RagAgent' }"
       class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border border-[#E5E5E1] bg-white text-[#6A6A74] transition hover:bg-[#FAFAF9] hover:text-[#15151B]"
-      aria-label="Back to conversations"
+      :aria-label="$t('dashboard.rag.conversation.back')"
     >
       <CIcon name="arrow-left" class="h-4 w-4" />
     </RouterLink>
 
-    <nav aria-label="Breadcrumb" class="min-w-0">
+    <nav :aria-label="$t('dashboard.rag.conversation.breadcrumb')" class="min-w-0">
       <ol class="flex items-center gap-2 text-sm">
         <li>
           <RouterLink
             :to="{ name: 'RagAgent' }"
             class="text-[#6A6A74] transition hover:text-[#15151B]"
           >
-            Conversations
+            {{ $t("dashboard.rag.conversation.breadcrumb") }}
           </RouterLink>
         </li>
         <li aria-hidden="true">
@@ -50,13 +50,13 @@ defineEmits<{ export: []; toggleHandover: [] }>()
     <template v-if="conversation">
       <CBadge tone="outline">
         <CChannelIcon :channel="conversation.channel" />
-        {{ CHANNELS[conversation.channel].label }}
+        {{ $t(CHANNELS[conversation.channel].label) }}
       </CBadge>
       <CConversationStatusBadge :status="conversation.status" dot />
 
       <div class="flex flex-wrap gap-2.5 sm:ml-auto">
         <CAppButton icon="download" @click="$emit('export')">
-          Export transcript
+          {{ $t("dashboard.rag.conversation.export") }}
         </CAppButton>
         <CAppButton
           :variant="isHandledByMe ? 'secondary' : 'primary'"
@@ -64,7 +64,13 @@ defineEmits<{ export: []; toggleHandover: [] }>()
           :loading="handoverBusy"
           @click="$emit('toggleHandover')"
         >
-          {{ isHandledByMe ? "Hand back to agent" : "Take over chat" }}
+          {{
+            $t(
+              isHandledByMe
+                ? "dashboard.rag.conversation.handBack"
+                : "dashboard.rag.conversation.takeOver"
+            )
+          }}
         </CAppButton>
       </div>
     </template>

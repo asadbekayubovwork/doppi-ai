@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue"
-import { useHead } from "@unhead/vue"
-import { usePageHeading } from "@/shared/lib"
+import { useI18n } from "vue-i18n"
+import { formatDayRange, formatMonthName, formatWeekdays, usePageHeading } from "@/shared/lib"
 import {
   CALENDAR_DAYS,
-  CALENDAR_WEEKDAYS,
   PLAN_HISTORY,
   SCRIPT_CONVERSATION,
   SCRIPT_CURRENT,
   SCRIPT_PROPOSED,
   WEEK_PLANS,
+  useVideoLabels,
+  type PlanHistoryEntry,
   type PlanStatus,
   type PlanVideo,
 } from "@/entities/video"
@@ -25,15 +26,26 @@ import {
   type RailEntry,
 } from "@/widgets/video-plans"
 
-useHead({ title: "Plans — Do'ppi AI" })
-usePageHeading(() => ({ subtitle: "Haftalik kontent rejalari · Sentabr 2026" }))
+const { t, locale } = useI18n()
+const { period } = useVideoLabels()
+
+// The demo plans cover September 2026; the calendar and headings follow them.
+const MONTH = "2026-09-01"
+const monthYear = computed(() =>
+  formatMonthName(MONTH, locale.value, { withYear: true })
+)
+const weekdays = computed(() => formatWeekdays(locale.value))
+
+usePageHeading(() => ({
+  subtitle: t("dashboard.video.plans.subtitle", { month: monthYear.value }),
+}))
 
 // ── Tab state ──────────────────────────────────────────────────────────────
 const status = ref<PlanStatus>("ongoing")
 const TABS = computed(() =>
   (["done", "ongoing", "upcoming"] as PlanStatus[]).map((value) => ({
     value,
-    label: value === "done" ? "Done" : value === "ongoing" ? "Ongoing" : "Upcoming",
+    label: t(`dashboard.video.planStatus.${value}`),
     count: WEEK_PLANS.filter((plan) => plan.status === value).length,
   }))
 )
@@ -60,20 +72,24 @@ const activeVideo = computed(
 )
 
 // ── Left rail entries ────────────────────────────────────────────────────────
-const toEntry = (plan: (typeof WEEK_PLANS)[number]): RailEntry => ({
+const toEntry = (plan: PlanHistoryEntry): RailEntry => ({
   id: plan.id,
-  title: plan.title,
-  range: plan.range.split(" · ")[0] ?? plan.range,
+  title: period(plan.start, plan.week),
+  range: formatDayRange(plan.start, plan.end, locale.value),
   status: plan.status,
   progress: plan.progress,
   views: plan.views,
 })
 
+const activeTitle = computed(() =>
+  period(activePlan.value.start, activePlan.value.week)
+)
+
 const railEntries = computed<RailEntry[]>(() => {
   if (status.value === "done") {
     return [
       ...WEEK_PLANS.filter((plan) => plan.status === "done").map(toEntry),
-      ...PLAN_HISTORY,
+      ...PLAN_HISTORY.map(toEntry),
     ]
   }
   // Ongoing / upcoming: active plan on top, then the rest for context.
@@ -92,37 +108,52 @@ const openScript = (video: PlanVideo) => {
 
 // ── Calendar legend varies by tab ────────────────────────────────────────────
 const legend = computed(() => {
+  const entry = (key: string, color: string) => ({
+    label: t(`dashboard.video.plans.legend.${key}`),
+    class: color,
+  })
   if (status.value === "upcoming") {
     return [
-      { label: "yangi reja", class: "bg-[#B45309]" },
-      { label: "joriy hafta", class: "bg-[#5B4BE8]" },
-      { label: "yakunlangan", class: "bg-[#B4B4BC]" },
+      entry("newPlan", "bg-[#B45309]"),
+      entry("currentWeek", "bg-[#5B4BE8]"),
+      entry("completed", "bg-[#B4B4BC]"),
     ]
   }
   if (status.value === "ongoing") {
     return [
-      { label: "chiqarilgan", class: "bg-[#5B4BE8]" },
-      { label: "rejada · faol emas", class: "bg-[#D97706]" },
-      { label: "boshqa plan", class: "bg-[#B4B4BC]" },
+      entry("published", "bg-[#5B4BE8]"),
+      entry("plannedInactive", "bg-[#D97706]"),
+      entry("otherPlan", "bg-[#B4B4BC]"),
     ]
   }
   return [
-    { label: "chiqarilgan video", class: "bg-[#5B4BE8]" },
-    { label: "boshqa plan", class: "bg-[#B4B4BC]" },
+    entry("publishedVideo", "bg-[#5B4BE8]"),
+    entry("otherPlan", "bg-[#B4B4BC]"),
   ]
 })
 
-const septemberSummary = [
-  { label: "Chiqarilgan video", value: "12" },
-  { label: "Umumiy ko'rish", value: "2.4M" },
-  { label: "O'rtacha ER", value: "8.4%", accent: true },
-]
+const monthSummary = computed(() => [
+  { label: t("dashboard.video.plans.summary.published"), value: "12" },
+  { label: t("dashboard.video.plans.summary.views"), value: "2.4M" },
+  { label: t("dashboard.video.plans.summary.er"), value: "8.4%", accent: true },
+])
 
-const researchInsights = [
-  { icon: "trending-up", text: "Trend audio ishlatilgan videolar ↑ 42%" },
-  { icon: "user-round", text: "UGC formatlari eng yuqori ER beryapti" },
-  { icon: "clock", text: "Eng samarali vaqt: 18:00–20:00" },
-]
+const researchInsights = computed(() =>
+  [
+    { icon: "trending-up", key: "trendAudio" },
+    { icon: "user-round", key: "ugc" },
+    { icon: "clock", key: "bestTime" },
+  ].map(({ icon, key }) => ({
+    icon,
+    text: t(`dashboard.video.demo.insights.${key}`),
+  }))
+)
+
+const railNote = computed(() =>
+  status.value === "done"
+    ? undefined
+    : t(`dashboard.video.demo.railNote.${status.value}`)
+)
 </script>
 
 <template>
@@ -130,16 +161,18 @@ const researchInsights = [
     <!-- Approval banner (upcoming only) -->
     <CPlanApprovalBanner
       v-if="status === 'upcoming'"
-      title="Yangi haftalik plan tayyor — tasdiqlashingizni kutmoqda"
-      subtitle="Agentlar 11-sentabr (juma) research asosida tuzdi · 15-sentabr dushanba 00:00 da avtomatik ishga tushadi"
+      :title="$t('dashboard.video.demo.approvalTitle')"
+      :subtitle="$t('dashboard.video.demo.approvalSubtitle')"
     />
 
     <!-- Title row + tabs -->
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div>
-        <h1 class="text-2xl font-bold tracking-tight text-[#15151B]">Plans</h1>
+        <h1 class="text-2xl font-bold tracking-tight text-[#15151B]">
+          {{ $t("dashboard.video.plans.title") }}
+        </h1>
         <p class="mt-1 text-[13.5px] text-[#73737D]">
-          Agentlar tizimi har hafta uchun kontent rejasini tuzadi
+          {{ $t("dashboard.video.plans.description") }}
         </p>
       </div>
       <CPlanTabs v-model="status" :tabs="TABS" />
@@ -153,13 +186,7 @@ const researchInsights = [
         :status="status"
         :active-id="activePlan.id"
         :entries="railEntries"
-        :note="
-          status === 'upcoming'
-            ? '15-sentabr dushanbada avtomatik ishga tushadi'
-            : status === 'ongoing'
-              ? '14-sentabr yakunlanganda plan avtomatik Done bo\'ladi'
-              : undefined
-        "
+        :note="railNote"
         @select="() => {}"
       />
 
@@ -172,25 +199,29 @@ const researchInsights = [
 
       <div class="grid gap-5">
         <CPlanCalendar
-          title="Sentabr 2026"
-          :weekdays="CALENDAR_WEEKDAYS"
+          :title="monthYear"
+          :weekdays="weekdays"
           :days="CALENDAR_DAYS"
           :legend="legend"
         />
         <CPlanVideoDetail
           :video="activeVideo"
-          :plan-title="activePlan.title"
+          :plan-title="activeTitle"
           @edit-script="openScript(activeVideo)"
         />
         <CPlanSummaryCard
           v-if="status === 'upcoming'"
-          title="Research xulosasi"
+          :title="$t('dashboard.video.plans.summary.research')"
           :bullets="researchInsights"
         />
         <CPlanSummaryCard
           v-else
-          title="Sentabr yakunlari"
-          :rows="septemberSummary"
+          :title="
+            $t('dashboard.video.plans.summary.monthResults', {
+              month: formatMonthName(MONTH, locale),
+            })
+          "
+          :rows="monthSummary"
         />
       </div>
     </div>
@@ -198,7 +229,7 @@ const researchInsights = [
     <CScriptEditorModal
       v-model:open="scriptOpen"
       :video="scriptVideo"
-      :plan-title="activePlan.title"
+      :plan-title="activeTitle"
       :conversation="SCRIPT_CONVERSATION"
       :current-script="SCRIPT_CURRENT"
       :proposed-script="SCRIPT_PROPOSED"

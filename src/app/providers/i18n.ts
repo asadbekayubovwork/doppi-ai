@@ -2,6 +2,7 @@
 import { createI18n } from "vue-i18n"
 import {
   messages,
+  pluralRules,
   defaultLocale,
   availableLocales,
   LOCALE_STORAGE_KEY,
@@ -26,6 +27,7 @@ const i18n = createI18n({
   locale: initialLocale,
   fallbackLocale: "en",
   messages,
+  pluralRules,
 
   // Using $t and $i18n in templates globally
   globalInjection: true,

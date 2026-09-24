@@ -9,7 +9,6 @@ export {
 } from "./dashboard"
 export {
   CALENDAR_DAYS,
-  CALENDAR_WEEKDAYS,
   PLAN_HISTORY,
   SCRIPT_CONVERSATION,
   SCRIPT_CURRENT,

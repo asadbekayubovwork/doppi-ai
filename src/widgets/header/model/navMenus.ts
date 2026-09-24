@@ -1,5 +1,4 @@
 import { SERVICE_NAV } from "@/shared/config/services"
-import { SERVICE_PATHS } from "@/shared/config/seoPages"
 
 export interface NavMenuItem {
   /** Full i18n key of the label. */
@@ -15,47 +14,21 @@ export interface NavMenuColumn {
   items: NavMenuItem[]
 }
 
-const soon = (key: string): NavMenuItem => ({
-  label: `services.menu.items.${key}`,
-})
-
 /**
- * The header's services mega-menu. Live services lead the first column in
- * SERVICE_NAV order; the rest is the roadmap. Voice agent use cases all land on
- * the voice agent page until each gets a page of its own.
+ * The header's services menu, two columns side by side: live services in
+ * SERVICE_NAV order, then the offerings that are on the way.
  */
 export const SERVICES_MENU: NavMenuColumn[] = [
   {
-    title: "services.navLabel",
-    items: [
-      ...SERVICE_NAV.map((service) => ({
-        label: `services.${service.key}.name`,
-        to: service.to,
-      })),
-      ...[
-        "marketRadar",
-        "personalBlogs",
-        "farmers",
-        "ytBusiness",
-        "meeting",
-        "isolator",
-        "voices",
-        "audiobooks",
-        "dubbing",
-        "subtitles",
-      ].map(soon),
-    ],
-  },
-  {
-    title: "services.menu.useCases",
-    items: ["support", "sales", "booking", "surveys"].map((key) => ({
-      label: `services.menu.items.${key}`,
-      to: SERVICE_PATHS.voice,
+    items: SERVICE_NAV.map((service) => ({
+      label: `services.${service.key}.name`,
+      to: service.to,
     })),
   },
   {
-    title: "services.menu.industries",
-    items: ["healthcare", "realEstate", "travel", "automotive", "banking", "ecommerce"].map(soon),
+    items: ["marketRadar", "personalBlogs", "farmers", "ytBusiness"].map((key) => ({
+      label: `services.menu.items.${key}`,
+    })),
   },
 ]
 

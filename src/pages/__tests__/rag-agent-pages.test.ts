@@ -181,7 +181,7 @@ describe("RAG agent pages", () => {
   it("renders data loaded through the RAG API", async () => {
     const wrapper = await mountAt("/app/rag", PRagAgent)
     expect(wrapper.text()).toContain("Support agent")
-    expect(wrapper.text()).toContain("1 chats")
+    expect(wrapper.text()).toMatch(/1 chat(?!s)/)
     wrapper.unmount()
   })
 

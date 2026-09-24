@@ -5,11 +5,11 @@ import {
   CTrustBar,
   CSolution,
   CFeatures,
+  CVideoShowcase,
   CHowItWorks,
   CResults,
   CFaq,
   CAbout,
-  CContact,
 } from "@/widgets"
 
 useSeo("/")
@@ -21,10 +21,10 @@ useSeo("/")
     <CTrustBar />
     <CSolution />
     <CFeatures />
+    <CVideoShowcase />
     <CHowItWorks />
     <CResults />
     <CFaq />
     <CAbout />
-    <CContact />
   </div>
 </template>

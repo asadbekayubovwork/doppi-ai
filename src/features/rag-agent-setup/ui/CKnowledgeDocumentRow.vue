@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 import { formatCount, formatFileSize } from "@/shared/lib"
 import {
   CBadge,
@@ -14,20 +15,35 @@ const props = defineProps<{ document: DocumentDraft }>()
 
 defineEmits<{ remove: [] }>()
 
+const { t, locale } = useI18n()
+
 const status = computed<{ label: string; tone: BadgeTone }>(() => {
   const { status, progress } = props.document
-  if (status === "indexed") return { label: "Indexed", tone: "success" }
-  if (status === "failed") return { label: "Failed", tone: "danger" }
-  return { label: `Embedding ${Math.round(progress * 100)}%`, tone: "warning" }
+  if (status === "indexed")
+    return { label: t("dashboard.rag.knowledge.indexed"), tone: "success" }
+  if (status === "failed")
+    return { label: t("dashboard.rag.knowledge.failed"), tone: "danger" }
+  return {
+    label: t("dashboard.rag.knowledge.embedding", {
+      percent: Math.round(progress * 100),
+    }),
+    tone: "warning",
+  }
 })
 
 const details = computed(() => {
   const { status, sizeBytes, chunkCount } = props.document
   const size = formatFileSize(sizeBytes)
-  if (status === "indexed")
-    return `${size} · ${formatCount(chunkCount ?? 0)} chunks`
+  if (status === "indexed") {
+    const chunks = chunkCount ?? 0
+    return `${size} · ${t(
+      "dashboard.plural.chunks",
+      { count: formatCount(chunks, locale.value) },
+      chunks
+    )}`
+  }
   if (status === "failed")
-    return `${size} · ${props.document.error || "remove it and upload again"}`
+    return `${size} · ${props.document.error || t("dashboard.rag.knowledge.failedHint")}`
   return size
 })
 </script>
@@ -46,7 +62,7 @@ const details = computed(() => {
         tone="warning"
         class="my-1 max-w-[280px]"
         :value="document.progress"
-        :label="`Embedding ${document.name}`"
+        :label="$t('dashboard.rag.knowledge.embeddingLabel', { name: document.name })"
       />
       <p class="truncate text-xs text-[#84848E]">{{ details }}</p>
     </div>
@@ -55,7 +71,7 @@ const details = computed(() => {
       icon="x"
       variant="ghost"
       size="sm"
-      :label="`Remove ${document.name}`"
+      :label="$t('dashboard.rag.knowledge.remove', { name: document.name })"
       @click="$emit('remove')"
     />
   </li>

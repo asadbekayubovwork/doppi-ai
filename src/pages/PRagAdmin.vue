@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from "vue"
-import { useHead } from "@unhead/vue"
+import { useI18n } from "vue-i18n"
 import {
   ragAdminApi,
   type AdminModel,
@@ -10,8 +10,21 @@ import { messageForProblem } from "@/features/auth"
 import { useToast } from "@/shared/lib"
 import { CAppButton, CEmptyState, CSelect } from "@/shared/ui"
 
-useHead({ title: "RAG administration — Do'ppi AI" })
+const TENANT_LIMITS = [
+  "max_documents",
+  "max_storage_bytes",
+  "max_agents",
+  "monthly_queries",
+  "monthly_tokens",
+  "monthly_cost_microusd",
+  "max_file_bytes",
+  "max_files_per_request",
+  "max_pdf_pages",
+  "query_rate_per_minute",
+  "upload_rate_per_minute",
+] as const
 
+const { t } = useI18n()
 const toast = useToast()
 const loading = ref(true)
 const denied = ref(false)
@@ -52,8 +65,8 @@ const load = async () => {
   } catch (error) {
     denied.value = true
     toast.error(
-      "Admin data unavailable",
-      messageForProblem(error, "Access denied.")
+      t("dashboard.rag.admin.unavailable"),
+      messageForProblem(error, t("dashboard.rag.admin.accessDenied"))
     )
   } finally {
     loading.value = false
@@ -83,11 +96,11 @@ const saveModel = async () => {
     }
     await ragAdminApi.saveModel(payload)
     await load()
-    toast.success("Model catalog updated")
+    toast.success(t("dashboard.rag.admin.modelSaved"))
   } catch (error) {
     toast.error(
-      "Model was not saved",
-      messageForProblem(error, "Check the fields.")
+      t("dashboard.rag.admin.modelFailed"),
+      messageForProblem(error, t("dashboard.rag.admin.checkFields"))
     )
   } finally {
     saving.value = false
@@ -104,11 +117,11 @@ const saveTenant = async () => {
     )
     await ragAdminApi.updateTenant(selectedTenantId.value, payload)
     await load()
-    toast.success("Tenant limits updated")
+    toast.success(t("dashboard.rag.admin.tenantSaved"))
   } catch (error) {
     toast.error(
-      "Limits were not saved",
-      messageForProblem(error, "Check the values.")
+      t("dashboard.rag.admin.tenantFailed"),
+      messageForProblem(error, t("dashboard.rag.admin.checkValues"))
     )
   } finally {
     saving.value = false
@@ -121,8 +134,8 @@ const saveTenant = async () => {
     <CEmptyState
       v-if="denied"
       icon="lock"
-      title="Platform administrator access required"
-      description="This area is restricted by the control-plane admin allowlist."
+      :title="$t('dashboard.rag.admin.deniedTitle')"
+      :description="$t('dashboard.rag.admin.deniedDescription')"
     />
 
     <div v-else class="grid gap-5">
@@ -130,25 +143,27 @@ const saveTenant = async () => {
         <div class="flex items-center justify-between gap-3">
           <div>
             <h2 class="text-base font-semibold text-[#15151B]">
-              Dynamic model catalog
+              {{ $t("dashboard.rag.admin.catalogTitle") }}
             </h2>
             <p class="mt-1 text-xs text-[#84848E]">
-              Frontend options and exact prices come from this catalog.
+              {{ $t("dashboard.rag.admin.catalogDescription") }}
             </p>
           </div>
-          <CAppButton icon="circle-plus" @click="editModel()"
-            >New model</CAppButton
-          >
+          <CAppButton icon="circle-plus" @click="editModel()">
+            {{ $t("dashboard.rag.admin.newModel") }}
+          </CAppButton>
         </div>
         <div class="mt-4 overflow-x-auto">
           <table class="w-full min-w-[720px] text-left text-[13px]">
             <thead class="bg-[#FAFAF9] text-[11px] uppercase text-[#84848E]">
               <tr>
-                <th class="p-3">Model</th>
-                <th class="p-3">Provider</th>
-                <th class="p-3">Input / 1M</th>
-                <th class="p-3">Output / 1M</th>
-                <th class="p-3">State</th>
+                <th
+                  v-for="column in ['model', 'provider', 'input', 'output', 'state']"
+                  :key="column"
+                  class="p-3"
+                >
+                  {{ $t(`dashboard.rag.admin.columns.${column}`) }}
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-[#EEEEEA]">
@@ -166,14 +181,29 @@ const saveTenant = async () => {
                 </td>
                 <td class="p-3">{{ model.provider }}</td>
                 <td class="p-3">
-                  {{ model.input_usd_per_million ?? "Not set" }}
+                  {{
+                    model.input_usd_per_million ??
+                    $t("dashboard.rag.admin.notSet")
+                  }}
                 </td>
                 <td class="p-3">
-                  {{ model.output_usd_per_million ?? "Not set" }}
+                  {{
+                    model.output_usd_per_million ??
+                    $t("dashboard.rag.admin.notSet")
+                  }}
                 </td>
                 <td class="p-3">
-                  {{ model.enabled ? "Enabled" : "Disabled"
-                  }}{{ model.is_default ? " · Default" : "" }}
+                  {{
+                    $t(
+                      model.enabled
+                        ? "dashboard.rag.admin.enabled"
+                        : "dashboard.rag.admin.disabled"
+                    )
+                  }}{{
+                    model.is_default
+                      ? ` · ${$t("dashboard.rag.admin.default")}`
+                      : ""
+                  }}
                 </td>
               </tr>
             </tbody>
@@ -184,25 +214,25 @@ const saveTenant = async () => {
           @submit.prevent="saveModel"
         >
           <label class="field"
-            >Model ID<input
+            >{{ $t("dashboard.rag.admin.form.id") }}<input
               v-model.trim="modelForm.id"
               required
               class="control"
           /></label>
           <label class="field"
-            >Display name<input
+            >{{ $t("dashboard.rag.admin.form.displayName") }}<input
               v-model.trim="modelForm.display_name"
               required
               class="control"
           /></label>
           <label class="field"
-            >Provider<input
+            >{{ $t("dashboard.rag.admin.form.provider") }}<input
               v-model.trim="modelForm.provider"
               required
               class="control"
           /></label>
           <label class="field"
-            >Context tokens<input
+            >{{ $t("dashboard.rag.admin.form.contextTokens") }}<input
               v-model.number="modelForm.context_tokens"
               type="number"
               min="1"
@@ -210,7 +240,7 @@ const saveTenant = async () => {
               class="control"
           /></label>
           <label class="field"
-            >Input USD / 1M<input
+            >{{ $t("dashboard.rag.admin.form.input") }}<input
               v-model="modelForm.input_usd_per_million"
               type="number"
               min="0"
@@ -218,7 +248,7 @@ const saveTenant = async () => {
               class="control"
           /></label>
           <label class="field"
-            >Output USD / 1M<input
+            >{{ $t("dashboard.rag.admin.form.output") }}<input
               v-model="modelForm.output_usd_per_million"
               type="number"
               min="0"
@@ -227,57 +257,45 @@ const saveTenant = async () => {
           /></label>
           <label class="flex items-center gap-2 text-[13px]"
             ><input v-model="modelForm.enabled" type="checkbox" />
-            Enabled</label
+            {{ $t("dashboard.rag.admin.enabled") }}</label
           >
           <label class="flex items-center gap-2 text-[13px]"
             ><input v-model="modelForm.is_default" type="checkbox" />
-            Default</label
+            {{ $t("dashboard.rag.admin.default") }}</label
           >
           <CAppButton variant="primary" type="submit" :loading="saving"
-            >Save model</CAppButton
+            >{{ $t("dashboard.rag.admin.saveModel") }}</CAppButton
           >
         </form>
       </section>
 
       <section class="rounded-2xl border border-[#E5E5E1] bg-white p-5">
-        <h2 class="text-base font-semibold text-[#15151B]">Tenant limits</h2>
+        <h2 class="text-base font-semibold text-[#15151B]">
+          {{ $t("dashboard.rag.admin.tenantTitle") }}
+        </h2>
         <div class="mt-4 flex gap-3">
           <CSelect
             v-model="selectedTenantId"
             :options="tenantOptions"
-            aria-label="Tenant"
+            :aria-label="$t('dashboard.rag.admin.tenant')"
             icon="building-2"
-            placeholder="Tenant tanlang"
+            :placeholder="$t('dashboard.rag.admin.tenantPlaceholder')"
             class="flex-1"
             @change="editTenant"
           />
-          <CAppButton @click="editTenant">Load limits</CAppButton>
+          <CAppButton @click="editTenant">
+            {{ $t("dashboard.rag.admin.loadLimits") }}
+          </CAppButton>
         </div>
         <form
           v-if="selectedTenant"
           class="mt-4 grid gap-3 sm:grid-cols-3"
           @submit.prevent="saveTenant"
         >
-          <label
-            v-for="key in [
-              'max_documents',
-              'max_storage_bytes',
-              'max_agents',
-              'monthly_queries',
-              'monthly_tokens',
-              'monthly_cost_microusd',
-              'max_file_bytes',
-              'max_files_per_request',
-              'max_pdf_pages',
-              'query_rate_per_minute',
-              'upload_rate_per_minute',
-            ]"
-            :key="key"
-            class="field"
-          >
-            {{ key.replaceAll("_", " ") }}
+          <label v-for="key in TENANT_LIMITS" :key="key" class="field">
+            {{ $t(`dashboard.rag.admin.limits.${key}`) }}
             <input
-              v-model.number="tenantForm[key as keyof AdminTenant]"
+              v-model.number="tenantForm[key]"
               type="number"
               min="1"
               class="control"
@@ -285,12 +303,12 @@ const saveTenant = async () => {
           </label>
           <div class="flex items-end">
             <CAppButton variant="primary" type="submit" :loading="saving"
-              >Save tenant limits</CAppButton
+              >{{ $t("dashboard.rag.admin.saveTenant") }}</CAppButton
             >
           </div>
         </form>
         <p v-if="loading" class="mt-4 text-sm text-[#84848E]">
-          Loading configuration…
+          {{ $t("dashboard.rag.admin.loading") }}
         </p>
       </section>
     </div>
@@ -299,7 +317,7 @@ const saveTenant = async () => {
 
 <style scoped>
 .field {
-  @apply grid gap-1.5 text-[12px] capitalize text-[#6A6A74];
+  @apply grid gap-1.5 text-[12px] text-[#6A6A74];
 }
 .control {
   @apply rounded-xl border border-[#D8D8D3] bg-white px-3 py-2.5 text-[13px] text-[#15151B] outline-none focus:border-[#5B4BE8];

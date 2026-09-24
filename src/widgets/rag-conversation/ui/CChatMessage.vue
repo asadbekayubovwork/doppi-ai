@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 import { llmModelName, type ChatMessage } from "@/entities/rag-agent"
-import { formatClockTime } from "@/shared/lib"
+import { formatClockTime, useCountLabel } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 
 const props = defineProps<{ message: ChatMessage }>()
@@ -12,13 +13,18 @@ const BUBBLES: Record<ChatMessage["author"], string> = {
   operator: "border border-[#D9D3FF] bg-white",
 }
 
+const { t } = useI18n()
+const count = useCountLabel()
 const isCustomer = computed(() => props.message.author === "customer")
 
 const traceLabel = computed(() => {
   const trace = props.message.trace
   if (!trace) return null
-  const seconds = (trace.latencyMs / 1000).toFixed(1)
-  return `${llmModelName(trace.model)} · ${seconds} s · ${trace.chunks} chunks`
+  return t("dashboard.rag.conversation.trace", {
+    model: llmModelName(trace.model),
+    seconds: (trace.latencyMs / 1000).toFixed(1),
+    chunks: count("dashboard.plural.chunks", trace.chunks),
+  })
 })
 </script>
 
@@ -35,13 +41,13 @@ const traceLabel = computed(() => {
         v-if="message.author === 'operator'"
         class="mb-1 text-[10.5px] font-semibold uppercase tracking-[0.08em] text-[#5B4BE8]"
       >
-        Operator
+        {{ $t("dashboard.rag.conversation.operator") }}
       </p>
       <p class="whitespace-pre-line break-words">{{ message.text }}</p>
       <div
         v-if="message.citations?.length"
         class="mt-2.5 space-y-1.5"
-        aria-label="Sources"
+        :aria-label="$t('dashboard.rag.conversation.sources')"
       >
         <details
           v-for="citation in message.citations"
@@ -66,8 +72,12 @@ const traceLabel = computed(() => {
             {{ citation.excerpt }}
           </p>
           <p class="mt-1 text-[10px] text-[#84848E]">
-            Vector {{ citation.vectorSimilarity.toFixed(3) }} · rerank
-            {{ citation.rerankScore.toFixed(3) }}
+            {{
+              $t("dashboard.rag.conversation.scores", {
+                vector: citation.vectorSimilarity.toFixed(3),
+                rerank: citation.rerankScore.toFixed(3),
+              })
+            }}
           </p>
         </details>
       </div>
@@ -92,7 +102,7 @@ const traceLabel = computed(() => {
           "
         />
         <span class="sr-only">
-          Customer marked this answer as {{ message.feedback }}
+          {{ $t(`dashboard.rag.conversation.feedback.${message.feedback}`) }}
         </span>
       </template>
     </p>

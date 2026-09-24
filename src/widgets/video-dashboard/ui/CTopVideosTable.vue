@@ -1,18 +1,29 @@
 <script setup lang="ts">
-import { ref } from "vue"
-import { CPlatformPill, CVideoThumb, type TopVideo } from "@/entities/video"
+import { computed, ref } from "vue"
+import { useI18n } from "vue-i18n"
+import {
+  CPlatformPill,
+  CVideoThumb,
+  useVideoLabels,
+  type TopVideo,
+} from "@/entities/video"
 import { CBadge } from "@/shared/ui"
 import CSegmentedControl from "./CSegmentedControl.vue"
 
 defineProps<{ videos: TopVideo[] }>()
 
+const { t } = useI18n()
+const { period, day } = useVideoLabels()
+
 type Range = "7" | "30" | "all"
 const range = ref<Range>("30")
-const RANGES: ReadonlyArray<{ value: Range; label: string }> = [
-  { value: "7", label: "7 kun" },
-  { value: "30", label: "30 kun" },
-  { value: "all", label: "Barchasi" },
-]
+const ranges = computed<ReadonlyArray<{ value: Range; label: string }>>(() => [
+  { value: "7", label: t("dashboard.video.dashboard.topVideos.days7") },
+  { value: "30", label: t("dashboard.video.dashboard.topVideos.days30") },
+  { value: "all", label: t("dashboard.video.dashboard.topVideos.all") },
+])
+
+const COLUMNS = ["video", "platform", "date", "views", "engagement"] as const
 </script>
 
 <template>
@@ -23,9 +34,9 @@ const RANGES: ReadonlyArray<{ value: Range; label: string }> = [
       class="flex flex-wrap items-center justify-between gap-3 px-5 py-4 sm:px-6"
     >
       <h2 class="text-[16px] font-semibold text-[#15151B]">
-        Top performing videos
+        {{ $t("dashboard.video.dashboard.topVideos.title") }}
       </h2>
-      <CSegmentedControl v-model="range" :options="RANGES" />
+      <CSegmentedControl v-model="range" :options="ranges" />
     </header>
 
     <div class="overflow-x-auto">
@@ -35,12 +46,12 @@ const RANGES: ReadonlyArray<{ value: Range; label: string }> = [
             class="border-y border-[#EEEEEA] text-[11px] font-semibold uppercase tracking-[0.06em] text-[#9A9AA2]"
           >
             <th class="w-10 py-2.5 pl-5 pr-2 sm:pl-6">#</th>
-            <th class="px-2 py-2.5">Video</th>
-            <th class="px-2 py-2.5">Platforma</th>
-            <th class="px-2 py-2.5">Sana</th>
-            <th class="px-2 py-2.5">Ko'rishlar</th>
-            <th class="px-2 py-2.5">Engagement</th>
-            <th class="px-2 py-2.5 pr-5 sm:pr-6">O'sish</th>
+            <th v-for="column in COLUMNS" :key="column" class="px-2 py-2.5">
+              {{ $t(`dashboard.video.dashboard.topVideos.columns.${column}`) }}
+            </th>
+            <th class="px-2 py-2.5 pr-5 sm:pr-6">
+              {{ $t("dashboard.video.dashboard.topVideos.columns.growth") }}
+            </th>
           </tr>
         </thead>
         <tbody class="divide-y divide-[#F1F1EE]">
@@ -64,7 +75,7 @@ const RANGES: ReadonlyArray<{ value: Range; label: string }> = [
                     {{ video.title }}
                   </p>
                   <p class="truncate text-[11.5px] text-[#9A9AA2]">
-                    {{ video.period }}
+                    {{ period(video.date, video.week) }}
                   </p>
                 </div>
               </div>
@@ -73,7 +84,7 @@ const RANGES: ReadonlyArray<{ value: Range; label: string }> = [
               <CPlatformPill :platform="video.platform" />
             </td>
             <td class="px-2 py-3 text-[13px] text-[#73737D]">
-              {{ video.date }}
+              {{ day(video.date) }}
             </td>
             <td class="px-2 py-3 text-[14px] font-bold tabular-nums text-[#15151B]">
               {{ video.views }}

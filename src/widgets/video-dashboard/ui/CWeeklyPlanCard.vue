@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed } from "vue"
-import type { WeekPlan } from "@/entities/video"
+import { useVideoLabels, type WeekPlan } from "@/entities/video"
 import { CAppButton, CBadge, CIcon } from "@/shared/ui"
 
 const props = defineProps<{ plan: WeekPlan; nextPost?: string }>()
+
+const { period } = useVideoLabels()
 
 const ratio = computed(() =>
   props.plan.total ? props.plan.produced / props.plan.total : 0
@@ -14,7 +16,9 @@ const ratio = computed(() =>
   <section
     class="rounded-2xl border border-[#E5E5E1] bg-white p-5 shadow-[0_12px_32px_rgba(22,22,27,0.04)]"
   >
-    <h2 class="text-[15px] font-semibold text-[#15151B]">Bu haftaning plani</h2>
+    <h2 class="text-[15px] font-semibold text-[#15151B]">
+      {{ $t("dashboard.video.dashboard.weeklyPlan.title") }}
+    </h2>
 
     <div class="mt-4 flex items-start justify-between gap-3">
       <div class="flex items-start gap-2.5">
@@ -25,17 +29,21 @@ const ratio = computed(() =>
         </span>
         <div>
           <p class="text-[14px] font-semibold text-[#15151B]">
-            {{ plan.title }}
+            {{ period(plan.start, plan.week) }}
           </p>
-          <p class="mt-0.5 text-[12px] text-[#8A8A94]">{{ plan.range }}</p>
+          <p class="mt-0.5 text-[12px] text-[#8A8A94]">{{ $t(plan.range) }}</p>
         </div>
       </div>
-      <CBadge tone="accent" dot>Ongoing</CBadge>
+      <CBadge tone="accent" dot>
+        {{ $t("dashboard.video.planStatus.ongoing") }}
+      </CBadge>
     </div>
 
     <div class="mt-4">
       <div class="flex items-center justify-between text-[12.5px]">
-        <span class="text-[#73737D]">Chiqarilgan videolar</span>
+        <span class="text-[#73737D]">
+          {{ $t("dashboard.video.dashboard.weeklyPlan.produced") }}
+        </span>
         <span class="font-semibold tabular-nums text-[#15151B]">
           {{ plan.progress }}
         </span>
@@ -53,7 +61,7 @@ const ratio = computed(() =>
       class="mt-4 flex items-center gap-2 rounded-xl border border-[#EEEEEA] bg-[#FAFAF9] px-3 py-2.5 text-[12.5px] text-[#55555F]"
     >
       <CIcon name="clock" class="h-4 w-4 text-[#84848E]" />
-      Keyingi post · {{ nextPost }}
+      {{ $t("dashboard.video.dashboard.weeklyPlan.nextPost", { time: nextPost }) }}
     </div>
 
     <CAppButton
@@ -62,7 +70,7 @@ const ratio = computed(() =>
       class="mt-4 w-full"
       :to="{ name: 'VideoPlans' }"
     >
-      Planni ochish
+      {{ $t("dashboard.video.dashboard.weeklyPlan.open") }}
     </CAppButton>
   </section>
 </template>

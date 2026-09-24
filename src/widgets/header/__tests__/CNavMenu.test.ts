@@ -39,10 +39,20 @@ describe("CNavMenu", () => {
   it("links every live service and tags the rest as coming soon", () => {
     const wrapper = mountMenu("services")
     const hrefs = wrapper.findAll("#services-menu a").map((a) => a.attributes("href"))
+    const columns = wrapper
+      .findAll("#services-menu ul")
+      .map((ul) => ul.findAll("li").map((li) => li.text()))
 
-    expect(hrefs).toEqual(expect.arrayContaining(Object.values(SERVICE_PATHS)))
-    expect(wrapper.text()).toContain("Ovozli agent yechimlari")
-    expect(wrapper.text()).toContain("Sohalar")
+    expect(hrefs).toEqual(Object.values(SERVICE_PATHS))
+    expect(columns).toEqual([
+      ["RAG Agent", "Ovozli agent", "Video generator"],
+      [
+        "Market Radar Tez kunda",
+        "Personal bloglar Tez kunda",
+        "Fermerlar Tez kunda",
+        "YaTT Tez kunda",
+      ],
+    ])
     expect(wrapper.text().match(/Tez kunda/g)).toHaveLength(soonCount(SERVICES_MENU))
   })
 

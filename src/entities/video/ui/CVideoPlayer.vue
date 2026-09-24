@@ -51,7 +51,7 @@ const onError = () => {
       controls
       playsinline
       preload="metadata"
-      aria-label="Yaratilgan video"
+      :aria-label="$t('dashboard.video.studio.player.label')"
       class="h-full w-full object-contain"
       @loadstart="loading = true"
       @loadedmetadata="loading = false"
@@ -66,7 +66,9 @@ const onError = () => {
       class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[#17171C]/90 text-center text-white"
     >
       <CIcon name="loader-circle" class="h-8 w-8 animate-spin text-[#B7AEFF]" />
-      <span class="text-[12.5px] font-medium">Video yuklanmoqda…</span>
+      <span class="text-[12.5px] font-medium">
+        {{ $t("dashboard.video.studio.player.loading") }}
+      </span>
     </div>
     <div
       v-else-if="failed"
@@ -74,14 +76,14 @@ const onError = () => {
     >
       <CIcon name="triangle-alert" class="h-7 w-7 text-[#F3C27A]" />
       <p class="max-w-[240px] text-[12.5px] leading-5">
-        Video hozir ochilmadi. Qayta urinib ko‘ring yoki yuklab oling.
+        {{ $t("dashboard.video.studio.player.failed") }}
       </p>
       <button
         type="button"
         class="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-xs font-semibold transition hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         @click="retry"
       >
-        Qayta yuklash
+        {{ $t("dashboard.video.studio.player.reload") }}
       </button>
     </div>
   </div>

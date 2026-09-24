@@ -11,13 +11,6 @@ interface FooterLink {
   to: RouteLocationRaw
 }
 
-const productLinks: FooterLink[] = [
-  { key: "nav.features", to: { path: "/product", hash: "#features" } },
-  { key: "nav.how", to: { path: "/product", hash: "#how" } },
-  { key: "nav.voice", to: { path: "/product", hash: "#voice" } },
-  { key: "nav.pricing", to: { path: "/pricing" } },
-]
-
 const companyLinks: FooterLink[] = [
   { key: "nav.about", to: { path: "/about" } },
   { key: "nav.team", to: { path: "/about", hash: "#team" } },
@@ -31,7 +24,7 @@ const socials = SOCIALS
 <template>
   <footer class="section-ground border-t border-sand-200">
     <div class="container relative z-10 py-14">
-      <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
         <div class="max-w-xs">
           <RouterLink to="/" aria-label="Do'ppi AI">
             <CLogo surface="light" />
@@ -62,20 +55,6 @@ const socials = SOCIALS
                 class="text-sm text-sand-500 transition-colors hover:text-sand-950"
               >
                 {{ $t(`services.${item.key}.name`) }}
-              </RouterLink>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-semibold text-sand-950">{{ $t("footer.product") }}</h3>
-          <ul class="mt-4 space-y-3">
-            <li v-for="link in productLinks" :key="link.key">
-              <RouterLink
-                :to="link.to"
-                class="text-sm text-sand-500 transition-colors hover:text-sand-950"
-              >
-                {{ $t(link.key) }}
               </RouterLink>
             </li>
           </ul>

@@ -3,7 +3,7 @@ import {
   type ChatMessage,
   type ConversationDetail,
 } from "@/entities/rag-agent"
-import { formatClockTime, formatDayLabel } from "@/shared/lib"
+import { formatClockTime, formatDate, formatDayLabel } from "@/shared/lib"
 
 export interface MessageGroup {
   key: string
@@ -12,10 +12,13 @@ export interface MessageGroup {
   messages: ChatMessage[]
 }
 
+type Translate = (key: string, named?: Record<string, unknown>) => string
+
 /** Splits a transcript into calendar-day sections, keeping message order. */
 export function groupMessagesByDay(
   messages: ChatMessage[],
-  now = new Date()
+  now = new Date(),
+  locale = "en"
 ): MessageGroup[] {
   const groups: MessageGroup[] = []
   for (const message of messages) {
@@ -26,7 +29,7 @@ export function groupMessagesByDay(
     } else {
       groups.push({
         key,
-        label: `${formatDayLabel(message.sentAt, now)} · ${formatClockTime(message.sentAt)}`,
+        label: `${formatDayLabel(message.sentAt, now, locale)} · ${formatClockTime(message.sentAt)}`,
         messages: [message],
       })
     }
@@ -34,20 +37,31 @@ export function groupMessagesByDay(
   return groups
 }
 
-/** Plain-text transcript for "Export transcript". */
-export function transcriptToText(conversation: ConversationDetail): string {
+/** Plain-text transcript for "Export transcript", in the language of `t`. */
+export function transcriptToText(
+  conversation: ConversationDetail,
+  t: Translate,
+  locale = "en"
+): string {
+  const file = (key: string, named: Record<string, unknown>) =>
+    t(`dashboard.rag.conversation.file.${key}`, named)
   const authorName = (message: ChatMessage) =>
     ({
       customer: conversation.customer.name,
       agent: conversation.handledBy,
-      operator: "Operator",
+      operator: t("dashboard.rag.conversation.operator"),
     })[message.author]
 
   const lines = [
-    `Conversation ${conversation.id}`,
-    `Channel: ${CHANNELS[conversation.channel].product}`,
-    `Customer: ${conversation.customer.name} (${conversation.customer.contact})`,
-    `Started: ${new Date(conversation.startedAt).toLocaleString("en-GB")}`,
+    file("title", { id: conversation.id }),
+    file("channel", { channel: t(CHANNELS[conversation.channel].product) }),
+    file("customer", {
+      name: conversation.customer.name,
+      contact: conversation.customer.contact,
+    }),
+    file("started", {
+      date: formatDate(conversation.startedAt, locale, { withTime: true }),
+    }),
     "",
   ]
 
@@ -59,7 +73,7 @@ export function transcriptToText(conversation: ConversationDetail): string {
       const sources = message.citations
         .map((citation) => `${citation.document} · ${citation.location}`)
         .join("; ")
-      lines.push(`    Sources: ${sources}`)
+      lines.push(`    ${file("sources", { sources })}`)
     }
   }
 

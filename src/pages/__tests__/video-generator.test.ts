@@ -1,6 +1,8 @@
 import { createHead } from "@unhead/vue/client"
 import { flushPromises, mount } from "@vue/test-utils"
 import { createPinia, setActivePinia } from "pinia"
+import { createI18n } from "vue-i18n"
+import { messages } from "@/shared/config/i18n"
 import { useAuthStore } from "@/features/auth"
 import {
   CVideoPreviewDialog,
@@ -75,7 +77,11 @@ const mountPage = async () => {
   auth.activeBusinessId = "business-1"
   const wrapper = mount(PVideoStudio, {
     global: {
-      plugins: [pinia, createHead()],
+      plugins: [
+        pinia,
+        createHead(),
+        createI18n({ legacy: false, locale: "uz", fallbackLocale: "en", messages }),
+      ],
       stubs: { RouterLink: true, teleport: true },
     },
   })
@@ -136,7 +142,7 @@ describe("video studio integration", () => {
 
   it("offers model-specific resolutions from the catalog", async () => {
     const wrapper = await mountPage()
-    const model = wrapper.find('[role="combobox"][aria-label="Video model"]')
+    const model = wrapper.find('[role="combobox"][aria-label="Video modeli"]')
 
     expect(model.exists()).toBe(true)
     await model.trigger("click")
@@ -147,10 +153,10 @@ describe("video studio integration", () => {
     await flushPromises()
 
     expect(
-      wrapper.find('[role="combobox"][aria-label="Resolution"]').text()
+      wrapper.find('[role="combobox"][aria-label="Sifat"]').text()
     ).toContain("480p")
     expect(
-      wrapper.find('[role="combobox"][aria-label="Duration"]').text()
+      wrapper.find('[role="combobox"][aria-label="Davomiylik"]').text()
     ).toContain("8s")
     expect(wrapper.text()).toContain("Model B")
     wrapper.unmount()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue"
-import { useHead } from "@unhead/vue"
+import { useI18n } from "vue-i18n"
 import { ragAgentApi, useRagAgentStore } from "@/entities/rag-agent"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { useToast } from "@/shared/lib"
@@ -14,8 +14,7 @@ interface PlaygroundMessage {
   latencyMs?: number
 }
 
-useHead({ title: "RAG playground — Do'ppi AI" })
-
+const { t } = useI18n()
 const auth = useAuthStore()
 const store = useRagAgentStore()
 const toast = useToast()
@@ -59,7 +58,10 @@ const send = async () => {
       latencyMs: result.latency_ms,
     })
   } catch (error) {
-    toast.error("RAG request failed", messageForProblem(error, "Try again."))
+    toast.error(
+      t("dashboard.rag.playground.failed"),
+      messageForProblem(error, t("dashboard.common.retry"))
+    )
   } finally {
     sending.value = false
   }
@@ -71,27 +73,26 @@ const send = async () => {
     <header class="flex items-start justify-between gap-4">
       <div>
         <h2 class="text-xl font-semibold tracking-tight text-[#15151B]">
-          Live playground
+          {{ $t("dashboard.rag.playground.title") }}
         </h2>
         <p class="mt-1 text-[13px] text-[#6A6A74]">
-          Queries use the selected model, indexed knowledge and production
-          retrieval pipeline.
+          {{ $t("dashboard.rag.playground.description") }}
         </p>
       </div>
-      <CAppButton :to="{ name: 'RagAgent' }" icon="arrow-left"
-        >Agent</CAppButton
-      >
+      <CAppButton :to="{ name: 'RagAgent' }" icon="arrow-left">
+        {{ $t("dashboard.rag.playground.back") }}
+      </CAppButton>
     </header>
 
     <CEmptyState
       v-if="store.agentState === 'ready' && !store.agent"
       icon="bot"
-      title="Create an agent first"
-      description="The playground needs an indexed knowledge base and a live agent."
+      :title="$t('dashboard.rag.playground.noAgentTitle')"
+      :description="$t('dashboard.rag.playground.noAgentDescription')"
     >
-      <CAppButton variant="primary" :to="{ name: 'RagAgentCreate' }"
-        >Create agent</CAppButton
-      >
+      <CAppButton variant="primary" :to="{ name: 'RagAgentCreate' }">
+        {{ $t("dashboard.rag.createAgent") }}
+      </CAppButton>
     </CEmptyState>
 
     <section
@@ -106,10 +107,10 @@ const send = async () => {
           <div>
             <CIcon name="sparkles" class="mx-auto h-8 w-8 text-[#5B4BE8]" />
             <p class="mt-3 text-sm font-medium text-[#15151B]">
-              Ask a grounded question
+              {{ $t("dashboard.rag.playground.emptyTitle") }}
             </p>
             <p class="mt-1 text-xs text-[#84848E]">
-              Answers include the retrieved document chunks.
+              {{ $t("dashboard.rag.playground.emptyText") }}
             </p>
           </div>
         </div>
@@ -136,7 +137,12 @@ const send = async () => {
                 v-for="source in message.sources"
                 :key="`${source.document_name}-${source.chunk_id}`"
               >
-                {{ source.document_name }} · chunk {{ source.chunk_id }}
+                {{
+                  $t("dashboard.rag.playground.chunk", {
+                    document: source.document_name,
+                    id: source.chunk_id,
+                  })
+                }}
               </li>
             </ul>
             <p v-if="message.latencyMs" class="mt-2 text-[10px] opacity-70">
@@ -152,7 +158,7 @@ const send = async () => {
         <input
           v-model="draft"
           class="min-w-0 flex-1 rounded-xl border border-[#D8D8D3] px-4 py-2.5 text-sm outline-none focus:border-[#5B4BE8]"
-          placeholder="Ask about your uploaded documents…"
+          :placeholder="$t('dashboard.rag.playground.placeholder')"
           :disabled="sending || !store.agent"
         />
         <CAppButton
@@ -160,8 +166,9 @@ const send = async () => {
           icon="send"
           :loading="sending"
           type="submit"
-          >Send</CAppButton
         >
+          {{ $t("dashboard.common.send") }}
+        </CAppButton>
       </form>
     </section>
   </div>

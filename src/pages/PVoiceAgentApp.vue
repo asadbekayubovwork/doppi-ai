@@ -1,14 +1,10 @@
-<script setup lang="ts">
-import { useHead } from "@unhead/vue"
-
-useHead({ title: "Ovozli agent — Do'ppi AI" })
-</script>
-
 <template>
   <div
     class="flex min-h-[420px] items-center justify-center rounded-2xl border border-dashed border-[#DEDEE6] bg-white"
   >
     <!-- Shell only: the section's content lands here. -->
-    <p class="text-sm text-[#A2A2AE]">Ovozli agent</p>
+    <p class="text-sm text-[#A2A2AE]">
+      {{ $t("dashboard.routes.voice.title") }}
+    </p>
   </div>
 </template>

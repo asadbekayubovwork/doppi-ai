@@ -2,7 +2,8 @@ import type { AgentStats } from "@/entities/rag-agent"
 import { formatCount, formatPercent } from "@/shared/lib"
 
 export interface AgentMetric {
-  label: string
+  /** Names the metric; its label is `dashboard.rag.metrics.<key>`. */
+  key: string
   value: string
   /** Formatted change against the previous period; `null` when flat. */
   change: string | null
@@ -11,13 +12,13 @@ export interface AgentMetric {
 }
 
 const metric = (
-  label: string,
+  key: string,
   value: string,
   change: number,
   formatChange: (change: number) => string,
   higherIsBetter: boolean
 ): AgentMetric => ({
-  label,
+  key,
   value,
   change: change === 0 ? null : formatChange(change),
   improved: higherIsBetter ? change > 0 : change < 0,
@@ -36,35 +37,35 @@ export function buildAgentMetrics(stats: AgentStats): AgentMetric[] {
 
   return [
     metric(
-      "Conversations",
+      "conversations",
       formatCount(stats.conversations),
       stats.conversationsChange,
       percentChange,
       true
     ),
     metric(
-      "Messages · 30 days",
+      "messages30d",
       formatCount(stats.messages30d),
       stats.messagesChange,
       percentChange,
       true
     ),
     metric(
-      "Avg. response time",
+      "avgResponse",
       orNoData(`${(stats.avgResponseMs / 1000).toFixed(1)}s`),
       stats.avgResponseChangeMs,
       millisecondChange,
       false
     ),
     metric(
-      "Answer accuracy",
+      "accuracy",
       orNoData(formatPercent(stats.answerAccuracy)),
       stats.answerAccuracyChange,
       percentChange,
       true
     ),
     metric(
-      "Escalated to human",
+      "escalation",
       orNoData(formatPercent(stats.escalationRate)),
       stats.escalationRateChange,
       percentChange,

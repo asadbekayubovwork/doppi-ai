@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, useId } from "vue"
+import { useI18n } from "vue-i18n"
 import { formatCount } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 import CSetupSection from "./CSetupSection.vue"
@@ -10,6 +11,7 @@ defineEmits<{ useTemplate: [] }>()
 
 const prompt = defineModel<string>({ required: true })
 
+const { locale } = useI18n()
 const fieldId = useId()
 const isOverLimit = computed(() => props.tokens > props.limit)
 </script>
@@ -18,16 +20,18 @@ const isOverLimit = computed(() => props.tokens > props.limit)
   <CSetupSection
     :step="4"
     :icon="icon"
-    title="System prompt"
-    hint="Applies to every conversation on every channel"
+    :title="$t('dashboard.rag.prompt.title')"
+    :hint="$t('dashboard.rag.prompt.hint')"
   >
     <template v-if="$slots.aside" #aside><slot name="aside" /></template>
-    <label :for="fieldId" class="sr-only">System prompt</label>
+    <label :for="fieldId" class="sr-only">
+      {{ $t("dashboard.rag.prompt.title") }}
+    </label>
     <textarea
       :id="fieldId"
       v-model="prompt"
       rows="7"
-      placeholder="Tell the agent who it is, what it may answer and when to hand the chat to a human."
+      :placeholder="$t('dashboard.rag.prompt.placeholder')"
       class="block w-full resize-y rounded-xl border bg-white px-3.5 py-3 text-[13px] leading-6 text-[#15151B] outline-none transition placeholder:text-[#A1A1AA] focus:ring-2"
       :class="
         isOverLimit
@@ -43,7 +47,12 @@ const isOverLimit = computed(() => props.tokens > props.limit)
         class="text-xs tabular-nums"
         :class="isOverLimit ? 'text-[#C42B2B]' : 'text-[#84848E]'"
       >
-        {{ formatCount(tokens) }} / {{ formatCount(limit) }} tokens
+        {{
+          $t("dashboard.rag.prompt.tokens", {
+            count: formatCount(tokens, locale),
+            limit: formatCount(limit, locale),
+          })
+        }}
       </p>
       <!-- A page that passes #action owns this corner, even when its content
            is empty for the moment. -->
@@ -55,7 +64,7 @@ const isOverLimit = computed(() => props.tokens > props.limit)
         @click="$emit('useTemplate')"
       >
         <CIcon name="wand-sparkles" class="h-4 w-4" />
-        Use a template
+        {{ $t("dashboard.rag.prompt.useTemplate") }}
       </button>
     </div>
   </CSetupSection>

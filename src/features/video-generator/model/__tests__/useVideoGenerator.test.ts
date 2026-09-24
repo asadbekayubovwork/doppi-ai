@@ -1,10 +1,15 @@
 import { defineComponent } from "vue"
 import { createPinia, setActivePinia } from "pinia"
 import { flushPromises, mount, type VueWrapper } from "@vue/test-utils"
+import { createI18n } from "vue-i18n"
+import { messages } from "@/shared/config/i18n"
 import { useAuthStore } from "@/features/auth"
 import { videoApi } from "../../api/videoApi"
 import type { VideoJob, VideoModelCatalog } from "../../api/types"
 import { useVideoGenerator } from "../useVideoGenerator"
+
+const i18n = () =>
+  createI18n({ legacy: false, locale: "uz", fallbackLocale: "en", messages })
 
 const modelCatalog: VideoModelCatalog = {
   provider: "magic_hour",
@@ -81,7 +86,7 @@ const mountController = async () => {
         return () => null
       },
     }),
-    { global: { plugins: [pinia] } }
+    { global: { plugins: [pinia, i18n()] } }
   )
   await flushPromises()
 }
