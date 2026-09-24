@@ -49,7 +49,9 @@ const analytics: AdminAnalytics = {
 }
 
 describe("super admin dashboards", () => {
-  afterEach(() => vi.restoreAllMocks())
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
 
   it("loads real analytics, switches service dashboard and changes the period", async () => {
     const analyticsRequest = vi
