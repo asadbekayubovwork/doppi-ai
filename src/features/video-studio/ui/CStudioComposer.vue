@@ -12,6 +12,8 @@ defineProps<{
   models: VideoModel[]
   modelsLoading: boolean
   modelError: string | null
+  estimatedCredits: number | null
+  availableCredits: number | null
 }>()
 
 defineEmits<{ submit: []; retryModels: [] }>()
@@ -298,12 +300,35 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
       </details>
 
       <div class="mt-auto border-t border-[#ECECE8] pt-4">
+        <p class="mb-3 text-center text-xs text-[#777782]">
+          Taxminiy sarf:
+          {{
+            estimatedCredits === null
+              ? "hisoblanmoqda"
+              : `${estimatedCredits.toLocaleString("uz-UZ")} kredit`
+          }}
+        </p>
+        <p
+          v-if="
+            estimatedCredits !== null &&
+            availableCredits !== null &&
+            estimatedCredits > availableCredits
+          "
+          class="mb-3 text-center text-xs font-semibold text-amber-700"
+        >
+          Balans yetarli emas.
+        </p>
         <CAppButton
           type="submit"
           variant="primary"
           icon="wand-sparkles"
           class="w-full"
-          :disabled="!canCreate"
+          :disabled="
+            !canCreate ||
+            (estimatedCredits !== null &&
+              availableCredits !== null &&
+              estimatedCredits > availableCredits)
+          "
           :loading="isCreating"
         >
           {{ text("submit") }}

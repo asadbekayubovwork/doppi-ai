@@ -4,6 +4,8 @@ import { createI18n } from "vue-i18n"
 import { createHead } from "@unhead/vue/client"
 import { createRouter, createWebHistory } from "vue-router"
 import { messages } from "@/shared/config/i18n"
+import { billingApi } from "@/features/billing"
+import { flushPromises } from "@vue/test-utils"
 
 // Note: TypeScript errors in test files are expected and can be ignored
 import PProduct from "../PProduct.vue"
@@ -64,13 +66,17 @@ describe("routed pages", () => {
     wrapper.unmount()
   })
 
-  it("renders the pricing page with all four tiers", () => {
+  it("renders the pricing page with API-managed introductory credits", async () => {
+    vi.spyOn(billingApi, "intro").mockResolvedValue({ credits: 1000, days: 7, free_video_model: "gemini-omni-1.1" })
+    vi.spyOn(billingApi, "rates").mockResolvedValue([])
+    vi.spyOn(billingApi, "packs").mockResolvedValue([])
     const wrapper = mountPage(PPricing)
+    await flushPromises()
     const text = wrapper.text()
 
     expect(text).toContain("Ochiq va tushunarli narxlar")
-    expect(text).toContain("Starter")
-    expect(text).toContain("Enterprise")
+    expect(text).toContain("Boshlang‘ich")
+    expect(text).toContain("7 kun amal qiladi")
     // The FAQ lives on the home page only.
     expect(wrapper.find("#faq").exists()).toBe(false)
     wrapper.unmount()

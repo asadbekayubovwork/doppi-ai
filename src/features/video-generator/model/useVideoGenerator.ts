@@ -1,6 +1,7 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue"
 import { useI18n } from "vue-i18n"
 import { messageForProblem, useAuthStore } from "@/features/auth"
+import { useBillingStore } from "@/features/billing"
 import { useToast } from "@/shared/lib"
 import { resolveMediaUrl, videoApi } from "../api/videoApi"
 import type {
@@ -21,6 +22,7 @@ export const useVideoGenerator = () => {
   const { t } = useI18n()
   const toastText = (key: string) => t(`dashboard.video.studio.toasts.${key}`)
   const auth = useAuthStore()
+  const billing = useBillingStore()
   const toast = useToast()
   const isCreating = ref(false)
   const pollInFlight = ref(false)
@@ -121,6 +123,12 @@ export const useVideoGenerator = () => {
     jobs.value[index] = next
     if (
       previous.status !== next.status &&
+      !ACTIVE_VIDEO_STATUSES.has(next.status)
+    ) {
+      void billing.load(businessId.value)
+    }
+    if (
+      previous.status !== next.status &&
       ACTIVE_VIDEO_STATUSES.has(previous.status)
     ) {
       if (next.status === "completed") {
@@ -181,6 +189,7 @@ export const useVideoGenerator = () => {
       const job = await videoApi.create(workspace, payload, attempt.key)
       if (!isCurrent(workspace, epoch)) return
       replaceJob(job)
+      void billing.load(workspace)
       // This is the job the studio result panel should now track.
       sessionJobId.value = job.id
       if (job.status === "submission_unknown" || job.status === "submitting") {

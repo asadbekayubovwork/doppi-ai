@@ -329,7 +329,7 @@
     ]
   },
   "pricing": {
-    "trialNote": "Barcha rejalar uchun 14 kunlik bepul sinov. Karta talab qilinmaydi.",
+    "trialNote": "Yangi foydalanuvchiga boshlang‘ich kredit bir marta beriladi. Amaldagi miqdor va muddat narxlar sahifasida ko‘rsatiladi.",
     "popularLabel": "Eng ommabop",
     "pageTitle": "Ochiq va tushunarli narxlar",
     "pageSubtitle": "Biznesingiz bosqichiga mos rejani tanlang — istalgan vaqtda o'zgartirishingiz mumkin.",
@@ -478,7 +478,7 @@
       },
       {
         "q": "Bepul sinov qanday ishlaydi?",
-        "a": "Barcha rejalar uchun 14 kunlik bepul sinov mavjud, karta talab qilinmaydi. Istalgan vaqtda bekor qilishingiz mumkin."
+        "a": "Yangi foydalanuvchiga bir martalik boshlang‘ich kredit beriladi. Uning miqdori va amal qilish muddati narxlar sahifasida ko‘rsatiladi; karta talab qilinmaydi."
       }
     ]
   },
@@ -606,8 +606,8 @@
         {
           "heading": "Obuna, sinov va to'lovlar",
           "paragraphs": [
-            "Do'ppi AI obuna asosidagi rejalarni taklif qiladi: Starter ($19/oy), Growth ($49/oy), Pro ($99/oy) va yirik korxonalar uchun maxsus narxdagi Enterprise reja.",
-            "Barcha rejalar uchun 14 kunlik bepul sinov mavjud. To'lovlar tanlangan reja asosida davriy (oylik) tarzda undiriladi. Obunani istalgan vaqtda bekor qilishingiz mumkin — bekor qilish joriy to'lov davri oxirida kuchga kiradi.",
+            "Do'ppi AI xizmatlari kredit asosida hisoblanadi. Amaldagi paketlar, narxlar va kredit miqdori narxlar sahifasida ko‘rsatiladi.",
+            "Yangi akkauntga bir martalik boshlang‘ich kredit beriladi; uning amal qilish muddati narxlar sahifasida ko‘rsatiladi. To‘lov faqat alohida tasdiqlangan xarid uchun olinadi.",
             "Narxlar va tarkib oldindan xabar berilgan holda o'zgarishi mumkin. Qonun bilan talab qilinmagan hollarda, to'langan summalar qaytarilmaydi."
           ],
           "bullets": []
@@ -691,7 +691,7 @@
     },
     "pricing": {
       "title": "Narxlar — Do'ppi AI",
-      "description": "Do'ppi AI rejalari: Starter, Growth, Pro va Enterprise. Barcha rejalar uchun 14 kunlik bepul sinov."
+      "description": "Do'ppi AI kredit paketlari va xizmatlar bo‘yicha sarf narxlari. Yangi akkaunt uchun boshlang‘ich kredit."
     },
     "about": {
       "title": "Biz haqimizda — Do'ppi AI",
@@ -793,7 +793,7 @@
       },
       "cta": {
         "title": "RAG Agentni biznesingizda sinab ko'ring",
-        "subtitle": "14 kunlik bepul sinov — hujjatlaringizni yuklang va agent qanday javob berishini o'zingiz ko'ring."
+        "subtitle": "Boshlang‘ich kredit bilan hujjatlaringizni yuklang va agent javobini sinab ko‘ring."
       },
       "landing": {
         "title": "Ma'lumotlaringizni yuklang — agent mijozga o'zi javob bersin",
@@ -1109,7 +1109,7 @@
       },
       "cta": {
         "title": "Ovozli agentni sinab ko'ring",
-        "subtitle": "14 kunlik bepul sinov — agent biznesingiz uchun qanday gaplashishini eshiting."
+        "subtitle": "Boshlang‘ich kredit bilan ovozli agent imkoniyatlarini sinab ko‘ring."
       },
       "landing": {
         "title": "Instagramda lead qoldirdi — 60 soniyada AI qo'ng'iroq qildi",
@@ -1422,9 +1422,30 @@
           }
         ]
       },
+      "faq": {
+        "title": "Video generator haqida savollar",
+        "items": [
+          {
+            "q": "Video yaratish uchun montaj tajribasi kerakmi?",
+            "a": "Yo'q. Nima kerakligini oddiy so'zlar bilan yozasiz, qolganini AI bajaradi."
+          },
+          {
+            "q": "Qanday kontent yaratish mumkin?",
+            "a": "Reels va qisqa videolar, reklama roliklari, rasmlar, reklama matnlari va ovoz."
+          },
+          {
+            "q": "Videoga o'zbek tilida ovoz qo'shsa bo'ladimi?",
+            "a": "Ha, kontent o'zbek va rus tillarida yaratiladi."
+          },
+          {
+            "q": "Qancha turadi?",
+            "a": "Narxlar sahifasida amaldagi kredit paketlari va xizmatlar bo‘yicha sarf stavkalarini ko‘ring."
+          }
+        ]
+      },
       "cta": {
         "title": "Birinchi videongizni yarating",
-        "subtitle": "14 kunlik bepul sinov bilan boshlang."
+        "subtitle": "Boshlang‘ich kredit bilan ishni boshlang."
       },
       "landing": {
         "title": "Haftalik rejani tasdiqlang — videolar o'zi chiqib, o'zi joylanadi",
@@ -1881,11 +1902,16 @@
       "videoNew": "Yangi video",
       "usage": "Sarf va to'lovlar",
       "settings": "Sozlamalar",
+      "platformAdmin": "Platform admin",
       "expand": "{label} bo'limini ochish",
       "collapse": "{label} bo'limini yopish"
     },
     "balance": {
       "available": "Mavjud balans",
+      "creditUnit": "kredit",
+      "bonusExpiry": "Bonus {date} gacha amal qiladi",
+      "loadError": "Balansni yuklab bo‘lmadi",
+      "details": "Balans tafsiloti",
       "used": "${limit} oylik limitning {used}% ishlatilgan",
       "topUp": "Balansni to'ldirish"
     },
@@ -1957,6 +1983,10 @@
       "ragAdmin": {
         "title": "RAG administratsiyasi",
         "subtitle": "Modellar, narxlar va tenant limitlari"
+      },
+      "platformAdmin": {
+        "title": "Platform admin",
+        "subtitle": "Foydalanuvchilar va kredit siyosati"
       },
       "ragConversation": {
         "title": "Universal RAG Agent",

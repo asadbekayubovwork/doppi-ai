@@ -187,13 +187,19 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/app/admin/rag",
-    name: "RagAdmin",
+    redirect: "/app/admin?tab=rag",
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/app/admin",
+    name: "PlatformAdmin",
     meta: {
       layout: "DashboardLayout",
       requiresAuth: true,
-      heading: "ragAdmin",
+      requiresAdmin: true,
+      heading: "platformAdmin",
     },
-    component: () => import("./PRagAdmin.vue"),
+    component: () => import("./PPlatformAdmin.vue"),
   },
   {
     path: "/app/rag/conversations/:chatId",

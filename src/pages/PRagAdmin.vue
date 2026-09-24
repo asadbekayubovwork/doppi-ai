@@ -130,7 +130,7 @@ const saveTenant = async () => {
 </script>
 
 <template>
-  <main>
+  <section>
     <CEmptyState
       v-if="denied"
       icon="lock"
@@ -312,7 +312,7 @@ const saveTenant = async () => {
         </p>
       </section>
     </div>
-  </main>
+  </section>
 </template>
 
 <style scoped>
