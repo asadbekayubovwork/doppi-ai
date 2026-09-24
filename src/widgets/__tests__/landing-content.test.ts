@@ -1,7 +1,56 @@
-import { describe, it, expect, afterEach } from "vitest"
+import { describe, it, expect, afterEach, vi } from "vitest"
 import { mount, enableAutoUnmount, flushPromises } from "@vue/test-utils"
+import { ref } from "vue"
 import { createI18n } from "vue-i18n"
 import { messages } from "@/shared/config/i18n"
+
+vi.mock("@/features/billing", () => ({
+  usePublicPricing: () => ({
+    plans: ref([
+      {
+        code: "starter",
+        monthly_price_cents: 2000,
+        credits_per_month: 5000,
+        yearly_discount_bps: 2000,
+      },
+      {
+        code: "pro",
+        monthly_price_cents: 6000,
+        credits_per_month: 18000,
+        yearly_discount_bps: 2000,
+      },
+      {
+        code: "business",
+        monthly_price_cents: 15000,
+        credits_per_month: 50000,
+        yearly_discount_bps: 2000,
+      },
+    ]),
+    packs: ref([
+      { id: "1", code: "mini", title: "Mini", price_cents: 500, credits: 1000 },
+      {
+        id: "2",
+        code: "medium",
+        title: "Medium",
+        price_cents: 2200,
+        credits: 5000,
+      },
+      { id: "3", code: "pro", title: "Pro", price_cents: 4800, credits: 12000 },
+    ]),
+    rates: ref([
+      { code: "voice_minute", credits_per_unit: 25, units_per_charge: 1 },
+      { code: "rag_answer_bundle", credits_per_unit: 5, units_per_charge: 10 },
+      { code: "rag_index_file", credits_per_unit: 10, units_per_charge: 1 },
+      { code: "video_sd_job", credits_per_unit: 100, units_per_charge: 1 },
+      { code: "video_hd_job", credits_per_unit: 200, units_per_charge: 1 },
+      { code: "planner_plan", credits_per_unit: 40, units_per_charge: 1 },
+      { code: "autopost_post", credits_per_unit: 5, units_per_charge: 1 },
+    ]),
+    intro: ref({ credits: 250, days: 7, free_video_model: "gemini-omni-1.1" }),
+    loading: ref(false),
+    error: ref(false),
+  }),
+}))
 
 // Note: TypeScript errors in test files are expected and can be ignored
 import CFeatures from "../features/ui/CFeatures.vue"
@@ -52,14 +101,20 @@ describe("landing sections render i18n list content", () => {
     const wrapper = mountWithI18n(CPricingList)
     const prices = () => wrapper.findAll("span.text-4xl").map((el) => el.text())
 
-    expect(wrapper.findAll("h3").map((h) => h.text())).toEqual(["Starter", "Pro", "Business"])
+    expect(wrapper.findAll("h3").map((h) => h.text())).toEqual([
+      "Starter",
+      "Pro",
+      "Business",
+    ])
     expect(prices()).toEqual(["$20", "$60", "$150"])
     expect(wrapper.text()).toMatch(/18\s000 kredit \/ oyiga/)
     expect(wrapper.text()).toContain("+33% bonus")
     // Starter lists what it lacks, crossed out.
     expect(wrapper.text().match(/Kirmaydi/g)).toHaveLength(2)
 
-    const yearly = wrapper.findAll("[aria-pressed]").find((b) => b.text().includes("Yillik"))
+    const yearly = wrapper
+      .findAll("[aria-pressed]")
+      .find((b) => b.text().includes("Yillik"))
     await yearly!.trigger("click")
     await flushPromises()
 
@@ -67,13 +122,14 @@ describe("landing sections render i18n list content", () => {
     expect(wrapper.text()).toContain("Yiliga $1,440 to'lanadi")
   })
 
-  it("prices every credit cost off the $0.004 credit", () => {
+  it("prices every credit cost from the published API catalog", () => {
     const wrapper = mountWithI18n(CCreditCosts)
 
     expect(wrapper.findAll("tbody tr")).toHaveLength(7)
     expect(wrapper.text()).toContain("1 kredit = $0.004")
     expect(wrapper.text()).toContain("25 kredit")
     expect(wrapper.text()).toContain("≈ $0.10")
+    expect(wrapper.text()).toContain("5 kredit")
   })
 
   it("shows each top-up pack with its per-credit price", () => {

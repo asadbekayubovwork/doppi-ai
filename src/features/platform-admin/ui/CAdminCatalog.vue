@@ -6,6 +6,7 @@ import { platformAdminApi, type AdminCatalog } from "../api/platformAdminApi"
 const catalog = ref<AdminCatalog | null>(null)
 const settings = reactive<Record<string, string>>({})
 const rates = reactive<Record<string, number>>({})
+const rateUnits = reactive<Record<string, number>>({})
 const draft = reactive({ code: "", title: "", credits: 0, price_cents: 0 })
 const reason = ref("")
 const error = ref("")
@@ -22,6 +23,12 @@ const load = async () => {
       rates,
       Object.fromEntries(
         catalog.value.rates.map((rate) => [rate.code, rate.credits_per_unit])
+      )
+    )
+    Object.assign(
+      rateUnits,
+      Object.fromEntries(
+        catalog.value.rates.map((rate) => [rate.code, rate.units_per_charge])
       )
     )
   } catch (cause) {
@@ -147,8 +154,7 @@ onMounted(() => void load())
             <label
               :for="`rate-${rate.code}`"
               class="block text-xs font-semibold text-[#747480]"
-              >{{ rate.code }} · kredit /
-              {{ rate.code === "rag_answer" ? "javob" : "sekund" }}</label
+              >{{ rate.code }} · kredit / birliklar</label
             >
             <div class="mt-2 flex gap-2">
               <input
@@ -158,12 +164,28 @@ onMounted(() => void load())
                 min="0"
                 step="1"
                 class="min-w-0 flex-1 rounded-lg border border-[#D8D8DE] bg-white px-3 py-2 text-sm"
+              /><input
+                v-model.number="rateUnits[rate.code]"
+                :aria-label="`${rate.code} birliklar soni`"
+                type="number"
+                min="1"
+                step="1"
+                class="w-24 rounded-lg border border-[#D8D8DE] bg-white px-3 py-2 text-sm"
               /><button
-                :disabled="saving || rates[rate.code] === rate.credits_per_unit"
+                :disabled="
+                  saving ||
+                  (rates[rate.code] === rate.credits_per_unit &&
+                    rateUnits[rate.code] === rate.units_per_charge)
+                "
                 class="rounded-lg bg-[#202026] px-3 text-sm font-semibold text-white disabled:opacity-40"
                 @click="
                   save(() =>
-                    platformAdminApi.rate(rate.code, rates[rate.code], reason)
+                    platformAdminApi.rate(
+                      rate.code,
+                      rates[rate.code],
+                      rateUnits[rate.code],
+                      reason
+                    )
                   )
                 "
               >
@@ -172,6 +194,76 @@ onMounted(() => void load())
             </div>
           </div>
         </div>
+      </div>
+      <div class="rounded-2xl border border-[#E8E8EC] bg-white p-6">
+        <h2 class="text-lg font-bold">Tarif rejalar</h2>
+        <p class="mt-1 text-xs text-[#8D8D99]">
+          To‘lov tizimi ulanmaguncha avtomatik xarid yo‘q.
+        </p>
+        <form
+          v-for="plan in catalog.plans"
+          :key="plan.code"
+          class="mt-3 grid gap-2 rounded-xl bg-[#F7F7F9] p-4 sm:grid-cols-[1fr_120px_130px_100px_auto]"
+          @submit.prevent="
+            save(() =>
+              platformAdminApi.plan(plan.code, {
+                monthly_price_cents: plan.monthly_price_cents,
+                credits_per_month: plan.credits_per_month,
+                yearly_discount_bps: plan.yearly_discount_bps,
+                active: plan.active,
+                reason,
+              })
+            )
+          "
+        >
+          <strong class="self-center text-sm capitalize">{{
+            plan.code
+          }}</strong>
+          <label class="text-xs"
+            >Narx (sent)
+            <input
+              v-model.number="plan.monthly_price_cents"
+              type="number"
+              min="1"
+              class="mt-1 w-full rounded-lg border border-[#D8D8DE] bg-white px-2 py-2 text-sm"
+            />
+          </label>
+          <label class="text-xs"
+            >Kredit / oy
+            <input
+              v-model.number="plan.credits_per_month"
+              type="number"
+              min="1"
+              class="mt-1 w-full rounded-lg border border-[#D8D8DE] bg-white px-2 py-2 text-sm"
+            />
+          </label>
+          <label class="text-xs"
+            >Yillik chegirma %
+            <input
+              :value="plan.yearly_discount_bps / 100"
+              type="number"
+              min="0"
+              max="90"
+              step="1"
+              class="mt-1 w-full rounded-lg border border-[#D8D8DE] bg-white px-2 py-2 text-sm"
+              @input="
+                plan.yearly_discount_bps =
+                  Number(($event.target as HTMLInputElement).value) * 100
+              "
+            />
+          </label>
+          <div class="flex items-center gap-2">
+            <label class="text-xs"
+              ><input v-model="plan.active" type="checkbox" /> Aktiv</label
+            >
+            <button
+              :disabled="saving"
+              class="rounded-lg bg-[#202026] px-3 py-2 text-sm font-semibold text-white disabled:opacity-50"
+            >
+              Saqlash
+            </button>
+          </div>
+        </form>
       </div>
       <div class="rounded-2xl border border-[#E8E8EC] bg-white p-6">
         <h2 class="text-lg font-bold">Kredit paketlari</h2>

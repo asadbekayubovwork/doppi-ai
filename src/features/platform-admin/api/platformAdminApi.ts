@@ -33,7 +33,19 @@ export interface AdminUserDetail extends AdminUser {
 
 export interface AdminCatalog {
   settings: Record<string, string>
-  rates: Array<{ code: string; credits_per_unit: number; version: number }>
+  rates: Array<{
+    code: string
+    credits_per_unit: number
+    units_per_charge: number
+    version: number
+  }>
+  plans: Array<{
+    code: string
+    monthly_price_cents: number
+    credits_per_month: number
+    yearly_discount_bps: number
+    active: boolean
+  }>
   packs: Array<{
     id: string
     code: string
@@ -79,11 +91,27 @@ export const platformAdminApi = {
   catalog: () => apiClient.get<AdminCatalog>("/admin/billing/catalog"),
   setting: (key: string, value: string, reason: string) =>
     apiClient.put(`/admin/billing/settings/${key}`, { value, reason }),
-  rate: (code: string, creditsPerUnit: number, reason: string) =>
+  rate: (
+    code: string,
+    creditsPerUnit: number,
+    unitsPerCharge: number,
+    reason: string
+  ) =>
     apiClient.put(`/admin/billing/rates/${code}`, {
       credits_per_unit: creditsPerUnit,
+      units_per_charge: unitsPerCharge,
       reason,
     }),
+  plan: (
+    code: string,
+    input: {
+      monthly_price_cents: number
+      credits_per_month: number
+      yearly_discount_bps: number
+      active: boolean
+      reason: string
+    }
+  ) => apiClient.patch(`/admin/billing/plans/${code}`, input),
   createPack: (input: {
     code: string
     title: string
