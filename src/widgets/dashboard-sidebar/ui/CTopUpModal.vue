@@ -23,7 +23,7 @@ watch(
 <template>
   <Teleport to="body">
     <Transition name="modal">
-      <!-- The overlay scrolls, not the panel: four cards stack well past a
+      <!-- The overlay scrolls, not the panel: three plan cards stack past a
            phone's height, and centring inside a min-h-full wrapper keeps the
            top of a tall panel reachable. -->
       <div

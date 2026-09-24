@@ -57,6 +57,13 @@ const socials = SOCIALS
                 {{ $t(`services.${item.key}.name`) }}
               </RouterLink>
             </li>
+            <!-- No page yet, so plain text with a "coming soon" tag, as in the header menu. -->
+            <li class="flex items-center gap-2 text-sm text-sand-500">
+              {{ $t("services.menu.items.marketRadar") }}
+              <span class="rounded-full bg-sand-100 px-2 py-0.5 text-xs text-sand-500">
+                {{ $t("nav.comingSoon") }}
+              </span>
+            </li>
           </ul>
         </div>
 
