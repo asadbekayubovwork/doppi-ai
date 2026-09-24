@@ -1,5 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue"
-import { useHead } from "@unhead/vue"
+import { useI18n } from "vue-i18n"
 import { onBeforeRouteLeave, useRouter } from "vue-router"
 import { useRagAgentStore } from "@/entities/rag-agent"
 import { messageForProblem, useAuthStore } from "@/features/auth"
@@ -9,8 +9,8 @@ import {
   type SettingsSection,
 } from "@/features/rag-agent-setup"
 import {
-  formatCount,
   formatTimeAgo,
+  useCountLabel,
   usePageHeading,
   useToast,
 } from "@/shared/lib"
@@ -18,14 +18,17 @@ import {
 interface Activity {
   key: string
   icon: string
+  /** i18n key and values of the entry's title. */
   title: string
-  detail: string
+  params?: Record<string, string>
+  /** i18n keys joined into the detail line; "You" when absent. */
+  details?: string[]
   at: number
 }
 
 export const useRagAgentSettingsPage = () => {
-  useHead({ title: "Edit RAG agent — Do'ppi AI" })
-
+  const { t, locale } = useI18n()
+  const count = useCountLabel()
   const auth = useAuthStore()
   const store = useRagAgentStore()
   const router = useRouter()
@@ -42,23 +45,34 @@ export const useRagAgentSettingsPage = () => {
   let activitySequence = 0
   let documentsChanged = false
 
-  const plural = (count: number, noun: string) =>
-    `${formatCount(count)} ${noun}${count === 1 ? "" : "s"}`
+  const plural = (noun: string, value: number) =>
+    count(`dashboard.plural.${noun}`, value)
 
   const ago = (date: string | number) => {
-    const age = formatTimeAgo(new Date(date), now.value)
-    return age === "now" ? "now" : `${age} ago`
+    const at = new Date(date).getTime()
+    if (now.value - at < 60_000) return t("dashboard.common.justNow")
+    return t("dashboard.common.ago", {
+      age: formatTimeAgo(new Date(at), now.value, locale.value),
+    })
   }
+
+  const labels = (keys: string[]) => keys.map((key) => t(key)).join(", ")
 
   const changed = (section: SettingsSection) =>
     form.changedSections.has(section)
 
-  const log = (icon: string, title: string, detail = "You") => {
+  const log = (
+    icon: string,
+    title: string,
+    params?: Record<string, string>,
+    details?: string[]
+  ) => {
     activity.value.push({
       key: `activity-${++activitySequence}`,
       icon,
       title,
-      detail,
+      params,
+      details,
       at: Date.now(),
     })
   }
@@ -68,8 +82,8 @@ export const useRagAgentSettingsPage = () => {
       await form.loadDocuments()
     } catch (error) {
       toast.error(
-        "Couldn't load the knowledge base",
-        messageForProblem(error, "Try again in a moment.")
+        t("dashboard.rag.knowledge.loadFailed"),
+        messageForProblem(error, t("dashboard.common.tryLater"))
       )
     }
   }
@@ -84,8 +98,8 @@ export const useRagAgentSettingsPage = () => {
       if (store.limits) form.configureLimits(store.limits.max_file_bytes)
     } catch (error) {
       toast.error(
-        "Couldn't load RAG configuration",
-        messageForProblem(error, "Try again in a moment.")
+        t("dashboard.rag.loadConfigFailed"),
+        messageForProblem(error, t("dashboard.common.tryLater"))
       )
     }
   }
@@ -104,8 +118,10 @@ export const useRagAgentSettingsPage = () => {
 
   usePageHeading(() => {
     if (!agent.value) return {}
-    const draft = form.changes.length ? " · draft" : ""
-    return { subtitle: `${agent.value.name} · editing configuration${draft}` }
+    const key = form.changes.length ? "subtitleDraft" : "subtitle"
+    return {
+      subtitle: t(`dashboard.rag.settings.${key}`, { name: agent.value.name }),
+    }
   })
 
   const knowledgeHint = computed(() => {
@@ -114,15 +130,21 @@ export const useRagAgentSettingsPage = () => {
         sum + (item.status === "indexed" ? (item.chunkCount ?? 0) : 0),
       0
     )
-    return `${plural(form.documents.length, "document")} · ${plural(chunks, "chunk")} · uploads apply right away`
+    return t("dashboard.rag.settings.knowledgeHint", {
+      documents: plural("documents", form.documents.length),
+      chunks: plural("chunks", chunks),
+    })
   })
 
   const embeddingNotice = computed(() => {
-    const count = (status: string) =>
+    const inStatus = (status: string) =>
       form.documents.filter((item) => item.status === status).length
-    const embedding = count("embedding")
+    const embedding = inStatus("embedding")
     if (!embedding) return null
-    return `${plural(embedding, "document")} still embedding — the agent answers from the ${plural(count("indexed"), "indexed document")} meanwhile.`
+    return t("dashboard.rag.settings.embeddingNotice", {
+      embedding: plural("documents", embedding),
+      indexed: plural("indexedDocuments", inStatus("indexed")),
+    })
   })
 
   const history = computed<ChangeHistoryEntry[]>(() => {
@@ -132,9 +154,9 @@ export const useRagAgentSettingsPage = () => {
         key: "draft",
         icon: "circle-dot",
         tone: "warning",
-        title: "Unsaved draft",
-        detail: form.changes.map((item) => item.label).join(", "),
-        time: "now",
+        title: t("dashboard.rag.settings.history.draft"),
+        detail: labels(form.changes.map((item) => item.label)),
+        time: t("dashboard.common.justNow"),
       })
     }
     for (const item of activity.value.slice(-4).reverse()) {
@@ -142,8 +164,10 @@ export const useRagAgentSettingsPage = () => {
         key: item.key,
         icon: item.icon,
         tone: "accent",
-        title: item.title,
-        detail: item.detail,
+        title: t(item.title, item.params ?? {}),
+        detail: item.details
+          ? labels(item.details)
+          : t("dashboard.rag.settings.you"),
         time: ago(item.at),
       })
     }
@@ -152,8 +176,8 @@ export const useRagAgentSettingsPage = () => {
         key: "live",
         icon: "history",
         tone: "neutral",
-        title: "Live configuration",
-        detail: "Last updated on the server",
+        title: t("dashboard.rag.settings.history.live"),
+        detail: t("dashboard.rag.settings.history.liveDetail"),
         time: ago(agent.value.syncedAt),
       })
     }
@@ -165,14 +189,16 @@ export const useRagAgentSettingsPage = () => {
     for (const file of files) {
       if (rejected.some((item) => item.file === file)) continue
       documentsChanged = true
-      log("upload", `${file.name} added`)
+      log("upload", "dashboard.rag.settings.fileAdded", { name: file.name })
     }
     if (!rejected.length) return
     toast.warning(
-      rejected.length === 1
-        ? "1 file skipped"
-        : `${rejected.length} files skipped`,
-      rejected.map(({ file, reason }) => `${file.name} — ${reason}`).join("\n")
+      plural("filesSkipped", rejected.length),
+      rejected
+        .map(({ file, reason }) =>
+          t("dashboard.rag.fileSkipped", { name: file.name, reason: t(reason) })
+        )
+        .join("\n")
     )
   }
 
@@ -182,37 +208,40 @@ export const useRagAgentSettingsPage = () => {
     if (
       item.documentId &&
       !window.confirm(
-        `Remove ${item.name} from the knowledge base? The agent stops using it right away.`
+        t("dashboard.rag.settings.removeConfirm", { name: item.name })
       )
     ) {
       return
     }
     form.removeDocument(key)
     documentsChanged = true
-    log("x", `${item.name} removed`)
+    log("x", "dashboard.rag.settings.fileRemoved", { name: item.name })
   }
 
   const save = async () => {
     if (!form.changes.length) return
     if (form.problems.length) {
-      toast.warning("Fix these before saving", form.problems.join(", "))
+      toast.warning(
+        t("dashboard.rag.settings.fixFirst"),
+        labels(form.problems)
+      )
       return
     }
-    const labels = form.changes.map((item) => item.label).join(", ")
+    const changedLabels = form.changes.map((item) => item.label)
     isSaving.value = true
     try {
       await store.saveConfiguration(businessId.value, form.toUpdate())
       if (store.agent) form.reset(store.agent)
-      log("check", "Configuration saved", labels)
+      log("check", "dashboard.rag.settings.saved", undefined, changedLabels)
       toast.success(
-        "Changes saved",
-        "New conversations use the updated configuration."
+        t("dashboard.rag.settings.changesSaved"),
+        t("dashboard.rag.settings.changesSavedDetail")
       )
     } catch (error) {
       if (store.agent) form.rebase(store.agent)
       toast.error(
-        "Couldn't save every change",
-        messageForProblem(error, "Try again in a moment.")
+        t("dashboard.rag.settings.saveFailed"),
+        messageForProblem(error, t("dashboard.common.tryLater"))
       )
     } finally {
       isSaving.value = false
@@ -220,10 +249,14 @@ export const useRagAgentSettingsPage = () => {
   }
 
   const discard = () => {
-    const count = form.changes.length
+    const changes = form.changes.length
     if (
-      !count ||
-      !window.confirm(`Discard ${plural(count, "unsaved change")}?`)
+      !changes ||
+      !window.confirm(
+        t("dashboard.rag.settings.discardConfirm", {
+          changes: plural("unsavedChanges", changes),
+        })
+      )
     )
       return
     form.discard()
@@ -236,18 +269,13 @@ export const useRagAgentSettingsPage = () => {
     try {
       await store.setAgentStatus(businessId.value, next)
       if (store.agent) form.rebase(store.agent)
-      const title = next === "live" ? "Agent resumed" : "Agent paused"
+      const title = `dashboard.rag.settings.${next === "live" ? "resumed" : "paused"}`
       log(next === "live" ? "play" : "pause", title)
-      toast.success(
-        title,
-        next === "live"
-          ? "It answers new messages again."
-          : "It stops answering until you resume it."
-      )
+      toast.success(t(title), t(`${title}Detail`))
     } catch (error) {
       toast.error(
-        "Couldn't change the agent status",
-        messageForProblem(error, "Try again in a moment.")
+        t("dashboard.rag.settings.statusFailed"),
+        messageForProblem(error, t("dashboard.common.tryLater"))
       )
     } finally {
       isChangingStatus.value = false
@@ -256,18 +284,19 @@ export const useRagAgentSettingsPage = () => {
 
   const remove = async () => {
     if (
-      !window.confirm(
-        "Delete this agent and all of its conversations? This can't be undone."
-      )
+      !window.confirm(t("dashboard.rag.settings.deleteConfirm"))
     )
       return
     isDeleting.value = true
     try {
       await store.deleteAgent(businessId.value)
-      toast.success("Agent deleted")
+      toast.success(t("dashboard.rag.settings.deleted"))
       await router.replace({ name: "RagAgent" })
     } catch (error) {
-      toast.error("Delete failed", messageForProblem(error, "Try again."))
+      toast.error(
+        t("dashboard.rag.settings.deleteFailed"),
+        messageForProblem(error, t("dashboard.common.retry"))
+      )
     } finally {
       isDeleting.value = false
     }
@@ -278,7 +307,7 @@ export const useRagAgentSettingsPage = () => {
   onBeforeRouteLeave(
     () =>
       !hasUnsavedChanges() ||
-      window.confirm("Leave without saving? Your unsaved changes will be lost.")
+      window.confirm(t("dashboard.rag.settings.leaveConfirm"))
   )
 
   const warnBeforeUnload = (event: BeforeUnloadEvent) => {

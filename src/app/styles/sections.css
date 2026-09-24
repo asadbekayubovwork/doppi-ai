@@ -134,6 +134,16 @@
   background-size: 56px 56px;
 }
 
+/* Chust do'ppi ornament, laid behind the solution orbit: qalampir (pepper)
+   motifs styled after the band on the logo's cap, alternating tail-up and
+   tail-down along each row, with every row shifted by half. The tile is drawn
+   in solid ink, so set the strength with `opacity` on the layer. */
+.bg-doppi {
+  background-image: url("../../shared/assets/patterns/doppi.svg");
+  background-position: center;
+  background-size: 210px auto;
+}
+
 .mask-fade-b {
   -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 90%);
   mask-image: linear-gradient(to bottom, black 0%, transparent 90%);

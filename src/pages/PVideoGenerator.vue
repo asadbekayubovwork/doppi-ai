@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useHead } from "@unhead/vue"
+import { useI18n } from "vue-i18n"
 import { usePageHeading } from "@/shared/lib"
 import {
   CHANNEL_SHARES,
@@ -16,10 +16,14 @@ import {
   CWeeklyPlanCard,
 } from "@/widgets/video-dashboard"
 
-useHead({ title: "Video generator — Do'ppi AI" })
+const { t } = useI18n()
 
 usePageHeading(() => ({
-  subtitle: "186 video · 142 tasi ijtimoiy tarmoqda · 2.4M ko'rish",
+  subtitle: t("dashboard.video.dashboard.subtitle", {
+    videos: 186,
+    published: 142,
+    views: "2.4M",
+  }),
 }))
 
 // The ongoing week drives the "Bu haftaning plani" card.
@@ -42,7 +46,10 @@ const ongoingPlan = WEEK_PLANS.find((plan) => plan.status === "ongoing")!
       <CTopVideosTable :videos="TOP_VIDEOS" />
       <div class="grid gap-5">
         <CChannelBreakdown :channels="CHANNEL_SHARES" />
-        <CWeeklyPlanCard :plan="ongoingPlan" next-post="ertaga 18:00" />
+        <CWeeklyPlanCard
+          :plan="ongoingPlan"
+          :next-post="$t('dashboard.video.dashboard.tomorrowAt', { time: '18:00' })"
+        />
       </div>
     </div>
 

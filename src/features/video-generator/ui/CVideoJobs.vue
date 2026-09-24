@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { formatTimeAgo } from "@/shared/lib"
+import { useI18n } from "vue-i18n"
+import { formatTimeAgo, useCountLabel } from "@/shared/lib"
 import { CAppButton, CBadge, CEmptyState, CIcon, CSkeleton } from "@/shared/ui"
 import type { BadgeTone } from "@/shared/ui/types"
 import type { VideoJob, VideoJobStatus } from "../api/types"
@@ -16,25 +17,18 @@ defineEmits<{
   preview: [job: VideoJob]
 }>()
 
-const STATUS: Record<
-  VideoJobStatus,
-  { label: string; tone: BadgeTone; icon: string }
-> = {
-  submitting: { label: "Yuborilmoqda", tone: "accent", icon: "upload" },
-  submission_failed: {
-    label: "Yuborilmadi",
-    tone: "danger",
-    icon: "triangle-alert",
-  },
-  submission_unknown: {
-    label: "Tekshirilmoqda",
-    tone: "warning",
-    icon: "clock-alert",
-  },
-  queued: { label: "Navbatda", tone: "neutral", icon: "timer" },
-  processing: { label: "Yaratilmoqda", tone: "accent", icon: "sparkles" },
-  completed: { label: "Tayyor", tone: "success", icon: "circle-check" },
-  failed: { label: "Xatolik", tone: "danger", icon: "triangle-alert" },
+const { t, locale } = useI18n()
+const count = useCountLabel()
+const text = (key: string) => t(`dashboard.video.studio.jobs.${key}`)
+
+const STATUS: Record<VideoJobStatus, { tone: BadgeTone; icon: string }> = {
+  submitting: { tone: "accent", icon: "upload" },
+  submission_failed: { tone: "danger", icon: "triangle-alert" },
+  submission_unknown: { tone: "warning", icon: "clock-alert" },
+  queued: { tone: "neutral", icon: "timer" },
+  processing: { tone: "accent", icon: "sparkles" },
+  completed: { tone: "success", icon: "circle-check" },
+  failed: { tone: "danger", icon: "triangle-alert" },
 }
 
 const eventCount = (job: VideoJob) => {
@@ -58,10 +52,10 @@ const progress = (job: VideoJob) => {
     >
       <div>
         <h2 class="text-[17px] font-semibold text-[#15151B]">
-          Yaratilgan videolar
+          {{ text("title") }}
         </h2>
         <p class="mt-1 text-[13px] text-[#73737D]">
-          Videolaringiz holati va tayyor natijalari shu yerda ko‘rinadi.
+          {{ text("description") }}
         </p>
       </div>
       <CAppButton
@@ -70,7 +64,7 @@ const progress = (job: VideoJob) => {
         :loading="isSyncing"
         @click="$emit('sync')"
       >
-        Tarixni yangilash
+        {{ text("sync") }}
       </CAppButton>
     </header>
 
@@ -82,8 +76,8 @@ const progress = (job: VideoJob) => {
       v-else-if="!jobs.length"
       class="m-5 sm:m-6"
       icon="clapperboard"
-      title="Hali video yo‘q"
-      description="Yangi yaratgan videolaringiz shu yerda paydo bo‘ladi."
+      :title="text('empty')"
+      :description="text('emptyDescription')"
     />
 
     <div v-else class="divide-y divide-[#ECECE8]">
@@ -98,10 +92,10 @@ const progress = (job: VideoJob) => {
               :tone="STATUS[job.status].tone"
               :icon="STATUS[job.status].icon"
             >
-              {{ STATUS[job.status].label }}
+              {{ text(`status.${job.status}`) }}
             </CBadge>
             <span class="text-xs text-[#8A8A94]">
-              {{ formatTimeAgo(new Date(job.created_at)) }}
+              {{ formatTimeAgo(new Date(job.created_at), Date.now(), locale) }}
             </span>
           </div>
           <h3 class="mt-2 truncate text-[15px] font-semibold text-[#24242A]">
@@ -110,16 +104,18 @@ const progress = (job: VideoJob) => {
           <div
             class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#73737D]"
           >
-            <span>{{ job.brief.aspect_ratio || "Avto format" }}</span>
+            <span>{{ job.brief.aspect_ratio || text("autoFormat") }}</span>
             <span>{{
               job.brief.duration_sec
                 ? `${job.brief.duration_sec}s`
-                : "Auto duration"
+                : text("autoDuration")
             }}</span>
-            <span>{{ job.brief.language?.toUpperCase() || "Avto" }}</span>
-            <span v-if="eventCount(job)"
-              >{{ eventCount(job) }} ta yangilanish</span
-            >
+            <span>{{
+              job.brief.language?.toUpperCase() || text("autoLanguage")
+            }}</span>
+            <span v-if="eventCount(job)">{{
+              count("dashboard.plural.updates", eventCount(job))
+            }}</span>
           </div>
           <div
             v-if="progress(job) !== null && job.status === 'processing'"
@@ -144,7 +140,7 @@ const progress = (job: VideoJob) => {
             class="inline-flex items-center gap-2 text-xs font-medium text-[#5B4BE8]"
           >
             <CIcon name="refresh-cw" class="h-3.5 w-3.5 animate-spin" />
-            Jonli yangilanadi
+            {{ text("live") }}
           </span>
           <CAppButton
             v-if="job.status === 'completed'"
@@ -152,17 +148,17 @@ const progress = (job: VideoJob) => {
             icon="download"
             @click="$emit('download', job)"
           >
-            Yuklab olish
+            {{ text("download") }}
           </CAppButton>
           <button
             v-if="job.status === 'completed'"
             type="button"
-            aria-label="Videoni ilovada ko'rish"
+            :aria-label="text('watchInApp')"
             class="inline-flex h-8 items-center gap-1.5 rounded-[10px] border border-[#E5E5E1] bg-white px-3 text-[13px] font-semibold text-[#15151B] transition hover:border-[#D6D6D1] hover:bg-[#FAFAF9]"
             @click="$emit('preview', job)"
           >
             <CIcon name="play" class="h-3.5 w-3.5" />
-            Ko‘rish
+            {{ text("watch") }}
           </button>
         </div>
       </article>

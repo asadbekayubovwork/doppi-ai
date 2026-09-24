@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed } from "vue"
+import { computed, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { CIcon, CLogo } from "@/shared/ui"
 import { HOME, SERVICES, WORKSPACE } from "../model/navigation"
 import CSidebarNavItem from "./CSidebarNavItem.vue"
+import CTopUpModal from "./CTopUpModal.vue"
 
 defineProps<{ open?: boolean }>()
 defineEmits<{ close: [] }>()
@@ -15,6 +16,9 @@ const balance = { amount: "$248.60", currency: "USD", limit: 400, used: 62 }
 const balanceUsed = computed(() =>
   t("dashboard.balance.used", { limit: balance.limit, used: balance.used })
 )
+
+// Until payments are wired up, topping up means picking a plan.
+const topUpOpen = ref(false)
 </script>
 
 <template>
@@ -109,6 +113,8 @@ const balanceUsed = computed(() =>
         <button
           type="button"
           class="mt-2.5 flex h-9 w-full items-center justify-center gap-2 rounded-lg bg-[#C9F354] text-[13px] font-bold text-[#1A1A13] transition hover:bg-[#BCE943]"
+          aria-haspopup="dialog"
+          @click="topUpOpen = true"
         >
           <CIcon name="plus" class="h-4 w-4" />
           {{ $t("dashboard.balance.topUp") }}
@@ -116,7 +122,7 @@ const balanceUsed = computed(() =>
       </div>
     </div>
 
-  
+    <CTopUpModal v-model:open="topUpOpen" />
   </aside>
 </template>
 

@@ -6,7 +6,7 @@ import { CSkeleton } from "@/shared/ui"
   <section
     class="rounded-2xl border border-[#E5E5E1] bg-white p-5"
     aria-busy="true"
-    aria-label="Loading agent"
+    :aria-label="$t('dashboard.rag.summary.loading')"
   >
     <div class="flex items-center gap-4 border-b border-[#EEEEEA] pb-5">
       <CSkeleton class="h-12 w-12 rounded-[14px]" />

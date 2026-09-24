@@ -71,7 +71,8 @@ describe("routed pages", () => {
     expect(text).toContain("Ochiq va tushunarli narxlar")
     expect(text).toContain("Starter")
     expect(text).toContain("Enterprise")
-    expect(text).toContain("Ko'p so'raladigan savollar")
+    // The FAQ lives on the home page only.
+    expect(wrapper.find("#faq").exists()).toBe(false)
     wrapper.unmount()
   })
 
@@ -127,7 +128,6 @@ describe("routed pages", () => {
 
       expect(wrapper.find("h1").text()).toBe(copy.title)
       expect(wrapper.text()).toContain(copy.features.items[0].title)
-      expect(wrapper.text()).toContain(copy.faq.items[0].q)
 
       // Links between the service pages are what tell crawlers these pages form
       // one section of the site.

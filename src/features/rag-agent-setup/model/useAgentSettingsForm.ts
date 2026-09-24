@@ -23,7 +23,7 @@ export type SettingsSection = "identity" | "model" | "prompt" | "channels"
 
 export interface SettingsChange {
   key: string
-  /** Short name for the "unsaved draft" summary: "Prompt", "WhatsApp". */
+  /** i18n key of a short name for the draft summary: "Prompt", "WhatsApp". */
   label: string
   section: SettingsSection
 }
@@ -114,38 +114,34 @@ export function useAgentSettingsForm(businessId: string | (() => string)) {
   const changes = computed<SettingsChange[]>(() => {
     const agent = saved.value
     if (!agent) return []
-    const fields: Array<[string, string, SettingsSection, boolean]> = [
-      ["name", "Name", "identity", name.value.trim() !== agent.name],
+    const fields: Array<[string, SettingsSection, boolean]> = [
+      ["name", "identity", name.value.trim() !== agent.name],
       [
         "description",
-        "Description",
         "identity",
         description.value.trim() !== agent.description,
       ],
-      ["model", "Model", "model", model.value !== agent.model],
-      [
-        "temperature",
-        "Temperature",
-        "model",
-        temperature.value !== agent.temperature,
-      ],
-      ["topK", "Retrieved chunks", "model", topK.value !== agent.topK],
+      ["model", "model", model.value !== agent.model],
+      ["temperature", "model", temperature.value !== agent.temperature],
+      ["topK", "model", topK.value !== agent.topK],
       [
         "similarityThreshold",
-        "Similarity threshold",
         "model",
         similarityThreshold.value !== agent.similarityThreshold,
       ],
       [
         "prompt",
-        "Prompt",
         "prompt",
         systemPrompt.value.trim() !== agent.systemPrompt.trim(),
       ],
     ]
     const list: SettingsChange[] = fields
-      .filter(([, , , changed]) => changed)
-      .map(([key, label, section]) => ({ key, label, section }))
+      .filter(([, , changed]) => changed)
+      .map(([key, section]) => ({
+        key,
+        label: `dashboard.rag.settings.fields.${key}`,
+        section,
+      }))
     for (const channel of channels.value) {
       if (!needsConnect(channel) && !needsDisconnect(channel)) continue
       list.push({
@@ -161,19 +157,20 @@ export function useAgentSettingsForm(businessId: string | (() => string)) {
     () => new Set(changes.value.map((item) => item.section))
   )
 
-  /** What stops the draft from saving, as short labels for a toast. */
+  /** What stops the draft from saving, as i18n keys of short labels. */
   const problems = computed(() => {
     const list: string[] = []
-    if (!name.value.trim()) list.push("Agent name")
-    if (!model.value) list.push("LLM model")
-    if (promptTokens.value > PROMPT_TOKEN_LIMIT) list.push("System prompt")
+    const problem = (key: string) => `dashboard.rag.settings.problems.${key}`
+    if (!name.value.trim()) list.push(problem("name"))
+    if (!model.value) list.push(problem("model"))
+    if (promptTokens.value > PROMPT_TOKEN_LIMIT) list.push(problem("prompt"))
     if (!Number.isInteger(topK.value) || !inRange(topK.value, TOP_K_RANGE))
-      list.push("Retrieved chunks")
+      list.push(problem("topK"))
     if (!inRange(similarityThreshold.value, SIMILARITY_RANGE))
-      list.push("Similarity threshold")
+      list.push(problem("similarityThreshold"))
     for (const channel of channels.value) {
       if (needsConnect(channel) && !isChannelReady(channel))
-        list.push(`${CHANNEL_SETUP[channel.kind].title} credentials`)
+        list.push(CHANNEL_SETUP[channel.kind].credentials)
     }
     return list
   })

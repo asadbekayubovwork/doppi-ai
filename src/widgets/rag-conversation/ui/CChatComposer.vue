@@ -41,12 +41,12 @@ watch(
   <footer class="border-t border-[#EEEEEA] p-3">
     <form v-if="canReply" class="flex items-end gap-2" @submit.prevent="submit">
       <label class="min-w-0 flex-1">
-        <span class="sr-only">Reply to the customer</span>
+        <span class="sr-only">{{ $t("dashboard.rag.conversation.reply") }}</span>
         <textarea
           ref="field"
           v-model="draft"
           rows="1"
-          placeholder="Write a reply… (Shift + Enter for a new line)"
+          :placeholder="$t('dashboard.rag.conversation.replyPlaceholder')"
           class="block max-h-32 min-h-9 w-full resize-none rounded-[10px] border border-[#E5E5E1] px-3 py-2 text-[13px] leading-5 text-[#15151B] outline-none transition placeholder:text-[#A1A1AA] focus:border-[#5B4BE8] focus:ring-2 focus:ring-[#5B4BE8]/15"
           @keydown.enter.exact="onEnter"
         />
@@ -58,7 +58,7 @@ watch(
         :loading="sending"
         :disabled="!draft.trim()"
       >
-        Send
+        {{ $t("dashboard.common.send") }}
       </CAppButton>
     </form>
 
@@ -67,7 +67,9 @@ watch(
         class="flex h-9 min-w-0 flex-1 items-center gap-2 rounded-[10px] border border-[#E5E5E1] bg-[#FAFAF9] px-3 text-[13px] text-[#84848E]"
       >
         <CIcon name="lock" class="h-4 w-4 shrink-0" />
-        <span class="truncate">Read-only transcript — take over to reply</span>
+        <span class="truncate">
+          {{ $t("dashboard.rag.conversation.readOnly") }}
+        </span>
       </p>
       <CAppButton
         variant="primary"
@@ -75,7 +77,7 @@ watch(
         :loading="handoverBusy"
         @click="emit('takeOver')"
       >
-        Take over
+        {{ $t("dashboard.rag.conversation.takeOverShort") }}
       </CAppButton>
     </div>
   </footer>

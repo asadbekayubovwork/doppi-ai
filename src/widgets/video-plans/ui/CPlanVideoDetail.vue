@@ -1,21 +1,30 @@
 <script setup lang="ts">
 import { computed } from "vue"
-import { CPlatformPill, CVideoThumb, type PlanVideo } from "@/entities/video"
+import {
+  CPlatformPill,
+  CVideoThumb,
+  useVideoLabels,
+  type PlanVideo,
+} from "@/entities/video"
 import { CAppButton, CIcon } from "@/shared/ui"
 
 const props = defineProps<{ video: PlanVideo; planTitle: string }>()
 
 defineEmits<{ editScript: [] }>()
 
+const { day } = useVideoLabels()
 const isPublished = computed(() => props.video.state === "published")
+const kind = computed(() =>
+  isPublished.value ? "video" : props.video.state === "draft" ? "draft" : "scheduled"
+)
 const isProcessing = computed(() => props.video.state === "processing")
 
 // Static engagement figures for the published preview.
 const STATS = [
-  { icon: "eye", label: "ko'rish", value: "480K" },
-  { icon: "heart", label: "like", value: "38K" },
-  { icon: "message-circle", label: "izoh", value: "1.2K" },
-  { icon: "share-2", label: "share", value: "4.1K" },
+  { icon: "eye", label: "views", value: "480K" },
+  { icon: "heart", label: "likes", value: "38K" },
+  { icon: "message-circle", label: "comments", value: "1.2K" },
+  { icon: "share-2", label: "shares", value: "4.1K" },
 ]
 </script>
 
@@ -25,7 +34,8 @@ const STATS = [
   >
     <header class="flex items-center justify-between gap-2">
       <h2 class="text-[14px] font-semibold text-[#15151B]">
-        {{ video.date }} · {{ isPublished ? "video" : video.state === "draft" ? "draft" : "rejada" }}
+        {{ day(video.date) }} ·
+        {{ $t(`dashboard.video.plans.detail.kind.${kind}`) }}
       </h2>
       <CPlatformPill :platform="video.platform" :channel="true" />
     </header>
@@ -48,7 +58,13 @@ const STATS = [
         :class="isProcessing ? 'animate-spin' : ''"
       />
       <p class="px-4 text-[12.5px] text-[#9A9AA2]">
-        {{ isProcessing ? "Video generatsiya qilinmoqda…" : "Video hali generatsiya qilinmagan" }}
+        {{
+          $t(
+            isProcessing
+              ? "dashboard.video.plans.detail.generating"
+              : "dashboard.video.plans.detail.notGenerated"
+          )
+        }}
       </p>
     </div>
 
@@ -56,7 +72,14 @@ const STATS = [
       {{ video.title }}
     </h3>
     <p class="mt-0.5 text-[12px] text-[#8A8A94]">
-      {{ video.date }} {{ video.time }} · plan: {{ planTitle }} · {{ video.order }}-video
+      {{
+        $t("dashboard.video.plans.detail.meta", {
+          date: day(video.date),
+          time: video.time,
+          plan: planTitle,
+          order: video.order,
+        })
+      }}
     </p>
 
     <!-- Published stats -->
@@ -72,7 +95,9 @@ const STATS = [
         <dd class="mt-1 text-[14px] font-bold tabular-nums text-[#15151B]">
           {{ stat.value }}
         </dd>
-        <dd class="text-[10.5px] text-[#9A9AA2]">{{ stat.label }}</dd>
+        <dd class="text-[10.5px] text-[#9A9AA2]">
+          {{ $t(`dashboard.video.plans.detail.stats.${stat.label}`) }}
+        </dd>
       </div>
     </dl>
 
@@ -83,19 +108,21 @@ const STATS = [
     >
       <CIcon name="lock" class="mt-0.5 h-3.5 w-3.5 shrink-0" />
       {{
-        video.state === "draft"
-          ? "Plan tasdiqlanmagan — script tahrirlanadi, video sana kelganda yaratiladi."
-          : "Sana kelmagan — tugmalar faol emas. Video chiqqach havola va yuklab olish ochiladi."
+        $t(
+          video.state === "draft"
+            ? "dashboard.video.plans.detail.lockedDraft"
+            : "dashboard.video.plans.detail.lockedScheduled"
+        )
       }}
     </p>
 
     <!-- Actions -->
     <div class="mt-4 grid grid-cols-2 gap-2">
       <CAppButton icon="external-link" :disabled="!isPublished">
-        Reels'da ochish
+        {{ $t("dashboard.video.plans.detail.openReels") }}
       </CAppButton>
       <CAppButton icon="download" :disabled="!isPublished">
-        Yuklab olish
+        {{ $t("dashboard.video.plans.detail.download") }}
       </CAppButton>
     </div>
     <CAppButton
@@ -105,7 +132,7 @@ const STATS = [
       class="mt-2 w-full"
       @click="$emit('editScript')"
     >
-      Scriptni AI bilan tahrirlash
+      {{ $t("dashboard.video.plans.detail.editScript") }}
     </CAppButton>
   </section>
 </template>

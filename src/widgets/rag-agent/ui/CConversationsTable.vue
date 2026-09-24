@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue"
+import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 import {
   CChannelIcon,
@@ -8,7 +9,13 @@ import {
   type ChannelKind,
   type ConversationSummary,
 } from "@/entities/rag-agent"
-import { downloadFile, formatCount, formatTimeAgo, toCsv } from "@/shared/lib"
+import {
+  downloadFile,
+  formatCount,
+  formatTimeAgo,
+  toCsv,
+  useCountLabel,
+} from "@/shared/lib"
 import {
   CBadge,
   CIcon,
@@ -27,6 +34,8 @@ const props = defineProps<{
   loading?: boolean
 }>()
 
+const { t, locale } = useI18n()
+const count = useCountLabel()
 const router = useRouter()
 const query = ref("")
 const channel = ref<ChannelKind | "all">("all")
@@ -83,7 +92,7 @@ const exportCsv = () => {
   ]
   const body = filtered.value.map((item) => [
     item.id,
-    CHANNELS[item.channel].label,
+    t(CHANNELS[item.channel].label),
     item.lastMessage,
     item.messageCount,
     item.status,
@@ -111,21 +120,21 @@ const exportCsv = () => {
           id="conversations-title"
           class="text-[15px] font-semibold text-[#15151B]"
         >
-          Conversations
+          {{ $t("dashboard.rag.table.title") }}
         </h2>
-        <CBadge tone="accent">{{ formatCount(total) }} chats</CBadge>
+        <CBadge tone="accent">{{ count("dashboard.plural.chats", total) }}</CBadge>
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <CSearchField
           v-model="query"
-          placeholder="Search chat_id"
-          label="Search conversations"
+          :placeholder="$t('dashboard.rag.table.search')"
+          :label="$t('dashboard.rag.table.searchLabel')"
           class="w-full sm:w-56"
         />
         <CChannelFilter v-model="channel" />
         <CIconButton
           icon="download"
-          label="Export as CSV"
+          :label="$t('dashboard.rag.table.export')"
           :disabled="loading || !filtered.length"
           @click="exportCsv"
         />
@@ -138,16 +147,28 @@ const exportCsv = () => {
           class="whitespace-nowrap bg-[#FAFAF9] text-[10.5px] uppercase tracking-[0.08em] text-[#84848E]"
         >
           <tr>
-            <th scope="col" class="px-5 py-2.5 font-semibold">Chat ID</th>
-            <th scope="col" class="px-4 py-2.5 font-semibold">Channel</th>
-            <th scope="col" class="w-full px-4 py-2.5 font-semibold">
-              Last message
+            <th scope="col" class="px-5 py-2.5 font-semibold">
+              {{ $t("dashboard.rag.table.columns.chatId") }}
             </th>
-            <th scope="col" class="px-4 py-2.5 font-semibold">Msgs</th>
-            <th scope="col" class="px-4 py-2.5 font-semibold">Status</th>
-            <th scope="col" class="px-4 py-2.5 font-semibold">Updated</th>
+            <th scope="col" class="px-4 py-2.5 font-semibold">
+              {{ $t("dashboard.rag.table.columns.channel") }}
+            </th>
+            <th scope="col" class="w-full px-4 py-2.5 font-semibold">
+              {{ $t("dashboard.rag.table.columns.lastMessage") }}
+            </th>
+            <th scope="col" class="px-4 py-2.5 font-semibold">
+              {{ $t("dashboard.rag.table.columns.messages") }}
+            </th>
+            <th scope="col" class="px-4 py-2.5 font-semibold">
+              {{ $t("dashboard.rag.table.columns.status") }}
+            </th>
+            <th scope="col" class="px-4 py-2.5 font-semibold">
+              {{ $t("dashboard.rag.table.columns.updated") }}
+            </th>
             <th scope="col" class="px-4 py-2.5">
-              <span class="sr-only">Open</span>
+              <span class="sr-only">
+                {{ $t("dashboard.rag.table.columns.open") }}
+              </span>
             </th>
           </tr>
         </thead>
@@ -185,7 +206,7 @@ const exportCsv = () => {
             <td class="whitespace-nowrap px-4 py-3 text-[#3F3F46]">
               <span class="inline-flex items-center gap-2">
                 <CChannelIcon :channel="chat.channel" />
-                {{ CHANNELS[chat.channel].label }}
+                {{ $t(CHANNELS[chat.channel].label) }}
               </span>
             </td>
             <td class="max-w-0 truncate px-4 py-3 text-[#3F3F46]">
@@ -199,7 +220,7 @@ const exportCsv = () => {
             </td>
             <td class="whitespace-nowrap px-4 py-3 text-[#84848E]">
               <time :datetime="chat.updatedAt">
-                {{ formatTimeAgo(chat.updatedAt) }}
+                {{ formatTimeAgo(chat.updatedAt, Date.now(), locale) }}
               </time>
             </td>
             <td class="px-4 py-3 text-[#84848E]">
@@ -210,8 +231,8 @@ const exportCsv = () => {
             <td colspan="7" class="px-5 py-12 text-center text-[#84848E]">
               {{
                 conversations.length
-                  ? "No conversations match your filters."
-                  : "No conversations yet — they show up here once customers write in."
+                  ? $t("dashboard.rag.table.noMatches")
+                  : $t("dashboard.rag.table.empty")
               }}
             </td>
           </tr>
@@ -221,20 +242,24 @@ const exportCsv = () => {
 
     <footer class="flex items-center justify-between gap-3 px-5 py-3">
       <p class="text-[13px] text-[#84848E]">
-        Showing {{ rangeLabel }} of {{ formatCount(filtered.length) }}
-        conversations
+        {{
+          $t("dashboard.rag.table.showing", {
+            range: rangeLabel,
+            total: formatCount(filtered.length, locale),
+          })
+        }}
       </p>
       <div class="flex gap-2">
         <CIconButton
           icon="chevron-left"
-          label="Previous page"
+          :label="$t('dashboard.common.previousPage')"
           size="sm"
           :disabled="loading || page === 1"
           @click="page -= 1"
         />
         <CIconButton
           icon="chevron-right"
-          label="Next page"
+          :label="$t('dashboard.common.nextPage')"
           size="sm"
           :disabled="loading || page >= pageCount"
           @click="page += 1"

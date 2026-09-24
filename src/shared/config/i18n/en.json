@@ -165,6 +165,20 @@
       }
     ]
   },
+  "studio": {
+    "badge": "New model",
+    "title": "Doppi Video Studio",
+    "subtitle": "Dozens of formats from a single script — Reels, Shorts, avatar and product videos. All on brand, published on the weekly plan you approve.",
+    "ctaPrimary": "Try for free",
+    "ctaSecondary": "Learn more",
+    "gallery": "See all samples",
+    "tags": {
+      "reels": "Reels · 9:16",
+      "shorts": "Shorts",
+      "avatar": "AI avatar",
+      "product": "Product video"
+    }
+  },
   "audience": {
     "eyebrow": "Who it's for",
     "title": "Who Do'ppi AI is built for",
@@ -501,7 +515,6 @@
   },
   "footer": {
     "tagline": "The future for businesses everywhere — with AI, starting today.",
-    "product": "Product",
     "company": "Company",
     "rights": "© {year} Do'ppi AI. All rights reserved.",
     "madeIn": "Made with care in Tashkent",
@@ -706,29 +719,11 @@
     "othersTitle": "More from Do'ppi AI",
     "learnMore": "Learn more",
     "menu": {
-      "useCases": "Voice agent use cases",
-      "industries": "Industries",
       "items": {
         "marketRadar": "Market Radar",
         "personalBlogs": "Personal blogs",
         "farmers": "Farmers",
-        "ytBusiness": "YouTube business",
-        "meeting": "Meeting AI",
-        "isolator": "Voice isolator",
-        "voices": "Voice library",
-        "audiobooks": "Audiobooks",
-        "dubbing": "Dubbing",
-        "subtitles": "Subtitles",
-        "support": "Support",
-        "sales": "Sales",
-        "booking": "Booking",
-        "surveys": "Surveys",
-        "healthcare": "Healthcare",
-        "realEstate": "Real estate",
-        "travel": "Travel & hospitality",
-        "automotive": "Automotive",
-        "banking": "Banking",
-        "ecommerce": "E-commerce"
+        "ytBusiness": "Sole proprietors"
       }
     },
     "rag": {
@@ -793,31 +788,6 @@
           {
             "title": "Track the results",
             "desc": "Follow conversations, hand-overs and answer quality on the dashboard, and keep growing the knowledge base."
-          }
-        ]
-      },
-      "faq": {
-        "title": "RAG Agent questions",
-        "items": [
-          {
-            "q": "What is RAG?",
-            "a": "RAG (retrieval-augmented generation) is a technique where the AI first finds the relevant part of your documents and then bases its answer on it. That is why the agent gives specific information about your business rather than generic replies."
-          },
-          {
-            "q": "Which files can I upload?",
-            "a": "PDF, DOCX, XLSX and TXT files, up to 50 MB each."
-          },
-          {
-            "q": "Which channels does the agent work on?",
-            "a": "Instagram, Telegram, WhatsApp and the chat widget on your website."
-          },
-          {
-            "q": "What happens when the agent doesn't know the answer?",
-            "a": "It hands the conversation to someone on your team, who sees the full history and takes it from there."
-          },
-          {
-            "q": "Which languages does it answer in?",
-            "a": "Uzbek and Russian."
           }
         ]
       },
@@ -1137,27 +1107,6 @@
           }
         ]
       },
-      "faq": {
-        "title": "Voice Agent questions",
-        "items": [
-          {
-            "q": "Which languages does the agent speak?",
-            "a": "Uzbek and Russian."
-          },
-          {
-            "q": "Which number are calls made from?",
-            "a": "Your company's own number, connected through SIP telephony."
-          },
-          {
-            "q": "Are calls recorded?",
-            "a": "Yes. Every call is recorded and saved to your CRM."
-          },
-          {
-            "q": "Does the agent work at night?",
-            "a": "Yes, it works 24/7 — nights and weekends included."
-          }
-        ]
-      },
       "cta": {
         "title": "Try the voice agent",
         "subtitle": "14-day free trial — hear how the agent sounds for your business."
@@ -1470,27 +1419,6 @@
           {
             "title": "Download and use",
             "desc": "Download the finished content and use it in your ads and pages."
-          }
-        ]
-      },
-      "faq": {
-        "title": "Video Generator questions",
-        "items": [
-          {
-            "q": "Do I need video editing experience?",
-            "a": "No. You describe what you need in plain words and the AI does the rest."
-          },
-          {
-            "q": "What can I create?",
-            "a": "Reels and short videos, ad clips, images, ad copy and voiceover."
-          },
-          {
-            "q": "Can the voiceover be in Uzbek?",
-            "a": "Yes, content is created in Uzbek and Russian."
-          },
-          {
-            "q": "How much does it cost?",
-            "a": "Compare the plans and what each includes on the pricing page — every plan starts with a 14-day free trial."
           }
         ]
       },
@@ -1920,7 +1848,26 @@
       "retry": "Please try again.",
       "checkDetails": "Check the details and try again.",
       "saving": "Saving...",
-      "loading": "Loading..."
+      "loading": "Loading...",
+      "select": "Select",
+      "copied": "Copied to clipboard",
+      "copyFailed": "Couldn't copy",
+      "copyFailedHint": "Select the text and copy it manually.",
+      "reload": "Reload the page.",
+      "tryAgain": "Try again",
+      "tryLater": "Try again in a moment.",
+      "checkConnection": "Check your connection and try again.",
+      "cancel": "Cancel",
+      "send": "Send",
+      "changed": "Changed",
+      "ago": "{age} ago",
+      "justNow": "now",
+      "optional": "optional",
+      "done": "done",
+      "notDone": "not done",
+      "previousPage": "Previous page",
+      "nextPage": "Next page",
+      "close": "Close"
     },
     "nav": {
       "services": "Services",
@@ -2045,7 +1992,6 @@
       }
     },
     "settings": {
-      "pageTitle": "Settings — Do'ppi AI",
       "profile": {
         "title": "Profile",
         "description": "Your personal details and interface preferences.",
@@ -2081,6 +2027,834 @@
         "revoked": "Session ended",
         "revokeFailed": "Couldn't end the session",
         "signOutAllFailed": "Couldn't end all sessions"
+      }
+    },
+    "pageTitle": "{title} — Do'ppi AI",
+    "home": {
+      "workspace": "My workspace",
+      "greeting": {
+        "morning": "Good morning",
+        "afternoon": "Good afternoon",
+        "evening": "Good evening"
+      },
+      "greetingNamed": "{greeting}, {name}",
+      "overview": "{business} · workspace overview"
+    },
+    "team": {
+      "roles": {
+        "owner": "Owner",
+        "admin": "Admin",
+        "member": "Member",
+        "viewer": "Viewer"
+      },
+      "loadFailed": "Couldn't load the team",
+      "invite": {
+        "title": "Invite to the team",
+        "description": "The invitation only works for the account with this exact email address.",
+        "emailPlaceholder": "colleague{'@'}company.com",
+        "role": "Role",
+        "submit": "Create invitation",
+        "created": "Invitation created",
+        "failed": "Couldn't create the invitation",
+        "checkFields": "Check the email and role.",
+        "linkOnce": "The invitation link is shown only once",
+        "copy": "Copy",
+        "copied": "Invitation link copied",
+        "copyManually": "Select the link and copy it manually."
+      },
+      "members": {
+        "title": "Team members",
+        "description": "Members and roles of the active business.",
+        "you": "You",
+        "role": "Member role",
+        "remove": "Remove",
+        "empty": "No team members found.",
+        "roleUpdated": "Role updated",
+        "roleUpdateFailed": "Couldn't update the role",
+        "removeConfirm": "Remove this member from the team?",
+        "removed": "Member removed from the team",
+        "removeFailed": "Couldn't remove the member"
+      }
+    },
+    "plural": {
+      "documents": "{count} document | {count} documents",
+      "indexedDocuments": "{count} indexed document | {count} indexed documents",
+      "chunks": "{count} chunk | {count} chunks",
+      "chats": "{count} chat | {count} chats",
+      "messages": "{count} message | {count} messages",
+      "unsavedChanges": "{count} unsaved change | {count} unsaved changes",
+      "filesSkipped": "{count} file skipped | {count} files skipped",
+      "credits": "{count} credit | {count} credits",
+      "networksSelected": "{count} network selected | {count} networks selected",
+      "updates": "{count} update | {count} updates"
+    },
+    "rag": {
+      "status": {
+        "live": "Live",
+        "paused": "Paused"
+      },
+      "onePerBusiness": "One agent per business",
+      "createAgent": "Create agent",
+      "loadFailed": "Couldn't load the agent",
+      "loadConfigFailed": "Couldn't load RAG configuration",
+      "fileSkipped": "{name} — {reason}",
+      "agent": {
+        "syncedJustNow": "synced just now",
+        "syncedAgo": "synced {age} ago",
+        "subtitle": "{name} · {status} · {synced}",
+        "emptyTitle": "No RAG agent yet",
+        "emptyDescription": "Each business runs one agent. Give it your documents, pick a model and connect the channels it should answer on."
+      },
+      "summary": {
+        "model": "{model} · temperature {temperature}",
+        "knowledge": "{documents} · {chunks}",
+        "noChannels": "No channels connected",
+        "edit": "Edit configuration",
+        "playground": "Open playground",
+        "loading": "Loading agent"
+      },
+      "metrics": {
+        "conversations": "Conversations",
+        "messages30d": "Messages · 30 days",
+        "avgResponse": "Avg. response time",
+        "accuracy": "Answer accuracy",
+        "escalation": "Escalated to human"
+      },
+      "table": {
+        "title": "Conversations",
+        "search": "Search chat_id",
+        "searchLabel": "Search conversations",
+        "allChannels": "All channels",
+        "filterLabel": "Filter by channel",
+        "export": "Export as CSV",
+        "columns": {
+          "chatId": "Chat ID",
+          "channel": "Channel",
+          "lastMessage": "Last message",
+          "messages": "Msgs",
+          "status": "Status",
+          "updated": "Updated",
+          "open": "Open"
+        },
+        "noMatches": "No conversations match your filters.",
+        "empty": "No conversations yet — they show up here once customers write in.",
+        "showing": "Showing {range} of {total} conversations"
+      },
+      "conversationStatus": {
+        "active": "Active",
+        "resolved": "Resolved",
+        "escalated": "Escalated"
+      },
+      "channels": {
+        "instagram": {
+          "label": "Instagram",
+          "product": "Instagram",
+          "caption": "Meta Messaging API",
+          "credentials": "Instagram credentials"
+        },
+        "telegram": {
+          "label": "Telegram",
+          "product": "Telegram",
+          "caption": "Bot API",
+          "credentials": "Telegram credentials"
+        },
+        "whatsapp": {
+          "label": "WhatsApp",
+          "product": "WhatsApp Business",
+          "caption": "Cloud API",
+          "credentials": "WhatsApp Business credentials"
+        },
+        "web": {
+          "label": "Web widget",
+          "product": "Web widget",
+          "caption": "Chat bubble on your website",
+          "credentials": "Web widget credentials"
+        }
+      },
+      "credentials": {
+        "pageId": {
+          "label": "Page ID",
+          "hint": "Copy the connected Page ID from Meta Business."
+        },
+        "metaAccessToken": {
+          "label": "Access token",
+          "hint": "Paste a valid long-lived Meta access token."
+        },
+        "verifyToken": {
+          "label": "Webhook verify token",
+          "placeholder": "Your private verification token",
+          "hint": "Use at least 16 characters."
+        },
+        "appSecret": {
+          "label": "Meta app secret",
+          "placeholder": "App secret",
+          "hint": "Paste the App Secret from Meta Developers."
+        },
+        "botToken": {
+          "label": "Bot token",
+          "hint": "Paste the token from {'@'}BotFather: digits, a colon, then the key."
+        },
+        "phoneNumberId": {
+          "label": "Phone number ID",
+          "hint": "Digits only — copy it from WhatsApp Manager."
+        },
+        "cloudAccessToken": {
+          "label": "Access token",
+          "hint": "This looks too short for a Cloud API token."
+        },
+        "domain": {
+          "label": "Website domain",
+          "hint": "Enter a domain such as aura.uz, without https://."
+        },
+        "show": "Show {field}",
+        "hide": "Hide {field}"
+      },
+      "checklist": {
+        "title": "Setup checklist",
+        "required": "{progress} required",
+        "name": "Agent name",
+        "documents": "Documents uploaded & indexed",
+        "model": "LLM model selected",
+        "prompt": "System prompt written",
+        "noteTitle": "One agent per business",
+        "noteText": "Every channel you connect feeds the same agent, the same knowledge base and the same chat history."
+      },
+      "identity": {
+        "title": "Agent name",
+        "hint": "Shown to your team, not to customers",
+        "name": "RAG agent name",
+        "namePlaceholder": "Aura Support Agent",
+        "description": "Short description",
+        "descriptionPlaceholder": "Answers product, pricing and delivery questions"
+      },
+      "knowledge": {
+        "title": "Knowledge base",
+        "limits": "PDF, DOCX, XLSX or TXT, up to {size} MB each",
+        "loadingLimits": "Loading upload limits…",
+        "drop": "Drag documents here or",
+        "browse": "browse files",
+        "uploaded": "Uploaded documents",
+        "loadFailed": "Couldn't load the knowledge base",
+        "indexed": "Indexed",
+        "failed": "Failed",
+        "embedding": "Embedding {percent}%",
+        "embeddingLabel": "Embedding {name}",
+        "failedHint": "remove it and upload again",
+        "remove": "Remove {name}",
+        "rejected": {
+          "unsupported": "unsupported file type",
+          "loading": "configuration is still loading",
+          "tooLarge": "larger than the configured limit",
+          "duplicate": "already added",
+          "noCollection": "the agent has no knowledge collection"
+        }
+      },
+      "model": {
+        "title": "LLM model",
+        "hint": "Powers retrieval answers on every channel",
+        "legend": "Model",
+        "context": "{tokens} context",
+        "pricingMissing": "Pricing not configured",
+        "pricing": "{currency} {input} input · {output} output / 1M",
+        "loading": "Loading available models…",
+        "none": "No model is enabled for this workspace.",
+        "temperature": "Temperature",
+        "modes": {
+          "factual": "factual",
+          "balanced": "balanced",
+          "creative": "creative"
+        }
+      },
+      "retrieval": {
+        "topK": "Retrieved chunks",
+        "topKHint": "Passages read per answer, {min}–{max}",
+        "threshold": "Similarity threshold",
+        "thresholdHint": "Weaker matches are ignored, {min} to {max}"
+      },
+      "prompt": {
+        "title": "System prompt",
+        "hint": "Applies to every conversation on every channel",
+        "placeholder": "Tell the agent who it is, what it may answer and when to hand the chat to a human.",
+        "tokens": "{count} / {limit} tokens",
+        "useTemplate": "Use a template",
+        "replaceConfirm": "Replace the current prompt with the template?",
+        "identityFallback": "the support agent",
+        "businessFallback": "our store",
+        "template": "You are {identity}, the support agent for {business}.\n\n• Answer only from the knowledge base. Never invent prices, terms or stock.\n• Reply in the language the customer writes in (UZ / RU / EN).\n• Always cite the document you used.\n• If the documents don't cover the question, say so and hand the chat to a human."
+      },
+      "channelsSection": {
+        "title": "Channels & credentials",
+        "hint": "Where the agent will answer customers",
+        "add": "Add another channel",
+        "connected": "connected",
+        "disconnectsOnSave": "disconnects on save",
+        "connect": "Connect {channel}",
+        "savedPlaceholder": "Saved · type to replace"
+      },
+      "create": {
+        "title": "Create your RAG agent",
+        "description": "Name it, feed it documents, pick a model, write the system prompt and connect the channels it will answer on.",
+        "replaces": "Replaces {name}",
+        "noAgentYet": "No agent yet · create the one agent for this business",
+        "finishSetup": "Finish the setup first",
+        "created": "Agent created",
+        "createdDetail": "{name} is live.",
+        "createFailed": "Couldn't create the agent"
+      },
+      "settings": {
+        "title": "Edit configuration",
+        "description": "Update the knowledge base, model, system prompt and channels. Saved changes apply to new conversations immediately.",
+        "subtitle": "{name} · editing configuration",
+        "subtitleDraft": "{name} · editing configuration · draft",
+        "noAgentTitle": "No agent to configure",
+        "noAgentDescription": "Create an agent before opening its configuration.",
+        "loading": "Loading configuration",
+        "discard": "Discard",
+        "save": "Save changes",
+        "pause": "Pause agent",
+        "resume": "Resume agent",
+        "delete": "Delete agent",
+        "modelHint": "Switching models doesn't re-index documents",
+        "restorePrompt": "Restore saved prompt",
+        "channelsHint": "Live channels for this agent",
+        "knowledgeHint": "{documents} · {chunks} · uploads apply right away",
+        "embeddingNotice": "{embedding} still embedding — the agent answers from the {indexed} meanwhile.",
+        "you": "You",
+        "fileAdded": "{name} added",
+        "fileRemoved": "{name} removed",
+        "removeConfirm": "Remove {name} from the knowledge base? The agent stops using it right away.",
+        "fixFirst": "Fix these before saving",
+        "saved": "Configuration saved",
+        "changesSaved": "Changes saved",
+        "changesSavedDetail": "New conversations use the updated configuration.",
+        "saveFailed": "Couldn't save every change",
+        "discardConfirm": "Discard {changes}?",
+        "resumed": "Agent resumed",
+        "resumedDetail": "It answers new messages again.",
+        "paused": "Agent paused",
+        "pausedDetail": "It stops answering until you resume it.",
+        "statusFailed": "Couldn't change the agent status",
+        "deleteConfirm": "Delete this agent and all of its conversations? This can't be undone.",
+        "deleted": "Agent deleted",
+        "deleteFailed": "Delete failed",
+        "leaveConfirm": "Leave without saving? Your unsaved changes will be lost.",
+        "fields": {
+          "name": "Name",
+          "description": "Description",
+          "model": "Model",
+          "temperature": "Temperature",
+          "topK": "Retrieved chunks",
+          "similarityThreshold": "Similarity threshold",
+          "prompt": "Prompt"
+        },
+        "problems": {
+          "name": "Agent name",
+          "model": "LLM model",
+          "prompt": "System prompt",
+          "topK": "Retrieved chunks",
+          "similarityThreshold": "Similarity threshold"
+        },
+        "history": {
+          "title": "Change history",
+          "hint": "Unsaved edits, this visit's actions and the live version",
+          "draft": "Unsaved draft",
+          "live": "Live configuration",
+          "liveDetail": "Last updated on the server"
+        }
+      },
+      "playground": {
+        "title": "Live playground",
+        "description": "Queries use the selected model, indexed knowledge and production retrieval pipeline.",
+        "back": "Agent",
+        "noAgentTitle": "Create an agent first",
+        "noAgentDescription": "The playground needs an indexed knowledge base and a live agent.",
+        "emptyTitle": "Ask a grounded question",
+        "emptyText": "Answers include the retrieved document chunks.",
+        "chunk": "{document} · chunk {id}",
+        "placeholder": "Ask about your uploaded documents…",
+        "failed": "RAG request failed"
+      },
+      "conversation": {
+        "subtitle": "Conversations · {id}",
+        "back": "Back to conversations",
+        "breadcrumb": "Conversations",
+        "export": "Export transcript",
+        "takeOver": "Take over chat",
+        "handBack": "Hand back to agent",
+        "handlingTitle": "You're handling this chat",
+        "handlingDetail": "The agent stops replying until you hand it back.",
+        "handedBack": "Chat handed back to the agent",
+        "handoverFailed": "Couldn't change who handles the chat",
+        "notSent": "Message not sent",
+        "tagsFailed": "Couldn't save tags",
+        "linkCopied": "Link copied",
+        "idCopied": "chat_id copied",
+        "insights": "Conversation insights",
+        "loading": "Loading conversation",
+        "notFound": "Conversation not found",
+        "loadFailed": "Couldn't load this conversation",
+        "notFoundDetail": "There is no chat with the id {id}. It may belong to another business.",
+        "transcript": "Transcript",
+        "started": "{contact} · started {time}",
+        "actions": "Conversation actions",
+        "copyLink": "Copy link",
+        "operator": "Operator",
+        "sources": "Sources",
+        "trace": "{model} · {seconds} s · {chunks}",
+        "scores": "Vector {vector} · rerank {rerank}",
+        "feedback": {
+          "positive": "Customer marked this answer as helpful",
+          "negative": "Customer marked this answer as unhelpful"
+        },
+        "reply": "Reply to the customer",
+        "replyPlaceholder": "Write a reply… (Shift + Enter for a new line)",
+        "readOnly": "Read-only transcript — take over to reply",
+        "takeOverShort": "Take over",
+        "list": {
+          "title": "All conversations",
+          "search": "Search by chat_id or text",
+          "noMatches": "No conversations match “{query}”."
+        },
+        "details": {
+          "title": "Chat details",
+          "copyId": "Copy chat_id",
+          "channel": "Channel",
+          "customer": "Customer",
+          "started": "Started",
+          "duration": "Duration",
+          "messages": "Messages",
+          "messagesValue": "{count} ({agent} agent)",
+          "handledBy": "Handled by",
+          "escalation": "Escalation",
+          "handedTo": "Handed to {name}",
+          "noHandover": "No human handover"
+        },
+        "sourcesCard": {
+          "title": "Retrieved sources",
+          "used": "{chunks} used",
+          "relevance": "Relevance of {document}",
+          "evidence": "View evidence chunks",
+          "chunk": "Chunk {id} · rerank {score}",
+          "empty": "No documents were retrieved for this chat."
+        },
+        "outcome": {
+          "title": "Outcome & tags",
+          "tags": "Tags",
+          "removeTag": "Remove tag {tag}",
+          "newTag": "New tag",
+          "add": "Add",
+          "rated": "Customer rated {score}/{outOf}",
+          "notRated": "The customer hasn't rated this chat yet."
+        },
+        "file": {
+          "title": "Conversation {id}",
+          "channel": "Channel: {channel}",
+          "customer": "Customer: {name} ({contact})",
+          "started": "Started: {date}",
+          "sources": "Sources: {sources}"
+        }
+      },
+      "admin": {
+        "unavailable": "Admin data unavailable",
+        "accessDenied": "Access denied.",
+        "modelSaved": "Model catalog updated",
+        "modelFailed": "Model was not saved",
+        "checkFields": "Check the fields.",
+        "tenantSaved": "Tenant limits updated",
+        "tenantFailed": "Limits were not saved",
+        "checkValues": "Check the values.",
+        "deniedTitle": "Platform administrator access required",
+        "deniedDescription": "This area is restricted by the control-plane admin allowlist.",
+        "catalogTitle": "Dynamic model catalog",
+        "catalogDescription": "Frontend options and exact prices come from this catalog.",
+        "newModel": "New model",
+        "columns": {
+          "model": "Model",
+          "provider": "Provider",
+          "input": "Input / 1M",
+          "output": "Output / 1M",
+          "state": "State"
+        },
+        "notSet": "Not set",
+        "enabled": "Enabled",
+        "disabled": "Disabled",
+        "default": "Default",
+        "form": {
+          "id": "Model ID",
+          "displayName": "Display name",
+          "provider": "Provider",
+          "contextTokens": "Context tokens",
+          "input": "Input USD / 1M",
+          "output": "Output USD / 1M"
+        },
+        "saveModel": "Save model",
+        "tenantTitle": "Tenant limits",
+        "tenant": "Tenant",
+        "tenantPlaceholder": "Select a tenant",
+        "loadLimits": "Load limits",
+        "saveTenant": "Save tenant limits",
+        "loading": "Loading configuration…",
+        "limits": {
+          "max_documents": "Max documents",
+          "max_storage_bytes": "Max storage (bytes)",
+          "max_agents": "Max agents",
+          "monthly_queries": "Monthly queries",
+          "monthly_tokens": "Monthly tokens",
+          "monthly_cost_microusd": "Monthly cost (micro-USD)",
+          "max_file_bytes": "Max file size (bytes)",
+          "max_files_per_request": "Max files per request",
+          "max_pdf_pages": "Max PDF pages",
+          "query_rate_per_minute": "Queries per minute",
+          "upload_rate_per_minute": "Uploads per minute"
+        }
+      }
+    },
+    "video": {
+      "period": "{month} · week {week}",
+      "dateTime": "{date} · {time}",
+      "planStatus": {
+        "done": "Done",
+        "ongoing": "Ongoing",
+        "upcoming": "Upcoming"
+      },
+      "railTitle": {
+        "done": "Completed plans",
+        "ongoing": "Active plan",
+        "upcoming": "Awaiting approval"
+      },
+      "videoState": {
+        "processing": "Processing",
+        "scheduled": "Scheduled",
+        "draft": "Draft"
+      },
+      "dashboard": {
+        "subtitle": "{videos} videos · {published} on social media · {views} views",
+        "tomorrowAt": "tomorrow {time}",
+        "metrics": {
+          "generated": "Videos generated · all time",
+          "published": "Posted to social media",
+          "views": "Total views · 30 days",
+          "engagement": "Engagement rate",
+          "thisMonth": "this month",
+          "high": "High",
+          "engagementHint": "Likes + comments + shares / views"
+        },
+        "topVideos": {
+          "title": "Top performing videos",
+          "days7": "7 days",
+          "days30": "30 days",
+          "all": "All",
+          "columns": {
+            "video": "Video",
+            "platform": "Platform",
+            "date": "Date",
+            "views": "Views",
+            "engagement": "Engagement",
+            "growth": "Growth"
+          }
+        },
+        "channels": {
+          "title": "Views · channels"
+        },
+        "weeklyPlan": {
+          "title": "This week's plan",
+          "produced": "Published videos",
+          "nextPost": "Next post · {time}",
+          "open": "Open plan"
+        },
+        "recommendations": {
+          "title": "Recommendations · content in your industry",
+          "agent": "Research agent",
+          "franchise": "Top franchise partners",
+          "trending": "Trending now",
+          "updated": "Updated at {time}",
+          "trend": "Trend",
+          "addToPlan": "Add to plan",
+          "tags": {
+            "franchise": "franchise",
+            "trend": "trend"
+          },
+          "trendingPosts": "Trending now · {count} posts"
+        }
+      },
+      "plans": {
+        "subtitle": "Weekly content plans · {month}",
+        "title": "Plans",
+        "description": "The agent system drafts a content plan for every week",
+        "legend": {
+          "newPlan": "new plan",
+          "currentWeek": "current week",
+          "completed": "completed",
+          "published": "published",
+          "plannedInactive": "planned · not active",
+          "otherPlan": "other plan",
+          "publishedVideo": "published video"
+        },
+        "summary": {
+          "published": "Published videos",
+          "views": "Total views",
+          "er": "Average ER",
+          "research": "Research summary",
+          "monthResults": "{month} results"
+        },
+        "approval": {
+          "reject": "Reject",
+          "edit": "Edit with AI",
+          "approve": "Approve plan"
+        },
+        "calendar": {
+          "previous": "Previous month",
+          "next": "Next month"
+        },
+        "filter": "Filter",
+        "timeline": {
+          "locked": "Scripts locked",
+          "upcomingEditable": "Upcoming scripts can be edited",
+          "editable": "Editable",
+          "download": "Download plan"
+        },
+        "item": {
+          "edit": "Edit",
+          "noEdit": "No edits"
+        },
+        "detail": {
+          "kind": {
+            "video": "video",
+            "draft": "draft",
+            "scheduled": "scheduled"
+          },
+          "generating": "Generating the video…",
+          "notGenerated": "The video hasn't been generated yet",
+          "meta": "{date} {time} · plan: {plan} · video {order}",
+          "stats": {
+            "views": "views",
+            "likes": "likes",
+            "comments": "comments",
+            "shares": "shares"
+          },
+          "lockedDraft": "The plan isn't approved yet — the script can be edited, and the video is generated on its date.",
+          "lockedScheduled": "Not due yet — the buttons are inactive. The link and download open once the video is out.",
+          "openReels": "Open in Reels",
+          "download": "Download",
+          "editScript": "Edit script with AI"
+        },
+        "script": {
+          "meta": "Video {order} · {title} · {date} {time} · this video only",
+          "quick": {
+            "shorter": "Make it shorter",
+            "cta": "Stronger CTA",
+            "hook": "Try another hook"
+          },
+          "placeholder": "How should we change the script?",
+          "current": "Current script",
+          "proposed": "New script",
+          "scopeNote": "The change applies to this video only. Once approved, the video is generated from this prompt.",
+          "footer": "Plan not approved · changes can be made until the week starts",
+          "approve": "Approve new script"
+        }
+      },
+      "demo": {
+        "approvalTitle": "A new weekly plan is ready — waiting for your approval",
+        "approvalSubtitle": "The agents built it from research on Friday, 11 September · it starts automatically on Monday, 15 September at 00:00",
+        "railNote": {
+          "upcoming": "Starts automatically on Monday, 15 September",
+          "ongoing": "When 14 September ends, the plan automatically becomes Done"
+        },
+        "insights": {
+          "trendAudio": "Videos with trending audio ↑ 42%",
+          "ugc": "UGC formats deliver the highest ER",
+          "bestTime": "Best time to post: 18:00–20:00"
+        },
+        "weeks": {
+          "upcoming": {
+            "range": "15–21 September · 7 videos · research-based",
+            "note": "If not edited by Monday, the plan automatically becomes Ongoing"
+          },
+          "ongoing": {
+            "range": "8–14 September · 7 videos · 3 published · today is 10 September",
+            "note": "Only videos that aren't due yet can be edited · the plan becomes Done at the end of the week"
+          },
+          "done": {
+            "range": "1–7 September · 6 videos · 1.9M views · average ER 8.4%",
+            "note": "Week complete · results added to the overall dashboard stats"
+          }
+        }
+      },
+      "studio": {
+        "subtitle": "Off-plan video · with your own prompt and context",
+        "title": "Create a new video",
+        "description": "Outside the plan: you steer it with context, a prompt and images",
+        "allVideos": "All my videos",
+        "untitled": "Video",
+        "composer": {
+          "title": "Prompt and context",
+          "aiHelp": "AI assist",
+          "prompt": "Video prompt",
+          "promptPlaceholder": "What should the video show? Describe the shots, tone and closing text.",
+          "context": "Context",
+          "brand": "{brand} brand",
+          "brandColors": "Brand colours",
+          "references": "Reference images",
+          "upload": "Upload",
+          "settings": "Settings",
+          "format": "Format",
+          "voice": "Voice",
+          "research": "Research",
+          "fast": "Fast",
+          "deep": "Deep",
+          "subtitles": "Turn on subtitles",
+          "previewOnly": "Prompt preview only",
+          "advanced": "Extra direction and references",
+          "tone": "Tone",
+          "tonePlaceholder": "For example: friendly, energetic, trustworthy",
+          "cta": "Call to action",
+          "ctaPlaceholder": "For example: Order via the link in our profile",
+          "source": "Ready script or source text",
+          "sourcePlaceholder": "Paste approved copy here, if you have it",
+          "links": "Reference links · one HTTPS URL per line",
+          "images": "Reference image URLs · one HTTPS URL per line",
+          "submit": "Create video"
+        },
+        "model": {
+          "title": "Video model",
+          "loading": "Loading models",
+          "loadFailed": "Couldn't load video models right now. Please try again.",
+          "reload": "Reload",
+          "model": "Model",
+          "resolution": "Resolution",
+          "duration": "Duration",
+          "audio": "With audio",
+          "noAudio": "No audio",
+          "estimate": "Provider estimate",
+          "noPrice": "No price listed"
+        },
+        "result": {
+          "title": "Result",
+          "ready": "Ready",
+          "creating": "Generating",
+          "error": "Error",
+          "status": {
+            "submitting": "Submitting…",
+            "queued": "Queued…",
+            "processing": "Editing the video…",
+            "submission_unknown": "Checking…"
+          },
+          "sending": "Sending the request…",
+          "preparing": "Preparing…",
+          "untitled": "New video",
+          "failed": "The video wasn't created",
+          "idle": "Write a prompt and press “Create video”",
+          "publish": "Post to social media",
+          "download": "Download",
+          "retry": "Try again",
+          "regenerate": "Regenerate",
+          "pipeline": {
+            "script": "Script",
+            "shots": "Shots",
+            "montage": "Editing",
+            "voice": "Voice"
+          }
+        },
+        "library": {
+          "title": "My videos",
+          "count": "{count}",
+          "filters": {
+            "all": "All",
+            "ready": "Ready",
+            "processing": "In progress",
+            "issues": "Issues"
+          },
+          "status": {
+            "ready": "Ready",
+            "processing": "In progress",
+            "failed": "Failed",
+            "review": "Needs review",
+            "published": "Published",
+            "draft": "Draft"
+          },
+          "watch": "Watch video",
+          "download": "Download video",
+          "empty": "No videos yet",
+          "emptyFilter": "No videos with this status",
+          "emptyDescription": "Generated videos appear here with their status and secure watch and download links.",
+          "footer": "Videos you create yourself don't affect plan statistics."
+        },
+        "publish": {
+          "title": "The video is ready — post it to social media?",
+          "where": "Where to post",
+          "postTo": "Post to {channel}",
+          "caption": "Caption (written by AI)",
+          "rewrite": "Rewrite",
+          "captionPlaceholder": "Post text and hashtags",
+          "when": "When",
+          "now": "Now",
+          "schedule": "Schedule",
+          "statsNote": "Once posted, the video's stats (views, ER) flow into the dashboard automatically.",
+          "later": "Later",
+          "submit": "Post"
+        },
+        "jobs": {
+          "status": {
+            "submitting": "Submitting",
+            "submission_failed": "Not submitted",
+            "submission_unknown": "Checking",
+            "queued": "Queued",
+            "processing": "Generating",
+            "completed": "Ready",
+            "failed": "Error"
+          },
+          "title": "Generated videos",
+          "description": "Your videos' status and finished results appear here.",
+          "sync": "Refresh history",
+          "empty": "No videos yet",
+          "emptyDescription": "Videos you create will show up here.",
+          "autoFormat": "Auto format",
+          "autoDuration": "Auto duration",
+          "autoLanguage": "Auto",
+          "live": "Updates live",
+          "download": "Download",
+          "watchInApp": "Watch the video in the app",
+          "watch": "Watch"
+        },
+        "preview": {
+          "eyebrow": "Watch video",
+          "untitled": "Generated video",
+          "close": "Close video",
+          "details": "Video details",
+          "status": "Status",
+          "ready": "Ready",
+          "format": "Format",
+          "auto": "Auto",
+          "duration": "Duration",
+          "model": "Model",
+          "download": "Download video"
+        },
+        "player": {
+          "label": "Generated video",
+          "loading": "Loading video…",
+          "failed": "The video won't open right now. Try again or download it.",
+          "reload": "Reload"
+        },
+        "toasts": {
+          "ready": "Video ready",
+          "readyDetail": "You can watch and post it now.",
+          "failed": "The video wasn't created",
+          "checkLinks": "Check reference links",
+          "httpsOnly": "Only HTTPS reference URLs are accepted.",
+          "needsVerification": "Submission needs verification",
+          "needsVerificationDetail": "Check this job before generating again. No automatic resubmission will be made.",
+          "notCompleted": "Generation was not completed",
+          "checkJob": "Check the job details.",
+          "previewQueued": "Preview job queued",
+          "queued": "Video generation queued",
+          "queuedDetail": "Progress appears in the job list below.",
+          "startFailed": "Couldn't start video generation",
+          "checkListFirst": "Check the job list before trying again.",
+          "loadFailed": "Couldn't load video jobs",
+          "synced": "Video jobs synchronized",
+          "syncedDetail": "{imported} imported, {updated} updated.",
+          "syncFailed": "Couldn't synchronize jobs"
+        }
       }
     }
   }

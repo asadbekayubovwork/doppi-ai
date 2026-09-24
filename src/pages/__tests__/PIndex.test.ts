@@ -42,7 +42,7 @@ describe("PIndex (landing page)", () => {
     const wrapper = buildApp()
 
     // The section anchors the navigation and footer link to must all exist.
-    for (const id of ["top", "solution", "features", "how", "results", "faq", "about", "contact"]) {
+    for (const id of ["top", "solution", "features", "how", "results", "faq", "about"]) {
       expect(wrapper.find(`#${id}`).exists(), `#${id} is missing`).toBe(true)
     }
 
@@ -51,7 +51,7 @@ describe("PIndex (landing page)", () => {
     wrapper.unmount()
   })
 
-  it("renders the home value proposition, core modules, and contact details", () => {
+  it("renders the home value proposition and core modules", () => {
     const wrapper = buildApp()
     const text = wrapper.text()
 
@@ -59,7 +59,8 @@ describe("PIndex (landing page)", () => {
     expect(text).toContain("barchasi bir tizimda")
     expect(text).toContain("SIP Telefoniya")
     expect(text).toContain("AI Ovozli Agent")
-    expect(text).toContain("Toshkent, O'zbekiston")
+    // The lead form lives on /contact-us only.
+    expect(wrapper.find("#contact").exists()).toBe(false)
 
     wrapper.unmount()
   })

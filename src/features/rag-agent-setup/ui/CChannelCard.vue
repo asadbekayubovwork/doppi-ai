@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 import { CChannelIcon } from "@/entities/rag-agent"
 import { CSwitch } from "@/shared/ui"
 import { CHANNEL_SETUP } from "../model/channel-setup"
@@ -13,12 +14,16 @@ const emit = defineEmits<{
   credential: [key: string, value: string]
 }>()
 
+const { t } = useI18n()
 const setup = computed(() => CHANNEL_SETUP[props.channel.kind])
+const title = computed(() => t(setup.value.title))
 
 const caption = computed(() => {
   const { connected, enabled } = props.channel
-  if (!connected) return setup.value.caption
-  return `${setup.value.caption} · ${enabled ? "connected" : "disconnects on save"}`
+  const caption = t(setup.value.caption)
+  if (!connected) return caption
+  const state = enabled ? "connected" : "disconnectsOnSave"
+  return `${caption} · ${t(`dashboard.rag.channelsSection.${state}`)}`
 })
 </script>
 
@@ -35,7 +40,7 @@ const caption = computed(() => {
       <CChannelIcon :channel="channel.kind" framed />
       <div class="min-w-0 flex-1">
         <h4 class="truncate text-[13.5px] font-semibold text-[#15151B]">
-          {{ setup.title }}
+          {{ title }}
         </h4>
         <p
           class="truncate text-xs"
@@ -50,7 +55,7 @@ const caption = computed(() => {
       </div>
       <CSwitch
         :model-value="channel.enabled"
-        :label="`Connect ${setup.title}`"
+        :label="$t('dashboard.rag.channelsSection.connect', { channel: title })"
         @update:model-value="emit('toggle', $event)"
       />
     </header>
@@ -62,7 +67,11 @@ const caption = computed(() => {
         v-for="field in setup.fields"
         :key="field.key"
         :field="field"
-        :placeholder="channel.connected ? 'Saved · type to replace' : undefined"
+        :placeholder="
+          channel.connected
+            ? $t('dashboard.rag.channelsSection.savedPlaceholder')
+            : undefined
+        "
         :model-value="channel.credentials[field.key]"
         @update:model-value="emit('credential', field.key, $event)"
       />

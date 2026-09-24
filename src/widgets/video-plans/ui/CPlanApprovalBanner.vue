@@ -24,12 +24,14 @@ defineEmits<{ reject: []; edit: []; approve: [] }>()
       </div>
     </div>
     <div class="flex flex-wrap items-center gap-2">
-      <CAppButton icon="x" @click="$emit('reject')">Rad etish</CAppButton>
+      <CAppButton icon="x" @click="$emit('reject')">
+        {{ $t("dashboard.video.plans.approval.reject") }}
+      </CAppButton>
       <CAppButton icon="wand-sparkles" @click="$emit('edit')">
-        AI bilan tahrirlash
+        {{ $t("dashboard.video.plans.approval.edit") }}
       </CAppButton>
       <CAppButton variant="primary" icon="check" @click="$emit('approve')">
-        Planni tasdiqlash
+        {{ $t("dashboard.video.plans.approval.approve") }}
       </CAppButton>
     </div>
   </div>

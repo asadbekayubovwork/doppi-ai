@@ -31,6 +31,9 @@ export default {
         // Hover accent for cards and blocks: the border glow, lit orbit
         // chips, step markers. Deep blue, hsl(221 46% 38%).
         cobalt: "#34508C",
+        // The video studio band's accent: badge, headline and buttons on its
+        // dark surface. Lime, never used on the light ground.
+        volt: "#D3F26A",
         primary: {
           10: "#EAEFFF",
           20: "#BDCCFF",

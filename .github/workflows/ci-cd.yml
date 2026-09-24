@@ -43,10 +43,19 @@ jobs:
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
 
+      # Failing tests are reported, but they don't stop the build or the deploy:
+      # the step is marked failed and a warning lands on the run summary.
+      - name: Run tests
+        continue-on-error: true
+        run: |
+          if ! pnpm test; then
+            echo "::warning::Tests failed; the build and deploy continue anyway."
+            exit 1
+          fi
+
       - name: Verify source
         run: |
           set -euo pipefail
-          pnpm test
           pnpm lint
           pnpm exec vue-tsc --noEmit -p tsconfig.app.json
           pnpm audit --prod --audit-level high

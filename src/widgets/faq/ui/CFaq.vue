@@ -8,15 +8,7 @@ interface FaqItem {
   a: string
 }
 
-const props = withDefaults(
-  defineProps<{
-    /** Branch holding title and items; service pages pass their own. */
-    i18nKey?: string
-  }>(),
-  { i18nKey: "faq" }
-)
-
-const items = useI18nList<FaqItem>(`${props.i18nKey}.items`)
+const items = useI18nList<FaqItem>("faq.items")
 
 // Single-open accordion: clicking the open row closes it again.
 const openIndex = ref<number | null>(0)
@@ -60,7 +52,7 @@ const onTransitionDone = (element: Element) => {
 <template>
   <section id="faq" class="section-ground py-[60px] sm:py-[100px]">
     <div class="container relative z-10">
-      <CSectionHeading :title="$t(`${i18nKey}.title`)" />
+      <CSectionHeading :title="$t('faq.title')" />
 
       <div class="mx-auto mt-12 max-w-[760px] space-y-3">
         <!-- The AOS-animated element must keep a STATIC class list: AOS adds

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
+import { useI18n } from "vue-i18n"
 import { CIcon } from "@/shared/ui"
 import type { DocumentDraft } from "../model/useKnowledgeDocuments"
 import CKnowledgeDocumentRow from "./CKnowledgeDocumentRow.vue"
@@ -15,10 +16,14 @@ const props = defineProps<{
   hint?: string
 }>()
 
+const { t } = useI18n()
+
 const limitsHint = computed(() =>
   props.maxFileBytes
-    ? `PDF, DOCX, XLSX or TXT, up to ${Math.round(props.maxFileBytes / 1024 / 1024)} MB each`
-    : "Loading upload limits…"
+    ? t("dashboard.rag.knowledge.limits", {
+        size: Math.round(props.maxFileBytes / 1024 / 1024),
+      })
+    : t("dashboard.rag.knowledge.loadingLimits")
 )
 
 const emit = defineEmits<{ add: [files: File[]]; remove: [key: string] }>()
@@ -58,7 +63,7 @@ const onPick = (event: Event) => {
   <CSetupSection
     :step="2"
     :icon="icon"
-    title="Knowledge base"
+    :title="$t('dashboard.rag.knowledge.title')"
     :hint="hint ?? limitsHint"
   >
     <template v-if="$slots.aside" #aside><slot name="aside" /></template>
@@ -77,9 +82,9 @@ const onPick = (event: Event) => {
       >
         <CIcon name="cloud-upload" class="h-6 w-6 text-[#5B4BE8]" />
         <span class="text-[13.5px] font-medium text-[#5B4BE8]">
-          Drag documents here or
+          {{ $t("dashboard.rag.knowledge.drop") }}
           <span class="font-semibold underline-offset-2 group-hover:underline">
-            browse files
+            {{ $t("dashboard.rag.knowledge.browse") }}
           </span>
         </span>
         <input
@@ -96,7 +101,7 @@ const onPick = (event: Event) => {
         tag="ul"
         name="fade"
         class="space-y-2.5"
-        aria-label="Uploaded documents"
+        :aria-label="$t('dashboard.rag.knowledge.uploaded')"
       >
         <CKnowledgeDocumentRow
           v-for="document in documents"

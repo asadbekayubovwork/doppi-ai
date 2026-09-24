@@ -33,7 +33,9 @@ const inputClass = (invalid: boolean) =>
 <template>
   <div class="grid gap-4 sm:grid-cols-2">
     <div>
-      <label :for="topKId" class="field-label">Retrieved chunks</label>
+      <label :for="topKId" class="field-label">
+        {{ $t("dashboard.rag.retrieval.topK") }}
+      </label>
       <input
         :id="topKId"
         v-model.number="topK"
@@ -52,12 +54,14 @@ const inputClass = (invalid: boolean) =>
         class="mt-1 text-xs"
         :class="isTopKInvalid ? 'text-[#C42B2B]' : 'text-[#84848E]'"
       >
-        Passages read per answer, {{ TOP_K_RANGE.min }}–{{ TOP_K_RANGE.max }}
+        {{ $t("dashboard.rag.retrieval.topKHint", TOP_K_RANGE) }}
       </p>
     </div>
 
     <div>
-      <label :for="thresholdId" class="field-label">Similarity threshold</label>
+      <label :for="thresholdId" class="field-label">
+        {{ $t("dashboard.rag.retrieval.threshold") }}
+      </label>
       <input
         :id="thresholdId"
         v-model.number="similarityThreshold"
@@ -76,8 +80,7 @@ const inputClass = (invalid: boolean) =>
         class="mt-1 text-xs"
         :class="isThresholdInvalid ? 'text-[#C42B2B]' : 'text-[#84848E]'"
       >
-        Weaker matches are ignored, {{ SIMILARITY_RANGE.min }} to
-        {{ SIMILARITY_RANGE.max }}
+        {{ $t("dashboard.rag.retrieval.thresholdHint", SIMILARITY_RANGE) }}
       </p>
     </div>
   </div>

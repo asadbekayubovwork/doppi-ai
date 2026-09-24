@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
 import type { ConversationDetail } from "@/entities/rag-agent"
-import { formatClockTime, useDismiss } from "@/shared/lib"
+import { formatClockTime, useCountLabel, useDismiss } from "@/shared/lib"
 import { CBadge, CIcon, CIconButton } from "@/shared/ui"
 
 const props = defineProps<{ conversation: ConversationDetail }>()
 
 const emit = defineEmits<{ copyLink: []; export: [] }>()
+
+const count = useCountLabel()
 
 const initials = computed(() =>
   props.conversation.customer.name
@@ -21,8 +23,16 @@ const isMenuOpen = ref(false)
 useDismiss(menu, () => (isMenuOpen.value = false))
 
 const actions = [
-  { label: "Copy link", icon: "link-2", run: () => emit("copyLink") },
-  { label: "Export transcript", icon: "download", run: () => emit("export") },
+  {
+    label: "dashboard.rag.conversation.copyLink",
+    icon: "link-2",
+    run: () => emit("copyLink"),
+  },
+  {
+    label: "dashboard.rag.conversation.export",
+    icon: "download",
+    run: () => emit("export"),
+  },
 ]
 
 const choose = (run: () => void) => {
@@ -44,19 +54,23 @@ const choose = (run: () => void) => {
         {{ conversation.customer.name }}
       </h2>
       <p class="truncate text-xs text-[#84848E]">
-        {{ conversation.customer.contact }} · started
-        {{ formatClockTime(conversation.startedAt) }}
+        {{
+          $t("dashboard.rag.conversation.started", {
+            contact: conversation.customer.contact,
+            time: formatClockTime(conversation.startedAt),
+          })
+        }}
       </p>
     </div>
 
     <CBadge tone="outline" icon="messages-square" class="hidden sm:inline-flex">
-      {{ conversation.messageCount }} messages
+      {{ count("dashboard.plural.messages", conversation.messageCount) }}
     </CBadge>
 
     <div ref="menu" class="relative">
       <CIconButton
         icon="ellipsis"
-        label="Conversation actions"
+        :label="$t('dashboard.rag.conversation.actions')"
         aria-haspopup="menu"
         :aria-expanded="isMenuOpen"
         @click="isMenuOpen = !isMenuOpen"
@@ -76,7 +90,7 @@ const choose = (run: () => void) => {
             @click="choose(action.run)"
           >
             <CIcon :name="action.icon" class="h-4 w-4 text-[#84848E]" />
-            {{ action.label }}
+            {{ $t(action.label) }}
           </button>
         </div>
       </Transition>

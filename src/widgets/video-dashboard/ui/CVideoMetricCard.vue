@@ -10,7 +10,9 @@ defineProps<{ metric: VideoMetric }>()
     class="rounded-2xl border border-[#E5E5E1] bg-white p-5 shadow-[0_12px_32px_rgba(22,22,27,0.04)]"
   >
     <div class="flex items-start justify-between gap-3">
-      <p class="text-[13px] leading-5 text-[#73737D]">{{ metric.label }}</p>
+      <p class="text-[13px] leading-5 text-[#73737D]">
+        {{ $t(metric.label) }}
+      </p>
       <span
         class="grid h-7 w-7 shrink-0 place-items-center rounded-[9px] bg-[#F2F2EF] text-[#84848E]"
       >
@@ -25,12 +27,16 @@ defineProps<{ metric: VideoMetric }>()
         {{ metric.value }}
       </span>
       <CBadge
-        v-if="metric.change"
+        v-if="metric.change || metric.changeLabel"
         size="sm"
         :tone="metric.changeTone === 'danger' ? 'danger' : metric.changeTone === 'neutral' ? 'neutral' : 'success'"
         :icon="metric.changeTone === 'danger' ? undefined : 'trending-up'"
       >
-        {{ metric.change }}
+        {{
+          [metric.change, metric.changeLabel && $t(metric.changeLabel)]
+            .filter(Boolean)
+            .join(" ")
+        }}
       </CBadge>
     </div>
 
@@ -43,7 +49,7 @@ defineProps<{ metric: VideoMetric }>()
         />
       </div>
       <p v-if="metric.hint" class="mt-2 text-[11.5px] text-[#9A9AA2]">
-        {{ metric.hint }}
+        {{ $t(metric.hint) }}
       </p>
     </div>
 

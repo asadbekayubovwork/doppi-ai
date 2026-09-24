@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, useId } from "vue"
+import { useI18n } from "vue-i18n"
 import type { LlmModel, LlmModelId } from "@/entities/rag-agent"
 import { describeTemperature } from "../model/prompt"
 import CSetupSection from "./CSetupSection.vue"
@@ -13,20 +14,27 @@ defineProps<{
   hint?: string
 }>()
 
+const { t } = useI18n()
 const temperatureId = useId()
 const radioName = useId()
 
 const temperatureLabel = computed(
   () =>
-    `${temperature.value.toFixed(1)} · ${describeTemperature(temperature.value)}`
+    `${temperature.value.toFixed(1)} · ${t(describeTemperature(temperature.value))}`
 )
 
 const contextLabel = (tokens: number) =>
-  `${Intl.NumberFormat("en", { notation: "compact" }).format(tokens)} context`
+  t("dashboard.rag.model.context", {
+    tokens: Intl.NumberFormat("en", { notation: "compact" }).format(tokens),
+  })
 
 const pricingLabel = (option: LlmModel) => {
-  if (!option.pricingConfigured) return "Pricing not configured"
-  return `${option.currency} ${option.inputUsdPerMillion} input · ${option.outputUsdPerMillion} output / 1M`
+  if (!option.pricingConfigured) return t("dashboard.rag.model.pricingMissing")
+  return t("dashboard.rag.model.pricing", {
+    currency: option.currency,
+    input: option.inputUsdPerMillion,
+    output: option.outputUsdPerMillion,
+  })
 }
 </script>
 
@@ -34,12 +42,12 @@ const pricingLabel = (option: LlmModel) => {
   <CSetupSection
     :step="3"
     :icon="icon"
-    title="LLM model"
-    :hint="hint ?? 'Powers retrieval answers on every channel'"
+    :title="$t('dashboard.rag.model.title')"
+    :hint="hint ?? $t('dashboard.rag.model.hint')"
   >
     <template v-if="$slots.aside" #aside><slot name="aside" /></template>
     <fieldset>
-      <legend class="sr-only">Model</legend>
+      <legend class="sr-only">{{ $t("dashboard.rag.model.legend") }}</legend>
       <div
         v-if="models.length"
         class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3"
@@ -80,15 +88,15 @@ const pricingLabel = (option: LlmModel) => {
       >
         {{
           loading
-            ? "Loading available models…"
-            : "No model is enabled for this workspace."
+            ? $t("dashboard.rag.model.loading")
+            : $t("dashboard.rag.model.none")
         }}
       </p>
     </fieldset>
 
     <div class="mt-4 flex items-center gap-4">
       <label :for="temperatureId" class="shrink-0 text-[13px] text-[#6A6A74]">
-        Temperature
+        {{ $t("dashboard.rag.model.temperature") }}
       </label>
       <input
         :id="temperatureId"

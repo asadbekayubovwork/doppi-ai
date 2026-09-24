@@ -14,5 +14,7 @@ const meta = computed(() => CONVERSATION_STATUS[props.status])
 </script>
 
 <template>
-  <CBadge :tone="meta.tone" :dot="dot" :size="size">{{ meta.label }}</CBadge>
+  <CBadge :tone="meta.tone" :dot="dot" :size="size">{{
+    $t(meta.label)
+  }}</CBadge>
 </template>

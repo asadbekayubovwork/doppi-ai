@@ -1,11 +1,16 @@
 import { mount } from "@vue/test-utils"
+import { createI18n } from "vue-i18n"
+import { messages } from "@/shared/config/i18n"
 import CVideoPlayer from "../CVideoPlayer.vue"
+
+const i18n = () =>
+  createI18n({ legacy: false, locale: "uz", fallbackLocale: "en", messages })
 
 describe("CVideoPlayer", () => {
   it("shows a loading state until the video can display a frame", async () => {
     const wrapper = mount(CVideoPlayer, {
       props: { src: "/video.mp4" },
-      global: { stubs: { CIcon: true } },
+      global: { plugins: [i18n()], stubs: { CIcon: true } },
     })
 
     expect(wrapper.get('[role="status"]').text()).toContain("Video yuklanmoqda")
@@ -17,7 +22,7 @@ describe("CVideoPlayer", () => {
   it("shows a clear retry action when playback fails", async () => {
     const wrapper = mount(CVideoPlayer, {
       props: { src: "/video.mp4" },
-      global: { stubs: { CIcon: true } },
+      global: { plugins: [i18n()], stubs: { CIcon: true } },
     })
 
     await wrapper.get("video").trigger("error")

@@ -109,18 +109,18 @@ const onKeydown = (event: KeyboardEvent) => {
             <p
               class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#77727D]"
             >
-              Videoni ko‘rish
+              {{ $t("dashboard.video.studio.preview.eyebrow") }}
             </p>
             <h2
               id="video-preview-title"
               class="mt-1 truncate text-lg font-semibold tracking-tight text-[#18171D] sm:text-xl"
             >
-              {{ job.brief.topic || "Yaratilgan video" }}
+              {{ job.brief.topic || $t("dashboard.video.studio.preview.untitled") }}
             </h2>
           </div>
           <button
             type="button"
-            aria-label="Videoni yopish"
+            :aria-label="$t('dashboard.video.studio.preview.close')"
             class="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-[#E2DFD8] bg-white text-[#5F5B64] transition hover:border-[#C9C3D9] hover:text-[#5B4BE8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8175EA]"
             @click="close"
           >
@@ -147,7 +147,7 @@ const onKeydown = (event: KeyboardEvent) => {
               <p
                 class="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#85808A]"
               >
-                Video tafsilotlari
+                {{ $t("dashboard.video.studio.preview.details") }}
               </p>
               <dl
                 class="mt-3 divide-y divide-[#E7E4DE] rounded-2xl border border-[#E7E4DE] bg-white/80 px-4"
@@ -155,21 +155,23 @@ const onKeydown = (event: KeyboardEvent) => {
                 <div
                   class="flex items-center justify-between gap-3 py-3 text-[13px]"
                 >
-                  <dt class="text-[#77727D]">Holati</dt>
-                  <dd class="font-semibold text-[#177A46]">Tayyor</dd>
-                </div>
-                <div
-                  class="flex items-center justify-between gap-3 py-3 text-[13px]"
-                >
-                  <dt class="text-[#77727D]">Format</dt>
-                  <dd class="font-medium text-[#27252D]">
-                    {{ job.brief.aspect_ratio || "Auto" }}
+                  <dt class="text-[#77727D]">{{ $t("dashboard.video.studio.preview.status") }}</dt>
+                  <dd class="font-semibold text-[#177A46]">
+                    {{ $t("dashboard.video.studio.preview.ready") }}
                   </dd>
                 </div>
                 <div
                   class="flex items-center justify-between gap-3 py-3 text-[13px]"
                 >
-                  <dt class="text-[#77727D]">Davomiyligi</dt>
+                  <dt class="text-[#77727D]">{{ $t("dashboard.video.studio.preview.format") }}</dt>
+                  <dd class="font-medium text-[#27252D]">
+                    {{ job.brief.aspect_ratio || $t("dashboard.video.studio.preview.auto") }}
+                  </dd>
+                </div>
+                <div
+                  class="flex items-center justify-between gap-3 py-3 text-[13px]"
+                >
+                  <dt class="text-[#77727D]">{{ $t("dashboard.video.studio.preview.duration") }}</dt>
                   <dd class="font-medium text-[#27252D]">
                     {{
                       job.brief.duration_sec
@@ -182,7 +184,7 @@ const onKeydown = (event: KeyboardEvent) => {
                   v-if="job.brief.video_model"
                   class="flex items-center justify-between gap-3 py-3 text-[13px]"
                 >
-                  <dt class="text-[#77727D]">Model</dt>
+                  <dt class="text-[#77727D]">{{ $t("dashboard.video.studio.preview.model") }}</dt>
                   <dd class="max-w-[135px] truncate font-medium text-[#27252D]">
                     {{ job.brief.video_model }}
                   </dd>
@@ -196,7 +198,7 @@ const onKeydown = (event: KeyboardEvent) => {
               @click="emit('download', job)"
             >
               <CIcon name="download" class="h-4 w-4" />
-              Videoni yuklab olish
+              {{ $t("dashboard.video.studio.preview.download") }}
             </button>
           </aside>
         </div>

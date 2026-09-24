@@ -1,14 +1,19 @@
 import { effectScope } from "vue"
+import { createI18n } from "vue-i18n"
+import { messages } from "@/shared/config/i18n"
 import { ragAgentApi } from "@/entities/rag-agent"
 import { useAgentSetupForm, type AgentSetupForm } from "../useAgentSetupForm"
 
 const TELEGRAM_TOKEN = "7742150983:AAF91c7kQx2mZ8vN3pL5tR9wY1bH6dJ4sE0"
 
+// The form speaks in i18n keys; English keeps the assertions readable.
+const { t } = createI18n({ legacy: false, locale: "en", messages }).global
+
 const file = (name: string, bytes = 2_048) =>
   new File([new Uint8Array(bytes)], name)
 
 const openItems = (form: AgentSetupForm) =>
-  form.checklist.filter((item) => !item.done).map((item) => item.label)
+  form.checklist.filter((item) => !item.done).map((item) => t(item.label))
 
 describe("agent setup form", () => {
   let scope: ReturnType<typeof effectScope>
@@ -64,7 +69,7 @@ describe("agent setup form", () => {
       huge,
     ])
 
-    expect(rejected.map(({ file, reason }) => [file.name, reason])).toEqual([
+    expect(rejected.map(({ file, reason }) => [file.name, t(reason)])).toEqual([
       ["prices.xlsx", "already added"],
       ["photo.png", "unsupported file type"],
       ["catalogue.pdf", "larger than the configured limit"],
@@ -95,7 +100,7 @@ describe("agent setup form", () => {
     form.setChannelEnabled("telegram", true)
     form.setCredential("telegram", "botToken", "not-a-token")
 
-    expect(form.missing.map((item) => item.label)).toContain(
+    expect(form.missing.map((item) => t(item.label))).toContain(
       "Telegram credentials"
     )
 

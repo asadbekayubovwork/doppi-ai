@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue"
-import { useHead } from "@unhead/vue"
+import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import {
@@ -16,11 +16,11 @@ import {
   useAgentSetupForm,
 } from "@/features/rag-agent-setup"
 import { useRagAgentStore } from "@/entities/rag-agent"
-import { usePageHeading, useToast } from "@/shared/lib"
+import { useCountLabel, usePageHeading, useToast } from "@/shared/lib"
 import { CAppButton, CBadge } from "@/shared/ui"
 
-useHead({ title: "Create RAG agent — Do'ppi AI" })
-
+const { t } = useI18n()
+const count = useCountLabel()
 const router = useRouter()
 const toast = useToast()
 const auth = useAuthStore()
@@ -43,8 +43,8 @@ const load = async () => {
     }
   } catch (error) {
     toast.error(
-      "Couldn't load RAG configuration",
-      messageForProblem(error, "Try again in a moment.")
+      t("dashboard.rag.loadConfigFailed"),
+      messageForProblem(error, t("dashboard.common.tryLater"))
     )
   }
 }
@@ -54,18 +54,20 @@ watch(businessId, () => void load())
 
 usePageHeading(() => ({
   subtitle: store.agent
-    ? `Replaces ${store.agent.name}`
-    : "No agent yet · create the one agent for this business",
+    ? t("dashboard.rag.create.replaces", { name: store.agent.name })
+    : t("dashboard.rag.create.noAgentYet"),
 }))
 
 const addFiles = (files: File[]) => {
   const rejected = form.addFiles(files)
   if (!rejected.length) return
   toast.warning(
-    rejected.length === 1
-      ? "1 file skipped"
-      : `${rejected.length} files skipped`,
-    rejected.map(({ file, reason }) => `${file.name} — ${reason}`).join("\n")
+    count("dashboard.plural.filesSkipped", rejected.length),
+    rejected
+      .map(({ file, reason }) =>
+        t("dashboard.rag.fileSkipped", { name: file.name, reason: t(reason) })
+      )
+      .join("\n")
   )
 }
 
@@ -73,33 +75,39 @@ const applyTemplate = () => {
   const hasPrompt = form.systemPrompt.trim().length > 0
   if (
     hasPrompt &&
-    !window.confirm("Replace the current prompt with the template?")
+    !window.confirm(t("dashboard.rag.prompt.replaceConfirm"))
   ) {
     return
   }
-  form.systemPrompt = buildPromptTemplate({
-    agentName: form.name.trim(),
-    businessName: auth.activeBusiness?.name,
-  })
+  form.systemPrompt = buildPromptTemplate(
+    {
+      agentName: form.name.trim(),
+      businessName: auth.activeBusiness?.name,
+    },
+    t
+  )
 }
 
 const submit = async () => {
   if (!form.canSubmit) {
     toast.warning(
-      "Finish the setup first",
-      form.missing.map((item) => item.label).join(", ")
+      t("dashboard.rag.create.finishSetup"),
+      form.missing.map((item) => t(item.label)).join(", ")
     )
     return
   }
   isSubmitting.value = true
   try {
     const agent = await store.createAgent(businessId.value, form.toPayload())
-    toast.success("Agent created", `${agent.name} is live.`)
+    toast.success(
+      t("dashboard.rag.create.created"),
+      t("dashboard.rag.create.createdDetail", { name: agent.name })
+    )
     await router.push({ name: "RagAgent" })
   } catch (error) {
     toast.error(
-      "Couldn't create the agent",
-      messageForProblem(error, "Try again in a moment.")
+      t("dashboard.rag.create.createFailed"),
+      messageForProblem(error, t("dashboard.common.tryLater"))
     )
   } finally {
     isSubmitting.value = false
@@ -115,24 +123,27 @@ const submit = async () => {
       <div class="min-w-0">
         <div class="flex flex-wrap items-center gap-2.5">
           <h2 class="text-xl font-semibold tracking-tight text-[#15151B]">
-            Create your RAG agent
+            {{ $t("dashboard.rag.create.title") }}
           </h2>
-          <CBadge tone="outline" icon="lock">One agent per business</CBadge>
+          <CBadge tone="outline" icon="lock">
+            {{ $t("dashboard.rag.onePerBusiness") }}
+          </CBadge>
         </div>
         <p class="mt-1 text-[13.5px] text-[#6A6A74]">
-          Name it, feed it documents, pick a model, write the system prompt and
-          connect the channels it will answer on.
+          {{ $t("dashboard.rag.create.description") }}
         </p>
       </div>
       <div class="flex shrink-0 gap-2.5">
-        <CAppButton :to="{ name: 'RagAgent' }">Cancel</CAppButton>
+        <CAppButton :to="{ name: 'RagAgent' }">
+          {{ $t("dashboard.common.cancel") }}
+        </CAppButton>
         <CAppButton
           variant="primary"
           icon="check"
           :loading="isSubmitting"
           @click="submit"
         >
-          Create agent
+          {{ $t("dashboard.rag.createAgent") }}
         </CAppButton>
       </div>
     </header>

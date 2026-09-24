@@ -1,30 +1,32 @@
 <script setup lang="ts">
 import { computed } from "vue"
-import { useHead } from "@unhead/vue"
+import { useI18n } from "vue-i18n"
 import { useAuthStore } from "@/features/auth"
 import { usePageHeading } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 import { SERVICES } from "@/widgets/dashboard-sidebar"
 
-useHead({ title: "Home — Do'ppi AI" })
+const { t } = useI18n()
+
 
 const auth = useAuthStore()
 
-const greeting = (() => {
+const greetingKey = (() => {
   const hour = new Date().getHours()
-  if (hour >= 5 && hour < 12) return "Good morning"
-  if (hour >= 12 && hour < 18) return "Good afternoon"
-  return "Good evening"
+  if (hour >= 5 && hour < 12) return "morning"
+  if (hour >= 12 && hour < 18) return "afternoon"
+  return "evening"
 })()
 
 const headline = computed(() => {
+  const greeting = t(`dashboard.home.greeting.${greetingKey}`)
   const name = auth.user?.first_name?.trim()
-  return name ? `${greeting}, ${name}` : greeting
+  return name ? t("dashboard.home.greetingNamed", { greeting, name }) : greeting
 })
 
 usePageHeading(() => {
   const business = auth.activeBusiness?.name
-  return business ? { subtitle: `${business} · workspace overview` } : {}
+  return business ? { subtitle: t("dashboard.home.overview", { business }) } : {}
 })
 </script>
 
@@ -33,7 +35,7 @@ usePageHeading(() => {
     class="flex min-h-full flex-col items-center justify-center py-8 sm:py-12"
   >
     <div class="text-center">
-      <p class="text-[15px] text-[#84848E]">My workspace</p>
+      <p class="text-[15px] text-[#84848E]">{{ $t("dashboard.home.workspace") }}</p>
       <h2
         class="mt-2 text-3xl font-bold tracking-tight text-[#15151B] sm:text-[42px] sm:leading-[1.15]"
       >
@@ -43,7 +45,7 @@ usePageHeading(() => {
 
     <ul
       class="mt-10 grid w-full max-w-[1080px] grid-cols-1 gap-5 sm:mt-14 sm:grid-cols-3 sm:gap-6"
-      aria-label="Services"
+      :aria-label="$t('dashboard.nav.services')"
     >
       <li v-for="service in SERVICES" :key="service.to">
         <RouterLink

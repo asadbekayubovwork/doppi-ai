@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 import { CVideoThumb } from "@/entities/video"
 import { CAppButton, CBadge, CIcon, CSelect, CSwitch } from "@/shared/ui"
 import CStudioModelSettings from "./CStudioModelSettings.vue"
@@ -43,11 +45,13 @@ const ASPECT_OPTIONS = [
   { value: "16:9" as const, label: "16:9" },
 ]
 
-const RESEARCH_MODES = [
-  { value: "fast" as const, label: "Tez" },
-  { value: "deep" as const, label: "Chuqur" },
-]
+const { t } = useI18n()
+const text = (key: string, named: Record<string, unknown> = {}) =>
+  t(`dashboard.video.studio.composer.${key}`, named)
 
+const RESEARCH_MODES = ["fast", "deep"] as const
+
+// Language names stay in their own language, whatever the interface speaks.
 const LANGUAGE_OPTIONS: { value: VideoLanguage; label: string }[] = [
   { value: "uz", label: "O'zbekcha" },
   { value: "ru", label: "Русский" },
@@ -55,11 +59,11 @@ const LANGUAGE_OPTIONS: { value: VideoLanguage; label: string }[] = [
 ]
 
 // Static context chips + references while the catalog endpoints are stubbed.
-const CONTEXT = [
-  { icon: "building-2", label: "Aura Store brendi" },
+const context = computed(() => [
+  { icon: "building-2", label: text("brand", { brand: "Aura Store" }) },
   { icon: "globe", label: "UZ" },
-  { icon: "tag", label: "Brend ranglari" },
-]
+  { icon: "tag", label: text("brandColors") },
+])
 const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
 </script>
 
@@ -71,9 +75,9 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
       class="flex items-center justify-between border-b border-[#ECECE8] px-5 py-4"
     >
       <h2 class="text-[15px] font-semibold text-[#15151B]">
-        Prompt va kontekst
+        {{ text("title") }}
       </h2>
-      <CBadge tone="accent" icon="wand-sparkles">AI yordam</CBadge>
+      <CBadge tone="accent" icon="wand-sparkles">{{ text("aiHelp") }}</CBadge>
     </header>
 
     <form
@@ -84,13 +88,13 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         <span
           class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
         >
-          Video prompti
+          {{ text("prompt") }}
         </span>
         <textarea
           v-model="prompt"
           rows="4"
           maxlength="8000"
-          placeholder="Video nimani ko'rsatsin? Kadrlar, ohang va yakuniy matnni yozing."
+          :placeholder="text('promptPlaceholder')"
           class="min-h-28 resize-y rounded-xl border border-[#DEDEE4] bg-[#FCFCFB] px-3.5 py-3 text-[13px] leading-6 text-[#1D1D22] outline-none transition placeholder:text-[#AAAAB3] focus:border-[#8175EA] focus:bg-white focus:ring-4 focus:ring-[#5B4BE8]/10"
         />
       </label>
@@ -99,11 +103,11 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         <span
           class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
         >
-          Kontekst
+          {{ text("context") }}
         </span>
         <div class="flex flex-wrap gap-2">
           <span
-            v-for="chip in CONTEXT"
+            v-for="chip in context"
             :key="chip.label"
             class="inline-flex items-center gap-1.5 rounded-lg bg-[#F2F0FC] px-2.5 py-1.5 text-[12px] font-medium text-[#5B4BE8]"
           >
@@ -117,7 +121,7 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         <span
           class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
         >
-          Referens rasmlar
+          {{ text("references") }}
         </span>
         <div class="flex flex-wrap gap-2.5">
           <CVideoThumb
@@ -132,7 +136,7 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
             class="flex h-14 w-16 flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-[#DEDEE4] text-[#9A9AA2] transition hover:border-[#C9C0F5] hover:text-[#5B4BE8]"
           >
             <CIcon name="cloud-upload" class="h-4 w-4" />
-            <span class="text-[10px] font-medium">Yuklash</span>
+            <span class="text-[10px] font-medium">{{ text("upload") }}</span>
           </button>
         </div>
       </div>
@@ -141,13 +145,13 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         <span
           class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
         >
-          Sozlamalar
+          {{ text("settings") }}
         </span>
         <div class="grid grid-cols-2 gap-2.5">
           <CSelect
             v-model="aspectRatio"
             :options="ASPECT_OPTIONS"
-            label="Format"
+            :label="text('format')"
             icon="layout-grid"
             size="xl"
           />
@@ -166,7 +170,7 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
           <CSelect
             v-model="language"
             :options="LANGUAGE_OPTIONS"
-            label="Ovoz"
+            :label="text('voice')"
             icon="mic"
             size="xl"
           />
@@ -177,7 +181,7 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         <span
           class="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#84848E]"
         >
-          Research
+          {{ text("research") }}
         </span>
         <div
           class="grid grid-cols-2 gap-0.5 rounded-xl border border-[#DEDEE4] bg-[#F5F4FB] p-0.5"
@@ -185,19 +189,19 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         >
           <button
             v-for="mode in RESEARCH_MODES"
-            :key="mode.value"
+            :key="mode"
             type="button"
             role="tab"
-            :aria-selected="researchMode === mode.value"
+            :aria-selected="researchMode === mode"
             class="h-8 rounded-[9px] text-[12px] font-semibold transition"
             :class="
-              researchMode === mode.value
+              researchMode === mode
                 ? 'bg-white text-[#15151B] shadow-[0_1px_2px_rgba(22,22,27,0.08)]'
                 : 'text-[#73737D] hover:text-[#15151B]'
             "
-            @click="researchMode = mode.value"
+            @click="researchMode = mode"
           >
-            {{ mode.label }}
+            {{ text(mode) }}
           </button>
         </div>
       </div>
@@ -208,18 +212,18 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         >
           <span class="flex items-center gap-2 text-[13px] text-[#42424B]">
             <CIcon name="message-square-text" class="h-4 w-4 text-[#84848E]" />
-            Subtitrlarni yoqish
+            {{ text("subtitles") }}
           </span>
-          <CSwitch v-model="subtitles" label="Subtitrlarni yoqish" />
+          <CSwitch v-model="subtitles" :label="text('subtitles')" />
         </label>
         <label
           class="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-[#DEDEE4] bg-white px-3 py-2.5"
         >
           <span class="flex items-center gap-2 text-[13px] text-[#42424B]">
             <CIcon name="eye" class="h-4 w-4 text-[#84848E]" />
-            Faqat prompt-preview
+            {{ text("previewOnly") }}
           </span>
-          <CSwitch v-model="previewOnly" label="Faqat prompt-preview" />
+          <CSwitch v-model="previewOnly" :label="text('previewOnly')" />
         </label>
       </div>
 
@@ -227,7 +231,7 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         <summary
           class="flex cursor-pointer list-none items-center justify-between px-3.5 py-3 text-[13px] font-semibold text-[#3D3D45]"
         >
-          Qo'shimcha yo'nalish va referenslar
+          {{ text("advanced") }}
           <CIcon
             name="chevron-down"
             class="h-4 w-4 transition group-open:rotate-180"
@@ -236,41 +240,41 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
         <div class="grid gap-3.5 border-t border-[#E7E7E3] p-3.5">
           <label class="grid gap-1.5">
             <span class="text-[11px] font-medium text-[#55555F]"
-              >Ohang (tone)</span
+              >{{ text("tone") }}</span
             >
             <input
               v-model="tone"
               maxlength="500"
-              placeholder="Masalan: samimiy, energiyali, ishonchli"
+              :placeholder="text('tonePlaceholder')"
               class="h-9 rounded-lg border border-[#DEDEE4] bg-white px-3 text-[13px] outline-none focus:border-[#8175EA]"
             />
           </label>
           <label class="grid gap-1.5">
             <span class="text-[11px] font-medium text-[#55555F]"
-              >Call to action</span
+              >{{ text("cta") }}</span
             >
             <input
               v-model="cta"
               maxlength="2000"
-              placeholder="Masalan: Profildagi havola orqali buyurtma bering"
+              :placeholder="text('ctaPlaceholder')"
               class="h-9 rounded-lg border border-[#DEDEE4] bg-white px-3 text-[13px] outline-none focus:border-[#8175EA]"
             />
           </label>
           <label class="grid gap-1.5">
             <span class="text-[11px] font-medium text-[#55555F]"
-              >Tayyor script yoki manba matn</span
+              >{{ text("source") }}</span
             >
             <textarea
               v-model="sourceText"
               rows="3"
               maxlength="40000"
-              placeholder="Tasdiqlangan matn bo'lsa, shu yerga qo'ying"
+              :placeholder="text('sourcePlaceholder')"
               class="resize-y rounded-lg border border-[#DEDEE4] bg-white px-3 py-2 text-[13px] outline-none focus:border-[#8175EA]"
             />
           </label>
           <label class="grid gap-1.5">
             <span class="text-[11px] font-medium text-[#55555F]"
-              >Referens havolalar · har qatorda bitta HTTPS URL</span
+              >{{ text("links") }}</span
             >
             <textarea
               v-model="referenceLinks"
@@ -281,7 +285,7 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
           </label>
           <label class="grid gap-1.5">
             <span class="text-[11px] font-medium text-[#55555F]"
-              >Referens rasm URL'lari · har qatorda bitta HTTPS URL</span
+              >{{ text("images") }}</span
             >
             <textarea
               v-model="referenceImages"
@@ -302,7 +306,7 @@ const REFERENCES = ["#C9A98C", "#2B3A67", "#D6D2CC"]
           :disabled="!canCreate"
           :loading="isCreating"
         >
-          Video yaratish
+          {{ text("submit") }}
         </CAppButton>
       </div>
     </form>

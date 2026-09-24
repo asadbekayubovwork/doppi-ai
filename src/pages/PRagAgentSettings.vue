@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 import {
   ACCEPTED_EXTENSIONS,
   CAgentIdentitySection,
@@ -33,6 +35,11 @@ const {
   toggleStatus,
   remove,
 } = useRagAgentSettingsPage()
+
+const { t } = useI18n()
+const statusAction = computed(() =>
+  t(`dashboard.rag.settings.${agent.value?.status === "live" ? "pause" : "resume"}`)
+)
 </script>
 
 <template>
@@ -40,24 +47,26 @@ const {
     <CEmptyState
       v-if="store.agentState === 'error'"
       icon="triangle-alert"
-      title="Couldn't load the agent"
-      description="Check your connection and try again."
+      :title="$t('dashboard.rag.loadFailed')"
+      :description="$t('dashboard.common.checkConnection')"
     >
-      <CAppButton icon="refresh-cw" @click="load">Try again</CAppButton>
+      <CAppButton icon="refresh-cw" @click="load">
+        {{ $t("dashboard.common.tryAgain") }}
+      </CAppButton>
     </CEmptyState>
 
     <CEmptyState
       v-else-if="store.agentState === 'ready' && !agent"
       icon="bot"
-      title="No agent to configure"
-      description="Create an agent before opening its configuration."
+      :title="$t('dashboard.rag.settings.noAgentTitle')"
+      :description="$t('dashboard.rag.settings.noAgentDescription')"
     >
       <CAppButton
         variant="primary"
         icon="circle-plus"
         :to="{ name: 'RagAgentCreate' }"
       >
-        Create agent
+        {{ $t("dashboard.rag.createAgent") }}
       </CAppButton>
     </CEmptyState>
 
@@ -65,7 +74,7 @@ const {
       v-else-if="!agent"
       class="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(320px,380px)]"
       aria-busy="true"
-      aria-label="Loading configuration"
+      :aria-label="$t('dashboard.rag.settings.loading')"
     >
       <div class="grid grid-cols-1 gap-5">
         <CSkeleton class="h-10 w-80 max-w-full" />
@@ -81,31 +90,32 @@ const {
         <div class="min-w-0">
           <div class="flex flex-wrap items-center gap-2.5">
             <h2 class="text-xl font-semibold tracking-tight text-[#15151B]">
-              Edit configuration
+              {{ $t("dashboard.rag.settings.title") }}
             </h2>
             <CBadge
               v-if="agent.status === 'live'"
               tone="success"
               icon="activity"
             >
-              {{ agent.name }} · Live
+              {{ agent.name }} · {{ $t("dashboard.rag.status.live") }}
             </CBadge>
-            <CBadge v-else icon="pause">{{ agent.name }} · Paused</CBadge>
+            <CBadge v-else icon="pause">
+              {{ agent.name }} · {{ $t("dashboard.rag.status.paused") }}
+            </CBadge>
           </div>
           <p class="mt-1 text-[13.5px] text-[#6A6A74]">
-            Update the knowledge base, model, system prompt and channels. Saved
-            changes apply to new conversations immediately.
+            {{ $t("dashboard.rag.settings.description") }}
           </p>
         </div>
         <div class="flex shrink-0 flex-wrap items-center gap-2.5">
           <CBadge v-if="form.changes.length" tone="warning" dot>
-            {{ plural(form.changes.length, "unsaved change") }}
+            {{ plural("unsavedChanges", form.changes.length) }}
           </CBadge>
           <CAppButton
             :disabled="!form.changes.length || isSaving"
             @click="discard"
           >
-            Discard
+            {{ $t("dashboard.rag.settings.discard") }}
           </CAppButton>
           <CAppButton
             variant="primary"
@@ -114,7 +124,7 @@ const {
             :disabled="!form.changes.length"
             @click="save"
           >
-            Save changes
+            {{ $t("dashboard.rag.settings.save") }}
           </CAppButton>
         </div>
       </header>
@@ -131,32 +141,28 @@ const {
             <template #aside>
               <div class="flex shrink-0 items-center gap-2">
                 <CBadge v-if="changed('identity')" tone="warning" dot>
-                  Changed
+                  {{ $t("dashboard.common.changed") }}
                 </CBadge>
                 <CAppButton
                   size="sm"
                   :icon="agent.status === 'live' ? 'pause' : 'play'"
                   :loading="isChangingStatus"
-                  :aria-label="
-                    agent.status === 'live' ? 'Pause agent' : 'Resume agent'
-                  "
+                  :aria-label="statusAction"
                   @click="toggleStatus"
                 >
-                  <span class="hidden sm:inline">
-                    {{
-                      agent.status === "live" ? "Pause agent" : "Resume agent"
-                    }}
-                  </span>
+                  <span class="hidden sm:inline">{{ statusAction }}</span>
                 </CAppButton>
                 <CAppButton
                   size="sm"
                   variant="danger"
                   icon="trash-2"
                   :loading="isDeleting"
-                  aria-label="Delete agent"
+                  :aria-label="$t('dashboard.rag.settings.delete')"
                   @click="remove"
                 >
-                  <span class="hidden sm:inline">Delete agent</span>
+                  <span class="hidden sm:inline">
+                    {{ $t("dashboard.rag.settings.delete") }}
+                  </span>
                 </CAppButton>
               </div>
             </template>
@@ -176,12 +182,14 @@ const {
             v-model:model="form.model"
             v-model:temperature="form.temperature"
             icon="sparkles"
-            hint="Switching models doesn't re-index documents"
+            :hint="$t('dashboard.rag.settings.modelHint')"
             :models="store.models"
             :loading="store.configurationState === 'loading'"
           >
             <template v-if="changed('model')" #aside>
-              <CBadge tone="warning" dot>Changed</CBadge>
+              <CBadge tone="warning" dot>
+                {{ $t("dashboard.common.changed") }}
+              </CBadge>
             </template>
             <CRetrievalFields
               v-model:top-k="form.topK"
@@ -196,7 +204,9 @@ const {
             :limit="PROMPT_TOKEN_LIMIT"
           >
             <template v-if="changed('prompt')" #aside>
-              <CBadge tone="warning" dot>Changed</CBadge>
+              <CBadge tone="warning" dot>
+                {{ $t("dashboard.common.changed") }}
+              </CBadge>
             </template>
             <template #action>
               <button
@@ -206,7 +216,7 @@ const {
                 @click="form.revertPrompt"
               >
                 <CIcon name="history" class="h-4 w-4" />
-                Restore saved prompt
+                {{ $t("dashboard.rag.settings.restorePrompt") }}
               </button>
             </template>
           </CSystemPromptSection>
@@ -215,7 +225,7 @@ const {
         <div class="grid grid-cols-1 gap-5">
           <CChannelsSection
             icon="plug"
-            hint="Live channels for this agent"
+            :hint="$t('dashboard.rag.settings.channelsHint')"
             :channels="form.channels"
             :available="form.availableChannels"
             @toggle="form.setChannelEnabled"
@@ -223,7 +233,9 @@ const {
             @add="form.addChannel"
           >
             <template v-if="changed('channels')" #aside>
-              <CBadge tone="warning" dot>Changed</CBadge>
+              <CBadge tone="warning" dot>
+                {{ $t("dashboard.common.changed") }}
+              </CBadge>
             </template>
           </CChannelsSection>
           <CChangeHistory :entries="history" :notice="embeddingNotice" />

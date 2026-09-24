@@ -1,6 +1,11 @@
 import { mount } from "@vue/test-utils"
+import { createI18n } from "vue-i18n"
+import { messages } from "@/shared/config/i18n"
 import CVideoPreviewDialog from "../CVideoPreviewDialog.vue"
 import type { VideoJob } from "../../api/types"
+
+const i18n = () =>
+  createI18n({ legacy: false, locale: "uz", fallbackLocale: "en", messages })
 
 const job: VideoJob = {
   id: "job-1",
@@ -30,6 +35,7 @@ describe("CVideoPreviewDialog", () => {
     const wrapper = mount(CVideoPreviewDialog, {
       props: { job },
       global: {
+        plugins: [i18n()],
         stubs: {
           Teleport: true,
           CIcon: true,

@@ -34,7 +34,7 @@ describe("SEO pages", () => {
   it.each(locales)("%s carries the same service copy as uz, item for item", (locale) => {
     const shape = (tree: unknown) =>
       SERVICE_KEYS.map((service) =>
-        ["features", "steps", "faq"].map(
+        ["features", "steps"].map(
           (section) => (lookup(tree, `services.${service}.${section}.items`) as unknown[]).length
         )
       )

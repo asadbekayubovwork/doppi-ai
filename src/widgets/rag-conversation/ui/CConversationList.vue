@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from "vue"
+import { useI18n } from "vue-i18n"
 import {
   CChannelIcon,
   CConversationStatusBadge,
@@ -15,6 +16,7 @@ const props = defineProps<{
   loading?: boolean
 }>()
 
+const { locale } = useI18n()
 const query = ref("")
 const list = ref<HTMLElement | null>(null)
 
@@ -50,13 +52,16 @@ watch(
           id="all-conversations-title"
           class="text-[15px] font-semibold text-[#15151B]"
         >
-          All conversations
+          {{ $t("dashboard.rag.conversation.list.title") }}
         </h2>
         <span class="text-[13px] tabular-nums text-[#84848E]">
-          {{ formatCount(total) }}
+          {{ formatCount(total, locale) }}
         </span>
       </div>
-      <CSearchField v-model="query" placeholder="Search by chat_id or text" />
+      <CSearchField
+        v-model="query"
+        :placeholder="$t('dashboard.rag.conversation.list.search')"
+      />
     </header>
 
     <ul v-if="loading" class="divide-y divide-[#EEEEEA]" aria-busy="true">
@@ -91,7 +96,7 @@ watch(
                 :datetime="chat.updatedAt"
                 class="shrink-0 text-xs text-[#84848E]"
               >
-                {{ formatTimeAgo(chat.updatedAt) }}
+                {{ formatTimeAgo(chat.updatedAt, Date.now(), locale) }}
               </time>
             </div>
             <div class="mt-1 flex items-center justify-between gap-2">
@@ -107,7 +112,7 @@ watch(
         v-if="!visible.length"
         class="px-4 py-10 text-center text-[13px] text-[#84848E]"
       >
-        No conversations match “{{ query }}”.
+        {{ $t("dashboard.rag.conversation.list.noMatches", { query }) }}
       </li>
     </ul>
   </section>

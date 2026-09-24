@@ -1,6 +1,8 @@
 // Domain types for the Video Generator surfaces (dashboard, plans, studio).
 // These describe the shapes the UI renders; the numbers themselves live in
-// `api/fixtures.ts` until the control plane exposes the endpoints.
+// `api/fixtures.ts` until the control plane exposes the endpoints. Dates are
+// ISO strings the UI formats per language; fields documented as i18n keys
+// hold interface copy, the rest is content shown as written.
 
 /** Social platforms a generated video can be published to. */
 export type PlatformKind = "instagram" | "tiktok" | "youtube"
@@ -18,16 +20,19 @@ export type PlanVideoState =
 /** A headline KPI card at the top of the dashboard. */
 export interface VideoMetric {
   id: string
+  /** i18n key. */
   label: string
   /** Rendered as-is ("186", "2.4M", "6.8%"). */
   value: string
   icon: string
-  /** Change chip, e.g. "+24 bu oy", "+18%". */
+  /** Change chip figure, e.g. "+24", "+18%". */
   change?: string
+  /** i18n key of the words after (or instead of) the figure: "this month". */
+  changeLabel?: string
   changeTone?: "success" | "danger" | "neutral"
   /** Sparkle/bars visual: normalized 0..1 heights. */
   spark?: number[]
-  /** Optional secondary line under the value. */
+  /** i18n key of an optional secondary line under the value. */
   hint?: string
   /** Engagement-style progress bar (0..1) instead of a sparkline. */
   progress?: number
@@ -38,8 +43,10 @@ export interface TopVideo {
   id: string
   rank: number
   title: string
-  period: string
+  /** Week of the month the video ran in; shown as "September · week 2". */
+  week: number
   platform: PlatformKind
+  /** ISO date. */
   date: string
   views: string
   engagement: string
@@ -59,8 +66,11 @@ export interface ChannelShare {
 export interface Recommendation {
   id: string
   title: string
-  author: string
-  tag: string
+  /** Creator handle; trend ideas have none and show `trendPosts` instead. */
+  author?: string
+  /** Post count behind a trend, e.g. "42K". */
+  trendPosts?: string
+  tag: "franchise" | "trend"
   views: string
   engagement: string
   thumbnail: string
@@ -74,6 +84,7 @@ export interface PlanVideo {
   title: string
   brief: string
   platform: PlatformKind
+  /** ISO date. */
   date: string
   time: string
   state: PlanVideoState
@@ -86,7 +97,11 @@ export interface PlanVideo {
 /** A weekly content plan. */
 export interface WeekPlan {
   id: string
-  title: string
+  /** First and last day, ISO; the title reads "September · week 3". */
+  start: string
+  end: string
+  week: number
+  /** i18n key of the one-line summary under the title. */
   range: string
   status: PlanStatus
   /** e.g. "6/6", "3/7". */
@@ -96,8 +111,19 @@ export interface WeekPlan {
   total: number
   views?: string
   videos: PlanVideo[]
-  /** Contextual note shown under the plan header. */
+  /** i18n key of the contextual note shown under the plan. */
   note?: string
+}
+
+/** A past week in the plans rail. */
+export interface PlanHistoryEntry {
+  id: string
+  start: string
+  end: string
+  week: number
+  status: PlanStatus
+  progress: string
+  views?: string
 }
 
 /** One day cell in the month calendar. */

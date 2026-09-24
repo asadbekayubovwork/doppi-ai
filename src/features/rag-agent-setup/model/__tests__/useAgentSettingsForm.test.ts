@@ -1,4 +1,6 @@
 import { effectScope } from "vue"
+import { createI18n } from "vue-i18n"
+import { messages } from "@/shared/config/i18n"
 import { ragAgentApi, type RagAgent } from "@/entities/rag-agent"
 import {
   useAgentSettingsForm,
@@ -6,6 +8,9 @@ import {
 } from "../useAgentSettingsForm"
 
 const TELEGRAM_TOKEN = "7742150983:AAF91c7kQx2mZ8vN3pL5tR9wY1bH6dJ4sE0"
+
+// The form speaks in i18n keys; English keeps the assertions readable.
+const { t } = createI18n({ legacy: false, locale: "en", messages }).global
 
 const agent: RagAgent = {
   id: "agent-test",
@@ -37,7 +42,9 @@ const agent: RagAgent = {
 }
 
 const labels = (form: AgentSettingsForm) =>
-  form.changes.map((item) => item.label)
+  form.changes.map((item) => t(item.label))
+const problems = (form: AgentSettingsForm) =>
+  form.problems.map((key) => t(key))
 
 describe("agent settings form", () => {
   let scope: ReturnType<typeof effectScope>
@@ -100,10 +107,10 @@ describe("agent settings form", () => {
 
     form.setCredential("telegram", "botToken", "not-a-token")
     expect(labels(form)).toEqual(["Telegram"])
-    expect(form.problems).toEqual(["Telegram credentials"])
+    expect(problems(form)).toEqual(["Telegram credentials"])
 
     form.setCredential("telegram", "botToken", TELEGRAM_TOKEN)
-    expect(form.problems).toEqual([])
+    expect(problems(form)).toEqual([])
     expect(form.toUpdate().connect).toEqual([
       { kind: "telegram", credentials: { botToken: TELEGRAM_TOKEN } },
     ])
@@ -112,13 +119,13 @@ describe("agent settings form", () => {
   it("needs credentials for a channel switched on for the first time", () => {
     form.setChannelEnabled("whatsapp", true)
     expect(labels(form)).toEqual(["WhatsApp Business"])
-    expect(form.problems).toEqual(["WhatsApp Business credentials"])
+    expect(problems(form)).toEqual(["WhatsApp Business credentials"])
   })
 
   it("rejects retrieval settings outside their range", () => {
     form.topK = 0
     form.similarityThreshold = 2
-    expect(form.problems).toEqual(["Retrieved chunks", "Similarity threshold"])
+    expect(problems(form)).toEqual(["Retrieved chunks", "Similarity threshold"])
   })
 
   it("discards the draft back to the saved agent", () => {

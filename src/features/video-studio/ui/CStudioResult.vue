@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 import { CVideoPlayer, CVideoThumb } from "@/entities/video"
 import type { VideoJob } from "@/features/video-generator"
 import { CAppButton, CBadge, CIcon } from "@/shared/ui"
@@ -18,6 +19,9 @@ const props = defineProps<{
 
 defineEmits<{ publish: []; download: []; regenerate: [] }>()
 
+const { t } = useI18n()
+const text = (key: string) => t(`dashboard.video.studio.result.${key}`)
+
 const ACTIVE = new Set(["submitting", "queued", "processing"])
 
 const phase = computed<"idle" | "active" | "completed" | "failed">(() => {
@@ -29,18 +33,20 @@ const phase = computed<"idle" | "active" | "completed" | "failed">(() => {
   return "failed"
 })
 
-// Uzbek status line shown under the spinner while the pipeline runs.
-const STATUS_LABEL: Record<string, string> = {
-  submitting: "Yuborilmoqda…",
-  queued: "Navbatda…",
-  processing: "Video montaj qilinmoqda…",
-  submission_unknown: "Tekshirilmoqda…",
-}
-const statusLabel = computed(() =>
-  props.isSubmitting
-    ? "So'rov yuborilmoqda…"
-    : STATUS_LABEL[props.job?.status ?? ""] || "Tayyorlanmoqda…"
-)
+// Status line shown under the spinner while the pipeline runs.
+const LABELLED_STATUSES = new Set([
+  "submitting",
+  "queued",
+  "processing",
+  "submission_unknown",
+])
+const statusLabel = computed(() => {
+  if (props.isSubmitting) return text("sending")
+  const status = props.job?.status ?? ""
+  return LABELLED_STATUSES.has(status)
+    ? text(`status.${status}`)
+    : text("preparing")
+})
 
 // The pipeline emits a step name with each event; the newest is the live one.
 const currentStep = computed(() => {
@@ -60,14 +66,9 @@ const meta = computed(() => {
   return parts.join(" · ")
 })
 
-const title = computed(() => props.job?.brief?.topic || "Yangi video")
+const title = computed(() => props.job?.brief?.topic || text("untitled"))
 
-const PIPELINE = [
-  { key: "script", label: "Script" },
-  { key: "shots", label: "Kadrlar" },
-  { key: "montage", label: "Montaj" },
-  { key: "voice", label: "Ovoz" },
-]
+const PIPELINE = ["script", "shots", "montage", "voice"] as const
 </script>
 
 <template>
@@ -78,23 +79,25 @@ const PIPELINE = [
       class="flex items-center justify-between border-b border-[#ECECE8] px-5 py-4"
     >
       <div class="flex items-center gap-2">
-        <h2 class="text-[15px] font-semibold text-[#15151B]">Natija</h2>
+        <h2 class="text-[15px] font-semibold text-[#15151B]">
+          {{ text("title") }}
+        </h2>
         <CBadge v-if="phase === 'completed'" tone="success" icon="circle-check">
-          Tayyor
+          {{ text("ready") }}
         </CBadge>
         <CBadge
           v-else-if="phase === 'active'"
           tone="accent"
           icon="loader-circle"
         >
-          Yaratilmoqda
+          {{ text("creating") }}
         </CBadge>
         <CBadge
           v-else-if="phase === 'failed'"
           tone="danger"
           icon="triangle-alert"
         >
-          Xatolik
+          {{ text("error") }}
         </CBadge>
       </div>
       <span v-if="meta" class="text-[12px] text-[#9A9AA2]">{{ meta }}</span>
@@ -157,7 +160,7 @@ const PIPELINE = [
           >
             <CIcon name="triangle-alert" class="h-8 w-8" />
             <span class="text-[12.5px]">
-              {{ job?.error_message || "Video yaratilmadi" }}
+              {{ job?.error_message || text("failed") }}
             </span>
           </div>
         </CVideoThumb>
@@ -173,7 +176,7 @@ const PIPELINE = [
             <CIcon name="wand-sparkles" class="h-6 w-6" />
           </span>
           <p class="text-[13px] text-[#73737D]">
-            Prompt yozing va "Video yaratish" tugmasini bosing
+            {{ text("idle") }}
           </p>
         </div>
 
@@ -198,7 +201,7 @@ const PIPELINE = [
           :disabled="phase !== 'completed'"
           @click="$emit('publish')"
         >
-          Ijtimoiy tarmoqqa joylash
+          {{ text("publish") }}
         </CAppButton>
         <div class="grid grid-cols-2 gap-2.5">
           <CAppButton
@@ -207,7 +210,7 @@ const PIPELINE = [
             :disabled="phase !== 'completed'"
             @click="$emit('download')"
           >
-            Yuklab olish
+            {{ text("download") }}
           </CAppButton>
           <CAppButton
             icon="refresh-cw"
@@ -215,7 +218,7 @@ const PIPELINE = [
             :disabled="phase === 'active'"
             @click="$emit('regenerate')"
           >
-            {{ phase === "failed" ? "Qayta urinish" : "Qayta yaratish" }}
+            {{ text(phase === "failed" ? "retry" : "regenerate") }}
           </CAppButton>
         </div>
       </div>
@@ -227,7 +230,7 @@ const PIPELINE = [
     >
       <span
         v-for="step in PIPELINE"
-        :key="step.key"
+        :key="step"
         class="inline-flex items-center gap-1.5 text-[12.5px] font-medium"
         :class="phase === 'completed' ? 'text-[#177A46]' : 'text-[#9A9AA2]'"
       >
@@ -236,7 +239,7 @@ const PIPELINE = [
           class="h-4 w-4"
           :class="phase === 'active' ? 'animate-pulse text-[#5B4BE8]' : ''"
         />
-        {{ step.label }}
+        {{ text(`pipeline.${step}`) }}
       </span>
     </footer>
   </section>

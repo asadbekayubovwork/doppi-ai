@@ -1,9 +1,9 @@
 import type { ChannelKind } from "./types"
 
 export interface ChannelMeta {
-  /** Short name for tables and filters. */
+  /** i18n key of the short name for tables and filters. */
   label: string
-  /** Full product name for detail views. */
+  /** i18n key of the full product name for detail views. */
   product: string
   icon: string
   /** Brand tint applied to the icon. */
@@ -12,26 +12,26 @@ export interface ChannelMeta {
 
 export const CHANNELS: Record<ChannelKind, ChannelMeta> = {
   instagram: {
-    label: "Instagram",
-    product: "Instagram",
+    label: "dashboard.rag.channels.instagram.label",
+    product: "dashboard.rag.channels.instagram.product",
     icon: "instagram",
     tone: "text-[#E1306C]",
   },
   telegram: {
-    label: "Telegram",
-    product: "Telegram",
+    label: "dashboard.rag.channels.telegram.label",
+    product: "dashboard.rag.channels.telegram.product",
     icon: "send",
     tone: "text-[#229ED9]",
   },
   whatsapp: {
-    label: "WhatsApp",
-    product: "WhatsApp Business",
+    label: "dashboard.rag.channels.whatsapp.label",
+    product: "dashboard.rag.channels.whatsapp.product",
     icon: "message-circle",
     tone: "text-[#25B861]",
   },
   web: {
-    label: "Web widget",
-    product: "Web widget",
+    label: "dashboard.rag.channels.web.label",
+    product: "dashboard.rag.channels.web.product",
     icon: "globe",
     tone: "text-[#6A6A74]",
   },

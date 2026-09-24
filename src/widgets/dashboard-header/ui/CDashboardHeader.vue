@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue"
+import { useHead } from "@unhead/vue"
 import { useI18n } from "vue-i18n"
 import { useRoute } from "vue-router"
 import { useAuthStore, messageForProblem } from "@/features/auth"
@@ -54,6 +55,10 @@ const title = computed(
 const subtitle = computed(
   () => claimedHeading.value?.subtitle || routeHeading.value?.subtitle
 )
+
+// Every dashboard page's browser tab follows the heading shown here, so pages
+// don't set their own titles.
+useHead({ title: computed(() => t("dashboard.pageTitle", { title: title.value })) })
 const businesses = computed(() => auth.businesses.map(toViewBusiness))
 const activeBusinessId = computed({
   get: () => auth.activeBusinessId || businesses.value[0]?.id || "",

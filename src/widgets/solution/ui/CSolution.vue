@@ -158,6 +158,7 @@ const onHover = (i: number | null) => {
 
 <template>
   <section id="solution" class="section-ground py-[60px] sm:py-[100px]">
+    <div class="doppi-veil pointer-events-none absolute inset-0 bg-doppi opacity-[0.07]" aria-hidden="true" />
     <div
       class="ambient-glow-cool left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2"
       aria-hidden="true"
@@ -185,6 +186,25 @@ const onHover = (i: number | null) => {
 </template>
 
 <style scoped>
+/* The ornament clears out behind the hub and orbit and fades into the
+   neighbouring sections, so it frames the diagram instead of crossing it. */
+.doppi-veil {
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 55%,
+    transparent 30%,
+    black 75%
+  ),
+  linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 55%,
+    transparent 30%,
+    black 75%
+  ),
+  linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  mask-composite: intersect;
+}
+
 /* Off screen, every loop holds still instead of burning frames. */
 .is-paused,
 .is-paused :deep(*) {

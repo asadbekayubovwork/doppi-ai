@@ -1,17 +1,29 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
+import { useI18n } from "vue-i18n"
 import { CVideoThumb, type Recommendation } from "@/entities/video"
 import { CBadge, CIcon } from "@/shared/ui"
 import CSegmentedControl from "./CSegmentedControl.vue"
 
 const props = defineProps<{ items: Recommendation[] }>()
 
+const { t } = useI18n()
+
 type Tab = "franchise" | "trend"
 const tab = ref<Tab>("franchise")
-const TABS: ReadonlyArray<{ value: Tab; label: string }> = [
-  { value: "franchise", label: "Franshiza hamkorlar top" },
-  { value: "trend", label: "Hozir trendda" },
-]
+const tabs = computed<ReadonlyArray<{ value: Tab; label: string }>>(() => [
+  {
+    value: "franchise",
+    label: t("dashboard.video.dashboard.recommendations.franchise"),
+  },
+  { value: "trend", label: t("dashboard.video.dashboard.recommendations.trending") },
+])
+
+const source = (item: Recommendation) =>
+  item.author ??
+  t("dashboard.video.dashboard.recommendations.trendingPosts", {
+    count: item.trendPosts ?? "",
+  })
 
 const visible = computed(() =>
   tab.value === "trend"
@@ -27,14 +39,16 @@ const visible = computed(() =>
     <header class="flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-2.5">
         <h2 class="text-[16px] font-semibold text-[#15151B]">
-          Tavsiyalar · sizning sohangizdagi kontent
+          {{ $t("dashboard.video.dashboard.recommendations.title") }}
         </h2>
-        <CBadge tone="accent" icon="wand-sparkles">Research agent</CBadge>
+        <CBadge tone="accent" icon="wand-sparkles">
+          {{ $t("dashboard.video.dashboard.recommendations.agent") }}
+        </CBadge>
       </div>
       <div class="flex items-center gap-3">
-        <CSegmentedControl v-model="tab" :options="TABS" />
+        <CSegmentedControl v-model="tab" :options="tabs" />
         <span class="hidden text-[12px] text-[#9A9AA2] lg:inline">
-          06:00 da yangilandi
+          {{ $t("dashboard.video.dashboard.recommendations.updated", { time: "06:00" }) }}
         </span>
       </div>
     </header>
@@ -58,7 +72,7 @@ const visible = computed(() =>
             class="absolute left-2 top-2 inline-flex items-center gap-1 rounded-md bg-black/55 px-1.5 py-0.5 text-[10.5px] font-semibold text-white"
           >
             <CIcon name="trending-up" class="h-3 w-3" />
-            Trend
+            {{ $t("dashboard.video.dashboard.recommendations.trend") }}
           </span>
           <span
             class="absolute right-2 top-2 inline-flex items-center gap-1 rounded-md bg-black/55 px-1.5 py-0.5 text-[10.5px] font-semibold text-white"
@@ -72,7 +86,8 @@ const visible = computed(() =>
             {{ item.title }}
           </p>
           <p class="mt-0.5 truncate text-[11.5px] text-[#9A9AA2]">
-            {{ item.author }} · {{ item.tag }}
+            {{ source(item) }} ·
+            {{ $t(`dashboard.video.dashboard.recommendations.tags.${item.tag}`) }}
           </p>
           <div class="mt-2.5 flex items-center justify-between gap-2">
             <CBadge tone="success" size="sm">{{ item.engagement }}</CBadge>
@@ -81,7 +96,7 @@ const visible = computed(() =>
               class="inline-flex items-center gap-1 rounded-lg border border-[#E5E5E1] px-2 py-1 text-[11.5px] font-semibold text-[#42424B] transition hover:border-[#D6D6D1] hover:bg-[#FAFAF9]"
             >
               <CIcon name="plus" class="h-3.5 w-3.5" />
-              Rejaga
+              {{ $t("dashboard.video.dashboard.recommendations.addToPlan") }}
             </button>
           </div>
         </div>

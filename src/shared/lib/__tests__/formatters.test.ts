@@ -1,5 +1,11 @@
 import {
+  formatCount,
+  formatDate,
   formatDayLabel,
+  formatDayRange,
+  formatMonthName,
+  formatShortDate,
+  formatWeekdays,
   formatDuration,
   formatFileSize,
   formatPercent,
@@ -40,5 +46,45 @@ describe("dashboard formatters", () => {
   it("spells out durations past an hour", () => {
     expect(formatDuration(minutesBefore(18), new Date(NOW))).toBe("18 min")
     expect(formatDuration(minutesBefore(125), new Date(NOW))).toBe("2 h 05 min")
+  })
+})
+
+describe("dashboard formatters in other languages", () => {
+  it("speaks Uzbek and Russian when asked", () => {
+    const now = new Date(NOW)
+    expect(formatTimeAgo(minutesBefore(18), NOW, "uz")).toBe("18 daq")
+    expect(formatTimeAgo(minutesBefore(125), NOW, "ru")).toBe("2 ч")
+    expect(formatDayLabel(minutesBefore(24 * 60), now, "uz")).toBe("Kecha")
+    expect(formatDayLabel(new Date("2026-09-02T10:00:00"), now, "uz")).toBe("2 sen")
+    expect(formatDuration(minutesBefore(125), now, "ru")).toBe("2 ч 05 мин")
+  })
+
+  it("prints calendar dates with the year", () => {
+    expect(formatDate(new Date("2026-09-02T10:00:00"), "uz")).toBe("2 sen 2026")
+    expect(formatDate(new Date("2026-09-02T10:05:00"), "en", { withTime: true })).toBe(
+      "2 Sep 2026 · 10:05"
+    )
+  })
+
+  it("groups counts the way each language does", () => {
+    expect(formatCount(8942)).toBe("8,942")
+    expect(formatCount(8942, "ru").replace(/\s/g, " ")).toBe("8 942")
+  })
+})
+
+describe("calendar formatters", () => {
+  it("names months and spans of days in each language", () => {
+    expect(formatMonthName("2026-09-10", "uz", { withYear: true })).toBe("Sentabr 2026")
+    expect(formatMonthName("2026-09-10", "ru")).toBe("Сентябрь")
+    expect(formatShortDate("2026-08-29", "uz")).toBe("29 avg")
+    expect(formatDayRange("2026-08-25", "2026-08-31", "en")).toBe("25–31 August")
+    expect(formatDayRange("2026-07-28", "2026-08-03", "uz")).toBe("28 iyul–3 avgust")
+    expect(formatDayRange("2026-08-25", "2026-08-31", "ru")).toBe("25–31 августа")
+  })
+
+  it("lists weekdays from Monday", () => {
+    expect(formatWeekdays("uz")).toEqual(["Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya"])
+    expect(formatWeekdays("en")[0]).toBe("Mon")
+    expect(formatWeekdays("ru")[6]).toBe("Вс")
   })
 })

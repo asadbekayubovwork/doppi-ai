@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue"
-import { useHead } from "@unhead/vue"
+import { onMounted, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 import { messageForProblem, useAuthStore } from "@/features/auth"
-import { useAppLocale, useToast } from "@/shared/lib"
+import { formatDate, useAppLocale, useToast } from "@/shared/lib"
 import { CSelect } from "@/shared/ui"
 
 // Language names stay in their own language, whatever the interface speaks.
@@ -30,7 +29,6 @@ const sessions = ref<SessionItem[]>([])
 const loading = ref(false)
 const sessionsLoading = ref(false)
 
-useHead({ title: computed(() => t("dashboard.settings.pageTitle")) })
 
 const fail = (value: unknown, title: string, fallback: string) => {
   toast.error(title, messageForProblem(value, fallback))
@@ -128,11 +126,8 @@ const logoutEverywhere = async () => {
   }
 }
 
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat(appLocale.value, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(new Date(value))
+const formatSeen = (value: string) =>
+  formatDate(value, appLocale.value, { withTime: true })
 
 onMounted(loadSessions)
 </script>
@@ -269,7 +264,7 @@ onMounted(loadSessions)
                 $t("dashboard.settings.sessions.unknownIp")
               }}
               ·
-              {{ formatDate(session.last_seen_at) }}
+              {{ formatSeen(session.last_seen_at) }}
             </p>
           </div>
           <button

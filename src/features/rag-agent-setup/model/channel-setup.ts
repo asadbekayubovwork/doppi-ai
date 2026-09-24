@@ -1,9 +1,13 @@
 import type { ChannelKind } from "@/entities/rag-agent"
 
+/** Every text field below is an i18n key; `example` is shown as-is. */
 export interface CredentialField {
   key: string
   label: string
-  placeholder: string
+  /** Sample value for the field, the same in every language. */
+  example?: string
+  /** Placeholder text for fields that have no sample value. */
+  placeholder?: string
   secret?: boolean
   isValid: (value: string) => boolean
   /** Shown once the value is non-empty but still fails `isValid`. */
@@ -13,112 +17,107 @@ export interface CredentialField {
 export interface ChannelSetup {
   title: string
   caption: string
+  /** The checklist and save-problem label for the channel's credentials. */
+  credentials: string
   fields: CredentialField[]
+}
+
+const text = (key: string) => `dashboard.rag.credentials.${key}`
+
+const channelText = (kind: ChannelKind) => ({
+  title: `dashboard.rag.channels.${kind}.product`,
+  caption: `dashboard.rag.channels.${kind}.caption`,
+  credentials: `dashboard.rag.channels.${kind}.credentials`,
+})
+
+const verifyTokenField: CredentialField = {
+  key: "verifyToken",
+  label: text("verifyToken.label"),
+  placeholder: text("verifyToken.placeholder"),
+  secret: true,
+  isValid: (value) => value.trim().length >= 16,
+  invalidHint: text("verifyToken.hint"),
+}
+
+const appSecretField: CredentialField = {
+  key: "appSecret",
+  label: text("appSecret.label"),
+  placeholder: text("appSecret.placeholder"),
+  secret: true,
+  isValid: (value) => value.trim().length >= 20,
+  invalidHint: text("appSecret.hint"),
 }
 
 export const CHANNEL_SETUP: Record<ChannelKind, ChannelSetup> = {
   instagram: {
-    title: "Instagram",
-    caption: "Meta Messaging API",
+    ...channelText("instagram"),
     fields: [
       {
         key: "pageId",
-        label: "Page ID",
-        placeholder: "17841400000000000",
+        label: text("pageId.label"),
+        example: "17841400000000000",
         isValid: (value) => /^\d{8,30}$/.test(value.trim()),
-        invalidHint: "Copy the connected Page ID from Meta Business.",
+        invalidHint: text("pageId.hint"),
       },
       {
         key: "accessToken",
-        label: "Access token",
-        placeholder: "EAA…",
+        label: text("metaAccessToken.label"),
+        example: "EAA…",
         secret: true,
         isValid: (value) => value.trim().length >= 20,
-        invalidHint: "Paste a valid long-lived Meta access token.",
+        invalidHint: text("metaAccessToken.hint"),
       },
-      {
-        key: "verifyToken",
-        label: "Webhook verify token",
-        placeholder: "Your private verification token",
-        secret: true,
-        isValid: (value) => value.trim().length >= 16,
-        invalidHint: "Use at least 16 characters.",
-      },
-      {
-        key: "appSecret",
-        label: "Meta app secret",
-        placeholder: "App secret",
-        secret: true,
-        isValid: (value) => value.trim().length >= 20,
-        invalidHint: "Paste the App Secret from Meta Developers.",
-      },
+      verifyTokenField,
+      appSecretField,
     ],
   },
   telegram: {
-    title: "Telegram",
-    caption: "Bot API",
+    ...channelText("telegram"),
     fields: [
       {
         key: "botToken",
-        label: "Bot token",
-        placeholder: "123456789:AAH…",
+        label: text("botToken.label"),
+        example: "123456789:AAH…",
         secret: true,
         isValid: (value) => /^\d{6,12}:[\w-]{30,}$/.test(value.trim()),
-        invalidHint:
-          "Paste the token from @BotFather: digits, a colon, then the key.",
+        invalidHint: text("botToken.hint"),
       },
     ],
   },
   whatsapp: {
-    title: "WhatsApp Business",
-    caption: "Cloud API",
+    ...channelText("whatsapp"),
     fields: [
       {
         key: "phoneNumberId",
-        label: "Phone number ID",
-        placeholder: "109876543210987",
+        label: text("phoneNumberId.label"),
+        example: "109876543210987",
         isValid: (value) => /^\d{10,20}$/.test(value.trim()),
-        invalidHint: "Digits only — copy it from WhatsApp Manager.",
+        invalidHint: text("phoneNumberId.hint"),
       },
       {
         key: "accessToken",
-        label: "Access token",
-        placeholder: "EAAG…",
+        label: text("cloudAccessToken.label"),
+        example: "EAAG…",
         secret: true,
         isValid: (value) => value.trim().length >= 20,
-        invalidHint: "This looks too short for a Cloud API token.",
+        invalidHint: text("cloudAccessToken.hint"),
       },
-      {
-        key: "verifyToken",
-        label: "Webhook verify token",
-        placeholder: "Your private verification token",
-        secret: true,
-        isValid: (value) => value.trim().length >= 16,
-        invalidHint: "Use at least 16 characters.",
-      },
-      {
-        key: "appSecret",
-        label: "Meta app secret",
-        placeholder: "App secret",
-        secret: true,
-        isValid: (value) => value.trim().length >= 20,
-        invalidHint: "Paste the App Secret from Meta Developers.",
-      },
+      verifyTokenField,
+      appSecretField,
     ],
   },
   web: {
-    title: "Web widget",
-    caption: "Chat bubble on your website",
+    ...channelText("web"),
     fields: [
       {
         key: "domain",
-        label: "Website domain",
-        placeholder: "aura.uz",
+        label: text("domain.label"),
+        example: "aura.uz",
         isValid: (value) =>
           /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i.test(
             value.trim()
           ),
-        invalidHint: "Enter a domain such as aura.uz, without https://.",
+        invalidHint: text("domain.hint"),
       },
     ],
   },

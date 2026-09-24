@@ -1,4 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue"
+import { useI18n } from "vue-i18n"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { useToast } from "@/shared/lib"
 import { resolveMediaUrl, videoApi } from "../api/videoApi"
@@ -17,6 +18,8 @@ import {
 } from "./videoGeneratorUtils"
 
 export const useVideoGenerator = () => {
+  const { t } = useI18n()
+  const toastText = (key: string) => t(`dashboard.video.studio.toasts.${key}`)
   const auth = useAuthStore()
   const toast = useToast()
   const isCreating = ref(false)
@@ -121,11 +124,11 @@ export const useVideoGenerator = () => {
       ACTIVE_VIDEO_STATUSES.has(previous.status)
     ) {
       if (next.status === "completed") {
-        toast.success("Video tayyor", "Uni ko'rish va joylash mumkin.")
+        toast.success(toastText("ready"), toastText("readyDetail"))
       } else if (next.status === "failed") {
         toast.error(
-          "Video yaratilmadi",
-          next.error_message || "Qayta urinib ko'ring."
+          toastText("failed"),
+          next.error_message || t("dashboard.common.retry")
         )
       }
     }
@@ -138,8 +141,8 @@ export const useVideoGenerator = () => {
     try {
       links = secureReferenceUrls(form.referenceLinks)
       images = secureReferenceUrls(form.referenceImages)
-    } catch (error) {
-      toast.warning("Check reference links", (error as Error).message)
+    } catch {
+      toast.warning(toastText("checkLinks"), toastText("httpsOnly"))
       return
     }
     const targets = publishTo.filter(Boolean)
@@ -182,17 +185,16 @@ export const useVideoGenerator = () => {
       sessionJobId.value = job.id
       if (job.status === "submission_unknown" || job.status === "submitting") {
         toast.warning(
-          "Submission needs verification",
-          job.error_message ||
-            "Check this job before generating again. No automatic resubmission will be made."
+          toastText("needsVerification"),
+          job.error_message || toastText("needsVerificationDetail")
         )
         return
       }
       if (job.status === "submission_failed" || job.status === "failed") {
         attempts.delete(workspace)
         toast.error(
-          "Generation was not completed",
-          job.error_message || "Check the job details."
+          toastText("notCompleted"),
+          job.error_message || toastText("checkJob")
         )
         return
       }
@@ -204,14 +206,14 @@ export const useVideoGenerator = () => {
       form.referenceLinks = ""
       form.referenceImages = ""
       toast.success(
-        form.previewOnly ? "Preview job queued" : "Video generation queued",
-        "Progress appears in the job list below."
+        toastText(form.previewOnly ? "previewQueued" : "queued"),
+        toastText("queuedDetail")
       )
     } catch (error) {
       if (!isCurrent(workspace, epoch)) return
       toast.error(
-        "Couldn't start video generation",
-        messageForProblem(error, "Check the job list before trying again.")
+        toastText("startFailed"),
+        messageForProblem(error, toastText("checkListFirst"))
       )
       await load()
     } finally {

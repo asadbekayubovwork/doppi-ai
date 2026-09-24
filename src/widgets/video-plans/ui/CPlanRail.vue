@@ -31,9 +31,14 @@ defineEmits<{ select: [id: string] }>()
       class="flex items-center justify-between border-b border-[#ECECE8] px-4 py-3.5"
     >
       <h2 class="text-[14px] font-semibold text-[#15151B]">
-        {{ PLAN_RAIL_TITLE[status] }}
+        {{ $t(PLAN_RAIL_TITLE[status]) }}
       </h2>
-      <CIconButton icon="list-filter" label="Filtrlash" variant="ghost" size="sm" />
+      <CIconButton
+        icon="list-filter"
+        :label="$t('dashboard.video.plans.filter')"
+        variant="ghost"
+        size="sm"
+      />
     </header>
 
     <ul class="p-2">
@@ -57,7 +62,7 @@ defineEmits<{ select: [id: string] }>()
               :dot="PLAN_STATUS_META[entry.status].dot"
               size="sm"
             >
-              {{ PLAN_STATUS_META[entry.status].label }}
+              {{ $t(PLAN_STATUS_META[entry.status].label) }}
             </CBadge>
           </div>
           <div

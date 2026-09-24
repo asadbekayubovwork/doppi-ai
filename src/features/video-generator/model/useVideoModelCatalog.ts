@@ -16,6 +16,10 @@ export const useVideoModelCatalog = (
   isCurrent: (workspace: string, epoch: number) => boolean
 ) => {
   const modelCatalog = ref<VideoModelCatalog | null>(null)
+  /**
+   * Set when the catalog failed to load: the server's explanation, or "" for
+   * the UI to show its own translated message.
+   */
   const modelError = ref<string | null>(null)
   const isLoadingModels = ref(false)
   let loadSequence = 0
@@ -70,10 +74,7 @@ export const useVideoModelCatalog = (
     } catch (error) {
       if (!isCurrent(workspace, epoch) || sequence !== loadSequence) return
       modelCatalog.value = null
-      modelError.value = messageForProblem(
-        error,
-        "Video modellari hozir yuklanmadi. Qayta urinib ko'ring."
-      )
+      modelError.value = messageForProblem(error, "")
       selection.videoModel = ""
       selection.videoResolution = ""
     } finally {

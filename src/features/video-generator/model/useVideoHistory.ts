@@ -1,5 +1,6 @@
 import type { ComputedRef } from "vue"
 import { ref } from "vue"
+import { useI18n } from "vue-i18n"
 import { messageForProblem } from "@/features/auth"
 import { useToast } from "@/shared/lib"
 import {
@@ -18,6 +19,9 @@ export const useVideoHistory = (
   isCurrent: IsCurrent
 ) => {
   const toast = useToast()
+  const { t } = useI18n()
+  const toastText = (key: string, named: Record<string, unknown> = {}) =>
+    t(`dashboard.video.studio.toasts.${key}`, named)
   const jobs = ref<VideoJob[]>([])
   const isLoading = ref(false)
   const isSyncing = ref(false)
@@ -40,8 +44,8 @@ export const useVideoHistory = (
     } catch (error) {
       if (!isCurrent(workspace, epoch)) return
       toast.error(
-        "Couldn't load video jobs",
-        messageForProblem(error, "Try again in a moment.")
+        toastText("loadFailed"),
+        messageForProblem(error, t("dashboard.common.tryLater"))
       )
     } finally {
       if (isCurrent(workspace, epoch) && sequence === loadSequence)
@@ -64,8 +68,11 @@ export const useVideoHistory = (
       if (!isCurrent(workspace, epoch)) return
       if (!options.silent) {
         toast.success(
-          "Video jobs synchronized",
-          `${result.imported} imported, ${result.updated} updated.`
+          toastText("synced"),
+          toastText("syncedDetail", {
+            imported: result.imported,
+            updated: result.updated,
+          })
         )
       }
     } catch (error) {
@@ -73,8 +80,8 @@ export const useVideoHistory = (
       if (options.silent) await load()
       else {
         toast.error(
-          "Couldn't synchronize jobs",
-          messageForProblem(error, "Try again in a moment.")
+          toastText("syncFailed"),
+          messageForProblem(error, t("dashboard.common.tryLater"))
         )
       }
     } finally {

@@ -7,9 +7,11 @@ export { default as CPlatformPill } from "./ui/CPlatformPill.vue"
 export { default as CVideoThumb } from "./ui/CVideoThumb.vue"
 export { default as CVideoFrameThumb } from "./ui/CVideoFrameThumb.vue"
 export { default as CVideoPlayer } from "./ui/CVideoPlayer.vue"
+export { useVideoLabels } from "./model/labels"
 export type {
   CalendarDay,
   ChannelShare,
+  PlanHistoryEntry,
   PlanStatus,
   PlanVideo,
   PlanVideoState,
@@ -25,7 +27,6 @@ export type {
 } from "./model/types"
 export {
   CALENDAR_DAYS,
-  CALENDAR_WEEKDAYS,
   CHANNEL_SHARES,
   PLAN_HISTORY,
   PUBLISH_TARGETS,

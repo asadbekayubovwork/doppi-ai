@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 import { CHANNELS, type ConversationDetail } from "@/entities/rag-agent"
 import { formatClockTime, formatDayLabel, formatDuration } from "@/shared/lib"
 import { CIconButton } from "@/shared/ui"
@@ -9,36 +10,47 @@ const props = defineProps<{ conversation: ConversationDetail }>()
 
 defineEmits<{ copyId: [] }>()
 
+const { t, locale } = useI18n()
+
 const rows = computed(() => {
   const chat = props.conversation
+  const label = (key: string) => t(`dashboard.rag.conversation.details.${key}`)
   return [
-    { label: "Channel", value: CHANNELS[chat.channel].product },
-    { label: "Customer", value: chat.customer.name },
+    { label: label("channel"), value: t(CHANNELS[chat.channel].product) },
+    { label: label("customer"), value: chat.customer.name },
     {
-      label: "Started",
-      value: `${formatDayLabel(chat.startedAt)} · ${formatClockTime(chat.startedAt)}`,
+      label: label("started"),
+      value: `${formatDayLabel(chat.startedAt, new Date(), locale.value)} · ${formatClockTime(chat.startedAt)}`,
     },
     {
-      label: "Duration",
-      value: formatDuration(chat.startedAt, chat.updatedAt),
+      label: label("duration"),
+      value: formatDuration(chat.startedAt, chat.updatedAt, locale.value),
     },
     {
-      label: "Messages",
-      value: `${chat.messageCount} (${chat.agentMessageCount} agent)`,
+      label: label("messages"),
+      value: t("dashboard.rag.conversation.details.messagesValue", {
+        count: chat.messageCount,
+        agent: chat.agentMessageCount,
+      }),
     },
-    { label: "Handled by", value: chat.handledBy },
+    { label: label("handledBy"), value: chat.handledBy },
     {
-      label: "Escalation",
+      label: label("escalation"),
       value: chat.handoverTo
-        ? `Handed to ${chat.handoverTo}`
-        : "No human handover",
+        ? t("dashboard.rag.conversation.details.handedTo", {
+            name: chat.handoverTo,
+          })
+        : label("noHandover"),
     },
   ]
 })
 </script>
 
 <template>
-  <CInsightCard title="Chat details" icon="info">
+  <CInsightCard
+    :title="$t('dashboard.rag.conversation.details.title')"
+    icon="info"
+  >
     <dl class="space-y-2.5 px-4 py-3.5 text-[13px]">
       <div class="flex items-center justify-between gap-3">
         <dt class="shrink-0 text-[#84848E]">chat_id</dt>
@@ -46,7 +58,7 @@ const rows = computed(() => {
           <span class="truncate">{{ conversation.id }}</span>
           <CIconButton
             icon="copy"
-            label="Copy chat_id"
+            :label="$t('dashboard.rag.conversation.details.copyId')"
             variant="ghost"
             size="xs"
             @click="$emit('copyId')"

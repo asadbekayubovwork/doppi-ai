@@ -1,6 +1,11 @@
 import { mount } from "@vue/test-utils"
+import { createI18n } from "vue-i18n"
+import { messages } from "@/shared/config/i18n"
 import CVideoJobs from "../CVideoJobs.vue"
 import type { VideoJob } from "../../api/types"
+
+const i18n = () =>
+  createI18n({ legacy: false, locale: "uz", fallbackLocale: "en", messages })
 
 const job: VideoJob = {
   id: "job-1",
@@ -26,6 +31,7 @@ describe("CVideoJobs", () => {
     const wrapper = mount(CVideoJobs, {
       props: { jobs: [job], isLoading: false, isSyncing: false },
       global: {
+        plugins: [i18n()],
         stubs: {
           CAppButton: { template: "<button><slot /></button>" },
           CBadge: { template: "<span><slot /></span>" },

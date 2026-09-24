@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSeo } from "@/shared/lib"
-import { CContact, CFaq } from "@/widgets"
+import { CContact } from "@/widgets"
 
 useSeo("/contact-us")
 </script>
@@ -30,6 +30,5 @@ useSeo("/contact-us")
     </section>
 
     <CContact />
-    <CFaq />
   </div>
 </template>

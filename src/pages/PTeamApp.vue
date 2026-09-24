@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue"
-import { useHead } from "@unhead/vue"
+import { useI18n } from "vue-i18n"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { workspaceApi, type Membership } from "@/features/workspace"
-import { useToast } from "@/shared/lib"
+import { formatDate, useToast } from "@/shared/lib"
 import { CSelect } from "@/shared/ui"
 
-const ROLE_OPTIONS: { value: Membership["role"]; label: string }[] = [
-  { value: "owner", label: "Egasi" },
-  { value: "admin", label: "Administrator" },
-  { value: "member", label: "A'zo" },
-  { value: "viewer", label: "Kuzatuvchi" },
-]
+const ROLES: Membership["role"][] = ["owner", "admin", "member", "viewer"]
 
+const { t, locale } = useI18n()
+const roleOptions = computed(() =>
+  ROLES.map((value) => ({ value, label: t(`dashboard.team.roles.${value}`) }))
+)
 const auth = useAuthStore()
 const toast = useToast()
 const members = ref<Membership[]>([])
@@ -25,7 +24,6 @@ const canManage = computed(() =>
   ["owner", "admin"].includes(auth.activeBusiness?.role || "")
 )
 
-useHead({ title: "Jamoa — Do'ppi AI" })
 
 const fail = (value: unknown, title: string, fallback: string) => {
   toast.error(title, messageForProblem(value, fallback))
@@ -37,7 +35,7 @@ const loadMembers = async () => {
   try {
     members.value = await workspaceApi.listMembers(businessId.value)
   } catch (value) {
-    fail(value, "Jamoani yuklab bo'lmadi", "Sahifani yangilang.")
+    fail(value, t("dashboard.team.loadFailed"), t("dashboard.common.reload"))
   } finally {
     loading.value = false
   }
@@ -53,10 +51,14 @@ const invite = async () => {
       role: role.value,
     })
     invitationLink.value = `${window.location.origin}/invitations/${invitation.token}`
-    toast.success("Taklif yaratildi", email.value.trim())
+    toast.success(t("dashboard.team.invite.created"), email.value.trim())
     email.value = ""
   } catch (value) {
-    fail(value, "Taklif yaratib bo'lmadi", "Email va rolni tekshirib ko'ring.")
+    fail(
+      value,
+      t("dashboard.team.invite.failed"),
+      t("dashboard.team.invite.checkFields")
+    )
   } finally {
     loading.value = false
   }
@@ -73,9 +75,13 @@ const updateRole = async (member: Membership, nextRole: Membership["role"]) => {
     members.value = members.value.map((item) =>
       item.user_id === updated.user_id ? updated : item
     )
-    toast.success("Rol yangilandi")
+    toast.success(t("dashboard.team.members.roleUpdated"))
   } catch (value) {
-    fail(value, "Rolni yangilab bo'lmadi", "Qayta urinib ko'ring.")
+    fail(
+      value,
+      t("dashboard.team.members.roleUpdateFailed"),
+      t("dashboard.common.retry")
+    )
     await loadMembers()
   }
 }
@@ -83,7 +89,7 @@ const updateRole = async (member: Membership, nextRole: Membership["role"]) => {
 const remove = async (member: Membership) => {
   if (
     !businessId.value ||
-    !window.confirm("Bu a'zoni jamoadan olib tashlaysizmi?")
+    !window.confirm(t("dashboard.team.members.removeConfirm"))
   )
     return
   try {
@@ -91,18 +97,25 @@ const remove = async (member: Membership) => {
     members.value = members.value.filter(
       (item) => item.user_id !== member.user_id
     )
-    toast.success("A'zo jamoadan olib tashlandi")
+    toast.success(t("dashboard.team.members.removed"))
   } catch (value) {
-    fail(value, "A'zoni olib tashlab bo'lmadi", "Qayta urinib ko'ring.")
+    fail(
+      value,
+      t("dashboard.team.members.removeFailed"),
+      t("dashboard.common.retry")
+    )
   }
 }
 
 const copyInvitation = async () => {
   try {
     await navigator.clipboard.writeText(invitationLink.value)
-    toast.success("Taklif havolasi nusxalandi")
+    toast.success(t("dashboard.team.invite.copied"))
   } catch {
-    toast.error("Nusxalab bo'lmadi", "Havolani qo'lda belgilab nusxalang.")
+    toast.error(
+      t("dashboard.common.copyFailed"),
+      t("dashboard.team.invite.copyManually")
+    )
   }
 }
 
@@ -117,10 +130,10 @@ onMounted(loadMembers)
       class="rounded-2xl border border-[#E5E5E1] bg-white p-5"
     >
       <h2 class="text-lg font-semibold text-[#15151B]">
-        Jamoaga taklif qilish
+        {{ $t("dashboard.team.invite.title") }}
       </h2>
       <p class="mt-1 text-sm text-[#6A6A74]">
-        Taklif aynan ko'rsatilgan email manzilidagi hisob uchun amal qiladi.
+        {{ $t("dashboard.team.invite.description") }}
       </p>
       <form
         class="mt-5 grid gap-3 md:grid-cols-[1fr_180px_auto]"
@@ -131,20 +144,20 @@ onMounted(loadMembers)
           required
           type="email"
           autocomplete="email"
-          placeholder="hamkasb@kompaniya.uz"
+          :placeholder="$t('dashboard.team.invite.emailPlaceholder')"
           class="h-11 rounded-[10px] border border-[#D6D6D1] px-3 outline-none focus:border-[#5B4BE8]"
         />
         <CSelect
           v-model="role"
-          :options="ROLE_OPTIONS.filter((option) => option.value !== 'owner')"
-          aria-label="Rol"
+          :options="roleOptions.filter((option) => option.value !== 'owner')"
+          :aria-label="$t('dashboard.team.invite.role')"
           size="lg"
         />
         <button
           :disabled="loading"
           class="h-11 rounded-[10px] bg-[#5B4BE8] px-5 text-sm font-semibold text-white disabled:opacity-60"
         >
-          Taklif yaratish
+          {{ $t("dashboard.team.invite.submit") }}
         </button>
       </form>
       <div
@@ -152,7 +165,7 @@ onMounted(loadMembers)
         class="mt-4 rounded-xl border border-[#CFC7FF] bg-[#F3F0FE] p-4"
       >
         <p class="text-sm font-medium text-[#4B21C4]">
-          Taklif havolasi bir marta ko'rsatiladi
+          {{ $t("dashboard.team.invite.linkOnce") }}
         </p>
         <div class="mt-2 flex gap-2">
           <input
@@ -163,7 +176,7 @@ onMounted(loadMembers)
             class="h-10 rounded-lg bg-[#5B4BE8] px-4 text-sm font-semibold text-white"
             @click="copyInvitation"
           >
-            Nusxalash
+            {{ $t("dashboard.team.invite.copy") }}
           </button>
         </div>
       </div>
@@ -173,13 +186,15 @@ onMounted(loadMembers)
       class="overflow-hidden rounded-2xl border border-[#E5E5E1] bg-white"
     >
       <div class="border-b border-[#E5E5E1] p-5">
-        <h2 class="text-lg font-semibold text-[#15151B]">Jamoa a'zolari</h2>
+        <h2 class="text-lg font-semibold text-[#15151B]">
+          {{ $t("dashboard.team.members.title") }}
+        </h2>
         <p class="mt-1 text-sm text-[#6A6A74]">
-          Faol biznesga tegishli a'zolar va rollar.
+          {{ $t("dashboard.team.members.description") }}
         </p>
       </div>
       <p v-if="loading && !members.length" class="p-5 text-sm text-[#6A6A74]">
-        Yuklanmoqda...
+        {{ $t("dashboard.common.loading") }}
       </p>
       <div v-else class="divide-y divide-[#E5E5E1]">
         <div
@@ -193,17 +208,21 @@ onMounted(loadMembers)
           >
           <div class="min-w-0 flex-1">
             <p class="truncate text-sm font-medium text-[#15151B]">
-              {{ member.user_id === auth.user?.id ? "Siz" : member.user_id }}
+              {{
+                member.user_id === auth.user?.id
+                  ? $t("dashboard.team.members.you")
+                  : member.user_id
+              }}
             </p>
             <p class="text-xs text-[#84848E]">
-              {{ new Date(member.joined_at).toLocaleDateString("uz-UZ") }}
+              {{ formatDate(member.joined_at, locale) }}
             </p>
           </div>
           <CSelect
             :model-value="member.role"
-            :options="ROLE_OPTIONS"
+            :options="roleOptions"
             :disabled="!canManage"
-            aria-label="A'zo roli"
+            :aria-label="$t('dashboard.team.members.role')"
             class="w-44"
             @change="updateRole(member, $event)"
           />
@@ -212,11 +231,11 @@ onMounted(loadMembers)
             class="h-10 rounded-[10px] border border-[#E7B8B8] px-3 text-sm text-[#C42B2B]"
             @click="remove(member)"
           >
-            Olib tashlash
+            {{ $t("dashboard.team.members.remove") }}
           </button>
         </div>
         <p v-if="!members.length" class="p-5 text-sm text-[#84848E]">
-          Jamoa a'zolari topilmadi.
+          {{ $t("dashboard.team.members.empty") }}
         </p>
       </div>
     </section>

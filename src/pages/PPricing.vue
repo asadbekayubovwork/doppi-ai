@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSeo } from "@/shared/lib"
-import { CPricingList, CFaq } from "@/widgets"
+import { CPricingList } from "@/widgets"
 
 useSeo("/pricing")
 </script>
@@ -30,6 +30,5 @@ useSeo("/pricing")
     </section>
 
     <CPricingList />
-    <CFaq />
   </div>
 </template>

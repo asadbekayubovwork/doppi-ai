@@ -11,6 +11,7 @@ import { useKnowledgeDocuments } from "./useKnowledgeDocuments"
 
 export interface ChecklistItem {
   key: string
+  /** i18n key. */
   label: string
   done: boolean
   /** Optional items are suggestions and never block creation. */
@@ -59,18 +60,19 @@ export function useAgentSetupForm(businessId: string | (() => string)) {
       optional: false,
     })
 
+    const label = (key: string) => `dashboard.rag.checklist.${key}`
     const items: ChecklistItem[] = [
-      required("name", "Agent name", name.value.trim().length > 0),
+      required("name", label("name"), name.value.trim().length > 0),
       required(
         "documents",
-        "Documents uploaded & indexed",
+        label("documents"),
         documents.value.length > 0 &&
           documents.value.every((item) => item.status === "indexed")
       ),
-      required("model", "LLM model selected", Boolean(model.value)),
+      required("model", label("model"), Boolean(model.value)),
       required(
         "prompt",
-        "System prompt written",
+        label("prompt"),
         systemPrompt.value.trim().length > 0 &&
           promptTokens.value <= PROMPT_TOKEN_LIMIT
       ),
@@ -82,7 +84,7 @@ export function useAgentSetupForm(businessId: string | (() => string)) {
       if (channel.enabled && isChannelReady(channel)) continue
       items.push({
         key: `channel-${channel.kind}`,
-        label: `${CHANNEL_SETUP[channel.kind].title} credentials`,
+        label: CHANNEL_SETUP[channel.kind].credentials,
         done: false,
         optional: !channel.enabled,
       })

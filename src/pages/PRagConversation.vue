@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue"
-import { useHead } from "@unhead/vue"
+import { useI18n } from "vue-i18n"
 import { messageForProblem, useAuthStore } from "@/features/auth"
 import { useRagAgentStore } from "@/entities/rag-agent"
 import {
@@ -22,6 +22,7 @@ import {
 
 const props = defineProps<{ chatId: string }>()
 
+const { t, locale } = useI18n()
 const store = useRagAgentStore()
 const auth = useAuthStore()
 const toast = useToast()
@@ -44,8 +45,9 @@ const isHandledByMe = computed(
   () => conversation.value?.handoverTo === operatorName.value
 )
 
-useHead({ title: computed(() => `${props.chatId} — Do'ppi AI`) })
-usePageHeading(() => ({ subtitle: `Conversations · ${props.chatId}` }))
+usePageHeading(() => ({
+  subtitle: t("dashboard.rag.conversation.subtitle", { id: props.chatId }),
+}))
 
 const businessId = computed(() => auth.activeBusiness?.id ?? "")
 
@@ -84,17 +86,17 @@ const toggleHandover = async () => {
   try {
     await store.setHandover(chat.id, takingOver ? operatorName.value : null)
     toast.success(
-      takingOver
-        ? "You're handling this chat"
-        : "Chat handed back to the agent",
-      takingOver
-        ? "The agent stops replying until you hand it back."
-        : undefined
+      t(
+        takingOver
+          ? "dashboard.rag.conversation.handlingTitle"
+          : "dashboard.rag.conversation.handedBack"
+      ),
+      takingOver ? t("dashboard.rag.conversation.handlingDetail") : undefined
     )
   } catch (error) {
     toast.error(
-      "Couldn't change who handles the chat",
-      messageForProblem(error, "Try again in a moment.")
+      t("dashboard.rag.conversation.handoverFailed"),
+      messageForProblem(error, t("dashboard.common.tryLater"))
     )
   } finally {
     isHandoverBusy.value = false
@@ -107,7 +109,10 @@ const send = async (text: string) => {
     await store.sendOperatorMessage(props.chatId, text)
     draft.value = ""
   } catch (error) {
-    toast.error("Message not sent", messageForProblem(error, "Try again."))
+    toast.error(
+      t("dashboard.rag.conversation.notSent"),
+      messageForProblem(error, t("dashboard.common.retry"))
+    )
   } finally {
     isSending.value = false
   }
@@ -117,17 +122,21 @@ const updateTags = async (tags: string[]) => {
   try {
     await store.updateTags(props.chatId, tags)
   } catch (error) {
-    toast.error("Couldn't save tags", messageForProblem(error, "Try again."))
+    toast.error(
+      t("dashboard.rag.conversation.tagsFailed"),
+      messageForProblem(error, t("dashboard.common.retry"))
+    )
   }
 }
 
-const copyLink = () => copy(window.location.href, "Link copied")
+const copyLink = () =>
+  copy(window.location.href, t("dashboard.rag.conversation.linkCopied"))
 
 const exportTranscript = () => {
   if (conversation.value) {
     downloadFile(
       `${conversation.value.id}-transcript.txt`,
-      transcriptToText(conversation.value)
+      transcriptToText(conversation.value, t, locale.value)
     )
   }
 }
@@ -177,11 +186,13 @@ const exportTranscript = () => {
         />
         <aside
           class="relative min-h-0 space-y-4 min-[1360px]:overflow-y-auto"
-          aria-label="Conversation insights"
+          :aria-label="$t('dashboard.rag.conversation.insights')"
         >
           <CChatDetailsCard
             :conversation="conversation"
-            @copy-id="copy(conversation.id, 'chat_id copied')"
+            @copy-id="
+              copy(conversation.id, $t('dashboard.rag.conversation.idCopied'))
+            "
           />
           <CRetrievedSourcesCard :sources="conversation.retrievedSources" />
           <COutcomeCard
@@ -196,7 +207,7 @@ const exportTranscript = () => {
         v-else-if="loadState === 'loading'"
         class="grid gap-4 lg:col-span-2 lg:grid-cols-[minmax(0,1fr)_300px]"
         aria-busy="true"
-        aria-label="Loading conversation"
+        :aria-label="$t('dashboard.rag.conversation.loading')"
       >
         <CSkeleton class="h-[640px] rounded-2xl min-[1360px]:h-full" />
         <div class="space-y-4">
@@ -211,17 +222,17 @@ const exportTranscript = () => {
         icon="messages-square"
         :title="
           loadState === 'missing'
-            ? 'Conversation not found'
-            : 'Couldn\'t load this conversation'
+            ? $t('dashboard.rag.conversation.notFound')
+            : $t('dashboard.rag.conversation.loadFailed')
         "
         :description="
           loadState === 'missing'
-            ? `There is no chat with the id ${chatId}. It may belong to another business.`
-            : 'Check your connection and try again.'
+            ? $t('dashboard.rag.conversation.notFoundDetail', { id: chatId })
+            : $t('dashboard.common.checkConnection')
         "
       >
         <CAppButton icon="arrow-left" :to="{ name: 'RagAgent' }">
-          Back to conversations
+          {{ $t("dashboard.rag.conversation.back") }}
         </CAppButton>
       </CEmptyState>
     </div>

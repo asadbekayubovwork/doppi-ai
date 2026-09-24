@@ -46,9 +46,12 @@ const remove = (tag: string) =>
 </script>
 
 <template>
-  <CInsightCard title="Outcome & tags" icon="tag">
+  <CInsightCard :title="$t('dashboard.rag.conversation.outcome.title')" icon="tag">
     <div class="space-y-3 p-4">
-      <ul class="flex flex-wrap items-center gap-1.5" aria-label="Tags">
+      <ul
+        class="flex flex-wrap items-center gap-1.5"
+        :aria-label="$t('dashboard.rag.conversation.outcome.tags')"
+      >
         <li
           v-for="tag in tags"
           :key="tag"
@@ -58,7 +61,7 @@ const remove = (tag: string) =>
           <button
             type="button"
             class="flex h-5 w-5 items-center justify-center rounded-full text-[#A1A1AA] transition hover:bg-[#F2F2EF] hover:text-[#15151B]"
-            :aria-label="`Remove tag ${tag}`"
+            :aria-label="$t('dashboard.rag.conversation.outcome.removeTag', { tag })"
             @click="remove(tag)"
           >
             <CIcon name="x" class="h-3 w-3" />
@@ -71,7 +74,7 @@ const remove = (tag: string) =>
             v-model="draft"
             maxlength="24"
             placeholder="new-tag"
-            aria-label="New tag"
+            :aria-label="$t('dashboard.rag.conversation.outcome.newTag')"
             class="h-7 w-28 rounded-full border border-[#5B4BE8] px-2.5 text-xs text-[#15151B] outline-none ring-2 ring-[#5B4BE8]/15"
             @keydown.enter.prevent="commit"
             @keydown.esc="cancel"
@@ -84,7 +87,7 @@ const remove = (tag: string) =>
             @click="startAdding"
           >
             <CIcon name="plus" class="h-3.5 w-3.5" />
-            Add
+            {{ $t("dashboard.rag.conversation.outcome.add") }}
           </button>
         </li>
       </ul>
@@ -101,7 +104,12 @@ const remove = (tag: string) =>
         <CIcon name="smile" class="mt-0.5 h-4 w-4 shrink-0" />
         <div class="min-w-0">
           <p class="text-[13px] font-semibold">
-            Customer rated {{ rating.score }}/{{ rating.outOf }}
+            {{
+              $t("dashboard.rag.conversation.outcome.rated", {
+                score: rating.score,
+                outOf: rating.outOf,
+              })
+            }}
           </p>
           <p v-if="rating.comment" class="mt-0.5 text-xs">
             “{{ rating.comment }}”
@@ -109,7 +117,7 @@ const remove = (tag: string) =>
         </div>
       </div>
       <p v-else class="text-xs text-[#84848E]">
-        The customer hasn't rated this chat yet.
+        {{ $t("dashboard.rag.conversation.outcome.notRated") }}
       </p>
     </div>
   </CInsightCard>

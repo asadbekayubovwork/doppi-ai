@@ -18,8 +18,8 @@ const TONES: Record<ChangeHistoryEntry["tone"], string> = {
 
 <template>
   <CSetupSection
-    title="Change history"
-    hint="Unsaved edits, this visit's actions and the live version"
+    :title="$t('dashboard.rag.settings.history.title')"
+    :hint="$t('dashboard.rag.settings.history.hint')"
   >
     <ul class="space-y-3.5">
       <li
