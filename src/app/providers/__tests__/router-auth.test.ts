@@ -29,16 +29,20 @@ describe("auth route boundary", () => {
   it("marks every app route as protected and exposes the OAuth callback", () => {
     const appRoutes = routes.filter((route) => route.path.startsWith("/app"))
     expect(appRoutes.length).toBeGreaterThan(0)
-    expect(appRoutes.every((route) => route.meta?.requiresAuth === true)).toBe(true)
+    expect(appRoutes.every((route) => route.meta?.requiresAuth === true)).toBe(
+      true
+    )
     expect(routes.some((route) => route.path === "/auth/callback")).toBe(true)
   })
 
   it("keeps only safe local redirect destinations", () => {
     expect(safeLocalPath("/app/settings")).toBe("/app/settings")
+    expect(safeLocalPath("/admin?tab=users")).toBe("/admin?tab=users")
     expect(safeLocalPath("https://evil.example/path")).toBe("/app")
     expect(safeLocalPath("//evil.example/path")).toBe("/app")
     expect(safeLocalPath("/login")).toBe("/app")
     expect(safeLocalPath("/appfoo")).toBe("/app")
+    expect(safeLocalPath("/administrator")).toBe("/app")
     expect(safeLocalPath("/app%2F..%2Flogin")).toBe("/app")
   })
 
@@ -66,13 +70,26 @@ describe("auth route boundary", () => {
     const auth = useAuthStore(pinia)
     auth.status = "authenticated"
     auth.user = user
-    vi.spyOn(platformAdminApi, "me").mockRejectedValueOnce(new Error("forbidden"))
+    vi.spyOn(platformAdminApi, "me").mockRejectedValueOnce(
+      new Error("forbidden")
+    )
     await router.push("/app/admin")
     expect(router.currentRoute.value.name).toBe("DashboardHome")
 
-    vi.spyOn(platformAdminApi, "me").mockResolvedValue({ is_admin: true, email: user.email })
+    vi.spyOn(platformAdminApi, "me").mockResolvedValue({
+      is_admin: true,
+      email: user.email,
+    })
     await router.push("/app/admin/rag")
     expect(router.currentRoute.value.name).toBe("PlatformAdmin")
     expect(router.currentRoute.value.query.tab).toBe("rag")
+    expect(router.currentRoute.value.path).toBe("/admin")
+  })
+
+  it("preserves an admin deep link through sign-in without granting access", async () => {
+    vi.spyOn(authApi, "getSession").mockRejectedValue(new Error("anonymous"))
+    await router.push("/admin?tab=users")
+    expect(router.currentRoute.value.name).toBe("Login")
+    expect(router.currentRoute.value.query.redirect).toBe("/admin?tab=users")
   })
 })

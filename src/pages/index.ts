@@ -187,17 +187,21 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/app/admin/rag",
-    redirect: "/app/admin?tab=rag",
+    redirect: "/admin?tab=rag",
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
     path: "/app/admin",
+    redirect: (to) => ({ path: "/admin", query: to.query }),
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/admin",
     name: "PlatformAdmin",
     meta: {
-      layout: "DashboardLayout",
+      layout: "AdminLayout",
       requiresAuth: true,
       requiresAdmin: true,
-      heading: "platformAdmin",
     },
     component: () => import("./PPlatformAdmin.vue"),
   },
