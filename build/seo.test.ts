@@ -5,6 +5,7 @@ import { describe, it, expect } from "vitest"
 import { messages } from "../src/shared/config/i18n"
 import { SEO_PAGES, SERVICE_PATHS, ogImageFor } from "../src/shared/config/seoPages"
 import { OG_IMAGE, SITE_URL } from "../src/shared/config/site"
+import { TEAM_MEMBERS } from "../src/shared/config/team"
 import {
   message,
   outputFile,
@@ -78,6 +79,25 @@ describe("build/seo", () => {
       "BreadcrumbList",
     ])
     expect(graphTypes(uz, "/pricing")).toEqual(["Organization", "BreadcrumbList"])
+  })
+
+  it("names the team and how to reach the company on every page", () => {
+    for (const page of SEO_PAGES) {
+      const [organization] = structuredData(uz, page)["@graph"] as {
+        email: string
+        employee: { name: string; jobTitle: string; sameAs: string[] }[]
+      }[]
+
+      expect(organization.email).toBe("transformation@doppiai.uz")
+      expect(organization.employee.map((person) => person.name)).toEqual(
+        TEAM_MEMBERS.map((member) => member.name)
+      )
+      for (const person of organization.employee) {
+        expect(person.jobTitle).toBeTruthy()
+        // Placeholder "#" profiles must not reach structured data.
+        expect(person.sameAs.every((href) => href.startsWith("https://"))).toBe(true)
+      }
+    }
   })
 
   it("escapes message text in attributes and inside the JSON-LD script", () => {

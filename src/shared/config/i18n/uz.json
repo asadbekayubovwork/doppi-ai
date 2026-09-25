@@ -511,14 +511,14 @@
   "team": {
     "title": "Do'ppi AI ortidagi jamoa",
     "roles": {
-      "rifat": "O'sish bo'yicha rahbar",
+      "rifat": "Bosh direktor (CEO)",
       "jaxongir": "Bosh texnolog (CTO)",
       "nodirbek": "Backend dasturchi",
       "asadbek": "Dasturiy ta'minot muhandisi",
       "aziz": "AI muhandis"
     },
     "bios": {
-      "rifat": "Do'ppi AI marketingi va mijozlar bilan ishlashni boshqaradi. Bizneslarga platformani joriy qilish va undan natija olishda yordam beradi.",
+      "rifat": "Do'ppi AI bosh direktori. Kompaniya strategiyasi va rivojini boshqaradi, bizneslarga platformani joriy qilish va undan natija olishda yordam beradi.",
       "jaxongir": "Do'ppi AI texnik arxitekturasi va AI modellarini boshqaradi. Platformaning muhandislik yo'nalishini belgilaydi, 5+ yillik tajriba.",
       "nodirbek": "Do'ppi AI backend dasturchisi. Server logikasi, API va ma'lumotlar bazasini quradi — tizim tez, xavfsiz va barqaror ishlaydi.",
       "asadbek": "Do'ppi AI front qismi bo'yicha dasturchi. Interfeysni quradi va UI/UX ni shakllantiradi — platforma har qanday qurilmada tez va qulay.",

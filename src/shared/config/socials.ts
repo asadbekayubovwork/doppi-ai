@@ -29,7 +29,7 @@ export const SOCIALS: SocialLink[] = [
   },
   {
     icon: "linkedin",
-    href: "",
+    href: "https://www.linkedin.com/company/doppiai/",
     label: "LinkedIn",
   },
 ].filter((social) => social.href)

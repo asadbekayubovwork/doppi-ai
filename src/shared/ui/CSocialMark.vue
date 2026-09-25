@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import instagramUrl from "../assets/brand/instagram.svg"
+import linkedinUrl from "../assets/brand/linkedin.svg"
 import telegramUrl from "../assets/brand/telegram.svg"
 import twitterUrl from "../assets/brand/twitter.svg"
 import CIcon from "./CIcon.vue"
@@ -17,6 +18,7 @@ const props = defineProps<{ name: string }>()
 
 const MARKS: Record<string, string> = {
   instagram: instagramUrl,
+  linkedin: linkedinUrl,
   telegram: telegramUrl,
   twitter: twitterUrl,
 }
