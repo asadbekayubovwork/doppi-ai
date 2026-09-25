@@ -12,6 +12,7 @@ import {
   absoluteUrl,
 } from "../src/shared/config/site"
 import { SOCIALS } from "../src/shared/config/socials"
+import { TEAM_MEMBERS, realSocials, type TeamMember } from "../src/shared/config/team"
 
 /**
  * The app is a single-page app, so without this every URL would serve the same
@@ -48,13 +49,27 @@ export const message = (tree: Messages, key: string): string => {
 
 const organizationId = `${SITE_URL}/#organization`
 
+/** A team member as shown on /about#team, linked to their public profiles. */
+const person = (tree: Messages, member: TeamMember) => ({
+  "@type": "Person",
+  name: member.name,
+  jobTitle: message(tree, `team.roles.${member.id}`),
+  ...(member.image ? { image: absoluteUrl(member.image) } : {}),
+  sameAs: realSocials(member).map((social) => social.href),
+  worksFor: { "@id": organizationId },
+})
+
+// Every page carries the full organization — who runs it and how to reach it —
+// so a reviewer verifying the business can do it from whichever page they land on.
 const organization = (tree: Messages) => ({
   "@type": "Organization",
   "@id": organizationId,
   name: SITE_NAME,
   alternateName: SITE_ALTERNATE_NAMES,
+  description: message(tree, "seo.home.description"),
   url: absoluteUrl("/"),
   logo: { "@type": "ImageObject", url: absoluteUrl(SITE_LOGO_PATH) },
+  email: message(tree, "contact.email"),
   sameAs: SOCIALS.map((social) => social.href),
   address: { "@type": "PostalAddress", addressLocality: "Tashkent", addressCountry: "UZ" },
   contactPoint: {
@@ -62,6 +77,7 @@ const organization = (tree: Messages) => ({
     telephone: message(tree, "contact.phone").replace(/\s+/g, ""),
     contactType: "sales",
   },
+  employee: TEAM_MEMBERS.map((member) => person(tree, member)),
 })
 
 const breadcrumb = (tree: Messages, page: SeoPage, name: string) => ({

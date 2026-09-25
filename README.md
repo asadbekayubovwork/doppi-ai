@@ -360,10 +360,20 @@ The pages meant for search are listed once, in
 [`src/shared/config/seoPages.ts`](src/shared/config/seoPages.ts). For each one
 the build ([`build/seo.ts`](build/seo.ts)) writes `<path>.html` carrying that
 page's title, description, canonical link, Open Graph tags and schema.org data
-(organization, services, breadcrumbs), and lists it in `sitemap.xml`.
-Crawlers that don't run JavaScript — link previews in Telegram and Facebook,
-Google's first pass — therefore see each page as it is. Every other route gets
-`app.html`, marked `noindex`, so sign-in and the dashboard stay out of results.
+(organization with its team, services, breadcrumbs), and lists it in
+`sitemap.xml`. Then [`build/prerender.ts`](build/prerender.ts) opens each of
+those pages — plus `/privacy` and `/terms`, which stay `noindex` — in headless
+Chrome and writes the rendered page into its `<div id="app">`, so the HTML
+carries the real headings, text, team and prices, not an empty mount point.
+Crawlers that don't run JavaScript — business verification, link previews in
+Telegram and Facebook, Google's first pass — therefore see each page as it is.
+Every other route gets `app.html`, marked `noindex`, so sign-in and the
+dashboard stay out of results.
+
+Prerendering needs the Chrome that `puppeteer` downloads on `pnpm install`, and
+pricing is rendered from the live billing API through the same `/api` proxy as
+`pnpm dev`. `SKIP_PRERENDER=1 pnpm build` builds without it; pages then ship
+with their SEO head and an empty body.
 
 Link previews (Telegram, Facebook, WhatsApp, X) use the 1200×630 images in
 `public/og/` — one for the home page and one per service. They are rendered

@@ -3,6 +3,7 @@ import { fileURLToPath, URL } from "node:url"
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 import { seoPages } from "./build/seo"
+import { prerenderPages } from "./build/prerender"
 
 /**
  * Origin that serves the documented API (https://doppiai.uz/api/docs).
@@ -13,7 +14,8 @@ const API_PROXY_TARGET =
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), seoPages()],
+  // seoPages writes each public page's head; prerenderPages then fills its body.
+  plugins: [vue(), seoPages(), prerenderPages()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
