@@ -70,6 +70,7 @@ jobs:
         env:
           VITE_API_BASE_URL: /api/v1
           VITE_GOOGLE_OAUTH_URL: /api/v1/auth/oauth/google/authorize
+          VITE_VOICE_AGENT_BASE_URL: https://visits-sessions-sri-abc.trycloudflare.com
           VITE_EMAIL_AUTH_ENABLED: "false"
           VITE_TELEGRAM_AUTH_ENABLED: "false"
         run: pnpm build
