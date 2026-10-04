@@ -4,6 +4,7 @@ import { createI18n } from "vue-i18n"
 import { createHead } from "@unhead/vue/client"
 import { createRouter, createWebHistory } from "vue-router"
 import { messages } from "@/shared/config/i18n"
+import { COMPANY, incorporatedYear } from "@/shared/config/company"
 
 // Note: TypeScript errors in test files are expected and can be ignored
 import PProduct from "../PProduct.vue"
@@ -97,8 +98,8 @@ describe("routed pages", () => {
         .map((row) => [row.find("dt").text(), row.find("dd").text()])
     )
     expect(details["Yuridik shaxs"]).toBe('"ADS AI AUTOMATION" MChJ')
-    expect(details["Mahsulot ishga tushgan"]).toBe("2025")
-    expect(details["Kompaniya ro'yxatdan o'tgan"]).toBe("2026")
+    expect(details["Mahsulot ishga tushgan"]).toBe(String(COMPANY.productLaunched))
+    expect(details["Kompaniya ro'yxatdan o'tgan"]).toBe(incorporatedYear())
     expect(details["Yuridik manzil"]).toContain("Qora-Qamish 1/1 dahasi, 20-uy, 42-xonadon")
     expect(Object.values(details)).not.toContain("")
     expect(text).toContain("pre-seed")

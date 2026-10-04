@@ -43,6 +43,14 @@ jobs:
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
 
+      # The build prerenders public pages in headless Chrome (build/prerender.ts).
+      # Puppeteer's postinstall downloads it to ~/.cache/puppeteer, which the
+      # pnpm cache doesn't keep — and once the store is cached, pnpm treats
+      # puppeteer as already built and skips that postinstall. Installing it
+      # explicitly gets the exact version puppeteer pins on every run.
+      - name: Install Chrome for prerendering
+        run: pnpm exec puppeteer browsers install chrome
+
       # Failing tests are reported, but they don't stop the build or the deploy:
       # the step is marked failed and a warning lands on the run summary.
       - name: Run tests
