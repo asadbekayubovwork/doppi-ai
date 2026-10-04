@@ -81,12 +81,27 @@ describe("routed pages", () => {
     wrapper.unmount()
   })
 
-  it("renders the about page with the team", () => {
+  it("renders the about page with the team and the company behind it", () => {
     const wrapper = mountPage(PAboutUs)
+    const text = wrapper.text()
 
     expect(wrapper.find("#results").exists()).toBe(true)
     expect(wrapper.find("#team").exists()).toBe(true)
-    expect(wrapper.text()).toContain("Jaxongir Abduxamidov")
+    expect(text).toContain("Jaxongir Abduxamidov")
+    expect(text).toContain("Hammuassis va bosh direktor (Co-founder & CEO)")
+
+    // The legal entity, spelled as registered, with both of its years.
+    const details = Object.fromEntries(
+      wrapper
+        .findAll("#company dl > div")
+        .map((row) => [row.find("dt").text(), row.find("dd").text()])
+    )
+    expect(details["Yuridik shaxs"]).toBe('"ADS AI AUTOMATION" MChJ')
+    expect(details["Mahsulot ishga tushgan"]).toBe("2025")
+    expect(details["Kompaniya ro'yxatdan o'tgan"]).toBe("2026")
+    expect(details["Yuridik manzil"]).toContain("Qora-Qamish 1/1 dahasi, 20-uy, 42-xonadon")
+    expect(Object.values(details)).not.toContain("")
+    expect(text).toContain("pre-seed")
     wrapper.unmount()
   })
 
@@ -97,10 +112,11 @@ describe("routed pages", () => {
     expect(wrapper.find("#contact-phone").exists()).toBe(true)
     expect(wrapper.find("#contact-message").exists()).toBe(true)
 
-    // Company contact details: domain email and location.
+    // Company contact details: domain email, legal name and registered address.
     const text = wrapper.text()
     expect(text).toContain("transformation@doppiai.uz")
-    expect(text).toContain("Toshkent, O'zbekiston")
+    expect(text).toContain('"ADS AI AUTOMATION" MChJ')
+    expect(text).toContain("Toshkent sh., Olmazor tumani, Oltinsoy MFY")
     wrapper.unmount()
   })
 
@@ -111,6 +127,8 @@ describe("routed pages", () => {
     expect(text).toContain("Maxfiylik siyosati")
     expect(text).toContain("Ma'lumotlar xavfsizligi")
     expect(text).toContain("transformation@doppiai.uz")
+    // Opens by naming the company that operates the service.
+    expect(text).toContain('Do\'ppi AI operatori "ADS AI AUTOMATION" MChJ tomonidan')
     wrapper.unmount()
   })
 
@@ -120,6 +138,8 @@ describe("routed pages", () => {
 
     expect(text).toContain("Foydalanish shartlari")
     expect(text).toContain("Amaldagi qonun")
+    // The contracting party is the registered company, not just the brand.
+    expect(text).toContain('Do\'ppi AI operatori "ADS AI AUTOMATION" MChJ o\'rtasidagi')
     // A section whose `bullets` array failed to resolve would drop this line.
     expect(text).toContain("AI ovozli agent — mijozlar bilan tabiiy suhbat")
     wrapper.unmount()

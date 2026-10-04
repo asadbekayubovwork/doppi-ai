@@ -332,6 +332,7 @@
     "pageTitle": "Automate your business with Do'ppi AI",
     "pageSubtitle": "Choose the plan that fits your needs and get the most out of every AI service.",
     "trialNote": "Sign up and get {credits} free credits to try the platform.",
+    "billingNote": "Prices in USD. Billed by {company}.",
     "loading": "Loading prices…",
     "unavailable": "Prices are temporarily unavailable. Please try again later.",
     "period": {
@@ -493,25 +494,25 @@
         "desc": "Data is protected, backed up and available 24/7."
       }
     ],
-    "facts": [
-      {
-        "label": "Founded",
-        "value": "2025"
-      },
-      {
-        "label": "Location",
-        "value": "Tashkent, Uzbekistan"
-      },
-      {
-        "label": "Category",
-        "value": "AI Marketing SaaS"
-      }
-    ]
+    "facts": {
+      "launched": "Product launched",
+      "incorporated": "Company incorporated",
+      "entity": "Legal entity",
+      "focus": "Focus",
+      "focusValue": "AI software · Self-serve SaaS platform"
+    },
+    "details": {
+      "title": "Company details",
+      "lead": "Do'ppi AI is a self-serve AI software platform built and operated by {company}. The product has been live since {launched}; the company was incorporated in Tashkent in {incorporated}.",
+      "funding": "We are bootstrapped and planning a pre-seed round in 2027.",
+      "brand": "Brand",
+      "address": "Registered address"
+    }
   },
   "team": {
     "title": "The team behind Do'ppi AI",
     "roles": {
-      "rifat": "CEO",
+      "rifat": "Co-founder & CEO",
       "jaxongir": "CTO",
       "nodirbek": "Backend Developer",
       "asadbek": "Software Engineer",
@@ -578,13 +579,19 @@
     "email": "transformation{'@'}doppiai.uz",
     "phone": "+998 93 903 33 01",
     "website": "doppiai.uz",
-    "location": "Tashkent, Uzbekistan",
     "reachTitle": "Reach us directly"
+  },
+  "company": {
+    "legalName": "{name} LLC",
+    "city": "Tashkent",
+    "address": "Apt. 42, Bldg. 20, Qora-Qamish 1/1, Oltinsoy MFY, Olmazor District, Tashkent, Uzbekistan",
+    "taxIdLabel": "TIN"
   },
   "footer": {
     "tagline": "The future for businesses everywhere — with AI, starting today.",
     "company": "Company",
-    "rights": "© {year} Do'ppi AI. All rights reserved.",
+    "legalEntity": "Do'ppi AI is a product of {company}",
+    "rights": "© {year} {company}. All rights reserved.",
     "madeIn": "Made with care in Tashkent",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
@@ -600,7 +607,8 @@
     "eyebrow": "Legal",
     "privacy": {
       "title": "Privacy Policy",
-      "updated": "Last updated: 7 July 2026",
+      "updated": "Last updated: 4 October 2026",
+      "operator": "This Privacy Policy is provided by {company}, {address}, the operator of Do'ppi AI.",
       "sections": [
         {
           "h": "Introduction",
@@ -638,7 +646,8 @@
     },
     "terms": {
       "title": "Terms of Service",
-      "updated": "Last updated: 7 July 2026",
+      "updated": "Last updated: 4 October 2026",
+      "operator": "These Terms are an agreement between you and {company}, {address}, the operator of Do'ppi AI.",
       "intro": "These Terms of Service (\"Terms\") govern your access to and use of the Do'ppi AI platform and its related website and services (the \"Service\"). Please read these Terms carefully before using the Service.",
       "disclaimerNote": "This document is provided as a general template and does not constitute legal advice. We recommend it be reviewed by qualified legal counsel before final use.",
       "sections": [

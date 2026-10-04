@@ -18,7 +18,7 @@ export { CVoiceAgent } from "./voiceagent"
 export { CResults } from "./results"
 export { CPricingList, CCreditCosts, CTopUpPacks } from "./pricing"
 export { CFaq } from "./faq"
-export { CAbout } from "./about"
+export { CAbout, CCompanyDetails } from "./about"
 export { CTeamCards } from "./team"
 export { CContact } from "./contact"
 

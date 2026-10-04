@@ -1,10 +1,18 @@
 <script setup lang="ts">
+import { computed } from "vue"
+import { useI18n } from "vue-i18n"
 import type { RouteLocationRaw } from "vue-router"
 import { CLogo, CSocialMark } from "@/shared/ui"
+import { useCompany } from "@/shared/lib"
 import { SOCIALS } from "@/shared/config/socials"
 import { SERVICE_NAV } from "@/shared/config/services"
 
+const { t } = useI18n()
+const { legalName, address, taxId } = useCompany()
+
 const currentYear = new Date().getFullYear()
+const email = computed(() => t("contact.email"))
+const phone = computed(() => t("contact.phone"))
 
 interface FooterLink {
   key: string
@@ -83,11 +91,33 @@ const socials = SOCIALS
 
       </div>
 
+      <!-- The operating company, word for word as registered: whoever verifies
+           the business (Google, billing) looks for it here on every page. -->
       <div
-        class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-sand-200 pt-8 sm:flex-row"
+        class="mt-12 flex flex-col items-center justify-between gap-6 border-t border-sand-200 pt-8 sm:flex-row sm:items-end"
       >
-        <p class="text-xs text-sand-500">{{ $t("footer.rights", { year: currentYear }) }}</p>
-        <div class="flex items-center gap-6">
+        <address
+          class="space-y-1 text-center text-xs not-italic leading-relaxed text-sand-500 sm:text-left"
+        >
+          <p class="font-medium text-sand-800">
+            {{ $t("footer.legalEntity", { company: legalName }) }}
+          </p>
+          <p>
+            {{ address }}<template v-if="taxId"> · {{ taxId }}</template>
+          </p>
+          <p>
+            <a
+              :href="`tel:${phone.replace(/\s+/g, '')}`"
+              class="transition-colors hover:text-sand-950"
+            >{{ phone }}</a>
+            <span aria-hidden="true"> · </span>
+            <a :href="`mailto:${email}`" class="transition-colors hover:text-sand-950">{{ email }}</a>
+          </p>
+          <p class="pt-2">
+            {{ $t("footer.rights", { year: currentYear, company: legalName }) }}
+          </p>
+        </address>
+        <div class="flex shrink-0 items-center gap-6">
           <RouterLink to="/privacy" class="text-xs text-sand-500 transition-colors hover:text-sand-950">
             {{ $t("footer.privacy") }}
           </RouterLink>

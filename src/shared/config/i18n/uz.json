@@ -332,6 +332,7 @@
     "pageTitle": "Do'ppi AI bilan biznesingizni avtomatlashtiring",
     "pageSubtitle": "Ehtiyojingizga mos tarifni tanlang va barcha AI servislardan unumli foydalaning.",
     "trialNote": "Ro'yxatdan o'tganingizda platformani sinab ko'rish uchun {credits} bepul kredit beriladi.",
+    "billingNote": "Narxlar AQSh dollarida. To'lovlarni {company} qabul qiladi.",
     "loading": "Narxlar yuklanmoqda…",
     "unavailable": "Narxlar hozir yuklanmadi. Keyinroq qayta urinib ko‘ring.",
     "period": {
@@ -493,25 +494,25 @@
         "desc": "Ma'lumotlar himoyalangan, zaxiralanadi va 24/7 mavjud."
       }
     ],
-    "facts": [
-      {
-        "label": "Tashkil topgan",
-        "value": "2025"
-      },
-      {
-        "label": "Joylashuv",
-        "value": "Toshkent, O'zbekiston"
-      },
-      {
-        "label": "Yo'nalish",
-        "value": "AI Marketing SaaS"
-      }
-    ]
+    "facts": {
+      "launched": "Mahsulot ishga tushgan",
+      "incorporated": "Kompaniya ro'yxatdan o'tgan",
+      "entity": "Yuridik shaxs",
+      "focus": "Yo'nalish",
+      "focusValue": "AI dasturiy ta'minot · Self-serve SaaS platforma"
+    },
+    "details": {
+      "title": "Kompaniya ma'lumotlari",
+      "lead": "Do'ppi AI — {company} tomonidan yaratilgan va boshqariladigan self-serve AI dasturiy platformasi. Mahsulot {launched}-yildan beri ishlaydi, kompaniya {incorporated}-yilda Toshkentda ro'yxatdan o'tgan.",
+      "funding": "Biz o'z mablag'imiz hisobiga rivojlanmoqdamiz (bootstrapped) va 2027-yilda pre-seed investitsiya raundini rejalashtirganmiz.",
+      "brand": "Brend",
+      "address": "Yuridik manzil"
+    }
   },
   "team": {
     "title": "Do'ppi AI ortidagi jamoa",
     "roles": {
-      "rifat": "Bosh direktor (CEO)",
+      "rifat": "Hammuassis va bosh direktor (Co-founder & CEO)",
       "jaxongir": "Bosh texnolog (CTO)",
       "nodirbek": "Backend dasturchi",
       "asadbek": "Dasturiy ta'minot muhandisi",
@@ -578,13 +579,19 @@
     "email": "transformation{'@'}doppiai.uz",
     "phone": "+998 93 903 33 01",
     "website": "doppiai.uz",
-    "location": "Toshkent, O'zbekiston",
     "reachTitle": "To'g'ridan-to'g'ri bog'laning"
+  },
+  "company": {
+    "legalName": "\"{name}\" MChJ",
+    "city": "Toshkent",
+    "address": "Toshkent sh., Olmazor tumani, Oltinsoy MFY, Qora-Qamish 1/1 dahasi, 20-uy, 42-xonadon",
+    "taxIdLabel": "STIR"
   },
   "footer": {
     "tagline": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan.",
     "company": "Kompaniya",
-    "rights": "© {year} Do'ppi AI. Barcha huquqlar himoyalangan.",
+    "legalEntity": "Do'ppi AI — {company} mahsuloti",
+    "rights": "© {year} {company}. Barcha huquqlar himoyalangan.",
     "madeIn": "Toshkentda mehr bilan yaratilgan",
     "privacy": "Maxfiylik siyosati",
     "terms": "Foydalanish shartlari"
@@ -600,7 +607,8 @@
     "eyebrow": "Huquqiy",
     "privacy": {
       "title": "Maxfiylik siyosati",
-      "updated": "Oxirgi yangilanish: 2026-yil 7-iyul",
+      "updated": "Oxirgi yangilanish: 2026-yil 4-oktabr",
+      "operator": "Ushbu Maxfiylik siyosati Do'ppi AI operatori {company} tomonidan taqdim etiladi. Manzil: {address}.",
       "sections": [
         {
           "h": "Kirish",
@@ -638,7 +646,8 @@
     },
     "terms": {
       "title": "Foydalanish shartlari",
-      "updated": "Oxirgi yangilanish: 2026-yil 7-iyul",
+      "updated": "Oxirgi yangilanish: 2026-yil 4-oktabr",
+      "operator": "Ushbu Shartlar siz bilan Do'ppi AI operatori {company} o'rtasidagi kelishuvdir. Manzil: {address}.",
       "intro": "Ushbu Foydalanish shartlari (\"Shartlar\") Do'ppi AI platformasi va u bilan bog'liq veb-sayt hamda xizmatlardan (\"Xizmat\") foydalanishingizni tartibga soladi. Xizmatdan foydalanishdan oldin ushbu shartlarni diqqat bilan o'qib chiqing.",
       "disclaimerNote": "Ushbu hujjat umumiy namuna sifatida taqdim etilgan va yuridik maslahat hisoblanmaydi. Yakuniy foydalanishdan oldin uni malakali yuridik maslahatchi ko'rib chiqishi tavsiya etiladi.",
       "sections": [

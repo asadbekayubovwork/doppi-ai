@@ -1,6 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises"
 import { join, resolve } from "node:path"
 import type { Plugin } from "vite"
+import { COMPANY } from "../src/shared/config/company"
 import { defaultLocale, messages } from "../src/shared/config/i18n"
 import { SEO_PAGES, ogImageFor, type SeoPage } from "../src/shared/config/seoPages"
 import {
@@ -48,10 +49,12 @@ export const message = (tree: Messages, key: string): string => {
 }
 
 const organizationId = `${SITE_URL}/#organization`
+const personId = (member: TeamMember) => `${SITE_URL}/about#${member.id}`
 
 /** A team member as shown on /about#team, linked to their public profiles. */
 const person = (tree: Messages, member: TeamMember) => ({
   "@type": "Person",
+  "@id": personId(member),
   name: member.name,
   jobTitle: message(tree, `team.roles.${member.id}`),
   ...(member.image ? { image: absoluteUrl(member.image) } : {}),
@@ -59,26 +62,35 @@ const person = (tree: Messages, member: TeamMember) => ({
   worksFor: { "@id": organizationId },
 })
 
-// Every page carries the full organization — who runs it and how to reach it —
-// so a reviewer verifying the business can do it from whichever page they land on.
-const organization = (tree: Messages) => ({
-  "@type": "Organization",
-  "@id": organizationId,
-  name: SITE_NAME,
-  alternateName: SITE_ALTERNATE_NAMES,
-  description: message(tree, "seo.home.description"),
-  url: absoluteUrl("/"),
-  logo: { "@type": "ImageObject", url: absoluteUrl(SITE_LOGO_PATH) },
-  email: message(tree, "contact.email"),
-  sameAs: SOCIALS.map((social) => social.href),
-  address: { "@type": "PostalAddress", addressLocality: "Tashkent", addressCountry: "UZ" },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: message(tree, "contact.phone").replace(/\s+/g, ""),
-    contactType: "sales",
-  },
-  employee: TEAM_MEMBERS.map((member) => person(tree, member)),
-})
+// Every page carries the full organization — who runs it, the legal entity
+// behind it and how to reach it — so a reviewer verifying the business can do
+// it from whichever page they land on. Unfilled company fields are left out.
+const organization = (tree: Messages) => {
+  const telephone = message(tree, "contact.phone").replace(/\s+/g, "")
+  const { postalCode, ...address } = COMPANY.address
+
+  return {
+    "@type": "Organization",
+    "@id": organizationId,
+    name: SITE_NAME,
+    legalName: COMPANY.legalName,
+    alternateName: SITE_ALTERNATE_NAMES,
+    description: message(tree, "seo.home.description"),
+    url: absoluteUrl("/"),
+    logo: { "@type": "ImageObject", url: absoluteUrl(SITE_LOGO_PATH) },
+    foundingDate: COMPANY.incorporated,
+    ...(COMPANY.taxId ? { taxID: COMPANY.taxId } : {}),
+    email: message(tree, "contact.email"),
+    telephone,
+    sameAs: SOCIALS.map((social) => social.href),
+    address: { "@type": "PostalAddress", ...address, ...(postalCode ? { postalCode } : {}) },
+    contactPoint: { "@type": "ContactPoint", telephone, contactType: "sales" },
+    founder: TEAM_MEMBERS.filter((member) => member.founder).map((member) => ({
+      "@id": personId(member),
+    })),
+    employee: TEAM_MEMBERS.map((member) => person(tree, member)),
+  }
+}
 
 const breadcrumb = (tree: Messages, page: SeoPage, name: string) => ({
   "@type": "BreadcrumbList",

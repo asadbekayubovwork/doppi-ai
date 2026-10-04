@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useHead } from "@unhead/vue"
-import { CDoppiMark } from "@/shared/ui"
+import { CLogo } from "@/shared/ui"
 
 withDefaults(
   defineProps<{
@@ -32,17 +32,11 @@ useHead({
     >
       <RouterLink
         to="/"
-        class="inline-flex items-center gap-3 lg:hidden"
+        class="inline-flex lg:hidden"
         aria-label="Do'ppi AI bosh sahifasi"
-        ><!-- logo.svg's wordmark is white, so on this light header the mark
-             sits on a dark tile beside a dark wordmark in the logo's colours. -->
-        <span
-          class="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#121216]"
-          ><CDoppiMark class="h-5 w-5 text-white" /></span
-        ><span class="text-base font-semibold tracking-tight"
-          >Do'ppi <span class="text-[#7A48FF]">AI</span></span
-        ></RouterLink
       >
+        <CLogo surface="light" />
+      </RouterLink>
       <div v-if="$slots.header" class="ml-auto flex items-center gap-3">
         <slot name="header" />
       </div>

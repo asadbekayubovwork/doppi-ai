@@ -60,6 +60,7 @@ import CTopUpPacks from "../pricing/ui/CTopUpPacks.vue"
 import CFaq from "../faq/ui/CFaq.vue"
 import CTeamCards from "../team/ui/CTeamCards.vue"
 import CTrustBar from "../trustbar/ui/CTrustBar.vue"
+import CFooter from "../footer/ui/CFooter.vue"
 
 /**
  * The landing sections read their lists straight out of the i18n tree via
@@ -120,6 +121,10 @@ describe("landing sections render i18n list content", () => {
 
     expect(prices()).toEqual(["$16", "$48", "$120"])
     expect(wrapper.text()).toContain("Yiliga $1,440 to'lanadi")
+    // Who the money goes to: the registered company, not the brand.
+    expect(wrapper.text()).toContain(
+      'Narxlar AQSh dollarida. To\'lovlarni "ADS AI AUTOMATION" MChJ qabul qiladi.'
+    )
   })
 
   it("prices every credit cost from the published API catalog", () => {
@@ -184,6 +189,23 @@ describe("landing sections render i18n list content", () => {
       expect(copy.attributes("aria-hidden")).toBe("true")
       expect(copy.attributes("inert")).toBeDefined()
     }
+  })
+
+  it("names the operating company, its address and contacts in the footer", () => {
+    const uz = mountWithI18n(CFooter).find("address").text()
+    const en = mountWithI18n(CFooter, "en").find("address").text()
+
+    expect(uz).toContain('Do\'ppi AI — "ADS AI AUTOMATION" MChJ mahsuloti')
+    expect(uz).toContain("Toshkent sh., Olmazor tumani, Oltinsoy MFY")
+    expect(uz).toMatch(/© \d{4} "ADS AI AUTOMATION" MChJ\. Barcha huquqlar himoyalangan\./)
+
+    expect(en).toContain("Do'ppi AI is a product of ADS AI AUTOMATION LLC")
+    expect(en).toContain(
+      "Apt. 42, Bldg. 20, Qora-Qamish 1/1, Oltinsoy MFY, Olmazor District, Tashkent, Uzbekistan"
+    )
+    expect(en).toContain("+998 93 903 33 01")
+    expect(en).toContain("transformation@doppiai.uz")
+    expect(en).toMatch(/© \d{4} ADS AI AUTOMATION LLC\. All rights reserved\./)
   })
 
   it("switches every list to the selected locale", () => {

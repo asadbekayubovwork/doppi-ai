@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { useI18nList } from "@/shared/lib"
+import { computed } from "vue"
+import { useI18n } from "vue-i18n"
+import { useCompany, useI18nList } from "@/shared/lib"
 import { CIcon, CSectionHeading, CCountUp } from "@/shared/ui"
 
 interface Point {
@@ -8,13 +10,18 @@ interface Point {
   desc: string
 }
 
-interface Fact {
-  label: string
-  value: string
-}
-
+const { t } = useI18n()
 const points = useI18nList<Point>("about.points")
-const facts = useI18nList<Fact>("about.facts")
+const { legalName, launched, incorporated } = useCompany()
+
+// The product predates the company, so both years are spelled out rather than
+// one "founded" year that disagrees with the registration certificate.
+const facts = computed(() => [
+  { label: t("about.facts.launched"), value: launched },
+  { label: t("about.facts.incorporated"), value: incorporated },
+  { label: t("about.facts.entity"), value: `${legalName.value}, ${t("company.city")}` },
+  { label: t("about.facts.focus"), value: t("about.facts.focusValue") },
+])
 </script>
 
 <template>
@@ -35,7 +42,7 @@ const facts = useI18nList<Fact>("about.facts")
           </p>
 
           <dl
-            class="mt-8 grid grid-cols-1 gap-4 border-t border-sand-200 pt-8 sm:grid-cols-3"
+            class="mt-8 grid grid-cols-1 gap-4 border-t border-sand-200 pt-8 sm:grid-cols-2"
           >
             <div
               v-for="(fact, i) in facts"

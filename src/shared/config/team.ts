@@ -10,6 +10,8 @@ export interface TeamMember {
   initials: string
   /** Optional photo from `public/team`; falls back to the initials disc. */
   image?: string
+  /** Published as a founder of the company in its structured data. */
+  founder?: boolean
   socials: TeamSocial[]
 }
 
@@ -25,6 +27,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Rifat Mamayusupov",
     initials: "RM",
     image: "/team/Rifat_mamayusupov.jpg",
+    founder: true,
     socials: [
       {
         icon: "linkedin",

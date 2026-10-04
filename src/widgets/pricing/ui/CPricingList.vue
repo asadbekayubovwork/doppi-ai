@@ -6,9 +6,11 @@ import {
   type BillingPeriod,
 } from "@/entities/pricing"
 import { usePublicPricing } from "@/features/billing"
+import { useCompany } from "@/shared/lib"
 
 const period = ref<BillingPeriod>("monthly")
 const pricing = usePublicPricing()
+const { legalName } = useCompany()
 </script>
 
 <template>
@@ -38,6 +40,9 @@ const pricing = usePublicPricing()
             ? $t("pricing.trialNote", { credits: pricing.intro.value.credits })
             : ""
         }}
+      </p>
+      <p class="mt-2 text-center text-xs text-sand-500">
+        {{ $t("pricing.billingNote", { company: legalName }) }}
       </p>
     </div>
   </section>

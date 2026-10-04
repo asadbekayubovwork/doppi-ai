@@ -2,7 +2,7 @@
 import { computed } from "vue"
 import { useI18n } from "vue-i18n"
 import { useHead } from "@unhead/vue"
-import { useI18nList } from "@/shared/lib"
+import { useCompany, useI18nList } from "@/shared/lib"
 import { CIcon } from "@/shared/ui"
 
 interface Section {
@@ -11,6 +11,7 @@ interface Section {
 }
 
 const { t } = useI18n()
+const { entity, address } = useCompany()
 const sections = useI18nList<Section>("legal.privacy.sections")
 
 const email = computed(() => t("contact.email"))
@@ -39,6 +40,9 @@ useHead({
           {{ $t("legal.privacy.title") }}
         </h1>
         <p class="mt-3 text-sm text-sand-500">{{ $t("legal.privacy.updated") }}</p>
+        <p class="mt-6 leading-relaxed text-sand-800">
+          {{ $t("legal.privacy.operator", { company: entity, address }) }}
+        </p>
 
         <section v-for="section in sections" :key="section.h">
           <h2 class="mt-10 text-xl font-semibold text-sand-950">{{ section.h }}</h2>
@@ -70,9 +74,13 @@ useHead({
                 {{ phone }}
               </a>
             </li>
-            <li class="inline-flex items-center gap-2.5">
-              <CIcon name="map-pin" class="h-4 w-4 text-sand-950" />
-              {{ $t("contact.location") }}
+            <li class="flex items-start gap-2.5">
+              <CIcon name="building-2" class="mt-1 h-4 w-4 shrink-0 text-sand-950" />
+              {{ entity }}
+            </li>
+            <li class="flex items-start gap-2.5">
+              <CIcon name="map-pin" class="mt-1 h-4 w-4 shrink-0 text-sand-950" />
+              {{ address }}
             </li>
           </ul>
         </section>

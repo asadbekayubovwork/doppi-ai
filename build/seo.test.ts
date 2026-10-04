@@ -81,13 +81,31 @@ describe("build/seo", () => {
     expect(graphTypes(uz, "/pricing")).toEqual(["Organization", "BreadcrumbList"])
   })
 
-  it("names the team and how to reach the company on every page", () => {
+  it("names the team, the legal entity and how to reach the company on every page", () => {
     for (const page of SEO_PAGES) {
       const [organization] = structuredData(uz, page)["@graph"] as {
+        legalName: string
+        foundingDate: string
         email: string
-        employee: { name: string; jobTitle: string; sameAs: string[] }[]
+        telephone: string
+        address: Record<string, string>
+        founder: { "@id": string }[]
+        employee: { "@id": string; name: string; jobTitle: string; sameAs: string[] }[]
       }[]
 
+      // Matched letter for letter against the registration certificate.
+      expect(organization.legalName).toBe("ADS AI AUTOMATION LLC")
+      expect(organization.foundingDate).toMatch(/^2026/)
+      expect(organization.telephone).toBe("+998939033301")
+      expect(organization.address).toMatchObject({
+        streetAddress: "Apt. 42, Bldg. 20, Qora-Qamish 1/1, Oltinsoy MFY",
+        addressLocality: "Tashkent",
+        addressCountry: "UZ",
+      })
+      // An unfilled postal code is left out rather than published empty.
+      expect(Object.values(organization.address)).not.toContain("")
+      const ceo = organization.employee.find((person) => person.name === "Rifat Mamayusupov")
+      expect(organization.founder).toEqual([{ "@id": ceo?.["@id"] }])
       expect(organization.email).toBe("transformation@doppiai.uz")
       expect(organization.employee.map((person) => person.name)).toEqual(
         TEAM_MEMBERS.map((member) => member.name)

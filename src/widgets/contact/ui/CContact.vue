@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
 import { useI18n } from "vue-i18n"
+import { useCompany } from "@/shared/lib"
 import { CIcon, CSectionHeading } from "@/shared/ui"
 
 const { t } = useI18n()
+const { entity, address } = useCompany()
 
 const form = ref({
   name: "",
@@ -72,7 +74,8 @@ const reachRows = computed(() => [
     href: `https://${website.value}`,
     external: true,
   },
-  { icon: "map-pin", label: t("contact.location") },
+  { icon: "building-2", label: entity.value },
+  { icon: "map-pin", label: address.value },
 ])
 
 /**

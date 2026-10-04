@@ -13,8 +13,8 @@ const props = withDefaults(
   { withWordmark: true, surface: "dark" }
 )
 
-// logo.svg draws its wordmark in white; logo-dark.svg is the same file inked
-// in sand-950 for light surfaces such as the landing.
+// logo.svg draws its mark and wordmark in white; logo-dark.svg is the same file
+// inked in black for light surfaces such as the landing.
 const src = computed(() => (props.surface === "light" ? logoDarkUrl : logoUrl))
 </script>
 
@@ -23,8 +23,8 @@ const src = computed(() => (props.surface === "light" ? logoDarkUrl : logoUrl))
     v-if="withWordmark"
     :src="src"
     alt="Do'ppi AI"
-    width="568"
-    height="134"
+    width="569"
+    height="139"
     class="h-8 w-auto shrink-0"
   />
   <CDoppiMark

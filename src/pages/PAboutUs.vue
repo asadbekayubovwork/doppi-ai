@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSeo } from "@/shared/lib"
-import { CResults, CTeamCards } from "@/widgets"
+import { CCompanyDetails, CResults, CTeamCards } from "@/widgets"
 
 useSeo("/about")
 </script>
@@ -31,5 +31,6 @@ useSeo("/about")
 
     <CResults />
     <CTeamCards />
+    <CCompanyDetails />
   </div>
 </template>
