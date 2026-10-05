@@ -45,7 +45,7 @@ const toggleCall = () => (isActive.value ? stop() : start())
 </script>
 
 <template>
-  <section id="top" class="hero section-ground pt-[120px] pb-[60px] sm:pt-[160px] sm:pb-[100px] h-screen">
+  <section id="top" class="hero section-ground pt-[120px] pb-[60px] sm:pt-[160px] sm:pb-[100px] min-h-screen">
     <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-70" aria-hidden="true" />
 
     <div class="container relative z-10">
