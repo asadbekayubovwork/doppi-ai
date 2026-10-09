@@ -25,7 +25,7 @@ const configuredKey = import.meta.env.VITE_VOICE_AGENT_API_KEY?.trim()
 
 /** Origin of the voice-agent API, without a trailing slash. */
 export const VOICE_AGENT_BASE_URL = (
-  configuredBase || "https://russia-modified-positioning-roman.trycloudflare.com"
+  configuredBase || "https://exclusive-caused-known-dress.trycloudflare.com"
 ).replace(/\/+$/, "")
 
 /** The public `ui` API key sent as `X-API-Key` on both `/api/offer` calls. */
