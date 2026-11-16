@@ -30,7 +30,7 @@ A production-ready Vue 3 boilerplate following Feature-Sliced Design (FSD) archi
 
 ### Prerequisites
 
-- Node.js 20+ (LTS recommended)
+- Node.js 22 (LTS; see .nvmrc)
 - pnpm 9+ (recommended)
 
 ### Installation
