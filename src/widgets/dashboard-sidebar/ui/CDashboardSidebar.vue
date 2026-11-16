@@ -109,7 +109,7 @@ const topUpOpen = ref(false)
         <p
           class="px-2 pb-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#6D6B77]"
         >
-          Boshqaruv portali
+          Boşqaruv portali
         </p>
         <ul>
           <CSidebarNavItem

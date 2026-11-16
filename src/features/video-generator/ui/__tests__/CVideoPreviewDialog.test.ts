@@ -53,7 +53,7 @@ describe("CVideoPreviewDialog", () => {
     expect(wrapper.emitted("close")).toHaveLength(1)
     const download = wrapper
       .findAll("button")
-      .find((button) => button.text().includes("Videoni yuklab olish"))
+      .find((button) => button.text().includes("Videoni yuklab oliş"))
     await download?.trigger("click")
     expect(wrapper.emitted("download")?.[0]?.[0]).toEqual(job)
     wrapper.unmount()

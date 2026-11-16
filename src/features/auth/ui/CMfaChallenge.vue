@@ -34,7 +34,7 @@ const changeMode = (recovery: boolean) => {
       step-name="MFA"
       title="MFA kodini kiriting"
       description="Authenticator ilovangizdagi 6 xonali kodni kiriting."
-      submit-label="Tasdiqlash"
+      submit-label="Tasdiqlaş"
       :loading="loading"
       telegram-variant="none"
       @update:model-value="emit('update:modelValue', $event)"
@@ -45,7 +45,7 @@ const changeMode = (recovery: boolean) => {
       class="mt-3 min-h-11 w-full rounded-[10px] text-sm font-medium text-[#5B4BE8]"
       @click="changeMode(true)"
     >
-      Tiklash kodidan foydalanish
+      Tiklaş kodidan foydalaniş
     </button>
   </template>
   <template v-else>
@@ -54,10 +54,10 @@ const changeMode = (recovery: boolean) => {
       <span class="h-[3px] flex-1 rounded-full bg-[#5B4BE8]" />
     </div>
     <h1 class="mt-6 text-[28px] font-semibold tracking-[-0.8px] text-[#15151B]">
-      Tiklash kodini kiriting
+      Tiklaş kodini kiriting
     </h1>
     <p class="mt-2 text-[13.5px] leading-6 text-[#6A6A74]">
-      MFA yoqilganda saqlagan bir martalik tiklash kodingizni kiriting.
+      MFA yoqilganda saqlagan bir martalik tiklaş kodingizni kiriting.
     </p>
     <form class="mt-6 grid gap-4" @submit.prevent="emit('submit')">
       <div>
@@ -65,7 +65,7 @@ const changeMode = (recovery: boolean) => {
           for="mfa-recovery"
           class="mb-1.5 block text-xs font-medium text-[#15151B]"
         >
-          Tiklash kodi
+          Tiklaş kodi
         </label>
         <input
           id="mfa-recovery"
@@ -90,7 +90,7 @@ const changeMode = (recovery: boolean) => {
         :disabled="loading"
         class="h-11 rounded-[10px] bg-[#5B4BE8] text-sm font-semibold text-white disabled:opacity-70"
       >
-        {{ loading ? "Kutilmoqda..." : "Tiklash kodi bilan kirish" }}
+        {{ loading ? "Kutilmoqda..." : "Tiklaş kodi bilan kiriş" }}
       </button>
     </form>
     <button
@@ -98,7 +98,7 @@ const changeMode = (recovery: boolean) => {
       class="mt-3 min-h-11 w-full rounded-[10px] text-sm font-medium text-[#5B4BE8]"
       @click="changeMode(false)"
     >
-      Authenticator kodiga qaytish
+      Authenticator kodiga qaytiş
     </button>
   </template>
   <button
@@ -106,6 +106,6 @@ const changeMode = (recovery: boolean) => {
     class="mt-1 min-h-11 w-full rounded-[10px] text-sm font-medium text-[#5B4BE8]"
     @click="emit('back')"
   >
-    Boshqa hisob bilan kirish
+    Boşqa hisob bilan kiriş
   </button>
 </template>

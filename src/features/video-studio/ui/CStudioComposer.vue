@@ -55,7 +55,7 @@ const RESEARCH_MODES = ["fast", "deep"] as const
 
 // Language names stay in their own language, whatever the interface speaks.
 const LANGUAGE_OPTIONS: { value: VideoLanguage; label: string }[] = [
-  { value: "uz", label: "O'zbekcha" },
+  { value: "uz", label: "Özbekça" },
   { value: "ru", label: "Русский" },
   { value: "en", label: "English" },
 ]

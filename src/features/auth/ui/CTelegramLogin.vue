@@ -5,7 +5,7 @@ export type TelegramLoginData = Record<string, string | number>
 
 const props = withDefaults(
   defineProps<{ botUsername?: string; label?: string }>(),
-  { label: "Telegram orqali kirish" }
+  { label: "Telegram orqali kiriş" }
 )
 
 const emit = defineEmits<{

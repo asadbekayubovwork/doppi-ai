@@ -40,7 +40,7 @@ const findUsers = async (reset = false) => {
     users.value = result.items
     total.value = result.total
   } catch (cause) {
-    error.value = messageForProblem(cause, "Qidiruv ishlamadi.")
+    error.value = messageForProblem(cause, "Qidiruv işlamadi.")
   } finally {
     loading.value = false
   }
@@ -50,7 +50,7 @@ const openUser = async (id: string) => {
   try {
     selected.value = await platformAdminApi.user(id)
   } catch (cause) {
-    error.value = messageForProblem(cause, "Foydalanuvchi yuklanmadi.")
+    error.value = messageForProblem(cause, "Foydalanuvçi yuklanmadi.")
   }
 }
 const statusLabel = (status: string) =>
@@ -65,7 +65,7 @@ const changePage = (next: number) => {
 }
 const change = async (action: () => Promise<unknown>) => {
   if (reason.value.trim().length < 8) {
-    error.value = "O‘zgarish sababini kamida 8 belgi bilan yozing."
+    error.value = "Özgariş sababini kamida 8 belgi bilan yozing."
     return
   }
   saving.value = true
@@ -77,7 +77,7 @@ const change = async (action: () => Promise<unknown>) => {
   } catch (cause) {
     error.value = messageForProblem(
       cause,
-      "Saqlanmadi. Qayta kiring va urinib ko‘ring."
+      "Saqlanmadi. Qayta kiring va urinib köring."
     )
   } finally {
     saving.value = false
@@ -88,7 +88,7 @@ const changeStatus = () => {
   const status = selected.value.status === "active" ? "suspended" : "active"
   if (
     status === "suspended" &&
-    !window.confirm("Foydalanuvchi sessiyalari bekor qilinadi. Davom etasizmi?")
+    !window.confirm("Foydalanuvçi sessiyalari bekor qilinadi. Davom etasizmi?")
   )
     return
   const id = selected.value.id
@@ -102,8 +102,8 @@ onMounted(() => void findUsers())
     <div v-if="analytics" class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
       <div
         v-for="item in [
-          { label: 'Jami foydalanuvchi', value: analytics.users.total },
-          { label: 'Yangi ro‘yxatdan o‘tgan', value: analytics.users.new },
+          { label: 'Jami foydalanuvçi', value: analytics.users.total },
+          { label: 'Yangi röyxatdan ötgan', value: analytics.users.new },
           { label: 'Davrda kirganlar', value: analytics.users.active },
           { label: 'Bloklangan', value: analytics.users.suspended },
         ]"
@@ -131,15 +131,15 @@ onMounted(() => void findUsers())
         <input
           v-model="search"
           type="search"
-          placeholder="Email bo‘yicha qidirish"
+          placeholder="Email böyiça qidiriş"
           class="min-h-11 min-w-0 flex-1 rounded-xl border border-[#DEDEE5] px-4 py-2.5 text-sm outline-none focus:border-[#808080]"
         />
         <select
           v-model="statusFilter"
-          aria-label="Foydalanuvchi holati"
+          aria-label="Foydalanuvçi holati"
           class="min-h-11 rounded-xl border border-[#DEDEE5] bg-white px-3 text-sm text-[#555560] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5B50A8]"
         >
-          <option value="">Barcha holatlar</option>
+          <option value="">Barça holatlar</option>
           <option value="active">Faol</option>
           <option value="suspended">Bloklangan</option>
           <option value="pending_verification">Tasdiqlanmagan</option>
@@ -147,14 +147,14 @@ onMounted(() => void findUsers())
         <button
           class="min-h-11 rounded-xl bg-[#202026] px-5 py-2 text-sm font-semibold text-white"
         >
-          Qidirish
+          Qidiriş
         </button>
       </form>
       <p class="mt-3 text-xs text-[#91919B]">
-        {{ loading ? "Yuklanmoqda…" : `${total} ta foydalanuvchi` }}
+        {{ loading ? "Yuklanmoqda…" : `${total} ta foydalanuvçi` }}
       </p>
       <p v-if="!loading && !users.length" class="py-6 text-sm text-[#858590]">
-        Foydalanuvchi topilmadi.
+        Foydalanuvçi topilmadi.
       </p>
       <div class="mt-2 divide-y divide-[#EFEFF2]">
         <button
@@ -166,9 +166,9 @@ onMounted(() => void findUsers())
           <span class="min-w-0"
             ><strong class="block truncate">{{ user.email }}</strong>
             <small class="text-[#858590]"
-              >Ro‘yxatdan: {{ date(user.created_at) }} · Oxirgi kirish:
+              >Röyxatdan: {{ date(user.created_at) }} · Oxirgi kiriş:
               {{
-                user.last_login_at ? date(user.last_login_at) : "Hali yo‘q"
+                user.last_login_at ? date(user.last_login_at) : "Hali yöq"
               }}</small
             >
           </span>
@@ -212,7 +212,7 @@ onMounted(() => void findUsers())
     >
       <h2 class="text-lg font-bold">{{ selected.email }}</h2>
       <p class="mt-1 text-sm text-[#858591]">
-        Oxirgi kirish:
+        Oxirgi kiriş:
         {{
           selected.last_login_at
             ? date(selected.last_login_at)
@@ -221,7 +221,7 @@ onMounted(() => void findUsers())
         · Sessiyalar: {{ selected.active_sessions }}
       </p>
       <label class="mt-5 block text-sm font-semibold" for="admin-user-reason"
-        >O‘zgarish sababi</label
+        >Özgariş sababi</label
       >
       <input
         id="admin-user-reason"
@@ -255,7 +255,7 @@ onMounted(() => void findUsers())
               )
             "
           >
-            {{ business.tier === "pro" ? "Free qilish" : "Pro qilish" }}
+            {{ business.tier === "pro" ? "Free qiliş" : "Pro qiliş" }}
           </button>
         </div>
       </div>
@@ -266,7 +266,7 @@ onMounted(() => void findUsers())
           class="rounded-lg border border-[#D8D8DE] px-3 py-1.5 text-sm font-semibold disabled:opacity-50"
           @click="changeStatus"
         >
-          {{ selected.status === "active" ? "Bloklash" : "Faollashtirish" }}
+          {{ selected.status === "active" ? "Bloklaş" : "Faollaştiriş" }}
         </button>
       </div>
     </div>

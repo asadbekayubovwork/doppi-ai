@@ -88,7 +88,7 @@ describe("auth page flows", () => {
 
     const recoveryButton = wrapper
       .findAll("button")
-      .find((button) => button.text().includes("Tiklash kodidan"))
+      .find((button) => button.text().includes("Tiklaş kodidan"))
     expect(recoveryButton).toBeDefined()
     await recoveryButton!.trigger("click")
     await wrapper.get("#mfa-recovery").setValue("AbC-recovery-code-123456")

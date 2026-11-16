@@ -46,3 +46,58 @@
   font-weight: 900;
   src: url("./inter-v20-latin-900.woff2") format("woff2");
 }
+
+/*
+ * Uzbek Latin (2026): Ğ ğ Ş ş sit outside the "latin" subset above (Ç and Ö
+ * are inside it). These ~1.6 KB files carry just those four glyphs, cut from
+ * the same Inter 4.001 latin-ext build. Faces declared later are checked
+ * first, so the narrow unicode-range routes only these letters here.
+ */
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./inter-v20-uz-regular.woff2") format("woff2");
+  unicode-range: U+011E-011F, U+015E-015F;
+}
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./inter-v20-uz-500.woff2") format("woff2");
+  unicode-range: U+011E-011F, U+015E-015F;
+}
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  src: url("./inter-v20-uz-600.woff2") format("woff2");
+  unicode-range: U+011E-011F, U+015E-015F;
+}
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./inter-v20-uz-700.woff2") format("woff2");
+  unicode-range: U+011E-011F, U+015E-015F;
+}
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  src: url("./inter-v20-uz-800.woff2") format("woff2");
+  unicode-range: U+011E-011F, U+015E-015F;
+}
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  src: url("./inter-v20-uz-900.woff2") format("woff2");
+  unicode-range: U+011E-011F, U+015E-015F;
+}

@@ -120,10 +120,10 @@ describe("landing sections render i18n list content", () => {
     await flushPromises()
 
     expect(prices()).toEqual(["$16", "$48", "$120"])
-    expect(wrapper.text()).toContain("Yiliga $1,440 to'lanadi")
+    expect(wrapper.text()).toContain("Yiliga $1,440 tölanadi")
     // Who the money goes to: the registered company, not the brand.
     expect(wrapper.text()).toContain(
-      'Narxlar AQSh dollarida. To\'lovlarni "ADS AI AUTOMATION" MChJ qabul qiladi.'
+      'Narxlar AQŞ dollarida. Tölovlarni "ADS AI AUTOMATION" MÇJ qabul qiladi.'
     )
   })
 
@@ -149,14 +149,14 @@ describe("landing sections render i18n list content", () => {
     const wrapper = mountWithI18n(CFaq, "uz", { base: "pricing.faq" })
 
     expect(wrapper.findAll("button")).toHaveLength(3)
-    expect(wrapper.text()).toContain("Kreditlarim tugab qolsa nima bo'ladi?")
+    expect(wrapper.text()).toContain("Kreditlarim tugab qolsa nima böladi?")
   })
 
   it("renders the FAQ and opens the first answer by default", () => {
     const wrapper = mountWithI18n(CFaq)
 
     expect(wrapper.findAll("button")).toHaveLength(5)
-    expect(wrapper.text()).toContain("Do'ppi AI o'zbek tilida ishlaydimi?")
+    expect(wrapper.text()).toContain("Do'ppi AI özbek tilida işlaydimi?")
   })
 
   it("resolves each team member's role and bio from their id", () => {
@@ -164,8 +164,8 @@ describe("landing sections render i18n list content", () => {
     const text = wrapper.text()
 
     expect(wrapper.findAll("li")).toHaveLength(5)
-    expect(text).toContain("Bosh texnolog (CTO)")
-    expect(text).toContain("Backend dasturchi")
+    expect(text).toContain("Boş texnolog (CTO)")
+    expect(text).toContain("Backend dasturçi")
     expect(text).toContain("Dasturiy ta'minot muhandisi")
     expect(text).toContain("AI muhandis")
     // A missing `team.roles.<id>` entry would leave the raw key on screen.
@@ -195,9 +195,9 @@ describe("landing sections render i18n list content", () => {
     const uz = mountWithI18n(CFooter).find("address").text()
     const en = mountWithI18n(CFooter, "en").find("address").text()
 
-    expect(uz).toContain('Do\'ppi AI — "ADS AI AUTOMATION" MChJ mahsuloti')
-    expect(uz).toContain("Toshkent sh., Olmazor tumani, Oltinsoy MFY")
-    expect(uz).toMatch(/© \d{4} "ADS AI AUTOMATION" MChJ\. Barcha huquqlar himoyalangan\./)
+    expect(uz).toContain('Do\'ppi AI — "ADS AI AUTOMATION" MÇJ mahsuloti')
+    expect(uz).toContain("Toşkent ş., Olmazor tumani, Oltinsoy MFY")
+    expect(uz).toMatch(/© \d{4} "ADS AI AUTOMATION" MÇJ\. Barça huquqlar himoyalangan\./)
 
     expect(en).toContain("Do'ppi AI is a product of ADS AI AUTOMATION LLC")
     expect(en).toContain(

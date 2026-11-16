@@ -16,7 +16,7 @@ const date = (value: string) =>
   }).format(new Date(value))
 const cards = computed(() => [
   {
-    label: "Foydalanuvchilar",
+    label: "Foydalanuvçilar",
     value: props.analytics.users.total,
     detail: `+${number(props.analytics.users.new)} yangi`,
     icon: "user-round",
@@ -24,7 +24,7 @@ const cards = computed(() => [
   {
     label: "Davrda kirganlar",
     value: props.analytics.users.active,
-    detail: "Unikal foydalanuvchi",
+    detail: "Unikal foydalanuvçi",
     icon: "trending-up",
   },
   {
@@ -45,16 +45,16 @@ const secondary = computed(() => [
   { label: "Band qilingan kredit", value: props.analytics.billing.held },
   { label: "7 kunda tugaydigan", value: props.analytics.billing.expiring_7d },
   {
-    label: "Berilgan kirish bonusi",
+    label: "Berilgan kiriş bonusi",
     value: props.analytics.billing.welcome_claims,
   },
 ])
 const actionLabel = (action: string) =>
   ({
-    "admin.user_status_changed": "Foydalanuvchi holati o‘zgardi",
-    "admin.entitlement_changed": "Biznes tarifi o‘zgardi",
-    "admin.billing.setting_changed": "Kredit sozlamasi o‘zgardi",
-    "admin.billing.rate_changed": "Xizmat narxi o‘zgardi",
+    "admin.user_status_changed": "Foydalanuvçi holati özgardi",
+    "admin.entitlement_changed": "Biznes tarifi özgardi",
+    "admin.billing.setting_changed": "Kredit sozlamasi özgardi",
+    "admin.billing.rate_changed": "Xizmat narxi özgardi",
   })[action] ?? action.replaceAll("_", " ")
 </script>
 
@@ -77,11 +77,11 @@ const actionLabel = (action: string) =>
             Platforma nazorati
           </p>
           <h2 class="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
-            Bir qarashda butun Do‘ppi AI
+            Bir qaraşda butun Do‘ppi AI
           </h2>
           <p class="mt-2 max-w-xl text-sm leading-6 text-[#D1D0D8]">
-            Foydalanuvchilar, kreditlar va xizmatlar holati — bazadagi real
-            ko‘rsatkichlar.
+            Foydalanuvçilar, kreditlar va xizmatlar holati — bazadagi real
+            körsatkiçlar.
           </p>
         </div>
         <div
@@ -141,7 +141,7 @@ const actionLabel = (action: string) =>
         </dl>
         <p class="mt-3 text-xs leading-5 text-[#858590]">
           Balans va band qilingan kreditlar joriy hisob holati, bonuslar esa
-          tanlangan davr bo‘yicha.
+          tanlangan davr böyiça.
         </p>
       </section>
     </div>
@@ -155,13 +155,13 @@ const actionLabel = (action: string) =>
             Audit
           </p>
           <h2 class="mt-2 text-xl font-bold text-[#23232B]">
-            So‘nggi harakatlar
+            Sönggi harakatlar
           </h2>
         </div>
         <CIcon name="shield-check" class="h-5 w-5 text-[#6558B4]" />
       </div>
       <p v-if="!activity.length" class="mt-5 text-sm text-[#858590]">
-        Hozircha yozuv yo‘q.
+        Hozirça yozuv yöq.
       </p>
       <ol v-else class="mt-3 divide-y divide-[#EFEFF2]">
         <li

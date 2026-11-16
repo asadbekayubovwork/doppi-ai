@@ -101,7 +101,7 @@ describe("video studio integration", () => {
     const wrapper = await mountPage()
 
     expect(videoApi.list).toHaveBeenCalledWith("business-1", { limit: 100 })
-    expect(wrapper.text()).toContain("Yangi video yaratish")
+    expect(wrapper.text()).toContain("Yangi video yaratiş")
     expect(wrapper.text()).toContain("Prompt va kontekst")
     expect(wrapper.text()).toContain("Yaratilgan videolar")
 
@@ -183,10 +183,10 @@ describe("video studio integration", () => {
       "/video-jobs/job-1/stream"
     )
     expect(
-      library?.find('button[aria-label="Videoni ko\'rish"]').exists()
+      library?.find('button[aria-label="Videoni köriş"]').exists()
     ).toBe(true)
     expect(
-      library?.find('a[aria-label="Videoni yuklab olish"]').attributes("href")
+      library?.find('a[aria-label="Videoni yuklab oliş"]').attributes("href")
     ).toContain("/video-jobs/job-1/download")
     wrapper.unmount()
   })
@@ -204,7 +204,7 @@ describe("video studio integration", () => {
     const wrapper = await mountPage()
     const library = wrapper.findComponent({ name: "CStudioLibrary" })
 
-    await library.find('button[aria-label="Videoni ko\'rish"]').trigger("click")
+    await library.find('button[aria-label="Videoni köriş"]').trigger("click")
 
     expect(
       wrapper.findComponent(CVideoPreviewDialog).props("job")

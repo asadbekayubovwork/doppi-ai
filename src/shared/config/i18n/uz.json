@@ -3,17 +3,17 @@
     "name": "Do'ppi AI"
   },
   "a11y": {
-    "mute": "Mikrofonni o'chirish",
-    "endCall": "Qo'ng'iroqni tugatish",
-    "openMenu": "Menyuni ochish",
-    "closeMenu": "Menyuni yopish",
-    "switchLang": "Tilni almashtirish",
-    "toTop": "Bosh sahifaga"
+    "mute": "Mikrofonni öçiriş",
+    "endCall": "Qönğiroqni tugatiş",
+    "openMenu": "Menyuni oçiş",
+    "closeMenu": "Menyuni yopiş",
+    "switchLang": "Tilni almaştiriş",
+    "toTop": "Boş sahifaga"
   },
   "nav": {
-    "home": "Bosh sahifa",
+    "home": "Boş sahifa",
     "features": "Imkoniyatlar",
-    "how": "Qanday ishlaydi",
+    "how": "Qanday işlaydi",
     "voice": "Ovozli agent",
     "results": "Natijalar",
     "pricing": "Narxlar",
@@ -21,25 +21,25 @@
     "team": "Jamoa",
     "faq": "Savol-javob",
     "contact": "Aloqa",
-    "signIn": "Kirish",
-    "cta": "Bepul boshlash",
+    "signIn": "Kiriş",
+    "cta": "Bepul boşlaş",
     "resources": "Resurslar",
     "blog": "Blog",
     "languages": "Tillar",
     "comingSoon": "Tez kunda"
   },
   "hero": {
-    "badge": "Butun dunyo uchun AI Marketing tizimi",
-    "titleTop": "Reklamadan sotuvgacha —",
-    "titleHighlight": "barchasi bir tizimda",
+    "badge": "Butun dunyo uçun AI Marketing tizimi",
+    "titleTop": "Reklamadan sotuvgaça —",
+    "titleHighlight": "barçasi bir tizimda",
     "titleBottom": "sun'iy intellekt bilan",
-    "subtitle": "Do'ppi AI — biznesingiz uchun AI marketing operatsion tizimi. Ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, video va kontent, CRM va chatbotlar — hammasi bitta joyda ishlaydi.",
-    "ctaPrimary": "Bepul sinovni boshlash",
-    "ctaSecondary": "Demoni ko'rish",
+    "subtitle": "Do'ppi AI — biznesingiz uçun AI marketing operatsion tizimi. Ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, video va kontent, CRM va çatbotlar — hammasi bitta joyda işlaydi.",
+    "ctaPrimary": "Bepul sinovni boşlaş",
+    "ctaSecondary": "Demoni köriş",
     "stats": [
       {
         "value": "2–5×",
-        "label": "ko'proq lead"
+        "label": "köproq lead"
       },
       {
         "value": "70%",
@@ -47,20 +47,20 @@
       },
       {
         "value": "24/7",
-        "label": "AI agentlar ishlaydi"
+        "label": "AI agentlar işlaydi"
       }
     ],
-    "agentPrompt": "Do'ppi AI ovozli agentining imkoniyatlarini kashf eting — inson kabi gaplashadi va uchrashuv belgilaydi",
-    "agentCall": "Ovozli agent bilan gaplashish",
-    "agentEndCall": "Qo'ng'iroqni tugatish",
-    "agentCallTime": "Qo'ng'iroq davomiyligi {time}",
+    "agentPrompt": "Do'ppi AI ovozli agentining imkoniyatlarini kaşf eting — inson kabi gaplaşadi va uçraşuv belgilaydi",
+    "agentCall": "Ovozli agent bilan gaplaşiş",
+    "agentEndCall": "Qönğiroqni tugatiş",
+    "agentCallTime": "Qönğiroq davomiyligi {time}",
     "agentStates": {
-      "idle": "Agent bilan gaplashish uchun bosing",
+      "idle": "Agent bilan gaplaşiş uçun bosing",
       "connecting": "Ulanmoqda…",
       "listening": "Tinglamoqda…",
       "speaking": "Agent gapiryapti…",
-      "live": "Ulandingiz — gapirishni boshlang",
-      "error": "Xatolik yuz berdi. Qayta urinish uchun bosing"
+      "live": "Ulandingiz — gapirişni boşlang",
+      "error": "Xatolik yuz berdi. Qayta uriniş uçun bosing"
     }
   },
   "trust": {
@@ -121,7 +121,7 @@
       },
       {
         "icon": "bot",
-        "label": "Chatbotlar"
+        "label": "Çatbotlar"
       },
       {
         "icon": "headset",
@@ -130,23 +130,23 @@
     ]
   },
   "features": {
-    "title": "Bitta platforma, oltita kuchli modul",
-    "subtitle": "Har bir modul sizning o'rningizga ishlaydi va natijani CRM'ga yozadi.",
+    "title": "Bitta platforma, oltita kuçli modul",
+    "subtitle": "Har bir modul sizning örningizga işlaydi va natijani CRM'ga yozadi.",
     "items": [
       {
         "icon": "phone",
         "title": "AI Ovozli Agent",
-        "desc": "Inson kabi gaplashadi, savollarga javob beradi, mijozni malakalaydi va uchrashuv belgilaydi."
+        "desc": "Inson kabi gaplaşadi, savollarga javob beradi, mijozni malakalaydi va uçraşuv belgilaydi."
       },
       {
         "icon": "share-2",
         "title": "Ijtimoiy tarmoq avtomatizatsiyasi",
-        "desc": "Instagram, Telegram va WhatsApp'da DM, komment va follow-up avtomatik boshqariladi."
+        "desc": "Instagram, Telegram va WhatsApp'da DM, komment va follow-up avtomatik boşqariladi."
       },
       {
         "icon": "headset",
         "title": "SIP Call-markaz",
-        "desc": "Inbound va outbound qo'ng'iroqlar — barchasi yozib olinadi va CRM'ga saqlanadi."
+        "desc": "Inbound va outbound qönğiroqlar — barçasi yozib olinadi va CRM'ga saqlanadi."
       },
       {
         "icon": "clapperboard",
@@ -155,12 +155,12 @@
       },
       {
         "icon": "database",
-        "title": "CRM & Lead boshqaruvi",
-        "desc": "Har bir lead bazada saqlanadi, malakalanadi va sotuvgacha kuzatiladi."
+        "title": "CRM & Lead boşqaruvi",
+        "desc": "Har bir lead bazada saqlanadi, malakalanadi va sotuvgaça kuzatiladi."
       },
       {
         "icon": "bot",
-        "title": "Chatbotlar",
+        "title": "Çatbotlar",
         "desc": "Har bir kanalda 24/7 avtomatik javoblar va aqlli suhbatlar."
       }
     ]
@@ -168,10 +168,10 @@
   "studio": {
     "badge": "Yangi model",
     "title": "Do'ppi Video Studio",
-    "subtitle": "Bitta ssenariydan o'nlab format — Reels, Shorts, avatar va mahsulot videolari. Hammasi brend uslubida, siz tasdiqlagan haftalik reja bo'yicha chiqadi.",
-    "ctaPrimary": "Bepul sinash",
+    "subtitle": "Bitta ssenariydan önlab format — Reels, Shorts, avatar va mahsulot videolari. Hammasi brend uslubida, siz tasdiqlagan haftalik reja böyiça çiqadi.",
+    "ctaPrimary": "Bepul sinaş",
     "ctaSecondary": "Batafsil",
-    "gallery": "Barcha namunalarni ko'rish",
+    "gallery": "Barça namunalarni köriş",
     "tags": {
       "reels": "Reels · 9:16",
       "shorts": "Shorts",
@@ -180,113 +180,113 @@
     }
   },
   "audience": {
-    "eyebrow": "Kim uchun",
-    "title": "Do'ppi AI kimlar uchun",
-    "subtitle": "Reklama beradigan, mijoz bilan yozishadigan yoki qo'ng'iroq qiladigan har qanday biznes uchun — jamoangiz hajmidan qat'i nazar.",
+    "eyebrow": "Kim uçun",
+    "title": "Do'ppi AI kimlar uçun",
+    "subtitle": "Reklama beradigan, mijoz bilan yozişadigan yoki qönğiroq qiladigan har qanday biznes uçun — jamoangiz hajmidan qat'i nazar.",
     "items": [
       {
         "icon": "user-plus",
-        "title": "Kichik biznes va yangi loyihalar",
-        "desc": "Mijoz Instagram va Telegram orqali keladi, lekin har biriga javob berishga vaqt yetmaydi.",
+        "title": "Kiçik biznes va yangi loyihalar",
+        "desc": "Mijoz Instagram va Telegram orqali keladi, lekin har biriga javob berişga vaqt yetmaydi.",
         "points": [
-          "Chatbot va ovozli agent 24/7 javob beradi",
-          "Har bir lead bazaga tushadi va yo'qolmaydi",
-          "Bitta xodim bilan ham tizimli ishlash mumkin"
+          "Çatbot va ovozli agent 24/7 javob beradi",
+          "Har bir lead bazaga tuşadi va yöqolmaydi",
+          "Bitta xodim bilan ham tizimli işlaş mumkin"
         ]
       },
       {
         "icon": "bar-chart-3",
-        "title": "O'sayotgan bizneslar va sotuv jamoalari",
-        "desc": "Kanallar ko'payadi, leadlar oqimi kattalashadi — qo'lda nazorat qilish qiyinlashadi.",
+        "title": "Ösayotgan bizneslar va sotuv jamoalari",
+        "desc": "Kanallar köpayadi, leadlar oqimi kattalaşadi — qölda nazorat qiliş qiyinlaşadi.",
         "points": [
-          "Barcha kanallar bitta CRM'da birlashadi",
+          "Barça kanallar bitta CRM'da birlaşadi",
           "Follow-up va eslatmalar avtomatik yuboriladi",
-          "Qaysi kanal sotuv keltirayotgani aniq ko'rinadi"
+          "Qaysi kanal sotuv keltirayotgani aniq körinadi"
         ]
       },
       {
         "icon": "headset",
-        "title": "Qo'ng'iroq bilan ishlaydigan kompaniyalar",
-        "desc": "Kirish va chiqish qo'ng'iroqlari kundalik ishning asosini tashkil qiladi.",
+        "title": "Qönğiroq bilan işlaydigan kompaniyalar",
+        "desc": "Kiriş va çiqiş qönğiroqlari kundalik işning asosini taşkil qiladi.",
         "points": [
-          "SIP telefoniya bilan to'g'ridan-to'g'ri integratsiya",
-          "Har bir qo'ng'iroq yozib olinadi va CRM'ga saqlanadi",
+          "SIP telefoniya bilan töğridan-töğri integratsiya",
+          "Har bir qönğiroq yozib olinadi va CRM'ga saqlanadi",
           "AI agent mijozni malakalab, menejerga tayyor lead uzatadi"
         ]
       },
       {
         "icon": "shield-check",
         "title": "Yirik korxonalar va agentliklar",
-        "desc": "Bir nechta jamoa, ko'p mijoz va qat'iy talablar bilan ishlaydiganlar uchun.",
+        "desc": "Bir neçta jamoa, köp mijoz va qat'iy talablar bilan işlaydiganlar uçun.",
         "points": [
           "Maxsus integratsiyalar va AI assistant sozlamalari",
-          "Kirish darajalari va xavfsizlik nazorati",
-          "SLA kafolati hamda shaxsiy menejer"
+          "Kiriş darajalari va xavfsizlik nazorati",
+          "SLA kafolati hamda şaxsiy menejer"
         ]
       }
     ]
   },
   "how": {
-    "title": "Reklamadan sotuvgacha — avtomatik oqim",
+    "title": "Reklamadan sotuvgaça — avtomatik oqim",
     "steps": [
       {
         "icon": "megaphone",
         "title": "Reklama",
-        "desc": "Targetlangan reklama kampaniyasi ishga tushadi."
+        "desc": "Targetlangan reklama kampaniyasi işga tuşadi."
       },
       {
         "icon": "user-plus",
-        "title": "Lead yig'ish",
-        "desc": "Barcha kanallardan leadlar yig'iladi."
+        "title": "Lead yiğiş",
+        "desc": "Barça kanallardan leadlar yiğiladi."
       },
       {
         "icon": "message-square",
-        "title": "AI Chatbot & forma",
-        "desc": "Chatbot javob beradi, ma'lumot to'playdi."
+        "title": "AI Çatbot & forma",
+        "desc": "Çatbot javob beradi, ma'lumot töplaydi."
       },
       {
         "icon": "phone",
-        "title": "AI Ovozli qo'ng'iroq",
-        "desc": "Voice agent qo'ng'iroq qilib, mijozni malakalaydi."
+        "title": "AI Ovozli qönğiroq",
+        "desc": "Voice agent qönğiroq qilib, mijozni malakalaydi."
       },
       {
         "icon": "database",
-        "title": "CRM'ga saqlash",
+        "title": "CRM'ga saqlaş",
         "desc": "Ma'lumot CRM'ga yoziladi va menejerga yetkaziladi."
       },
       {
         "icon": "handshake",
-        "title": "Uchrashuv / sotuv",
+        "title": "Uçraşuv / sotuv",
         "desc": "Malakalangan lead sotuvga aylanadi."
       },
       {
         "icon": "life-buoy",
         "title": "Sotuvdan keyingi xizmat",
-        "desc": "Avtomatik follow-up va qo'llab-quvvatlash."
+        "desc": "Avtomatik follow-up va qöllab-quvvatlaş."
       },
       {
         "icon": "bar-chart-3",
         "title": "Tahlil & hisobot",
-        "desc": "Har bir bosqich bo'yicha aniq analitika."
+        "desc": "Har bir bosqiç böyiça aniq analitika."
       }
     ]
   },
   "voice": {
     "eyebrow": "Asosiy modul",
-    "title": "AI Ovozli Agent — inson kabi gaplashadi",
-    "subtitle": "Tabiiy ovoz bilan qo'ng'iroq qiladi, mijozni tinglaydi, ma'lumot yig'adi va sotuvni boshlaydi — kechayu kunduz.",
+    "title": "AI Ovozli Agent — inson kabi gaplaşadi",
+    "subtitle": "Tabiiy ovoz bilan qönğiroq qiladi, mijozni tinglaydi, ma'lumot yiğadi va sotuvni boşlaydi — keçayu kunduz.",
     "points": [
       "Tabiiy va ravon suhbat",
       "Savol va ehtiyojni aniqlaydi",
-      "Kerakli ma'lumotni yig'adi",
-      "Uchrashuvni avtomatik belgilaydi",
+      "Kerakli ma'lumotni yiğadi",
+      "Uçraşuvni avtomatik belgilaydi",
       "Hammasini CRM'ga yozadi",
       "Natijani tahlil qilib, hisobot beradi"
     ],
     "transcript": [
       {
         "role": "agent",
-        "text": "Assalomu alaykum! Do'ppi AI'dan aloqaga chiqdim. Xizmatimiz haqida gaplashsak bo'ladimi?"
+        "text": "Assalomu alaykum! Do'ppi AI'dan aloqaga çiqdim. Xizmatimiz haqida gaplaşsak böladimi?"
       },
       {
         "role": "user",
@@ -294,21 +294,21 @@
       },
       {
         "role": "agent",
-        "text": "Ajoyib! Bir necha savol berib, sizga mos rejani tavsiya qilaman va uchrashuvga yozib qo'yaman."
+        "text": "Ajoyib! Bir neça savol berib, sizga mos rejani tavsiya qilaman va uçraşuvga yozib qöyaman."
       }
     ],
-    "callLabel": "Jonli qo'ng'iroq"
+    "callLabel": "Jonli qönğiroq"
   },
   "results": {
-    "title": "Biznesingizni keyingi bosqichga olib chiqing",
+    "title": "Biznesingizni keyingi bosqiçga olib çiqing",
     "stats": [
       {
         "value": "2–5×",
-        "label": "ko'proq malakali lead"
+        "label": "köproq malakali lead"
       },
       {
         "value": "70%",
-        "label": "qo'lda ishga sarflangan vaqt kamayadi"
+        "label": "qölda işga sarflangan vaqt kamayadi"
       },
       {
         "value": "50%",
@@ -316,7 +316,7 @@
       },
       {
         "value": "24/7",
-        "label": "uzluksiz avtomatlashtirish"
+        "label": "uzluksiz avtomatlaştiriş"
       },
       {
         "value": "90%+",
@@ -329,20 +329,20 @@
     ]
   },
   "pricing": {
-    "pageTitle": "Do'ppi AI bilan biznesingizni avtomatlashtiring",
-    "pageSubtitle": "Ehtiyojingizga mos tarifni tanlang va barcha AI servislardan unumli foydalaning.",
-    "trialNote": "Ro'yxatdan o'tganingizda platformani sinab ko'rish uchun {credits} bepul kredit beriladi.",
-    "billingNote": "Narxlar AQSh dollarida. To'lovlarni {company} qabul qiladi.",
+    "pageTitle": "Do'ppi AI bilan biznesingizni avtomatlaştiring",
+    "pageSubtitle": "Ehtiyojingizga mos tarifni tanlang va barça AI servislardan unumli foydalaning.",
+    "trialNote": "Röyxatdan ötganingizda platformani sinab köriş uçun {credits} bepul kredit beriladi.",
+    "billingNote": "Narxlar AQŞ dollarida. Tölovlarni {company} qabul qiladi.",
     "loading": "Narxlar yuklanmoqda…",
-    "unavailable": "Narxlar hozir yuklanmadi. Keyinroq qayta urinib ko‘ring.",
+    "unavailable": "Narxlar hozir yuklanmadi. Keyinroq qayta urinib köring.",
     "period": {
-      "label": "To'lov davri",
+      "label": "Tölov davri",
       "monthly": "Oylik",
       "yearly": "Yillik",
       "yearlyBadge": "2 oy bepul",
       "perMonth": "/oy",
-      "billedMonthly": "Har oy to'lanadi",
-      "billedYearly": "Yiliga {total} to'lanadi"
+      "billedMonthly": "Har oy tölanadi",
+      "billedYearly": "Yiliga {total} tölanadi"
     },
     "credits": "{count} kredit",
     "creditsPerMonth": "{credits} / oyiga",
@@ -356,36 +356,36 @@
     "plans": {
       "starter": {
         "name": "Starter",
-        "tagline": "Kichik biznes va frilanserlar uchun ideal boshlang'ich paket.",
-        "cta": "Boshlash",
+        "tagline": "Kiçik biznes va frilanserlar uçun ideal boşlanğiç paket.",
+        "cta": "Boşlaş",
         "features": {
-          "voice": "100 daqiqa ovozli agent qo'ng'irog'i",
+          "voice": "100 daqiqa ovozli agent qönğiroği",
           "rag": "Telegram va WhatsApp RAG agent",
-          "files": "3 tagacha fayl yuklash (15 MB)",
+          "files": "3 tagaça fayl yuklaş (15 MB)",
           "video": "20 ta AI video (720p/1080p)",
           "instagram": "1 ta Instagram akkaunt",
           "watermark": "Watermark'siz video",
-          "cloning": "Ovoz klonlash va Instagram Direct RAG"
+          "cloning": "Ovoz klonlaş va Instagram Direct RAG"
         }
       },
       "pro": {
         "name": "Pro",
-        "tagline": "O'sayotgan KOB va sotuvini avtomatlashtiruvchi jamoalar uchun.",
-        "cta": "Pro rejaga o'tish",
+        "tagline": "Ösayotgan KOB va sotuvini avtomatlaştiruvçi jamoalar uçun.",
+        "cta": "Pro rejaga ötiş",
         "features": {
-          "voice": "300 daqiqa ovozli agent + ovoz klonlash",
+          "voice": "300 daqiqa ovozli agent + ovoz klonlaş",
           "rag": "Telegram, WhatsApp va Instagram Direct RAG",
-          "files": "Cheksiz fayllar (100 MB gacha)",
+          "files": "Çeksiz fayllar (100 MB gaça)",
           "video": "80 ta HD video (watermark'siz)",
           "planner": "Avtopilot kontent-reja agenti",
-          "instagram": "3 ta Instagram akkaunt boshqaruvi",
-          "analytics": "Chuqur analitika va konversiya tahlili"
+          "instagram": "3 ta Instagram akkaunt boşqaruvi",
+          "analytics": "Çuqur analitika va konversiya tahlili"
         }
       },
       "business": {
         "name": "Business",
-        "tagline": "Yirik brendlar, tarmoqli biznes va agentliklar uchun.",
-        "cta": "Biznes bilan bog'lanish",
+        "tagline": "Yirik brendlar, tarmoqli biznes va agentliklar uçun.",
+        "cta": "Biznes bilan boğlaniş",
         "features": {
           "voice": "800 daqiqa ovozli agent (10+ parallel liniya)",
           "rag": "Omnichannel RAG + web vidjet + live scraper",
@@ -393,7 +393,7 @@
           "autopilot": "Multi-agent avtopilot + Trend Hunter",
           "instagram": "10 ta Instagram akkaunt",
           "crm": "AmoCRM va Bitrix24 integratsiyasi",
-          "priority": "Ustuvor GPU navbati va shaxsiy menejer"
+          "priority": "Ustuvor GPU navbati va şaxsiy menejer"
         }
       }
     },
@@ -415,7 +415,7 @@
         "rag": {
           "name": "Universal RAG agent",
           "unit": "ta xabar",
-          "note": "Telegram, WhatsApp va Instagram Direct orqali chat"
+          "note": "Telegram, WhatsApp va Instagram Direct orqali çat"
         },
         "ragIndex": {
           "name": "RAG indeksatsiya",
@@ -435,19 +435,19 @@
         "planner": {
           "name": "Auto-planner agent",
           "unit": "reja",
-          "note": "Haftalik kontent-reja tuzish"
+          "note": "Haftalik kontent-reja tuziş"
         },
         "autopost": {
           "name": "Auto-post va analitika",
           "unit": "post",
-          "note": "Avto-nashr va ijtimoiy tarmoq analitikasi"
+          "note": "Avto-naşr va ijtimoiy tarmoq analitikasi"
         }
       }
     },
     "topUp": {
-      "title": "Qo'shimcha kreditlar",
+      "title": "Qöşimça kreditlar",
       "perCredit": "{price} / kredit",
-      "cta": "Sotib olish",
+      "cta": "Sotib oliş",
       "packs": {
         "mini": "Mini",
         "medium": "Medium",
@@ -455,33 +455,33 @@
       }
     },
     "faq": {
-      "title": "Ko'p beriladigan savollar",
+      "title": "Köp beriladigan savollar",
       "items": [
         {
-          "q": "Kreditlarim tugab qolsa nima bo'ladi?",
-          "a": "Rejangizni Pro yoki Business'ga oshirishingiz yoki alohida qo'shimcha kredit paketlarini sotib olishingiz mumkin."
+          "q": "Kreditlarim tugab qolsa nima böladi?",
+          "a": "Rejangizni Pro yoki Business'ga oşirişingiz yoki alohida qöşimça kredit paketlarini sotib olişingiz mumkin."
         },
         {
-          "q": "Kreditlar oydan-oyga o'tadimi?",
-          "a": "Tarif doirasida berilgan kreditlar har oy yangilanadi. Qo'shimcha paket orqali sotib olingan kreditlar esa kuymaydi."
+          "q": "Kreditlar oydan-oyga ötadimi?",
+          "a": "Tarif doirasida berilgan kreditlar har oy yangilanadi. Qöşimça paket orqali sotib olingan kreditlar esa kuymaydi."
         },
         {
           "q": "Sinov muddati bormi?",
-          "a": "Ha, ro'yxatdan o'tganingizda platformani sinab ko'rish uchun 250 bepul kredit beriladi."
+          "a": "Ha, röyxatdan ötganingizda platformani sinab köriş uçun 250 bepul kredit beriladi."
         }
       ]
     }
   },
   "about": {
-    "title": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan",
-    "lead": "Do'ppi AI — har bir biznes uchun sun'iy intellekt orqali marketingni avtomatlashtirishni maksimal darajada osonlashtiruvchi platforma.",
+    "title": "Butun dunyo bizneslari uçun kelajak — AI bilan bugundan",
+    "lead": "Do'ppi AI — har bir biznes uçun sun'iy intellekt orqali marketingni avtomatlaştirişni maksimal darajada osonlaştiruvçi platforma.",
     "pageTitle": "Do'ppi AI ortidagi maqsad",
-    "pageSubtitle": "Biz butun dunyo bizneslari uchun sun'iy intellektni kundalik ish quroliga aylantiramiz.",
+    "pageSubtitle": "Biz butun dunyo bizneslari uçun sun'iy intellektni kundalik iş quroliga aylantiramiz.",
     "points": [
       {
         "icon": "target",
-        "title": "Bozoringizga moslashadi",
-        "desc": "O'zbek va rus tili, mahalliy kanallar va SIP telefoniya bilan ishlaydi."
+        "title": "Bozoringizga moslaşadi",
+        "desc": "Özbek va rus tili, mahalliy kanallar va SIP telefoniya bilan işlaydi."
       },
       {
         "icon": "sparkles",
@@ -495,16 +495,16 @@
       }
     ],
     "facts": {
-      "launched": "Mahsulot ishga tushgan",
-      "incorporated": "Kompaniya ro'yxatdan o'tgan",
-      "entity": "Yuridik shaxs",
-      "focus": "Yo'nalish",
+      "launched": "Mahsulot işga tuşgan",
+      "incorporated": "Kompaniya röyxatdan ötgan",
+      "entity": "Yuridik şaxs",
+      "focus": "Yönaliş",
       "focusValue": "AI dasturiy ta'minot · Self-serve SaaS platforma"
     },
     "details": {
       "title": "Kompaniya ma'lumotlari",
-      "lead": "Do'ppi AI — {company} tomonidan yaratilgan va boshqariladigan self-serve AI dasturiy platformasi. Mahsulot {launched}-yildan beri ishlaydi, kompaniya {incorporated}-yilda Toshkentda ro'yxatdan o'tgan.",
-      "funding": "Biz o'z mablag'imiz hisobiga rivojlanmoqdamiz (bootstrapped) va 2027-yilda pre-seed investitsiya raundini rejalashtirganmiz.",
+      "lead": "Do'ppi AI — {company} tomonidan yaratilgan va boşqariladigan self-serve AI dasturiy platformasi. Mahsulot {launched}-yildan beri işlaydi, kompaniya {incorporated}-yilda Toşkentda röyxatdan ötgan.",
+      "funding": "Biz öz mablağimiz hisobiga rivojlanmoqdamiz (bootstrapped) va 2027-yilda pre-seed investitsiya raundini rejalaştirganmiz.",
       "brand": "Brend",
       "address": "Yuridik manzil"
     }
@@ -512,49 +512,49 @@
   "team": {
     "title": "Do'ppi AI ortidagi jamoa",
     "roles": {
-      "rifat": "Hammuassis va bosh direktor (Co-founder & CEO)",
-      "jaxongir": "Bosh texnolog (CTO)",
-      "nodirbek": "Backend dasturchi",
+      "rifat": "Hammuassis va boş direktor (Co-founder & CEO)",
+      "jaxongir": "Boş texnolog (CTO)",
+      "nodirbek": "Backend dasturçi",
       "asadbek": "Dasturiy ta'minot muhandisi",
       "aziz": "AI muhandis"
     },
     "bios": {
-      "rifat": "Do'ppi AI bosh direktori. Kompaniya strategiyasi va rivojini boshqaradi, bizneslarga platformani joriy qilish va undan natija olishda yordam beradi.",
-      "jaxongir": "Do'ppi AI texnik arxitekturasi va AI modellarini boshqaradi. Platformaning muhandislik yo'nalishini belgilaydi, 5+ yillik tajriba.",
-      "nodirbek": "Do'ppi AI backend dasturchisi. Server logikasi, API va ma'lumotlar bazasini quradi — tizim tez, xavfsiz va barqaror ishlaydi.",
-      "asadbek": "Do'ppi AI front qismi bo'yicha dasturchi. Interfeysni quradi va UI/UX ni shakllantiradi — platforma har qanday qurilmada tez va qulay.",
-      "aziz": "Platformaning AI modellari ustida ishlaydi — ularni o'zbek va rus tillarini yaxshi tushunadigan qilib o'rgatadi va sozlaydi."
+      "rifat": "Do'ppi AI boş direktori. Kompaniya strategiyasi va rivojini boşqaradi, bizneslarga platformani joriy qiliş va undan natija olişda yordam beradi.",
+      "jaxongir": "Do'ppi AI texnik arxitekturasi va AI modellarini boşqaradi. Platformaning muhandislik yönalişini belgilaydi, 5+ yillik tajriba.",
+      "nodirbek": "Do'ppi AI backend dasturçisi. Server logikasi, API va ma'lumotlar bazasini quradi — tizim tez, xavfsiz va barqaror işlaydi.",
+      "asadbek": "Do'ppi AI front qismi böyiça dasturçi. Interfeysni quradi va UI/UX ni şakllantiradi — platforma har qanday qurilmada tez va qulay.",
+      "aziz": "Platformaning AI modellari ustida işlaydi — ularni özbek va rus tillarini yaxşi tuşunadigan qilib örgatadi va sozlaydi."
     }
   },
   "faq": {
-    "title": "Ko'p so'raladigan savollar",
+    "title": "Köp söraladigan savollar",
     "items": [
       {
-        "q": "Do'ppi AI o'zbek tilida ishlaydimi?",
-        "a": "Ha. Ovozli agent, chatbot va kontent o'zbek va rus tillarida ishlaydi — mahalliy bozor uchun maxsus sozlangan."
+        "q": "Do'ppi AI özbek tilida işlaydimi?",
+        "a": "Ha. Ovozli agent, çatbot va kontent özbek va rus tillarida işlaydi — mahalliy bozor uçun maxsus sozlangan."
       },
       {
-        "q": "Tizimni ishga tushirish qancha vaqt oladi?",
-        "a": "Odatda bir necha kun. Jamoamiz kanallaringizni ulab, ovozli agent va CRM'ni biznesingizga moslab beradi."
+        "q": "Tizimni işga tuşiriş qança vaqt oladi?",
+        "a": "Odatda bir neça kun. Jamoamiz kanallaringizni ulab, ovozli agent va CRM'ni biznesingizga moslab beradi."
       },
       {
-        "q": "Mavjud CRM yoki kanallarim bilan integratsiya bo'ladimi?",
-        "a": "Ha. Instagram, Telegram, WhatsApp, SIP telefoniya va boshqa xizmatlar bilan integratsiya qilinadi. Enterprise rejada maxsus integratsiyalar mavjud."
+        "q": "Mavjud CRM yoki kanallarim bilan integratsiya böladimi?",
+        "a": "Ha. Instagram, Telegram, WhatsApp, SIP telefoniya va boşqa xizmatlar bilan integratsiya qilinadi. Enterprise rejada maxsus integratsiyalar mavjud."
       },
       {
         "q": "Ma'lumotlarim xavfsizmi?",
-        "a": "Ma'lumotlaringiz himoyalangan bulutda saqlanadi, muntazam zaxiralanadi va faqat sizga tegishli bo'ladi."
+        "a": "Ma'lumotlaringiz himoyalangan bulutda saqlanadi, muntazam zaxiralanadi va faqat sizga tegişli böladi."
       },
       {
-        "q": "Bepul sinov qanday ishlaydi?",
-        "a": "Yangi foydalanuvchiga bir martalik boshlang‘ich kredit beriladi. Uning miqdori va amal qilish muddati narxlar sahifasida ko‘rsatiladi; karta talab qilinmaydi."
+        "q": "Bepul sinov qanday işlaydi?",
+        "a": "Yangi foydalanuvçiga bir martalik boşlanğiç kredit beriladi. Uning miqdori va amal qiliş muddati narxlar sahifasida körsatiladi; karta talab qilinmaydi."
       }
     ]
   },
   "contact": {
-    "title": "Keling, marketingni birga avtomatlashtiramiz",
-    "pageTitle": "Biz bilan bog'laning",
-    "pageSubtitle": "Savollaringizga javob beramiz va biznesingiz uchun demo tayyorlaymiz.",
+    "title": "Keling, marketingni birga avtomatlaştiramiz",
+    "pageTitle": "Biz bilan boğlaning",
+    "pageSubtitle": "Savollaringizga javob beramiz va biznesingiz uçun demo tayyorlaymiz.",
     "form": {
       "name": "Ismingiz",
       "phone": "Telefon raqamingiz",
@@ -566,201 +566,201 @@
         "phone": "+998 90 123 45 67",
         "email": "siz{'@'}kompaniya.uz",
         "business": "Masalan, Do'ppi Group",
-        "message": "Biznesingiz va maqsadlaringiz haqida qisqacha yozing"
+        "message": "Biznesingiz va maqsadlaringiz haqida qisqaça yozing"
       },
-      "submit": "Demo olish",
+      "submit": "Demo oliş",
       "sending": "Yuborilmoqda...",
-      "privacy": "Yuborish orqali siz bilan bog'lanishimizga rozilik bildirasiz."
+      "privacy": "Yuboriş orqali siz bilan boğlanişimizga rozilik bildirasiz."
     },
     "success": {
-      "title": "Rahmat! So'rovingiz qabul qilindi.",
-      "subtitle": "Jamoamiz bir ish kuni ichida siz bilan bog'lanib, demo uchun vaqt belgilaydi."
+      "title": "Rahmat! Sörovingiz qabul qilindi.",
+      "subtitle": "Jamoamiz bir iş kuni içida siz bilan boğlanib, demo uçun vaqt belgilaydi."
     },
     "email": "transformation{'@'}doppiai.uz",
     "phone": "+998 93 903 33 01",
     "website": "doppiai.uz",
-    "reachTitle": "To'g'ridan-to'g'ri bog'laning"
+    "reachTitle": "Töğridan-töğri boğlaning"
   },
   "company": {
-    "legalName": "\"{name}\" MChJ",
-    "city": "Toshkent",
-    "address": "Toshkent sh., Olmazor tumani, Oltinsoy MFY, Qora-Qamish 1/1 dahasi, 20-uy, 42-xonadon",
+    "legalName": "\"{name}\" MÇJ",
+    "city": "Toşkent",
+    "address": "Toşkent ş., Olmazor tumani, Oltinsoy MFY, Qora-Qamiş 1/1 dahasi, 20-uy, 42-xonadon",
     "taxIdLabel": "STIR"
   },
   "footer": {
-    "tagline": "Butun dunyo bizneslari uchun kelajak — AI bilan bugundan.",
+    "tagline": "Butun dunyo bizneslari uçun kelajak — AI bilan bugundan.",
     "company": "Kompaniya",
     "legalEntity": "Do'ppi AI — {company} mahsuloti",
-    "rights": "© {year} {company}. Barcha huquqlar himoyalangan.",
-    "madeIn": "Toshkentda mehr bilan yaratilgan",
+    "rights": "© {year} {company}. Barça huquqlar himoyalangan.",
+    "madeIn": "Toşkentda mehr bilan yaratilgan",
     "privacy": "Maxfiylik siyosati",
-    "terms": "Foydalanish shartlari"
+    "terms": "Foydalaniş şartlari"
   },
   "error": {
     "404": "404",
     "pageNotFound": "Sahifa topilmadi",
-    "message": "Kechirasiz, siz izlagan sahifa mavjud emas yoki ko'chirilgan.",
-    "goBackHome": "Bosh sahifaga qaytish"
+    "message": "Keçirasiz, siz izlagan sahifa mavjud emas yoki köçirilgan.",
+    "goBackHome": "Boş sahifaga qaytiş"
   },
   "legal": {
-    "back": "Bosh sahifaga qaytish",
+    "back": "Boş sahifaga qaytiş",
     "eyebrow": "Huquqiy",
     "privacy": {
       "title": "Maxfiylik siyosati",
-      "updated": "Oxirgi yangilanish: 2026-yil 4-oktabr",
-      "operator": "Ushbu Maxfiylik siyosati Do'ppi AI operatori {company} tomonidan taqdim etiladi. Manzil: {address}.",
+      "updated": "Oxirgi yangilaniş: 2026-yil 4-oktabr",
+      "operator": "Uşbu Maxfiylik siyosati Do'ppi AI operatori {company} tomonidan taqdim etiladi. Manzil: {address}.",
       "sections": [
         {
-          "h": "Kirish",
-          "p": "Do'ppi AI (\"biz\") butun dunyo bizneslari uchun sun'iy intellektga asoslangan marketing platformasini taqdim etadi. Ushbu Maxfiylik siyosati biz qanday ma'lumotlarni yig'ishimizni, ulardan qanday foydalanishimizni va veb-saytimizga tashrif buyurganingizda yoki demo so'raganingizda qanday tanlovlaringiz borligini tushuntiradi."
+          "h": "Kiriş",
+          "p": "Do'ppi AI (\"biz\") butun dunyo bizneslari uçun sun'iy intellektga asoslangan marketing platformasini taqdim etadi. Uşbu Maxfiylik siyosati biz qanday ma'lumotlarni yiğişimizni, ulardan qanday foydalanişimizni va veb-saytimizga taşrif buyurganingizda yoki demo söraganingizda qanday tanlovlaringiz borligini tuşuntiradi."
         },
         {
-          "h": "Biz yig'adigan ma'lumotlar",
-          "p": "Demo so'rovi formasini to'ldirganingizda siz kiritgan ma'lumotlarni yig'amiz: ismingiz, telefon raqamingiz, elektron pochta manzilingiz va biznesingiz haqidagi ma'lumot. Shuningdek, veb-saytimiz qanday ishlatilayotganini tushunish va uni xavfsiz saqlash uchun cheklangan foydalanish va analitika ma'lumotlarini — masalan, ko'rilgan sahifalar, qurilma va brauzer turi hamda taxminiy joylashuv — avtomatik ravishda to'playmiz."
+          "h": "Biz yiğadigan ma'lumotlar",
+          "p": "Demo sörovi formasini töldirganingizda siz kiritgan ma'lumotlarni yiğamiz: ismingiz, telefon raqamingiz, elektron poçta manzilingiz va biznesingiz haqidagi ma'lumot. Şuningdek, veb-saytimiz qanday işlatilayotganini tuşuniş va uni xavfsiz saqlaş uçun çeklangan foydalaniş va analitika ma'lumotlarini — masalan, körilgan sahifalar, qurilma va brauzer turi hamda taxminiy joylaşuv — avtomatik ravişda töplaymiz."
         },
         {
           "h": "Ma'lumotlardan qanday foydalanamiz",
-          "p": "Ma'lumotlaringizdan demo so'rovlaringiz va murojaatlaringizga javob berish, Do'ppi AI xizmatini taqdim etish va ishlatish hamda mahsulotimiz, kontentimiz va mijozlar tajribasini yaxshilash uchun foydalanamiz. So'rovingiz va tegishli mahsulot yangiliklari yuzasidan siz bilan bog'lanishimiz mumkin."
+          "p": "Ma'lumotlaringizdan demo sörovlaringiz va murojaatlaringizga javob beriş, Do'ppi AI xizmatini taqdim etiş va işlatiş hamda mahsulotimiz, kontentimiz va mijozlar tajribasini yaxşilaş uçun foydalanamiz. Sörovingiz va tegişli mahsulot yangiliklari yuzasidan siz bilan boğlanişimiz mumkin."
         },
         {
-          "h": "Ma'lumotlarni ulashish",
-          "p": "Biz shaxsiy ma'lumotlaringizni sotmaymiz. Ularni faqat platformamizni ishlatishga yordam beradigan ishonchli xizmat ko'rsatuvchilar bilan — masalan, hosting, aloqa va analitika provayderlari bilan — va faqat xizmatni taqdim etish uchun zarur bo'lgan darajada ulashamiz. Shuningdek, amaldagi qonun talab qilgan hollarda ma'lumotlarni oshkor qilishimiz mumkin."
+          "h": "Ma'lumotlarni ulaşiş",
+          "p": "Biz şaxsiy ma'lumotlaringizni sotmaymiz. Ularni faqat platformamizni işlatişga yordam beradigan işonçli xizmat körsatuvçilar bilan — masalan, hosting, aloqa va analitika provayderlari bilan — va faqat xizmatni taqdim etiş uçun zarur bölgan darajada ulaşamiz. Şuningdek, amaldagi qonun talab qilgan hollarda ma'lumotlarni oşkor qilişimiz mumkin."
         },
         {
           "h": "Ma'lumotlar xavfsizligi",
-          "p": "Ma'lumotlaringiz kirish nazorati va muntazam zaxira nusxalari bilan himoyalangan bulut infratuzilmasida saqlanadi. Biz ularni ruxsatsiz kirish, yo'qotish yoki noto'g'ri foydalanishdan himoya qilish uchun asosli texnik va tashkiliy choralarni ko'ramiz."
+          "p": "Ma'lumotlaringiz kiriş nazorati va muntazam zaxira nusxalari bilan himoyalangan bulut infratuzilmasida saqlanadi. Biz ularni ruxsatsiz kiriş, yöqotiş yoki notöğri foydalanişdan himoya qiliş uçun asosli texnik va taşkiliy çoralarni köramiz."
         },
         {
           "h": "Sizning huquqlaringiz",
-          "p": "Siz o'zingiz haqingizda saqlanayotgan shaxsiy ma'lumotlarga kirishni so'rashingiz, ularni tuzatishni yoki o'chirishni talab qilishingiz mumkin. Ushbu huquqlardan foydalanish uchun quyidagi ma'lumotlar orqali biz bilan bog'laning — biz asosli muddat ichida javob beramiz."
+          "p": "Siz özingiz haqingizda saqlanayotgan şaxsiy ma'lumotlarga kirişni söraşingiz, ularni tuzatişni yoki öçirişni talab qilişingiz mumkin. Uşbu huquqlardan foydalaniş uçun quyidagi ma'lumotlar orqali biz bilan boğlaning — biz asosli muddat içida javob beramiz."
         }
       ],
       "contact": {
         "h": "Aloqa",
-        "p": "Ushbu Maxfiylik siyosati yoki ma'lumotlaringizni qanday boshqarishimiz yuzasidan savollaringiz bo'lsa, biz bilan bog'laning:"
+        "p": "Uşbu Maxfiylik siyosati yoki ma'lumotlaringizni qanday boşqarişimiz yuzasidan savollaringiz bölsa, biz bilan boğlaning:"
       },
       "disclaimer": {
-        "h": "Umumiy shablon — yuridik maslahat emas",
-        "p": "Ushbu Maxfiylik siyosati Do'ppi AI'ning mahsulot va muvofiqlik ishlarini qo'llab-quvvatlash uchun umumiy shablon sifatida taqdim etilgan. U yuridik maslahat hisoblanmaydi va unga tayanishdan oldin malakali yuristlar tomonidan ko'rib chiqilishi va biznesingizga moslashtirilishi lozim."
+        "h": "Umumiy şablon — yuridik maslahat emas",
+        "p": "Uşbu Maxfiylik siyosati Do'ppi AI'ning mahsulot va muvofiqlik işlarini qöllab-quvvatlaş uçun umumiy şablon sifatida taqdim etilgan. U yuridik maslahat hisoblanmaydi va unga tayanişdan oldin malakali yuristlar tomonidan körib çiqilişi va biznesingizga moslaştirilişi lozim."
       }
     },
     "terms": {
-      "title": "Foydalanish shartlari",
-      "updated": "Oxirgi yangilanish: 2026-yil 4-oktabr",
-      "operator": "Ushbu Shartlar siz bilan Do'ppi AI operatori {company} o'rtasidagi kelishuvdir. Manzil: {address}.",
-      "intro": "Ushbu Foydalanish shartlari (\"Shartlar\") Do'ppi AI platformasi va u bilan bog'liq veb-sayt hamda xizmatlardan (\"Xizmat\") foydalanishingizni tartibga soladi. Xizmatdan foydalanishdan oldin ushbu shartlarni diqqat bilan o'qib chiqing.",
-      "disclaimerNote": "Ushbu hujjat umumiy namuna sifatida taqdim etilgan va yuridik maslahat hisoblanmaydi. Yakuniy foydalanishdan oldin uni malakali yuridik maslahatchi ko'rib chiqishi tavsiya etiladi.",
+      "title": "Foydalaniş şartlari",
+      "updated": "Oxirgi yangilaniş: 2026-yil 4-oktabr",
+      "operator": "Uşbu Şartlar siz bilan Do'ppi AI operatori {company} örtasidagi kelişuvdir. Manzil: {address}.",
+      "intro": "Uşbu Foydalaniş şartlari (\"Şartlar\") Do'ppi AI platformasi va u bilan boğliq veb-sayt hamda xizmatlardan (\"Xizmat\") foydalanişingizni tartibga soladi. Xizmatdan foydalanişdan oldin uşbu şartlarni diqqat bilan öqib çiqing.",
+      "disclaimerNote": "Uşbu hujjat umumiy namuna sifatida taqdim etilgan va yuridik maslahat hisoblanmaydi. Yakuniy foydalanişdan oldin uni malakali yuridik maslahatçi körib çiqişi tavsiya etiladi.",
       "sections": [
         {
-          "heading": "Kirish va shartlarni qabul qilish",
+          "heading": "Kiriş va şartlarni qabul qiliş",
           "paragraphs": [
-            "Do'ppi AI xizmatidan ro'yxatdan o'tib yoki undan foydalanib, siz ushbu Shartlarga va Maxfiylik siyosatiga rozilik bildirasiz. Agar siz ushbu shartlarga rozi bo'lmasangiz, Xizmatdan foydalanmang.",
-            "Agar siz Xizmatdan tashkilot nomidan foydalanayotgan bo'lsangiz, siz ushbu tashkilotni ushbu Shartlar bilan bog'lash vakolatiga ega ekanligingizni tasdiqlaysiz."
+            "Do'ppi AI xizmatidan röyxatdan ötib yoki undan foydalanib, siz uşbu Şartlarga va Maxfiylik siyosatiga rozilik bildirasiz. Agar siz uşbu şartlarga rozi bölmasangiz, Xizmatdan foydalanmang.",
+            "Agar siz Xizmatdan taşkilot nomidan foydalanayotgan bölsangiz, siz uşbu taşkilotni uşbu Şartlar bilan boğlaş vakolatiga ega ekanligingizni tasdiqlaysiz."
           ],
           "bullets": []
         },
         {
           "heading": "Xizmat tavsifi",
           "paragraphs": [
-            "Do'ppi AI — bu marketing jarayonlarini avtomatlashtirishga mo'ljallangan All-in-One AI marketing platformasi. Xizmat quyidagi asosiy modullarni o'z ichiga oladi:"
+            "Do'ppi AI — bu marketing jarayonlarini avtomatlaştirişga möljallangan All-in-One AI marketing platformasi. Xizmat quyidagi asosiy modullarni öz içiga oladi:"
           ],
           "bullets": [
-            "AI ovozli agent — mijozlar bilan tabiiy suhbat, malakalash va uchrashuv belgilash.",
-            "Ijtimoiy tarmoq avtomatizatsiyasi — DM, komment va follow-up boshqaruvi.",
+            "AI ovozli agent — mijozlar bilan tabiiy suhbat, malakalaş va uçraşuv belgilaş.",
+            "Ijtimoiy tarmoq avtomatizatsiyasi — DM, komment va follow-up boşqaruvi.",
             "AI kontent va video generatsiyasi.",
-            "CRM va lead boshqaruvi.",
-            "Ko'p kanalli chatbotlar."
+            "CRM va lead boşqaruvi.",
+            "Köp kanalli çatbotlar."
           ]
         },
         {
           "heading": "Hisoblar va muvofiqlik",
           "paragraphs": [
-            "Xizmatdan foydalanish uchun kamida 18 yoshda bo'lishingiz va amaldagi qonunlarga muvofiq shartnoma tuzish qobiliyatiga ega bo'lishingiz kerak.",
-            "Siz hisob ma'lumotlaringiz (login va parol) maxfiyligini saqlash va hisobingiz orqali amalga oshirilgan barcha faoliyat uchun javobgar bo'lasiz. Ruxsatsiz foydalanish aniqlansa, bizni zudlik bilan xabardor qiling."
+            "Xizmatdan foydalaniş uçun kamida 18 yoşda bölişingiz va amaldagi qonunlarga muvofiq şartnoma tuziş qobiliyatiga ega bölişingiz kerak.",
+            "Siz hisob ma'lumotlaringiz (login va parol) maxfiyligini saqlaş va hisobingiz orqali amalga oşirilgan barça faoliyat uçun javobgar bölasiz. Ruxsatsiz foydalaniş aniqlansa, bizni zudlik bilan xabardor qiling."
           ],
           "bullets": []
         },
         {
-          "heading": "Obuna, sinov va to'lovlar",
+          "heading": "Obuna, sinov va tölovlar",
           "paragraphs": [
-            "Do'ppi AI xizmatlari kredit asosida hisoblanadi. Amaldagi paketlar, narxlar va kredit miqdori narxlar sahifasida ko‘rsatiladi.",
-            "Yangi akkauntga bir martalik boshlang‘ich kredit beriladi; uning amal qilish muddati narxlar sahifasida ko‘rsatiladi. To‘lov faqat alohida tasdiqlangan xarid uchun olinadi.",
-            "Narxlar va tarkib oldindan xabar berilgan holda o'zgarishi mumkin. Qonun bilan talab qilinmagan hollarda, to'langan summalar qaytarilmaydi."
+            "Do'ppi AI xizmatlari kredit asosida hisoblanadi. Amaldagi paketlar, narxlar va kredit miqdori narxlar sahifasida körsatiladi.",
+            "Yangi akkauntga bir martalik boşlanğiç kredit beriladi; uning amal qiliş muddati narxlar sahifasida körsatiladi. Tölov faqat alohida tasdiqlangan xarid uçun olinadi.",
+            "Narxlar va tarkib oldindan xabar berilgan holda özgarişi mumkin. Qonun bilan talab qilinmagan hollarda, tölangan summalar qaytarilmaydi."
           ],
           "bullets": []
         },
         {
-          "heading": "Foydalanish qoidalari",
+          "heading": "Foydalaniş qoidalari",
           "paragraphs": [
-            "Siz Xizmatdan faqat qonuniy maqsadlarda va ushbu Shartlarga muvofiq foydalanishga rozilik bildirasiz. Xususan, siz quyidagilarga yo'l qo'ymaslikka rozisiz:"
+            "Siz Xizmatdan faqat qonuniy maqsadlarda va uşbu Şartlarga muvofiq foydalanişga rozilik bildirasiz. Xususan, siz quyidagilarga yöl qöymaslikka rozisiz:"
           ],
           "bullets": [
-            "Qonunga xilof, aldov yoki spam xarakteridagi xabarlar yuborish.",
-            "Boshqa shaxslarning huquqlarini yoki maxfiyligini buzish.",
-            "Xizmatni buzish, unga ruxsatsiz kirish yoki uni teskari muhandislik qilish.",
-            "Zararli dastur yoki avtomatlashtirilgan so'rovlar orqali tizimga ortiqcha yuk berish.",
-            "Xizmat orqali qonun taqiqlagan tovar yoki xizmatlarni targ'ib qilish."
+            "Qonunga xilof, aldov yoki spam xarakteridagi xabarlar yuboriş.",
+            "Boşqa şaxslarning huquqlarini yoki maxfiyligini buziş.",
+            "Xizmatni buziş, unga ruxsatsiz kiriş yoki uni teskari muhandislik qiliş.",
+            "Zararli dastur yoki avtomatlaştirilgan sörovlar orqali tizimga ortiqça yuk beriş.",
+            "Xizmat orqali qonun taqiqlagan tovar yoki xizmatlarni tarğib qiliş."
           ]
         },
         {
           "heading": "Intellektual mulk",
           "paragraphs": [
-            "Xizmat, uning dizayni, dasturiy ta'minoti, brendi va barcha tegishli intellektual mulk huquqlari Do'ppi AI yoki uning litsenziarlariga tegishli. Ushbu Shartlar sizga cheklangan, eksklyuziv bo'lmagan va o'tkazib bo'lmaydigan foydalanish huquqini beradi.",
-            "Siz Xizmatga yuklagan yoki u orqali yaratgan kontentga (\"Foydalanuvchi kontenti\") egaligingiz saqlanib qoladi. Xizmatni taqdim etish uchun zarur bo'lgan darajada uni qayta ishlashimizga ruxsat berasiz."
+            "Xizmat, uning dizayni, dasturiy ta'minoti, brendi va barça tegişli intellektual mulk huquqlari Do'ppi AI yoki uning litsenziarlariga tegişli. Uşbu Şartlar sizga çeklangan, eksklyuziv bölmagan va ötkazib bölmaydigan foydalaniş huquqini beradi.",
+            "Siz Xizmatga yuklagan yoki u orqali yaratgan kontentga (\"Foydalanuvçi kontenti\") egaligingiz saqlanib qoladi. Xizmatni taqdim etiş uçun zarur bölgan darajada uni qayta işlaşimizga ruxsat berasiz."
           ],
           "bullets": []
         },
         {
-          "heading": "Kafolatlardan voz kechish va javobgarlik cheklovi",
+          "heading": "Kafolatlardan voz keçiş va javobgarlik çeklovi",
           "paragraphs": [
-            "Xizmat \"boribori holida\" va \"mavjud bo'lgani bo'yicha\" taqdim etiladi. Qonun ruxsat bergan darajada biz uning uzluksiz, xatosiz yoki har qanday muayyan maqsadga mos kelishini kafolatlamaymiz.",
-            "Qonun ruxsat bergan maksimal darajada Do'ppi AI bilvosita, tasodifiy yoki oqibatli zararlar, shu jumladan foyda yoki ma'lumot yo'qotilishi uchun javobgar bo'lmaydi. Bizning umumiy javobgarligimiz da'vodan oldingi 12 oy ichida Xizmat uchun to'langan summadan oshmaydi."
+            "Xizmat \"boribori holida\" va \"mavjud bölgani böyiça\" taqdim etiladi. Qonun ruxsat bergan darajada biz uning uzluksiz, xatosiz yoki har qanday muayyan maqsadga mos kelişini kafolatlamaymiz.",
+            "Qonun ruxsat bergan maksimal darajada Do'ppi AI bilvosita, tasodifiy yoki oqibatli zararlar, şu jumladan foyda yoki ma'lumot yöqotilişi uçun javobgar bölmaydi. Bizning umumiy javobgarligimiz da'vodan oldingi 12 oy içida Xizmat uçun tölangan summadan oşmaydi."
           ],
           "bullets": []
         },
         {
-          "heading": "Bekor qilish",
+          "heading": "Bekor qiliş",
           "paragraphs": [
-            "Siz istalgan vaqtda hisobingizni bekor qilishingiz mumkin. Ushbu Shartlar buzilgan taqdirda biz Xizmatga kirishni to'xtatib qo'yish yoki hisobni bekor qilish huquqini o'zimizda saqlab qolamiz.",
-            "Bekor qilingandan so'ng Xizmatdan foydalanish huquqingiz darhol tugaydi. Ayrim qoidalar (masalan, intellektual mulk va javobgarlik cheklovi) bekor qilingandan keyin ham amal qiladi."
+            "Siz istalgan vaqtda hisobingizni bekor qilişingiz mumkin. Uşbu Şartlar buzilgan taqdirda biz Xizmatga kirişni töxtatib qöyiş yoki hisobni bekor qiliş huquqini özimizda saqlab qolamiz.",
+            "Bekor qilingandan söng Xizmatdan foydalaniş huquqingiz darhol tugaydi. Ayrim qoidalar (masalan, intellektual mulk va javobgarlik çeklovi) bekor qilingandan keyin ham amal qiladi."
           ],
           "bullets": []
         },
         {
-          "heading": "Shartlarga o'zgartirishlar",
+          "heading": "Şartlarga özgartirişlar",
           "paragraphs": [
-            "Biz ushbu Shartlarni vaqti-vaqti bilan yangilashimiz mumkin. Muhim o'zgarishlar to'g'risida veb-sayt orqali yoki boshqa oqilona usulda xabar beramiz. O'zgarishlardan keyin Xizmatdan foydalanishni davom ettirish yangilangan Shartlarni qabul qilishni anglatadi."
+            "Biz uşbu Şartlarni vaqti-vaqti bilan yangilaşimiz mumkin. Muhim özgarişlar töğrisida veb-sayt orqali yoki boşqa oqilona usulda xabar beramiz. Özgarişlardan keyin Xizmatdan foydalanişni davom ettiriş yangilangan Şartlarni qabul qilişni anglatadi."
           ],
           "bullets": []
         },
         {
           "heading": "Amaldagi qonun",
           "paragraphs": [
-            "Ushbu Shartlar O'zbekiston Respublikasi qonunlariga muvofiq tartibga solinadi va talqin qilinadi. Har qanday nizolar O'zbekiston Respublikasining vakolatli sudlari tomonidan ko'rib chiqiladi."
+            "Uşbu Şartlar Özbekiston Respublikasi qonunlariga muvofiq tartibga solinadi va talqin qilinadi. Har qanday nizolar Özbekiston Respublikasining vakolatli sudlari tomonidan körib çiqiladi."
           ],
           "bullets": []
         }
       ],
       "contactHeading": "Aloqa",
-      "contactLead": "Ushbu Shartlar bo'yicha savollaringiz bo'lsa, biz bilan bog'laning:",
+      "contactLead": "Uşbu Şartlar böyiça savollaringiz bölsa, biz bilan boğlaning:",
       "ctaTitle": "Yana savollaringiz bormi?",
-      "ctaBody": "Jamoamiz Xizmat va shartlar bo'yicha savollaringizga yordam berishga tayyor.",
-      "ctaButton": "Bosh sahifaga qaytish"
+      "ctaBody": "Jamoamiz Xizmat va şartlar böyiça savollaringizga yordam berişga tayyor.",
+      "ctaButton": "Boş sahifaga qaytiş"
     }
   },
   "seo": {
     "home": {
-      "title": "Do'ppi AI (Doppi AI) — butun dunyo uchun AI marketing tizimi",
-      "description": "Do'ppi AI (Doppi AI) — reklamadan sotuvgacha jarayonni avtomatlashtiruvchi AI marketing tizimi: AI ovozli agent, RAG chatbot, video generator, CRM va SIP call-markaz.",
-      "keywords": "Do'ppi AI, Doppi AI, doppi, AI marketing, sun'iy intellekt, ovozli agent, RAG chatbot, video generator, CRM, chatbot, SIP telefoniya, lead generatsiya, marketing avtomatizatsiya"
+      "title": "Do'ppi AI (Doppi AI) — butun dunyo uçun AI marketing tizimi",
+      "description": "Do'ppi AI (Doppi AI) — reklamadan sotuvgaça jarayonni avtomatlaştiruvçi AI marketing tizimi: AI ovozli agent, RAG çatbot, video generator, CRM va SIP call-markaz.",
+      "keywords": "Do'ppi AI, Doppi AI, doppi, AI marketing, sun'iy intellekt, ovozli agent, RAG çatbot, video generator, CRM, çatbot, SIP telefoniya, lead generatsiya, marketing avtomatizatsiya"
     },
     "ragAgent": {
-      "title": "RAG Agent: hujjatlaringiz asosidagi AI chatbot — Do'ppi AI",
-      "description": "Do'ppi AI RAG Agent PDF, DOCX va Excel hujjatlaringizni o'rganib, Instagram, Telegram, WhatsApp va saytda mijozlarga 24/7 aniq javob beradi."
+      "title": "RAG Agent: hujjatlaringiz asosidagi AI çatbot — Do'ppi AI",
+      "description": "Do'ppi AI RAG Agent PDF, DOCX va Excel hujjatlaringizni örganib, Instagram, Telegram, WhatsApp va saytda mijozlarga 24/7 aniq javob beradi."
     },
     "voiceAgent": {
-      "title": "AI Ovozli Agent: qo'ng'iroqlarga AI javob beradi — Do'ppi AI",
-      "description": "Do'ppi AI ovozli agenti qo'ng'iroqlarni inson kabi olib boradi: leadlarni saralaydi, uchrashuv belgilaydi va hammasini CRM'ga yozadi."
+      "title": "AI Ovozli Agent: qönğiroqlarga AI javob beradi — Do'ppi AI",
+      "description": "Do'ppi AI ovozli agenti qönğiroqlarni inson kabi olib boradi: leadlarni saralaydi, uçraşuv belgilaydi va hammasini CRM'ga yozadi."
     },
     "videoGenerator": {
       "title": "AI Video generator: matndan reklama va Reels — Do'ppi AI",
@@ -768,47 +768,47 @@
     },
     "pricing": {
       "title": "Narxlar — Do'ppi AI",
-      "description": "Do'ppi AI tariflari: Starter, Pro va Business rejalari, xizmatlar bo'yicha kredit sarfi va qo'shimcha kredit paketlari."
+      "description": "Do'ppi AI tariflari: Starter, Pro va Business rejalari, xizmatlar böyiça kredit sarfi va qöşimça kredit paketlari."
     },
     "about": {
       "title": "Biz haqimizda — Do'ppi AI",
-      "description": "Do'ppi AI jamoasi va vazifasi: butun dunyo bizneslari uchun AI marketing tizimini qurish."
+      "description": "Do'ppi AI jamoasi va vazifasi: butun dunyo bizneslari uçun AI marketing tizimini quriş."
     },
     "contact": {
       "title": "Aloqa — Do'ppi AI",
-      "description": "Do'ppi AI jamoasi bilan bog'laning va biznesingiz uchun demo oling."
+      "description": "Do'ppi AI jamoasi bilan boğlaning va biznesingiz uçun demo oling."
     },
     "product": {
       "title": "Mahsulot — Do'ppi AI",
-      "description": "Do'ppi AI modullari: AI ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, SIP call-markaz, AI video va kontent, CRM hamda chatbotlar."
+      "description": "Do'ppi AI modullari: AI ovozli agent, ijtimoiy tarmoq avtomatizatsiyasi, SIP call-markaz, AI video va kontent, CRM hamda çatbotlar."
     }
   },
   "product": {
-    "pageTitle": "Reklamadan sotuvgacha — bitta AI platformada",
-    "pageSubtitle": "Do'ppi AI qanday ishlashini bosqichma-bosqich ko'ring: modullar, imkoniyatlar, kimlar uchun mo'ljallangani va kutilayotgan natijalar."
+    "pageTitle": "Reklamadan sotuvgaça — bitta AI platformada",
+    "pageSubtitle": "Do'ppi AI qanday işlaşini bosqiçma-bosqiç köring: modullar, imkoniyatlar, kimlar uçun möljallangani va kutilayotgan natijalar."
   },
   "services": {
     "navLabel": "Xizmatlar",
-    "breadcrumbHome": "Bosh sahifa",
-    "ctaPrimary": "Bepul sinovni boshlash",
-    "ctaSecondary": "Demo so'rash",
-    "breadcrumbLabel": "Sahifa yo'li",
-    "othersTitle": "Boshqa xizmatlarimiz",
+    "breadcrumbHome": "Boş sahifa",
+    "ctaPrimary": "Bepul sinovni boşlaş",
+    "ctaSecondary": "Demo söraş",
+    "breadcrumbLabel": "Sahifa yöli",
+    "othersTitle": "Boşqa xizmatlarimiz",
     "learnMore": "Batafsil",
     "menu": {
-      "useCases": "Ovozli agent yechimlari",
+      "useCases": "Ovozli agent yeçimlari",
       "industries": "Sohalar",
       "items": {
         "marketRadar": "Market Radar",
         "personalBlogs": "Personal bloglar",
         "farmers": "Fermerlar",
         "ytBusiness": "YaTT",
-        "support": "Mijozlarni qo'llab-quvvatlash",
+        "support": "Mijozlarni qöllab-quvvatlaş",
         "sales": "Sotuv",
-        "booking": "Qabulga yozish",
-        "surveys": "So'rovnomalar",
+        "booking": "Qabulga yoziş",
+        "surveys": "Sörovnomalar",
         "healthcare": "Tibbiyot",
-        "realEstate": "Ko'chmas mulk",
+        "realEstate": "Köçmas mulk",
         "travel": "Turizm va mehmonxonalar",
         "automotive": "Avtomobil",
         "banking": "Bank",
@@ -817,81 +817,81 @@
     },
     "rag": {
       "name": "RAG Agent",
-      "navDesc": "Hujjatlaringiz asosida javob beradigan AI chatbot",
+      "navDesc": "Hujjatlaringiz asosida javob beradigan AI çatbot",
       "eyebrow": "Universal RAG Agent",
-      "title": "Mijozlarga hujjatlaringiz asosida javob beradigan AI chatbot",
-      "subtitle": "Narxlar, katalog, qo'llanma va qoidalaringizni yuklang — RAG Agent ularni o'rganib, Instagram, Telegram, WhatsApp va saytingizda mijozlarga kechayu kunduz aniq javob beradi.",
+      "title": "Mijozlarga hujjatlaringiz asosida javob beradigan AI çatbot",
+      "subtitle": "Narxlar, katalog, qöllanma va qoidalaringizni yuklang — RAG Agent ularni örganib, Instagram, Telegram, WhatsApp va saytingizda mijozlarga keçayu kunduz aniq javob beradi.",
       "features": {
         "eyebrow": "Imkoniyatlar",
-        "title": "Bilim bazangiz ishlaydigan yordamchiga aylanadi",
+        "title": "Bilim bazangiz işlaydigan yordamçiga aylanadi",
         "subtitle": "Agent faqat siz bergan ma'lumotlarga tayanadi, har bir suhbat esa nazoratingizda qoladi.",
         "items": [
           {
             "icon": "file-text",
             "title": "Hujjatlardan bilim bazasi",
-            "desc": "PDF, DOCX, XLSX va TXT fayllarni yuklang (har biri 50 MB gacha) — agent ularni indekslaydi va javoblarini shularga asoslaydi."
+            "desc": "PDF, DOCX, XLSX va TXT fayllarni yuklang (har biri 50 MB gaça) — agent ularni indekslaydi va javoblarini şularga asoslaydi."
           },
           {
             "icon": "messages-square",
-            "title": "Barcha kanallarda bitta agent",
-            "desc": "Instagram, Telegram, WhatsApp va sayt vidjetidagi yozishmalarga bir xil bilim bilan javob beradi."
+            "title": "Barça kanallarda bitta agent",
+            "desc": "Instagram, Telegram, WhatsApp va sayt vidjetidagi yozişmalarga bir xil bilim bilan javob beradi."
           },
           {
             "icon": "user-round-check",
-            "title": "Kerak bo'lsa — xodimga",
+            "title": "Kerak bölsa — xodimga",
             "desc": "Javob bera olmaydigan savolni suhbat tarixi bilan birga jamoangizdagi xodimga uzatadi."
           },
           {
             "icon": "settings-2",
-            "title": "Sizning uslubingizda gaplashadi",
-            "desc": "Ko'rsatmalar va tayyor shablonlar orqali agentning ohangi, vazifasi va chegaralarini belgilaysiz."
+            "title": "Sizning uslubingizda gaplaşadi",
+            "desc": "Körsatmalar va tayyor şablonlar orqali agentning ohangi, vazifasi va çegaralarini belgilaysiz."
           },
           {
             "icon": "bar-chart-3",
             "title": "Suhbatlar tahlili",
-            "desc": "Javob aniqligi, o'rtacha javob vaqti va xabarlar soni — hammasi bitta panelda."
+            "desc": "Javob aniqligi, örtaça javob vaqti va xabarlar soni — hammasi bitta panelda."
           },
           {
             "icon": "search",
-            "title": "Har bir suhbat qo'l ostida",
-            "desc": "Yozishmalarni kanal bo'yicha saralang, qidiring va CSV formatida yuklab oling."
+            "title": "Har bir suhbat qöl ostida",
+            "desc": "Yozişmalarni kanal böyiça saralang, qidiring va CSV formatida yuklab oling."
           }
         ]
       },
       "steps": {
-        "eyebrow": "Qanday ishlaydi",
-        "title": "To'rt qadamda ishga tushadi",
+        "eyebrow": "Qanday işlaydi",
+        "title": "Tört qadamda işga tuşadi",
         "items": [
           {
             "title": "Hujjatlarni yuklang",
-            "desc": "Narxlar, mahsulotlar, ko'p beriladigan savollar va qoidalar yozilgan fayllarni qo'shing."
+            "desc": "Narxlar, mahsulotlar, köp beriladigan savollar va qoidalar yozilgan fayllarni qöşing."
           },
           {
             "title": "Agentni sozlang",
-            "desc": "Ko'rsatma yozing yoki shablon tanlang: agent kim, nima haqida gapiradi va nimaga javob bermaydi."
+            "desc": "Körsatma yozing yoki şablon tanlang: agent kim, nima haqida gapiradi va nimaga javob bermaydi."
           },
           {
             "title": "Kanallarni ulang",
-            "desc": "Instagram, Telegram, WhatsApp yoki sayt vidjetini ulang — agent darhol javob bera boshlaydi."
+            "desc": "Instagram, Telegram, WhatsApp yoki sayt vidjetini ulang — agent darhol javob bera boşlaydi."
           },
           {
             "title": "Natijani kuzating",
-            "desc": "Suhbatlar, xodimga uzatilganlar va javob sifatini panelda kuzatib, bilim bazasini to'ldirib boring."
+            "desc": "Suhbatlar, xodimga uzatilganlar va javob sifatini panelda kuzatib, bilim bazasini töldirib boring."
           }
         ]
       },
       "cta": {
-        "title": "RAG Agentni biznesingizda sinab ko'ring",
-        "subtitle": "Boshlang‘ich kredit bilan hujjatlaringizni yuklang va agent javobini sinab ko‘ring."
+        "title": "RAG Agentni biznesingizda sinab köring",
+        "subtitle": "Boşlanğiç kredit bilan hujjatlaringizni yuklang va agent javobini sinab köring."
       },
       "landing": {
-        "title": "Ma'lumotlaringizni yuklang — agent mijozga o'zi javob bersin",
-        "ctaPrimary": "Bilim bazasini yuklash",
-        "ctaSecondary": "Telegramda sinab ko'rish",
+        "title": "Ma'lumotlaringizni yuklang — agent mijozga özi javob bersin",
+        "ctaPrimary": "Bilim bazasini yuklaş",
+        "ctaSecondary": "Telegramda sinab köriş",
         "flow": [
           {
             "icon": "cloud-upload",
-            "label": "Ma'lumot yuklash"
+            "label": "Ma'lumot yuklaş"
           },
           {
             "icon": "scan-text",
@@ -903,40 +903,40 @@
           },
           {
             "icon": "inbox",
-            "label": "CRM'da chat"
+            "label": "CRM'da çat"
           }
         ],
         "steps": {
-          "title": "Uch qadam: yuklang, javob bersin, CRM'da ko'ring",
+          "title": "Uç qadam: yuklang, javob bersin, CRM'da köring",
           "items": [
             {
               "tag": "Bilim bazasi",
               "title": "Biznes ma'lumotlaringizni bir marta yuklaysiz",
-              "desc": "Narx ro'yxati, xizmatlar katalogi, ichki qo'llanma yoki saytingiz — faylni tashlaysiz, tizim uni bo'laklarga ajratib vektor bazaga yozadi.",
+              "desc": "Narx röyxati, xizmatlar katalogi, içki qöllanma yoki saytingiz — faylni taşlaysiz, tizim uni bölaklarga ajratib vektor bazaga yozadi.",
               "bullets": [
                 "PDF, DOCX, XLSX, TXT va sayt havolasi",
-                "Ma'lumot o'zgarsa — avtomatik qayta indekslanadi",
-                "Agent faqat shu bazadan javob beradi"
+                "Ma'lumot özgarsa — avtomatik qayta indekslanadi",
+                "Agent faqat şu bazadan javob beradi"
               ]
             },
             {
               "tag": "Telegramda javob",
-              "title": "Mijoz Telegramda so'raydi — agent bazadan javob beradi",
-              "desc": "Agent o'zidan to'qib chiqarmaydi: javobni faqat siz yuklagan hujjatlardan oladi va qaysi fayldan olganini ko'rsatadi. Narx yangilansa, javob ham o'zi yangilanadi.",
+              "title": "Mijoz Telegramda söraydi — agent bazadan javob beradi",
+              "desc": "Agent özidan töqib çiqarmaydi: javobni faqat siz yuklagan hujjatlardan oladi va qaysi fayldan olganini körsatadi. Narx yangilansa, javob ham özi yangilanadi.",
               "bullets": [
-                "Har bir javobda manba ko'rsatiladi",
-                "24/7 ishlaydi, mijoz kutib turmaydi",
-                "Bazada javob bo'lmasa — operatorga uzatadi"
+                "Har bir javobda manba körsatiladi",
+                "24/7 işlaydi, mijoz kutib turmaydi",
+                "Bazada javob bölmasa — operatorga uzatadi"
               ]
             },
             {
               "tag": "CRM'da saqlanadi",
-              "title": "Agent olib borgan barcha suhbatlar CRM'ga tushadi",
-              "desc": "Kim bilan nima haqida gaplashilgani — to'liq yozishma, mavzu va holat bilan CRM'da turadi. Menejer istalgan paytda ochib ko'radi va kerak bo'lsa suhbatni o'zi davom ettiradi.",
+              "title": "Agent olib borgan barça suhbatlar CRM'ga tuşadi",
+              "desc": "Kim bilan nima haqida gaplaşilgani — töliq yozişma, mavzu va holat bilan CRM'da turadi. Menejer istalgan paytda oçib köradi va kerak bölsa suhbatni özi davom ettiradi.",
               "bullets": [
-                "To'liq yozishma tarixi vaqti bilan",
-                "Mavzu, holat va lead sifatida belgilash",
-                "Operator istalgan payt suhbatga qo'shiladi"
+                "Töliq yozişma tarixi vaqti bilan",
+                "Mavzu, holat va lead sifatida belgilaş",
+                "Operator istalgan payt suhbatga qöşiladi"
               ]
             }
           ]
@@ -947,49 +947,49 @@
             {
               "icon": "shield-check",
               "title": "Faqat sizning ma'lumotingiz",
-              "desc": "Agent bazadan tashqariga chiqmaydi va o'zidan to'qib javob bermaydi. Bilmasa — bilmaganini aytadi."
+              "desc": "Agent bazadan taşqariga çiqmaydi va özidan töqib javob bermaydi. Bilmasa — bilmaganini aytadi."
             },
             {
               "icon": "file-search",
               "title": "Har bir javobda manba",
-              "desc": "Javob ostida qaysi hujjat va qaysi bo'limdan olingani ko'rsatiladi — tekshirish oson."
+              "desc": "Javob ostida qaysi hujjat va qaysi bölimdan olingani körsatiladi — tekşiriş oson."
             },
             {
               "icon": "languages",
-              "title": "O'zbek va rus tili",
-              "desc": "Mijoz qaysi tilda yozsa, agent o'sha tilda javob qaytaradi."
+              "title": "Özbek va rus tili",
+              "desc": "Mijoz qaysi tilda yozsa, agent öşa tilda javob qaytaradi."
             },
             {
               "icon": "message-square",
               "title": "Telegram, Instagram, sayt",
-              "desc": "Bitta bilim bazasi — barcha kanalda bir xil va bir xil aniq javob."
+              "desc": "Bitta bilim bazasi — barça kanalda bir xil va bir xil aniq javob."
             },
             {
               "icon": "user-round-cog",
-              "title": "Operatorga uzatish",
-              "desc": "Javob topilmasa yoki mijoz so'rasa, suhbatni jonli operatorga o'tkazadi."
+              "title": "Operatorga uzatiş",
+              "desc": "Javob topilmasa yoki mijoz sörasa, suhbatni jonli operatorga ötkazadi."
             },
             {
               "icon": "chart-no-axes-column",
               "title": "Savollar analitikasi",
-              "desc": "Eng ko'p so'ralgan savollar va javobsiz qolgan so'rovlar hisoboti — bazani nima bilan to'ldirishni ko'rsatadi."
+              "desc": "Eng köp söralgan savollar va javobsiz qolgan sörovlar hisoboti — bazani nima bilan töldirişni körsatadi."
             }
           ]
         },
         "cta": {
-          "title": "Mijozlar savolining ko'pchiligiga javob allaqachon hujjatlaringizda bor",
-          "subtitle": "Ularni bir marta yuklang — qolganini RAG agent qiladi. Ulanish uchun dasturchi kerak emas, 1 kun kifoya.",
-          "primary": "Bilim bazasini yuklash",
-          "secondary": "Telegramda sinab ko'rish"
+          "title": "Mijozlar savolining köpçiligiga javob allaqaçon hujjatlaringizda bor",
+          "subtitle": "Ularni bir marta yuklang — qolganini RAG agent qiladi. Ulaniş uçun dasturçi kerak emas, 1 kun kifoya.",
+          "primary": "Bilim bazasini yuklaş",
+          "secondary": "Telegramda sinab köriş"
         },
         "demo": {
           "kb": {
             "window": "Doppi AI · Bilim bazasi",
             "title": "Bilim bazasi",
             "badge": "4 ta manba",
-            "add": "Manba qo'shish",
-            "dropTitle": "Fayllarni shu yerga tashlang",
-            "dropSub": "PDF · DOCX · XLSX · TXT · sayt havolasi — 50 MB gacha",
+            "add": "Manba qöşiş",
+            "dropTitle": "Fayllarni şu yerga taşlang",
+            "dropSub": "PDF · DOCX · XLSX · TXT · sayt havolasi — 50 MB gaça",
             "files": [
               {
                 "icon": "file-spreadsheet",
@@ -1003,7 +1003,7 @@
               },
               {
                 "icon": "file-type",
-                "name": "Ko'p so'raladigan savollar.docx",
+                "name": "Köp söraladigan savollar.docx",
                 "meta": "180 KB · 64 savol"
               },
               {
@@ -1014,24 +1014,24 @@
             ],
             "indexed": "Indekslandi",
             "indexing": "Indekslanmoqda · 64%",
-            "footer": "1 248 ta bo'lak vektor bazaga yozildi · so'nggi yangilanish 2 daqiqa oldin",
+            "footer": "1 248 ta bölak vektor bazaga yozildi · sönggi yangilaniş 2 daqiqa oldin",
             "sync": "Avtomatik",
             "alt": "Bilim bazasiga yuklangan fayllar va ularning indeksatsiya holati"
           },
           "chat": {
-            "bot": "Doppi Klinika · yordamchi",
+            "bot": "Doppi Klinika · yordamçi",
             "status": "bot · doim onlayn",
             "placeholder": "Xabar yozing...",
             "sourceLabel": "Manba",
             "turns": [
               {
                 "role": "client",
-                "text": "Implant qo'yish qancha turadi?",
+                "text": "Implant qöyiş qança turadi?",
                 "time": "14:02"
               },
               {
                 "role": "bot",
-                "text": "Osstem (Koreya) — 4 500 000 so'm\nStraumann (Shveytsariya) — 8 200 000 so'm\nNarxga konsultatsiya va 3D rentgen kiradi.",
+                "text": "Osstem (Koreya) — 4 500 000 söm\nStraumann (Şveytsariya) — 8 200 000 söm\nNarxga konsultatsiya va 3D rentgen kiradi.",
                 "time": "14:02",
                 "source": "Narx-navo 2026.xlsx",
                 "sourceIcon": "file-spreadsheet"
@@ -1049,7 +1049,7 @@
                 "sourceIcon": "file-text"
               }
             ],
-            "alt": "Telegramda RAG agent bilan suhbat, javoblar ostida manbalar ko'rsatilgan"
+            "alt": "Telegramda RAG agent bilan suhbat, javoblar ostida manbalar körsatilgan"
           },
           "crm": {
             "window": "CRM · Suhbatlar",
@@ -1057,18 +1057,18 @@
             "badge": "bugun 46 ta",
             "telegram": "Telegram",
             "export": "Eksport",
-            "search": "Suhbat qidirish",
+            "search": "Suhbat qidiriş",
             "agentBadge": "RAG agent javob berdi",
             "contactSub": "Telegram · {'@'}dilshod_r · bugun 14:02",
             "messages": [
               {
                 "role": "client",
-                "text": "Implant qo'yish qancha turadi?",
+                "text": "Implant qöyiş qança turadi?",
                 "time": "14:02"
               },
               {
                 "role": "agent",
-                "text": "Osstem (Koreya) — 4 500 000 so'm, Straumann — 8 200 000 so'm. Narxga konsultatsiya kiradi.",
+                "text": "Osstem (Koreya) — 4 500 000 söm, Straumann — 8 200 000 söm. Narxga konsultatsiya kiradi.",
                 "time": "14:02"
               },
               {
@@ -1099,12 +1099,12 @@
                 "tone": "accent"
               }
             ],
-            "alt": "CRM'dagi suhbatlar ro'yxati va agent olib borgan yozishma",
+            "alt": "CRM'dagi suhbatlar röyxati va agent olib borgan yozişma",
             "chats": [
               {
-                "name": "Dilshod Rahimov",
+                "name": "Dilşod Rahimov",
                 "time": "14:03",
-                "snippet": "Implant qo'yish qancha turadi?",
+                "snippet": "Implant qöyiş qança turadi?",
                 "unread": 2
               },
               {
@@ -1114,7 +1114,7 @@
                 "unread": 0
               },
               {
-                "name": "Jasur To'rayev",
+                "name": "Jasur Törayev",
                 "time": "12:58",
                 "snippet": "Filial manzilini yuborasizmi?",
                 "unread": 1
@@ -1122,30 +1122,30 @@
               {
                 "name": "Kamola Sattorova",
                 "time": "11:20",
-                "snippet": "Tozalash narxi qancha?",
+                "snippet": "Tozalaş narxi qança?",
                 "unread": 0
               }
             ],
-            "contact": "Dilshod Rahimov"
+            "contact": "Dilşod Rahimov"
           }
         }
       }
     },
     "voice": {
       "name": "Ovozli agent",
-      "navDesc": "Qo'ng'iroqlarga inson kabi javob beradigan AI",
+      "navDesc": "Qönğiroqlarga inson kabi javob beradigan AI",
       "eyebrow": "AI Ovozli Agent",
-      "title": "Qo'ng'iroqlarni inson kabi olib boradigan AI ovozli agent",
-      "subtitle": "Kiruvchi va chiquvchi qo'ng'iroqlarni tabiiy ovozda olib boradi: mijozni tinglaydi, ehtiyojini aniqlaydi, uchrashuv belgilaydi va hammasini CRM'ga yozadi — kechayu kunduz.",
+      "title": "Qönğiroqlarni inson kabi olib boradigan AI ovozli agent",
+      "subtitle": "Kiruvçi va çiquvçi qönğiroqlarni tabiiy ovozda olib boradi: mijozni tinglaydi, ehtiyojini aniqlaydi, uçraşuv belgilaydi va hammasini CRM'ga yozadi — keçayu kunduz.",
       "features": {
         "eyebrow": "Imkoniyatlar",
-        "title": "Sotuv bo'limingiz uchun charchamaydigan xodim",
-        "subtitle": "Har bir qo'ng'iroq yozib olinadi, tahlil qilinadi va natijasi CRM'da qoladi.",
+        "title": "Sotuv bölimingiz uçun çarçamaydigan xodim",
+        "subtitle": "Har bir qönğiroq yozib olinadi, tahlil qilinadi va natijasi CRM'da qoladi.",
         "items": [
           {
             "icon": "audio-lines",
             "title": "Tabiiy va ravon suhbat",
-            "desc": "Robotdek emas, inson kabi gaplashadi — mijozni tinglaydi va savollariga javob beradi."
+            "desc": "Robotdek emas, inson kabi gaplaşadi — mijozni tinglaydi va savollariga javob beradi."
           },
           {
             "icon": "target",
@@ -1154,56 +1154,56 @@
           },
           {
             "icon": "calendar-days",
-            "title": "Uchrashuv belgilaydi",
-            "desc": "Mijoz rozi bo'lsa, uchrashuv yoki qayta qo'ng'iroq vaqtini o'zi yozib qo'yadi."
+            "title": "Uçraşuv belgilaydi",
+            "desc": "Mijoz rozi bölsa, uçraşuv yoki qayta qönğiroq vaqtini özi yozib qöyadi."
           },
           {
             "icon": "headset",
             "title": "SIP telefoniya",
-            "desc": "Kiruvchi va chiquvchi qo'ng'iroqlar sizning raqamlaringiz orqali ishlaydi, har biri yozib olinadi."
+            "desc": "Kiruvçi va çiquvçi qönğiroqlar sizning raqamlaringiz orqali işlaydi, har biri yozib olinadi."
           },
           {
             "icon": "database",
             "title": "CRM bilan birga",
-            "desc": "Suhbat mazmuni, yig'ilgan ma'lumot va keyingi qadam avtomatik ravishda CRM'ga tushadi."
+            "desc": "Suhbat mazmuni, yiğilgan ma'lumot va keyingi qadam avtomatik ravişda CRM'ga tuşadi."
           },
           {
             "icon": "bar-chart-3",
             "title": "Hisobot va tahlil",
-            "desc": "Qo'ng'iroqlar natijasini tahlil qilib, qaysi ssenariy yaxshiroq ishlayotganini ko'rsatadi."
+            "desc": "Qönğiroqlar natijasini tahlil qilib, qaysi ssenariy yaxşiroq işlayotganini körsatadi."
           }
         ]
       },
       "steps": {
-        "eyebrow": "Qanday ishlaydi",
-        "title": "To'rt qadamda ishga tushadi",
+        "eyebrow": "Qanday işlaydi",
+        "title": "Tört qadamda işga tuşadi",
         "items": [
           {
             "title": "Ssenariyni belgilang",
-            "desc": "Agent nima haqida gapirishini, qaysi savollarni berishini va maqsadini yozasiz."
+            "desc": "Agent nima haqida gapirişini, qaysi savollarni berişini va maqsadini yozasiz."
           },
           {
             "title": "Raqamni ulang",
             "desc": "Kompaniyangiz telefon raqamini SIP orqali ulaysiz."
           },
           {
-            "title": "Agent qo'ng'iroq qiladi va qabul qiladi",
-            "desc": "Kiruvchi qo'ng'iroqlarga javob beradi va ro'yxatdagi mijozlarga o'zi qo'ng'iroq qiladi."
+            "title": "Agent qönğiroq qiladi va qabul qiladi",
+            "desc": "Kiruvçi qönğiroqlarga javob beradi va röyxatdagi mijozlarga özi qönğiroq qiladi."
           },
           {
             "title": "Natija CRM'da",
-            "desc": "Har bir qo'ng'iroqning yozuvi, xulosasi va keyingi qadami CRM'da saqlanadi."
+            "desc": "Har bir qönğiroqning yozuvi, xulosasi va keyingi qadami CRM'da saqlanadi."
           }
         ]
       },
       "cta": {
-        "title": "Ovozli agentni sinab ko'ring",
-        "subtitle": "Boshlang‘ich kredit bilan ovozli agent imkoniyatlarini sinab ko‘ring."
+        "title": "Ovozli agentni sinab köring",
+        "subtitle": "Boşlanğiç kredit bilan ovozli agent imkoniyatlarini sinab köring."
       },
       "landing": {
-        "title": "Instagramda lead qoldirdi — 60 soniyada AI qo'ng'iroq qildi",
-        "ctaPrimary": "Agentni ishga tushirish",
-        "ctaSecondary": "Qo'ng'iroq yozuvini eshitish",
+        "title": "Instagramda lead qoldirdi — 60 soniyada AI qönğiroq qildi",
+        "ctaPrimary": "Agentni işga tuşiriş",
+        "ctaSecondary": "Qönğiroq yozuvini eşitiş",
         "flow": [
           {
             "icon": "instagram",
@@ -1215,7 +1215,7 @@
           },
           {
             "icon": "phone-call",
-            "label": "SIP qo'ng'iroq"
+            "label": "SIP qönğiroq"
           },
           {
             "icon": "calendar-check",
@@ -1223,46 +1223,46 @@
           }
         ],
         "steps": {
-          "title": "Lead'dan yozuvgacha — to'rt qadam, odam aralashuvisiz",
+          "title": "Lead'dan yozuvgaça — tört qadam, odam aralaşuvisiz",
           "items": [
             {
-              "tag": "Lead yig'ish",
-              "title": "Instagram postidagi tugmadan ro'yxatdan o'tadi",
-              "desc": "Mijoz reklama posti ostidagi «Ro'yxatdan o'tish» tugmasini bosadi va faqat ism-familiya bilan telefon raqamini qoldiradi — boshqa hech narsa so'ralmaydi.",
+              "tag": "Lead yiğiş",
+              "title": "Instagram postidagi tugmadan röyxatdan ötadi",
+              "desc": "Mijoz reklama posti ostidagi «Röyxatdan ötiş» tugmasini bosadi va faqat ism-familiya bilan telefon raqamini qoldiradi — boşqa heç narsa söralmaydi.",
               "bullets": [
                 "Instagram va Facebook lead formalari",
                 "Telegram bot va sayt formalari",
-                "Ma'lumot bir zumda tizimga tushadi"
+                "Ma'lumot bir zumda tizimga tuşadi"
               ]
             },
             {
-              "tag": "CRM'ga tushadi",
-              "title": "Forma to'ldirilishi bilan lead CRM'da paydo bo'ladi",
-              "desc": "Ma'lumotlar qo'lda ko'chirilmaydi. Ism, telefon, manba va vaqt avtomatik yoziladi va lead darhol navbatga tushadi — operator kutib o'tirmaydi.",
+              "tag": "CRM'ga tuşadi",
+              "title": "Forma töldirilişi bilan lead CRM'da paydo böladi",
+              "desc": "Ma'lumotlar qölda köçirilmaydi. Ism, telefon, manba va vaqt avtomatik yoziladi va lead darhol navbatga tuşadi — operator kutib ötirmaydi.",
               "bullets": [
                 "Real vaqtda sinxronizatsiya",
                 "Manba va UTM belgilari saqlanadi",
-                "Dublikat raqamlar birlashtiriladi"
+                "Dublikat raqamlar birlaştiriladi"
               ]
             },
             {
-              "tag": "Ovozli qo'ng'iroq",
-              "title": "SIP orqali agent mijozga o'zi telefon qiladi",
-              "desc": "Lead tushgan zahoti ovozli agent haqiqiy raqamdan qo'ng'iroq qiladi. O'zbek tilida tabiiy gaplashadi, savollarga javob beradi va qabul vaqtini kelishib oladi.",
+              "tag": "Ovozli qönğiroq",
+              "title": "SIP orqali agent mijozga özi telefon qiladi",
+              "desc": "Lead tuşgan zahoti ovozli agent haqiqiy raqamdan qönğiroq qiladi. Özbek tilida tabiiy gaplaşadi, savollarga javob beradi va qabul vaqtini kelişib oladi.",
               "bullets": [
-                "SIP trunk orqali haqiqiy shahar raqamidan",
-                "O'zbek va rus tillarida tabiiy nutq",
+                "SIP trunk orqali haqiqiy şahar raqamidan",
+                "Özbek va rus tillarida tabiiy nutq",
                 "Javob bermasa — belgilangan vaqtda qayta uriniladi"
               ]
             },
             {
               "tag": "Natija CRM'da",
               "title": "Suhbat natijasi CRM'ga qaytib yoziladi",
-              "desc": "Agent nima kelishilganini o'zi yozib qo'yadi: qabul sanasi va vaqti, shifokor, xizmat hamda qisqa xulosa. Menejer CRM'ni ochadi va ko'radi — «Shifokor qabuliga soat 10:00 ga yozildi».",
+              "desc": "Agent nima kelişilganini özi yozib qöyadi: qabul sanasi va vaqti, şifokor, xizmat hamda qisqa xulosa. Menejer CRM'ni oçadi va köradi — «Şifokor qabuliga soat 10:00 ga yozildi».",
               "bullets": [
                 "Qabul sanasi va vaqti avtomatik saqlanadi",
-                "Qo'ng'iroq yozuvi va to'liq transkript",
-                "Lead holati o'z-o'zidan yangilanadi"
+                "Qönğiroq yozuvi va töliq transkript",
+                "Lead holati öz-özidan yangilanadi"
               ]
             }
           ]
@@ -1273,62 +1273,62 @@
             {
               "icon": "phone-call",
               "title": "SIP telefoniya",
-              "desc": "Haqiqiy shahar raqamidan chiquvchi va kiruvchi qo'ng'iroqlar. Mavjud ATS'ingizga ulanadi."
+              "desc": "Haqiqiy şahar raqamidan çiquvçi va kiruvçi qönğiroqlar. Mavjud ATS'ingizga ulanadi."
             },
             {
               "icon": "languages",
-              "title": "O'zbek va rus tili",
-              "desc": "Tabiiy nutq, jonli intonatsiya va mijozning gapini bo'lmasdan tinglash."
+              "title": "Özbek va rus tili",
+              "desc": "Tabiiy nutq, jonli intonatsiya va mijozning gapini bölmasdan tinglaş."
             },
             {
               "icon": "database-zap",
-              "title": "CRM'ga to'g'ridan-to'g'ri",
+              "title": "CRM'ga töğridan-töğri",
               "desc": "Lead, qabul vaqti, xulosa va holat — hammasi API orqali real vaqtda yoziladi."
             },
             {
               "icon": "calendar-clock",
-              "title": "Qabulga yozish",
-              "desc": "Bo'sh vaqtlarni tekshiradi, mijoz bilan kelishadi va bandlovni tasdiqlaydi."
+              "title": "Qabulga yoziş",
+              "desc": "Böş vaqtlarni tekşiradi, mijoz bilan kelişadi va bandlovni tasdiqlaydi."
             },
             {
               "icon": "audio-lines",
               "title": "Yozuv va transkript",
-              "desc": "Har bir qo'ng'iroq saqlanadi: audio, matn va kayfiyat tahlili bilan."
+              "desc": "Har bir qönğiroq saqlanadi: audio, matn va kayfiyat tahlili bilan."
             },
             {
               "icon": "gauge",
-              "title": "100+ parallel qo'ng'iroq",
-              "desc": "Navbat yo'q — yuzlab leadga bir vaqtda, 24/7 rejimida qo'ng'iroq qiladi."
+              "title": "100+ parallel qönğiroq",
+              "desc": "Navbat yöq — yuzlab leadga bir vaqtda, 24/7 rejimida qönğiroq qiladi."
             }
           ]
         },
         "cta": {
-          "title": "Bir kunda o'tkazib yuborilgan leadlaringizni sanab chiqing",
-          "subtitle": "Ovozli agent ularning har biriga 60 soniya ichida qo'ng'iroq qiladi va natijani CRM'ga yozadi. Ulanish — 1 kun.",
-          "primary": "Bepul demo qo'ng'iroq",
-          "secondary": "Menejer bilan bog'lanish"
+          "title": "Bir kunda ötkazib yuborilgan leadlaringizni sanab çiqing",
+          "subtitle": "Ovozli agent ularning har biriga 60 soniya içida qönğiroq qiladi va natijani CRM'ga yozadi. Ulaniş — 1 kun.",
+          "primary": "Bepul demo qönğiroq",
+          "secondary": "Menejer bilan boğlaniş"
         },
         "demo": {
           "ig": {
             "caption": "Homiylangan",
-            "cta": "Ro'yxatdan o'tish",
-            "likes": "1 248 ta yoqtirish",
-            "post": "Implantatsiya bo'yicha bepul konsultatsiya — joylar cheklangan",
+            "cta": "Röyxatdan ötiş",
+            "likes": "1 248 ta yoqtiriş",
+            "post": "Implantatsiya böyiça bepul konsultatsiya — joylar çeklangan",
             "imageAlt": "Stomatologiya klinikasi kabineti",
-            "sheetTitle": "Ro'yxatdan o'tish",
-            "sheetSub": "Bepul konsultatsiya uchun ma'lumotlaringizni qoldiring",
+            "sheetTitle": "Röyxatdan ötiş",
+            "sheetSub": "Bepul konsultatsiya uçun ma'lumotlaringizni qoldiring",
             "nameLabel": "Ism familiya",
             "phoneLabel": "Telefon raqam",
-            "submit": "Yuborish",
-            "alt": "Instagram lead formasi ochilgan telefon ekrani",
-            "nameValue": "Dilshod Rahimov",
+            "submit": "Yuboriş",
+            "alt": "Instagram lead formasi oçilgan telefon ekrani",
+            "nameValue": "Dilşod Rahimov",
             "phoneValue": "+998 90 123 45 67"
           },
           "leads": {
             "window": "CRM · Leadlar",
             "title": "Yangi leadlar",
             "badge": "+1 yangi",
-            "search": "Qidirish",
+            "search": "Qidiriş",
             "filter": "Filtr",
             "cols": {
               "name": "Mijoz",
@@ -1339,10 +1339,10 @@
             },
             "footer": "Jami 128 ta lead · bugun 14 ta",
             "webhook": "Webhook ulangan",
-            "alt": "CRM'dagi yangi leadlar ro'yxati",
+            "alt": "CRM'dagi yangi leadlar röyxati",
             "rows": [
               {
-                "name": "Dilshod Rahimov",
+                "name": "Dilşod Rahimov",
                 "phone": "+998 90 123 45 67",
                 "source": "Instagram",
                 "time": "hozir",
@@ -1354,11 +1354,11 @@
                 "phone": "+998 93 244 11 08",
                 "source": "Instagram",
                 "time": "2 daq oldin",
-                "status": "Qo'ng'iroqda",
+                "status": "Qönğiroqda",
                 "tone": "warning"
               },
               {
-                "name": "Jasur To'rayev",
+                "name": "Jasur Törayev",
                 "phone": "+998 97 810 55 32",
                 "source": "Telegram",
                 "time": "14 daq oldin",
@@ -1380,17 +1380,17 @@
             "duration": "00:42",
             "rec": "REC",
             "caller": "Doppi klinikasi · ovozli agent",
-            "line": "«Ertaga soat 10:00 ga yozib qo'yaman»",
+            "line": "«Ertaga soat 10:00 ga yozib qöyaman»",
             "controls": [
               {
                 "icon": "voicemail",
                 "key": "stopRecording",
-                "label": "Yozuvni to'xtatish"
+                "label": "Yozuvni töxtatiş"
               },
               {
                 "icon": "video",
                 "key": "videoCall",
-                "label": "Video qo'ng'iroq"
+                "label": "Video qönğiroq"
               },
               {
                 "icon": "bluetooth",
@@ -1413,18 +1413,18 @@
                 "label": "Klaviatura"
               }
             ],
-            "alt": "Ovozli agent qo'ng'iroq qilayotgan telefon ekrani, suhbat yozib olinmoqda"
+            "alt": "Ovozli agent qönğiroq qilayotgan telefon ekrani, suhbat yozib olinmoqda"
           },
           "result": {
             "window": "CRM · Lead kartasi",
             "meta": "+998 90 123 45 67 · Instagram lead · bugun 14:38",
             "status": "Qabulga yozildi",
-            "apptTitle": "Shifokor qabuliga yozildi",
+            "apptTitle": "Şifokor qabuliga yozildi",
             "apptSub": "Doppi AI ovozli agent tomonidan · avtomatik",
-            "date": "23-sentabr, seshanba",
+            "date": "23-sentabr, seşanba",
             "fields": [
               {
-                "label": "Shifokor",
+                "label": "Şifokor",
                 "value": "Dr. K. Kamolov"
               },
               {
@@ -1433,15 +1433,15 @@
               },
               {
                 "label": "Filial",
-                "value": "Chilonzor, 12-uy"
+                "value": "Çilonzor, 12-uy"
               }
             ],
             "aiLabel": "AI xulosa",
-            "aiText": "Mijoz implantatsiya narxi bilan qiziqdi va ertalabki vaqtni so'radi. Qabul 23-sentabr 10:00 ga belgilandi, mijozga eslatma SMS yuboriladi. Qo'shimcha savol qolmadi.",
+            "aiText": "Mijoz implantatsiya narxi bilan qiziqdi va ertalabki vaqtni söradi. Qabul 23-sentabr 10:00 ga belgilandi, mijozga eslatma SMS yuboriladi. Qöşimça savol qolmadi.",
             "transcript": "Transkript",
-            "play": "Yozuvni eshitish",
+            "play": "Yozuvni eşitiş",
             "alt": "CRM'dagi lead kartasi va qabul yozuvi",
-            "name": "Dilshod Rahimov"
+            "name": "Dilşod Rahimov"
           }
         }
       }
@@ -1450,37 +1450,37 @@
       "name": "Video generator",
       "navDesc": "Matndan reklama va Reels videolar",
       "eyebrow": "AI Video generator",
-      "title": "Matndan tayyor videogacha — AI video generator",
-      "subtitle": "G'oyangizni yozing — Do'ppi AI reklama, Reels va ijtimoiy tarmoqlar uchun video, rasm, matn va ovozni sun'iy intellekt yordamida yaratadi.",
+      "title": "Matndan tayyor videogaça — AI video generator",
+      "subtitle": "Ğoyangizni yozing — Do'ppi AI reklama, Reels va ijtimoiy tarmoqlar uçun video, rasm, matn va ovozni sun'iy intellekt yordamida yaratadi.",
       "features": {
         "eyebrow": "Imkoniyatlar",
         "title": "Kontentni tezroq tayyorlang",
-        "subtitle": "Dizayner va montajchini kutmasdan tayyor kontent.",
+        "subtitle": "Dizayner va montajçini kutmasdan tayyor kontent.",
         "items": [
           {
             "icon": "wand-sparkles",
             "title": "Promptdan video",
-            "desc": "Nima kerakligini oddiy so'zlar bilan yozasiz — AI videoni yaratib beradi."
+            "desc": "Nima kerakligini oddiy sözlar bilan yozasiz — AI videoni yaratib beradi."
           },
           {
             "icon": "clapperboard",
             "title": "Reels va reklama roliklari",
-            "desc": "Instagram, Telegram va boshqa ijtimoiy tarmoqlar uchun qisqa videolar."
+            "desc": "Instagram, Telegram va boşqa ijtimoiy tarmoqlar uçun qisqa videolar."
           },
           {
             "icon": "mic",
             "title": "AI ovoz",
-            "desc": "Videoga o'zbek yoki rus tilida ovoz qo'shadi."
+            "desc": "Videoga özbek yoki rus tilida ovoz qöşadi."
           },
           {
             "icon": "sparkles",
             "title": "Rasm va bannerlar",
-            "desc": "Postlar, bannerlar va reklama uchun rasmlar yaratadi."
+            "desc": "Postlar, bannerlar va reklama uçun rasmlar yaratadi."
           },
           {
             "icon": "file-text",
             "title": "Reklama matnlari",
-            "desc": "Video va postlar uchun sarlavha, tavsif va reklama matnlarini yozadi."
+            "desc": "Video va postlar uçun sarlavha, tavsif va reklama matnlarini yozadi."
           },
           {
             "icon": "share-2",
@@ -1490,24 +1490,24 @@
         ]
       },
       "steps": {
-        "eyebrow": "Qanday ishlaydi",
-        "title": "To'rt qadamda tayyor kontent",
+        "eyebrow": "Qanday işlaydi",
+        "title": "Tört qadamda tayyor kontent",
         "items": [
           {
-            "title": "G'oyani yozing",
-            "desc": "Mahsulot, auditoriya va video nima haqida bo'lishini yozing."
+            "title": "Ğoyani yozing",
+            "desc": "Mahsulot, auditoriya va video nima haqida bölişini yozing."
           },
           {
             "title": "Formatni tanlang",
-            "desc": "Reels, reklama roligi yoki post — qayerda ishlatilishini belgilang."
+            "desc": "Reels, reklama roligi yoki post — qayerda işlatilişini belgilang."
           },
           {
             "title": "AI yaratadi",
             "desc": "Sun'iy intellekt video, matn va ovozni tayyorlaydi."
           },
           {
-            "title": "Yuklab oling va ishlating",
-            "desc": "Tayyor kontentni yuklab olib, reklama va sahifalaringizda ishlating."
+            "title": "Yuklab oling va işlating",
+            "desc": "Tayyor kontentni yuklab olib, reklama va sahifalaringizda işlating."
           }
         ]
       },
@@ -1515,31 +1515,31 @@
         "title": "Video generator haqida savollar",
         "items": [
           {
-            "q": "Video yaratish uchun montaj tajribasi kerakmi?",
-            "a": "Yo'q. Nima kerakligini oddiy so'zlar bilan yozasiz, qolganini AI bajaradi."
+            "q": "Video yaratiş uçun montaj tajribasi kerakmi?",
+            "a": "Yöq. Nima kerakligini oddiy sözlar bilan yozasiz, qolganini AI bajaradi."
           },
           {
-            "q": "Qanday kontent yaratish mumkin?",
+            "q": "Qanday kontent yaratiş mumkin?",
             "a": "Reels va qisqa videolar, reklama roliklari, rasmlar, reklama matnlari va ovoz."
           },
           {
-            "q": "Videoga o'zbek tilida ovoz qo'shsa bo'ladimi?",
-            "a": "Ha, kontent o'zbek va rus tillarida yaratiladi."
+            "q": "Videoga özbek tilida ovoz qöşsa böladimi?",
+            "a": "Ha, kontent özbek va rus tillarida yaratiladi."
           },
           {
-            "q": "Qancha turadi?",
-            "a": "Narxlar sahifasida amaldagi kredit paketlari va xizmatlar bo‘yicha sarf stavkalarini ko‘ring."
+            "q": "Qança turadi?",
+            "a": "Narxlar sahifasida amaldagi kredit paketlari va xizmatlar böyiça sarf stavkalarini köring."
           }
         ]
       },
       "cta": {
-        "title": "Birinchi videongizni yarating",
-        "subtitle": "Boshlang‘ich kredit bilan ishni boshlang."
+        "title": "Birinçi videongizni yarating",
+        "subtitle": "Boşlanğiç kredit bilan işni boşlang."
       },
       "landing": {
-        "title": "Haftalik rejani tasdiqlang — videolar o'zi chiqib, o'zi joylanadi",
-        "ctaPrimary": "Haftalik reja tuzish",
-        "ctaSecondary": "Namunaviy videolarni ko'rish",
+        "title": "Haftalik rejani tasdiqlang — videolar özi çiqib, özi joylanadi",
+        "ctaPrimary": "Haftalik reja tuziş",
+        "ctaSecondary": "Namunaviy videolarni köriş",
         "flow": [
           {
             "icon": "calendar-days",
@@ -1559,46 +1559,46 @@
           }
         ],
         "steps": {
-          "title": "Rejadan tortib hisobotgacha — to'rt qadam, bitta agent",
+          "title": "Rejadan tortib hisobotgaça — tört qadam, bitta agent",
           "items": [
             {
               "tag": "Haftalik reja",
-              "title": "Kontent rejangizni dashboardda ko'rib turasiz",
-              "desc": "Qaysi kuni qanday video chiqishi — mavzu, ssenariy, format va joylanish vaqti bilan bitta jadvalda. Agent rejani o'zi to'ldiradi, siz faqat tasdiqlaysiz.",
+              "title": "Kontent rejangizni dashboardda körib turasiz",
+              "desc": "Qaysi kuni qanday video çiqişi — mavzu, ssenariy, format va joylaniş vaqti bilan bitta jadvalda. Agent rejani özi töldiradi, siz faqat tasdiqlaysiz.",
               "bullets": [
                 "Mavzu va ssenariyni AI taklif qiladi",
-                "Kun, vaqt va format qo'lda sozlanadi",
-                "Tasdiqlangan reja avtomatik ishga tushadi"
+                "Kun, vaqt va format qölda sozlanadi",
+                "Tasdiqlangan reja avtomatik işga tuşadi"
               ]
             },
             {
               "tag": "Avto-generatsiya",
-              "title": "Bir haftalik videolar o'zi tayyorlanib, o'zi joylanadi",
-              "desc": "Agent har bir reja bandini navbatga oladi: ssenariy yozadi, ovoz beradi, montaj qiladi, titr qo'yadi va belgilangan kuni Instagramga post qiladi. Har safar tasdiq so'ramaydi.",
+              "title": "Bir haftalik videolar özi tayyorlanib, özi joylanadi",
+              "desc": "Agent har bir reja bandini navbatga oladi: ssenariy yozadi, ovoz beradi, montaj qiladi, titr qöyadi va belgilangan kuni Instagramga post qiladi. Har safar tasdiq söramaydi.",
               "bullets": [
                 "Ssenariy → ovoz → montaj → titr → post",
-                "Belgilangan kun va soatda avtomatik chiqadi",
-                "Xatolik bo'lsa qayta urinadi va xabar beradi"
+                "Belgilangan kun va soatda avtomatik çiqadi",
+                "Xatolik bölsa qayta urinadi va xabar beradi"
               ]
             },
             {
               "tag": "Natija va statistika",
-              "title": "Chiqqan videoning natijasi bir joyda ko'rinadi",
-              "desc": "Har bir post bo'yicha ko'rishlar, layklar, izohlar va ulashishlar avtomatik yig'iladi. Qaysi mavzu ishlagani ko'rinadi va agent keyingi haftalik rejani shunga moslab tuzadi.",
+              "title": "Çiqqan videoning natijasi bir joyda körinadi",
+              "desc": "Har bir post böyiça körişlar, layklar, izohlar va ulaşişlar avtomatik yiğiladi. Qaysi mavzu işlagani körinadi va agent keyingi haftalik rejani şunga moslab tuzadi.",
               "bullets": [
-                "Ko'rishlar, layklar, izoh va ulashishlar",
-                "Video Instagramda qanday turgani ko'rinadi",
-                "Eng yaxshi mavzular keyingi rejaga tushadi"
+                "Körişlar, layklar, izoh va ulaşişlar",
+                "Video Instagramda qanday turgani körinadi",
+                "Eng yaxşi mavzular keyingi rejaga tuşadi"
               ]
             },
             {
-              "tag": "Siz faqat ko'rasiz",
-              "title": "Telefoningizni ochasiz — natija allaqachon joyida",
-              "desc": "Video chiqdi, odamlar ko'rdi, layk bosdi va izoh yozdi. Siz Instagramni ochib shunchaki o'sishni kuzatasiz, haftalik hisobot esa o'zi kelib turadi.",
+              "tag": "Siz faqat körasiz",
+              "title": "Telefoningizni oçasiz — natija allaqaçon joyida",
+              "desc": "Video çiqdi, odamlar kördi, layk bosdi va izoh yozdi. Siz Instagramni oçib şunçaki ösişni kuzatasiz, haftalik hisobot esa özi kelib turadi.",
               "bullets": [
                 "Har hafta tayyor hisobot",
                 "Post vaqti va natijasi bir joyda",
-                "Kontent hech qachon uzilib qolmaydi"
+                "Kontent heç qaçon uzilib qolmaydi"
               ]
             }
           ]
@@ -1613,28 +1613,28 @@
             },
             {
               "icon": "mic-vocal",
-              "title": "O'zbekcha ovoz",
+              "title": "Özbekça ovoz",
               "desc": "Tabiiy ovozli diktor: erkak yoki ayol, tezlik va ohang sozlanadi."
             },
             {
               "icon": "captions",
               "title": "Avto-titrlar",
-              "desc": "Har bir videoga o'qish oson titr qo'yiladi — ovozsiz ko'rilsa ham tushunarli."
+              "desc": "Har bir videoga öqiş oson titr qöyiladi — ovozsiz körilsa ham tuşunarli."
             },
             {
               "icon": "calendar-clock",
-              "title": "Rejalashtirilgan post",
-              "desc": "Kun va soatni belgilaysiz — agent o'zi joylaydi, siz kutib o'tirmaysiz."
+              "title": "Rejalaştirilgan post",
+              "desc": "Kun va soatni belgilaysiz — agent özi joylaydi, siz kutib ötirmaysiz."
             },
             {
               "icon": "images",
               "title": "Brend uslubi saqlanadi",
-              "desc": "Logotip, ranglar va shrift barcha videolarda bir xil bo'ladi."
+              "desc": "Logotip, ranglar va şrift barça videolarda bir xil böladi."
             },
             {
               "icon": "chart-line",
-              "title": "Natijadan o'rganadi",
-              "desc": "Yaxshi ishlagan mavzular keyingi haftalik rejada ko'proq takrorlanadi."
+              "title": "Natijadan örganadi",
+              "desc": "Yaxşi işlagan mavzular keyingi haftalik rejada köproq takrorlanadi."
             }
           ],
           "platformsLabel": "Joylanadi:",
@@ -1658,18 +1658,18 @@
           ]
         },
         "cta": {
-          "title": "Har hafta 7 ta video — sizning ishtirokingizsiz",
-          "subtitle": "Bir marta reja tuzing — montajchi, diktor va SMM menejerning ishini agent o'z zimmasiga oladi.",
-          "primary": "Haftalik reja tuzish",
-          "secondary": "Namunaviy videolarni ko'rish"
+          "title": "Har hafta 7 ta video — sizning iştirokingizsiz",
+          "subtitle": "Bir marta reja tuzing — montajçi, diktor va SMM menejerning işini agent öz zimmasiga oladi.",
+          "primary": "Haftalik reja tuziş",
+          "secondary": "Namunaviy videolarni köriş"
         },
         "demo": {
-          "days": ["Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya"],
+          "days": ["Du", "Se", "Ç", "Pa", "Ju", "Ş", "Ya"],
           "plan": {
             "window": "Doppi AI · Kontent rejasi",
             "title": "Haftalik reja",
             "week": "22–28 sentabr",
-            "approve": "Rejani tasdiqlash",
+            "approve": "Rejani tasdiqlaş",
             "summary": [
               {
                 "icon": "clapperboard",
@@ -1696,7 +1696,7 @@
             },
             "rows": [
               {
-                "day": "Dushanba",
+                "day": "Duşanba",
                 "date": "22 sen",
                 "topic": "Implantatsiya: 3 ta asosiy savol",
                 "format": "Reels · 35s",
@@ -1705,27 +1705,27 @@
                 "tone": "success"
               },
               {
-                "day": "Seshanba",
+                "day": "Seşanba",
                 "date": "23 sen",
-                "topic": "Bemor sharhi: implantdan keyin 1 yil",
+                "topic": "Bemor şarhi: implantdan keyin 1 yil",
                 "format": "Reels · 42s",
                 "time": "19:00",
                 "status": "Tasdiqlandi",
                 "tone": "success"
               },
               {
-                "day": "Chorshanba",
+                "day": "Çorşanba",
                 "date": "24 sen",
-                "topic": "Tish oqartirish — narx va muddat",
+                "topic": "Tiş oqartiriş — narx va muddat",
                 "format": "Reels · 30s",
                 "time": "19:00",
                 "status": "Tasdiqlandi",
                 "tone": "success"
               },
               {
-                "day": "Payshanba",
+                "day": "Payşanba",
                 "date": "25 sen",
-                "topic": "Klinika ichida: bir ish kuni",
+                "topic": "Klinika içida: bir iş kuni",
                 "format": "Reels · 38s",
                 "time": "19:00",
                 "status": "Ssenariy tayyor",
@@ -1741,7 +1741,7 @@
                 "tone": "accent"
               },
               {
-                "day": "Shanba",
+                "day": "Şanba",
                 "date": "27 sen",
                 "topic": "Aksiya: bepul konsultatsiya",
                 "format": "Reels · 25s",
@@ -1750,23 +1750,23 @@
                 "tone": "warning"
               },
               {
-                "day": "Yakshanba",
+                "day": "Yakşanba",
                 "date": "28 sen",
-                "topic": "Savol-javob: kafolat qanday ishlaydi",
+                "topic": "Savol-javob: kafolat qanday işlaydi",
                 "format": "Reels · 40s",
                 "time": "12:00",
                 "status": "Rejada",
                 "tone": "warning"
               }
             ],
-            "footer": "Reja tasdiqlangach agent ssenariy, ovoz va montajni o'zi bajaradi",
+            "footer": "Reja tasdiqlangaç agent ssenariy, ovoz va montajni özi bajaradi",
             "auto": "Avtopilot yoqilgan",
             "alt": "Haftalik kontent rejasi jadvali va uning holati"
           },
           "queue": {
             "window": "Doppi AI · Generatsiya navbati",
             "title": "Generatsiya navbati",
-            "live": "ishlamoqda",
+            "live": "işlamoqda",
             "week": "22–28 sentabr",
             "progressLabel": "Haftalik reja bajarilmoqda",
             "progressValue": "7 tadan 4 tasi tayyor",
@@ -1784,7 +1784,7 @@
                 "tone": "success"
               },
               {
-                "day": "Ch",
+                "day": "Ç",
                 "duration": "0:30",
                 "status": "Tayyor",
                 "tone": "success"
@@ -1802,7 +1802,7 @@
                 "tone": "muted"
               },
               {
-                "day": "Sh",
+                "day": "Ş",
                 "duration": "0:25",
                 "status": "Navbatda",
                 "tone": "muted"
@@ -1815,7 +1815,7 @@
               }
             ],
             "job": {
-              "title": "Payshanba · «Klinika ichida: bir ish kuni»",
+              "title": "Payşanba · «Klinika içida: bir iş kuni»",
               "eta": "~2 daqiqa qoldi",
               "stages": [
                 {
@@ -1842,7 +1842,7 @@
             },
             "footer": "Keyingi post: bugun 19:00 · avtomatik",
             "account": "{'@'}doppi.clinic ulangan",
-            "alt": "Videolar generatsiya navbati va joriy bosqichlar"
+            "alt": "Videolar generatsiya navbati va joriy bosqiçlar"
           },
           "post": {
             "stories": [
@@ -1853,21 +1853,21 @@
               "oyxon"
             ],
             "author": "doppi.clinic",
-            "meta": "Toshkent · bugun 19:00",
+            "meta": "Toşkent · bugun 19:00",
             "duration": "0:35",
             "aiBadge": "Doppi AI tomonidan avtomatik",
             "likes": "3 412",
             "comments": "218",
             "shares": "764",
-            "views": "48 210 marta ko'rildi",
+            "views": "48 210 marta körildi",
             "caption": "Implantatsiya haqida 3 ta asosiy savol 🦷",
             "statsTitle": "Post statistikasi",
-            "statsSub": "Dushanba · 22 sentabr, 19:00 da joylandi",
+            "statsSub": "Duşanba · 22 sentabr, 19:00 da joylandi",
             "tiles": [
               {
                 "icon": "eye",
                 "value": "48 210",
-                "label": "Ko'rishlar",
+                "label": "Körişlar",
                 "delta": "+32%"
               },
               {
@@ -1885,11 +1885,11 @@
               {
                 "icon": "send",
                 "value": "764",
-                "label": "Ulashishlar",
+                "label": "Ulaşişlar",
                 "delta": "+41%"
               }
             ],
-            "chartTitle": "Oxirgi 7 kun · ko'rishlar",
+            "chartTitle": "Oxirgi 7 kun · körişlar",
             "chartTotal": "186K",
             "chart": [
               {
@@ -1903,7 +1903,7 @@
                 "lit": true
               },
               {
-                "day": "Ch",
+                "day": "Ç",
                 "height": 30,
                 "lit": false
               },
@@ -1918,7 +1918,7 @@
                 "lit": false
               },
               {
-                "day": "Sh",
+                "day": "Ş",
                 "height": 24,
                 "lit": false
               },
@@ -1946,30 +1946,30 @@
                 "count": "764"
               }
             ],
-            "alt": "Telefonida Instagram ochib turgan odam va haftalik natija"
+            "alt": "Telefonida Instagram oçib turgan odam va haftalik natija"
           }
         }
       }
     }
   },
   "dashboard": {
-    "workspaceLabel": "Do'ppi AI ish maydoni",
+    "workspaceLabel": "Do'ppi AI iş maydoni",
     "common": {
-      "retry": "Qayta urinib ko'ring.",
-      "checkDetails": "Ma'lumotlarni tekshirib ko'ring.",
+      "retry": "Qayta urinib köring.",
+      "checkDetails": "Ma'lumotlarni tekşirib köring.",
       "saving": "Saqlanmoqda...",
       "loading": "Yuklanmoqda...",
       "select": "Tanlang",
       "copied": "Nusxa olindi",
-      "copyFailed": "Nusxa olib bo'lmadi",
-      "copyFailedHint": "Matnni belgilab, qo'lda nusxa oling.",
+      "copyFailed": "Nusxa olib bölmadi",
+      "copyFailedHint": "Matnni belgilab, qölda nusxa oling.",
       "reload": "Sahifani yangilang.",
-      "tryAgain": "Qayta urinish",
-      "tryLater": "Birozdan so'ng qayta urinib ko'ring.",
-      "checkConnection": "Internet aloqasini tekshirib, qayta urinib ko'ring.",
-      "cancel": "Bekor qilish",
-      "send": "Yuborish",
-      "changed": "O'zgargan",
+      "tryAgain": "Qayta uriniş",
+      "tryLater": "Birozdan söng qayta urinib köring.",
+      "checkConnection": "Internet aloqasini tekşirib, qayta urinib köring.",
+      "cancel": "Bekor qiliş",
+      "send": "Yuboriş",
+      "changed": "Özgargan",
       "ago": "{age} oldin",
       "justNow": "hozir",
       "optional": "ixtiyoriy",
@@ -1977,81 +1977,81 @@
       "notDone": "bajarilmagan",
       "previousPage": "Oldingi sahifa",
       "nextPage": "Keyingi sahifa",
-      "close": "Yopish"
+      "close": "Yopiş"
     },
     "nav": {
       "services": "Xizmatlar",
-      "workspace": "Ish maydoni",
-      "home": "Bosh sahifa",
+      "workspace": "Iş maydoni",
+      "home": "Boş sahifa",
       "rag": "Universal RAG Agent",
-      "ragCreate": "Agent yaratish",
+      "ragCreate": "Agent yaratiş",
       "voice": "Ovozli agent",
       "video": "Video generator",
       "videoPlans": "Rejalar",
       "videoNew": "Yangi video",
-      "usage": "Sarf va to'lovlar",
+      "usage": "Sarf va tölovlar",
       "settings": "Sozlamalar",
       "platformAdmin": "Platform admin",
-      "expand": "{label} bo'limini ochish",
-      "collapse": "{label} bo'limini yopish"
+      "expand": "{label} bölimini oçiş",
+      "collapse": "{label} bölimini yopiş"
     },
     "balance": {
       "available": "Mavjud balans",
       "creditUnit": "kredit",
-      "bonusExpiry": "Bonus {date} gacha amal qiladi",
-      "loadError": "Balansni yuklab bo‘lmadi",
+      "bonusExpiry": "Bonus {date} gaça amal qiladi",
+      "loadError": "Balansni yuklab bölmadi",
       "details": "Balans tafsiloti",
-      "used": "${limit} oylik limitning {used}% ishlatilgan",
-      "topUp": "Balansni to'ldirish"
+      "used": "${limit} oylik limitning {used}% işlatilgan",
+      "topUp": "Balansni töldiriş"
     },
     "header": {
-      "fallbackTitle": "Ish maydoni",
-      "openMenu": "Menyuni ochish",
-      "notifications": "Bildirishnomalar",
-      "fallbackUser": "Foydalanuvchi",
-      "fallbackPlan": "Ish maydoni",
-      "businessSelectFailed": "Biznesni tanlab bo'lmadi",
+      "fallbackTitle": "Iş maydoni",
+      "openMenu": "Menyuni oçiş",
+      "notifications": "Bildirişnomalar",
+      "fallbackUser": "Foydalanuvçi",
+      "fallbackPlan": "Iş maydoni",
+      "businessSelectFailed": "Biznesni tanlab bölmadi",
       "businessCreated": "Biznes yaratildi",
-      "businessCreateFailed": "Biznes yaratib bo'lmadi",
-      "businessListFailed": "Bizneslar ro'yxatini yuklab bo'lmadi"
+      "businessCreateFailed": "Biznes yaratib bölmadi",
+      "businessListFailed": "Bizneslar röyxatini yuklab bölmadi"
     },
     "business": {
       "choose": "Biznes tanlang",
       "label": "Biznes",
       "yours": "Sizning bizneslaringiz",
       "members": "{count} a'zo",
-      "create": "Yangi biznes yaratish",
+      "create": "Yangi biznes yaratiş",
       "settings": "Biznes sozlamalari"
     },
     "businessModal": {
-      "title": "Yangi biznes yaratish",
-      "description": "Har bir biznesning o'z agentlari, jamoasi va API kalitlari bo'ladi.",
-      "close": "Yopish",
+      "title": "Yangi biznes yaratiş",
+      "description": "Har bir biznesning öz agentlari, jamoasi va API kalitlari böladi.",
+      "close": "Yopiş",
       "name": "Biznes nomi",
       "language": "Asosiy til",
-      "region": "To'lov hududi",
-      "note": "Biznes yaratilgach, jamoa va integratsiyalarni alohida sozlashingiz mumkin.",
-      "cancel": "Bekor qilish",
-      "submit": "Biznes yaratish",
+      "region": "Tölov hududi",
+      "note": "Biznes yaratilgaç, jamoa va integratsiyalarni alohida sozlaşingiz mumkin.",
+      "cancel": "Bekor qiliş",
+      "submit": "Biznes yaratiş",
       "submitting": "Yaratilmoqda...",
       "regions": {
-        "UZ": "O'zbekiston",
-        "KZ": "Qozog'iston",
-        "US": "AQSh",
+        "UZ": "Özbekiston",
+        "KZ": "Qozoğiston",
+        "US": "AQŞ",
         "EU": "Yevropa"
       }
     },
     "userMenu": {
       "account": "Hisob sozlamalari",
-      "billing": "To'lov va balans",
-      "signOut": "Chiqish",
-      "signOutIncomplete": "Chiqish to'liq yakunlanmadi",
+      "billing": "Tölov va balans",
+      "signOut": "Çiqiş",
+      "signOutIncomplete": "Çiqiş töliq yakunlanmadi",
       "signOutIncompleteHint": "Sessiya serverda yopilmadi, lekin bu qurilmadagi holat tozalandi."
     },
     "routes": {
       "home": {
-        "title": "Bosh sahifa",
-        "subtitle": "Ish maydoni sharhi"
+        "title": "Boş sahifa",
+        "subtitle": "Iş maydoni şarhi"
       },
       "rag": {
         "title": "Universal RAG Agent",
@@ -2063,7 +2063,7 @@
       },
       "ragPlayground": {
         "title": "RAG playground",
-        "subtitle": "Retrieval va javoblarni real vaqtda tekshirish"
+        "subtitle": "Retrieval va javoblarni real vaqtda tekşiriş"
       },
       "ragSettings": {
         "title": "Universal RAG Agent",
@@ -2075,7 +2075,7 @@
       },
       "platformAdmin": {
         "title": "Platform admin",
-        "subtitle": "Foydalanuvchilar va kredit siyosati"
+        "subtitle": "Foydalanuvçilar va kredit siyosati"
       },
       "ragConversation": {
         "title": "Universal RAG Agent",
@@ -2083,11 +2083,11 @@
       },
       "voice": {
         "title": "Ovozli agent",
-        "subtitle": "Qo'ng'iroqlar, ssenariylar va raqamlar"
+        "subtitle": "Qönğiroqlar, ssenariylar va raqamlar"
       },
       "video": {
         "title": "Video generator",
-        "subtitle": "Promptdan tayyor videogacha"
+        "subtitle": "Promptdan tayyor videogaça"
       },
       "videoPlans": {
         "title": "Rejalar",
@@ -2095,10 +2095,10 @@
       },
       "videoNew": {
         "title": "Yangi video",
-        "subtitle": "Navbatdan tashqari video"
+        "subtitle": "Navbatdan taşqari video"
       },
       "usage": {
-        "title": "Sarf va to'lovlar",
+        "title": "Sarf va tölovlar",
         "subtitle": "Balans, limitlar va hisob-fakturalar"
       },
       "team": {
@@ -2107,162 +2107,162 @@
       },
       "settings": {
         "title": "Sozlamalar",
-        "subtitle": "Ish maydoni va biznes sozlamalari"
+        "subtitle": "Iş maydoni va biznes sozlamalari"
       }
     },
     "settings": {
       "profile": {
         "title": "Profil",
-        "description": "Shaxsiy ma'lumotlaringiz va interfeys sozlamalari.",
+        "description": "Şaxsiy ma'lumotlaringiz va interfeys sozlamalari.",
         "firstName": "Ism",
         "lastName": "Familiya",
         "language": "Til",
         "timezone": "Vaqt mintaqasi",
-        "save": "Profilni saqlash",
+        "save": "Profilni saqlaş",
         "saved": "Profil saqlandi",
-        "saveFailed": "Profilni saqlab bo'lmadi"
+        "saveFailed": "Profilni saqlab bölmadi"
       },
       "security": {
-        "title": "Kirish xavfsizligi",
+        "title": "Kiriş xavfsizligi",
         "description": "Google hisobini ulang yoki mavjud parolni yangilang.",
-        "linkGoogle": "Google hisobini ulash",
+        "linkGoogle": "Google hisobini ulaş",
         "currentPassword": "Joriy parol",
         "newPassword": "Yangi parol — kamida 12 belgi",
-        "submit": "Parolni yangilash",
+        "submit": "Parolni yangilaş",
         "updated": "Parol yangilandi",
-        "updateFailed": "Parolni yangilab bo'lmadi",
-        "checkCurrent": "Joriy parolni tekshirib ko'ring."
+        "updateFailed": "Parolni yangilab bölmadi",
+        "checkCurrent": "Joriy parolni tekşirib köring."
       },
       "sessions": {
         "title": "Faol sessiyalar",
-        "description": "Hisobingiz ochiq turgan qurilmalarni boshqaring.",
-        "signOutAll": "Barchasidan chiqish",
+        "description": "Hisobingiz oçiq turgan qurilmalarni boşqaring.",
+        "signOutAll": "Barçasidan çiqiş",
         "unknownDevice": "Noma'lum qurilma",
         "unknownIp": "IP noma'lum",
-        "revoke": "Yakunlash",
-        "none": "Boshqa faol sessiya yo'q.",
-        "loadFailed": "Sessiyalarni yuklab bo'lmadi",
+        "revoke": "Yakunlaş",
+        "none": "Boşqa faol sessiya yöq.",
+        "loadFailed": "Sessiyalarni yuklab bölmadi",
         "reload": "Sahifani yangilang.",
         "revoked": "Sessiya yakunlandi",
-        "revokeFailed": "Sessiyani yakunlab bo'lmadi",
-        "signOutAllFailed": "Barcha sessiyalarni yakunlab bo'lmadi"
+        "revokeFailed": "Sessiyani yakunlab bölmadi",
+        "signOutAllFailed": "Barça sessiyalarni yakunlab bölmadi"
       }
     },
     "pageTitle": "{title} — Do'ppi AI",
     "home": {
-      "workspace": "Mening ish maydonim",
+      "workspace": "Mening iş maydonim",
       "greeting": {
         "morning": "Xayrli tong",
         "afternoon": "Xayrli kun",
-        "evening": "Xayrli kech"
+        "evening": "Xayrli keç"
       },
       "greetingNamed": "{greeting}, {name}",
-      "overview": "{business} · ish maydoni sharhi"
+      "overview": "{business} · iş maydoni şarhi"
     },
     "team": {
       "roles": {
         "owner": "Egasi",
         "admin": "Administrator",
         "member": "A'zo",
-        "viewer": "Kuzatuvchi"
+        "viewer": "Kuzatuvçi"
       },
-      "loadFailed": "Jamoani yuklab bo'lmadi",
+      "loadFailed": "Jamoani yuklab bölmadi",
       "invite": {
-        "title": "Jamoaga taklif qilish",
-        "description": "Taklif aynan ko'rsatilgan email manzilidagi hisob uchun amal qiladi.",
+        "title": "Jamoaga taklif qiliş",
+        "description": "Taklif aynan körsatilgan email manzilidagi hisob uçun amal qiladi.",
         "emailPlaceholder": "hamkasb{'@'}kompaniya.uz",
         "role": "Rol",
-        "submit": "Taklif yaratish",
+        "submit": "Taklif yaratiş",
         "created": "Taklif yaratildi",
-        "failed": "Taklif yaratib bo'lmadi",
-        "checkFields": "Email va rolni tekshirib ko'ring.",
-        "linkOnce": "Taklif havolasi bir marta ko'rsatiladi",
-        "copy": "Nusxalash",
+        "failed": "Taklif yaratib bölmadi",
+        "checkFields": "Email va rolni tekşirib köring.",
+        "linkOnce": "Taklif havolasi bir marta körsatiladi",
+        "copy": "Nusxalaş",
         "copied": "Taklif havolasi nusxalandi",
-        "copyManually": "Havolani qo'lda belgilab nusxalang."
+        "copyManually": "Havolani qölda belgilab nusxalang."
       },
       "members": {
         "title": "Jamoa a'zolari",
-        "description": "Faol biznesga tegishli a'zolar va rollar.",
+        "description": "Faol biznesga tegişli a'zolar va rollar.",
         "you": "Siz",
         "role": "A'zo roli",
-        "remove": "Olib tashlash",
+        "remove": "Olib taşlaş",
         "empty": "Jamoa a'zolari topilmadi.",
         "roleUpdated": "Rol yangilandi",
-        "roleUpdateFailed": "Rolni yangilab bo'lmadi",
-        "removeConfirm": "Bu a'zoni jamoadan olib tashlaysizmi?",
-        "removed": "A'zo jamoadan olib tashlandi",
-        "removeFailed": "A'zoni olib tashlab bo'lmadi"
+        "roleUpdateFailed": "Rolni yangilab bölmadi",
+        "removeConfirm": "Bu a'zoni jamoadan olib taşlaysizmi?",
+        "removed": "A'zo jamoadan olib taşlandi",
+        "removeFailed": "A'zoni olib taşlab bölmadi"
       }
     },
     "plural": {
       "documents": "{count} ta hujjat",
       "indexedDocuments": "{count} ta indekslangan hujjat",
-      "chunks": "{count} ta bo'lak",
-      "chats": "{count} ta chat",
+      "chunks": "{count} ta bölak",
+      "chats": "{count} ta çat",
       "messages": "{count} ta xabar",
-      "unsavedChanges": "{count} ta saqlanmagan o'zgarish",
-      "filesSkipped": "{count} ta fayl o'tkazib yuborildi",
+      "unsavedChanges": "{count} ta saqlanmagan özgariş",
+      "filesSkipped": "{count} ta fayl ötkazib yuborildi",
       "credits": "{count} kredit",
       "networksSelected": "{count} ta tarmoq tanlangan",
-      "updates": "{count} ta yangilanish"
+      "updates": "{count} ta yangilaniş"
     },
     "rag": {
       "status": {
         "live": "Faol",
-        "paused": "To'xtatilgan"
+        "paused": "Töxtatilgan"
       },
       "onePerBusiness": "Har bir biznesga bitta agent",
-      "createAgent": "Agent yaratish",
-      "loadFailed": "Agentni yuklab bo'lmadi",
-      "loadConfigFailed": "RAG sozlamalarini yuklab bo'lmadi",
+      "createAgent": "Agent yaratiş",
+      "loadFailed": "Agentni yuklab bölmadi",
+      "loadConfigFailed": "RAG sozlamalarini yuklab bölmadi",
       "fileSkipped": "{name} — {reason}",
       "agent": {
         "syncedJustNow": "hozirgina sinxronlandi",
         "syncedAgo": "{age} oldin sinxronlandi",
         "subtitle": "{name} · {status} · {synced}",
-        "emptyTitle": "Hali RAG agent yo'q",
-        "emptyDescription": "Har bir biznesda bitta agent ishlaydi. Unga hujjatlaringizni bering, model tanlang va u javob beradigan kanallarni ulang."
+        "emptyTitle": "Hali RAG agent yöq",
+        "emptyDescription": "Har bir biznesda bitta agent işlaydi. Unga hujjatlaringizni bering, model tanlang va u javob beradigan kanallarni ulang."
       },
       "summary": {
         "model": "{model} · temperatura {temperature}",
         "knowledge": "{documents} · {chunks}",
         "noChannels": "Kanallar ulanmagan",
-        "edit": "Sozlamalarni tahrirlash",
-        "playground": "Sinov maydonini ochish",
+        "edit": "Sozlamalarni tahrirlaş",
+        "playground": "Sinov maydonini oçiş",
         "loading": "Agent yuklanmoqda"
       },
       "metrics": {
         "conversations": "Suhbatlar",
         "messages30d": "Xabarlar · 30 kun",
-        "avgResponse": "O'rtacha javob vaqti",
+        "avgResponse": "Örtaça javob vaqti",
         "accuracy": "Javoblar aniqligi",
-        "escalation": "Operatorga o'tkazilgan"
+        "escalation": "Operatorga ötkazilgan"
       },
       "table": {
         "title": "Suhbatlar",
-        "search": "chat_id bo'yicha qidirish",
-        "searchLabel": "Suhbatlarni qidirish",
-        "allChannels": "Barcha kanallar",
-        "filterLabel": "Kanal bo'yicha saralash",
-        "export": "CSV sifatida yuklab olish",
+        "search": "chat_id böyiça qidiriş",
+        "searchLabel": "Suhbatlarni qidiriş",
+        "allChannels": "Barça kanallar",
+        "filterLabel": "Kanal böyiça saralaş",
+        "export": "CSV sifatida yuklab oliş",
         "columns": {
-          "chatId": "Chat ID",
+          "chatId": "Çat ID",
           "channel": "Kanal",
           "lastMessage": "Oxirgi xabar",
           "messages": "Xabar",
           "status": "Holat",
           "updated": "Yangilangan",
-          "open": "Ochish"
+          "open": "Oçiş"
         },
         "noMatches": "Filtrlarga mos suhbat topilmadi.",
-        "empty": "Hali suhbatlar yo'q — mijozlar yozishni boshlashi bilan shu yerda paydo bo'ladi.",
-        "showing": "{total} ta suhbatdan {range} ko'rsatilmoqda"
+        "empty": "Hali suhbatlar yöq — mijozlar yozişni boşlaşi bilan şu yerda paydo böladi.",
+        "showing": "{total} ta suhbatdan {range} körsatilmoqda"
       },
       "conversationStatus": {
         "active": "Faol",
         "resolved": "Hal qilingan",
-        "escalated": "Operatorga o'tkazilgan"
+        "escalated": "Operatorga ötkazilgan"
       },
       "channels": {
         "instagram": {
@@ -2286,7 +2286,7 @@
         "web": {
           "label": "Veb-vidjet",
           "product": "Veb-vidjet",
-          "caption": "Saytingizdagi chat oynasi",
+          "caption": "Saytingizdagi çat oynasi",
           "credentials": "Veb-vidjet ma'lumotlari"
         }
       },
@@ -2301,8 +2301,8 @@
         },
         "verifyToken": {
           "label": "Webhook verify token",
-          "placeholder": "Shaxsiy tasdiqlash tokeningiz",
-          "hint": "Kamida 16 ta belgi ishlating."
+          "placeholder": "Şaxsiy tasdiqlaş tokeningiz",
+          "hint": "Kamida 16 ta belgi işlating."
         },
         "appSecret": {
           "label": "Meta app secret",
@@ -2319,17 +2319,17 @@
         },
         "cloudAccessToken": {
           "label": "Access token",
-          "hint": "Cloud API tokeni uchun bu juda qisqa."
+          "hint": "Cloud API tokeni uçun bu juda qisqa."
         },
         "domain": {
           "label": "Sayt domeni",
           "hint": "aura.uz kabi domenni https:// siz kiriting."
         },
-        "show": "Ko'rsatish: {field}",
-        "hide": "Yashirish: {field}"
+        "show": "Körsatiş: {field}",
+        "hide": "Yaşiriş: {field}"
       },
       "checklist": {
-        "title": "Sozlash ro'yxati",
+        "title": "Sozlaş röyxati",
         "required": "{progress} majburiy",
         "name": "Agent nomi",
         "documents": "Hujjatlar yuklangan va indekslangan",
@@ -2340,43 +2340,43 @@
       },
       "identity": {
         "title": "Agent nomi",
-        "hint": "Mijozlarga emas, jamoangizga ko'rinadi",
+        "hint": "Mijozlarga emas, jamoangizga körinadi",
         "name": "RAG agent nomi",
-        "namePlaceholder": "Aura yordamchi agenti",
+        "namePlaceholder": "Aura yordamçi agenti",
         "description": "Qisqa tavsif",
-        "descriptionPlaceholder": "Mahsulot, narx va yetkazib berish haqidagi savollarga javob beradi"
+        "descriptionPlaceholder": "Mahsulot, narx va yetkazib beriş haqidagi savollarga javob beradi"
       },
       "knowledge": {
         "title": "Bilim bazasi",
-        "limits": "PDF, DOCX, XLSX yoki TXT, har biri {size} MB gacha",
-        "loadingLimits": "Yuklash limitlari olinmoqda…",
-        "drop": "Hujjatlarni shu yerga torting yoki",
+        "limits": "PDF, DOCX, XLSX yoki TXT, har biri {size} MB gaça",
+        "loadingLimits": "Yuklaş limitlari olinmoqda…",
+        "drop": "Hujjatlarni şu yerga torting yoki",
         "browse": "fayllarni tanlang",
         "uploaded": "Yuklangan hujjatlar",
-        "loadFailed": "Bilim bazasini yuklab bo'lmadi",
+        "loadFailed": "Bilim bazasini yuklab bölmadi",
         "indexed": "Indekslandi",
         "failed": "Xato",
         "embedding": "Indekslanmoqda {percent}%",
         "embeddingLabel": "Indekslanmoqda: {name}",
-        "failedHint": "o'chirib, qayta yuklang",
-        "remove": "O'chirish: {name}",
+        "failedHint": "öçirib, qayta yuklang",
+        "remove": "Öçiriş: {name}",
         "rejected": {
-          "unsupported": "fayl turi qo'llab-quvvatlanmaydi",
+          "unsupported": "fayl turi qöllab-quvvatlanmaydi",
           "loading": "sozlamalar hali yuklanmoqda",
           "tooLarge": "belgilangan limitdan katta",
-          "duplicate": "allaqachon qo'shilgan",
-          "noCollection": "agentda bilim to'plami yo'q"
+          "duplicate": "allaqaçon qöşilgan",
+          "noCollection": "agentda bilim töplami yöq"
         }
       },
       "model": {
         "title": "LLM model",
-        "hint": "Barcha kanallardagi javoblarni shakllantiradi",
+        "hint": "Barça kanallardagi javoblarni şakllantiradi",
         "legend": "Model",
         "context": "{tokens} kontekst",
         "pricingMissing": "Narx sozlanmagan",
-        "pricing": "{currency} {input} kirish · {output} chiqish / 1M",
+        "pricing": "{currency} {input} kiriş · {output} çiqiş / 1M",
         "loading": "Mavjud modellar yuklanmoqda…",
-        "none": "Bu ish maydonida birorta ham model yoqilmagan.",
+        "none": "Bu iş maydonida birorta ham model yoqilmagan.",
         "temperature": "Temperatura",
         "modes": {
           "factual": "aniq",
@@ -2385,97 +2385,97 @@
         }
       },
       "retrieval": {
-        "topK": "Olinadigan bo'laklar",
-        "topKHint": "Har bir javob uchun o'qiladigan parchalar, {min}–{max}",
-        "threshold": "O'xshashlik chegarasi",
-        "thresholdHint": "Kuchsizroq mosliklar hisobga olinmaydi, {min} dan {max} gacha"
+        "topK": "Olinadigan bölaklar",
+        "topKHint": "Har bir javob uçun öqiladigan parçalar, {min}–{max}",
+        "threshold": "Öxşaşlik çegarasi",
+        "thresholdHint": "Kuçsizroq mosliklar hisobga olinmaydi, {min} dan {max} gaça"
       },
       "prompt": {
         "title": "Tizim prompti",
-        "hint": "Barcha kanallardagi har bir suhbatga qo'llanadi",
-        "placeholder": "Agentga u kimligini, nimalarga javob bera olishini va qachon suhbatni operatorga topshirishini ayting.",
+        "hint": "Barça kanallardagi har bir suhbatga qöllanadi",
+        "placeholder": "Agentga u kimligini, nimalarga javob bera olişini va qaçon suhbatni operatorga topşirişini ayting.",
         "tokens": "{count} / {limit} token",
-        "useTemplate": "Shablondan foydalanish",
-        "replaceConfirm": "Joriy prompt shablon bilan almashtirilsinmi?",
-        "identityFallback": "yordamchi agent",
-        "businessFallback": "do'konimiz",
-        "template": "Siz — {identity}, {business} uchun qo'llab-quvvatlash agentisiz.\n\n• Faqat bilim bazasiga tayanib javob bering. Narx, shart yoki qoldiqni hech qachon o'ylab topmang.\n• Mijoz qaysi tilda yozsa, shu tilda javob bering (UZ / RU / EN).\n• Foydalangan hujjatingizni doim ko'rsating.\n• Hujjatlarda savolga javob bo'lmasa, buni ochiq ayting va suhbatni operatorga topshiring."
+        "useTemplate": "Şablondan foydalaniş",
+        "replaceConfirm": "Joriy prompt şablon bilan almaştirilsinmi?",
+        "identityFallback": "yordamçi agent",
+        "businessFallback": "dökonimiz",
+        "template": "Siz — {identity}, {business} uçun qöllab-quvvatlaş agentisiz.\n\n• Faqat bilim bazasiga tayanib javob bering. Narx, şart yoki qoldiqni heç qaçon öylab topmang.\n• Mijoz qaysi tilda yozsa, şu tilda javob bering (UZ / RU / EN).\n• Foydalangan hujjatingizni doim körsating.\n• Hujjatlarda savolga javob bölmasa, buni oçiq ayting va suhbatni operatorga topşiring."
       },
       "channelsSection": {
-        "title": "Kanallar va ulanish ma'lumotlari",
+        "title": "Kanallar va ulaniş ma'lumotlari",
         "hint": "Agent mijozlarga qayerda javob beradi",
-        "add": "Yana kanal qo'shish",
+        "add": "Yana kanal qöşiş",
         "connected": "ulangan",
         "disconnectsOnSave": "saqlanganda uziladi",
-        "connect": "{channel}ni ulash",
-        "savedPlaceholder": "Saqlangan · almashtirish uchun yozing"
+        "connect": "{channel}ni ulaş",
+        "savedPlaceholder": "Saqlangan · almaştiriş uçun yozing"
       },
       "create": {
         "title": "RAG agentingizni yarating",
         "description": "Unga nom bering, hujjatlar yuklang, model tanlang, tizim promptini yozing va javob beradigan kanallarni ulang.",
-        "replaces": "{name} o'rnini egallaydi",
-        "noAgentYet": "Hali agent yo'q · shu biznes uchun yagona agentni yarating",
-        "finishSetup": "Avval sozlashni yakunlang",
+        "replaces": "{name} örnini egallaydi",
+        "noAgentYet": "Hali agent yöq · şu biznes uçun yagona agentni yarating",
+        "finishSetup": "Avval sozlaşni yakunlang",
         "created": "Agent yaratildi",
-        "createdDetail": "{name} ishga tushdi.",
-        "createFailed": "Agentni yaratib bo'lmadi"
+        "createdDetail": "{name} işga tuşdi.",
+        "createFailed": "Agentni yaratib bölmadi"
       },
       "settings": {
-        "title": "Sozlamalarni tahrirlash",
-        "description": "Bilim bazasi, model, tizim prompti va kanallarni yangilang. Saqlangan o'zgarishlar yangi suhbatlarga darhol qo'llanadi.",
+        "title": "Sozlamalarni tahrirlaş",
+        "description": "Bilim bazasi, model, tizim prompti va kanallarni yangilang. Saqlangan özgarişlar yangi suhbatlarga darhol qöllanadi.",
         "subtitle": "{name} · sozlamalar tahrirlanmoqda",
         "subtitleDraft": "{name} · sozlamalar tahrirlanmoqda · qoralama",
-        "noAgentTitle": "Sozlanadigan agent yo'q",
-        "noAgentDescription": "Sozlamalarni ochishdan oldin agent yarating.",
+        "noAgentTitle": "Sozlanadigan agent yöq",
+        "noAgentDescription": "Sozlamalarni oçişdan oldin agent yarating.",
         "loading": "Sozlamalar yuklanmoqda",
-        "discard": "Bekor qilish",
-        "save": "O'zgarishlarni saqlash",
-        "pause": "Agentni to'xtatish",
-        "resume": "Agentni davom ettirish",
-        "delete": "Agentni o'chirish",
-        "modelHint": "Modelni almashtirish hujjatlarni qayta indekslamaydi",
-        "restorePrompt": "Saqlangan promptni tiklash",
-        "channelsHint": "Shu agentning faol kanallari",
-        "knowledgeHint": "{documents} · {chunks} · yuklanganlar darhol qo'llanadi",
+        "discard": "Bekor qiliş",
+        "save": "Özgarişlarni saqlaş",
+        "pause": "Agentni töxtatiş",
+        "resume": "Agentni davom ettiriş",
+        "delete": "Agentni öçiriş",
+        "modelHint": "Modelni almaştiriş hujjatlarni qayta indekslamaydi",
+        "restorePrompt": "Saqlangan promptni tiklaş",
+        "channelsHint": "Şu agentning faol kanallari",
+        "knowledgeHint": "{documents} · {chunks} · yuklanganlar darhol qöllanadi",
         "embeddingNotice": "{embedding} hali indekslanmoqda — bu vaqtda agent {indexed} asosida javob beradi.",
         "you": "Siz",
-        "fileAdded": "{name} qo'shildi",
-        "fileRemoved": "{name} o'chirildi",
-        "removeConfirm": "{name} bilim bazasidan o'chirilsinmi? Agent undan darhol foydalanmay qo'yadi.",
-        "fixFirst": "Saqlashdan oldin quyidagilarni tuzating",
+        "fileAdded": "{name} qöşildi",
+        "fileRemoved": "{name} öçirildi",
+        "removeConfirm": "{name} bilim bazasidan öçirilsinmi? Agent undan darhol foydalanmay qöyadi.",
+        "fixFirst": "Saqlaşdan oldin quyidagilarni tuzating",
         "saved": "Sozlamalar saqlandi",
-        "changesSaved": "O'zgarishlar saqlandi",
+        "changesSaved": "Özgarişlar saqlandi",
         "changesSavedDetail": "Yangi suhbatlar yangilangan sozlamalardan foydalanadi.",
-        "saveFailed": "Barcha o'zgarishlarni saqlab bo'lmadi",
+        "saveFailed": "Barça özgarişlarni saqlab bölmadi",
         "discardConfirm": "{changes} bekor qilinsinmi?",
-        "resumed": "Agent qayta ishga tushdi",
+        "resumed": "Agent qayta işga tuşdi",
         "resumedDetail": "U yangi xabarlarga yana javob beradi.",
-        "paused": "Agent to'xtatildi",
-        "pausedDetail": "Siz qayta yoqmaguningizcha u javob bermaydi.",
-        "statusFailed": "Agent holatini o'zgartirib bo'lmadi",
-        "deleteConfirm": "Agent va uning barcha suhbatlari o'chirilsinmi? Buni ortga qaytarib bo'lmaydi.",
-        "deleted": "Agent o'chirildi",
-        "deleteFailed": "O'chirib bo'lmadi",
-        "leaveConfirm": "Saqlamasdan chiqasizmi? Saqlanmagan o'zgarishlar yo'qoladi.",
+        "paused": "Agent töxtatildi",
+        "pausedDetail": "Siz qayta yoqmaguningizça u javob bermaydi.",
+        "statusFailed": "Agent holatini özgartirib bölmadi",
+        "deleteConfirm": "Agent va uning barça suhbatlari öçirilsinmi? Buni ortga qaytarib bölmaydi.",
+        "deleted": "Agent öçirildi",
+        "deleteFailed": "Öçirib bölmadi",
+        "leaveConfirm": "Saqlamasdan çiqasizmi? Saqlanmagan özgarişlar yöqoladi.",
         "fields": {
           "name": "Nomi",
           "description": "Tavsif",
           "model": "Model",
           "temperature": "Temperatura",
-          "topK": "Olinadigan bo'laklar",
-          "similarityThreshold": "O'xshashlik chegarasi",
+          "topK": "Olinadigan bölaklar",
+          "similarityThreshold": "Öxşaşlik çegarasi",
           "prompt": "Prompt"
         },
         "problems": {
           "name": "Agent nomi",
           "model": "LLM model",
           "prompt": "Tizim prompti",
-          "topK": "Olinadigan bo'laklar",
-          "similarityThreshold": "O'xshashlik chegarasi"
+          "topK": "Olinadigan bölaklar",
+          "similarityThreshold": "Öxşaşlik çegarasi"
         },
         "history": {
-          "title": "O'zgarishlar tarixi",
-          "hint": "Saqlanmagan tahrirlar, shu tashrifdagi amallar va faol versiya",
+          "title": "Özgarişlar tarixi",
+          "hint": "Saqlanmagan tahrirlar, şu taşrifdagi amallar va faol versiya",
           "draft": "Saqlanmagan qoralama",
           "live": "Faol sozlamalar",
           "liveDetail": "Serverda oxirgi marta yangilangan"
@@ -2483,40 +2483,40 @@
       },
       "playground": {
         "title": "Sinov maydoni",
-        "description": "So'rovlar tanlangan model, indekslangan bilimlar va ishchi qidiruv jarayonidan foydalanadi.",
+        "description": "Sörovlar tanlangan model, indekslangan bilimlar va işçi qidiruv jarayonidan foydalanadi.",
         "back": "Agent",
         "noAgentTitle": "Avval agent yarating",
-        "noAgentDescription": "Sinov maydoni uchun indekslangan bilim bazasi va faol agent kerak.",
+        "noAgentDescription": "Sinov maydoni uçun indekslangan bilim bazasi va faol agent kerak.",
         "emptyTitle": "Hujjatlarga asoslangan savol bering",
-        "emptyText": "Javoblarda topilgan hujjat bo'laklari ko'rsatiladi.",
-        "chunk": "{document} · {id}-bo'lak",
-        "placeholder": "Yuklangan hujjatlaringiz haqida so'rang…",
-        "failed": "RAG so'rovi bajarilmadi"
+        "emptyText": "Javoblarda topilgan hujjat bölaklari körsatiladi.",
+        "chunk": "{document} · {id}-bölak",
+        "placeholder": "Yuklangan hujjatlaringiz haqida sörang…",
+        "failed": "RAG sörovi bajarilmadi"
       },
       "conversation": {
         "subtitle": "Suhbatlar · {id}",
-        "back": "Suhbatlarga qaytish",
+        "back": "Suhbatlarga qaytiş",
         "breadcrumb": "Suhbatlar",
-        "export": "Yozishmani yuklab olish",
-        "takeOver": "Suhbatni o'z qo'limga olish",
-        "handBack": "Agentga qaytarish",
+        "export": "Yozişmani yuklab oliş",
+        "takeOver": "Suhbatni öz qölimga oliş",
+        "handBack": "Agentga qaytariş",
         "handlingTitle": "Bu suhbatni siz olib boryapsiz",
-        "handlingDetail": "Siz qaytarmaguningizcha agent javob bermaydi.",
+        "handlingDetail": "Siz qaytarmaguningizça agent javob bermaydi.",
         "handedBack": "Suhbat agentga qaytarildi",
-        "handoverFailed": "Suhbatni kim olib borishini o'zgartirib bo'lmadi",
+        "handoverFailed": "Suhbatni kim olib borişini özgartirib bölmadi",
         "notSent": "Xabar yuborilmadi",
-        "tagsFailed": "Teglarni saqlab bo'lmadi",
+        "tagsFailed": "Teglarni saqlab bölmadi",
         "linkCopied": "Havola nusxalandi",
         "idCopied": "chat_id nusxalandi",
         "insights": "Suhbat tahlili",
         "loading": "Suhbat yuklanmoqda",
         "notFound": "Suhbat topilmadi",
-        "loadFailed": "Bu suhbatni yuklab bo'lmadi",
-        "notFoundDetail": "{id} identifikatorli chat yo'q. U boshqa biznesga tegishli bo'lishi mumkin.",
-        "transcript": "Yozishma",
-        "started": "{contact} · {time} da boshlangan",
+        "loadFailed": "Bu suhbatni yuklab bölmadi",
+        "notFoundDetail": "{id} identifikatorli çat yöq. U boşqa biznesga tegişli bölişi mumkin.",
+        "transcript": "Yozişma",
+        "started": "{contact} · {time} da boşlangan",
         "actions": "Suhbat amallari",
-        "copyLink": "Havolani nusxalash",
+        "copyLink": "Havolani nusxalaş",
         "operator": "Operator",
         "sources": "Manbalar",
         "trace": "{model} · {seconds} s · {chunks}",
@@ -2526,105 +2526,105 @@
           "negative": "Mijoz bu javobni foydasiz deb belgiladi"
         },
         "reply": "Mijozga javob",
-        "replyPlaceholder": "Javob yozing… (yangi qator uchun Shift + Enter)",
-        "readOnly": "Faqat o'qish uchun — javob berish uchun suhbatni o'z qo'lingizga oling",
-        "takeOverShort": "O'z qo'limga olish",
+        "replyPlaceholder": "Javob yozing… (yangi qator uçun Shift + Enter)",
+        "readOnly": "Faqat öqiş uçun — javob beriş uçun suhbatni öz qölingizga oling",
+        "takeOverShort": "Öz qölimga oliş",
         "list": {
-          "title": "Barcha suhbatlar",
-          "search": "chat_id yoki matn bo'yicha qidirish",
-          "noMatches": "“{query}” bo'yicha suhbat topilmadi."
+          "title": "Barça suhbatlar",
+          "search": "chat_id yoki matn böyiça qidiriş",
+          "noMatches": "“{query}” böyiça suhbat topilmadi."
         },
         "details": {
-          "title": "Chat tafsilotlari",
-          "copyId": "chat_id'ni nusxalash",
+          "title": "Çat tafsilotlari",
+          "copyId": "chat_id'ni nusxalaş",
           "channel": "Kanal",
           "customer": "Mijoz",
-          "started": "Boshlangan",
+          "started": "Boşlangan",
           "duration": "Davomiyligi",
           "messages": "Xabarlar",
           "messagesValue": "{count} (agent: {agent})",
           "handledBy": "Kim olib bordi",
-          "escalation": "Operatorga o'tkazish",
-          "handedTo": "{name}ga topshirilgan",
-          "noHandover": "Operatorga o'tkazilmagan"
+          "escalation": "Operatorga ötkaziş",
+          "handedTo": "{name}ga topşirilgan",
+          "noHandover": "Operatorga ötkazilmagan"
         },
         "sourcesCard": {
           "title": "Topilgan manbalar",
-          "used": "{chunks} ishlatilgan",
+          "used": "{chunks} işlatilgan",
           "relevance": "{document} mosligi",
-          "evidence": "Dalil bo'laklarini ko'rish",
-          "chunk": "{id}-bo'lak · rerank {score}",
-          "empty": "Bu chat uchun hech qanday hujjat topilmadi."
+          "evidence": "Dalil bölaklarini köriş",
+          "chunk": "{id}-bölak · rerank {score}",
+          "empty": "Bu çat uçun heç qanday hujjat topilmadi."
         },
         "outcome": {
           "title": "Natija va teglar",
           "tags": "Teglar",
-          "removeTag": "{tag} tegini o'chirish",
+          "removeTag": "{tag} tegini öçiriş",
           "newTag": "Yangi teg",
-          "add": "Qo'shish",
+          "add": "Qöşiş",
           "rated": "Mijoz bahosi: {score}/{outOf}",
-          "notRated": "Mijoz bu chatni hali baholamagan."
+          "notRated": "Mijoz bu çatni hali baholamagan."
         },
         "file": {
           "title": "Suhbat {id}",
           "channel": "Kanal: {channel}",
           "customer": "Mijoz: {name} ({contact})",
-          "started": "Boshlangan: {date}",
+          "started": "Boşlangan: {date}",
           "sources": "Manbalar: {sources}"
         }
       },
       "admin": {
         "unavailable": "Admin ma'lumotlari mavjud emas",
-        "accessDenied": "Ruxsat yo'q.",
+        "accessDenied": "Ruxsat yöq.",
         "modelSaved": "Modellar katalogi yangilandi",
         "modelFailed": "Model saqlanmadi",
-        "checkFields": "Maydonlarni tekshiring.",
+        "checkFields": "Maydonlarni tekşiring.",
         "tenantSaved": "Tenant limitlari yangilandi",
         "tenantFailed": "Limitlar saqlanmadi",
-        "checkValues": "Qiymatlarni tekshiring.",
+        "checkValues": "Qiymatlarni tekşiring.",
         "deniedTitle": "Platforma administratori huquqi kerak",
-        "deniedDescription": "Bu bo'lim control-plane admin ro'yxati bilan cheklangan.",
+        "deniedDescription": "Bu bölim control-plane admin röyxati bilan çeklangan.",
         "catalogTitle": "Dinamik modellar katalogi",
-        "catalogDescription": "Frontend variantlari va aniq narxlar shu katalogdan olinadi.",
+        "catalogDescription": "Frontend variantlari va aniq narxlar şu katalogdan olinadi.",
         "newModel": "Yangi model",
         "columns": {
           "model": "Model",
           "provider": "Provayder",
-          "input": "Kirish / 1M",
-          "output": "Chiqish / 1M",
+          "input": "Kiriş / 1M",
+          "output": "Çiqiş / 1M",
           "state": "Holat"
         },
         "notSet": "Belgilanmagan",
         "enabled": "Yoqilgan",
-        "disabled": "O'chirilgan",
+        "disabled": "Öçirilgan",
         "default": "Standart",
         "form": {
           "id": "Model ID",
-          "displayName": "Ko'rinadigan nomi",
+          "displayName": "Körinadigan nomi",
           "provider": "Provayder",
           "contextTokens": "Kontekst tokenlari",
-          "input": "Kirish USD / 1M",
-          "output": "Chiqish USD / 1M"
+          "input": "Kiriş USD / 1M",
+          "output": "Çiqiş USD / 1M"
         },
-        "saveModel": "Modelni saqlash",
+        "saveModel": "Modelni saqlaş",
         "tenantTitle": "Tenant limitlari",
         "tenant": "Tenant",
         "tenantPlaceholder": "Tenant tanlang",
-        "loadLimits": "Limitlarni yuklash",
-        "saveTenant": "Tenant limitlarini saqlash",
+        "loadLimits": "Limitlarni yuklaş",
+        "saveTenant": "Tenant limitlarini saqlaş",
         "loading": "Sozlamalar yuklanmoqda…",
         "limits": {
           "max_documents": "Maksimal hujjatlar",
           "max_storage_bytes": "Maksimal xotira (bayt)",
           "max_agents": "Maksimal agentlar",
-          "monthly_queries": "Oylik so'rovlar",
+          "monthly_queries": "Oylik sörovlar",
           "monthly_tokens": "Oylik tokenlar",
           "monthly_cost_microusd": "Oylik xarajat (mikro-USD)",
           "max_file_bytes": "Maksimal fayl hajmi (bayt)",
-          "max_files_per_request": "Bir so'rovdagi maksimal fayllar",
+          "max_files_per_request": "Bir sörovdagi maksimal fayllar",
           "max_pdf_pages": "Maksimal PDF sahifalari",
-          "query_rate_per_minute": "Daqiqasiga so'rovlar",
-          "upload_rate_per_minute": "Daqiqasiga yuklashlar"
+          "query_rate_per_minute": "Daqiqasiga sörovlar",
+          "upload_rate_per_minute": "Daqiqasiga yuklaşlar"
         }
       }
     },
@@ -2639,7 +2639,7 @@
       "railTitle": {
         "done": "Bajarilgan planlar",
         "ongoing": "Faol plan",
-        "upcoming": "Tasdiqlash kutilmoqda"
+        "upcoming": "Tasdiqlaş kutilmoqda"
       },
       "videoState": {
         "processing": "Process",
@@ -2647,50 +2647,50 @@
         "draft": "Draft"
       },
       "dashboard": {
-        "subtitle": "{videos} video · {published} tasi ijtimoiy tarmoqda · {views} ko'rish",
+        "subtitle": "{videos} video · {published} tasi ijtimoiy tarmoqda · {views} köriş",
         "tomorrowAt": "ertaga {time}",
         "metrics": {
-          "generated": "Videolar yaratildi · barcha vaqt",
+          "generated": "Videolar yaratildi · barça vaqt",
           "published": "Ijtimoiy tarmoqqa joylandi",
-          "views": "Umumiy ko'rish · 30 kun",
+          "views": "Umumiy köriş · 30 kun",
           "engagement": "Engagement rate",
           "thisMonth": "bu oy",
           "high": "Yuqori",
-          "engagementHint": "Like + comment + share / ko'rishlar"
+          "engagementHint": "Like + comment + share / körişlar"
         },
         "topVideos": {
-          "title": "Eng yaxshi natija bergan videolar",
+          "title": "Eng yaxşi natija bergan videolar",
           "days7": "7 kun",
           "days30": "30 kun",
-          "all": "Barchasi",
+          "all": "Barçasi",
           "columns": {
             "video": "Video",
             "platform": "Platforma",
             "date": "Sana",
-            "views": "Ko'rishlar",
+            "views": "Körişlar",
             "engagement": "Engagement",
-            "growth": "O'sish"
+            "growth": "Ösiş"
           }
         },
         "channels": {
-          "title": "Ko'rishlar · kanallar"
+          "title": "Körişlar · kanallar"
         },
         "weeklyPlan": {
           "title": "Bu haftaning plani",
-          "produced": "Chiqarilgan videolar",
+          "produced": "Çiqarilgan videolar",
           "nextPost": "Keyingi post · {time}",
-          "open": "Planni ochish"
+          "open": "Planni oçiş"
         },
         "recommendations": {
           "title": "Tavsiyalar · sizning sohangizdagi kontent",
           "agent": "Research agent",
-          "franchise": "Franshiza hamkorlar top",
+          "franchise": "Franşiza hamkorlar top",
           "trending": "Hozir trendda",
           "updated": "{time} da yangilandi",
           "trend": "Trend",
           "addToPlan": "Rejaga",
           "tags": {
-            "franchise": "franshiza",
+            "franchise": "franşiza",
             "trend": "trend"
           },
           "trendingPosts": "Hozir trendda · {count} post"
@@ -2699,42 +2699,42 @@
       "plans": {
         "subtitle": "Haftalik kontent rejalari · {month}",
         "title": "Rejalar",
-        "description": "Agentlar tizimi har hafta uchun kontent rejasini tuzadi",
+        "description": "Agentlar tizimi har hafta uçun kontent rejasini tuzadi",
         "legend": {
           "newPlan": "yangi reja",
           "currentWeek": "joriy hafta",
           "completed": "yakunlangan",
-          "published": "chiqarilgan",
+          "published": "çiqarilgan",
           "plannedInactive": "rejada · faol emas",
-          "otherPlan": "boshqa plan",
-          "publishedVideo": "chiqarilgan video"
+          "otherPlan": "boşqa plan",
+          "publishedVideo": "çiqarilgan video"
         },
         "summary": {
-          "published": "Chiqarilgan video",
-          "views": "Umumiy ko'rish",
-          "er": "O'rtacha ER",
+          "published": "Çiqarilgan video",
+          "views": "Umumiy köriş",
+          "er": "Örtaça ER",
           "research": "Research xulosasi",
           "monthResults": "{month} yakunlari"
         },
         "approval": {
-          "reject": "Rad etish",
-          "edit": "AI bilan tahrirlash",
-          "approve": "Planni tasdiqlash"
+          "reject": "Rad etiş",
+          "edit": "AI bilan tahrirlaş",
+          "approve": "Planni tasdiqlaş"
         },
         "calendar": {
           "previous": "Oldingi oy",
           "next": "Keyingi oy"
         },
-        "filter": "Filtrlash",
+        "filter": "Filtrlaş",
         "timeline": {
           "locked": "Scriptlar qulflangan",
           "upcomingEditable": "Kelgusi scriptlar tahrirlanadi",
           "editable": "Tahrirlanadi",
-          "download": "Planni yuklab olish"
+          "download": "Planni yuklab oliş"
         },
         "item": {
-          "edit": "Tahrirlash",
-          "noEdit": "Edit yo'q"
+          "edit": "Tahrirlaş",
+          "noEdit": "Edit yöq"
         },
         "detail": {
           "kind": {
@@ -2746,106 +2746,106 @@
           "notGenerated": "Video hali generatsiya qilinmagan",
           "meta": "{date} {time} · plan: {plan} · {order}-video",
           "stats": {
-            "views": "ko'rish",
+            "views": "köriş",
             "likes": "like",
             "comments": "izoh",
             "shares": "share"
           },
           "lockedDraft": "Plan tasdiqlanmagan — script tahrirlanadi, video sana kelganda yaratiladi.",
-          "lockedScheduled": "Sana kelmagan — tugmalar faol emas. Video chiqqach havola va yuklab olish ochiladi.",
-          "openReels": "Reels'da ochish",
-          "download": "Yuklab olish",
-          "editScript": "Scriptni AI bilan tahrirlash"
+          "lockedScheduled": "Sana kelmagan — tugmalar faol emas. Video çiqqaç havola va yuklab oliş oçiladi.",
+          "openReels": "Reels'da oçiş",
+          "download": "Yuklab oliş",
+          "editScript": "Scriptni AI bilan tahrirlaş"
         },
         "script": {
-          "meta": "{order}-video · {title} · {date} {time} · faqat shu video uchun",
+          "meta": "{order}-video · {title} · {date} {time} · faqat şu video uçun",
           "quick": {
             "shorter": "Yanada qisqaroq",
-            "cta": "CTA kuchaytir",
-            "hook": "Boshqa hook ber"
+            "cta": "CTA kuçaytir",
+            "hook": "Boşqa hook ber"
           },
-          "placeholder": "Scriptni qanday o'zgartiramiz?",
+          "placeholder": "Scriptni qanday özgartiramiz?",
           "current": "Joriy script",
           "proposed": "Yangi script",
-          "scopeNote": "O'zgarish faqat shu videoga tegishli. Tasdiqlangach video shu prompt bo'yicha yaratiladi.",
-          "footer": "Plan tasdiqlanmagan · o'zgarishlar hafta boshlanishigacha kiritiladi",
-          "approve": "Yangi scriptni tasdiqlash"
+          "scopeNote": "Özgariş faqat şu videoga tegişli. Tasdiqlangaç video şu prompt böyiça yaratiladi.",
+          "footer": "Plan tasdiqlanmagan · özgarişlar hafta boşlanişigaça kiritiladi",
+          "approve": "Yangi scriptni tasdiqlaş"
         }
       },
       "demo": {
-        "approvalTitle": "Yangi haftalik plan tayyor — tasdiqlashingizni kutmoqda",
-        "approvalSubtitle": "Agentlar 11-sentabr (juma) research asosida tuzdi · 15-sentabr dushanba 00:00 da avtomatik ishga tushadi",
+        "approvalTitle": "Yangi haftalik plan tayyor — tasdiqlaşingizni kutmoqda",
+        "approvalSubtitle": "Agentlar 11-sentabr (juma) research asosida tuzdi · 15-sentabr duşanba 00:00 da avtomatik işga tuşadi",
         "railNote": {
-          "upcoming": "15-sentabr dushanbada avtomatik ishga tushadi",
-          "ongoing": "14-sentabr yakunlanganda plan avtomatik Done bo'ladi"
+          "upcoming": "15-sentabr duşanbada avtomatik işga tuşadi",
+          "ongoing": "14-sentabr yakunlanganda plan avtomatik Done böladi"
         },
         "insights": {
-          "trendAudio": "Trend audio ishlatilgan videolar ↑ 42%",
+          "trendAudio": "Trend audio işlatilgan videolar ↑ 42%",
           "ugc": "UGC formatlari eng yuqori ER beryapti",
           "bestTime": "Eng samarali vaqt: 18:00–20:00"
         },
         "weeks": {
           "upcoming": {
             "range": "15–21 sentabr · 7 video · research asosida",
-            "note": "Dushanbagacha tahrir qilinmasa, plan avtomatik Ongoing bo'ladi"
+            "note": "Duşanbagaça tahrir qilinmasa, plan avtomatik Ongoing böladi"
           },
           "ongoing": {
-            "range": "8–14 sentabr · 7 video · 3 chiqarildi · bugun 10 sentabr",
-            "note": "Faqat vaqti kelmagan videolar tahrirlanadi · hafta yakunida plan Done bo'ladi"
+            "range": "8–14 sentabr · 7 video · 3 çiqarildi · bugun 10 sentabr",
+            "note": "Faqat vaqti kelmagan videolar tahrirlanadi · hafta yakunida plan Done böladi"
           },
           "done": {
-            "range": "1–7 sentabr · 6 video · 1.9M ko'rish · o'rtacha ER 8.4%",
-            "note": "Hafta yakunlandi · natijalar umumiy dashboard statistikasiga qo'shildi"
+            "range": "1–7 sentabr · 6 video · 1.9M köriş · örtaça ER 8.4%",
+            "note": "Hafta yakunlandi · natijalar umumiy dashboard statistikasiga qöşildi"
           }
         }
       },
       "studio": {
-        "subtitle": "Navbatdan tashqari video · o'z prompt va kontekstingiz bilan",
-        "title": "Yangi video yaratish",
-        "description": "Plandan tashqari: kontekst, prompt va rasmlar bilan o'zingiz boshqarasiz",
-        "allVideos": "Barcha videolarim",
+        "subtitle": "Navbatdan taşqari video · öz prompt va kontekstingiz bilan",
+        "title": "Yangi video yaratiş",
+        "description": "Plandan taşqari: kontekst, prompt va rasmlar bilan özingiz boşqarasiz",
+        "allVideos": "Barça videolarim",
         "untitled": "Video",
         "composer": {
           "title": "Prompt va kontekst",
           "aiHelp": "AI yordam",
           "prompt": "Video prompti",
-          "promptPlaceholder": "Video nimani ko'rsatsin? Kadrlar, ohang va yakuniy matnni yozing.",
+          "promptPlaceholder": "Video nimani körsatsin? Kadrlar, ohang va yakuniy matnni yozing.",
           "context": "Kontekst",
           "brand": "{brand} brendi",
           "brandColors": "Brend ranglari",
           "references": "Referens rasmlar",
-          "upload": "Yuklash",
+          "upload": "Yuklaş",
           "settings": "Sozlamalar",
           "format": "Format",
           "voice": "Ovoz",
           "research": "Research",
           "fast": "Tez",
-          "deep": "Chuqur",
-          "subtitles": "Subtitrlarni yoqish",
+          "deep": "Çuqur",
+          "subtitles": "Subtitrlarni yoqiş",
           "previewOnly": "Faqat prompt-preview",
-          "advanced": "Qo'shimcha yo'nalish va referenslar",
+          "advanced": "Qöşimça yönaliş va referenslar",
           "tone": "Ohang (tone)",
-          "tonePlaceholder": "Masalan: samimiy, energiyali, ishonchli",
+          "tonePlaceholder": "Masalan: samimiy, energiyali, işonçli",
           "cta": "Call to action",
           "ctaPlaceholder": "Masalan: Profildagi havola orqali buyurtma bering",
           "source": "Tayyor script yoki manba matn",
-          "sourcePlaceholder": "Tasdiqlangan matn bo'lsa, shu yerga qo'ying",
+          "sourcePlaceholder": "Tasdiqlangan matn bölsa, şu yerga qöying",
           "links": "Referens havolalar · har qatorda bitta HTTPS URL",
           "images": "Referens rasm URL'lari · har qatorda bitta HTTPS URL",
-          "submit": "Video yaratish"
+          "submit": "Video yaratiş"
         },
         "model": {
           "title": "Video modeli",
           "loading": "Modellar yuklanmoqda",
-          "loadFailed": "Video modellari hozir yuklanmadi. Qayta urinib ko'ring.",
-          "reload": "Qayta yuklash",
+          "loadFailed": "Video modellari hozir yuklanmadi. Qayta urinib köring.",
+          "reload": "Qayta yuklaş",
           "model": "Model",
           "resolution": "Sifat",
           "duration": "Davomiylik",
           "audio": "Audio bor",
-          "noAudio": "Audio yo'q",
+          "noAudio": "Audio yöq",
           "estimate": "Provayder taxmini",
-          "noPrice": "Narx ko'rsatilmagan"
+          "noPrice": "Narx körsatilmagan"
         },
         "result": {
           "title": "Natija",
@@ -2856,17 +2856,17 @@
             "submitting": "Yuborilmoqda…",
             "queued": "Navbatda…",
             "processing": "Video montaj qilinmoqda…",
-            "submission_unknown": "Tekshirilmoqda…"
+            "submission_unknown": "Tekşirilmoqda…"
           },
-          "sending": "So'rov yuborilmoqda…",
+          "sending": "Sörov yuborilmoqda…",
           "preparing": "Tayyorlanmoqda…",
           "untitled": "Yangi video",
           "failed": "Video yaratilmadi",
-          "idle": "Prompt yozing va “Video yaratish” tugmasini bosing",
-          "publish": "Ijtimoiy tarmoqqa joylash",
-          "download": "Yuklab olish",
-          "retry": "Qayta urinish",
-          "regenerate": "Qayta yaratish",
+          "idle": "Prompt yozing va “Video yaratiş” tugmasini bosing",
+          "publish": "Ijtimoiy tarmoqqa joylaş",
+          "download": "Yuklab oliş",
+          "retry": "Qayta uriniş",
+          "regenerate": "Qayta yaratiş",
           "pipeline": {
             "script": "Script",
             "shots": "Kadrlar",
@@ -2878,7 +2878,7 @@
           "title": "Mening videolarim",
           "count": "{count} ta",
           "filters": {
-            "all": "Barchasi",
+            "all": "Barçasi",
             "ready": "Tayyor",
             "processing": "Jarayonda",
             "issues": "Muammo"
@@ -2887,58 +2887,58 @@
             "ready": "Tayyor",
             "processing": "Jarayonda",
             "failed": "Xato",
-            "review": "Tekshirish kerak",
+            "review": "Tekşiriş kerak",
             "published": "Joylangan",
             "draft": "Draft"
           },
-          "watch": "Videoni ko'rish",
-          "download": "Videoni yuklab olish",
-          "empty": "Hali video yo‘q",
+          "watch": "Videoni köriş",
+          "download": "Videoni yuklab oliş",
+          "empty": "Hali video yöq",
           "emptyFilter": "Bu holatda video topilmadi",
-          "emptyDescription": "Yaratilgan videolar shu yerda statusi va xavfsiz ko'rish/yuklab olish havolalari bilan chiqadi.",
-          "footer": "O'zingiz yaratgan videolar plan statistikasiga ta'sir qilmaydi."
+          "emptyDescription": "Yaratilgan videolar şu yerda statusi va xavfsiz köriş/yuklab oliş havolalari bilan çiqadi.",
+          "footer": "Özingiz yaratgan videolar plan statistikasiga ta'sir qilmaydi."
         },
         "publish": {
           "title": "Video tayyor — ijtimoiy tarmoqqa joylaymizmi?",
-          "where": "Qayerga joylash",
-          "postTo": "{channel}ga joylash",
+          "where": "Qayerga joylaş",
+          "postTo": "{channel}ga joylaş",
           "caption": "Matn (AI tayyorladi)",
-          "rewrite": "Qayta yozish",
+          "rewrite": "Qayta yoziş",
           "captionPlaceholder": "Post matni va hashtaglar",
-          "when": "Qachon",
+          "when": "Qaçon",
           "now": "Hozir",
-          "schedule": "Rejalashtirish",
-          "statsNote": "Joylangach video statistikasi (ko'rish, ER) dashboardga avtomatik tushadi.",
+          "schedule": "Rejalaştiriş",
+          "statsNote": "Joylangaç video statistikasi (köriş, ER) dashboardga avtomatik tuşadi.",
           "later": "Keyinroq",
-          "submit": "Joylash"
+          "submit": "Joylaş"
         },
         "jobs": {
           "status": {
             "submitting": "Yuborilmoqda",
             "submission_failed": "Yuborilmadi",
-            "submission_unknown": "Tekshirilmoqda",
+            "submission_unknown": "Tekşirilmoqda",
             "queued": "Navbatda",
             "processing": "Yaratilmoqda",
             "completed": "Tayyor",
             "failed": "Xatolik"
           },
           "title": "Yaratilgan videolar",
-          "description": "Videolaringiz holati va tayyor natijalari shu yerda ko‘rinadi.",
-          "sync": "Tarixni yangilash",
-          "empty": "Hali video yo‘q",
-          "emptyDescription": "Yangi yaratgan videolaringiz shu yerda paydo bo‘ladi.",
+          "description": "Videolaringiz holati va tayyor natijalari şu yerda körinadi.",
+          "sync": "Tarixni yangilaş",
+          "empty": "Hali video yöq",
+          "emptyDescription": "Yangi yaratgan videolaringiz şu yerda paydo böladi.",
           "autoFormat": "Avto format",
           "autoDuration": "Avto davomiylik",
           "autoLanguage": "Avto",
           "live": "Jonli yangilanadi",
-          "download": "Yuklab olish",
-          "watchInApp": "Videoni ilovada ko'rish",
-          "watch": "Ko‘rish"
+          "download": "Yuklab oliş",
+          "watchInApp": "Videoni ilovada köriş",
+          "watch": "Köriş"
         },
         "preview": {
-          "eyebrow": "Videoni ko‘rish",
+          "eyebrow": "Videoni köriş",
           "untitled": "Yaratilgan video",
-          "close": "Videoni yopish",
+          "close": "Videoni yopiş",
           "details": "Video tafsilotlari",
           "status": "Holati",
           "ready": "Tayyor",
@@ -2946,33 +2946,33 @@
           "auto": "Avto",
           "duration": "Davomiyligi",
           "model": "Model",
-          "download": "Videoni yuklab olish"
+          "download": "Videoni yuklab oliş"
         },
         "player": {
           "label": "Yaratilgan video",
           "loading": "Video yuklanmoqda…",
-          "failed": "Video hozir ochilmadi. Qayta urinib ko‘ring yoki yuklab oling.",
-          "reload": "Qayta yuklash"
+          "failed": "Video hozir oçilmadi. Qayta urinib köring yoki yuklab oling.",
+          "reload": "Qayta yuklaş"
         },
         "toasts": {
           "ready": "Video tayyor",
-          "readyDetail": "Uni ko'rish va joylash mumkin.",
+          "readyDetail": "Uni köriş va joylaş mumkin.",
           "failed": "Video yaratilmadi",
-          "checkLinks": "Referens havolalarni tekshiring",
+          "checkLinks": "Referens havolalarni tekşiring",
           "httpsOnly": "Faqat HTTPS havolalar qabul qilinadi.",
-          "needsVerification": "Yuborishni tekshirish kerak",
-          "needsVerificationDetail": "Qayta yaratishdan oldin shu vazifani tekshiring. Avtomatik qayta yuborilmaydi.",
+          "needsVerification": "Yuborişni tekşiriş kerak",
+          "needsVerificationDetail": "Qayta yaratişdan oldin şu vazifani tekşiring. Avtomatik qayta yuborilmaydi.",
           "notCompleted": "Generatsiya yakunlanmadi",
-          "checkJob": "Vazifa tafsilotlarini tekshiring.",
-          "previewQueued": "Preview navbatga qo'yildi",
-          "queued": "Video generatsiyasi navbatga qo'yildi",
-          "queuedDetail": "Jarayon quyidagi ro'yxatda ko'rinadi.",
-          "startFailed": "Video generatsiyasini boshlab bo'lmadi",
-          "checkListFirst": "Qayta urinishdan oldin ro'yxatni tekshiring.",
-          "loadFailed": "Videolarni yuklab bo'lmadi",
+          "checkJob": "Vazifa tafsilotlarini tekşiring.",
+          "previewQueued": "Preview navbatga qöyildi",
+          "queued": "Video generatsiyasi navbatga qöyildi",
+          "queuedDetail": "Jarayon quyidagi röyxatda körinadi.",
+          "startFailed": "Video generatsiyasini boşlab bölmadi",
+          "checkListFirst": "Qayta urinişdan oldin röyxatni tekşiring.",
+          "loadFailed": "Videolarni yuklab bölmadi",
           "synced": "Videolar sinxronlandi",
           "syncedDetail": "{imported} ta import qilindi, {updated} ta yangilandi.",
-          "syncFailed": "Videolarni sinxronlab bo'lmadi"
+          "syncFailed": "Videolarni sinxronlab bölmadi"
         }
       }
     }

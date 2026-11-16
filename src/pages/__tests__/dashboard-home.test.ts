@@ -98,7 +98,7 @@ describe("sidebar language", () => {
     const wrapper = await mountAt("/app", CDashboardSidebar, i18n)
     const labels = () => wrapper.findAll("nav a").map((link) => link.text())
 
-    expect(labels()).toContain("Bosh sahifa")
+    expect(labels()).toContain("Boş sahifa")
     expect(labels()).toContain("Sozlamalar")
 
     i18n.global.locale.value = "ru"

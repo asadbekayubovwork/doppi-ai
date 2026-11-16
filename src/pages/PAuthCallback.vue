@@ -70,8 +70,8 @@ const queryText = (value: unknown) => (typeof value === "string" ? value : "")
 useHead({
   title: computed(() =>
     failure.value
-      ? "Kirish amalga oshmadi — Do'ppi AI"
-      : "Kirish tasdiqlanmoqda — Do'ppi AI"
+      ? "Kiriş amalga oşmadi — Do'ppi AI"
+      : "Kiriş tasdiqlanmoqda — Do'ppi AI"
   ),
 })
 
@@ -158,9 +158,9 @@ const steps = computed(() => {
         : "waiting"
 
   return [
-    { label: "Google hisobini tasdiqlash", state: google },
-    { label: "Sessiyani yaratish", state: session },
-    { label: "Ish maydoni va bizneslarni yuklash", state: workspace },
+    { label: "Google hisobini tasdiqlaş", state: google },
+    { label: "Sessiyani yaratiş", state: session },
+    { label: "Iş maydoni va bizneslarni yuklaş", state: workspace },
   ]
 })
 
@@ -177,15 +177,15 @@ const account = computed(() => {
 const description = computed(() => {
   const current = failure.value
   if (!current) {
-    return "Google hisobingizni tekshirib, ish maydoningizni tayyorlayapmiz. Iltimos, bu oynani yopmang."
+    return "Google hisobingizni tekşirib, iş maydoningizni tayyorlayapmiz. Iltimos, bu oynani yopmang."
   }
   if (current.step === "session") {
-    return "Google hisobingiz tasdiqlandi, ammo sessiyani ochib bo'lmadi. Qayta urinib ko'ring."
+    return "Google hisobingiz tasdiqlandi, ammo sessiyani oçib bölmadi. Qayta urinib köring."
   }
   if (current.code === "access_denied") {
-    return "Google so'rovni sessiya yaratilishidan oldin bekor qildi. Hech qanday ma'lumot ulashilmadi va hisob yaratilmadi."
+    return "Google sörovni sessiya yaratilişidan oldin bekor qildi. Heç qanday ma'lumot ulaşilmadi va hisob yaratilmadi."
   }
-  return "Google orqali kirish yakunlanmadi. Hech qanday hisob yaratilmadi — qayta urinib ko'ring."
+  return "Google orqali kiriş yakunlanmadi. Heç qanday hisob yaratilmadi — qayta urinib köring."
 })
 
 // Kept as parts so a narrow screen wraps between them, not inside "19-sen".
@@ -194,7 +194,7 @@ const errorDetails = computed(() => {
   if (!current) return []
   return [
     `Xato kodi: ${current.code}`,
-    current.traceId && `so'rov ID ${current.traceId}`,
+    current.traceId && `sörov ID ${current.traceId}`,
     formatTime(current.at),
   ].filter(Boolean)
 })
@@ -209,12 +209,12 @@ const retryGoogle = () => {
   <AuthShell>
     <template #header>
       <span class="hidden text-[13.5px] text-[#6A6A74] sm:inline">{{
-        failure ? "Yordam kerakmi?" : "Jarayon cho'zildimi?"
+        failure ? "Yordam kerakmi?" : "Jarayon çözildimi?"
       }}</span>
       <RouterLink
         to="/contact-us"
         class="inline-flex h-9 items-center rounded-[10px] border border-[#D6D6D1] bg-white px-3.5 text-[13.5px] font-semibold text-[#15151B] hover:bg-[#FAFAF9]"
-        >Qo'llab-quvvatlash</RouterLink
+        >Qöllab-quvvatlaş</RouterLink
       >
     </template>
 
@@ -307,7 +307,7 @@ const retryGoogle = () => {
         <div
           class="h-1.5 overflow-hidden rounded-full bg-[#EDEDEA]"
           role="progressbar"
-          aria-label="Kirish jarayoni"
+          aria-label="Kiriş jarayoni"
           aria-valuemin="0"
           aria-valuemax="100"
           :aria-valuenow="percent"
@@ -329,8 +329,8 @@ const retryGoogle = () => {
       <RouterLink
         to="/login"
         class="mx-auto mt-5 flex w-fit items-center gap-2 text-[13.5px] font-medium text-[#6A6A74] hover:text-[#15151B]"
-        ><CIcon name="arrow-left" class="h-4 w-4" />Bekor qilish va kirishga
-        qaytish</RouterLink
+        ><CIcon name="arrow-left" class="h-4 w-4" />Bekor qiliş va kirişga
+        qaytiş</RouterLink
       >
     </template>
     <template v-else>
@@ -339,13 +339,13 @@ const retryGoogle = () => {
         class="mt-6 flex h-11 w-full items-center justify-center gap-2 rounded-[10px] bg-[#5B4BE8] text-[13.5px] font-semibold text-white hover:bg-[#4F40D4]"
         @click="retryGoogle"
       >
-        <CIcon name="rotate-ccw" class="h-4 w-4" />Google orqali qayta urinish
+        <CIcon name="rotate-ccw" class="h-4 w-4" />Google orqali qayta uriniş
       </button>
       <RouterLink
         to="/login"
         class="mx-auto mt-5 flex w-fit items-center gap-2 text-[13.5px] font-medium text-[#6A6A74] hover:text-[#15151B]"
         ><CIcon name="arrow-left" class="h-4 w-4" />Email va parol orqali
-        kirish</RouterLink
+        kiriş</RouterLink
       >
     </template>
 
@@ -358,8 +358,8 @@ const retryGoogle = () => {
           ></template
         >
         <template v-else
-          >Bu oynani yopmang — avtomatik ravishda {{ destination }} sahifasiga
-          yo'naltirilasiz.</template
+          >Bu oynani yopmang — avtomatik ravişda {{ destination }} sahifasiga
+          yönaltirilasiz.</template
         >
       </p>
     </template>

@@ -123,7 +123,7 @@ onMounted(() =>
 </script>
 
 <template>
-  <div :class="['flex', groupClass]" role="group" aria-label="Tasdiqlash kodi">
+  <div :class="['flex', groupClass]" role="group" aria-label="Tasdiqlaş kodi">
     <input
       v-for="(_, index) in digits"
       :key="index"

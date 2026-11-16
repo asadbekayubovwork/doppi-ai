@@ -16,7 +16,7 @@ const statusName = (status: string) =>
   ({
     completed: "Tayyor",
     failed: "Xato",
-    submission_failed: "Yuborish xatosi",
+    submission_failed: "Yuboriş xatosi",
     processing: "Jarayonda",
     queued: "Navbatda",
     submitting: "Yuborilmoqda",
@@ -49,7 +49,7 @@ const date = (value: string) =>
       <article class="rounded-[20px] border border-[#E8E8EC] bg-white p-5">
         <CIcon name="chart-line" class="h-5 w-5 text-[#6558B4]" />
         <p class="mt-4 text-sm text-[#71717D]">
-          Hisoblangan xizmat ishlatishlari
+          Hisoblangan xizmat işlatişlari
         </p>
         <strong class="mt-1 block text-3xl tabular-nums text-[#24242C]">{{
           number(usageCount)
@@ -82,16 +82,16 @@ const date = (value: string) =>
           Servislar kesimida
         </p>
         <h2 class="mt-2 text-xl font-bold text-[#24242C]">
-          Ishlatish va kredit sarfi
+          Işlatiş va kredit sarfi
         </h2>
         <p class="mt-1 text-sm text-[#858590]">
-          Faqat yakunlangan, hisoblangan ishlatishlar.
+          Faqat yakunlangan, hisoblangan işlatişlar.
         </p>
         <p
           v-if="!analytics.services.length"
           class="mt-6 text-sm text-[#858590]"
         >
-          Bu davrda xizmat ishlatilmagan.
+          Bu davrda xizmat işlatilmagan.
         </p>
         <ul v-else class="mt-6 space-y-6">
           <li v-for="service in analytics.services" :key="service.service">
@@ -107,7 +107,7 @@ const date = (value: string) =>
             <div
               class="mt-2 h-2.5 overflow-hidden rounded-full bg-[#F0EFF7]"
               role="meter"
-              :aria-label="`${serviceName(service.service)} ishlatishlar`"
+              :aria-label="`${serviceName(service.service)} işlatişlar`"
               :aria-valuenow="service.events"
               aria-valuemin="0"
               :aria-valuemax="maxEvents"
@@ -130,10 +130,10 @@ const date = (value: string) =>
           Buyurtmalar holati
         </h2>
         <p class="mt-1 text-sm text-[#858590]">
-          Buyurtma yaratilgan sanasi bo‘yicha.
+          Buyurtma yaratilgan sanasi böyiça.
         </p>
         <p v-if="!orderedStatuses.length" class="mt-6 text-sm text-[#858590]">
-          Bu davrda video buyurtma yo‘q.
+          Bu davrda video buyurtma yöq.
         </p>
         <dl v-else class="mt-5 divide-y divide-[#EFEFF2]">
           <div
@@ -170,22 +170,20 @@ const date = (value: string) =>
           Faol bizneslar
         </p>
         <h2 class="mt-2 text-xl font-bold text-[#24242C]">
-          Eng ko‘p kredit sarflaganlar
+          Eng köp kredit sarflaganlar
         </h2>
         <p
           v-if="!analytics.top_businesses.length"
           class="mt-5 text-sm text-[#858590]"
         >
-          Hozircha sarf qayd etilmagan.
+          Hozirça sarf qayd etilmagan.
         </p>
         <div v-else class="mt-4 overflow-x-auto">
           <table class="w-full min-w-[340px] text-left text-sm">
             <thead class="text-xs text-[#858590]">
               <tr>
                 <th scope="col" class="pb-3 font-semibold">Biznes</th>
-                <th scope="col" class="pb-3 text-right font-semibold">
-                  So‘rov
-                </th>
+                <th scope="col" class="pb-3 text-right font-semibold">Sörov</th>
                 <th scope="col" class="pb-3 text-right font-semibold">
                   Kredit
                 </th>

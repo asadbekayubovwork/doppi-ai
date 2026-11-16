@@ -29,7 +29,7 @@ const props = withDefaults(
     loading: false,
     step: 2,
     steps: 2,
-    stepName: "Tasdiqlash",
+    stepName: "Tasdiqlaş",
     resendDelay: 60,
     variant: "default",
     icon: "mail-check",
@@ -138,7 +138,7 @@ const requestCode = (channel: "email" | "telegram") => {
         class="text-sm font-semibold text-[#5B4BE8] transition-colors hover:text-[#4F40D4]"
         @click="emit('changeEmail')"
       >
-        O'zgartirish
+        Özgartiriş
       </button>
     </div>
 
@@ -167,14 +167,14 @@ const requestCode = (channel: "email" | "telegram") => {
           @click="requestCode('email')"
         >
           <CIcon name="refresh-cw" class="h-4 w-4" />
-          Kodni qayta yuborish
+          Kodni qayta yuboriş
         </button>
         <span
           v-else
           class="inline-flex items-center gap-1.5 text-sm text-[#84848E]"
         >
           <CIcon name="timer" class="h-4 w-4" />
-          Qayta yuborish: {{ countdown }}
+          Qayta yuboriş: {{ countdown }}
         </span>
       </div>
 
@@ -201,14 +201,14 @@ const requestCode = (channel: "email" | "telegram") => {
       @click="requestCode('telegram')"
     >
       <CIcon name="telegram" class="h-5 w-5 text-[#29A9EA]" />
-      Kodni Telegram orqali yuborish
+      Kodni Telegram orqali yuboriş
     </button>
 
     <p
       v-else-if="props.telegramVariant === 'link'"
       class="mt-5 text-center text-sm text-[#6A6A74]"
     >
-      Boshqa yo'l kerakmi?
+      Boşqa yöl kerakmi?
       <button
         type="button"
         class="ml-1 font-semibold text-[#5B4BE8] transition-colors hover:text-[#4F40D4]"
@@ -219,13 +219,13 @@ const requestCode = (channel: "email" | "telegram") => {
     </p>
 
     <p v-if="props.emailChip" class="mt-4 text-center text-sm text-[#6A6A74]">
-      Manzil noto'g'rimi?
+      Manzil notöğrimi?
       <button
         type="button"
         class="ml-1 font-semibold text-[#5B4BE8] transition-colors hover:text-[#4F40D4]"
         @click="emit('changeEmail')"
       >
-        Boshqa email kiriting
+        Boşqa email kiriting
       </button>
     </p>
   </div>

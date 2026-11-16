@@ -55,8 +55,8 @@ describe("PIndex (landing page)", () => {
     const wrapper = buildApp()
     const text = wrapper.text()
 
-    expect(text).toContain("biznesingiz uchun AI marketing operatsion tizimi")
-    expect(text).toContain("barchasi bir tizimda")
+    expect(text).toContain("biznesingiz uçun AI marketing operatsion tizimi")
+    expect(text).toContain("barçasi bir tizimda")
     expect(text).toContain("SIP Telefoniya")
     expect(text).toContain("AI Ovozli Agent")
     // The lead form lives on /contact-us only.

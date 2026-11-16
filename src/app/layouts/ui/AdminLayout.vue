@@ -32,7 +32,7 @@ watch(
           <button
             type="button"
             class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#E5E5EA] text-[#444450] lg:hidden"
-            aria-label="Admin menyusini ochish"
+            aria-label="Admin menyusini oçiş"
             :aria-expanded="menuOpen"
             @click="menuOpen = true"
           >
@@ -52,7 +52,7 @@ watch(
         <span
           class="hidden items-center gap-2 rounded-full border border-[#E9E5F4] bg-[#F7F5FC] px-3 py-1.5 text-xs font-semibold text-[#6558B4] sm:flex"
         >
-          <CIcon name="shield-check" class="h-4 w-4" /> Platforma boshqaruvi
+          <CIcon name="shield-check" class="h-4 w-4" /> Platforma boşqaruvi
         </span>
       </header>
       <main

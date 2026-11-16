@@ -29,7 +29,7 @@ const loading = ref(false)
 const resendDelay = ref(60)
 const emailAuthEnabled = import.meta.env.VITE_EMAIL_AUTH_ENABLED !== "false"
 
-useHead({ title: "Ro'yxatdan o'tish — Do'ppi AI" })
+useHead({ title: "Röyxatdan ötiş — Do'ppi AI" })
 
 const destination = () => safeLocalPath(route.query.redirect)
 
@@ -39,10 +39,10 @@ const showError = (error: unknown, title: string, fallback: string) => {
   toast.error(
     title,
     messageForProblem(error, fallback, {
-      EMAIL_ALREADY_REGISTERED: "Bu email bilan hisob allaqachon mavjud.",
+      EMAIL_ALREADY_REGISTERED: "Bu email bilan hisob allaqaçon mavjud.",
       PASSWORD_POLICY: "Parol backend talablariga mos emas.",
-      OTP_INVALID: "Tasdiqlash kodi noto'g'ri yoki muddati tugagan.",
-      RATE_LIMITED: "Yangi kod so'rash uchun server ko'rsatgan vaqtni kuting.",
+      OTP_INVALID: "Tasdiqlaş kodi notöğri yoki muddati tugagan.",
+      RATE_LIMITED: "Yangi kod söraş uçun server körsatgan vaqtni kuting.",
     })
   )
 }
@@ -63,8 +63,8 @@ const register = async (payload: SignupPayload) => {
   } catch (error) {
     showError(
       error,
-      "Ro'yxatdan o'tish amalga oshmadi",
-      "Ma'lumotlarni tekshirib, qayta urinib ko'ring."
+      "Röyxatdan ötiş amalga oşmadi",
+      "Ma'lumotlarni tekşirib, qayta urinib köring."
     )
   } finally {
     loading.value = false
@@ -80,7 +80,7 @@ const verifyEmail = async () => {
     })
     await router.replace({ path: "/login", query: { redirect: destination() } })
   } catch (error) {
-    showError(error, "Email tasdiqlanmadi", "Kodni qayta kiritib ko'ring.")
+    showError(error, "Email tasdiqlanmadi", "Kodni qayta kiritib köring.")
   } finally {
     loading.value = false
   }
@@ -100,8 +100,8 @@ const resendCode = async (channel: "email" | "telegram") => {
   } catch (error) {
     showError(
       error,
-      "Yangi tasdiqlash kodi yuborilmadi",
-      "Biroz kutib, qayta urinib ko'ring."
+      "Yangi tasdiqlaş kodi yuborilmadi",
+      "Biroz kutib, qayta urinib köring."
     )
   } finally {
     loading.value = false
@@ -124,9 +124,9 @@ const handleTelegram = async (data: Record<string, string | number>) => {
     await router.replace(destination())
   } catch (error) {
     toast.error(
-      "Telegram orqali ro'yxatdan o'tish amalga oshmadi",
-      messageForProblem(error, "Qayta urinib ko'ring.", {
-        TELEGRAM_NOT_CONFIGURED: "Telegram orqali kirish hozircha mavjud emas.",
+      "Telegram orqali röyxatdan ötiş amalga oşmadi",
+      messageForProblem(error, "Qayta urinib köring.", {
+        TELEGRAM_NOT_CONFIGURED: "Telegram orqali kiriş hozirça mavjud emas.",
       })
     )
   } finally {
@@ -146,7 +146,7 @@ const handleTelegram = async (data: Record<string, string | number>) => {
         class="mt-6 flex h-11 w-full items-center justify-center gap-2.5 rounded-[10px] border border-[#D6D6D1] bg-white text-[13.5px] font-medium text-[#15151B] hover:bg-[#FAFAF9]"
         @click="startGoogle"
       >
-        <CGoogleMark class="h-[18px] w-[18px]" />Google orqali ro'yxatdan o'tish
+        <CGoogleMark class="h-[18px] w-[18px]" />Google orqali röyxatdan ötiş
       </button>
       <div
         v-if="emailAuthEnabled"
@@ -167,11 +167,11 @@ const handleTelegram = async (data: Record<string, string | number>) => {
         class="mt-5 rounded-[10px] border border-[#E5E5E1] bg-[#FAFAF9] px-4 py-3 text-center text-sm text-[#6A6A74]"
         role="status"
       >
-        Email orqali ro'yxatdan o'tish tez orada
+        Email orqali röyxatdan ötiş tez orada
       </p>
       <div class="mt-4">
         <CTelegramLogin
-          label="Telegram orqali ro'yxatdan o'tish"
+          label="Telegram orqali röyxatdan ötiş"
           @auth="handleTelegram"
         />
       </div>
@@ -181,8 +181,8 @@ const handleTelegram = async (data: Record<string, string | number>) => {
         v-model="code"
         :email="email"
         title="Emailni tasdiqlang"
-        :description="`6 xonali tasdiqlash kodini emailingizga yubordik: ${email}. Kod 10 daqiqa amal qiladi.`"
-        submit-label="Emailni tasdiqlash"
+        :description="`6 xonali tasdiqlaş kodini emailingizga yubordik: ${email}. Kod 10 daqiqa amal qiladi.`"
+        submit-label="Emailni tasdiqlaş"
         step-name="Email"
         :loading="loading"
         :resend-delay="resendDelay"
@@ -192,7 +192,7 @@ const handleTelegram = async (data: Record<string, string | number>) => {
         @change-email="isVerifyStep = false"
       />
       <p class="mt-4 text-center text-sm text-[#6A6A74]">
-        Kod kelmadimi? Server cooldown tugagach qayta yuboring.
+        Kod kelmadimi? Server cooldown tugagaç qayta yuboring.
       </p>
     </template>
   </AuthShell>

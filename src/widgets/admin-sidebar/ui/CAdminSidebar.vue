@@ -34,7 +34,7 @@ const activeTab = computed(() => adminTabFromQuery(route.query.tab))
       <div>
         <RouterLink
           to="/admin"
-          aria-label="Super Admin bosh sahifa"
+          aria-label="Super Admin boş sahifa"
           @click="emit('close')"
         >
           <CLogo />
@@ -48,16 +48,16 @@ const activeTab = computed(() => adminTabFromQuery(route.query.tab))
       <button
         type="button"
         class="min-h-11 min-w-11 rounded-lg text-sm text-[#D5D3E0] hover:bg-white/10 lg:hidden"
-        aria-label="Menyuni yopish"
+        aria-label="Menyuni yopiş"
         @click="emit('close')"
       >
-        Yopish
+        Yopiş
       </button>
     </div>
 
     <nav
       class="min-h-0 flex-1 overflow-y-auto px-3 py-5"
-      aria-label="Admin bo‘limlari"
+      aria-label="Admin bölimlari"
     >
       <div v-for="section in ADMIN_NAV" :key="section.label" class="mb-6">
         <p
@@ -100,7 +100,7 @@ const activeTab = computed(() => adminTabFromQuery(route.query.tab))
         to="/app"
         class="flex min-h-11 items-center gap-2 rounded-xl px-3 text-sm font-semibold text-[#D7D4E0] transition-colors hover:bg-white/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#BDB5F7]"
       >
-        <CIcon name="arrow-left" class="h-4 w-4" /> Ish joyiga qaytish
+        <CIcon name="arrow-left" class="h-4 w-4" /> Iş joyiga qaytiş
       </RouterLink>
       <p
         class="mt-3 truncate px-3 text-xs text-[#888594]"

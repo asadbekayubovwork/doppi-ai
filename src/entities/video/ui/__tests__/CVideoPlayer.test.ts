@@ -27,7 +27,7 @@ describe("CVideoPlayer", () => {
 
     await wrapper.get("video").trigger("error")
     expect(wrapper.find("video").exists()).toBe(false)
-    expect(wrapper.text()).toContain("Video hozir ochilmadi")
+    expect(wrapper.text()).toContain("Video hozir oçilmadi")
 
     await wrapper.get("button").trigger("click")
     expect(wrapper.find("video").exists()).toBe(true)

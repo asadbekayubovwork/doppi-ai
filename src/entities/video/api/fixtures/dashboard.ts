@@ -66,7 +66,7 @@ export const TOP_VIDEOS: TopVideo[] = [
   {
     id: "tv-2",
     rank: 2,
-    title: "Kechki shahar b-roll",
+    title: "Keçki şahar b-roll",
     week: 1,
     platform: "tiktok",
     date: "2026-09-06",
@@ -144,7 +144,7 @@ export const RECOMMENDATIONS: Recommendation[] = [
   },
   {
     id: "rec-2",
-    title: "Ko'cha taomi POV",
+    title: "Köça taomi POV",
     author: "@tashkent_bites",
     tag: "franchise",
     views: "980K",
@@ -163,7 +163,7 @@ export const RECOMMENDATIONS: Recommendation[] = [
   },
   {
     id: "rec-4",
-    title: "Do'kon ortidagi kun",
+    title: "Dökon ortidagi kun",
     author: "@aura.store",
     tag: "franchise",
     views: "640K",

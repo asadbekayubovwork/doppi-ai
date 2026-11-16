@@ -12,8 +12,8 @@ const doneVideos: PlanVideo[] = [
   {
     id: "p1-1",
     order: 1,
-    title: "Hafta hook · brend tanishtiruv",
-    brief: "3 kadr: do'kon eshigi ochilishi → barista portreti → logotip. Matn: 'Yangi hafta, yangi ta'm.'",
+    title: "Hafta hook · brend taniştiruv",
+    brief: "3 kadr: dökon eşigi oçilişi → barista portreti → logotip. Matn: 'Yangi hafta, yangi ta'm.'",
     platform: "instagram",
     date: "2026-09-01",
     time: "18:00",
@@ -26,7 +26,7 @@ const doneVideos: PlanVideo[] = [
     id: "p1-2",
     order: 2,
     title: "Mahsulot demo · latte art",
-    brief: "Yaqin plan: sut quyilishi, sekin harakat. Ovoz: original audio + trend track.",
+    brief: "Yaqin plan: sut quyilişi, sekin harakat. Ovoz: original audio + trend track.",
     platform: "tiktok",
     date: "2026-09-02",
     time: "12:00",
@@ -38,7 +38,7 @@ const doneVideos: PlanVideo[] = [
   {
     id: "p1-3",
     order: 3,
-    title: "Mijoz sharhi · UGC",
+    title: "Mijoz şarhi · UGC",
     brief: "Mijoz intervyusi 15s, subtitrlar UZ. CTA: profil havolasi.",
     platform: "instagram",
     date: "2026-09-03",
@@ -51,8 +51,8 @@ const doneVideos: PlanVideo[] = [
   {
     id: "p1-4",
     order: 4,
-    title: "Kofe tayyorlash ASMR",
-    brief: "Ovoz asosiy: grinder, bug', chashka. Kadrlar 5×3s.",
+    title: "Kofe tayyorlaş ASMR",
+    brief: "Ovoz asosiy: grinder, bug', çaşka. Kadrlar 5×3s.",
     platform: "instagram",
     date: "2026-09-05",
     time: "18:30",
@@ -64,8 +64,8 @@ const doneVideos: PlanVideo[] = [
   {
     id: "p1-5",
     order: 5,
-    title: "Do'kon ortidagi kun",
-    brief: "Timelapse: ochilishdan yopilishgacha. Xodimlar bilan qisqa dialog.",
+    title: "Dökon ortidagi kun",
+    brief: "Timelapse: oçilişdan yopilişgaça. Xodimlar bilan qisqa dialog.",
     platform: "youtube",
     date: "2026-09-06",
     time: "13:00",
@@ -78,7 +78,7 @@ const doneVideos: PlanVideo[] = [
     id: "p1-6",
     order: 6,
     title: "Hafta yakuni · CTA",
-    brief: "Eng yaxshi 3 kadr montaji + chegirma e'loni. Matn overlay.",
+    brief: "Eng yaxşi 3 kadr montaji + çegirma e'loni. Matn overlay.",
     platform: "instagram",
     date: "2026-09-07",
     time: "20:00",
@@ -94,7 +94,7 @@ const ongoingVideos: PlanVideo[] = [
     id: "p2-1",
     order: 1,
     title: "Hafta hook · yangi menyu",
-    brief: "3 kadr: menyu taxtasi → yangi shirinlik → CTA overlay.",
+    brief: "3 kadr: menyu taxtasi → yangi şirinlik → CTA overlay.",
     platform: "instagram",
     date: "2026-09-08",
     time: "18:00",
@@ -106,7 +106,7 @@ const ongoingVideos: PlanVideo[] = [
     id: "p2-2",
     order: 2,
     title: "Barista challenge",
-    brief: "Xodimlar o'rtasida 15s tezlik challenge, trend audio.",
+    brief: "Xodimlar örtasida 15s tezlik challenge, trend audio.",
     platform: "tiktok",
     date: "2026-09-09",
     time: "12:30",
@@ -118,7 +118,7 @@ const ongoingVideos: PlanVideo[] = [
     id: "p2-3",
     order: 3,
     title: "Mijoz reaksiyasi · UGC",
-    brief: "Yangi shirinlikni tatib ko'rish reaksiyalari, subtitr UZ.",
+    brief: "Yangi şirinlikni tatib köriş reaksiyalari, subtitr UZ.",
     platform: "instagram",
     date: "2026-09-10",
     time: "19:00",
@@ -129,7 +129,7 @@ const ongoingVideos: PlanVideo[] = [
   {
     id: "p2-4",
     order: 4,
-    title: "Yangi shirinlik demo",
+    title: "Yangi şirinlik demo",
     brief: "Yaqin plan: qatlamlar kesimi, sekin harakat, ovoz ASMR.",
     platform: "instagram",
     date: "2026-09-11",
@@ -139,8 +139,8 @@ const ongoingVideos: PlanVideo[] = [
   {
     id: "p2-5",
     order: 5,
-    title: "Ustaxona: don qovurish",
-    brief: "Timelapse qovurish jarayoni + barista izohi 20s.",
+    title: "Ustaxona: don qovuriş",
+    brief: "Timelapse qovuriş jarayoni + barista izohi 20s.",
     platform: "youtube",
     date: "2026-09-12",
     time: "13:00",
@@ -160,7 +160,7 @@ const ongoingVideos: PlanVideo[] = [
     id: "p2-7",
     order: 7,
     title: "Hafta yakuni · CTA",
-    brief: "Eng yaxshi kadrlar montaji + dushanba aksiyasi e'loni.",
+    brief: "Eng yaxşi kadrlar montaji + duşanba aksiyasi e'loni.",
     platform: "instagram",
     date: "2026-09-14",
     time: "17:00",
@@ -183,7 +183,7 @@ const upcomingVideos: PlanVideo[] = [
     id: "p3-2",
     order: 2,
     title: "Trend audio · latte pour",
-    brief: "Hozir trendda #2 audio ustiga latte quyish kadri, 9s.",
+    brief: "Hozir trendda #2 audio ustiga latte quyiş kadri, 9s.",
     platform: "tiktok",
     date: "2026-09-16",
     time: "12:30",
@@ -193,7 +193,7 @@ const upcomingVideos: PlanVideo[] = [
     id: "p3-3",
     order: 3,
     title: "UGC: mijoz kuni",
-    brief: "Mijoz do'kondagi kunini o'zi suratga oladi, 20s montaj.",
+    brief: "Mijoz dökondagi kunini özi suratga oladi, 20s montaj.",
     platform: "instagram",
     date: "2026-09-17",
     time: "19:00",
@@ -212,7 +212,7 @@ const upcomingVideos: PlanVideo[] = [
   {
     id: "p3-5",
     order: 5,
-    title: "Yangi shirinlik teaser",
+    title: "Yangi şirinlik teaser",
     brief: "Sekin harakat + ASMR ovoz, oxirida narx overlay.",
     platform: "instagram",
     date: "2026-09-19",
@@ -222,8 +222,8 @@ const upcomingVideos: PlanVideo[] = [
   {
     id: "p3-6",
     order: 6,
-    title: "Dam olish kuni aksiyasi",
-    brief: "Shanba aksiyasi e'loni, CTA: profil havolasi.",
+    title: "Dam oliş kuni aksiyasi",
+    brief: "Şanba aksiyasi e'loni, CTA: profil havolasi.",
     platform: "instagram",
     date: "2026-09-20",
     time: "11:00",
@@ -233,7 +233,7 @@ const upcomingVideos: PlanVideo[] = [
     id: "p3-7",
     order: 7,
     title: "Hafta yakuni · natijalar",
-    brief: "Haftaning eng yaxshi kadrlari + minnatdorchilik.",
+    brief: "Haftaning eng yaxşi kadrlari + minnatdorçilik.",
     platform: "instagram",
     date: "2026-09-21",
     time: "20:00",
@@ -317,23 +317,23 @@ export const SCRIPT_CONVERSATION: ScriptMessage[] = [
   {
     id: "sc-1",
     role: "assistant",
-    text: "Salom! Bu video uchun joriy script: mijoz do'kondagi kunini o'zi suratga oladi, 20s montaj. Nimani o'zgartiramiz?",
+    text: "Salom! Bu video uçun joriy script: mijoz dökondagi kunini özi suratga oladi, 20s montaj. Nimani özgartiramiz?",
   },
   {
     id: "sc-2",
     role: "user",
-    text: "Trend o'zgardi — POV formatdagi videolar ko'proq ko'rish olyapti. Shu formatga o'tkaz va 15 soniyaga qisqartir.",
+    text: "Trend özgardi — POV formatdagi videolar köproq köriş olyapti. Şu formatga ötkaz va 15 soniyaga qisqartir.",
   },
   {
     id: "sc-3",
     role: "assistant",
-    text: "Tayyor. Yangi variant: POV — “mijoz ko'zi bilan” 15s, 4 kadr, trend audio #2, oxirida 2s CTA overlay. Ohang: samimiy, tez kesim.",
+    text: "Tayyor. Yangi variant: POV — “mijoz közi bilan” 15s, 4 kadr, trend audio #2, oxirida 2s CTA overlay. Ohang: samimiy, tez kesim.",
     chips: ["POV format", "20s → 15s", "trend audio"],
   },
 ]
 
 export const SCRIPT_CURRENT =
-  "Mijoz do'kondagi kunini o'zi suratga oladi. 20s montaj, subtitrlar UZ, oxirida profil havolasi."
+  "Mijoz dökondagi kunini özi suratga oladi. 20s montaj, subtitrlar UZ, oxirida profil havolasi."
 
 export const SCRIPT_PROPOSED =
-  "POV: “mijoz ko'zi bilan” — 15s, 4 kadr (kirish, buyurtma, birinchi qultum, tabassum). Trend audio #2, oxirgi 2s CTA overlay."
+  "POV: “mijoz közi bilan” — 15s, 4 kadr (kiriş, buyurtma, birinçi qultum, tabassum). Trend audio #2, oxirgi 2s CTA overlay."

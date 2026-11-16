@@ -30,19 +30,19 @@ const passwordsMatch = computed(
   () =>
     confirmation.value.length > 0 && confirmation.value === newPassword.value
 )
-useHead({ title: "Parolni tiklash — Do'ppi AI" })
+useHead({ title: "Parolni tiklaş — Do'ppi AI" })
 const showError = (error: unknown, title: string, fallback: string) => {
   const retry = retryAfterSeconds(error)
   if (retry > 0) resendDelay.value = retry
   toast.error(
     title,
     messageForProblem(error, fallback, {
-      OTP_INVALID: "Kod noto'g'ri yoki muddati tugagan.",
+      OTP_INVALID: "Kod notöğri yoki muddati tugagan.",
       RESET_TOKEN_INVALID:
-        "Tiklash sessiyasi muddati tugagan. Qaytadan boshlang.",
+        "Tiklaş sessiyasi muddati tugagan. Qaytadan boşlang.",
       PASSWORD_POLICY: "Yangi parol backend talablariga mos emas.",
-      PASSWORD_REUSED: "Avval ishlatilmagan parol tanlang.",
-      RATE_LIMITED: "Server ko'rsatgan vaqt tugagach qayta urinib ko'ring.",
+      PASSWORD_REUSED: "Avval işlatilmagan parol tanlang.",
+      RATE_LIMITED: "Server körsatgan vaqt tugagaç qayta urinib köring.",
     })
   )
 }
@@ -53,12 +53,12 @@ const requestCode = async () => {
     challengeId.value = response.challenge_id || ""
     step.value = "code"
     resendDelay.value = 60
-    toast.success("Tasdiqlash kodi yuborildi", email.value.trim())
+    toast.success("Tasdiqlaş kodi yuborildi", email.value.trim())
   } catch (error) {
     showError(
       error,
-      "Tasdiqlash kodi yuborilmadi",
-      "Email manzilni tekshirib, qayta urinib ko'ring."
+      "Tasdiqlaş kodi yuborilmadi",
+      "Email manzilni tekşirib, qayta urinib köring."
     )
   } finally {
     loading.value = false
@@ -76,8 +76,8 @@ const resendCode = async (channel: "email" | "telegram") => {
   } catch (error) {
     showError(
       error,
-      "Yangi tasdiqlash kodi yuborilmadi",
-      "Biroz kutib, qayta urinib ko'ring."
+      "Yangi tasdiqlaş kodi yuborilmadi",
+      "Biroz kutib, qayta urinib köring."
     )
   } finally {
     loading.value = false
@@ -94,7 +94,7 @@ const verifyCode = async () => {
     code.value = ""
     step.value = "password"
   } catch (error) {
-    showError(error, "Tiklash kodi tasdiqlanmadi", "Kodni qayta kiriting.")
+    showError(error, "Tiklaş kodi tasdiqlanmadi", "Kodni qayta kiriting.")
   } finally {
     loading.value = false
   }
@@ -118,13 +118,13 @@ const updatePassword = async () => {
     step.value = "done"
     toast.success(
       "Parol yangilandi",
-      "Endi yangi parol bilan kirishingiz mumkin."
+      "Endi yangi parol bilan kirişingiz mumkin."
     )
   } catch (error) {
     showError(
       error,
-      "Parolni yangilab bo'lmadi",
-      "Yangi parolni tekshirib, qayta urinib ko'ring."
+      "Parolni yangilab bölmadi",
+      "Yangi parolni tekşirib, qayta urinib köring."
     )
   } finally {
     loading.value = false
@@ -136,8 +136,8 @@ const updatePassword = async () => {
   <AuthShell
     ><CAuthFeatureSoon
       v-if="!emailAuthEnabled"
-      title="Parolni tiklash"
-      message="Email orqali parolni tiklash tez orada"
+      title="Parolni tiklaş"
+      message="Email orqali parolni tiklaş tez orada"
     />
     <template v-else-if="step === 'email'"
       ><div class="flex gap-2" aria-label="1-qadam / 3">
@@ -146,10 +146,10 @@ const updatePassword = async () => {
         /><span class="h-[3px] flex-1 rounded-full bg-[#E5E5E1]" />
       </div>
       <h1 class="mt-6 text-[28px] font-semibold tracking-[-0.8px]">
-        Parolni tiklash
+        Parolni tiklaş
       </h1>
       <p class="mt-2 text-[13.5px] leading-6 text-[#6A6A74]">
-        Email manzilingizni kiriting — tasdiqlash kodini yuboramiz.
+        Email manzilingizni kiriting — tasdiqlaş kodini yuboramiz.
       </p>
       <form class="mt-6 grid gap-4" @submit.prevent="requestCode">
         <div>
@@ -170,14 +170,14 @@ const updatePassword = async () => {
           :disabled="loading"
           class="flex h-11 items-center justify-center gap-2 rounded-[10px] bg-[#5B4BE8] text-[13.5px] font-semibold text-white disabled:opacity-70"
         >
-          {{ loading ? "Kutilmoqda..." : "Tasdiqlash kodini yuborish"
+          {{ loading ? "Kutilmoqda..." : "Tasdiqlaş kodini yuboriş"
           }}<CIcon v-if="!loading" name="arrow-right" class="h-4 w-4" />
         </button>
       </form>
       <p class="mt-4 text-center text-sm text-[#6A6A74]">
         Parolingiz esingizdami?
         <RouterLink to="/login" class="font-semibold text-[#5B4BE8]"
-          >Kirish</RouterLink
+          >Kiriş</RouterLink
         >
       </p></template
     ><CAuthVerifyStep
@@ -186,10 +186,10 @@ const updatePassword = async () => {
       :email="email"
       :step="2"
       :steps="3"
-      step-name="Kodni tasdiqlash"
-      title="Tiklash kodini kiriting"
+      step-name="Kodni tasdiqlaş"
+      title="Tiklaş kodini kiriting"
       :description="`6 xonali kodni emailingizga yubordik: ${email}.`"
-      submit-label="Kodni tasdiqlash"
+      submit-label="Kodni tasdiqlaş"
       :loading="loading"
       :resend-delay="resendDelay"
       telegram-variant="none"
@@ -204,10 +204,10 @@ const updatePassword = async () => {
         />
       </div>
       <h1 class="mt-6 text-[28px] font-semibold tracking-[-0.8px]">
-        Yangi parol o'rnating
+        Yangi parol örnating
       </h1>
       <p class="mt-2 text-[13.5px] leading-6 text-[#6A6A74]">
-        Avval ishlatmagan parolni tanlang.
+        Avval işlatmagan parolni tanlang.
       </p>
       <form class="mt-6 grid gap-4" @submit.prevent="updatePassword">
         <div>
@@ -227,7 +227,7 @@ const updatePassword = async () => {
               type="button"
               class="absolute right-2 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-lg text-[#6A6A74]"
               :aria-label="
-                showPassword ? 'Parolni yashirish' : 'Parolni ko\'rsatish'
+                showPassword ? 'Parolni yaşiriş' : 'Parolni körsatiş'
               "
               @click="showPassword = !showPassword"
             >
@@ -277,7 +277,7 @@ const updatePassword = async () => {
           :disabled="loading"
           class="flex h-11 items-center justify-center gap-2 rounded-[10px] bg-[#5B4BE8] text-[13.5px] font-semibold text-white disabled:opacity-70"
         >
-          {{ loading ? "Kutilmoqda..." : "Parolni yangilash"
+          {{ loading ? "Kutilmoqda..." : "Parolni yangilaş"
           }}<CIcon v-if="!loading" name="arrow-right" class="h-4 w-4" />
         </button></form></template
     ><template v-else
@@ -288,12 +288,12 @@ const updatePassword = async () => {
         /></span>
         <h1 class="mt-6 text-[28px] font-semibold">Parol yangilandi</h1>
         <p class="mt-2 text-[13.5px] leading-6 text-[#6A6A74]">
-          Endi yangi parol bilan kirishingiz mumkin.
+          Endi yangi parol bilan kirişingiz mumkin.
         </p>
         <RouterLink
           to="/login"
           class="mt-6 flex h-11 items-center justify-center rounded-[10px] bg-[#5B4BE8] text-sm font-semibold text-white"
-          >Kirishga o'tish</RouterLink
+          >Kirişga ötiş</RouterLink
         >
       </div>
     </template>

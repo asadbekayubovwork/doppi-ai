@@ -33,7 +33,7 @@ useHead({
       <RouterLink
         to="/"
         class="inline-flex lg:hidden"
-        aria-label="Do'ppi AI bosh sahifasi"
+        aria-label="Do'ppi AI boş sahifasi"
       >
         <CLogo surface="light" />
       </RouterLink>
@@ -46,9 +46,9 @@ useHead({
     </div>
     <slot name="footer">
       <p class="text-center text-xs leading-5 text-[#84848E]">
-        Davom etish orqali siz
+        Davom etiş orqali siz
         <RouterLink to="/terms" class="hover:underline"
-          >foydalanish shartlari</RouterLink
+          >foydalaniş şartlari</RouterLink
         >
         va
         <RouterLink to="/privacy" class="hover:underline"

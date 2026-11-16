@@ -6,17 +6,17 @@ const highlights = [
   {
     icon: "library",
     title: "Universal RAG agent",
-    text: "O'z ma'lumotlaringizga asoslangan, manbasi ko'rsatilgan javoblar.",
+    text: "Öz ma'lumotlaringizga asoslangan, manbasi körsatilgan javoblar.",
   },
   {
     icon: "audio-lines",
     title: "Ovozli agent",
-    text: "Qo'ng'iroqlarni o'zbek, rus va ingliz tilida 24/7 qabul qiladi.",
+    text: "Qönğiroqlarni özbek, rus va ingliz tilida 24/7 qabul qiladi.",
   },
   {
     icon: "clapperboard",
     title: "Video generator",
-    text: "Bitta promptni bir necha daqiqada tayyor videoga aylantiradi.",
+    text: "Bitta promptni bir neça daqiqada tayyor videoga aylantiradi.",
   },
 ]
 </script>
@@ -35,7 +35,7 @@ const highlights = [
       <RouterLink
         to="/"
         class="inline-flex items-center"
-        aria-label="Do'ppi AI bosh sahifasi"
+        aria-label="Do'ppi AI boş sahifasi"
       >
         <CLogo />
       </RouterLink>
@@ -45,11 +45,11 @@ const highlights = [
       <h2
         class="max-w-[460px] text-[34px] font-semibold leading-[1.15] tracking-[-0.02em] text-white"
       >
-        Har bir AI agent uchun yagona ish maydoni.
+        Har bir AI agent uçun yagona iş maydoni.
       </h2>
       <p class="mt-5 max-w-[420px] text-sm leading-[1.65] text-white/45">
         RAG agentlar, ovozli agentlar va video generatsiya — bitta balans,
-        bitta jamoa, ko'plab bizneslar.
+        bitta jamoa, köplab bizneslar.
       </p>
       <ul class="mt-9 space-y-4">
         <li

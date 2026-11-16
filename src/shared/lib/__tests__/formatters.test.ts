@@ -54,7 +54,7 @@ describe("dashboard formatters in other languages", () => {
     const now = new Date(NOW)
     expect(formatTimeAgo(minutesBefore(18), NOW, "uz")).toBe("18 daq")
     expect(formatTimeAgo(minutesBefore(125), NOW, "ru")).toBe("2 ч")
-    expect(formatDayLabel(minutesBefore(24 * 60), now, "uz")).toBe("Kecha")
+    expect(formatDayLabel(minutesBefore(24 * 60), now, "uz")).toBe("Keça")
     expect(formatDayLabel(new Date("2026-09-02T10:00:00"), now, "uz")).toBe("2 sen")
     expect(formatDuration(minutesBefore(125), now, "ru")).toBe("2 ч 05 мин")
   })
@@ -83,7 +83,7 @@ describe("calendar formatters", () => {
   })
 
   it("lists weekdays from Monday", () => {
-    expect(formatWeekdays("uz")).toEqual(["Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya"])
+    expect(formatWeekdays("uz")).toEqual(["Du", "Se", "Ç", "Pa", "Ju", "Ş", "Ya"])
     expect(formatWeekdays("en")[0]).toBe("Mon")
     expect(formatWeekdays("ru")[6]).toBe("Вс")
   })

@@ -5,7 +5,7 @@ import { CIcon, CSelect } from "@/shared/ui"
 
 // Language names stay in their own language, whatever the interface speaks.
 const LANGUAGE_OPTIONS = [
-  { value: "uz", label: "O'zbekcha" },
+  { value: "uz", label: "Özbekça" },
   { value: "ru", label: "Русский" },
   { value: "en", label: "English" },
 ]

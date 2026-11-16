@@ -16,37 +16,37 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     quote:
-      "Uchta vendorni Do'ppi bilan almashtirdik. Liniyamiz endi 4 soniyada, o'zbek tilida javob beradi.",
+      "Uçta vendorni Do'ppi bilan almaştirdik. Liniyamiz endi 4 soniyada, özbek tilida javob beradi.",
     name: "Dilnoza Saidova",
     role: "COO, Silk Road Logistics",
     initials: "DS",
   },
   {
     quote:
-      "Buyurtma savollarining 70 foizini agent yopadi. Operatorlar faqat murakkab holatlar bilan ishlaydi.",
+      "Buyurtma savollarining 70 foizini agent yopadi. Operatorlar faqat murakkab holatlar bilan işlaydi.",
     name: "Sardor Rahimov",
     role: "Mijozlar xizmati rahbari, Anor Retail",
     initials: "SR",
   },
   {
     quote:
-      "Agent har bir javobga ichki hujjatdan manba biriktiradi. Auditorlar uchun shu hal qiluvchi bo'ldi.",
+      "Agent har bir javobga içki hujjatdan manba biriktiradi. Auditorlar uçun şu hal qiluvçi böldi.",
     name: "Jasur Abdullayev",
     role: "IT rahbari, Zamin Agro",
     initials: "JA",
   },
   {
     quote:
-      "Bir oyda 40 ta reklama roligi tayyorladik. Ilgari bittasi uchun butun bir hafta ketardi.",
+      "Bir oyda 40 ta reklama roligi tayyorladik. Ilgari bittasi uçun butun bir hafta ketardi.",
     name: "Kamola Yusupova",
     role: "Marketing direktori, Navro Clinic",
     initials: "KY",
   },
   {
     quote:
-      "Tungi qo'ng'iroqlar endi javobsiz qolmaydi. Uchala agentni bitta balansdan boshqaramiz.",
+      "Tungi qönğiroqlar endi javobsiz qolmaydi. Uçala agentni bitta balansdan boşqaramiz.",
     name: "Nigora Tursunova",
-    role: "Operatsiyalar boshlig'i, Bekat Telecom",
+    role: "Operatsiyalar boşliği, Bekat Telecom",
     initials: "NT",
   },
 ]

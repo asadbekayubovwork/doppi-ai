@@ -30,19 +30,19 @@ describe("shared/lib/composables/useToast", () => {
   })
 
   it("error() defaults to 4000ms duration (longer for errors)", () => {
-    useToast().error("Kirish amalga oshmadi")
+    useToast().error("Kiriş amalga oşmadi")
 
-    expect(sonner.error).toHaveBeenCalledWith("Kirish amalga oshmadi", {
+    expect(sonner.error).toHaveBeenCalledWith("Kiriş amalga oşmadi", {
       description: undefined,
       duration: 4000,
     })
   })
 
   it("warning() and info() default to 3000ms duration", () => {
-    useToast().warning("Shartlarni qabul qiling")
+    useToast().warning("Şartlarni qabul qiling")
     useToast().info("Yangi kod yuborildi")
 
-    expect(sonner.warning).toHaveBeenCalledWith("Shartlarni qabul qiling", {
+    expect(sonner.warning).toHaveBeenCalledWith("Şartlarni qabul qiling", {
       description: undefined,
       duration: 3000,
     })

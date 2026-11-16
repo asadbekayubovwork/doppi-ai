@@ -75,7 +75,7 @@ watch([tab, days], () => void load(), { immediate: true })
         <p
           class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#6558B4]"
         >
-          <CIcon name="shield-check" class="h-4 w-4" /> Do‘ppi AI · Boshqaruv
+          <CIcon name="shield-check" class="h-4 w-4" /> Do‘ppi AI · Boşqaruv
         </p>
         <h1
           class="mt-2 text-3xl font-bold tracking-tight text-[#23232B] sm:text-4xl"
@@ -116,7 +116,7 @@ watch([tab, days], () => void load(), { immediate: true })
           class="flex min-h-12 items-center gap-2 rounded-xl border border-[#E4E4E9] bg-white px-4 text-sm font-semibold text-[#393943] transition-colors hover:bg-[#F5F5F7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5B50A8] disabled:opacity-50"
           @click="load"
         >
-          <CIcon name="refresh-cw" class="h-4 w-4" /> Yangilash
+          <CIcon name="refresh-cw" class="h-4 w-4" /> Yangilaş
         </button>
       </div>
     </header>
@@ -132,7 +132,7 @@ watch([tab, days], () => void load(), { immediate: true })
       role="status"
       class="rounded-xl border border-[#E8E8EC] bg-white p-6 text-sm text-[#777782]"
     >
-      Ko‘rsatkichlar yuklanmoqda…
+      Körsatkiçlar yuklanmoqda…
     </p>
     <template v-if="analytics && !loading">
       <CAdminOverview

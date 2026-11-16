@@ -11,11 +11,11 @@ export interface PasswordRequirement {
  * auth pages hide anyway.
  */
 const levels = [
-  { label: "Juda kuchsiz", bar: "bg-[#E5484D]", text: "text-[#C42121]" },
-  { label: "Kuchsiz", bar: "bg-[#E5484D]", text: "text-[#C42121]" },
-  { label: "O'rtacha", bar: "bg-[#E8A33D]", text: "text-[#B0730B]" },
-  { label: "Kuchli", bar: "bg-[#15803D]", text: "text-[#15803D]" },
-  { label: "Juda kuchli", bar: "bg-[#15803D]", text: "text-[#15803D]" },
+  { label: "Juda kuçsiz", bar: "bg-[#E5484D]", text: "text-[#C42121]" },
+  { label: "Kuçsiz", bar: "bg-[#E5484D]", text: "text-[#C42121]" },
+  { label: "Örtaça", bar: "bg-[#E8A33D]", text: "text-[#B0730B]" },
+  { label: "Kuçli", bar: "bg-[#15803D]", text: "text-[#15803D]" },
+  { label: "Juda kuçli", bar: "bg-[#15803D]", text: "text-[#15803D]" },
 ]
 
 /**
@@ -30,7 +30,7 @@ export const usePasswordStrength = (password: Ref<string>) => {
     return [
       { label: "Kamida 12 ta belgi", met: value.length >= 12 },
       {
-        label: "Katta va kichik harf",
+        label: "Katta va kiçik harf",
         met: /[a-z]/.test(value) && /[A-Z]/.test(value),
       },
       { label: "Kamida bitta raqam", met: /\d/.test(value) },

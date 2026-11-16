@@ -13,14 +13,14 @@ export const STUDIO_VIDEOS: StudioVideo[] = [
   {
     id: "sv-2",
     title: "Barista tanlovi teaser",
-    meta: "Kecha 19:05 · 12s",
+    meta: "Keça 19:05 · 12s",
     status: "published",
     thumbnail: "#C9A98C",
     hasLink: true,
   },
   {
     id: "sv-3",
-    title: "Yangi shirinlik POV",
+    title: "Yangi şirinlik POV",
     meta: "9 sen · 18s",
     status: "published",
     thumbnail: "#8C6E54",
@@ -28,7 +28,7 @@ export const STUDIO_VIDEOS: StudioVideo[] = [
   },
   {
     id: "sv-4",
-    title: "Do'kon tur · 360°",
+    title: "Dökon tur · 360°",
     meta: "7 sen · 20s",
     status: "published",
     thumbnail: "#2B3A67",
@@ -36,14 +36,14 @@ export const STUDIO_VIDEOS: StudioVideo[] = [
   },
   {
     id: "sv-5",
-    title: "Aksiya e'loni · shanba",
+    title: "Aksiya e'loni · şanba",
     meta: "5 sen · 10s",
     status: "draft",
     thumbnail: "#E8E6E2",
   },
   {
     id: "sv-6",
-    title: "Mijoz sharhi montaji",
+    title: "Mijoz şarhi montaji",
     meta: "3 sen · 16s",
     status: "published",
     thumbnail: "#B4472E",

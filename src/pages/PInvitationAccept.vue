@@ -9,7 +9,7 @@ const route = useRoute()
 const router = useRouter()
 const auth = useAuthStore()
 const status = ref<"loading" | "success" | "error">("loading")
-const message = ref("Taklif tekshirilmoqda...")
+const message = ref("Taklif tekşirilmoqda...")
 
 useHead({ title: "Jamoa taklifi — Do'ppi AI" })
 
@@ -18,7 +18,7 @@ onMounted(async () => {
     await workspaceApi.acceptInvitation(String(route.params.token || ""))
     await auth.loadBusinesses()
     status.value = "success"
-    message.value = "Taklif qabul qilindi. Ish maydoni tayyor."
+    message.value = "Taklif qabul qilindi. Iş maydoni tayyor."
   } catch (error) {
     status.value = "error"
     message.value = messageForProblem(
@@ -56,7 +56,7 @@ onMounted(async () => {
         class="mt-6 h-11 w-full rounded-[10px] bg-[#5B4BE8] text-sm font-semibold text-white"
         @click="router.replace('/app/rag')"
       >
-        Ish maydoniga o'tish
+        Iş maydoniga ötiş
       </button>
     </section>
   </main>

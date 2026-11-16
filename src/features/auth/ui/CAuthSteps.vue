@@ -45,7 +45,7 @@ const STEP_STATES: Record<
 <template>
   <ol
     class="mt-6 rounded-xl border border-[#E5E5E1] bg-white px-3.5 py-2"
-    aria-label="Kirish bosqichlari"
+    aria-label="Kiriş bosqiçlari"
   >
     <li
       v-for="step in steps"

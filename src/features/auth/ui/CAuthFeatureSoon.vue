@@ -14,6 +14,6 @@ defineProps<{ title: string; message: string }>()
     to="/login"
     class="mt-5 flex h-11 items-center justify-center rounded-[10px] bg-[#5B4BE8] text-sm font-semibold text-white"
   >
-    Kirish sahifasiga qaytish
+    Kiriş sahifasiga qaytiş
   </RouterLink>
 </template>

@@ -7,8 +7,8 @@ type Metric = "credits_spent" | "new_users" | "usage_events" | "video_jobs"
 const metric = ref<Metric>("credits_spent")
 const metrics: Array<{ key: Metric; label: string }> = [
   { key: "credits_spent", label: "Kredit sarfi" },
-  { key: "new_users", label: "Yangi foydalanuvchi" },
-  { key: "usage_events", label: "Xizmat so‘rovlari" },
+  { key: "new_users", label: "Yangi foydalanuvçi" },
+  { key: "usage_events", label: "Xizmat sörovlari" },
   { key: "video_jobs", label: "Video buyurtmalar" },
 ]
 const selected = computed(
@@ -57,7 +57,7 @@ const shortDate = (value: string) =>
       </div>
       <div
         class="flex flex-wrap gap-1 rounded-xl bg-[#F5F5F7] p-1"
-        aria-label="Grafik ko‘rsatkichi"
+        aria-label="Grafik körsatkiçi"
       >
         <button
           v-for="option in metrics"
@@ -129,7 +129,7 @@ const shortDate = (value: string) =>
         v-if="total === 0"
         class="pointer-events-none absolute inset-0 flex items-center justify-center text-sm text-[#777782]"
       >
-        Bu davrda ma’lumot yo‘q
+        Bu davrda ma’lumot yöq
       </p>
     </div>
     <div
@@ -146,7 +146,7 @@ const shortDate = (value: string) =>
       <summary
         class="cursor-pointer font-semibold text-[#555565] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5B50A8]"
       >
-        Kunlik ma’lumotlarni ko‘rish
+        Kunlik ma’lumotlarni köriş
       </summary>
       <div
         class="mt-3 max-h-56 overflow-auto rounded-xl border border-[#ECECF0]"

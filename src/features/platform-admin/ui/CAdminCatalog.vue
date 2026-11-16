@@ -39,7 +39,7 @@ const load = async () => {
 }
 const save = async (action: () => Promise<unknown>) => {
   if (reason.value.trim().length < 8) {
-    error.value = "O‘zgarish sababini kamida 8 belgi bilan yozing."
+    error.value = "Özgariş sababini kamida 8 belgi bilan yozing."
     return
   }
   saving.value = true
@@ -48,11 +48,11 @@ const save = async (action: () => Promise<unknown>) => {
   try {
     await action()
     await load()
-    success.value = "O‘zgarish saqlandi."
+    success.value = "Özgariş saqlandi."
   } catch (cause) {
     error.value = messageForProblem(
       cause,
-      "Saqlanmadi. Qayta kiring va urinib ko‘ring."
+      "Saqlanmadi. Qayta kiring va urinib köring."
     )
   } finally {
     saving.value = false
@@ -65,7 +65,7 @@ const createPack = () => {
     draft.credits <= 0 ||
     draft.price_cents <= 0
   ) {
-    error.value = "Paket maydonlarini to‘ldiring."
+    error.value = "Paket maydonlarini töldiring."
     return
   }
   void save(async () => {
@@ -103,7 +103,7 @@ onMounted(() => void load())
     <template v-if="catalog">
       <div class="rounded-2xl border border-[#E8E8EC] bg-white p-6">
         <label for="admin-reason" class="text-sm font-semibold"
-          >O‘zgarish sababi</label
+          >Özgariş sababi</label
         >
         <input
           id="admin-reason"
@@ -139,7 +139,7 @@ onMounted(() => void load())
                   )
                 "
               >
-                Saqlash
+                Saqlaş
               </button>
             </div>
           </div>
@@ -189,7 +189,7 @@ onMounted(() => void load())
                   )
                 "
               >
-                Saqlash
+                Saqlaş
               </button>
             </div>
           </div>
@@ -198,7 +198,7 @@ onMounted(() => void load())
       <div class="rounded-2xl border border-[#E8E8EC] bg-white p-6">
         <h2 class="text-lg font-bold">Tarif rejalar</h2>
         <p class="mt-1 text-xs text-[#8D8D99]">
-          To‘lov tizimi ulanmaguncha avtomatik xarid yo‘q.
+          Tölov tizimi ulanmagunça avtomatik xarid yöq.
         </p>
         <form
           v-for="plan in catalog.plans"
@@ -238,7 +238,7 @@ onMounted(() => void load())
             />
           </label>
           <label class="text-xs"
-            >Yillik chegirma %
+            >Yillik çegirma %
             <input
               :value="plan.yearly_discount_bps / 100"
               type="number"
@@ -260,7 +260,7 @@ onMounted(() => void load())
               :disabled="saving"
               class="rounded-lg bg-[#202026] px-3 py-2 text-sm font-semibold text-white disabled:opacity-50"
             >
-              Saqlash
+              Saqlaş
             </button>
           </div>
         </form>
@@ -268,11 +268,10 @@ onMounted(() => void load())
       <div class="rounded-2xl border border-[#E8E8EC] bg-white p-6">
         <h2 class="text-lg font-bold">Kredit paketlari</h2>
         <p class="mt-1 text-xs text-[#8D8D99]">
-          To‘lov integratsiyasi yoqilmaguncha xarid avtomatik amalga
-          oshirilmaydi.
+          Tölov integratsiyasi yoqilmagunça xarid avtomatik amalga oşirilmaydi.
         </p>
         <p v-if="!catalog.packs.length" class="mt-4 text-sm text-[#91919B]">
-          Hozircha paket yo‘q.
+          Hozirça paket yöq.
         </p>
         <div
           v-for="pack in catalog.packs"
@@ -302,7 +301,7 @@ onMounted(() => void load())
                 )
               "
             >
-              {{ pack.active ? "Yashirish" : "E’lon qilish" }}
+              {{ pack.active ? "Yaşiriş" : "E’lon qiliş" }}
             </button>
           </div>
           <form
@@ -338,7 +337,7 @@ onMounted(() => void load())
               :disabled="saving"
               class="rounded-lg bg-[#202026] px-3 py-2 text-sm font-semibold text-white disabled:opacity-50"
             >
-              Saqlash
+              Saqlaş
             </button>
           </form>
         </div>
@@ -375,7 +374,7 @@ onMounted(() => void load())
             :disabled="saving"
             class="rounded-lg bg-[#202026] px-3 py-2 text-sm font-semibold text-white disabled:opacity-50"
           >
-            Qo‘shish
+            Qöşiş
           </button>
         </form>
       </div>

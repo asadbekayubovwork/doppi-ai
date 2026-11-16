@@ -72,13 +72,13 @@ describe("super admin dashboards", () => {
     })
     await flushPromises()
     expect(analyticsRequest).toHaveBeenCalledWith(30)
-    expect(wrapper.text()).toContain("Bir qarashda butun Do‘ppi AI")
+    expect(wrapper.text()).toContain("Bir qaraşda butun Do‘ppi AI")
     expect(wrapper.text().replaceAll("\u00a0", " ")).toContain("2 500")
     expect(
       wrapper.find("aside[aria-label='Super Admin navigatsiyasi']").exists()
     ).toBe(true)
     expect(wrapper.find("aside a[href='/app']").text()).toContain(
-      "Ish joyiga qaytish"
+      "Iş joyiga qaytiş"
     )
 
     await wrapper
@@ -90,7 +90,7 @@ describe("super admin dashboards", () => {
     expect(wrapper.find("nav a[aria-current='page']").text()).toContain(
       "Xizmatlar"
     )
-    expect(wrapper.text()).toContain("Ishlatish va kredit sarfi")
+    expect(wrapper.text()).toContain("Işlatiş va kredit sarfi")
     expect(wrapper.text()).toContain("Test Biznes")
     expect(wrapper.text()).toContain("RAG suhbat")
 

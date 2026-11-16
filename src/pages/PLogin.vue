@@ -29,13 +29,13 @@ const loading = ref(false)
 const cooldown = ref(0)
 let cooldownTimer: ReturnType<typeof setInterval> | undefined
 
-useHead({ title: "Xush kelibsiz — Do'ppi AI" })
+useHead({ title: "Xuş kelibsiz — Do'ppi AI" })
 
 onMounted(() => {
   if (route.query.logout === "failed") {
     toast.warning(
-      "Chiqish to'liq yakunlanmadi",
-      "Server bilan bog'lanib chiqish amalga oshmadi, ammo bu qurilmadagi sessiya tozalandi."
+      "Çiqiş töliq yakunlanmadi",
+      "Server bilan boğlanib çiqiş amalga oşmadi, ammo bu qurilmadagi sessiya tozalandi."
     )
   }
 })
@@ -56,24 +56,24 @@ onBeforeUnmount(() => {
 const showLoginError = (error: unknown, fallback: string) => {
   startCooldown(retryAfterSeconds(error))
   toast.error(
-    "Kirish amalga oshmadi",
+    "Kiriş amalga oşmadi",
     messageForProblem(error, fallback, {
-      AUTHENTICATION_REQUIRED: "Email yoki parol noto'g'ri.",
+      AUTHENTICATION_REQUIRED: "Email yoki parol notöğri.",
       EMAIL_NOT_VERIFIED: "Avval email manzilingizni tasdiqlang.",
       RATE_LIMITED:
-        "Juda ko'p urinish. Server ko'rsatgan vaqtdan so'ng qayta urinib ko'ring.",
+        "Juda köp uriniş. Server körsatgan vaqtdan söng qayta urinib köring.",
     })
   )
 }
 
 const showMfaError = (error: unknown) => {
   toast.error(
-    "MFA tekshiruvi amalga oshmadi",
-    messageForProblem(error, "Kodni qayta kiritib ko'ring.", {
+    "MFA tekşiruvi amalga oşmadi",
+    messageForProblem(error, "Kodni qayta kiritib köring.", {
       AUTHENTICATION_REQUIRED:
-        "MFA yoki tiklash kodi noto'g'ri yoxud muddati tugagan.",
+        "MFA yoki tiklaş kodi notöğri yoxud muddati tugagan.",
       RATE_LIMITED:
-        "MFA urinishlari vaqtincha cheklangan. Keyinroq urinib ko'ring.",
+        "MFA urinişlari vaqtinça çeklangan. Keyinroq urinib köring.",
     })
   )
 }
@@ -95,7 +95,7 @@ const signIn = async () => {
     }
     await router.replace(destination())
   } catch (error) {
-    showLoginError(error, "Ma'lumotlaringizni tekshirib, qayta urinib ko'ring.")
+    showLoginError(error, "Ma'lumotlaringizni tekşirib, qayta urinib köring.")
   } finally {
     loading.value = false
   }
@@ -153,18 +153,18 @@ const startGoogle = () => {
   <AuthShell>
     <template v-if="step === 'password'"
       ><h1 class="text-[28px] font-semibold tracking-[-0.8px] text-[#15151B]">
-        Xush kelibsiz
+        Xuş kelibsiz
       </h1>
       <p class="mt-2 text-[13.5px] leading-6 text-[#6A6A74]">
-        Agentlar, balans va bizneslarni boshqarish uchun Do'ppi AI ish
-        maydoningizga kiring.
+        Agentlar, balans va bizneslarni boşqariş uçun Do'ppi AI iş maydoningizga
+        kiring.
       </p>
       <button
         type="button"
         class="mt-6 flex h-11 w-full items-center justify-center gap-2.5 rounded-[10px] border border-[#D6D6D1] bg-white text-[13.5px] font-medium text-[#15151B] hover:bg-[#FAFAF9]"
         @click="startGoogle"
       >
-        <CGoogleMark class="h-[18px] w-[18px]" />Google orqali kirish
+        <CGoogleMark class="h-[18px] w-[18px]" />Google orqali kiriş
       </button>
       <div class="my-5 flex items-center gap-3" aria-hidden="true">
         <span class="h-px flex-1 bg-[#E5E5E1]" /><span
@@ -212,7 +212,7 @@ const startGoogle = () => {
               type="button"
               class="absolute right-0 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-[10px] text-[#6A6A74] outline-none"
               :aria-label="
-                showPassword ? 'Parolni yashirish' : 'Parolni ko\'rsatish'
+                showPassword ? 'Parolni yaşiriş' : 'Parolni körsatiş'
               "
               @click="showPassword = !showPassword"
             >
@@ -229,8 +229,8 @@ const startGoogle = () => {
             loading
               ? "Kutilmoqda..."
               : cooldown > 0
-                ? `${cooldown} soniyadan so'ng qayta urining`
-                : "Kirish"
+                ? `${cooldown} soniyadan söng qayta urining`
+                : "Kiriş"
           }}
           <CIcon
             v-if="!loading && cooldown === 0"

@@ -60,8 +60,8 @@ describe("routed pages", () => {
     expect(wrapper.find("#how").exists()).toBe(true)
     expect(wrapper.find("#voice").exists()).toBe(true)
     // Target audience is spelled out, not just implied.
-    expect(text).toContain("Kichik biznes va yangi loyihalar")
-    expect(text).toContain("Qo'ng'iroq bilan ishlaydigan kompaniyalar")
+    expect(text).toContain("Kiçik biznes va yangi loyihalar")
+    expect(text).toContain("Qönğiroq bilan işlaydigan kompaniyalar")
     wrapper.unmount()
   })
 
@@ -70,14 +70,14 @@ describe("routed pages", () => {
     const text = wrapper.text()
 
     expect(wrapper.find("h1").text()).toBe(
-      "Do'ppi AI bilan biznesingizni avtomatlashtiring"
+      "Do'ppi AI bilan biznesingizni avtomatlaştiring"
     )
     for (const id of ["pricing", "credits", "top-up", "faq"]) {
       expect(wrapper.find(`#${id}`).exists(), `#${id} is missing`).toBe(true)
     }
     expect(text).toContain("Narxlar yuklanmoqda")
     expect(text).toContain("Kredit sarfi")
-    expect(text).toContain("Qo'shimcha kreditlar")
+    expect(text).toContain("Qöşimça kreditlar")
     expect(text).toContain("Sinov muddati bormi?")
     wrapper.unmount()
   })
@@ -89,7 +89,7 @@ describe("routed pages", () => {
     expect(wrapper.find("#results").exists()).toBe(true)
     expect(wrapper.find("#team").exists()).toBe(true)
     expect(text).toContain("Jaxongir Abduxamidov")
-    expect(text).toContain("Hammuassis va bosh direktor (Co-founder & CEO)")
+    expect(text).toContain("Hammuassis va boş direktor (Co-founder & CEO)")
 
     // The legal entity, spelled as registered, with both of its years.
     const details = Object.fromEntries(
@@ -97,10 +97,10 @@ describe("routed pages", () => {
         .findAll("#company dl > div")
         .map((row) => [row.find("dt").text(), row.find("dd").text()])
     )
-    expect(details["Yuridik shaxs"]).toBe('"ADS AI AUTOMATION" MChJ')
-    expect(details["Mahsulot ishga tushgan"]).toBe(String(COMPANY.productLaunched))
-    expect(details["Kompaniya ro'yxatdan o'tgan"]).toBe(incorporatedYear())
-    expect(details["Yuridik manzil"]).toContain("Qora-Qamish 1/1 dahasi, 20-uy, 42-xonadon")
+    expect(details["Yuridik şaxs"]).toBe('"ADS AI AUTOMATION" MÇJ')
+    expect(details["Mahsulot işga tuşgan"]).toBe(String(COMPANY.productLaunched))
+    expect(details["Kompaniya röyxatdan ötgan"]).toBe(incorporatedYear())
+    expect(details["Yuridik manzil"]).toContain("Qora-Qamiş 1/1 dahasi, 20-uy, 42-xonadon")
     expect(Object.values(details)).not.toContain("")
     expect(text).toContain("pre-seed")
     wrapper.unmount()
@@ -116,8 +116,8 @@ describe("routed pages", () => {
     // Company contact details: domain email, legal name and registered address.
     const text = wrapper.text()
     expect(text).toContain("transformation@doppiai.uz")
-    expect(text).toContain('"ADS AI AUTOMATION" MChJ')
-    expect(text).toContain("Toshkent sh., Olmazor tumani, Oltinsoy MFY")
+    expect(text).toContain('"ADS AI AUTOMATION" MÇJ')
+    expect(text).toContain("Toşkent ş., Olmazor tumani, Oltinsoy MFY")
     wrapper.unmount()
   })
 
@@ -129,7 +129,7 @@ describe("routed pages", () => {
     expect(text).toContain("Ma'lumotlar xavfsizligi")
     expect(text).toContain("transformation@doppiai.uz")
     // Opens by naming the company that operates the service.
-    expect(text).toContain('Do\'ppi AI operatori "ADS AI AUTOMATION" MChJ tomonidan')
+    expect(text).toContain('Do\'ppi AI operatori "ADS AI AUTOMATION" MÇJ tomonidan')
     wrapper.unmount()
   })
 
@@ -137,10 +137,10 @@ describe("routed pages", () => {
     const wrapper = mountPage(PTerms)
     const text = wrapper.text()
 
-    expect(text).toContain("Foydalanish shartlari")
+    expect(text).toContain("Foydalaniş şartlari")
     expect(text).toContain("Amaldagi qonun")
     // The contracting party is the registered company, not just the brand.
-    expect(text).toContain('Do\'ppi AI operatori "ADS AI AUTOMATION" MChJ o\'rtasidagi')
+    expect(text).toContain('Do\'ppi AI operatori "ADS AI AUTOMATION" MÇJ örtasidagi')
     // A section whose `bullets` array failed to resolve would drop this line.
     expect(text).toContain("AI ovozli agent — mijozlar bilan tabiiy suhbat")
     wrapper.unmount()

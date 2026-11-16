@@ -26,8 +26,8 @@ const formatDate = (value: string) =>
   }).format(new Date(value))
 const serviceName = (value: string) =>
   ({
-    rag: "Chatbot",
-    rag_answer: "Chatbot",
+    rag: "Çatbot",
+    rag_answer: "Çatbot",
     video: "Video",
     video_second: "Video",
     voice: "Ovozli agent",
@@ -81,7 +81,7 @@ watch(
         Kredit va sarf
       </h1>
       <p class="mt-2 text-sm text-[#757583]">
-        Balansingiz, amaldagi narxlar va xizmatlardan foydalanish tarixi.
+        Balansingiz, amaldagi narxlar va xizmatlardan foydalaniş tarixi.
       </p>
     </header>
     <p
@@ -89,7 +89,7 @@ watch(
       role="alert"
       class="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"
     >
-      Ma'lumotlarni yuklab bo‘lmadi. Sahifani qayta ochib ko‘ring.
+      Ma'lumotlarni yuklab bölmadi. Sahifani qayta oçib köring.
     </p>
     <section class="grid gap-4 md:grid-cols-3">
       <div class="rounded-2xl border border-[#E8E8EC] bg-white p-6">
@@ -104,7 +104,7 @@ watch(
         <p class="mt-3 text-4xl font-bold tracking-tight text-[#24242C]">
           {{ billing.wallet?.held?.toLocaleString("uz-UZ") ?? "—" }}
         </p>
-        <p class="mt-1 text-xs text-[#92929F]">jarayondagi so‘rovlar uchun</p>
+        <p class="mt-1 text-xs text-[#92929F]">jarayondagi sörovlar uçun</p>
       </div>
       <div class="rounded-2xl border border-[#E8E8EC] bg-white p-6">
         <p class="text-sm text-[#797986]">Bonus kredit</p>
@@ -115,7 +115,7 @@ watch(
           {{
             billing.wallet?.promo_expires_at
               ? `Muddati: ${formatDate(billing.wallet.promo_expires_at)}`
-              : "Amaldagi bonus yo‘q"
+              : "Amaldagi bonus yöq"
           }}
         </p>
       </div>
@@ -124,7 +124,7 @@ watch(
       <h2 class="text-lg font-bold text-[#24242C]">Xizmat narxlari</h2>
       <p class="mt-1 text-xs text-[#8A8A96]">
         Hisob-kitob kreditda yuritiladi. Amaldagi stavkalar admin tomonidan
-        boshqariladi.
+        boşqariladi.
       </p>
       <div class="mt-4 grid gap-3 sm:grid-cols-3">
         <div
@@ -144,9 +144,9 @@ watch(
     </section>
     <section class="grid gap-5 xl:grid-cols-2">
       <div class="rounded-2xl border border-[#E8E8EC] bg-white p-6">
-        <h2 class="text-lg font-bold text-[#24242C]">Foydalanish tarixi</h2>
+        <h2 class="text-lg font-bold text-[#24242C]">Foydalaniş tarixi</h2>
         <p v-if="!usage.length" class="mt-5 text-sm text-[#92929F]">
-          {{ loading ? "Yuklanmoqda…" : "Hozircha sarf yo‘q." }}
+          {{ loading ? "Yuklanmoqda…" : "Hozirça sarf yöq." }}
         </p>
         <ul v-else class="mt-4 divide-y divide-[#EFEFF2]">
           <li
@@ -172,7 +172,7 @@ watch(
       <div class="rounded-2xl border border-[#E8E8EC] bg-white p-6">
         <h2 class="text-lg font-bold text-[#24242C]">Balans tarixi</h2>
         <p v-if="!ledger.length" class="mt-5 text-sm text-[#92929F]">
-          {{ loading ? "Yuklanmoqda…" : "Hozircha harakat yo‘q." }}
+          {{ loading ? "Yuklanmoqda…" : "Hozirça harakat yöq." }}
         </p>
         <ul v-else class="mt-4 divide-y divide-[#EFEFF2]">
           <li

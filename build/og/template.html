@@ -23,6 +23,25 @@
         font-weight: 800;
         src: url(../../src/app/fonts/inter-v20-latin-800.woff2) format("woff2");
       }
+      /* Ğ ğ Ş ş of the 2026 Uzbek alphabet, outside the latin subset. */
+      @font-face {
+        font-family: Inter;
+        font-weight: 500;
+        src: url(../../src/app/fonts/inter-v20-uz-500.woff2) format("woff2");
+        unicode-range: U+011E-011F, U+015E-015F;
+      }
+      @font-face {
+        font-family: Inter;
+        font-weight: 600;
+        src: url(../../src/app/fonts/inter-v20-uz-600.woff2) format("woff2");
+        unicode-range: U+011E-011F, U+015E-015F;
+      }
+      @font-face {
+        font-family: Inter;
+        font-weight: 800;
+        src: url(../../src/app/fonts/inter-v20-uz-800.woff2) format("woff2");
+        unicode-range: U+011E-011F, U+015E-015F;
+      }
 
       html,
       body {

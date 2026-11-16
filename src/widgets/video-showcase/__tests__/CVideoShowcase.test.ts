@@ -49,7 +49,7 @@ describe("CVideoShowcase", () => {
     const hrefs = wrapper.findAll("a").map((a) => a.attributes("href"))
 
     expect(wrapper.find("h2").text()).toBe("Do'ppi Video Studio")
-    expect(wrapper.text()).toContain("Barcha namunalarni ko'rish")
+    expect(wrapper.text()).toContain("Barça namunalarni köriş")
     expect(wrapper.text()).toContain("Mahsulot videosi")
     expect(hrefs).toEqual(["/login", "/video-generator", "/video-generator"])
   })

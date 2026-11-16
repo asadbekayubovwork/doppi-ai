@@ -40,7 +40,7 @@ const UNITS: Record<
   FormatLocale,
   { now: string; min: string; h: string; d: string; today: string; yesterday: string }
 > = {
-  uz: { now: "hozir", min: "daq", h: "soat", d: "kun", today: "Bugun", yesterday: "Kecha" },
+  uz: { now: "hozir", min: "daq", h: "soat", d: "kun", today: "Bugun", yesterday: "Keça" },
   en: { now: "now", min: "min", h: "h", d: "d", today: "Today", yesterday: "Yesterday" },
   ru: { now: "сейчас", min: "мин", h: "ч", d: "дн", today: "Сегодня", yesterday: "Вчера" },
 }
@@ -50,7 +50,7 @@ const UNITS: Record<
 const UZ_MONTHS = ["yan", "fev", "mar", "apr", "may", "iyn", "iyl", "avg", "sen", "okt", "noy", "dek"]
 
 const UZ_MONTHS_LONG = ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"]
-const UZ_WEEKDAYS = ["Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya"]
+const UZ_WEEKDAYS = ["Du", "Se", "Ç", "Pa", "Ju", "Ş", "Ya"]
 
 const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 

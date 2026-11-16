@@ -43,9 +43,9 @@ describe("CVideoJobs", () => {
     })
 
     expect(wrapper.text()).not.toContain(job.stream_url)
-    expect(wrapper.text()).toContain("Ko‘rish")
+    expect(wrapper.text()).toContain("Köriş")
     await wrapper
-      .find('button[aria-label="Videoni ilovada ko\'rish"]')
+      .find('button[aria-label="Videoni ilovada köriş"]')
       .trigger("click")
     expect(wrapper.emitted("preview")?.[0]?.[0]).toEqual(job)
   })

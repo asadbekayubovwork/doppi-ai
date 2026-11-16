@@ -15,7 +15,7 @@ export const ADMIN_NAV: Array<{
       {
         key: "overview",
         title: "Umumiy",
-        description: "Platforma ko‘rsatkichlari",
+        description: "Platforma körsatkiçlari",
         icon: "layout-grid",
       },
       {
@@ -26,14 +26,14 @@ export const ADMIN_NAV: Array<{
       },
       {
         key: "users",
-        title: "Foydalanuvchilar",
+        title: "Foydalanuvçilar",
         description: "Akkauntlar va faollik",
         icon: "user-round",
       },
     ],
   },
   {
-    label: "Boshqaruv",
+    label: "Boşqaruv",
     items: [
       {
         key: "pricing",

@@ -52,10 +52,10 @@ describe("CNavMenu", () => {
         "Video generator",
         "Market Radar Tez kunda",
       ],
-      ["Mijozlarni qo'llab-quvvatlash", "Sotuv", "Qabulga yozish", "So'rovnomalar"],
+      ["Mijozlarni qöllab-quvvatlaş", "Sotuv", "Qabulga yoziş", "Sörovnomalar"],
       [
         "Tibbiyot Tez kunda",
-        "Ko'chmas mulk Tez kunda",
+        "Köçmas mulk Tez kunda",
         "Turizm va mehmonxonalar Tez kunda",
         "Avtomobil Tez kunda",
         "Bank Tez kunda",

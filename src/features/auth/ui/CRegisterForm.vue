@@ -67,7 +67,7 @@ const submit = () => {
 
     <div>
       <label for="register-email" class="mb-1.5 block text-xs font-medium"
-        >Ish emaili</label
+        >Iş emaili</label
       >
       <input
         id="register-email"
@@ -111,9 +111,7 @@ const submit = () => {
         <button
           type="button"
           class="absolute right-2 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-lg text-[#6A6A74] outline-none"
-          :aria-label="
-            showPassword ? 'Parolni yashirish' : 'Parolni ko\'rsatish'
-          "
+          :aria-label="showPassword ? 'Parolni yaşiriş' : 'Parolni körsatiş'"
           @click="showPassword = !showPassword"
         >
           <CIcon :name="showPassword ? 'eye-off' : 'eye'" class="h-5 w-5" />
@@ -140,7 +138,7 @@ const submit = () => {
       :disabled="props.loading"
       class="flex h-11 items-center justify-center gap-2 rounded-[10px] bg-[#5B4BE8] text-[13.5px] font-semibold text-white hover:bg-[#4F40D4] disabled:opacity-70"
     >
-      {{ props.loading ? "Kutilmoqda..." : "Hisob yaratish" }}
+      {{ props.loading ? "Kutilmoqda..." : "Hisob yaratiş" }}
       <CIcon v-if="!props.loading" name="arrow-right" class="h-4 w-4" />
     </button>
   </form>

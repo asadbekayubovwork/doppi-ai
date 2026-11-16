@@ -52,13 +52,13 @@ const SEEDS: ConversationSeed[] = [
   {
     id: "chat_8f21c04a",
     channel: "instagram",
-    lastMessage: "Buyurtmam qachon yetadi?",
+    lastMessage: "Buyurtmam qaçon yetadi?",
     messageCount: 14,
     status: "resolved",
     minutesAgo: 2,
-    customer: { name: "Jasur Toshmatov", contact: "@jasur.t" },
+    customer: { name: "Jasur Toşmatov", contact: "@jasur.t" },
     reply:
-      "Buyurtmangiz #40211 bugun kuryerga topshirildi, ertaga 18:00 gacha yetkaziladi.",
+      "Buyurtmangiz #40211 bugun kuryerga topşirildi, ertaga 18:00 gaça yetkaziladi.",
     citation: { document: DOCS.delivery, location: "p.2" },
   },
   {
@@ -76,7 +76,7 @@ const SEEDS: ConversationSeed[] = [
   {
     id: "chat_5c73aa90",
     channel: "whatsapp",
-    lastMessage: "Narxlar ro'yxatini bering",
+    lastMessage: "Narxlar röyxatini bering",
     messageCount: 22,
     status: "active",
     minutesAgo: 18,
@@ -111,12 +111,12 @@ const SEEDS: ConversationSeed[] = [
   {
     id: "chat_1d38ce65",
     channel: "telegram",
-    lastMessage: "Kafolat muddati necha oy?",
+    lastMessage: "Kafolat muddati neça oy?",
     messageCount: 5,
     status: "resolved",
     minutesAgo: 60,
     customer: { name: "Bekzod Aliyev", contact: "@bekzod_a" },
-    reply: "Barcha Aura qurilmalariga 12 oylik rasmiy kafolat beriladi.",
+    reply: "Barça Aura qurilmalariga 12 oylik rasmiy kafolat beriladi.",
     citation: { document: DOCS.catalogue, location: "p.31" },
   },
   {
@@ -146,12 +146,12 @@ const SEEDS: ConversationSeed[] = [
   {
     id: "chat_0e91da53",
     channel: "instagram",
-    lastMessage: "Ish vaqtingiz qachon tugaydi?",
+    lastMessage: "Iş vaqtingiz qaçon tugaydi?",
     messageCount: 4,
     status: "resolved",
     minutesAgo: 180,
     customer: { name: "Sevara Nazarova", contact: "@sevara.nz" },
-    reply: "Do'konlarimiz har kuni 09:00 dan 21:00 gacha ishlaydi.",
+    reply: "Dökonlarimiz har kuni 09:00 dan 21:00 gaça işlaydi.",
     citation: { document: DOCS.faq, location: "§1" },
   },
   {
@@ -161,7 +161,7 @@ const SEEDS: ConversationSeed[] = [
     messageCount: 13,
     status: "escalated",
     minutesAgo: 240,
-    customer: { name: "Rustam Ergashev", contact: "@rustam_b2b" },
+    customer: { name: "Rustam Ergaşev", contact: "@rustam_b2b" },
     reply:
       "Orders from 200 units get contract pricing, so I've handed you to our sales manager.",
     citation: { document: DOCS.pricing, location: "sheet 3" },
@@ -169,12 +169,12 @@ const SEEDS: ConversationSeed[] = [
   {
     id: "chat_7d18ba26",
     channel: "instagram",
-    lastMessage: "Yangi kolleksiya qachon keladi?",
+    lastMessage: "Yangi kolleksiya qaçon keladi?",
     messageCount: 7,
     status: "resolved",
     minutesAgo: 300,
     customer: { name: "Malika Saidova", contact: "@malika.s" },
-    reply: "Kuzgi kolleksiya 1-oktabrdan sotuvga chiqadi.",
+    reply: "Kuzgi kolleksiya 1-oktabrdan sotuvga çiqadi.",
     citation: { document: DOCS.catalogue, location: "p.2" },
   },
   {
@@ -197,29 +197,29 @@ const SEEDS: ConversationSeed[] = [
     minutesAgo: 420,
     customer: { name: "Aziza Umarova", contact: "+998 97 765 43 21" },
     reply:
-      "Buyurtma allaqachon to'langan, shuning uchun bekor qilishni operatorimizga uzatdim.",
+      "Buyurtma allaqaçon tölangan, şuning uçun bekor qilişni operatorimizga uzatdim.",
     citation: { document: DOCS.returns, location: "§3" },
   },
   {
     id: "chat_c81e7f20",
     channel: "web",
-    lastMessage: "Toshkentda do'koningiz bormi?",
+    lastMessage: "Toşkentda dökoningiz bormi?",
     messageCount: 5,
     status: "resolved",
     minutesAgo: 540,
     customer: { name: "Website visitor", contact: "visitor #5790" },
-    reply: "Ha, Chilonzor va Yunusobodda ikkita do'konimiz bor.",
+    reply: "Ha, Çilonzor va Yunusobodda ikkita dökonimiz bor.",
     citation: { document: DOCS.faq, location: "§2" },
   },
   {
     id: "chat_a3f6d219",
     channel: "telegram",
-    lastMessage: "Muddatli to'lov bormi?",
+    lastMessage: "Muddatli tölov bormi?",
     messageCount: 12,
     status: "resolved",
     minutesAgo: 660,
-    customer: { name: "Shoxrux Mirzayev", contact: "@shoxrux_m" },
-    reply: "Ha, 3, 6 va 12 oyga foizsiz muddatli to'lov mavjud.",
+    customer: { name: "Şoxrux Mirzayev", contact: "@shoxrux_m" },
+    reply: "Ha, 3, 6 va 12 oyga foizsiz muddatli tölov mavjud.",
     citation: { document: DOCS.pricing, location: "sheet 2" },
   },
   {
@@ -229,7 +229,7 @@ const SEEDS: ConversationSeed[] = [
     messageCount: 6,
     status: "resolved",
     minutesAgo: 780,
-    customer: { name: "Kamila Rashidova", contact: "@kamila.rsh" },
+    customer: { name: "Kamila Raşidova", contact: "@kamila.rsh" },
     reply:
       "Aura Pro is IP67 rated — safe from splashes and brief immersion, but not for swimming.",
     citation: { document: DOCS.catalogue, location: "p.12" },
@@ -254,7 +254,7 @@ const SEEDS: ConversationSeed[] = [
     status: "resolved",
     minutesAgo: 1_080,
     customer: { name: "Gulnora Tursunova", contact: "+998 91 234 56 78" },
-    reply: "Ha, Samarqandga 1–2 ish kunida yetkazamiz.",
+    reply: "Ha, Samarqandga 1–2 iş kunida yetkazamiz.",
     citation: { document: DOCS.delivery, location: "p.2" },
   },
   {
@@ -271,13 +271,12 @@ const SEEDS: ConversationSeed[] = [
   {
     id: "chat_3e57f1b6",
     channel: "instagram",
-    lastMessage: "Chegirma kodi ishlamayapti",
+    lastMessage: "Çegirma kodi işlamayapti",
     messageCount: 11,
     status: "resolved",
     minutesAgo: 1_500,
-    customer: { name: "Ulug'bek Hamidov", contact: "@ulugbek.h" },
-    reply:
-      "AURA10 kodi faqat 500 000 so'mdan yuqori buyurtmalarga amal qiladi.",
+    customer: { name: "Uluğbek Hamidov", contact: "@ulugbek.h" },
+    reply: "AURA10 kodi faqat 500 000 sömdan yuqori buyurtmalarga amal qiladi.",
     citation: { document: DOCS.pricing, location: "sheet 4" },
   },
 ]
@@ -333,13 +332,13 @@ const pricingThread = (seed: ConversationSeed): LegacyConversationDetail => ({
     {
       id: "msg_01",
       author: "customer",
-      text: "Salom! Narxlar ro'yxatini yuborasizmi?",
+      text: "Salom! Narxlar röyxatini yuborasizmi?",
       sentAt: minutesAgo(36),
     },
     {
       id: "msg_02",
       author: "agent",
-      text: "Salom, Madina! Albatta. 2026 katalogidagi asosiy narxlar: Aura Mini — 1 290 000 so'm, Aura Pro — 2 450 000 so'm. To'liq ro'yxatni PDF holida ham yuboraman.",
+      text: "Salom, Madina! Albatta. 2026 katalogidagi asosiy narxlar: Aura Mini — 1 290 000 söm, Aura Pro — 2 450 000 söm. Töliq röyxatni PDF holida ham yuboraman.",
       sentAt: minutesAgo(36),
       citations: [
         { document: DOCS.pricing, location: "sheet 1" },
@@ -351,13 +350,13 @@ const pricingThread = (seed: ConversationSeed): LegacyConversationDetail => ({
     {
       id: "msg_03",
       author: "customer",
-      text: "Ulgurji buyurtmaga chegirma bormi?",
+      text: "Ulgurji buyurtmaga çegirma bormi?",
       sentAt: minutesAgo(33),
     },
     {
       id: "msg_04",
       author: "agent",
-      text: "Ha. 50 donadan ortiq buyurtmalarda 12% chegirma, 200 donadan boshlab esa alohida shartnoma narxi taklif qilinadi.",
+      text: "Ha. 50 donadan ortiq buyurtmalarda 12% çegirma, 200 donadan boşlab esa alohida şartnoma narxi taklif qilinadi.",
       sentAt: minutesAgo(32),
       citations: [{ document: DOCS.pricing, location: "sheet 3" }],
       trace: { model: "gpt-4o", latencyMs: 1_200, chunks: 3 },
@@ -366,13 +365,13 @@ const pricingThread = (seed: ConversationSeed): LegacyConversationDetail => ({
     {
       id: "msg_05",
       author: "customer",
-      text: "Yetkazib berish Samarqandga qancha vaqt oladi?",
+      text: "Yetkazib beriş Samarqandga qança vaqt oladi?",
       sentAt: minutesAgo(29),
     },
     {
       id: "msg_06",
       author: "agent",
-      text: "Samarqandga yetkazib berish 1–2 ish kuni, 500 000 so'mdan yuqori buyurtmalarda bepul.",
+      text: "Samarqandga yetkazib beriş 1–2 iş kuni, 500 000 sömdan yuqori buyurtmalarda bepul.",
       sentAt: minutesAgo(29),
       citations: [{ document: DOCS.returns, location: "§4" }],
       trace: { model: "gpt-4o", latencyMs: 1_200, chunks: 3 },
